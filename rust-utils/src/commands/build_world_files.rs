@@ -55,7 +55,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	
 	let shaders_path = get_shaders_path()?;
 	for (world_folder_name, world_name) in WORLDS_LIST {
-		let world_path = shaders_path.push_new(world_folder_name);
+		let world_path = shaders_path.join(world_folder_name);
 		if world_path.exists() {
 			fs::remove_dir_all(&world_path)?;
 		}
@@ -72,17 +72,17 @@ pub fn function(args: &[String]) -> Result<()> {
 
 
 
-pub fn build_shader_files(world_name: &str, shader_name: &str, world_path: &PathBuf) -> Result<()> {
+pub fn build_shader_files(world_name: &str, shader_name: &str, world_path: &Path) -> Result<()> {
 	let fsh_contents = create_file_contents(world_name, shader_name, "FSH");
-	fs::write(world_path.push_new(format!("{shader_name}.fsh")), fsh_contents)?;
+	fs::write(world_path.join(format!("{shader_name}.fsh")), fsh_contents)?;
 	let vsh_contents = create_file_contents(world_name, shader_name, "VSH");
-	fs::write(world_path.push_new(format!("{shader_name}.vsh")), vsh_contents)?;
+	fs::write(world_path.join(format!("{shader_name}.vsh")), vsh_contents)?;
 	Ok(())
 }
 
 
 
-pub fn build_final_shader_file(world_name: &str, world_path: &PathBuf) -> Result<()> {
+pub fn build_final_shader_file(world_name: &str, world_path: &Path) -> Result<()> {
 	
 	// fsh
 	let fsh_contents = &r##"
@@ -96,7 +96,7 @@ void main() {
 	gl_FragData[0] = vec4(color, 1.0);
 }
 "##[1..];
-	fs::write(world_path.push_new(format!("final.fsh")), fsh_contents)?;
+	fs::write(world_path.join("final.fsh"), fsh_contents)?;
 	
 	// vsh
 	let vsh_contents = &r##"
@@ -106,7 +106,7 @@ void main() {
 	gl_Position = ftransform();
 }
 "##[1..];
-	fs::write(world_path.push_new(format!("final.vsh")), vsh_contents)?;
+	fs::write(world_path.join("final.vsh"), vsh_contents)?;
 	
 	Ok(())
 }

@@ -4,7 +4,6 @@ use crate::prelude::*;
 
 pub trait PathTraits {
 	fn contains_file(&self, dir_name: &str) -> bool;
-	fn push_new(&self, path: impl AsRef<Path>) -> PathBuf;
 	fn pop_new(&self) -> PathBuf;
 	fn as_str(&self) -> Option<&str>;
 }
@@ -15,11 +14,6 @@ impl PathTraits for Path {
 			if path.expect("Could not process dir entry").file_name() == dir_name {return true;}
 		}
 		false
-	}
-	fn push_new(&self, path: impl AsRef<Path>) -> PathBuf {
-		let mut output = self.to_path_buf();
-		output.push(path);
-		output
 	}
 	fn pop_new(&self) -> PathBuf {
 		let mut output = self.to_path_buf();

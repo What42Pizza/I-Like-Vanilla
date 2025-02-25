@@ -92,6 +92,7 @@ const COMMANDS: &[data::Command] = &[
 	data::Command::new("build_world_files", "build_world_files", "Generates the '/world_' files using hard-coded data", commands::build_world_files::function),
 	data::Command::new("build_uniform_imports", "build_uniform_imports", "Generates the '/import' files using hard-coded data", commands::build_uniform_imports::function),
 	data::Command::new("build_property_ids", "build_property_ids", "Converts the data in .property files (currently, just block.properties) from `block = num` to `num = block, ...`", commands::build_property_ids::function),
+	data::Command::new("check_settings", "check_settings", "Detects all shader settings and ensures they are consistent across all files", commands::check_settings::function),
 	data::Command::new("export", "export", "Exports the shader with only shader files included", commands::export::function),
 	data::Command::new("preprocess_file", "preprocess_file [file_path] [input_path]", "Preprocesses `#include`s of a shader file. The input_path is assumed to be in /shaders", commands::preprocess_file::function),
 	data::Command::new("compile_file", "compile_file [file_path] [input_path]", "Compiles a shader file. The input_path is assumed to be in /shaders, and only .fsh and .vsh can be compiled", commands::compile_file::function),

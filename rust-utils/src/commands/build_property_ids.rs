@@ -20,7 +20,7 @@ pub fn function(args: &[String]) -> Result<()> {
 
 
 pub fn build_ids_for_file(file_name: &str) -> Result<()> {
-	let file_path = get_shaders_path()?.push_new(format!("{file_name}.properties"));
+	let file_path = get_shaders_path()?.join(format!("{file_name}.properties"));
 	let file_strings = fs::read_to_string(&file_path)?;
 	let mut file_lines = file_strings.lines().map(str::trim).collect::<Vec<_>>();
 	
@@ -45,7 +45,7 @@ pub fn build_ids_for_file(file_name: &str) -> Result<()> {
 		for byte in line.bytes() {
 			output_data.push(byte);
 		}
-		output_data.push('\n' as u8);
+		output_data.push(b'\n');
 	};
 	
 	for line in file_lines.into_iter().take(i + 1) {
@@ -167,9 +167,7 @@ pub fn apply_aliases(ids: &mut HashMap<String, isize>, aliases: HashMap<String, 
 pub fn collect_entity_mappings(ids: HashMap<String, isize>) -> HashMap<isize, Vec<String>> {
 	let mut output = HashMap::new();
 	for (name, value) in ids {
-		if !output.contains_key(&value) {
-			output.insert(value, vec!());
-		}
+		output.entry(value).or_insert_with(Vec::new);
 		output.get_mut(&value).unwrap().push(name);
 	}
 	output

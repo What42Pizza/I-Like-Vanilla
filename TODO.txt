@@ -1,24 +1,27 @@
 Before 1.0.0:
-Add generalized volumetrics
 Add 'dither or noise' options to everything that uses dithering or noise
 Make sure ALL settings work
-Make sure that ALL settings are listed in the same order in define_settings.glsl, shaders.properties, and the style files
-Rework clouds
-Rework sky
 Make nearby cloud transparency more smooth
 Make sure all vanilla effect work
 Update ALL gallery images
 Update performance and compatibility note (Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.)
-Maybe add smaa from https://github.com/Luracasmus/smaa-mc
-Add a scary style?
-Re-add BLOCKS_REFLECTION_AMOUNT_MULT_SURFACE?
+Re-add BLOCKS_REFLECTION_AMOUNT_MULT_SURFACE
 Fix rain reflections
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Re-add SHOW_DANGEROUS_LIGHT
-Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
 Add glcolor saturation setting
 Add setting `Light Mixing: Artistic / Realistic`
 Fix beacon beam
+Create rust-utils command for finding invalid / incomplete settings
+	Make sure that ALL settings are listed in the same order in setting_defines.glsl, shaders.properties, and the style files
+
+Possibly before 1.0.0:
+Add generalized volumetrics
+Add a scary style?
+Rework clouds
+Rework sky
+Maybe add smaa from https://github.com/Luracasmus/smaa-mc
+Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
 
 
 

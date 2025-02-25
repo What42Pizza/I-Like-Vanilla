@@ -16,7 +16,7 @@ pub fn get_program_path() -> PathBuf {
 pub fn get_project_path() -> Result<PathBuf> {
 	let mut curr_path = get_program_path();
 	loop {
-		let shaders_path = curr_path.push_new("shaders");
+		let shaders_path = curr_path.join("shaders");
 		if shaders_path.exists() {
 			return Ok(curr_path);
 		}

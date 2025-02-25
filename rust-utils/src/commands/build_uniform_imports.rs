@@ -55,7 +55,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	let uniform_datas = get_uniform_datas()?;
 	
 	let project_path = get_project_path()?;
-	let uniforms_path = project_path.push_new("shaders/import");
+	let uniforms_path = project_path.join("shaders/import");
 	
 	fs_extra::dir::remove(&uniforms_path)?;
 	fs::create_dir(&uniforms_path)?;
@@ -63,11 +63,11 @@ pub fn function(args: &[String]) -> Result<()> {
 	let mut switchboard_file_contents = String::new();
 	for uniform in &uniform_datas {
 		let import_file_contents = create_file_contents(uniform);
-		let import_file_path = uniforms_path.push_new(format!("{}.glsl", uniform.name));
+		let import_file_path = uniforms_path.join(format!("{}.glsl", uniform.name));
 		fs::write(import_file_path, import_file_contents)?;
 		switchboard_file_contents += &create_switchboard_file_contents(uniform);
 	}
-	let switchboard_file_path = &uniforms_path.push_new("switchboard.glsl");
+	let switchboard_file_path = &uniforms_path.join("switchboard.glsl");
 	fs::write(switchboard_file_path, switchboard_file_contents)?;
 	
 	

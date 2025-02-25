@@ -9,7 +9,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	println!("Compiling file...");
 	
-	let mut output = compile_file(&PathBuf::from(&args[0]))?;
+	let mut output = compile_file(PathBuf::from(&args[0]))?;
 	
 	let mut output_bytes = vec!();
 	output_bytes.append(&mut format!("Output Status: {}\n", output.status).into_bytes());
@@ -35,7 +35,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	
 	let temp_path = get_temp_path()?;
-	let output_path = temp_path.push_new(&args[1]);
+	let output_path = temp_path.join(&args[1]);
 	fs::write(output_path, output_bytes)?;
 	
 	println!("Done, see '/temp/output.txt' for output");
@@ -49,7 +49,7 @@ pub fn compile_file(file_path: impl Into<PathBuf>) -> Result<ProcessOutput> {
 	
 	let project_path = get_project_path()?;
 	let temp_path = get_temp_path()?;
-	let validator_path = project_path.push_new("glslangValidator.exe");
+	let validator_path = project_path.join("glslangValidator.exe");
 	if !validator_path.exists() {
 		return error!("glslangValidator.exe was not found. Please download it and put it in the main folder\n(download link: https://github.com/KhronosGroup/glslang/releases/tag/main-tot)");
 	}
@@ -70,12 +70,12 @@ pub fn compile_file(file_path: impl Into<PathBuf>) -> Result<ProcessOutput> {
 		preprocessed_file_bytes.append(&mut line.into_bytes());
 		preprocessed_file_bytes.push(b'\n');
 	}
-	let compile_ready_file_path = temp_path.push_new(format!("compile_ready.{compile_ready_extension}"));
+	let compile_ready_file_path = temp_path.join(format!("compile_ready.{compile_ready_extension}"));
 	fs::write(&compile_ready_file_path, preprocessed_file_bytes)?;
 	
 	let mut cmd = std::process::Command::new(validator_path);
 	let path_arg = format!("temp/compile_ready.{compile_ready_extension}");
-	cmd.args(&["-H", &path_arg]);
+	cmd.args(["-H", &path_arg]);
 	cmd.current_dir(&project_path);
 	
 	let output = cmd.output();

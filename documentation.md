@@ -31,7 +31,7 @@ Because of the extensive and tedious usage of `#define`s, this repo contains a r
 
 Here's a list of the commands and why they exist:
 
-- **'export':** This takes the shader code, license, changelog, and shader readme and packages it into (broken?) zip files. It also automatically creates the OptiFine version, where it splices 'style_vanilla.glsl' with 'define_settings.glsl' (plus other fixes) to remove the styles feature, which causes the massive log file and horrendous loading time on OptiFine.
+- **'export':** This takes the shader code, license, changelog, and shader readme and packages it into (broken?) zip files. It also automatically creates the OptiFine version, where it splices 'style_vanilla.glsl' with 'setting_defines.glsl' (plus other fixes) to remove the styles feature, which causes the massive log file and horrendous loading time on OptiFine.
 - **'build uniform imports':** This generates all the files in the /shaders/import folder, using the data in 'all_uniforms.txt'. See 'Uniforms System' below for more details on this
 - **build world files':** This generates all the files in the /shaders/world_ folders, using data that is hard-coded into src/main.rs. Even if you don't know Rust, you should still be able to edit the values if needed
 - **count_sloc:** Counts the significant lines of code. May not be accurate, idk. It only counts .glsl files, since the .vsh and .fsh files don't contain anything meaningful.
@@ -96,7 +96,7 @@ In the settings menu, you can define which base style you use than override any 
 
 ### Basics:
 
-In "/shaders", you'll find "settings.glsl", "define_settings.glsl", "shaders.properties", "style_vanilla.glsl", "style_realistic.glsl", and so on. The "settings.glsl" file generally controls the defining of settings. The "define_settings.glsl" file holds the `#define`s which are modified by user settings. The "shaders.properties" file holds a ton of stuff, look elsewhere for info. The "style_..." files hold the default setting values for that style.
+In "/shaders", you'll find "settings.glsl", "setting_defines.glsl", "shaders.properties", "style_vanilla.glsl", "style_realistic.glsl", and so on. The "settings.glsl" file generally controls the defining of settings. The "setting_defines.glsl" file holds the `#define`s which are modified by user settings. The "shaders.properties" file holds a ton of stuff, look elsewhere for info. The "style_..." files hold the default setting values for that style.
 
 You should be able to figure this out yourself, but I'll still give some quick overviews
 
@@ -144,7 +144,7 @@ You should be able to figure this out yourself, but I'll still give some quick o
 ### /import: &nbsp; See 'Uniforms System' above
 ### /utils: &nbsp; Holds common functions that use uniforms (see 'Uniforms System' above for why)
 ### /lang: &nbsp; Holds shown names of setting options and setting values
-### define_settings.glsl: &nbsp; Holds every setting's GLSL name and allowed values
+### setting_defines.glsl: &nbsp; Holds every setting's GLSL name and allowed values
 ### settings.glsl: &nbsp; Miscellaneous settings stuff
 ### common.glsl: &nbsp; Holds commonly used code and macros for easier programming (cannot use uniforms, see 'Uniforms System' above for why)
 ### shaders.properties: &nbsp; Defines the settings menu plus many other details about the shader internals

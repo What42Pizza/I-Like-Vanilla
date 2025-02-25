@@ -9,7 +9,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	println!("Preprocessing file...");
 	
-	let preprocessed_file = preprocess_file(&PathBuf::from(&args[0]))?;
+	let preprocessed_file = preprocess_file(PathBuf::from(&args[0]))?;
 	
 	let mut output_bytes = vec!();
 	for line in preprocessed_file {
@@ -18,7 +18,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	
 	let temp_path = get_temp_path()?;
-	let output_path = temp_path.push_new(&args[1]);
+	let output_path = temp_path.join(&args[1]);
 	fs::write(output_path, output_bytes)?;
 	
 	println!("Done");
@@ -32,7 +32,7 @@ pub fn preprocess_file(file_path: impl Into<PathBuf>) -> Result<Vec<String>> {
 	
 	let shaders_path = get_shaders_path()?;
 	if !file_path.is_absolute() {
-		file_path = shaders_path.push_new(file_path);
+		file_path = shaders_path.join(file_path);
 	}
 	
 	let file_contents = fs::read_to_string(&file_path)?;
@@ -56,10 +56,10 @@ pub fn preprocess_line(file_contents: &mut Vec<String>, i: usize, file_path: &Pa
 	if !line.starts_with("#include ") {return Ok(());}
 	
 	let include_path_end = &line[10..line.len()-1];
-	let include_path = if include_path_end.starts_with("/") {
-		shaders_path.push_new(&include_path_end[1..])
+	let include_path = if let Some(path) = include_path_end.strip_prefix("/") {
+		shaders_path.join(path)
 	} else {
-		file_path.pop_new().push_new(include_path_end)
+		file_path.pop_new().join(include_path_end)
 	};
 	
 	file_contents.remove(i);
