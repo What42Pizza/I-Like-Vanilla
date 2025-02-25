@@ -223,7 +223,9 @@ This describes which /main_files-s handle different effects
 - **colortex5:  Bloom Texture**
 - **colortex6:  Noisy Texture**
 
-Note: the 'noisy texture' buffer is where things like bloom, sunrays, etc (anything that gives noisy results) are rendered before being added to the main image using LOD-sampling as a high-perf(?) blur
+Notes:
+- If more data needs to be packed into the 'Opaque Data' and 'Transparent Data' buffers, it may be better to switch them to an integer format
+- The 'noisy texture' buffer is where things like bloom, sunrays, etc (anything that gives noisy results) are rendered before being added to the main image using LOD-sampling as a high-perf(?) blur
 
 <br>
 <br>

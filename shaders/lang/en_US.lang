@@ -1073,12 +1073,6 @@ value.PHYSICALLY_WAVING_WATER_ENABLED.-1=Use Style Value
 value.PHYSICALLY_WAVING_WATER_ENABLED.0=Off
 value.PHYSICALLY_WAVING_WATER_ENABLED.1=On
 
-option.WAVING_WATER_NORMALS_ENABLED=Waving Normals Enabled
-option.WAVING_WATER_NORMALS_ENABLED.comment=Makes the water reflections wavy (only takes effect when water reflections are enabled)
-value.WAVING_WATER_NORMALS_ENABLED.-1=Use Style Value
-value.WAVING_WATER_NORMALS_ENABLED.0=Off
-value.WAVING_WATER_NORMALS_ENABLED.1=On
-
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE=Physical Waving Amount Surface
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
 value.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.-1=Use Style Value
@@ -1087,13 +1081,31 @@ option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND=Physical Waving Amount Undergr
 option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
 value.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.-1=Use Style Value
 
-option.WAVING_WATER_NORMALS_AMOUNT_SURFACE=Normals Waving Amount Surface
-option.WAVING_WATER_NORMALS_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
-value.WAVING_WATER_NORMALS_AMOUNT_SURFACE.-1=Use Style Value
+option.WAVING_WATER_SURFACE_ENABLED=Waving Surface Enabled
+option.WAVING_WATER_SURFACE_ENABLED.comment=Makes the water reflections wavy (only takes effect when water reflections are enabled)
+value.WAVING_WATER_SURFACE_ENABLED.-1=Use Style Value
+value.WAVING_WATER_SURFACE_ENABLED.0=Off
+value.WAVING_WATER_SURFACE_ENABLED.1=On
 
-option.WAVING_WATER_NORMALS_AMOUNT_UNDERGROUND=Normals Waving Amount Underground
-option.WAVING_WATER_NORMALS_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
-value.WAVING_WATER_NORMALS_AMOUNT_UNDERGROUND.-1=Use Style Value
+option.WAVING_WATER_NORMAL_AMOUNT=Waving Normal Amount
+option.WAVING_WATER_NORMAL_AMOUNT.comment=How much the waving surface should affect the water surface's normal (surface direction)
+value.WAVING_WATER_NORMAL_AMOUNT.-1=Use Style Value
+
+option.WAVING_WATER_FRESNEL_MULT=Waving Fresnel Mult
+option.WAVING_WATER_FRESNEL_MULT.comment=How much to darken the water based on the viewing direction
+value.WAVING_WATER_FRESNEL_MULT.-1=Use Style Value
+
+option.WAVING_WATER_SCALE=Waving Water Scale
+option.WAVING_WATER_SCALE.comment=How much to scale the noise for the waving water surface
+value.WAVING_WATER_SCALE.-1=Use Style Value
+
+option.WAVING_WATER_SURFACE_AMOUNT_SURFACE=Normals Waving Amount Surface
+option.WAVING_WATER_SURFACE_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
+value.WAVING_WATER_SURFACE_AMOUNT_SURFACE.-1=Use Style Value
+
+option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND=Normals Waving Amount Underground
+option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
+value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style Value
 
 
 
@@ -1133,12 +1145,6 @@ value.UNDERWATER_WAVINESS_SPEED.-1=Use Style Value
 screen.WATER_SETTINGS=Water
 
 
-
-option.WATER_FRESNEL_ADDITION=Fresnel Addition
-option.WATER_FRESNEL_ADDITION.comment=Makes the water lighter / darker depending on how parallel the surface is to the camera
-value.WATER_FRESNEL_ADDITION.-1=Use Style Value
-value.WATER_FRESNEL_ADDITION.0=Off
-value.WATER_FRESNEL_ADDITION.1=On
 
 option.WATER_TRANSPARENCY=Water Transparency
 value.WATER_TRANSPARENCY.-1=Use Style Value

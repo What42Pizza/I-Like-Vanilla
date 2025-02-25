@@ -8,10 +8,10 @@
 	
 	flat_inout vec3 shadowcasterColor;
 	
-	#if WATER_FRESNEL_ADDITION == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1
 		varying vec3 viewPos;
 	#endif
-	#if WAVING_WATER_NORMALS_ENABLED == 1 || defined DISTANT_HORIZONS
+	#if WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS
 		varying vec3 playerPos;
 	#endif
 	#if BORDER_FOG_ENABLED == 1
@@ -28,7 +28,7 @@
 
 #include "/lib/lighting/fsh_lighting.glsl"
 
-#if WAVING_WATER_NORMALS_ENABLED == 1
+#if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
@@ -51,7 +51,7 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	
-	#if WAVING_WATER_NORMALS_ENABLED == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1
 		vec3 normal = normal;
 	#endif
 	
@@ -59,35 +59,22 @@ void main() {
 	if (materialId == 7) {
 		
 		color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 0.8);
+		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
 		
 		
 		// waving water normals
-		#if WAVING_WATER_NORMALS_ENABLED == 1
-			const float worldPosScale = 2.0;
+		#if WAVING_WATER_SURFACE_ENABLED == 1
 			#include "/import/frameTimeCounter.glsl"
 			#include "/import/cameraPosition.glsl"
-			vec3 randomPoint = abs(simplexNoise3From4(vec4((playerPos + cameraPosition) / worldPosScale, frameTimeCounter * 0.7)));
-			vec3 normalWavingAddition = normalize(randomPoint) * 0.15;
-			normalWavingAddition *= abs(dot(normal, normalize(viewPos)));
-			normalWavingAddition *= mix(WAVING_WATER_NORMALS_AMOUNT_UNDERGROUND, WAVING_WATER_NORMALS_AMOUNT_SURFACE, lmcoord.y);
-			normal += normalWavingAddition;
-			normal = normalize(normal);
-		#endif
-		
-		
-		// fresnel addition
-		#if WATER_FRESNEL_ADDITION == 1
-			const vec3 fresnelColor = vec3(1.0, 0.6, 0.5);
-			const float fresnelStrength = 0.3;
-			vec3 fresnelNormal = normal;
-			#if WAVING_WATER_NORMALS_ENABLED == 1
-				fresnelNormal = normalize(fresnelNormal + normalWavingAddition * 30);
-			#endif
-			vec3 reflectedNormal = reflect(normalize(viewPos), fresnelNormal);
-			#include "/import/shadowLightPosition.glsl"
-			float fresnel = 1.0 - abs(dot(reflectedNormal, normalize(shadowLightPosition)));
-			fresnel *= fresnel;
-			color.rgb *= (1.0 - fresnelColor * fresnelStrength) + fresnel * fresnelColor * fresnelStrength * 2.0;
+			vec3 randomPoint = simplexNoise3From4(vec4((playerPos + cameraPosition) / WAVING_WATER_SCALE, frameTimeCounter * WAVING_WATER_SPEED));
+			randomPoint = normalize(randomPoint);
+			randomPoint += simplexNoise3From4(vec4((playerPos + cameraPosition) / WAVING_WATER_SCALE / 0.2, frameTimeCounter * WAVING_WATER_SPEED * 2.0)) * 0.5;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y);
+			randomPoint = mix(randomPoint, normal, wavingSurfaceAmount);
+			randomPoint = normalize(randomPoint);
+			normal = normalize(normal + randomPoint * 0.05 * WAVING_WATER_NORMAL_AMOUNT * dot(normal, normalize(viewPos)));
+			float fresnel = dot(-randomPoint, normalize(viewPos));
+			color.rgb *= 1.0 - fresnel * fresnel * WAVING_WATER_FRESNEL_MULT * 0.5;
 		#endif
 		
 		
@@ -158,7 +145,7 @@ void main() {
 	shadowcasterColor = getShadowcasterColor(ARG_IN);
 	
 	
-	#if !(WAVING_WATER_NORMALS_ENABLED == 1 || defined DISTANT_HORIZONS)
+	#if !(WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS)
 		vec3 playerPos;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
@@ -203,7 +190,7 @@ void main() {
 	#endif
 	
 	
-	#if WATER_FRESNEL_ADDITION == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1
 		viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	#endif
 	
