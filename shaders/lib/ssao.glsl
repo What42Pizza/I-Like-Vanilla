@@ -28,7 +28,7 @@ float getAoFactor(ARG_OUT) {
 	//#endif
 	#include "/utils/var_rng.glsl"
 	float noise = 1.0 + randomFloat(rng) * 0.3;
-	float scale = AO_SIZE * 0.17 / depth;
+	float scale = AO_SIZE * 0.1 / depth;
 	
 	float total = 0.0;
 	float maxTotal = 0.0; // this doesn't seem to have any performance impact vs total/=SAMPLE_COUNT at the end, so it's probably being pre-computed at comp-time

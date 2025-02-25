@@ -14,7 +14,7 @@ void main() {
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
 	
 	
-	#if !defined END
+	#ifdef OVERWORLD
 		#include "/import/sunPosition.glsl"
 		if (sunPosition.z < 0.0) {
 			albedo.rgb *= SUN_BRIGHTNESS;

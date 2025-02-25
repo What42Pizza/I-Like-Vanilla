@@ -4,7 +4,7 @@
 #endif
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 0.5
+										#define SUN_BRIGHTNESS 0.4
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
@@ -88,7 +88,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.25
+										#define BLOCK_BRIGHTNESS 1.0
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -225,18 +225,18 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.3
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.6
 #endif
 
 
 
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.6
+										#define AMBIENT_NIGHT_RED 0.4
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.7
+										#define AMBIENT_NIGHT_GREEN 0.5
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
@@ -244,7 +244,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.35
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.5
 #endif
 
 
@@ -273,7 +273,7 @@
 
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
-										#define AMBIENT_SUNRISE_RED 1.03
+										#define AMBIENT_SUNRISE_RED 1.0
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
@@ -465,14 +465,6 @@
 
 
 
-#if REFLECTION_ITERATIONS == -1
-#undef REFLECTION_ITERATIONS
-										#define REFLECTION_ITERATIONS 40
-#endif
-#if REFLECTION_STEP_INCREASE == -1
-#undef REFLECTION_STEP_INCREASE
-										#define REFLECTION_STEP_INCREASE 1.1
-#endif
 #if REFLECTION_FRESNEL == -1
 #undef REFLECTION_FRESNEL
 										#define REFLECTION_FRESNEL 0.5
@@ -489,11 +481,11 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.0
+										#define AO_AMOUNT 1.2
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 0.5
+										#define AO_SIZE 0.7
 #endif
 
 
@@ -565,7 +557,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.25
+										#define SUNRAYS_AMOUNT_DAY 0.4
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -573,11 +565,11 @@
 #endif
 #if SUNRAYS_MULT_SUNRISE == -1
 #undef SUNRAYS_MULT_SUNRISE
-										#define SUNRAYS_MULT_SUNRISE 3.0
+										#define SUNRAYS_MULT_SUNRISE 1.0
 #endif
 #if SUNRAYS_MULT_SUNSET == -1
 #undef SUNRAYS_MULT_SUNSET
-										#define SUNRAYS_MULT_SUNSET 3.0
+										#define SUNRAYS_MULT_SUNSET 1.0
 #endif
 #if SUNRAYS_WEATHER_MULT == -1
 #undef SUNRAYS_WEATHER_MULT
@@ -697,10 +689,6 @@
 
 
 
-#if SHARPENING_ENABLED == -1
-#undef SHARPENING_ENABLED
-										#define SHARPENING_ENABLED 1
-#endif
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
 										#define SHARPEN_AMOUNT 1.0

@@ -15,6 +15,9 @@ Re-add BLOCKS_REFLECTION_AMOUNT_MULT_SURFACE?
 Fix rain reflections
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Re-add SHOW_DANGEROUS_LIGHT
+Test `separateAO` in shaders.properties
+Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
+Add glcolor saturation setting?
 
 
 

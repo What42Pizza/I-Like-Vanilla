@@ -5,9 +5,7 @@
 	varying vec2 texcoord;
 	varying vec2 lmcoord;
 	varying vec4 glcolor;
-	varying vec3 normal;
-	
-	flat_inout vec3 skyLight;
+	varying vec2 normal;
 	
 #endif
 
@@ -17,22 +15,16 @@
 
 #ifdef FSH
 
-#include "/lib/lighting/fsh_lighting.glsl"
-
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor.rgb, 1.0);
 	if (albedo.a < 0.1) discard;
 	
-	
-	doFshLighting(albedo.rgb, lmcoord.x, lmcoord.y, vec3(0.0), normal  ARGS_IN);
-	
-	
 	/* DRAWBUFFERS:02 */
 	gl_FragData[0] = vec4(albedo);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(encodeNormal(normal)),
+		packVec2(normal),
 		0.0,
 		1.0
 	);
@@ -48,7 +40,6 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getSkyLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -62,9 +53,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color;
-	normal = gl_NormalMatrix * gl_Normal;
-	
-	skyLight = getSkyLight(ARG_IN);
+	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	
 	#include "/import/gbufferModelViewInverse.glsl"

@@ -541,11 +541,9 @@ value.RAIN_REFLECTION_SLOPE.-1=Use Style Value
 
 option.REFLECTION_ITERATIONS=Reflection Iterations
 option.REFLECTION_ITERATIONS.comment=The number of steps that the pseudo-raytracer takes
-value.REFLECTION_ITERATIONS.-1=Use Style Value
 
 option.REFLECTION_STEP_INCREASE=Reflection Step Increase
 option.REFLECTION_STEP_INCREASE.comment=How much the step amount is increased per step
-value.REFLECTION_STEP_INCREASE.-1=Use Style Value
 
 option.REFLECTION_FRESNEL=Reflection Fresnel Amount
 option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
@@ -813,9 +811,6 @@ screen.SHARPENING_SETTINGS=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
 option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA). (Performance cost: Low)
-value.SHARPENING_ENABLED.-1=Use Style Value
-value.SHARPENING_ENABLED.0=Off
-value.SHARPENING_ENABLED.1=On
 
 option.SHARPEN_AMOUNT=Sharpening Amount
 value.SHARPEN_AMOUNT.-1=Use Style Value

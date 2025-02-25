@@ -87,7 +87,6 @@ const float ambientOcclusionLevel = 1.0; // [0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8
 	#undef TAA_ENABLED
 	#undef FXAA_ENABLED
 	#undef SHARPENING_ENABLED
-	#define SHARPENING_ENABLED 0
 #endif
 
 
@@ -130,8 +129,6 @@ const float ambientOcclusionLevel = 1.0; // [0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8
 
 
 // misc
-
-#define LIGHT_SMOOTHING 0.1
 
 const float SHADOW_OFFSET_INCREASE = 1.3 / shadowMapResolution;
 const float SHADOW_OFFSET_MIN = 1.1 / pow(shadowMapResolution, 0.95);

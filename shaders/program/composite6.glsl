@@ -10,7 +10,7 @@
 #if SSS_DECONVERGE == 1
 	#include "/lib/super_secret_settings/deconverge.glsl"
 #endif
-#if SHARPENING_ENABLED == 1
+#ifdef SHARPENING_ENABLED
 	#include "/lib/sharpening.glsl"
 #endif
 #include "/lib/color_correction.glsl"
@@ -39,7 +39,7 @@ void main() {
 	
 	// ======== SHARPENING ========
 	
-	#if SHARPENING_ENABLED == 1
+	#ifdef SHARPENING_ENABLED
 		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		float blockDepth = toBlockDepth(depth  ARGS_IN);
 		#ifdef DISTANT_HORIZONS

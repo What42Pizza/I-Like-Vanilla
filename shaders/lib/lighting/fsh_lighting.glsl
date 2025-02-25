@@ -224,16 +224,12 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	#if CEL_SHADING_ENABLED == 1
 		blockBrightness =
-			sqrt(blockBrightness) * 0.8
-			+ step(0.2, blockBrightness) * 0.2;
+			0.8 * sqrt(blockBrightness) +
+			0.2 * step(0.2, blockBrightness);
 		ambientBrightness = smoothstep(0.0, 1.0, ambientBrightness);
 	#endif
 	
-	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
-	skyBrightness *= 0.25 + 0.75 * ambientBrightness;
 	vec3 ambientLight = getAmbientLight(ambientBrightness  ARGS_IN);
-	ambientLight *= 1.0 - skyBrightness;
-	blockBrightness *= 1.0 - 0.8 * skyBrightness;
 	
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
 		#include "/import/blockFlickerAmount.glsl"
@@ -253,14 +249,23 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	vec3 blockLight = blockBrightness * BLOCK_COLOR;
 	
+	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
+	skyBrightness *= 0.25 + 0.75 * ambientBrightness;
+	vec3 skyLighting = skyLight * skyBrightness;
+	ambientLight *= 1.0 - skyBrightness;
+	
+	vec3 lighting = ambientLight + skyLighting;
+	
+	float lightingBrightness = min(getColorLum(lighting), 1.0);
+	blockBrightness *= 1.1 - lightingBrightness;
+	vec3 blockLight = blockBrightness * BLOCK_COLOR;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
+	lighting += blockLight;
 	
-	color *= smoothMax(blockLight, ambientLight, LIGHT_SMOOTHING) + skyLight * skyBrightness;
-	color *= 1.2;
+	color *= lighting * 1.2;
 	
 }
 
