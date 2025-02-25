@@ -4,7 +4,7 @@
 	
 	varying vec2 texcoord;
 	varying vec2 lmcoord;
-	varying vec4 glcolor;
+	varying vec3 glcolor;
 	varying vec2 normal;
 	
 #endif
@@ -17,7 +17,7 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor.rgb, 1.0);
+	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	if (albedo.a < 0.1) discard;
 	
 	/* DRAWBUFFERS:02 */
@@ -52,7 +52,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = gl_Color;
+	glcolor = gl_Color.rgb;
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	

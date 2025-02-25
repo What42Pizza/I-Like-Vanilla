@@ -14,7 +14,7 @@
 
 #ifdef FSH
 
-#include "/utils/getSkyLight.glsl"
+#include "/utils/getShadowcasterColor.glsl"
 
 void main() {
 	

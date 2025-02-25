@@ -6,7 +6,7 @@
 	varying vec3 normal;
 	flat_inout int materialId;
 	
-	flat_inout vec3 skyLight;
+	flat_inout vec3 shadowcasterColor;
 	
 	#if WATER_FRESNEL_ADDITION == 1
 		varying vec3 viewPos;
@@ -131,7 +131,7 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getSkyLight.glsl"
+#include "/utils/getShadowcasterColor.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -155,7 +155,7 @@ void main() {
 	if (materialId < 1000) materialId = 0;
 	materialId %= 1000;
 	
-	skyLight = getSkyLight(ARG_IN);
+	shadowcasterColor = getShadowcasterColor(ARG_IN);
 	
 	
 	#if !(WAVING_WATER_NORMALS_ENABLED == 1 || defined DISTANT_HORIZONS)

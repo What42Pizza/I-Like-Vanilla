@@ -15,29 +15,11 @@ Re-add BLOCKS_REFLECTION_AMOUNT_MULT_SURFACE?
 Fix rain reflections
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Re-add SHOW_DANGEROUS_LIGHT
-Test `separateAO` in shaders.properties
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
 Add glcolor saturation setting?
+Add setting `Light Mixing: Artistic / Realistic`
 
-
-
-Planned 1.0.0 pipeline: (if rendering at half-res works out)
-
-- render opaques
-- render deferred
-- - render shadows and ssao at half resolution
-- - apply lighting
-- render transparents
-- render composite
-- - combine opaques, transparents, and volumetrics, apply auto exposure, and filter bloom
-- - render reflections and bloom at half resolution
-- - add reflections and bloom and do aa
-- - process underwater waving and do depth of field and motion blur
-- - do sharpening, color correction, etc
-
-MAYBE, half-res textures can be rendered without rendering edge data, then an upscaling pass can for each 2x2 quad either upscale the half-ref texture or else render at full ref?
-
-
+ 
 
 Current:
 Make more example images:
@@ -52,7 +34,6 @@ Turn uniforms into "static" vars?
 Do a round of making sure different settings combinations work
 Improve TAA on moving entities
 Add documentation for super secret settings
-Rework sky
 Make only top of water wavy
 Add ripples to rain reflections
 Add void fog option?

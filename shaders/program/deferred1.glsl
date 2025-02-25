@@ -1,6 +1,6 @@
 #ifdef FIRST_PASS
 	varying vec2 texcoord;
-	flat_inout vec3 skyLight;
+	flat_inout vec3 shadowcasterColor;
 #endif
 
 
@@ -97,12 +97,12 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getSkyLight.glsl"
+#include "/utils/getShadowcasterColor.glsl"
 
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
-	skyLight = getSkyLight(ARG_IN);
+	shadowcasterColor = getShadowcasterColor(ARG_IN);
 }
 
 #endif

@@ -205,8 +205,8 @@ float getSkyBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_
 	#ifdef SHADOWS_ENABLED
 		float skyBrightness = sampleShadow(viewPos, lightDot  ARGS_IN);
 		#ifdef DISTANT_HORIZONS
-			#include "/import/far.glsl"
-			float len = max(length(viewPos) / far, 0.8);
+			#include "/import/invFar.glsl"
+			float len = max(length(viewPos) * invFar, 0.8);
 			skyBrightness = mix(skyBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
 		#endif
 	#else
@@ -250,9 +250,10 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockBrightness *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	
-	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
+	#include "/import/sunLightBrightness.glsl"
+	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	skyBrightness *= 0.25 + 0.75 * ambientBrightness;
-	vec3 skyLighting = skyLight * skyBrightness;
+	vec3 skyLighting = shadowcasterColor * skyBrightness;
 	ambientLight *= 1.0 - skyBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;

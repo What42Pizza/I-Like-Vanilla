@@ -54,7 +54,6 @@ void main() {
 			noisyAdditions += depthSunraysAddition;
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1
-			#include "/import/sunLightBrightness.glsl"
 			#include "/import/sunAngle.glsl"
 			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
 			float rawVolSunraysAmount = getVolSunraysAmount(depth, rng  ARGS_IN) * volSunraysAmountMult;

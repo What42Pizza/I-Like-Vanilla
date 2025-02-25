@@ -52,7 +52,7 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getSkyLight.glsl"
+#include "/utils/getShadowcasterColor.glsl"
 #include "/utils/getAmbientLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
@@ -74,9 +74,9 @@ void main() {
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	vec3 skyLight = getSkyLight(ARG_IN);
+	vec3 shadowcasterColor = getShadowcasterColor(ARG_IN);
 	vec3 ambientLight = getAmbientLight(1.0  ARGS_IN);
-	colorMult = skyLight + ambientLight;
+	colorMult = shadowcasterColor + ambientLight;
 	//colorMult = mix(vec3(getColorLum(colorMult)), colorMult, vec3(1.0));
 	colorMult = normalize(colorMult) * 2.0 * CLOUDS_BRIGHTNESS;
 	

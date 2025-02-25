@@ -9,7 +9,7 @@
 	
 	varying vec3 playerPos;
 	varying vec3 viewPos;
-	flat_inout vec3 skyLight;
+	flat_inout vec3 shadowcasterColor;
 	
 #endif
 
@@ -116,7 +116,7 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getSkyLight.glsl"
+#include "/utils/getShadowcasterColor.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -138,7 +138,7 @@ void main() {
 		playerPos.y -= 0.11213;
 	}
 	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
-	skyLight = getSkyLight(ARG_IN);
+	shadowcasterColor = getShadowcasterColor(ARG_IN);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

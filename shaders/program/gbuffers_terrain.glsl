@@ -32,16 +32,9 @@ void main() {
 	#endif
 	
 	
-	// decrease vanilla ao in caves
-	float glcolorBrightness = length(glcolor);
-	glcolorBrightness = 1.0 - (1.0 - glcolorBrightness) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
-	vec3 newGlcolor = normalize(glcolor) * glcolorBrightness;
-	
-	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
+	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	if (albedo.a < 0.1) discard;
 	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.15);
-	albedo.rgb *= newGlcolor;
 	
 	
 	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15;
@@ -83,6 +76,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
+	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	#include "/import/mc_Entity.glsl"
