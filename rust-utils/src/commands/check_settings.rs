@@ -16,6 +16,13 @@ pub fn function(args: &[String]) -> Result<()> {
 
 
 
+/*
+Strategy:
+1: Go through shaders.properties and get a list of all settings in the desired order (and check for inconsistencies)
+2: Go through setting_defines.glsl and check which settings are supposed to be in style files (and check for inconsistencies)
+3: Go through the lang file and check for inconsistencies
+4: Go through each style file and check for inconsistencies (ignoring listed settings that aren't supposed to be in style files)
+*/
 pub fn check_settings() -> Result<bool> {
 	let shaders_path = get_shaders_path()?;
 	let mut found_problems = false;
@@ -169,15 +176,9 @@ pub fn check_style_file(
 pub fn check_settings_order(settings_list: &[&str], prop_settings_list: &[String], style_settings_set: Option<&HashSet<String>>, file_name: &'static str) {
 	let mut prev_i = 0;
 	for (i, setting) in prop_settings_list.iter().enumerate() {
+		if let Some(style_settings_set) = style_settings_set && !style_settings_set.contains(setting) {continue;}
 		let Some((mut defines_i, _)) = settings_list.iter().enumerate().find(|(_, define)| *define == setting) else {
-			let skip_warning = if let Some(style_settings_set) = style_settings_set {
-				!style_settings_set.contains(setting) // skip the warning if the 'problematic' setting isn't meant to be a style setting
-			} else {
-				false
-			};
-			if !skip_warning {
-				println!("WARNING: found setting in shaders.properties that is not present in {file_name}: {setting}");
-			}
+			println!("WARNING: found setting in shaders.properties that is not present in {file_name}: {setting}");
 			continue;
 		};
 		defines_i += 1;

@@ -3,14 +3,8 @@
 #ifdef FIRST_PASS
 	
 	varying vec2 texcoord;
-	flat_inout float glcolor;
 	flat_inout vec3 colorMult;
-	#if HIDE_NEARBY_CLOUDS == 1
-		varying float opacity;
-	#endif
-	#if BORDER_FOG_ENABLED == 1
-		varying float fogAmount;
-	#endif
+	varying vec3 playerPos;
 	
 #endif
 
@@ -18,27 +12,14 @@
 
 #ifdef FSH
 
-#if BORDER_FOG_ENABLED == 1
-	#include "/lib/fog/applyFog.glsl"
-#endif
-
 void main() {
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	
-	
-	#if HIDE_NEARBY_CLOUDS == 0
-		const float opacity = (1.0 - CLOUD_TRANSPARENCY);
-	#endif
-	color.a = opacity;
+	float playerPosDist = max(length(playerPos.xz), abs(playerPos.y));
+	color.a = 1.0 - mix(NEARBY_CLOUD_TRANSPARENCY, CLOUD_TRANSPARENCY, clamp(playerPosDist / NEARBY_CLOUD_DIST, 0.0, 1.0));
 	
 	
 	color.rgb *= colorMult;
-	
-	
-	// fog
-	#if BORDER_FOG_ENABLED == 1
-		applyFog(color.rgb, fogAmount  ARGS_IN);
-	#endif
 	
 	
 	/* DRAWBUFFERS:0 */
@@ -66,12 +47,6 @@ void main() {
 #endif
 
 void main() {
-	
-	//#ifdef DISTANT_HORIZONS
-	//	gl_Position = vec4(10);
-	//	return;
-	//#endif
-	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	vec3 shadowcasterColor = getShadowcasterColor(ARG_IN);
@@ -79,11 +54,10 @@ void main() {
 	colorMult = shadowcasterColor + ambientLight;
 	//colorMult = mix(vec3(getColorLum(colorMult)), colorMult, vec3(1.0));
 	colorMult = normalize(colorMult) * 2.0 * CLOUDS_BRIGHTNESS;
+	colorMult *= gl_Color.rgb;
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1 || HIDE_NEARBY_CLOUDS == 1
-		#include "/import/gbufferModelViewInverse.glsl"
-		vec3 worldPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
-	#endif
+	#include "/import/gbufferModelViewInverse.glsl"
+	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
@@ -94,17 +68,6 @@ void main() {
 	#ifdef TAA_ENABLED
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
-	
-	#if BORDER_FOG_ENABLED == 1
-		vec4 position = gl_Vertex;
-		fogAmount = getFogAmount(position.xyz  ARGS_IN);
-	#endif
-	
-	#if HIDE_NEARBY_CLOUDS == 1
-		opacity = (1.0 - CLOUD_TRANSPARENCY) * atan(length(playerPos) - 30.0) / PI + 0.5;
-	#endif
-	
-	glcolor = gl_Color.r;
 	
 }
 

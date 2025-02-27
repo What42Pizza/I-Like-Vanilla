@@ -42,9 +42,13 @@
 #undef CLOUD_TRANSPARENCY
 										#define CLOUD_TRANSPARENCY 0.3
 #endif
-#if HIDE_NEARBY_CLOUDS == -1
-#undef HIDE_NEARBY_CLOUDS
-										#define HIDE_NEARBY_CLOUDS 0
+#if NEARBY_CLOUD_TRANSPARENCY == -1
+#undef NEARBY_CLOUD_TRANSPARENCY
+										#define NEARBY_CLOUD_TRANSPARENCY 0.2
+#endif
+#if NEARBY_CLOUD_DIST == -1
+#undef NEARBY_CLOUD_DIST
+										#define NEARBY_CLOUD_DIST 30
 #endif
 
 
@@ -72,6 +76,10 @@
 
 
 
+#if FOLIAGE_SATURATION == -1
+#undef FOLIAGE_SATURATION
+										#define FOLIAGE_SATURATION 1.0
+#endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
 										#define END_AMBIENT_BRIGHTNESS 0.1
@@ -95,11 +103,11 @@
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.95
+										#define SKYLIGHT_DAY_GREEN 0.9
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.85
+										#define SKYLIGHT_DAY_BLUE 0.8
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
@@ -107,11 +115,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.5
+										#define AMBIENT_DAY_RED 0.6
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.6
+										#define AMBIENT_DAY_GREEN 0.7
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -128,11 +136,11 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 1.0
+										#define SKYLIGHT_NIGHT_RED 0.7
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 1.05
+										#define SKYLIGHT_NIGHT_GREEN 0.9
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
@@ -140,15 +148,15 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.3
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.25
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.5
+										#define AMBIENT_NIGHT_RED 0.55
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.55
+										#define AMBIENT_NIGHT_GREEN 0.65
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
@@ -243,7 +251,7 @@
 #endif
 #if BLOCK_GREEN == -1
 #undef BLOCK_GREEN
-										#define BLOCK_GREEN 0.6
+										#define BLOCK_GREEN 0.65
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
@@ -251,7 +259,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 0.85
+										#define BLOCK_BRIGHTNESS 0.8
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -259,7 +267,7 @@
 #endif
 #if BLOCK_BRIGHTNESS_NIGHT_MULT == -1
 #undef BLOCK_BRIGHTNESS_NIGHT_MULT
-										#define BLOCK_BRIGHTNESS_NIGHT_MULT 1.4
+										#define BLOCK_BRIGHTNESS_NIGHT_MULT 1.3
 #endif
 #if BLOCKLIGHT_FLICKERING_ENABLED == -1
 #undef BLOCKLIGHT_FLICKERING_ENABLED
@@ -276,7 +284,7 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.0
+										#define CAVE_AMBIENT_RED 1.05
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
@@ -284,11 +292,11 @@
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.6
+										#define CAVE_AMBIENT_BLUE 0.5
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.07
+										#define CAVE_AMBIENT_BRIGHTNESS 0.06
 #endif
 
 
@@ -342,11 +350,11 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.0
+										#define VANILLA_AO_BRIGHT 1.1
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 0.2
+										#define VANILLA_AO_DARK 0.5
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -354,7 +362,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.8
+										#define SIDE_SHADING_DARK 0.3
 #endif
 #if RAIN_LIGHT_MULT == -1
 #undef RAIN_LIGHT_MULT
@@ -371,11 +379,11 @@
 #endif
 #if HANDHELD_LIGHT_DISTANCE == -1
 #undef HANDHELD_LIGHT_DISTANCE
-										#define HANDHELD_LIGHT_DISTANCE 18
+										#define HANDHELD_LIGHT_DISTANCE 16
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
-										#define HANDHELD_LIGHT_BRIGHTNESS 0.65
+										#define HANDHELD_LIGHT_BRIGHTNESS 0.5
 #endif
 
 
@@ -405,7 +413,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.2
+										#define BLOOM_LOW_CUTOFF 0.35
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -430,11 +438,11 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.5
+										#define AO_AMOUNT 1.8
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 0.7
+										#define AO_SIZE 1.0
 #endif
 
 
@@ -472,7 +480,7 @@
 
 #if DEPTH_SUNRAYS_ENABLED == -1
 #undef DEPTH_SUNRAYS_ENABLED
-										#define DEPTH_SUNRAYS_ENABLED 1
+										#define DEPTH_SUNRAYS_ENABLED 0
 #endif
 #if VOL_SUNRAYS_ENABLED == -1
 #undef VOL_SUNRAYS_ENABLED
@@ -484,19 +492,19 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.15
+										#define SUNRAYS_AMOUNT_DAY 0.25
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.1
+										#define SUNRAYS_AMOUNT_NIGHT 0.25
 #endif
 #if SUNRAYS_MULT_SUNRISE == -1
 #undef SUNRAYS_MULT_SUNRISE
-										#define SUNRAYS_MULT_SUNRISE 3.0
+										#define SUNRAYS_MULT_SUNRISE 2.5
 #endif
 #if SUNRAYS_MULT_SUNSET == -1
 #undef SUNRAYS_MULT_SUNSET
-										#define SUNRAYS_MULT_SUNSET 3.0
+										#define SUNRAYS_MULT_SUNSET 2.5
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -504,7 +512,7 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.15
+										#define SUNRAYS_SUN_GREEN 0.2
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
@@ -550,7 +558,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 1.0
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.6
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -559,10 +567,6 @@
 #if SUNRAYS_BRIGHTNESS_INCREASE == -1
 #undef SUNRAYS_BRIGHTNESS_INCREASE
 										#define SUNRAYS_BRIGHTNESS_INCREASE 0.0
-#endif
-#if SUNRAYS_INC_AMOUNT == -1
-#undef SUNRAYS_INC_AMOUNT
-										#define SUNRAYS_INC_AMOUNT 1.5
 #endif
 
 
@@ -674,7 +678,7 @@
 #endif
 #if AUTO_EXPOSURE_BRIGHT_MULT == -1
 #undef AUTO_EXPOSURE_BRIGHT_MULT
-										#define AUTO_EXPOSURE_BRIGHT_MULT 0.9
+										#define AUTO_EXPOSURE_BRIGHT_MULT 1.0
 #endif
 #if AUTO_EXPOSURE_DARK_MULT == -1
 #undef AUTO_EXPOSURE_DARK_MULT
@@ -843,7 +847,7 @@
 #endif
 #if WAVING_WATER_SCALE == -1
 #undef WAVING_WATER_SCALE
-										#define WAVING_WATER_SCALE 0.5
+										#define WAVING_WATER_SCALE 0.8
 #endif
 #if WAVING_WATER_SPEED == -1
 #undef WAVING_WATER_SPEED
@@ -851,7 +855,7 @@
 #endif
 #if WAVING_WATER_FRESNEL_MULT == -1
 #undef WAVING_WATER_FRESNEL_MULT
-										#define WAVING_WATER_FRESNEL_MULT 0.5
+										#define WAVING_WATER_FRESNEL_MULT 0.4
 #endif
 #if WAVING_WATER_NORMAL_AMOUNT == -1
 #undef WAVING_WATER_NORMAL_AMOUNT
@@ -897,15 +901,15 @@
 #endif
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.2
+										#define WATER_COLOR_RED 0.25
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.4
+										#define WATER_COLOR_GREEN 0.45
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.55
+										#define WATER_COLOR_BLUE 0.6
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
@@ -937,14 +941,6 @@
 
 
 
-#if USE_BETTER_RAND == -1
-#undef USE_BETTER_RAND
-										#define USE_BETTER_RAND 0
-#endif
-#if SHOW_DANGEROUS_LIGHT == -1
-#undef SHOW_DANGEROUS_LIGHT
-										#define SHOW_DANGEROUS_LIGHT 0
-#endif
 #if USE_SIMPLE_LIGHT == -1
 #undef USE_SIMPLE_LIGHT
 										#define USE_SIMPLE_LIGHT 0

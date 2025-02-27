@@ -6,8 +6,11 @@
 	varying vec2 normal;
 	flat_inout int materialId;
 	
-	#ifdef DISTANT_HORIZONS
+	#if defined DISTANT_HORIZONS || defined SHOW_DANGEROUS_LIGHT
 		varying vec3 playerPos;
+	#endif
+	#ifdef SHOW_DANGEROUS_LIGHT
+		varying float isDangerousLight;
 	#endif
 	
 #endif
@@ -35,6 +38,14 @@ void main() {
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	if (albedo.a < 0.1) discard;
 	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.15);
+	
+	
+	#ifdef SHOW_DANGEROUS_LIGHT
+		#include "/import/cameraPosition.glsl"
+		vec3 blockPos = fract(playerPos + cameraPosition);
+		float centerDist = length(blockPos -= 0.5);
+		albedo.rgb = mix(albedo.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.3 * float(centerDist < 0.65));
+	#endif
 	
 	
 	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15;
@@ -75,7 +86,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = gl_Color.rgb;
+	glcolor = mix(vec3(getColorLum(gl_Color.rgb)), gl_Color.rgb, FOLIAGE_SATURATION);
 	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
@@ -85,7 +96,12 @@ void main() {
 	materialId %= 1000;
 	
 	
-	#ifndef DISTANT_HORIZONS
+	#ifdef SHOW_DANGEROUS_LIGHT
+		isDangerousLight = float(gl_Normal.y > 0.9 && lmcoord.x < 0.5);
+	#endif
+	
+	
+	#if !(defined DISTANT_HORIZONS || defined SHOW_DANGEROUS_LIGHT)
 		vec3 playerPos;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"

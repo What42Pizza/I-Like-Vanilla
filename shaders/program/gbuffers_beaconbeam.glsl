@@ -1,6 +1,7 @@
 #ifdef FIRST_PASS
 	varying vec2 texcoord;
 	flat_inout float glcolor_alpha;
+	varying vec2 normal;
 #endif
 
 
@@ -12,8 +13,14 @@ void main() {
 	
 	color.rgb *= 1.3;
 	
-	/* DRAWBUFFERS:0 */
+	/* DRAWBUFFERS:02 */
 	gl_FragData[0] = color;
+	gl_FragData[1] = vec4(
+		packVec2(0.25, 0.0),
+		packVec2(normal),
+		0.0,
+		1.0
+	);
 	
 }
 
@@ -32,6 +39,7 @@ void main() {
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		#include "/import/gbufferModelViewInverse.glsl"

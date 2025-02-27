@@ -40,11 +40,15 @@
 #endif
 #if CLOUD_TRANSPARENCY == -1
 #undef CLOUD_TRANSPARENCY
-										#define CLOUD_TRANSPARENCY 0.5
+										#define CLOUD_TRANSPARENCY 0.6
 #endif
-#if HIDE_NEARBY_CLOUDS == -1
-#undef HIDE_NEARBY_CLOUDS
-										#define HIDE_NEARBY_CLOUDS 0
+#if NEARBY_CLOUD_TRANSPARENCY == -1
+#undef NEARBY_CLOUD_TRANSPARENCY
+										#define NEARBY_CLOUD_TRANSPARENCY 0.8
+#endif
+#if NEARBY_CLOUD_DIST == -1
+#undef NEARBY_CLOUD_DIST
+										#define NEARBY_CLOUD_DIST 30
 #endif
 
 
@@ -72,6 +76,10 @@
 
 
 
+#if FOLIAGE_SATURATION == -1
+#undef FOLIAGE_SATURATION
+										#define FOLIAGE_SATURATION 1.0
+#endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
 										#define END_AMBIENT_BRIGHTNESS 0.1
@@ -560,10 +568,6 @@
 #undef SUNRAYS_BRIGHTNESS_INCREASE
 										#define SUNRAYS_BRIGHTNESS_INCREASE 0.0
 #endif
-#if SUNRAYS_INC_AMOUNT == -1
-#undef SUNRAYS_INC_AMOUNT
-										#define SUNRAYS_INC_AMOUNT 1.5
-#endif
 
 
 
@@ -937,14 +941,6 @@
 
 
 
-#if USE_BETTER_RAND == -1
-#undef USE_BETTER_RAND
-										#define USE_BETTER_RAND 0
-#endif
-#if SHOW_DANGEROUS_LIGHT == -1
-#undef SHOW_DANGEROUS_LIGHT
-										#define SHOW_DANGEROUS_LIGHT 0
-#endif
 #if USE_SIMPLE_LIGHT == -1
 #undef USE_SIMPLE_LIGHT
 										#define USE_SIMPLE_LIGHT 0
