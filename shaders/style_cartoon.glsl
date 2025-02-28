@@ -399,10 +399,6 @@
 
 
 
-#if BLOOM_ENABLED == -1
-#undef BLOOM_ENABLED
-										#define BLOOM_ENABLED 1
-#endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
 										#define BLOOM_AMOUNT 0.9

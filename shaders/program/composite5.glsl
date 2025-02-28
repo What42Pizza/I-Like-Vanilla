@@ -63,19 +63,19 @@ void main() {
 	
 	
 	
-	// ======== FXAA ========
+	// ======== FXAA ======== //
 	#ifdef FXAA_ENABLED
 		doFxaa(color, MAIN_TEXTURE  ARGS_IN);
 	#endif
 	
-	// ======== TAA ========
+	// ======== TAA ======== //
 	#ifdef TAA_ENABLED
 		doTAA(color, blockDepth, prevCoord  ARGS_IN);
 	#endif
 	
 	
 	
-	// ======== MOTION BLUR ========
+	// ======== MOTION BLUR ======== //
 	
 	#if MOTION_BLUR_ENABLED == 1
 		vec3 prevColor = color;

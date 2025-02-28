@@ -2,16 +2,19 @@
 
 
 
-vec3 getBloomAddition(inout uint rng, float depth  ARGS_OUT) {
+vec3 getBloomAddition(float depth  ARGS_OUT) {
 	
 	float blockDepth = toBlockDepth(depth  ARGS_IN);
 	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.15;
 	
-	#include "/import/invAspectRatio.glsl"
-	float random = randomFloat(rng) * 100000.0;
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	float randomAngle = (dither - 0.5) * 2.0 * PI;
 	mat2 rotationMatrix;
-	rotationMatrix[0] = vec2(cos(random) * invAspectRatio, -sin(random) * invAspectRatio);
-	rotationMatrix[1] = vec2(sin(random), cos(random));
+	#include "/import/invAspectRatio.glsl"
+	rotationMatrix[0] = vec2(cos(randomAngle) * invAspectRatio, -sin(randomAngle) * invAspectRatio);
+	rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle));
 	
 	// these values were generated with https://github.com/What42Pizza/Small-Rust-Programs/tree/master/point-distribution
 	vec3 bloomAddition = vec3(0.0);

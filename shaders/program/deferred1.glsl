@@ -45,7 +45,7 @@ void main() {
 	
 	
 	
-	// ======== OUTLINES ========
+	// ======== OUTLINES ======== //
 	
 	#if OUTLINES_ENABLED == 1
 		color *= 1.0 - getOutlineAmount(ARG_IN);

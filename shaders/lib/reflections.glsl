@@ -23,8 +23,10 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 	stepVector.y = clampedStepY;
 	stepVector /= (REFLECTION_ITERATIONS - 15); // ensure that the ray will reach the edge of the screen 15 steps early, allows for fine-tuning to not be cut short
 	
-	#include "/utils/var_rng.glsl"
-	screenPos += stepVector * randomFloat(rng) * 0.5;
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	screenPos += stepVector * (dither - 0.5) * REFLECTION_DITHER_AMOUNT;
 	
 	int hitCount = 0;
 	
@@ -85,14 +87,6 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D textur
 		float reflectionColorBrightness = getColorLum(reflectionColor);
 		float alteredFogColorBrightness = getColorLum(alteredFogColor);
 		reflectionColor *= min(alteredFogColorBrightness * 2.0, reflectionColorBrightness) / reflectionColorBrightness;
-	//} else if (error == 1) {
-		//color *= vec3(1.0, 0.1, 0.1);
-	//} else if (error == 1) {
-		//reflectionPos = (reflectionPos + texcoord) / 2;//mix(texcoord, reflectionPos, randomFloat(rngStart));
-		//vec3 reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
-		//reflectionColor = mix(fogColor, reflectionColor, clamp(5.0 - 5.0 * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-		//reflectionColor *= 0.8 + color * 0.2;
-		//color = mix(color, reflectionColor, lerpAmount);
 	} else {
 		reflectionColor = alteredFogColor;
 	}

@@ -222,6 +222,7 @@ This describes which /main_files-s handle different effects
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
 - **colortex6:  Noisy Texture**
+- **colortex7:  ShadowDepth**
 
 Notes:
 - If more data needs to be packed into the 'Opaque Data' and 'Transparent Data' buffers, it may be better to switch them to an integer format

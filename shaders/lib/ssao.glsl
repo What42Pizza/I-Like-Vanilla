@@ -26,8 +26,9 @@ float getAoFactor(ARG_OUT) {
 	//#ifdef DISTANT_HORIZONS
 	//	depth = max(depth, toBlockDepthDh(texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN));
 	//#endif
-	#include "/utils/var_rng.glsl"
-	float noise = 1.0 + randomFloat(rng) * 0.3;
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	float noise = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * PI * 2.0;
 	float scale = AO_SIZE * 0.1 / depth;
 	
 	float total = 0.0;
@@ -37,7 +38,7 @@ float getAoFactor(ARG_OUT) {
 		
 		float len = (float(i) / SAMPLE_COUNT + 0.3) * scale;
 		#include "/import/invAspectRatio.glsl"
-		vec2 offset = vec2(cos(i * noise) * len * invAspectRatio, sin(i * noise) * len);
+		vec2 offset = vec2(cos(i + noise) * len * invAspectRatio, sin(i + noise) * len);
 		
 		float weight = 100 - float(i) / SAMPLE_COUNT;
 		total += getAoInfluence(depth, offset  ARGS_IN) * weight;

@@ -1,15 +1,20 @@
 // optifine settings (DON'T DELETE)
 /*
-const int colortex2Format = RGB32F;
-const int colortex3Format = RGB32F;
-const bool colortex4Clear = false;
-const bool shadowtex0Mipmap = false;
-const bool shadowtex1Mipmap = false;
-const bool shadowtex0Clear = false;
-const bool shadowtex1Clear = false;
-const float wetnessHalflife = 50.0f;
-const float drynessHalflife = 50.0f;
-const float centerDepthHalflife = 2.5f;
+const bool  colortex0Clear        = false;
+const bool  colortex1Clear        = false;
+const int   colortex2Format       = RGB32F;
+const bool  colortex2Clear        = false;
+const int   colortex3Format       = RGB32F;
+const bool  colortex4Clear        = false;
+const bool  colortex5Clear        = false;
+const bool  colortex6Clear        = false;
+const bool  shadowtex0Mipmap      = false;
+const bool  shadowtex0Clear       = false;
+const bool  shadowtex1Mipmap      = false;
+const bool  shadowtex1Clear       = false;
+const float wetnessHalflife       = 50.0f;
+const float drynessHalflife       = 50.0f;
+const float centerDepthHalflife   = 2.5f;
 const float eyeBrightnessHalflife = 3.0f;
 */
 

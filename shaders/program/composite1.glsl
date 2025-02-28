@@ -12,13 +12,13 @@
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
-	#if BLOOM_ENABLED == 1
+	#ifdef BLOOM_ENABLED
 		vec3 bloomColor = color;
 	#endif
 	
 	
 	
-	// ======== AUTO EXPOSURE ========
+	// ======== AUTO EXPOSURE ======== //
 	
 	#if AUTO_EXPOSURE_ENABLED == 1
 		#include "/import/eyeBrightnessSmooth.glsl"
@@ -35,9 +35,9 @@ void main() {
 	
 	
 	
-	// ======== BLOOM FILTERING ========
+	// ======== BLOOM FILTERING ======== //
 	
-	#if BLOOM_ENABLED == 1
+	#ifdef BLOOM_ENABLED
 		float bloomMult = getColorLum(bloomColor * vec3(2.0, 1.0, 0.4));
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0);
@@ -46,12 +46,34 @@ void main() {
 	
 	
 	
+	// ======== SHADOWTEX DOWNSAMPLING ======== //
+	
+	//#if defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1
+	//	float shadowDepth = 0.0;
+	//	#include "/import/viewHeight.glsl"
+	//	if (gl_FragCoord.x < viewHeight) {
+			
+	//	}
+	//#endif
+	
+	
+	
 	/* DRAWBUFFERS:1 */
 	gl_FragData[0] = vec4(color, 1.0);
-	#if BLOOM_ENABLED == 1
+	#ifdef BLOOM_ENABLED
 		/* DRAWBUFFERS:15 */
 		gl_FragData[1] = vec4(bloomColor, 1.0);
 	#endif
+	//#if defined BLOOM_ENABLED && (defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
+	//	/* DRAWBUFFERS:15 */
+	//	gl_FragData[1] = vec4(bloomColor, 1.0);
+	//#elif !defined BLOOM_ENABLED && (defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
+	//	/* DRAWBUFFERS:15 */
+	//	gl_FragData[1] = vec4(bloomColor, 1.0);
+	//#elif defined BLOOM_ENABLED && !(defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
+	//	/* DRAWBUFFERS:15 */
+	//	gl_FragData[1] = vec4(bloomColor, 1.0);
+	//#endif
 	
 }
 

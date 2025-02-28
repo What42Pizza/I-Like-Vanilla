@@ -37,7 +37,7 @@ void main() {
 	
 	
 	
-	// ======== SHARPENING ========
+	// ======== SHARPENING ======== //
 	
 	#ifdef SHARPENING_ENABLED
 		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
@@ -52,7 +52,7 @@ void main() {
 	
 	
 	
-	// ======== COLOR CORRECTION & TONE MAPPING ========
+	// ======== COLOR CORRECTION & TONE MAPPING ======== //
 	
 	doColorCorrection(color  ARGS_IN);
 	#if COLORBLIND_MODE != 0
@@ -61,20 +61,20 @@ void main() {
 	
 	
 	
-	// ======== SUPER SECRET SETTINGS ========
+	// ======== SUPER SECRET SETTINGS ======== //
 	
 	doSuperSecretSettings(color  ARGS_IN);
 	
 	
 	
-	// ======== HSV POSTERIZE ========
+	// ======== HSV POSTERIZE ======== //
 	#if HSV_POSTERIZE_ENABLED == 1
 		doHsvPosterize(color  ARGS_IN);
 	#endif
 	
 	
 	
-	// ======== VIGNETTE ========
+	// ======== VIGNETTE ======== //
 	
 	#if VIGNETTE_ENABLED == 1 && !defined END
 		#include "/import/eyeBrightnessSmooth.glsl"

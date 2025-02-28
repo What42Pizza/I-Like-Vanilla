@@ -1,8 +1,3 @@
-// started: 23/11/30
-// last updated: 24/05/14
-
-
-
 #![feature(let_chains)]
 
 #![allow(unused)]
@@ -20,7 +15,7 @@ use std::env;
 
 
 
-// ======== SETTINGS ========
+// ======== SETTINGS ======== //
 
 
 
@@ -80,7 +75,7 @@ pub const STYLES: &[&str] = &["vanilla", "realistic", "fantasy", "cartoon"];
 
 
 
-// ======== END SETTINGS ========
+// ======== END SETTINGS ======== //
 
 
 

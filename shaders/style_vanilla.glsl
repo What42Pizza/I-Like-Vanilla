@@ -399,10 +399,6 @@
 
 
 
-#if BLOOM_ENABLED == -1
-#undef BLOOM_ENABLED
-										#define BLOOM_ENABLED 1
-#endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
 										#define BLOOM_AMOUNT 0.9
@@ -455,7 +451,7 @@
 #endif
 #if WATER_REFLECTION_AMOUNT == -1
 #undef WATER_REFLECTION_AMOUNT
-										#define WATER_REFLECTION_AMOUNT 0.5
+										#define WATER_REFLECTION_AMOUNT 0.45
 #endif
 #if RAIN_REFLECTION_AMOUNT == -1
 #undef RAIN_REFLECTION_AMOUNT
@@ -897,7 +893,7 @@
 
 #if WATER_TRANSPARENCY == -1
 #undef WATER_TRANSPARENCY
-										#define WATER_TRANSPARENCY 0.4
+										#define WATER_TRANSPARENCY 0.3
 #endif
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED

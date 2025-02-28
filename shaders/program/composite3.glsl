@@ -2,7 +2,7 @@
 	
 	varying vec2 texcoord;
 	
-	#if BLOOM_ENABLED == 0
+	#ifndef BLOOM_ENABLED
 		const bool colortex6MipmapEnabled = true;
 	#endif
 	
@@ -18,7 +18,7 @@ void main() {
 	
 	
 	
-	// ======== UNDERWATER WAVING ========
+	// ======== UNDERWATER WAVING ======== //
 	
 	#ifdef UNDERWATER_WAVINESS_ENABLED
 		vec2 texcoord = texcoord;
@@ -38,7 +38,7 @@ void main() {
 	
 	
 	
-	// ======== NOISY ADDITIONS ========
+	// ======== NOISY ADDITIONS ======== //
 	
 	const int noiseMipMap = 1;
 	vec3 noisyAdditions = texture2DLod(NOISY_TEXTURE, texcoord, noiseMipMap).rgb;

@@ -14,6 +14,8 @@ uniform sampler2D colortex3;
 uniform sampler2D colortex4;
 uniform sampler2D colortex5;
 uniform sampler2D colortex6;
+uniform sampler2D colortex7;
+uniform sampler2D colortex8;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D depthtex2;
@@ -45,13 +47,13 @@ uniform sampler2D shadowtex0;
 
 // buffer values:
 
-#define MAIN_TEXTURE               colortex0
-#define MAIN_TEXTURE_COPY          colortex1
-#define OPAQUE_DATA_TEXTURE        colortex2
-#define TRANSPARENT_DATA_TEXTURE   colortex3
-#define PREV_TEXTURE               colortex4
-#define BLOOM_TEXTURE              colortex5
-#define NOISY_TEXTURE              colortex6
+#define MAIN_TEXTURE              colortex0
+#define MAIN_TEXTURE_COPY         colortex1
+#define OPAQUE_DATA_TEXTURE       colortex2
+#define TRANSPARENT_DATA_TEXTURE  colortex3
+#define PREV_TEXTURE              colortex4
+#define BLOOM_TEXTURE             colortex5
+#define NOISY_TEXTURE             colortex6
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1

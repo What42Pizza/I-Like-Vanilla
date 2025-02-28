@@ -14,7 +14,7 @@
 
 #ifdef FSH
 
-#if BLOOM_ENABLED == 1
+#ifdef BLOOM_ENABLED
 	#include "/lib/bloom.glsl"
 #endif
 #if DEPTH_SUNRAYS_ENABLED == 1
@@ -28,25 +28,24 @@ void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
 	vec3 noisyAdditions = vec3(0.0);
 	
-	#include "/utils/var_rng.glsl"
-	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	
 	
 	
-	// ======== BLOOM CALCULATIONS ========
+	// ======== BLOOM CALCULATIONS ======== //
 	
-	#if BLOOM_ENABLED == 1
-		vec3 bloomAddition = getBloomAddition(rng, depth  ARGS_IN);
+	#ifdef BLOOM_ENABLED
+		vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
 		noisyAdditions += bloomAddition;
 	#endif
 	
 	
 	
-	// ======== SUNRAYS ========
+	// ======== SUNRAYS ======== //
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		
+		#include "/utils/var_rng.glsl"
 		#if DEPTH_SUNRAYS_ENABLED == 1
 			#include "/import/isSun.glsl"
 			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;

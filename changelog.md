@@ -2,7 +2,7 @@
   - Relaunched as "I Like Vanilla" (previously "What42's Shader Base")
   - Now trying to make the shader generally more exciting
   - Major performance improvements from massive internal rewrites, balanced out with higher performance settings (better shadows, sunrays, reflections, etc)
-  - Generally looks, feels, and still is What42's Shader Base, but with countless changes across the entire shader
+  - Generally looks like, feels like, and still is What42's Shader Base, but with countless changes across the entire shader
 
 <br>
 <br>

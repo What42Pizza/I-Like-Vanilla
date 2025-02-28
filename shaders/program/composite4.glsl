@@ -58,7 +58,7 @@ void main() {
 	
 	
 	
-	// ======== DEPTH OF FIELD ========
+	// ======== DEPTH OF FIELD ======== //
 	
 	#if DOF_ENABLED == 1
 		doDOF(color  ARGS_IN);
@@ -66,7 +66,7 @@ void main() {
 	
 	
 	
-	// ======== REFLECTIONS ========
+	// ======== REFLECTIONS ======== //
 	
 	vec4 data;
 	float depth0 = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;

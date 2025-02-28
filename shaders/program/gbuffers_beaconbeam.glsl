@@ -11,12 +11,12 @@
 void main() {
 	vec4 color = vec4(texture2D(MAIN_TEXTURE, texcoord).rgb, glcolor_alpha);
 	
-	color.rgb *= 1.3;
+	color.rgb *= 1.1;
 	
 	/* DRAWBUFFERS:02 */
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		packVec2(0.25, 0.0),
+		packVec2(0.0, 0.25),
 		packVec2(normal),
 		0.0,
 		1.0
