@@ -103,10 +103,10 @@
 
 
 #define SHADOWS_ENABLED
-const int shadowMapResolution = 2048; // [256 384 512 768 896 1024 1280 1536 2048 3072 4096 6144 8192 12288]
-const float shadowDistance = 192.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0 224.0 256.0 320.0 384.0 512.0 768.0 1024.0]
+const int shadowMapResolution = 1280; // [256 384 512 768 896 1024 1280 1536 2048 3072 4096 6144 8192 12288]
+const float shadowDistance = 160.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0 224.0 256.0 320.0 384.0 512.0 768.0 1024.0]
 #define SHADOW_DISTORT_ADDITION -1 // [-1 0.05 0.06 0.07 0.08 0.09 0.1 0.11 0.12 0.13 0.14 0.15 0.2 0.25 0.3]
-#define SHADOW_FILTERING 3 // [0 1 2 3]
+#define SHADOW_FILTERING 2 // [0 1 2 3]
 #define SHADOWS_NOISE -1 // [-1 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
 #define PIXELATED_SHADOWS -1 // [-1 0 8 16 32 64 128]
 #define EXCLUDE_FOLIAGE -1 // [-1 0 1]
@@ -147,12 +147,12 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 #define SSAO_ENABLED -1 // [-1 0 1]
 #define AO_AMOUNT -1 // [-1 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0]
 #define AO_SIZE -1 // [-1 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.25 2.5 2.75 3.0]
-#define AO_QUALITY 5 // [2 3 4 5 6 7 8 9 10]
+#define AO_QUALITY 4 // [2 3 4 5 6 7 8 9 10]
 
 
 
 #define REFLECTIONS_ENABLED
-#define REFLECTION_ITERATIONS 70 // [-1 20 25 30 35 40 45 50 55 60 65 70 80 90 100 120 140 160 180 200]
+#define REFLECTION_ITERATIONS 50 // [-1 20 25 30 35 40 45 50 55 60 65 70 80 90 100 120 140 160 180 200]
 #define REFLECTION_DITHER_AMOUNT 0.7 // [0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
 #define REFLECTION_FRESNEL -1 // [-1 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
 #define WATER_REFLECTION_AMOUNT -1 // [-1 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0]
@@ -165,7 +165,7 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 #define DEPTH_SUNRAYS_ENABLED -1 // [-1 0 1]
 #define VOL_SUNRAYS_ENABLED -1 // [-1 0 1]
-#define SUNRAYS_QUALITY 6 // [2 3 4 5 6 7 8 9 10]
+#define SUNRAYS_QUALITY 5 // [2 3 4 5 6 7 8 9 10]
 #define SUNRAYS_WEATHER_MULT -1 // [-1 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0]
 #define SUNRAYS_AMOUNT_DAY -1 // [-1 0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.25 2.5 2.75 3.0]
 #define SUNRAYS_AMOUNT_NIGHT -1 // [-1 0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.25 2.5 2.75 3.0]
