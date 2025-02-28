@@ -496,9 +496,6 @@ option.REFLECTIONS_ENABLED.comment=Enabled reflections\n\n(Performance cost: HIG
 option.REFLECTION_ITERATIONS=Reflection Iterations
 option.REFLECTION_ITERATIONS.comment=The number of steps that the pseudo-raytracer takes
 
-option.REFLECTION_STEP_INCREASE=Reflection Step Increase
-option.REFLECTION_STEP_INCREASE.comment=How much the step amount is increased per step
-
 option.REFLECTION_FRESNEL=Reflection Fresnel Amount
 option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
 value.REFLECTION_FRESNEL.-1=Use Style Value

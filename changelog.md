@@ -1,8 +1,8 @@
 - **1.0.0** (25/02/18)
   - Relaunched as "I Like Vanilla" (previously "What42's Shader Base")
-  - Far too many changes to list (or remember)
-  - Altered, added, and removed MANY settings
-  - Major performance improvements from massive internal rewrites
+  - Now trying to make the shader generally more exciting
+  - Major performance improvements from massive internal rewrites, balanced out with higher performance settings (better shadows, sunrays, reflections, etc)
+  - Generally looks, feels, and still is What42's Shader Base, but with countless changes across the entire shader
 
 <br>
 <br>

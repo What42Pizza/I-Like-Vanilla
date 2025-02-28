@@ -3,14 +3,12 @@
 	varying vec2 texcoord;
 	varying vec2 lmcoord;
 	varying vec3 glcolor;
+	varying vec3 viewPos;
 	varying vec3 normal;
 	flat_inout int materialId;
 	
 	flat_inout vec3 shadowcasterColor;
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1
-		varying vec3 viewPos;
-	#endif
 	#if WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS
 		varying vec3 playerPos;
 	#endif
@@ -135,6 +133,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
+	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	#include "/import/mc_Entity.glsl"
@@ -187,11 +186,6 @@ void main() {
 	
 	#if BORDER_FOG_ENABLED == 1
 		fogAmount = getFogAmount(playerPos  ARGS_IN);
-	#endif
-	
-	
-	#if WAVING_WATER_SURFACE_ENABLED == 1
-		viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	#endif
 	
 	

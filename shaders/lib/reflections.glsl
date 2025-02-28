@@ -6,18 +6,25 @@
 
 void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  ARGS_OUT) {
 	
+	// basic setup
 	#include "/import/gbufferProjection.glsl"
 	vec3 screenPos = endMat(gbufferProjection * startMat(viewPos)) * 0.5 + 0.5;
 	vec3 viewStepVector = reflect(normalize(viewPos), normalize(normal));
-	//viewStepVector /= dot(viewStepVector.xy, viewStepVector.xy);
 	vec3 nextScreenPos = endMat(gbufferProjection * startMat(viewPos + viewStepVector)) * 0.5 + 0.5;
+	
+	// calculate the optimal stepVector that will stop at the screen edge
 	vec3 stepVector = nextScreenPos - screenPos;
-	//stepVector *= 0.5;
-	//screenPos = nextScreenPos;
-	//screenPos += stepVector;
+	stepVector /= length(stepVector.xy);
+	float clampedStepX = clamp(stepVector.x, -screenPos.x, 1.0 - screenPos.x);
+	stepVector.yz *= clampedStepX / stepVector.x;
+	stepVector.x = clampedStepX;
+	float clampedStepY = clamp(stepVector.y, -screenPos.y, 1.0 - screenPos.y);
+	stepVector.xz *= clampedStepY / stepVector.y;
+	stepVector.y = clampedStepY;
+	stepVector /= (REFLECTION_ITERATIONS - 15); // ensure that the ray will reach the edge of the screen 15 steps early, allows for fine-tuning to not be cut short
 	
 	#include "/utils/var_rng.glsl"
-	screenPos = mix(screenPos, nextScreenPos, (randomFloat(rng) + 1.5) * 0.6);
+	screenPos += stepVector * randomFloat(rng) * 0.5;
 	
 	int hitCount = 0;
 	
@@ -35,12 +42,6 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 		#endif
 		float realToScreen = screenPos.z - realDepth;
 		
-		if (realToScreen > pow(stepVector.z, 0.3) * 0.15) { // went behind object
-			#include "/utils/var_rng.glsl"
-			reflectionPos = mix(nextScreenPos.xy, screenPos.xy, randomFloat(rng) * 0.4 + 0.5);
-			error = 0;
-			return;
-		}
 		if (realToScreen > 0.0) {
 			hitCount ++;
 			if (hitCount >= 10) { // converged on point
@@ -48,93 +49,16 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 				error = 0;
 				return;
 			}
-			screenPos -= stepVector;
 			stepVector *= 0.5;
+			screenPos -= stepVector;
+			continue;
 		}
 		
-		stepVector *= REFLECTION_STEP_INCREASE;
 		screenPos += stepVector;
-		if (screenPos.x < -0.1 || screenPos.x > 1.1 || screenPos.y < -0.1 || screenPos.y > 1.1) {
-			error = 2;
-			return;
-		}
 	}
 	
-	error = 2;
+	error = 1;
 }
-
-
-
-// old:
-/*
-void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  ARGS_OUT) {
-	
-	#include "/import/gbufferProjection.glsl"
-	vec3 screenPos = endMat(gbufferProjection * startMat(viewPos)) * 0.5 + 0.5;
-	vec3 viewStepVector = reflect(normalize(viewPos), normalize(normal));
-	//viewStepVector /= dot(viewStepVector.xy, viewStepVector.xy);
-	vec3 nextScreenPos = endMat(gbufferProjection * startMat(viewPos + viewStepVector)) * 0.5 + 0.5;
-	vec3 stepVector = nextScreenPos - screenPos;
-	//stepVector *= 0.5;
-	//screenPos = nextScreenPos;
-	//screenPos += stepVector;
-	
-	#include "/utils/var_rng.glsl"
-	screenPos = mix(screenPos, nextScreenPos, (randomFloat(rng) + 1.5) * 0.6);
-	
-	int hitCount = 0;
-	
-	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
-		
-		float realDepth = texture2D(DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
-		float realToScreen = screenPos.z - realDepth;
-		
-		if (realToScreen > pow(stepVector.z, 0.3) * 0.15) { // went behind object
-		//if (realToScreen > pow(stepVector.z, 0.2) * 0.03) { // went behind object
-			//error = 1;
-			//return;
-			#include "/utils/var_rng.glsl"
-			reflectionPos = mix(nextScreenPos.xy, screenPos.xy, randomFloat(rng) * 0.4 + 0.5);
-			//screenPos -= stepVector * (randomFloat(rng) * 0.5 + 0.5);
-			//reflectionPos = screenPos.xy;
-			error = 0;
-			return;
-		}
-		//if (realToScreen > stepVector.z * 2) { // went behind object
-		//	error = 1;
-		//	return;
-		//	if (realDepth < 0.98) {
-		//		error = 2;
-		//		return;
-		//	}
-		//	#include "/utils/var_rng.glsl"
-		//	screenPos -= stepVector * randomFloat(rng);
-		//	reflectionPos = screenPos.xy;
-		//	error = 0;
-		//	return;
-		//}
-		if (realToScreen > 0.0) {
-			hitCount ++;
-			if (hitCount >= 10) { // converged on point
-				reflectionPos = screenPos.xy;
-				error = 0;
-				return;
-			}
-			screenPos -= stepVector;
-			stepVector *= 0.5;
-		}
-		
-		stepVector *= REFLECTION_STEP_INCREASE;
-		screenPos += stepVector;
-		if (screenPos.x < -0.1 || screenPos.x > 1.1 || screenPos.y < -0.1 || screenPos.y > 1.1) {
-			error = 2;
-			return;
-		}
-	}
-	
-	error = 2;
-}
-*/
 
 
 
