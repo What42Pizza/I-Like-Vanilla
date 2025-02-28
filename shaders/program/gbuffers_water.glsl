@@ -50,6 +50,7 @@ void main() {
 	
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
+	color.rgb *= glcolor;
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
 		vec3 normal = normal;
@@ -70,7 +71,7 @@ void main() {
 			randomPoint = normalize(randomPoint);
 			randomPoint += simplexNoise3From4(vec4((playerPos + cameraPosition) / WAVING_WATER_SCALE / 0.2, frameTimeCounter * WAVING_WATER_SPEED * 2.0)) * 0.5;
 			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y);
-			randomPoint = mix(randomPoint, normal, wavingSurfaceAmount);
+			randomPoint = mix(normal, randomPoint, wavingSurfaceAmount);
 			randomPoint = normalize(randomPoint);
 			normal = normalize(normal + randomPoint * 0.05 * WAVING_WATER_NORMAL_AMOUNT * dot(normal, normalize(viewPos)));
 			float fresnel = dot(-randomPoint, normalize(viewPos));
@@ -84,7 +85,6 @@ void main() {
 	
 	
 	// main lighting
-	color.rgb *= glcolor;
 	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, viewPos, normal  ARGS_IN);
 	
 	

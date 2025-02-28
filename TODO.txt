@@ -9,6 +9,7 @@ Fix rain reflections
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Add setting `Light Mixing: Artistic / Realistic`
 Separate depth sunrays and vol sunrays settings
+Check gamma correction stuff again to make sure it makes sense
 Make sure settings are tuned for:
 	Vanilla Day
 	Vanilla Night

@@ -44,7 +44,6 @@ void main() {
 	
 	
 	vec4 color = glcolor;
-	vec2 reflectionStrengths = vec2(0.0);
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
 		vec3 normal = normal;

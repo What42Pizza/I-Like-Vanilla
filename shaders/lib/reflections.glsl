@@ -148,34 +148,31 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D textur
 	fresnel *= fresnel;
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
 	#include "/import/fogColor.glsl"
-	#include "/import/eyeBrightness.glsl"
-	vec3 alteredFogColor = fogColor * (0.25 + 0.75 * eyeBrightness.y / 240.0);
+	#include "/import/eyeBrightnessSmooth.glsl"
+	vec3 alteredFogColor = fogColor * (0.15 + 0.6 * max(eyeBrightnessSmooth.x, eyeBrightnessSmooth.y) / 240.0);
 	
 	const float inputColorWeight = 0.2;
 	
+	vec3 reflectionColor;
 	if (error == 0) {
-		vec3 reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
+		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
 		reflectionColor = mix(alteredFogColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-		reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
-		color = mix(color, reflectionColor, reflectionStrength);
-		
+		float reflectionColorBrightness = getColorLum(reflectionColor);
+		float alteredFogColorBrightness = getColorLum(alteredFogColor);
+		reflectionColor *= min(alteredFogColorBrightness * 2.0, reflectionColorBrightness) / reflectionColorBrightness;
 	//} else if (error == 1) {
-	//	color *= vec3(1.0, 0.1, 0.1);
-		
+		//color *= vec3(1.0, 0.1, 0.1);
 	//} else if (error == 1) {
-	//	reflectionPos = (reflectionPos + texcoord) / 2;//mix(texcoord, reflectionPos, randomFloat(rngStart));
-	//	vec3 reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
-	//	reflectionColor = mix(fogColor, reflectionColor, clamp(5.0 - 5.0 * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-	//	reflectionColor *= 0.8 + color * 0.2;
-	//	color = mix(color, reflectionColor, lerpAmount);
-		
+		//reflectionPos = (reflectionPos + texcoord) / 2;//mix(texcoord, reflectionPos, randomFloat(rngStart));
+		//vec3 reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
+		//reflectionColor = mix(fogColor, reflectionColor, clamp(5.0 - 5.0 * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
+		//reflectionColor *= 0.8 + color * 0.2;
+		//color = mix(color, reflectionColor, lerpAmount);
 	} else {
-		vec3 reflectionColor = alteredFogColor;
-		reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
-		color = mix(color, reflectionColor, reflectionStrength);
-		
+		reflectionColor = alteredFogColor;
 	}
-	//color = vec3(reflectionPos, 0);
+	reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
+	color = mix(color, reflectionColor, reflectionStrength);
 	
 }
