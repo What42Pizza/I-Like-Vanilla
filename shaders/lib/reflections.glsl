@@ -26,7 +26,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	screenPos += stepVector * (dither - 0.5) * REFLECTION_DITHER_AMOUNT;
+	screenPos += stepVector * dither * REFLECTION_DITHER_AMOUNT;
 	
 	int hitCount = 0;
 	

@@ -20,7 +20,7 @@ void main() {
 	
 	// ======== UNDERWATER WAVING ======== //
 	
-	#ifdef UNDERWATER_WAVINESS_ENABLED
+	#if UNDERWATER_WAVINESS_ENABLED == 1
 		vec2 texcoord = texcoord;
 		#include "/import/isEyeInWater.glsl"
 		if (isEyeInWater == 1) {

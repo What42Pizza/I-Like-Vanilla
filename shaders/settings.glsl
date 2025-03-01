@@ -115,14 +115,24 @@ const float eyeBrightnessHalflife = 3.0f;
 const float SHADOW_OFFSET_INCREASE = 1.3 / shadowMapResolution;
 const float SHADOW_OFFSET_MIN = 1.1 / pow(shadowMapResolution, 0.95);
 
-// use settings so iris/optifine can detect
+// use settings so iris/optifine can detect (not always needed but nice to have just in case)
 #ifdef SHADOWS_ENABLED
 #endif
 #ifdef TAA_ENABLED
 #endif
 #ifdef FXAA_ENABLED
 #endif
+#ifdef BLOOM_ENABLED
+#endif
 #ifdef REFLECTIONS_ENABLED
+#endif
+#ifdef SHARPENING_ENABLED
+#endif
+#ifdef SSAO_ENABLED
+#endif
+#ifdef USE_BETTER_RAND
+#endif
+#ifdef SHOW_DANGEROUS_LIGHT
 #endif
 #ifdef SSS_BARREL
 #endif

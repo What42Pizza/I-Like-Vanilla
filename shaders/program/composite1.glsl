@@ -46,34 +46,12 @@ void main() {
 	
 	
 	
-	// ======== SHADOWTEX DOWNSAMPLING ======== //
-	
-	//#if defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1
-	//	float shadowDepth = 0.0;
-	//	#include "/import/viewHeight.glsl"
-	//	if (gl_FragCoord.x < viewHeight) {
-			
-	//	}
-	//#endif
-	
-	
-	
 	/* DRAWBUFFERS:1 */
 	gl_FragData[0] = vec4(color, 1.0);
 	#ifdef BLOOM_ENABLED
 		/* DRAWBUFFERS:15 */
 		gl_FragData[1] = vec4(bloomColor, 1.0);
 	#endif
-	//#if defined BLOOM_ENABLED && (defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
-	//	/* DRAWBUFFERS:15 */
-	//	gl_FragData[1] = vec4(bloomColor, 1.0);
-	//#elif !defined BLOOM_ENABLED && (defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
-	//	/* DRAWBUFFERS:15 */
-	//	gl_FragData[1] = vec4(bloomColor, 1.0);
-	//#elif defined BLOOM_ENABLED && !(defined SHADOWS_ENABLED && VOL_SUNRAYS_ENABLED == 1)
-	//	/* DRAWBUFFERS:15 */
-	//	gl_FragData[1] = vec4(bloomColor, 1.0);
-	//#endif
 	
 }
 

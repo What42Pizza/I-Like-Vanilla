@@ -4,10 +4,6 @@
 
 <br>
 
-### Note: If you want vanilla Minecraft's shader files directly ported to Optifine, you can use [XorDev's Default-Shaderpack](https://github.com/XorDev/XorDevs-Default-Shaderpack)
-
-<br>
-
 ## Additional Documentation:
 
 - [Iris' ShaderDoc](https://github.com/IrisShaders/ShaderDoc)
@@ -138,14 +134,14 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 ## File Structure:
 
-### /main_files: &nbsp; Main shader code
+### /program: &nbsp; Main shader code
 ### /lib: &nbsp; More complex, standalone code
-### /world_: &nbsp; The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
+### /worldX: &nbsp; The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
 ### /import: &nbsp; See 'Uniforms System' above
 ### /utils: &nbsp; Holds common functions that use uniforms (see 'Uniforms System' above for why)
 ### /lang: &nbsp; Holds shown names of setting options and setting values
-### setting_defines.glsl: &nbsp; Holds every setting's GLSL name and allowed values
-### settings.glsl: &nbsp; Miscellaneous settings stuff
+### setting_defines.glsl: &nbsp; Holds the definition for every setting
+### settings.glsl: &nbsp; Miscellaneous settings loading stuff
 ### common.glsl: &nbsp; Holds commonly used code and macros for easier programming (cannot use uniforms, see 'Uniforms System' above for why)
 ### shaders.properties: &nbsp; Defines the settings menu plus many other details about the shader internals
 ### blocks.properties: &nbsp; Defines what different blocks are mapped to. The shaders retrieve these value from `mc_Entity.x`
@@ -222,7 +218,6 @@ This describes which /main_files-s handle different effects
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
 - **colortex6:  Noisy Texture**
-- **colortex7:  ShadowDepth**
 
 Notes:
 - If more data needs to be packed into the 'Opaque Data' and 'Transparent Data' buffers, it may be better to switch them to an integer format

@@ -18,7 +18,7 @@ vec3 getShadowPos(vec3 viewPos  ARGS_OUT) {
 
 
 
-float getVolSunraysAmount(float depth, inout uint rng  ARGS_OUT) {
+float getVolSunraysAmount(float depth  ARGS_OUT) {
 	const int SAMPLE_COUNT = int(SUNRAYS_QUALITY * SUNRAYS_QUALITY);
 	
 	vec3 viewPosStep = screenToView(vec3(texcoord, depth)  ARGS_IN);
@@ -27,7 +27,9 @@ float getVolSunraysAmount(float depth, inout uint rng  ARGS_OUT) {
 	viewPosStep = normalize(viewPosStep) * (blockDepth / SAMPLE_COUNT);
 	vec3 viewPos = vec3(0.0);
 	
-	float random = randomFloat(rng);
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	float random = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * 2.0 - 1.0;
 	viewPos += viewPosStep * random * 0.5;
 	
 	float total = 0.0;
