@@ -29,14 +29,26 @@ void main() {
 	vec3 noisyAdditions = vec3(0.0);
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float linearDepth = toLinearDepth(depth  ARGS_IN);
+	#ifdef DISTANT_HORIZONS
+		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float linearDhDepth = toLinearDepthDh(dhDepth  ARGS_IN);
+	#endif
+	#ifdef DISTANT_HORIZONS
+		bool isSky = depthIsSky(linearDepth) && depthIsSky(linearDhDepth);
+	#else
+		bool isSky = depthIsSky(linearDepth);
+	#endif
 	
 	
 	
 	// ======== BLOOM CALCULATIONS ======== //
 	
 	#ifdef BLOOM_ENABLED
-		vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
-		noisyAdditions += bloomAddition;
+		if (!isSky) {
+			vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
+			noisyAdditions += bloomAddition;
+		}
 	#endif
 	
 	
@@ -53,13 +65,15 @@ void main() {
 			noisyAdditions += depthSunraysAddition;
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1
-			#include "/import/sunAngle.glsl"
-			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
-			float rawVolSunraysAmount = getVolSunraysAmount(depth  ARGS_IN) * volSunraysAmountMult;
-			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
-			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-			float volSunraysAmountMax = 1.0 - 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
-			color = mix(volSunraysColor * 1.25, color, max(volSunraysAmount, volSunraysAmountMax));
+			if (!isSky) {
+				#include "/import/sunAngle.glsl"
+				vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+				float rawVolSunraysAmount = getVolSunraysAmount(depth  ARGS_IN) * volSunraysAmountMult;
+				float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
+				color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+				float volSunraysAmountMax = 1.0 - 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
+				color = mix(volSunraysColor * 1.25, color, max(volSunraysAmount, volSunraysAmountMax));
+			}
 		#endif
 		
 	#endif

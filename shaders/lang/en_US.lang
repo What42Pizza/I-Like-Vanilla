@@ -18,9 +18,6 @@ value.STYLE.3=Cartoon
 
 screen.SKY_SETTINGS=Sky
 
-option.SKY_BRIGHTNESS=Sky Brightness
-value.SKY_BRIGHTNESS.-1=Use Style
-
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style
 
@@ -91,6 +88,67 @@ value.BORDER_FOG_END.-1=Use Style
 option.BORDER_FOG_CURVE=Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
+
+
+
+
+
+screen.SKY_COLOR_SETTINGS=Sky Color Settings
+
+option.SKY_DAY_RED=Sky Day Red
+value.SKY_DAY_RED.-1=use Style
+
+option.SKY_DAY_GREEN=Sky Day Green
+value.SKY_DAY_GREEN.-1=use Style
+
+option.SKY_DAY_BLUE=Sky Day Blue
+value.SKY_DAY_BLUE.-1=use Style
+
+option.SKY_NIGHT_RED=Sky Night Red
+value.SKY_NIGHT_RED.-1=use Style
+
+option.SKY_NIGHT_GREEN=Sky Night Green
+value.SKY_NIGHT_GREEN.-1=use Style
+
+option.SKY_NIGHT_BLUE=Sky Night Blue
+value.SKY_NIGHT_BLUE.-1=use Style
+
+option.SKY_FOG_DAY_RED=Sky Fog Day Red
+value.SKY_FOG_DAY_RED.-1=use Style
+
+option.SKY_FOG_DAY_GREEN=Sky Fog Day Green
+value.SKY_FOG_DAY_GREEN.-1=use Style
+
+option.SKY_FOG_DAY_BLUE=Sky Fog Day Blue
+value.SKY_FOG_DAY_BLUE.-1=use Style
+
+option.SKY_FOG_NIGHT_RED=Sky Fog Night Red
+value.SKY_FOG_NIGHT_RED.-1=use Style
+
+option.SKY_FOG_NIGHT_GREEN=Sky Fog Night Green
+value.SKY_FOG_NIGHT_GREEN.-1=use Style
+
+option.SKY_FOG_NIGHT_BLUE=Sky Fog Night Blue
+value.SKY_FOG_NIGHT_BLUE.-1=use Style
+
+option.SKY_FOG_SUNRISE_RED=Sky Fog Sunrise Red
+value.SKY_FOG_SUNRISE_RED.-1=use Style
+
+option.SKY_FOG_SUNRISE_GREEN=Sky Fog Sunrise Green
+value.SKY_FOG_SUNRISE_GREEN.-1=use Style
+
+option.SKY_FOG_SUNRISE_BLUE=Sky Fog Sunrise Blue
+value.SKY_FOG_SUNRISE_BLUE.-1=use Style
+
+option.SKY_FOG_SUNSET_RED=Sky Fog Sunset Red
+value.SKY_FOG_SUNSET_RED.-1=use Style
+
+option.SKY_FOG_SUNSET_GREEN=Sky Fog Sunset Green
+value.SKY_FOG_SUNSET_GREEN.-1=use Style
+
+option.SKY_FOG_SUNSET_BLUE=Sky Fog Sunset Blue
+value.SKY_FOG_SUNSET_BLUE.-1=use Style
+
 
 
 

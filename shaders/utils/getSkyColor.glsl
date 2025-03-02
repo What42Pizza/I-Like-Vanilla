@@ -15,10 +15,6 @@
 
 
 
-float fogify(float x, float w  ARGS_OUT) {
-	return w / (x * x + w);
-}
-
 #if DARKEN_SKY_UNDERGROUND == 1
 	float getHorizonMultiplier(ARG_OUT) {
 		#ifdef OVERWORLD
@@ -41,26 +37,40 @@ float fogify(float x, float w  ARGS_OUT) {
 	}
 #endif
 
+#include "/utils/getShadowcasterColor.glsl"
+
 vec3 getSkyColor(ARG_OUT) {
 	
+	#include "/import/ambientSunPercent.glsl"
+	#include "/import/ambientMoonPercent.glsl"
+	#include "/import/ambientSunrisePercent.glsl"
+	#include "/import/ambientSunsetPercent.glsl"
+	vec3 skyFogColor =
+		SKY_FOG_DAY_COLOR * ambientSunPercent +
+		SKY_FOG_NIGHT_COLOR * ambientMoonPercent +
+		SKY_FOG_SUNRISE_COLOR * ambientSunrisePercent +
+		SKY_FOG_SUNSET_COLOR * ambientSunsetPercent;
+	#include "/import/sunAngle.glsl"
+	float skyMixingValue = sunAngle * 4.0 - (sunAngle < 0.5 ? 1.0 : 3.0);
+	skyMixingValue *= skyMixingValue;
+	skyMixingValue *= skyMixingValue;
+	if (sunAngle < 0.5) skyMixingValue = 1.0 - skyMixingValue;
+	vec3 skyColor = mix(SKY_NIGHT_COLOR, SKY_DAY_COLOR, skyMixingValue);
+	
+	#include "/import/gbufferModelView.glsl"
 	#include "/import/invViewSize.glsl"
 	#include "/import/gbufferProjectionInverse.glsl"
-	#include "/import/gbufferModelView.glsl"
-	#include "/import/skyColor.glsl"
-	#include "/import/fogColor.glsl"
-	
-	vec3 alteredSkyColor = mix(vec3(getColorLum(skyColor)), skyColor, 0.8);
-	
-	vec4 pos = vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0);
-	pos = gbufferProjectionInverse * pos;
-	float upDot = dot(normalize(pos.xyz), gbufferModelView[1].xyz);
-	vec3 finalSkyColor = mix(alteredSkyColor, fogColor, fogify(max(upDot, 0.0), 0.25  ARGS_IN));
+	vec3 upPos = gbufferModelView[1].xyz;
+	vec3 viewPos = endMat(gbufferProjectionInverse * vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0));
+	float upDot = dot(normalize(viewPos), upPos);
+	//upDot = sqrt(max(upDot, 0.0));
+	skyColor = mix(skyFogColor, skyColor, max(upDot, 0.0));
 	
 	#if DARKEN_SKY_UNDERGROUND == 1
-		finalSkyColor *= getHorizonMultiplier(ARG_IN);
+		skyColor *= getHorizonMultiplier(ARG_IN);
 	#endif
 	
-	return finalSkyColor * SKY_BRIGHTNESS;
+	return skyColor;
 }
 
 

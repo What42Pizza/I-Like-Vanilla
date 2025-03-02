@@ -22,8 +22,7 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 	const int SAMPLE_COUNT = int(SUNRAYS_QUALITY * SUNRAYS_QUALITY);
 	
 	vec3 viewPosStep = screenToView(vec3(texcoord, depth)  ARGS_IN);
-	#include "/import/far.glsl"
-	float blockDepth = min(length(viewPosStep), far);
+	float blockDepth = length(viewPosStep);
 	viewPosStep = normalize(viewPosStep) * (blockDepth / SAMPLE_COUNT);
 	vec3 viewPos = vec3(0.0);
 	
@@ -55,9 +54,6 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 	
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
-	if (blockDepth == far) {
-		playerPos *= 10.0;
-	}
 	float fogAmount = getFogAmount(playerPos  ARGS_IN);
 	sunraysAmount *= 1.0 - 0.7 * fogAmount;
 	

@@ -15,12 +15,16 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 	// calculate the optimal stepVector that will stop at the screen edge
 	vec3 stepVector = nextScreenPos - screenPos;
 	stepVector /= length(stepVector.xy);
-	float clampedStepX = clamp(stepVector.x, -screenPos.x, 1.0 - screenPos.x);
-	stepVector.yz *= clampedStepX / stepVector.x;
-	stepVector.x = clampedStepX;
-	float clampedStepY = clamp(stepVector.y, -screenPos.y, 1.0 - screenPos.y);
-	stepVector.xz *= clampedStepY / stepVector.y;
-	stepVector.y = clampedStepY;
+	if (abs(stepVector.x) > 0.0001) {
+		float clampedStepX = clamp(stepVector.x, -screenPos.x, 1.0 - screenPos.x);
+		stepVector.yz *= clampedStepX / stepVector.x;
+		stepVector.x = clampedStepX;
+	}
+	if (abs(stepVector.y) > 0.0001) {
+		float clampedStepY = clamp(stepVector.y, -screenPos.y, 1.0 - screenPos.y);
+		stepVector.xz *= clampedStepY / stepVector.y;
+		stepVector.y = clampedStepY;
+	}
 	stepVector /= (REFLECTION_ITERATIONS - 15); // ensure that the ray will reach the edge of the screen 15 steps early, allows for fine-tuning to not be cut short
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -37,7 +41,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 			vec3 realBlockViewPos = screenToView(vec3(texcoord, realDepth)  ARGS_IN);
 			float realDepthDh = texture2D(DH_DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
 			vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, realDepthDh)  ARGS_IN);
-			if (length(realBlockViewPosDh) < length(realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
+			if (dot(realBlockViewPosDh, realBlockViewPosDh) < dot(realBlockViewPos, realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
 			#include "/import/gbufferProjection.glsl"
 			vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 			realDepth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;

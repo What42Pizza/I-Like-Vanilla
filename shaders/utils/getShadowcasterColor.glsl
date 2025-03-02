@@ -15,27 +15,30 @@
 
 
 
-vec3 getShadowcasterColor(ARG_OUT) {
-	
+vec3 getSunlightColor(ARG_OUT) {
 	#include "/import/sunNoonColorPercent.glsl"
+	vec3 sunNoonLight = SKYLIGHT_DAY_COLOR * sunNoonColorPercent;
 	#include "/import/sunriseColorPercent.glsl"
+	vec3 sunSunriseLight = SKYLIGHT_SUNRISE_COLOR * sunriseColorPercent;
 	#include "/import/sunsetColorPercent.glsl"
-	#include "/import/sunAngle.glsl"
+	vec3 sunSunsetLight = SKYLIGHT_SUNSET_COLOR * sunsetColorPercent;
+	vec3 sunlightColor = sunNoonLight + sunSunriseLight + sunSunsetLight;
 	#include "/import/rainStrength.glsl"
-	
+	return sunlightColor * (1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT));
+}
+
+vec3 getMoonlightColor(ARG_OUT) {
+	#include "/import/rainStrength.glsl"
+	return SKYLIGHT_NIGHT_COLOR * (1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT));
+}
+
+vec3 getShadowcasterColor(ARG_OUT) {
+	#include "/import/sunAngle.glsl"
 	if (sunAngle < 0.5) {
-		vec3 sunNoonLight = SKYLIGHT_DAY_COLOR * sunNoonColorPercent;
-		vec3 sunSunriseLight = SKYLIGHT_SUNRISE_COLOR * sunriseColorPercent;
-		vec3 sunSunsetLight = SKYLIGHT_SUNSET_COLOR * sunsetColorPercent;
-		vec3 sunLight = (sunNoonLight + sunSunriseLight + sunSunsetLight);
-		sunLight *= 1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT);
-		return sunLight;
+		return getSunlightColor(ARG_IN);
 	} else {
-		vec3 moonLight = SKYLIGHT_NIGHT_COLOR;
-		moonLight *= 1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT);
-		return moonLight;
+		return getMoonlightColor(ARG_IN);
 	}
-	
 }
 
 

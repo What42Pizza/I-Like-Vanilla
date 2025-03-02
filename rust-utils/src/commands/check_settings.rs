@@ -109,7 +109,7 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 			continue;
 		};
 		if !prop_settings_set.contains(setting_name) {
-			println!("WARNING: found define for setting with no entry in shaders.properties: {setting_name}");
+			println!("WARNING: found setting in define_settings which is not present in shaders.properties: {setting_name}");
 		}
 		defines.push(setting_name);
 	}
@@ -134,7 +134,7 @@ pub fn check_lang_file(shaders_path: &Path, prop_settings_set: &HashSet<String>,
 		};
 		let setting_name = &entry[..equal_position];
 		if !prop_settings_set.contains(setting_name) {
-			println!("WARNING: found define for setting with no entry in shaders.properties: {setting_name}");
+			println!("WARNING: found setting in lang/en_US.lang which is not present in shaders.properties: {setting_name}");
 		}
 		settings.push(setting_name);
 	}
@@ -163,7 +163,7 @@ pub fn check_style_file(
 			continue;
 		};
 		if !prop_settings_set.contains(setting_name) {
-			println!("WARNING: found define for setting with no entry in shaders.properties: {setting_name}");
+			println!("WARNING: found setting in style {style_name} which is not present in shaders.properties: {setting_name}");
 		}
 		settings.push(setting_name);
 	}

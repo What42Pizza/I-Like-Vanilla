@@ -1,7 +1,3 @@
-#if SKY_BRIGHTNESS == -1
-#undef SKY_BRIGHTNESS
-										#define SKY_BRIGHTNESS 0.95
-#endif
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
 										#define SUN_BRIGHTNESS 0.5
@@ -44,7 +40,7 @@
 #endif
 #if NEARBY_CLOUD_TRANSPARENCY == -1
 #undef NEARBY_CLOUD_TRANSPARENCY
-										#define NEARBY_CLOUD_TRANSPARENCY 0.2
+										#define NEARBY_CLOUD_TRANSPARENCY 0.8
 #endif
 #if NEARBY_CLOUD_DIST == -1
 #undef NEARBY_CLOUD_DIST
@@ -70,6 +66,83 @@
 #if BORDER_FOG_CURVE == -1
 #undef BORDER_FOG_CURVE
 										#define BORDER_FOG_CURVE 3
+#endif
+
+
+
+
+
+#if SKY_DAY_RED == -1
+#undef SKY_DAY_RED
+										#define SKY_DAY_RED 0.6
+#endif
+#if SKY_DAY_GREEN == -1
+#undef SKY_DAY_GREEN
+										#define SKY_DAY_GREEN 0.75
+#endif
+#if SKY_DAY_BLUE == -1
+#undef SKY_DAY_BLUE
+										#define SKY_DAY_BLUE 1.0
+#endif
+#if SKY_NIGHT_RED == -1
+#undef SKY_NIGHT_RED
+										#define SKY_NIGHT_RED 1.0
+#endif
+#if SKY_NIGHT_GREEN == -1
+#undef SKY_NIGHT_GREEN
+										#define SKY_NIGHT_GREEN 1.0
+#endif
+#if SKY_NIGHT_BLUE == -1
+#undef SKY_NIGHT_BLUE
+										#define SKY_NIGHT_BLUE 1.0
+#endif
+#if SKY_FOG_DAY_RED == -1
+#undef SKY_FOG_DAY_RED
+										#define SKY_FOG_DAY_RED 0.95
+#endif
+#if SKY_FOG_DAY_GREEN == -1
+#undef SKY_FOG_DAY_GREEN
+										#define SKY_FOG_DAY_GREEN 1.0
+#endif
+#if SKY_FOG_DAY_BLUE == -1
+#undef SKY_FOG_DAY_BLUE
+										#define SKY_FOG_DAY_BLUE 1.0
+#endif
+#if SKY_FOG_NIGHT_RED == -1
+#undef SKY_FOG_NIGHT_RED
+										#define SKY_FOG_NIGHT_RED 1.0
+#endif
+#if SKY_FOG_NIGHT_GREEN == -1
+#undef SKY_FOG_NIGHT_GREEN
+										#define SKY_FOG_NIGHT_GREEN 1.0
+#endif
+#if SKY_FOG_NIGHT_BLUE == -1
+#undef SKY_FOG_NIGHT_BLUE
+										#define SKY_FOG_NIGHT_BLUE 1.0
+#endif
+#if SKY_FOG_SUNRISE_RED == -1
+#undef SKY_FOG_SUNRISE_RED
+										#define SKY_FOG_SUNRISE_RED 0.95
+#endif
+#if SKY_FOG_SUNRISE_GREEN == -1
+#undef SKY_FOG_SUNRISE_GREEN
+										#define SKY_FOG_SUNRISE_GREEN 0.9
+#endif
+#if SKY_FOG_SUNRISE_BLUE == -1
+#undef SKY_FOG_SUNRISE_BLUE
+										#define SKY_FOG_SUNRISE_BLUE 0.4
+#endif
+#if SKY_FOG_SUNSET_RED == -1
+#undef SKY_FOG_SUNSET_RED
+										#define SKY_FOG_SUNSET_RED 0.9
+#endif
+#if SKY_FOG_SUNSET_GREEN == -1
+#undef SKY_FOG_SUNSET_GREEN
+										#define SKY_FOG_SUNSET_GREEN 0.85
+#endif
+#if SKY_FOG_SUNSET_BLUE == -1
+#undef SKY_FOG_SUNSET_BLUE
+										#define SKY_FOG_SUNSET_BLUE 0.6
 #endif
 
 
