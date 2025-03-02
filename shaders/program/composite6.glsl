@@ -1,5 +1,6 @@
 #ifdef FIRST_PASS
 	varying vec2 texcoord;
+	uniform float testValue;
 #endif
 
 
@@ -41,13 +42,21 @@ void main() {
 	
 	#ifdef SHARPENING_ENABLED
 		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float blockDepth = toBlockDepth(depth  ARGS_IN);
+		float linearDepth = toLinearDepth(depth  ARGS_IN);
+		bool isSky = depthIsSky(linearDepth);
+		#include "/import/far.glsl"
+		float blockDepth = linearDepth * far;
 		#ifdef DISTANT_HORIZONS
 			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-			float dhBlockDepth = toBlockDepthDh(dhDepth  ARGS_IN);
+			float dhLinearDepth = toLinearDepthDh(dhDepth  ARGS_IN);
+			isSky = isSky || depthIsSky(dhLinearDepth);
+			#include "/import/dhFarPlane.glsl"
+			float dhBlockDepth = dhLinearDepth * dhFarPlane;
 			blockDepth = min(blockDepth, dhBlockDepth);
 		#endif
-		doSharpening(color, blockDepth  ARGS_IN);
+		if (!isSky) {
+			doSharpening(color, blockDepth  ARGS_IN);
+		}
 	#endif
 	
 	

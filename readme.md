@@ -56,8 +56,8 @@
 
 ## Credits:
 
-- **[EminGTR](https://modrinth.com/shader/complementary-reimagined):** FXAA, TAA, coordinate transformation code, and code structure inspiration
-- **[Acerola](https://github.com/GarrettGunnell/Minecraft-Shaders/blob/c1a6f5060dfd91ccac31e04fa529f2be4304a21a/shaders/final.fsh):** ACES tonemapping code
 - **[Patricio Vivo](https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83):** Simplex noise function
+- **[EminGTR](https://modrinth.com/shader/complementary-reimagined):** Misc code from Complementary (initial TAA code, FXAA, coordinate transforms, taa bayer, probably more)
 - **[Nathan Reed](https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/):** Easy hashing function
+- **[Acerola](https://github.com/GarrettGunnell/Minecraft-Shaders/blob/c1a6f5060dfd91ccac31e04fa529f2be4304a21a/shaders/final.fsh):** ACES tonemapping code
 - **[XorDev](https://github.com/XorDev/Ortho-Shaderpack/tree/master):** Original isometric projection code

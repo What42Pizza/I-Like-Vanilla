@@ -1,6 +1,8 @@
 // optifine settings (DON'T DELETE)
 /*
+const int   colortex0Format       = RGB16F;
 const bool  colortex0Clear        = false;
+const int   colortex1Format       = RGB16F;
 const bool  colortex1Clear        = false;
 const int   colortex2Format       = RGB32F;
 const bool  colortex2Clear        = false;

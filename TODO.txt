@@ -1,5 +1,6 @@
 Before 1.0.0:
 Move 'Sun Path Rotation' to 'Sky Settings'
+Change data buffers to store ints instead of floats?
 Make volumetric sunrays work over dh terrain again
 Add 'dither or noise' options to everything that uses dithering or noise
 Make sure ALL settings work

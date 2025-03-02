@@ -47,15 +47,15 @@ vec3 getSkyColor(ARG_OUT) {
 	#include "/import/ambientSunsetPercent.glsl"
 	vec3 skyFogColor =
 		SKY_FOG_DAY_COLOR * ambientSunPercent +
-		SKY_FOG_NIGHT_COLOR * ambientMoonPercent +
-		SKY_FOG_SUNRISE_COLOR * ambientSunrisePercent +
-		SKY_FOG_SUNSET_COLOR * ambientSunsetPercent;
+		SKY_FOG_NIGHT_COLOR * 0.25 * ambientMoonPercent +
+		SKY_FOG_SUNRISE_COLOR * 0.75 * ambientSunrisePercent +
+		SKY_FOG_SUNSET_COLOR * 0.75 * ambientSunsetPercent;
 	#include "/import/sunAngle.glsl"
 	float skyMixingValue = sunAngle * 4.0 - (sunAngle < 0.5 ? 1.0 : 3.0);
 	skyMixingValue *= skyMixingValue;
 	skyMixingValue *= skyMixingValue;
 	if (sunAngle < 0.5) skyMixingValue = 1.0 - skyMixingValue;
-	vec3 skyColor = mix(SKY_NIGHT_COLOR, SKY_DAY_COLOR, skyMixingValue);
+	vec3 skyColor = mix(SKY_NIGHT_COLOR * 0.25, SKY_DAY_COLOR, skyMixingValue);
 	
 	#include "/import/gbufferModelView.glsl"
 	#include "/import/invViewSize.glsl"
@@ -63,8 +63,11 @@ vec3 getSkyColor(ARG_OUT) {
 	vec3 upPos = gbufferModelView[1].xyz;
 	vec3 viewPos = endMat(gbufferProjectionInverse * vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0));
 	float upDot = dot(normalize(viewPos), upPos);
-	//upDot = sqrt(max(upDot, 0.0));
+	#include "/utils/var_rng.glsl"
+	upDot += randomFloat(rng) * 0.07 * (0.8 - getColorLum(skyFogColor));
+	
 	skyColor = mix(skyFogColor, skyColor, max(upDot, 0.0));
+	skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
 	
 	#if DARKEN_SKY_UNDERGROUND == 1
 		skyColor *= getHorizonMultiplier(ARG_IN);

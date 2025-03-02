@@ -110,15 +110,15 @@
 #endif
 #if SKY_FOG_NIGHT_RED == -1
 #undef SKY_FOG_NIGHT_RED
-										#define SKY_FOG_NIGHT_RED 0.3
+										#define SKY_FOG_NIGHT_RED 0.35
 #endif
 #if SKY_FOG_NIGHT_GREEN == -1
 #undef SKY_FOG_NIGHT_GREEN
-										#define SKY_FOG_NIGHT_GREEN 0.4
+										#define SKY_FOG_NIGHT_GREEN 0.45
 #endif
 #if SKY_FOG_NIGHT_BLUE == -1
 #undef SKY_FOG_NIGHT_BLUE
-										#define SKY_FOG_NIGHT_BLUE 0.5
+										#define SKY_FOG_NIGHT_BLUE 0.65
 #endif
 #if SKY_FOG_SUNRISE_RED == -1
 #undef SKY_FOG_SUNRISE_RED
@@ -126,11 +126,11 @@
 #endif
 #if SKY_FOG_SUNRISE_GREEN == -1
 #undef SKY_FOG_SUNRISE_GREEN
-										#define SKY_FOG_SUNRISE_GREEN 0.75
+										#define SKY_FOG_SUNRISE_GREEN 0.7
 #endif
 #if SKY_FOG_SUNRISE_BLUE == -1
 #undef SKY_FOG_SUNRISE_BLUE
-										#define SKY_FOG_SUNRISE_BLUE 0.1
+										#define SKY_FOG_SUNRISE_BLUE 0.15
 #endif
 #if SKY_FOG_SUNSET_RED == -1
 #undef SKY_FOG_SUNSET_RED
@@ -565,7 +565,7 @@
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.25
+										#define SUNRAYS_AMOUNT_NIGHT 0.3
 #endif
 #if SUNRAYS_MULT_SUNRISE == -1
 #undef SUNRAYS_MULT_SUNRISE
@@ -631,7 +631,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
-										#define SUNRAYS_AMOUNT_MAX_NIGHT 0.4
+										#define SUNRAYS_AMOUNT_MAX_NIGHT 0.3
 #endif
 #if SUNRAYS_BRIGHTNESS_INCREASE == -1
 #undef SUNRAYS_BRIGHTNESS_INCREASE
