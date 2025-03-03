@@ -378,6 +378,8 @@ value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 screen.SHADING_SETTINGS=Shading
 
 option.SHADOWS_ENABLED=Shadows Enabled
+value.SHADOWS_ENABLED.0=Off
+value.SHADOWS_ENABLED.1=On
 
 option.shadowMapResolution=Shadow Map Resolution
 option.shadowMapResolution.comment=Resolution of the shadow map. Higher is more accurate, lower is more performance\n\n(Performance cost: HIGH)
@@ -472,9 +474,13 @@ screen.POST_PROCESSING_SETTINGS=Post Processing
 
 option.TAA_ENABLED=TAA
 option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing, which removes jagged lines and smooths out flickering
+value.TAA_ENABLED.0=Off
+value.TAA_ENABLED.1=On
 
 option.FXAA_ENABLED=FXAA
 option.FXAA_ENABLED.comment=Another form of anti-aliasing, generally not as good as TAA but a whole lot simpler to deal with
+value.FXAA_ENABLED.0=Off
+value.FXAA_ENABLED.1=On
 
 option.OUTLINES_ENABLED=Outlines
 option.OUTLINES_ENABLED.comment=Adds black outlines over everything
@@ -548,6 +554,8 @@ screen.REFLECTION_SETTINGS=Reflections
 
 option.REFLECTIONS_ENABLED=Reflections Enabled
 option.REFLECTIONS_ENABLED.comment=Enabled reflections\n\n(Performance cost: HIGH)
+value.REFLECTIONS_ENABLED.0=Off
+value.REFLECTIONS_ENABLED.1=On
 
 option.REFLECTION_ITERATIONS=Reflection Iterations
 option.REFLECTION_ITERATIONS.comment=The number of steps that the pseudo-raytracer takes
@@ -752,6 +760,8 @@ screen.SHARPENING_SETTINGS=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
 option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA). (Performance cost: Low)
+value.SHARPENING_ENABLED.0=Off
+value.SHARPENING_ENABLED.1=On
 
 option.SHARPEN_AMOUNT=Sharpening Amount
 value.SHARPEN_AMOUNT.-1=Use Style
@@ -1100,9 +1110,13 @@ screen.DEBUG_SETTINGS=Debug
 
 option.USE_BETTER_RAND=Use Better Random
 option.USE_BETTER_RAND.comment=The better random function is technically better, but the performance cost doesn't exactly make up for it
+value.USE_BETTER_RAND.0=Off
+value.USE_BETTER_RAND.1=On
 
 option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
 option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate)
+value.SHOW_DANGEROUS_LIGHT.0=Off
+value.SHOW_DANGEROUS_LIGHT.1=On
 
 option.USE_SIMPLE_LIGHT=Use Simple Light
 option.USE_SIMPLE_LIGHT.comment=Breaks the lighting in a strangely artistic way
@@ -1205,6 +1219,8 @@ value.SSS_INVERT.1=On
 
 option.SSS_BARREL=Barrel
 option.SSS_BARREL.comment=Applies barrel distortion
+value.SSS_BARREL.0=Off
+value.SSS_BARREL.1=On
 
 option.SSS_BARREL_AMOUNT=Barrel Amount
 option.SSS_BARREL_AMOUNT.comment=How strong the distortion is

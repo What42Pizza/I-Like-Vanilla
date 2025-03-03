@@ -6,10 +6,10 @@
 	varying vec2 normal;
 	flat_inout int materialId;
 	
-	#if defined DISTANT_HORIZONS || defined SHOW_DANGEROUS_LIGHT
+	#if defined DISTANT_HORIZONS || SHOW_DANGEROUS_LIGHT == 1
 		varying vec3 playerPos;
 	#endif
-	#ifdef SHOW_DANGEROUS_LIGHT
+	#if SHOW_DANGEROUS_LIGHT == 1
 		varying float isDangerousLight;
 	#endif
 	
@@ -25,7 +25,7 @@ void main() {
 	
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
-		#ifdef TAA_ENABLED
+		#if TAA_ENABLED == 1
 			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
@@ -40,7 +40,7 @@ void main() {
 	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.15);
 	
 	
-	#ifdef SHOW_DANGEROUS_LIGHT
+	#if SHOW_DANGEROUS_LIGHT == 1
 		#include "/import/cameraPosition.glsl"
 		vec3 blockPos = fract(playerPos + cameraPosition);
 		float centerDist = length(blockPos -= 0.5);
@@ -78,7 +78,7 @@ void main() {
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
 #endif
-#ifdef TAA_ENABLED
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -96,12 +96,12 @@ void main() {
 	materialId %= 1000;
 	
 	
-	#ifdef SHOW_DANGEROUS_LIGHT
+	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = float(gl_Normal.y > 0.9 && lmcoord.x < 0.5);
 	#endif
 	
 	
-	#if !(defined DISTANT_HORIZONS || defined SHOW_DANGEROUS_LIGHT)
+	#if !(defined DISTANT_HORIZONS || SHOW_DANGEROUS_LIGHT == 1)
 		vec3 playerPos;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
@@ -126,7 +126,7 @@ void main() {
 	#endif
 	
 	
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
 	

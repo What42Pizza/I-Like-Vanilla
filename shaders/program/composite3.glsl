@@ -2,7 +2,7 @@
 	
 	varying vec2 texcoord;
 	
-	#ifndef BLOOM_ENABLED
+	#if BLOOM_ENABLED == 0
 		const bool colortex6MipmapEnabled = true;
 	#endif
 	

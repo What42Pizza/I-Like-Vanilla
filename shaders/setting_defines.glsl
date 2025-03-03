@@ -122,7 +122,7 @@
 
 
 
-#define SHADOWS_ENABLED
+#define SHADOWS_ENABLED 1 // [0 1]
 const int shadowMapResolution = 1280; // [256 384 512 768 896 1024 1280 1536 2048 3072 4096 6144 8192 12288]
 const float shadowDistance = 160.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0 224.0 256.0 320.0 384.0 512.0 768.0 1024.0]
 #define SHADOW_DISTORT_ADDITION -1 // [-1 0.05 0.06 0.07 0.08 0.09 0.1 0.11 0.12 0.13 0.14 0.15 0.2 0.25 0.3]
@@ -147,13 +147,13 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 
 
-#define TAA_ENABLED
-//#define FXAA_ENABLED
+#define TAA_ENABLED 1 // [0 1]
+#define FXAA_ENABLED 0 // [0 1]
 #define OUTLINES_ENABLED -1 // [-1 0 1]
 
 
 
-#define BLOOM_ENABLED
+#define BLOOM_ENABLED 1 // [0 1]
 #define BLOOM_QUALITY 4 // [2 3 4]
 #define BLOOM_AMOUNT -1 // [-1 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.75 0.8 0.85 0.9 0.95 1.0 1.05 1.1 1.15 1.2 1.25 1.3 1.35 1.4 1.45 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.2 3.4 3.6 3.8 4.0 4.5 5.0 6.0 7.0 8.0 9.0 10.0]
 #define BLOOM_SIZE -1 // [-1 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.5 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0]
@@ -171,7 +171,7 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 
 
-#define REFLECTIONS_ENABLED
+#define REFLECTIONS_ENABLED 1 // [0 1]
 #define REFLECTION_ITERATIONS 50 // [-1 20 25 30 35 40 45 50 55 60 65 70 80 90 100 120 140 160 180 200]
 #define REFLECTION_DITHER_AMOUNT 0.5 // [0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
 #define REFLECTION_FRESNEL -1 // [-1 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
@@ -234,7 +234,7 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 
 
-#define SHARPENING_ENABLED
+#define SHARPENING_ENABLED 1 // [0 1]
 #define SHARPEN_AMOUNT -1 // [-1 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0 1.05 1.1 1.15 1.2 1.25 1.3 1.35 1.4 1.45 1.5 1.6 1.7 1.8 1.9 2.0]
 #define SHARPEN_VEL_ADDITION -1 // [-1 0.0 0.2 0.4 0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0 2.5 3.0 3.5 4.0]
 #define SHARPEN_DEPTH_ADDITION -1 // [-1 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.2 1.4 1.6 1.8 2.0]
@@ -328,8 +328,8 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 
 
-//#define USE_BETTER_RAND
-//#define SHOW_DANGEROUS_LIGHT
+#define USE_BETTER_RAND 0 // [0 1]
+#define SHOW_DANGEROUS_LIGHT 0 // [0 1]
 #define USE_SIMPLE_LIGHT -1 // [-1 0 1]
 #define REFLECTIVE_EVERYTHING -1 // [-1 0 1]
 
@@ -352,5 +352,5 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 #define SSS_PHOSPHOR_AMOUNT -1 // [-1 0.7 0.71 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79 0.8 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89 0.9 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99]
 #define SSS_PHOSPHOR_CURVE -1 // [-1 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0]
 #define SSS_INVERT -1 // [-1 0 1]
-//#define SSS_BARREL
+#define SSS_BARREL 0 // [0 1]
 #define SSS_BARREL_AMOUNT -1 // [-1 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0]
