@@ -14,7 +14,7 @@
 
 #ifdef FSH
 
-#ifdef BLOOM_ENABLED
+#if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
 #endif
 #if DEPTH_SUNRAYS_ENABLED == 1
@@ -44,7 +44,7 @@ void main() {
 	
 	// ======== BLOOM CALCULATIONS ======== //
 	
-	#ifdef BLOOM_ENABLED
+	#if BLOOM_ENABLED == 1
 		if (!isSky) {
 			vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
 			noisyAdditions += bloomAddition;

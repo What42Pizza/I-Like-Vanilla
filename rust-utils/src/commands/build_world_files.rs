@@ -63,7 +63,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		for shader_name in SHADERS_LIST {
 			build_shader_files(world_name, shader_name, &world_path)?;
 		}
-		build_final_shader_file(world_name, &world_path)?;
+		build_final_shader_files(world_name, &world_path)?;
 	}
 	
 	println!("Done");
@@ -82,7 +82,7 @@ pub fn build_shader_files(world_name: &str, shader_name: &str, world_path: &Path
 
 
 
-pub fn build_final_shader_file(world_name: &str, world_path: &Path) -> Result<()> {
+pub fn build_final_shader_files(world_name: &str, world_path: &Path) -> Result<()> {
 	
 	// fsh
 	let fsh_contents = &r##"
@@ -96,17 +96,21 @@ void main() {
 	gl_FragData[0] = vec4(color, 1.0);
 }
 "##[1..];
-	fs::write(world_path.join("final.fsh"), fsh_contents)?;
+	fs::write(world_path.join("composite99.fsh"), fsh_contents)?;
 	
 	// vsh
 	let vsh_contents = &r##"
 #version 330 compatibility
 
 void main() {
-	gl_Position = ftransform();
+	#ifdef COPY_DEBUG_TO_OUTPUT
+		gl_Position = ftransform();
+	#else
+		gl_Position = vec4(-1.0);
+	#endif
 }
 "##[1..];
-	fs::write(world_path.join("final.vsh"), vsh_contents)?;
+	fs::write(world_path.join("composite99.vsh"), vsh_contents)?;
 	
 	Ok(())
 }

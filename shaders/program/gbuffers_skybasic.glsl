@@ -41,7 +41,7 @@ void main() {
 
 #ifdef VSH
 
-#ifdef TAA_ENABLED
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -51,7 +51,7 @@ void main() {
 	starData = vec4(gl_Color.rgb * STARS_BRIGHTNESS, float(isStar));
 	
 	
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
 	

@@ -51,7 +51,7 @@ void main() {
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
 #endif
-#ifdef TAA_ENABLED
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -79,7 +79,7 @@ void main() {
 	#endif
 	
 	
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
 	

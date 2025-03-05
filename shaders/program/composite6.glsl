@@ -11,7 +11,7 @@
 #if SSS_DECONVERGE == 1
 	#include "/lib/super_secret_settings/deconverge.glsl"
 #endif
-#ifdef SHARPENING_ENABLED
+#if SHARPENING_ENABLED == 1
 	#include "/lib/sharpening.glsl"
 #endif
 #include "/lib/color_correction.glsl"
@@ -40,7 +40,7 @@ void main() {
 	
 	// ======== SHARPENING ======== //
 	
-	#ifdef SHARPENING_ENABLED
+	#if SHARPENING_ENABLED == 1
 		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		float linearDepth = toLinearDepth(depth  ARGS_IN);
 		bool isSky = depthIsSky(linearDepth);

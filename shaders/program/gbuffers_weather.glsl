@@ -31,7 +31,7 @@ void main() {
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
 #endif
-#ifdef TAA_ENABLED
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -52,7 +52,7 @@ void main() {
 		gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * pos;
 	#endif
 	
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
 	

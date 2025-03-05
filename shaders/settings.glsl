@@ -51,6 +51,7 @@ const float eyeBrightnessHalflife = 3.0f;
 
 #ifdef NETHER
 	#undef SHADOWS_ENABLED
+	#define SHADOWS_ENABLED 0
 	#undef DEPTH_SUNRAYS_ENABLED
 	#define DEPTH_SUNRAYS_ENABLED 0
 	#undef VOL_SUNRAYS_ENABLED
@@ -59,13 +60,14 @@ const float eyeBrightnessHalflife = 3.0f;
 
 #ifdef END
 	#undef SHADOWS_ENABLED
+	#define SHADOWS_ENABLED 0
 	#undef DEPTH_SUNRAYS_ENABLED
 	#define DEPTH_SUNRAYS_ENABLED 0
 	#undef VOL_SUNRAYS_ENABLED
 	#define VOL_SUNRAYS_ENABLED 0
 #endif
 
-#ifndef SHADOWS_ENABLED
+#if SHADOWS_ENABLED == 0
 	#undef VOL_SUNRAYS_ENABLED
 	#define VOL_SUNRAYS_ENABLED 0
 #endif
@@ -79,8 +81,27 @@ const float eyeBrightnessHalflife = 3.0f;
 
 #if SSS_PIXELS != 0
 	#undef TAA_ENABLED
+	#defined TAA_ENABLED 0
 	#undef FXAA_ENABLED
+	#defined FXAA_ENABLED 0
 	#undef SHARPENING_ENABLED
+	#defined SHARPENING_ENABLED 0
+#endif
+
+
+
+// How on earth can optifine be THIS bad???
+#if TAA_ENABLED == 1
+	#undef TAA_ENABLED
+	#define TAA_ENABLED 1
+#endif
+#if SSS_PHOSPHOR == 1
+	#undef SSS_PHOSPHOR
+	#define SSS_PHOSPHOR 1
+#endif
+#if MOTION_BLUR_ENABLED == 1
+	#undef MOTION_BLUR_ENABLED
+	#define MOTION_BLUR_ENABLED 1
 #endif
 
 
@@ -123,25 +144,3 @@ const float eyeBrightnessHalflife = 3.0f;
 
 const float SHADOW_OFFSET_INCREASE = 1.3 / shadowMapResolution;
 const float SHADOW_OFFSET_MIN = 1.1 / pow(shadowMapResolution, 0.95);
-
-// use settings so iris/optifine can detect (not always needed but nice to have just in case)
-#ifdef SHADOWS_ENABLED
-#endif
-#ifdef TAA_ENABLED
-#endif
-#ifdef FXAA_ENABLED
-#endif
-#ifdef BLOOM_ENABLED
-#endif
-#ifdef REFLECTIONS_ENABLED
-#endif
-#ifdef SHARPENING_ENABLED
-#endif
-#ifdef SSAO_ENABLED
-#endif
-#ifdef USE_BETTER_RAND
-#endif
-#ifdef SHOW_DANGEROUS_LIGHT
-#endif
-#ifdef SSS_BARREL
-#endif

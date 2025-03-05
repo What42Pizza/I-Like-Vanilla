@@ -254,7 +254,7 @@ void adjustLmcoord(inout vec2 lmcoord) {
 
 
 
-#ifdef USE_BETTER_RAND
+#if USE_BETTER_RAND == 1
 	// taken from: https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/
 	uint randomizeUint(inout uint rng) {
 		rng = rng * 747796405u + 2891336453u;

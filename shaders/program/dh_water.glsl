@@ -1,4 +1,5 @@
 #undef SHADOWS_ENABLED
+#define SHADOWS_ENABLED 0
 
 #ifdef FIRST_PASS
 	
@@ -29,7 +30,7 @@
 void main() {
 	
 	float dither = bayer64(gl_FragCoord.xy);
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
@@ -106,7 +107,7 @@ void main() {
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
 #endif
-#ifdef TAA_ENABLED
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -134,7 +135,7 @@ void main() {
 	#endif
 	
 	
-	#ifdef TAA_ENABLED
+	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy  ARGS_IN);
 	#endif
 	

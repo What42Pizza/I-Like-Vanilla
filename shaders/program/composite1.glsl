@@ -12,7 +12,7 @@
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
-	#ifdef BLOOM_ENABLED
+	#if BLOOM_ENABLED == 1
 		vec3 bloomColor = color;
 	#endif
 	
@@ -37,7 +37,7 @@ void main() {
 	
 	// ======== BLOOM FILTERING ======== //
 	
-	#ifdef BLOOM_ENABLED
+	#if BLOOM_ENABLED == 1
 		float bloomMult = getColorLum(bloomColor * vec3(2.0, 1.0, 0.4));
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0);
@@ -47,7 +47,7 @@ void main() {
 	
 	/* DRAWBUFFERS:1 */
 	gl_FragData[0] = vec4(color, 1.0);
-	#ifdef BLOOM_ENABLED
+	#if BLOOM_ENABLED == 1
 		/* DRAWBUFFERS:15 */
 		gl_FragData[1] = vec4(bloomColor, 1.0);
 	#endif

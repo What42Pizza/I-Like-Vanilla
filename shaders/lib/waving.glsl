@@ -43,7 +43,7 @@ void applyWaving(inout vec3 position  ARGS_OUT) {
 	float wavingScale = wavingScales[wavingData / 2];
 	#include "/import/mc_midTexCoord.glsl"
 	if (wavingData % 2 == 0 && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
-	#if !defined SHADER_SHADOW
+	#ifndef SHADER_SHADOW
 		wavingScale *= lmcoord.y * lmcoord.y;
 	#endif
 	#include "/import/betterRainStrength.glsl"
