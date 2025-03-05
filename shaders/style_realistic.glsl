@@ -176,11 +176,11 @@
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 1.0
+										#define SKYLIGHT_DAY_GREEN 0.95
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.8
+										#define SKYLIGHT_DAY_BLUE 0.7
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
@@ -188,11 +188,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.75
+										#define AMBIENT_DAY_RED 0.6
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.9
+										#define AMBIENT_DAY_GREEN 0.8
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 2.0
+										#define BLOOM_AMOUNT 1.8
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -561,7 +561,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.2
+										#define SUNRAYS_AMOUNT_DAY 0.1
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -619,7 +619,7 @@
 
 #if SUNRAYS_MIN_UNDERGROUND == -1
 #undef SUNRAYS_MIN_UNDERGROUND
-										#define SUNRAYS_MIN_UNDERGROUND 30
+										#define SUNRAYS_MIN_UNDERGROUND 20
 #endif
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
@@ -714,7 +714,7 @@
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION
-										#define SHARPEN_VEL_ADDITION 1.3
+										#define SHARPEN_VEL_ADDITION 1.4
 #endif
 #if SHARPEN_DEPTH_ADDITION == -1
 #undef SHARPEN_DEPTH_ADDITION

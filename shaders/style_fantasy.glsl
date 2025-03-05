@@ -1,6 +1,6 @@
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.0
+										#define SUN_BRIGHTNESS 1.5
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
@@ -74,15 +74,15 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.6
+										#define SKY_DAY_RED 0.4
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.75
+										#define SKY_DAY_GREEN 0.5
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
+										#define SKY_DAY_BLUE 0.7
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -98,15 +98,15 @@
 #endif
 #if SKY_FOG_DAY_RED == -1
 #undef SKY_FOG_DAY_RED
-										#define SKY_FOG_DAY_RED 0.95
+										#define SKY_FOG_DAY_RED 0.7
 #endif
 #if SKY_FOG_DAY_GREEN == -1
 #undef SKY_FOG_DAY_GREEN
-										#define SKY_FOG_DAY_GREEN 1.0
+										#define SKY_FOG_DAY_GREEN 0.55
 #endif
 #if SKY_FOG_DAY_BLUE == -1
 #undef SKY_FOG_DAY_BLUE
-										#define SKY_FOG_DAY_BLUE 1.0
+										#define SKY_FOG_DAY_BLUE 0.85
 #endif
 #if SKY_FOG_NIGHT_RED == -1
 #undef SKY_FOG_NIGHT_RED
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 3.0
+										#define BLOOM_AMOUNT 2.8
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -623,7 +623,7 @@
 #endif
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 10
+										#define SUNRAYS_MIN_SURFACE 15
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
