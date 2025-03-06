@@ -1,19 +1,19 @@
 #ifdef FIRST_PASS
 	
-	varying vec2 texcoord;
-	varying vec2 lmcoord;
-	varying vec3 glcolor;
-	varying vec3 viewPos;
-	varying vec3 normal;
-	flat_inout int materialId;
+	in_out vec2 texcoord;
+	in_out vec2 lmcoord;
+	in_out vec3 glcolor;
+	in_out vec3 viewPos;
+	flat in_out vec3 normal;
+	flat in_out int materialId;
 	
-	flat_inout vec3 shadowcasterColor;
+	flat in_out vec3 shadowcasterColor;
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS
-		varying vec3 playerPos;
+		in_out vec3 playerPos;
 	#endif
 	#if BORDER_FOG_ENABLED == 1
-		varying float fogAmount;
+		in_out float fogAmount;
 	#endif
 	
 #endif
@@ -37,7 +37,7 @@ void main() {
 	
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
-		#if TAA_ENABLED == 1
+		#if TEMPORAL_FILTER_ENABLED == 1
 			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif

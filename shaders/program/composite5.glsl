@@ -1,7 +1,5 @@
 #ifdef FIRST_PASS
-	
-	varying vec2 texcoord;
-	
+	in_out vec2 texcoord;
 #endif
 
 
@@ -17,8 +15,8 @@
 #if FXAA_ENABLED == 1
 	#include "/lib/fxaa.glsl"
 #endif
-#if TAA_ENABLED == 1
-	#include "/lib/taa.glsl"
+#if TEMPORAL_FILTER_ENABLED == 1
+	#include "/lib/temporal_filter.glsl"
 #endif
 #if MOTION_BLUR_ENABLED == 1
 	#include "/lib/motion_blur.glsl"
@@ -68,9 +66,9 @@ void main() {
 		doFxaa(color, MAIN_TEXTURE  ARGS_IN);
 	#endif
 	
-	// ======== TAA ======== //
-	#if TAA_ENABLED == 1
-		doTAA(color, blockDepth, prevCoord  ARGS_IN);
+	// ======== TEMPORAL FILTER ======== //
+	#if TEMPORAL_FILTER_ENABLED == 1
+		doTemporalFilter(color, blockDepth, prevCoord  ARGS_IN);
 	#endif
 	
 	
@@ -88,7 +86,7 @@ void main() {
 	
 	/* DRAWBUFFERS:1 */
 	gl_FragData[0] = vec4(color, 1.0);
-	#if TAA_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
+	#if TEMPORAL_FILTER_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
 		/* DRAWBUFFERS:14 */
 		#if MOTION_BLUR_ENABLED == 1
 			gl_FragData[1] = vec4(prevColor, 1.0);

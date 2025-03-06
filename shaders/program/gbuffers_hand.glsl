@@ -1,9 +1,9 @@
 #ifdef FIRST_PASS
 	
-	varying vec2 texcoord;
-	varying vec2 lmcoord;
-	varying vec3 glcolor;
-	varying vec2 normal;
+	in_out vec2 texcoord;
+	in_out vec2 lmcoord;
+	in_out vec3 glcolor;
+	flat in_out vec2 normal;
 	
 #endif
 

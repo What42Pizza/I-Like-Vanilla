@@ -1,5 +1,5 @@
 #ifdef FIRST_PASS
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 #endif
 
 

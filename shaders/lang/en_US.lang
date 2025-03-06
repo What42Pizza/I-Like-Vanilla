@@ -391,7 +391,7 @@ option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of closer sh
 value.SHADOW_DISTORT_ADDITION.-1=Use Style
 
 option.SHADOW_FILTERING=Shadow Filtering
-option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with TAA)\n\n(Performance cost: Low)
+option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled)\n\n(Performance cost: Low)
 value.SHADOW_FILTERING.0=Off (pixelated)
 value.SHADOW_FILTERING.1=Off (smooth)
 value.SHADOW_FILTERING.2=On (default)
@@ -471,13 +471,18 @@ value.HANDHELD_LIGHT_BRIGHTNESS.-1=Use Style
 
 screen.POST_PROCESSING_SETTINGS=Post Processing
 
+option.TEMPORAL_FILTER_ENABLED=Temporal Filter
+option.TEMPORAL_FILTER_ENABLED.comment=Blends frames together to reduce flickering
+value.TEMPORAL_FILTER_ENABLED.0=Off
+value.TEMPORAL_FILTER_ENABLED.1=On
+
 option.TAA_ENABLED=TAA
-option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing, which removes jagged lines and smooths out flickering
+option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), required Temporal Filter to be enabled
 value.TAA_ENABLED.0=Off
 value.TAA_ENABLED.1=On
 
 option.FXAA_ENABLED=FXAA
-option.FXAA_ENABLED.comment=Another form of anti-aliasing, generally not as good as TAA but a whole lot simpler to deal with
+option.FXAA_ENABLED.comment=A simple form of anti-aliasing (makes jagged edges smooth)
 value.FXAA_ENABLED.0=Off
 value.FXAA_ENABLED.1=On
 
@@ -614,13 +619,13 @@ value.SUNRAYS_AMOUNT_DAY.-1=Use Style
 option.SUNRAYS_AMOUNT_NIGHT=Sunrays Amount Night
 value.SUNRAYS_AMOUNT_NIGHT.-1=Use Style
 
-option.SUNRAYS_MULT_SUNRISE=Sunrays Mult Sunrise
-option.SUNRAYS_MULT_SUNRISE.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunrise
-value.SUNRAYS_MULT_SUNRISE.-1=Use Style
+option.SUNRAYS_INCREASE_SUNRISE=Sunrays Increase Sunrise
+option.SUNRAYS_INCREASE_SUNRISE.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunrise
+value.SUNRAYS_INCREASE_SUNRISE.-1=Use Style
 
-option.SUNRAYS_MULT_SUNSET=Sunrays Mult Sunset
-option.SUNRAYS_MULT_SUNSET.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunset
-value.SUNRAYS_MULT_SUNSET.-1=Use Style
+option.SUNRAYS_INCREASE_SUNSET=Sunrays Increase Sunset
+option.SUNRAYS_INCREASE_SUNSET.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunset
+value.SUNRAYS_INCREASE_SUNSET.-1=Use Style
 
 option.SUNRAYS_SUN_RED=Sunrays Sun Red
 value.SUNRAYS_SUN_RED.-1=Use Style
@@ -758,7 +763,7 @@ option.MOTION_BLUR_QUALITY=Motion Blur Quality
 screen.SHARPENING_SETTINGS=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
-option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA). (Performance cost: Low)
+option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA / FXAA). (Performance cost: Low)
 value.SHARPENING_ENABLED.0=Off
 value.SHARPENING_ENABLED.1=On
 

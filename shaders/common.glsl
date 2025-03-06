@@ -32,11 +32,9 @@ uniform sampler2D shadowtex0;
 // misc defines
 
 #ifdef FSH
-	#define flat_inout flat in
-	#define varying in
+	#define in_out in
 #else
-	#define flat_inout flat out
-	#define varying out
+	#define in_out out
 #endif
 
 //#define HAND_DEPTH 0.19 // idk what should actually be here

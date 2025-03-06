@@ -1,5 +1,5 @@
 #ifdef FIRST_PASS
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 #endif
 
 
@@ -68,23 +68,24 @@ void main() {
 	
 	// ======== REFLECTIONS ======== //
 	
-	vec4 data;
-	float depth0 = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	float depth1 = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-	bool shouldUseTransparent = depth0 < depth1; // if transparents depth is less than non-transparents depth then use transparents data tex
-	#ifdef DISTANT_HORIZONS
-		float dhDepth0 = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float dhDepth1 = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		shouldUseTransparent = shouldUseTransparent || dhDepth0 < dhDepth1;
-	#endif
-	if (shouldUseTransparent) {
-		data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
-	} else {
-		data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-	}
-	vec3 normal = decodeNormal(unpackVec2(data.y));
-	
 	#if REFLECTIONS_ENABLED == 1
+		
+		vec4 data;
+		float depth0 = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float depth1 = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		bool shouldUseTransparent = depth0 < depth1; // if transparents depth is less than non-transparents depth then use transparents data tex
+		#ifdef DISTANT_HORIZONS
+			float dhDepth0 = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+			float dhDepth1 = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+			shouldUseTransparent = shouldUseTransparent || dhDepth0 < dhDepth1;
+		#endif
+		if (shouldUseTransparent) {
+			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
+		} else {
+			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
+		}
+		vec3 normal = decodeNormal(unpackVec2(data.y));
+		
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectionStrength = 1.0;
 		#else
@@ -93,6 +94,7 @@ void main() {
 		if (reflectionStrength > 0.01) {
 			doReflections(color, depth0, normal, reflectionStrength  ARGS_IN);
 		}
+		
 	#endif
 	
 	

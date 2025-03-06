@@ -1,5 +1,5 @@
 #ifdef FIRST_PASS
-	varying vec4 starData; //rgb = star color, a = flag for weather or not this pixel is a star.
+	in_out vec4 starData; //rgb = star color, a = flag for weather or not this pixel is a star.
 #endif
 
 

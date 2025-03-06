@@ -1,6 +1,6 @@
 #ifdef FIRST_PASS
 	
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 	
 	#if BLOOM_ENABLED == 0
 		const bool colortex6MipmapEnabled = true;

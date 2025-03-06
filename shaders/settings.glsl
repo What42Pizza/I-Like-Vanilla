@@ -10,6 +10,7 @@ const int   colortex3Format       = RGB32F;
 const bool  colortex4Clear        = false;
 const bool  colortex5Clear        = false;
 const bool  colortex6Clear        = false;
+const bool  colortex7Clear        = false;
 const bool  shadowtex0Mipmap      = false;
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Mipmap      = false;
@@ -90,10 +91,17 @@ const float eyeBrightnessHalflife = 3.0f;
 
 
 
-// How on earth can optifine be THIS bad???
-#if TAA_ENABLED == 1
+#if TEMPORAL_FILTER_ENABLED == 0
 	#undef TAA_ENABLED
-	#define TAA_ENABLED 1
+	#define TAA_ENABLED 0
+#endif
+
+
+
+// How on earth can optifine be THIS bad???
+#if TEMPORAL_FILTER_ENABLED == 1
+	#undef TEMPORAL_FILTER_ENABLED
+	#define TEMPORAL_FILTER_ENABLED 1
 #endif
 #if SSS_PHOSPHOR == 1
 	#undef SSS_PHOSPHOR

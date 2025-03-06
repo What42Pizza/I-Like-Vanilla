@@ -74,11 +74,11 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.6
+										#define SKY_DAY_RED 0.3
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.75
+										#define SKY_DAY_GREEN 0.6
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
@@ -98,15 +98,15 @@
 #endif
 #if SKY_FOG_DAY_RED == -1
 #undef SKY_FOG_DAY_RED
-										#define SKY_FOG_DAY_RED 0.95
+										#define SKY_FOG_DAY_RED 0.6
 #endif
 #if SKY_FOG_DAY_GREEN == -1
 #undef SKY_FOG_DAY_GREEN
-										#define SKY_FOG_DAY_GREEN 1.0
+										#define SKY_FOG_DAY_GREEN 0.7
 #endif
 #if SKY_FOG_DAY_BLUE == -1
 #undef SKY_FOG_DAY_BLUE
-										#define SKY_FOG_DAY_BLUE 1.0
+										#define SKY_FOG_DAY_BLUE 0.7
 #endif
 #if SKY_FOG_NIGHT_RED == -1
 #undef SKY_FOG_NIGHT_RED
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.9
+										#define BLOOM_AMOUNT 0.8
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -507,7 +507,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.2
+										#define AO_AMOUNT 1.0
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -561,23 +561,23 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.4
+										#define SUNRAYS_AMOUNT_DAY 0.45
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
 										#define SUNRAYS_AMOUNT_NIGHT 0.1
 #endif
-#if SUNRAYS_MULT_SUNRISE == -1
-#undef SUNRAYS_MULT_SUNRISE
-										#define SUNRAYS_MULT_SUNRISE 0.85
+#if SUNRAYS_INCREASE_SUNRISE == -1
+#undef SUNRAYS_INCREASE_SUNRISE
+										#define SUNRAYS_INCREASE_SUNRISE -0.2
 #endif
-#if SUNRAYS_MULT_SUNSET == -1
-#undef SUNRAYS_MULT_SUNSET
-										#define SUNRAYS_MULT_SUNSET 0.85
+#if SUNRAYS_INCREASE_SUNSET == -1
+#undef SUNRAYS_INCREASE_SUNSET
+										#define SUNRAYS_INCREASE_SUNSET -0.2
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
-										#define SUNRAYS_SUN_RED 1.0
+										#define SUNRAYS_SUN_RED 1.2
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN

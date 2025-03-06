@@ -478,7 +478,7 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 3.0
+										#define BLOOM_SIZE 2.5
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
@@ -567,13 +567,13 @@
 #undef SUNRAYS_AMOUNT_NIGHT
 										#define SUNRAYS_AMOUNT_NIGHT 0.3
 #endif
-#if SUNRAYS_MULT_SUNRISE == -1
-#undef SUNRAYS_MULT_SUNRISE
-										#define SUNRAYS_MULT_SUNRISE 2.5
+#if SUNRAYS_INCREASE_SUNRISE == -1
+#undef SUNRAYS_INCREASE_SUNRISE
+										#define SUNRAYS_INCREASE_SUNRISE 2.5
 #endif
-#if SUNRAYS_MULT_SUNSET == -1
-#undef SUNRAYS_MULT_SUNSET
-										#define SUNRAYS_MULT_SUNSET 2.5
+#if SUNRAYS_INCREASE_SUNSET == -1
+#undef SUNRAYS_INCREASE_SUNSET
+										#define SUNRAYS_INCREASE_SUNSET 2.5
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED

@@ -2,9 +2,9 @@
 
 #ifdef FIRST_PASS
 	
-	varying vec2 texcoord;
-	flat_inout vec3 colorMult;
-	varying vec3 playerPos;
+	in_out vec2 texcoord;
+	flat in_out vec3 colorMult;
+	in_out vec3 playerPos;
 	
 #endif
 

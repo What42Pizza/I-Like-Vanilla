@@ -1,16 +1,16 @@
 #ifdef FIRST_PASS
 	
-	varying vec2 texcoord;
-	varying vec2 lmcoord;
-	varying vec3 glcolor;
-	varying vec2 normal;
-	flat_inout int materialId;
+	in_out vec2 texcoord;
+	in_out vec2 lmcoord;
+	in_out vec3 glcolor;
+	flat in_out vec2 normal;
+	flat in_out int materialId;
 	
 	#if defined DISTANT_HORIZONS || SHOW_DANGEROUS_LIGHT == 1
-		varying vec3 playerPos;
+		in_out vec3 playerPos;
 	#endif
 	#if SHOW_DANGEROUS_LIGHT == 1
-		varying float isDangerousLight;
+		in_out float isDangerousLight;
 	#endif
 	
 #endif
@@ -25,7 +25,7 @@ void main() {
 	
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
-		#if TAA_ENABLED == 1
+		#if TEMPORAL_FILTER_ENABLED == 1
 			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif

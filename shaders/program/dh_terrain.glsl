@@ -1,10 +1,10 @@
 #ifdef FIRST_PASS
 	
-	varying vec2 lmcoord;
-	varying vec3 glcolor;
-	varying vec2 normal;
-	varying vec3 playerPos;
-	flat_inout int dhBlock;
+	in_out vec2 lmcoord;
+	in_out vec3 glcolor;
+	flat in_out vec2 normal;
+	in_out vec3 playerPos;
+	flat in_out int dhBlock;
 	
 #endif
 

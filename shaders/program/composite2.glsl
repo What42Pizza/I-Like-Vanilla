@@ -1,18 +1,20 @@
 #ifdef FIRST_PASS
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
-		flat_inout vec2 lightCoord;
-		flat_inout float depthSunraysAmountMult;
+		flat in_out vec2 lightCoord;
+		flat in_out float depthSunraysAmountMult;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		flat_inout float volSunraysAmountMult;
+		flat in_out float volSunraysAmountMult;
 	#endif
 #endif
 
 
 
 #ifdef FSH
+
+#include "/utils/depth.glsl"
 
 #if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
@@ -114,7 +116,7 @@ void main() {
 		#include "/import/isSun.glsl"
 		if (isSun) {
 			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY;
-			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_MULT_SUNRISE + ambientSunsetPercent * SUNRAYS_MULT_SUNSET;
+			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		} else {
 			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT;
 		}
@@ -130,7 +132,7 @@ void main() {
 		#include "/import/sunAngle.glsl"
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY : SUNRAYS_AMOUNT_NIGHT;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
-		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_MULT_SUNRISE + ambientSunsetPercent * SUNRAYS_MULT_SUNSET;
+		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		#include "/import/rainStrength.glsl"
 		volSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 	#endif

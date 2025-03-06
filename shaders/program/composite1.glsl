@@ -1,12 +1,10 @@
 #ifdef FIRST_PASS
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 #endif
 
 
 
 #ifdef FSH
-
-#include "/utils/depth.glsl"
 
 
 
@@ -43,6 +41,7 @@ void main() {
 		bloomMult = clamp(bloomMult, 0.0, 1.0);
 		bloomColor *= bloomMult;
 	#endif
+	
 	
 	
 	/* DRAWBUFFERS:1 */

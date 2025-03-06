@@ -1,7 +1,7 @@
 #ifdef FIRST_PASS
-	varying vec2 texcoord;
+	in_out vec2 texcoord;
 	#ifdef END
-		varying vec3 glcolor;
+		in_out vec3 glcolor;
 	#endif
 #endif
 
@@ -21,10 +21,6 @@ void main() {
 		} else {
 			albedo.rgb *= MOON_BRIGHTNESS;
 		}
-	#endif
-	
-	#ifdef END
-		albedo.rgb *= glcolor;
 	#endif
 	
 	
