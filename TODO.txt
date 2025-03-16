@@ -3,14 +3,13 @@ Move 'Sun Path Rotation' to 'Sky Settings'
 Change data buffers to store ints instead of floats?
 Make volumetric sunrays work over dh terrain again
 Add 'dither or noise' options to everything that uses dithering or noise
-Add settings for TAA
-Add setting `Light Mixing: Artistic / Realistic`
 Add setting 'Shadows on Transparents'
+Add setting 'Bright Terrain Decrease' (for smoothMin value)
 Make sure ALL settings work
 Make sure all vanilla effect work
-Match dh look with regular rendering
+Make dh terrain look like regular terrain
 Update ALL gallery images
-Update performance and compatibility note (Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.)
+Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.")
 Fix rain reflections
 Go through and make sure that all `#include`s are used or removed
 Fix in-liquid fog
@@ -32,11 +31,16 @@ Make sure settings are tuned for:
 	Cartoon Night
 	Cartoon Sunrise
 	Cartoon Sunset
+	Especially settings:
+		BLOCK_REFLECTION_AMOUNT_SURFACE
+		BLOCK_REFLECTION_AMOUNT_UNDERGROUND
 Update documentation
 
 Possibly before 1.0.0:
 Add generalized volumetrics
-Re-add BLOCKS_REFLECTION_AMOUNT_MULT_SURFACE
+Make reflections (especially on water) noticeable at night
+Add settings for TAA
+Add setting `Light Mixing: Artistic / Realistic`
 Add close-up particle reduction
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Separate depth sunrays and vol sunrays settings
@@ -90,10 +94,13 @@ OPTIMIZE (see shader assembly?)
 Keep the shader simple!
 Update documentation
 Cut down on the number of options
-Add more values to options
+Add more values to options (to an extent)
 Add more comments to options
-Match the vanilla look, especially in:
+Make sure all styles look good in:
+	day
 	night
+	sunset
+	sunrise
 	underwater
 	nether
 	end

@@ -64,6 +64,7 @@ void main() {
 			#include "/import/isSun.glsl"
 			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
 			vec3 depthSunraysAddition = getDepthSunraysAmount(rng  ARGS_IN) * depthSunraysAmountMult * depthSunraysColor;
+			if (isSky) depthSunraysAddition *= 0.5;
 			noisyAdditions += depthSunraysAddition;
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1

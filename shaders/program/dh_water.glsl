@@ -87,7 +87,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		dhBlock == DH_BLOCK_WATER ? WATER_REFLECTION_AMOUNT : 0.0,
+		dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0,
 		1.0
 	);
 	

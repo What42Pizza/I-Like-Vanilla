@@ -568,9 +568,21 @@ option.REFLECTION_FRESNEL=Reflection Fresnel Amount
 option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
 value.REFLECTION_FRESNEL.-1=Use Style
 
-option.WATER_REFLECTION_AMOUNT=Water Reflection Strength
-option.WATER_REFLECTION_AMOUNT.comment=Max water reflection strength (also affects reflections of transparent blocks like stained glass, ice, etc)
-value.WATER_REFLECTION_AMOUNT.-1=Use Style
+option.BLOCK_REFLECTION_AMOUNT_SURFACE=(Surface) Block Reflection Strength
+option.BLOCK_REFLECTION_AMOUNT_SURFACE.comment=Max reflection strength for blocks in sunlight
+value.BLOCK_REFLECTION_AMOUNT_SURFACE.-1=Use Style
+
+option.BLOCK_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Block Reflection Strength
+option.BLOCK_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for blocks not in sunlight
+value.BLOCK_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
+
+option.WATER_REFLECTION_AMOUNT_SURFACE=(Surface) Water Reflection Strength
+option.WATER_REFLECTION_AMOUNT_SURFACE.comment=Max reflection strength for water in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
+value.WATER_REFLECTION_AMOUNT_SURFACE.-1=Use Style
+
+option.WATER_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Water Reflection Strength
+option.WATER_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for water not in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
+value.WATER_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
 option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
@@ -669,13 +681,13 @@ value.SUNRAYS_FLICKERING_FIX.1=On
 screen.VOL_SUNRAYS_SETTINGS=Volumetric Sunrays Settings
 screen.VOL_SUNRAYS_SETTINGS.comment=Settings specific to volumetric sunrays
 
-option.SUNRAYS_MIN_UNDERGROUND=Sunrays Min Underground
-option.SUNRAYS_MIN_UNDERGROUND.comment=How much is added to the detected sunrays amount while underground, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
-value.SUNRAYS_MIN_UNDERGROUND.-1=Use Style
-
 option.SUNRAYS_MIN_SURFACE=Sunrays Min Surface
 option.SUNRAYS_MIN_SURFACE.comment=How much is added to the detected sunrays amount while on the surface, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
 value.SUNRAYS_MIN_SURFACE.-1=Use Style
+
+option.SUNRAYS_MIN_UNDERGROUND=Sunrays Min Underground
+option.SUNRAYS_MIN_UNDERGROUND.comment=How much is added to the detected sunrays amount while underground, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
+value.SUNRAYS_MIN_UNDERGROUND.-1=Use Style
 
 option.SUNRAYS_AMOUNT_MAX_DAY=Sunrays Amount Max Day
 option.SUNRAYS_AMOUNT_MAX_DAY.comment=Clamp for how much the sunrays color can be mixed into the main color (during the day)
@@ -999,13 +1011,13 @@ value.PHYSICALLY_WAVING_WATER_ENABLED.-1=Use Style
 value.PHYSICALLY_WAVING_WATER_ENABLED.0=Off
 value.PHYSICALLY_WAVING_WATER_ENABLED.1=On
 
-option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND=Physical Waving Amount Underground
-option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
-value.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.-1=Use Style
-
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE=Physical Waving Amount Surface
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
 value.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.-1=Use Style
+
+option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND=Physical Waving Amount Underground
+option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
+value.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.WAVING_WATER_SURFACE_ENABLED=Waving Surface Enabled
 option.WAVING_WATER_SURFACE_ENABLED.comment=Makes the water reflections wavy (only takes effect when water reflections are enabled)
@@ -1029,13 +1041,13 @@ option.WAVING_WATER_NORMAL_AMOUNT=Waving Normal Amount
 option.WAVING_WATER_NORMAL_AMOUNT.comment=How much the waving surface should affect the water surface's normal (surface direction)
 value.WAVING_WATER_NORMAL_AMOUNT.-1=Use Style
 
-option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND=Normals Waving Amount Underground
-option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
-value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style
-
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE=Normals Waving Amount Surface
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
 value.WAVING_WATER_SURFACE_AMOUNT_SURFACE.-1=Use Style
+
+option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND=Normals Waving Amount Underground
+option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
+value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style
 
 
 

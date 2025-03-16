@@ -50,12 +50,25 @@ vec3 getSkyColor(ARG_OUT) {
 		SKY_FOG_NIGHT_COLOR * 0.25 * ambientMoonPercent +
 		SKY_FOG_SUNRISE_COLOR * 0.75 * ambientSunrisePercent +
 		SKY_FOG_SUNSET_COLOR * 0.75 * ambientSunsetPercent;
-	#include "/import/sunAngle.glsl"
-	float skyMixingValue = sunAngle * 4.0 - (sunAngle < 0.5 ? 1.0 : 3.0);
-	skyMixingValue *= skyMixingValue;
-	skyMixingValue *= skyMixingValue;
-	if (sunAngle < 0.5) skyMixingValue = 1.0 - skyMixingValue;
-	vec3 skyColor = mix(SKY_NIGHT_COLOR * 0.25, SKY_DAY_COLOR, skyMixingValue);
+	
+	//const float skySunriseStart = 0.925;
+	//const float skySunriseEnd = 1.1;
+	//const float skySunsetStart = 0.4;
+	//const float skySunsetEnd = 0.575;
+	//#include "/import/sunAngle.glsl"
+	//float skyMixingValue = 1.0;
+	//if (sunAngle < skySunriseEnd - 1.0 || sunAngle > skySunsetStart) {
+	//	skyMixingValue = sunAngle - 0.5;
+	//	skyMixingValue = mod(sunAngle + 0.25, 0.5) - 0.25;
+	//	skyMixingValue /= 0.075;
+	//	skyMixingValue *= skyMixingValue;
+	//	skyMixingValue = max(1.0 - skyMixingValue, 0.0);
+	//}
+	//float skyMixingValue = sunAngle * 4.0 - (sunAngle < 0.5 ? 1.0 : 3.0);
+	//skyMixingValue *= skyMixingValue;
+	//skyMixingValue *= skyMixingValue;
+	//if (sunAngle < 0.5) skyMixingValue = 1.0 - skyMixingValue;
+	vec3 skyColor = mix(SKY_NIGHT_COLOR * 0.25, SKY_DAY_COLOR, ambientSunPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.75);
 	
 	#include "/import/gbufferModelView.glsl"
 	#include "/import/invViewSize.glsl"

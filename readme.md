@@ -1,8 +1,12 @@
 # I Like Vanilla (MC Shader)
 
+## Overhauling the vanilla graphics while making it feel like nothing has changed
+
 ![Example Image (Village)](/images/village.png)
 
-### This is the culmination of basically everything I'd want in a shader. Amazing graphics, good performance, easy expandability, thorough settings, and unobtrusive in gameplay.
+<br>
+
+This is basically the culmination of everything I'd want in a shader. Amazing visuals, good performance, easy expandability, thorough settings, and completely unobtrusive.
 
 <br>
 
@@ -19,21 +23,18 @@
 ## Effects:
 
 - **Shadows**
-- **Reflections** (water and rain puddles)
-- **Extensive Styles System**
+- **Reflections**
+- **Settings-based Styles System**
 - **Colorblindness Correction**
 - **Anti-Aliasing (TAA and FXAA)**
+- **Dynamic Sharpening**
 - **Isometric Rendering**
-- **SSAO**
 - **Sunrays** (depth-based and volumetric)
 - **Depth of Field**
 - **Optional World-Pixelated Shadows**
+- **SSAO**
 - **Bloom**
 - **Motion Blur**
-- **Sharpening**
-- **Waving blocks**
-- **Fog**
-- **Handheld light**
 - **Misc Post-Processing**
 - - Underwater Waviness
 - - Vignette

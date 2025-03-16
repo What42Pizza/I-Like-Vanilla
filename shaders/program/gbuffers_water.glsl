@@ -93,7 +93,7 @@ void main() {
 	
 	
 	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15;
-	if (materialId == 7) reflectiveness = WATER_REFLECTION_AMOUNT;
+	if (materialId == 7) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
 	
 	
 	/* DRAWBUFFERS:03 */

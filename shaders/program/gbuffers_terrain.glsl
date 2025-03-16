@@ -37,7 +37,7 @@ void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	if (albedo.a < 0.1) discard;
-	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.15);
+	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.2);
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
@@ -48,7 +48,7 @@ void main() {
 	#endif
 	
 	
-	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15;
+	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15 * mix(BLOCK_REFLECTION_AMOUNT_UNDERGROUND, BLOCK_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
 	
 	
 	/* DRAWBUFFERS:02 */
