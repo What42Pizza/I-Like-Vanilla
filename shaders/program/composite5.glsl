@@ -8,6 +8,7 @@
 
 #include "/utils/depth.glsl"
 #include "/utils/reprojection.glsl"
+#include "/utils/screen_to_view.glsl"
 
 #if SSS_PHOSPHOR == 1
 	#include "/lib/super_secret_settings/phosphor.glsl"
@@ -46,11 +47,14 @@ void main() {
 	
 	
 	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-	float blockDepth = toBlockDepth(depth  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
-		float dhDepth = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		float blockDhDepth = toBlockDepthDh(dhDepth  ARGS_IN);
-		blockDepth = min(blockDepth, blockDhDepth);
+		vec3 realBlockViewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
+		if (dot(realBlockViewPosDh, realBlockViewPosDh) < dot(realBlockViewPos, realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
+		#include "/import/gbufferProjection.glsl"
+		vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
+		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 	#endif
 	
 	vec3 pos = vec3(texcoord, depth);
@@ -68,7 +72,7 @@ void main() {
 	
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
-		doTemporalFilter(color, blockDepth, prevCoord  ARGS_IN);
+		doTemporalFilter(color, depth, prevCoord  ARGS_IN);
 	#endif
 	
 	

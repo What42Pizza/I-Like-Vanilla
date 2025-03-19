@@ -112,42 +112,41 @@ value.SKY_NIGHT_GREEN.-1=use Style
 option.SKY_NIGHT_BLUE=Sky Night Blue
 value.SKY_NIGHT_BLUE.-1=use Style
 
-option.SKY_FOG_DAY_RED=Sky Fog Day Red
-value.SKY_FOG_DAY_RED.-1=use Style
+option.SKY_HORIZON_DAY_RED=Horizon Day Red
+value.SKY_HORIZON_DAY_RED.-1=use Style
 
-option.SKY_FOG_DAY_GREEN=Sky Fog Day Green
-value.SKY_FOG_DAY_GREEN.-1=use Style
+option.SKY_HORIZON_DAY_GREEN=Horizon Day Green
+value.SKY_HORIZON_DAY_GREEN.-1=use Style
 
-option.SKY_FOG_DAY_BLUE=Sky Fog Day Blue
-value.SKY_FOG_DAY_BLUE.-1=use Style
+option.SKY_HORIZON_DAY_BLUE=Horizon Day Blue
+value.SKY_HORIZON_DAY_BLUE.-1=use Style
 
-option.SKY_FOG_NIGHT_RED=Sky Fog Night Red
-value.SKY_FOG_NIGHT_RED.-1=use Style
+option.SKY_HORIZON_NIGHT_RED=Horizon Night Red
+value.SKY_HORIZON_NIGHT_RED.-1=use Style
 
-option.SKY_FOG_NIGHT_GREEN=Sky Fog Night Green
-value.SKY_FOG_NIGHT_GREEN.-1=use Style
+option.SKY_HORIZON_NIGHT_GREEN=Horizon Night Green
+value.SKY_HORIZON_NIGHT_GREEN.-1=use Style
 
-option.SKY_FOG_NIGHT_BLUE=Sky Fog Night Blue
-value.SKY_FOG_NIGHT_BLUE.-1=use Style
+option.SKY_HORIZON_NIGHT_BLUE=Horizon Night Blue
+value.SKY_HORIZON_NIGHT_BLUE.-1=use Style
 
-option.SKY_FOG_SUNRISE_RED=Sky Fog Sunrise Red
-value.SKY_FOG_SUNRISE_RED.-1=use Style
+option.SKY_HORIZON_SUNRISE_RED=Horizon Sunrise Red
+value.SKY_HORIZON_SUNRISE_RED.-1=use Style
 
-option.SKY_FOG_SUNRISE_GREEN=Sky Fog Sunrise Green
-value.SKY_FOG_SUNRISE_GREEN.-1=use Style
+option.SKY_HORIZON_SUNRISE_GREEN=Horizon Sunrise Green
+value.SKY_HORIZON_SUNRISE_GREEN.-1=use Style
 
-option.SKY_FOG_SUNRISE_BLUE=Sky Fog Sunrise Blue
-value.SKY_FOG_SUNRISE_BLUE.-1=use Style
+option.SKY_HORIZON_SUNRISE_BLUE=Horizon Sunrise Blue
+value.SKY_HORIZON_SUNRISE_BLUE.-1=use Style
 
-option.SKY_FOG_SUNSET_RED=Sky Fog Sunset Red
-value.SKY_FOG_SUNSET_RED.-1=use Style
+option.SKY_HORIZON_SUNSET_RED=Horizon Sunset Red
+value.SKY_HORIZON_SUNSET_RED.-1=use Style
 
-option.SKY_FOG_SUNSET_GREEN=Sky Fog Sunset Green
-value.SKY_FOG_SUNSET_GREEN.-1=use Style
+option.SKY_HORIZON_SUNSET_GREEN=Horizon Sunset Green
+value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
 
-option.SKY_FOG_SUNSET_BLUE=Sky Fog Sunset Blue
-value.SKY_FOG_SUNSET_BLUE.-1=use Style
-
+option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
+value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
 
 
 
@@ -563,6 +562,9 @@ value.REFLECTIONS_ENABLED.1=On
 
 option.REFLECTION_ITERATIONS=Reflection Iterations
 option.REFLECTION_ITERATIONS.comment=The number of steps that the pseudo-raytracer takes
+
+option.REFLECTION_DITHER_AMOUNT=Reflection Dither Amount
+option.REFLECTION_DITHER_AMOUNT.comment=How much dithering to add to reflections
 
 option.REFLECTION_FRESNEL=Reflection Fresnel Amount
 option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength

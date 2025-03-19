@@ -14,6 +14,7 @@ Fix rain reflections
 Go through and make sure that all `#include`s are used or removed
 Fix in-liquid fog
 See if `depthIsSky()` can take non-linear values
+Make sure it works with optifine
 Make sure settings are tuned for:
 	Vanilla Day
 	Vanilla Night

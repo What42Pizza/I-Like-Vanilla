@@ -39,7 +39,7 @@ void neighborhoodClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
 
 
 
-void doTemporalFilter(inout vec3 color, float blockDepth, vec2 prevCoord  ARGS_OUT) {
+void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	if (
 		prevCoord.x < 0.0 || prevCoord.x > 1.0 ||
@@ -62,9 +62,11 @@ void doTemporalFilter(inout vec3 color, float blockDepth, vec2 prevCoord  ARGS_O
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;
 	float velocityAmount = dot(velocity, velocity) * 10.0;
 	
-	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(blockDepth) * depthFactor);
+	#include "/import/far.glsl"
+	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(depth * far) * depthFactor);
 	#ifdef END
-		if (blockDepth == 1000000) blendAmount = 0.0;
+		// reimplement this??
+		//if (blockDepth == 1000000) blendAmount = 0.0;
 	#endif
 	blendAmount = clamp(blendAmount, blendMin, blendMax);
 	
