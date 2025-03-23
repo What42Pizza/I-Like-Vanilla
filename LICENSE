@@ -1,7 +1,5 @@
-What42's Shader License 1.10
-Effective Date: 2025-02-20
-
-By using the contents packaged with this license in any way, you agree to the terms and conditions listed in this file.
+What42's Shader License 2.0
+Effective Date: 2025-03-23
 
 
 
@@ -25,7 +23,7 @@ You cannot:
 - Create shortened / indirect links to this shader (without any exceptions)
 
 Notes:
-- Making changes to the code isn't required for publishing altered versions of this shader; a significant enough change to the default settings is enough to count (look at sections 2.4.3 / 2.5.3)
+- Making changes to the code isn't strictly required for publishing altered versions of this shader; a significant enough change to the default settings (for each style) is enough to count (as defined by section 2.3.3)
 - The rules in the license of a fork don't apply to the creators and/or owners of said fork, only the license(s) of the base shader(s) take effect. Also, you only have to follow the version of the license that came with the version that you forked
 - This license can apply to distributions of this shader (downloaded from curseforge, modrinth, etc) and apply separately to a download of this shader's repo. That means the images, Rust code, and everything else in this shader's full repo is protected by this license
 - If you're sure that what you're doing is allowed by this license, there's no need to ask for permission
@@ -38,7 +36,7 @@ The creator of I Like Vanilla goes by "What42" / "What42Pizza" online, and you c
 
 
 
-======== TERMS AND CONDITIONS ========
+Everyone is hereby granted a perpetual and irrevocable right to use the contents packaged with this license, subject to the terms outlined below.
 
 
 
@@ -64,9 +62,9 @@ The creator of I Like Vanilla goes by "What42" / "What42Pizza" online, and you c
 	1.7.5. Distributing and using This Shaderpack purely for educational purposes
 	1.7.6. Anything else that What42 has publicly declared to be "Normal Use" in the context of Shaderpacks
 
-1.8. "Small Portions", in the context of a Shaderpack, refers to less than one-fourth of the Source Code that originated from said Shaderpack.
+1.8. "Small Portions", in the context of a Shaderpack, refers to any amount of Source Code which is less than ten percent of the Source Code that originated from said Shaderpack.
 
-1.9. "Substantial Portions", in the context of a Shaderpack, refers to more than one-fourth of the Source Code that originated from said Shaderpack.
+1.9. "Substantial Portions", in the context of a Shaderpack, refers to any amount of Source Code which is at lest ten percent of the Source Code that originated from said Shaderpack.
 
 1.10. "What42" refers to the primary creator of the Shaderpack "I Like Vanilla", which is available at "https://github.com/What42Pizza/I-Like-Vanilla".
 
@@ -82,10 +80,10 @@ The creator of I Like Vanilla goes by "What42" / "What42Pizza" online, and you c
 	2.2.1. This Shaderpack is a small portion of said larger software package.
 	2.2.2. This Shaderpack and all of its Base Shaderpacks (if any) are clearly credited everywhere that the said larger software package is distributed.
 	2.2.3. The copy of This Shaderpack inside said larger software package is not renamed, unless to differentiate multiple copies of This Shaderpack in a single folder, in which case only additions to the end of the name are allowed.
-	2.2.4. The copy of This Shaderpack inside said larger software package is not modified in any way. (If modification is needed, This License allows you to create then include a separate Shaderpack following section 2.3 or 2.4.)
+	2.2.4. The copy of This Shaderpack inside said larger software package is not modified in any way. (If modification is needed, This License allows you to create, distribute, and include a separate Shaderpack following section 2.3 or 2.4.)
 
 2.3. (Concerning Shaderpack code reuse) You are allowed to use Small Portions of This Shaderpack in the creation, modification, and/or updating of Shaderpacks and distribute said Shaderpacks if and only if the following conditions are met for each of said Shaderpacks:
-	2.3.1. Every person whose Code is included in the Shaderpack is clearly credited everywhere that the Shaderpack is distributed and in a file labeled 'readme.md' that is included in the Shaderpack.
+	2.3.1. Every person whose Code is included in the Shaderpack is clearly credited everywhere that the Shaderpack is distributed and in a file named 'readme.md' that is included in the Shaderpack.
 	2.3.2. The name of the Shaderpack is substantially different from any name that is already used by other Shaderpacks.
 	2.3.3. Each Style of the Shaderpack is visibly different from each Style of its Base Shaderpack(s) in the majority of typical Minecraft gameplay scenarios.
 	2.3.4. The Shaderpack has an apparent and substantial amount of effort put into it by the creator(s) of said Shaderpacks.
@@ -110,13 +108,11 @@ The creator of I Like Vanilla goes by "What42" / "What42Pizza" online, and you c
 
 3.1. You are not allowed to claim to be the sole creator of This Shaderpack.
 
-3.2. You are not allowed to redistribute This Shaderpack unless said action is allowed by section 2.2.
+3.2. You are not allowed to redistribute any amount of This Shaderpack unless said action is allowed by sections 2.2, 2.3, 2.4, or 2.5.
 
 3.3. You are not allowed to issue licenses that override This License unless permission to do so is granted by What42.
 
-3.4. You are not allowed to redistribute any amount of This Shaderpack unless said action is allowed by section 2.3, section 2.4, or section 2.5.
-
-3.5. You are not allowed to create links that indirectly lead to a distributor of This Shaderpack.
+3.4. You are not allowed to create links that indirectly lead to a distributor of This Shaderpack, except for indirection which is automatically created by whichever medium the link is shared on.
 
 
 
@@ -129,7 +125,3 @@ The creator of I Like Vanilla goes by "What42" / "What42Pizza" online, and you c
 4.3. This License only applies to This Shaderpack.
 
 4.4. All other laws (including Copyright laws) still need to be considered and upheld when using This Shaderpack in any way.
-
-
-
-======== END OF TERMS AND CONDITIONS ========
