@@ -1,5 +1,6 @@
 Before 1.0.0:
 Move 'Sun Path Rotation' to 'Sky Settings'
+Improve cloud lighting
 Change data buffers to store ints instead of floats?
 Make volumetric sunrays work over dh terrain again
 Add 'dither or noise' options to everything that uses dithering or noise
@@ -15,6 +16,7 @@ Go through and make sure that all `#include`s are used or removed
 Fix in-liquid fog
 See if `depthIsSky()` can take non-linear values
 Make sure it works with optifine
+Increase waviness of plant tops
 Make sure settings are tuned for:
 	Vanilla Day
 	Vanilla Night
@@ -60,9 +62,10 @@ Make more example images:
 	Rain
 	Night
 	Reflections
+Realistic clouds
+World curvature settings
 Make sunrays cave increase ignore sunrays max
 Add water caustics?
-Increase waviness of plant tops
 Move the moonLightBrightness calculation in basic_lighting to its own uniform
 Turn uniforms into "static" vars?
 Do a round of making sure different settings combinations work

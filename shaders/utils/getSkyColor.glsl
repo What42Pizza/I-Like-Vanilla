@@ -59,10 +59,18 @@ vec3 getSkyColor(ARG_OUT) {
 	vec3 viewPos = endMat(gbufferProjectionInverse * vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0));
 	float upDot = dot(normalize(viewPos), upPos);
 	#include "/utils/var_rng.glsl"
-	upDot += randomFloat(rng) * 0.07 * (0.8 - getColorLum(skyFogColor));
 	
-	skyColor = mix(skyFogColor, skyColor, max(upDot, 0.0));
+	#include "/import/sunPosition.glsl"
+	float fogAmount = 1.0 - (1.0 - upDot) * dot(normalize(viewPos), normalize(sunPosition));
+	fogAmount *= upDot;
+	fogAmount += randomFloat(rng) * 0.2 * (0.8 - getColorLum(skyFogColor));
+	
+	skyColor *= skyColor;
+	skyFogColor *= skyFogColor;
+	skyColor = mix(skyFogColor, skyColor, max(fogAmount, 0.0));
+	skyColor = sqrt(skyColor);
 	skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
+	skyColor += bayer64(gl_FragCoord.xy) * 0.01;
 	
 	#if DARKEN_SKY_UNDERGROUND == 1
 		skyColor *= getHorizonMultiplier(ARG_IN);
