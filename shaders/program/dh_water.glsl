@@ -73,7 +73,7 @@ void main() {
 		#endif
 		
 		
-		color.a = (1.0 - WATER_TRANSPARENCY);
+		color.a = (1.0 - WATER_TRANSPARENCY_DEEP);
 		
 	}
 	

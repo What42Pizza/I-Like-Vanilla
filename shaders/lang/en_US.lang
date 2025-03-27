@@ -1077,8 +1077,11 @@ value.UNDERWATER_WAVINESS_SPEED.-1=Use Style
 
 screen.WATER_SETTINGS=Water
 
-option.WATER_TRANSPARENCY=Water Transparency
-value.WATER_TRANSPARENCY.-1=Use Style
+option.WATER_TRANSPARENCY_SHALLOW=Water Transparency (Shallow)
+value.WATER_TRANSPARENCY_SHALLOW.-1=Use Style
+
+option.WATER_TRANSPARENCY_DEEP=Water Transparency (Deep)
+value.WATER_TRANSPARENCY_DEEP.-1=Use Style
 
 option.WATER_COLOR_RED=Water Color Red
 option.WATER_COLOR_RED.comment=Red value for custom water color

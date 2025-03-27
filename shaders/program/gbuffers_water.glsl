@@ -25,6 +25,7 @@
 #ifdef FSH
 
 #include "/lib/lighting/fsh_lighting.glsl"
+#include "/utils/depth.glsl"
 
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
@@ -77,7 +78,11 @@ void main() {
 		#endif
 		
 		
-		color.a = (1.0 - WATER_TRANSPARENCY);
+		float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
+		float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
+		#include "/import/far.glsl"
+		float waterDepth = (opaqueBlockDepth - blockDepth) * far;
+		color.a = (1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 10.0 / (10.0 + waterDepth)));
 		
 	}
 	

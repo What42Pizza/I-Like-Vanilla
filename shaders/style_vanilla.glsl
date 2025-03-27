@@ -74,15 +74,15 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.45
+										#define SKY_DAY_RED 0.35
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.65
+										#define SKY_DAY_GREEN 0.55
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
+										#define SKY_DAY_BLUE 0.9
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -98,15 +98,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.65
+										#define SKY_HORIZON_DAY_RED 0.55
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.8
+										#define SKY_HORIZON_DAY_GREEN 0.7
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 0.85
+										#define SKY_HORIZON_DAY_BLUE 0.8
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
@@ -200,7 +200,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 1.05
+										#define AMBIENT_DAY_BRIGHTNESS 1.0
 #endif
 
 
@@ -532,7 +532,7 @@
 #endif
 #if WATER_REFLECTION_AMOUNT_SURFACE == -1
 #undef WATER_REFLECTION_AMOUNT_SURFACE
-										#define WATER_REFLECTION_AMOUNT_SURFACE 0.4
+										#define WATER_REFLECTION_AMOUNT_SURFACE 0.3
 #endif
 #if WATER_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef WATER_REFLECTION_AMOUNT_UNDERGROUND
@@ -976,9 +976,13 @@
 
 
 
-#if WATER_TRANSPARENCY == -1
-#undef WATER_TRANSPARENCY
-										#define WATER_TRANSPARENCY 0.25
+#if WATER_TRANSPARENCY_SHALLOW == -1
+#undef WATER_TRANSPARENCY_SHALLOW
+										#define WATER_TRANSPARENCY_SHALLOW 0.3
+#endif
+#if WATER_TRANSPARENCY_DEEP == -1
+#undef WATER_TRANSPARENCY_DEEP
+										#define WATER_TRANSPARENCY_DEEP 0.1
 #endif
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
