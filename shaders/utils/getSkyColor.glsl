@@ -41,7 +41,7 @@
 
 vec3 getSkyColor(ARG_OUT) {
 	
-	const float GAMMA_CORRECTION = 2.2;
+	const float GAMMA_CORRECTION = 2.0;
 	const vec3 DAY_COLOR = pow(SKY_DAY_COLOR, vec3(GAMMA_CORRECTION));
 	const vec3 NIGHT_COLOR = pow(SKY_NIGHT_COLOR, vec3(GAMMA_CORRECTION));
 	const vec3 HORIZON_DAY_COLOR = pow(SKY_HORIZON_DAY_COLOR, vec3(GAMMA_CORRECTION));
@@ -62,11 +62,11 @@ vec3 getSkyColor(ARG_OUT) {
 	#include "/import/ambientSunsetPercent.glsl"
 	float skyMixFactor = ambientSunPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.75;
 	skyMixFactor *= skyMixFactor;
-	vec3 horizonColor = mix(HORIZON_NIGHT_COLOR * 0.25, HORIZON_DAY_COLOR, skyMixFactor);
-	vec3 skyColor = mix(NIGHT_COLOR * 0.25, DAY_COLOR, skyMixFactor);
+	vec3 horizonColor = mix(HORIZON_NIGHT_COLOR * 0.02, HORIZON_DAY_COLOR, skyMixFactor);
+	vec3 skyColor = mix(NIGHT_COLOR * 0.02, DAY_COLOR, skyMixFactor);
 	upDot += randomFloat(rng) * 0.05 * (0.8 - getColorLum(skyColor));
-	upDot = max(upDot, 0.0);
-	skyColor = mix(horizonColor, skyColor, upDot);
+	upDot = max(upDot, 0.0) + 0.01;
+	skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 	
 	#include "/import/sunPosition.glsl"
 	float sunDot = dot(normalize(viewPos), normalize(sunPosition)) * 0.5 + 0.5;
@@ -77,7 +77,6 @@ vec3 getSkyColor(ARG_OUT) {
 	
 	skyColor = pow(skyColor, vec3(1.0 / GAMMA_CORRECTION));
 	skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
-	skyColor += bayer64(gl_FragCoord.xy) * 0.01;
 	
 	#if DARKEN_SKY_UNDERGROUND == 1
 		skyColor *= getHorizonMultiplier(ARG_IN);

@@ -28,8 +28,10 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 	stepVector /= (REFLECTION_ITERATIONS - 15); // ensure that the ray will reach the edge of the screen 15 steps early, allows for fine-tuning to not be cut short
 	
 	float dither = bayer64(gl_FragCoord.xy);
-	#include "/import/frameCounter.glsl"
-	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	#if TEMPORAL_FILTER_ENABLED == 1
+		#include "/import/frameCounter.glsl"
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	#endif
 	screenPos += stepVector * dither * REFLECTION_DITHER_AMOUNT;
 	
 	int hitCount = 0;

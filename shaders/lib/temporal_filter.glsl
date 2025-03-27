@@ -56,7 +56,11 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	const float blendMax = 0.98;
 	const float blendVariable = 0.175;
 	const float blendConstant = 0.625;
-	const float depthFactor = 0.01;
+	#if FXAA_ENABLED == 1
+		const float depthFactor = 0.0;
+	#else
+		const float depthFactor = 0.01;
+	#endif
 	
 	#include "/import/viewSize.glsl"
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;
