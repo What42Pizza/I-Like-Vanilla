@@ -52,11 +52,9 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	neighborhoodClamping(color, prevColor  ARGS_IN);
 	
-	const float blendMin = 0.3;
-	const float blendMax = 0.98;
-	const float blendVariable = 0.175;
-	const float blendConstant = 0.625;
-	#if FXAA_ENABLED == 1
+	const float blendVariable = 0.05;
+	const float blendConstant = 0.75;
+	#if TAA_ENABLED == 0
 		const float depthFactor = 0.0;
 	#else
 		const float depthFactor = 0.01;
@@ -68,11 +66,6 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	#include "/import/far.glsl"
 	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(depth * far) * depthFactor);
-	#ifdef END
-		// reimplement this??
-		//if (blockDepth == 1000000) blendAmount = 0.0;
-	#endif
-	blendAmount = clamp(blendAmount, blendMin, blendMax);
 	
 	color = mix(color, prevColor, blendAmount);
 	

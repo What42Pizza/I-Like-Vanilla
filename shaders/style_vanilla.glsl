@@ -192,7 +192,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.97
+										#define AMBIENT_DAY_GREEN 0.93
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -200,7 +200,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 1.0
+										#define AMBIENT_DAY_BRIGHTNESS 0.95
 #endif
 
 
@@ -589,11 +589,11 @@
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
-										#define SUNRAYS_SUN_RED 1.2
+										#define SUNRAYS_SUN_RED 1.0
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.4
+										#define SUNRAYS_SUN_GREEN 0.5
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE

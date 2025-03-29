@@ -27,9 +27,11 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 	vec3 viewPos = vec3(0.0);
 	
 	float dither = bayer64(gl_FragCoord.xy);
-	#include "/import/frameCounter.glsl"
-	float random = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * 2.0 - 1.0;
-	viewPos += viewPosStep * random * 0.5;
+	#if TEMPORAL_FILTER_ENABLED == 1
+		#include "/import/frameCounter.glsl"
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	#endif
+	viewPos += viewPosStep * dither - 0.5;
 	
 	float total = 0.0;
 	for (int i = 0; i < SAMPLE_COUNT; i ++) {

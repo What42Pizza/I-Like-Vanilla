@@ -35,6 +35,9 @@ value.DARKEN_SKY_UNDERGROUND.1=On
 option.STARS_BRIGHTNESS=Stars Brightness
 value.STARS_BRIGHTNESS.-1=Use Style
 
+option.sunPathRotation=Sun Path Rotation
+option.sunPathRotation.comment=How tilted the sun's rotation is. 0 is vanilla
+
 option.DARKEN_STARS_NEAR_BLOCKLIGHT=Darken Stars Near Blocklight
 option.DARKEN_STARS_NEAR_BLOCKLIGHT.comment=Simulates light pollution by darkening stars when you're near blocklight
 value.DARKEN_STARS_NEAR_BLOCKLIGHT.-1=Use Style
@@ -440,9 +443,6 @@ value.SIDE_SHADING_BRIGHT.-1=Use Style
 option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.SIDE_SHADING_DARK.-1=Use Style
-
-option.sunPathRotation=Sun Path Rotation
-option.sunPathRotation.comment=How tilted the sun's rotation is. 0 is vanilla
 
 option.RAIN_LIGHT_MULT=Rain Light Multiplier
 value.RAIN_LIGHT_MULT.-1=Use Style

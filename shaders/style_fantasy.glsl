@@ -176,7 +176,7 @@
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.9
+										#define SKYLIGHT_DAY_GREEN 0.95
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -382,7 +382,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_RED_MULT == -1
 #undef NETHER_BLOCKLIGHT_RED_MULT
-										#define NETHER_BLOCKLIGHT_RED_MULT 1.3
+										#define NETHER_BLOCKLIGHT_RED_MULT 1.2
 #endif
 #if NETHER_BLOCKLIGHT_GREEN_MULT == -1
 #undef NETHER_BLOCKLIGHT_GREEN_MULT
@@ -390,7 +390,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BLUE_MULT == -1
 #undef NETHER_BLOCKLIGHT_BLUE_MULT
-										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.5
+										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.4
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 2.8
+										#define BLOOM_AMOUNT 2.5
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -593,7 +593,7 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.2
+										#define SUNRAYS_SUN_GREEN 0.3
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE

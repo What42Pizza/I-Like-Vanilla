@@ -1,11 +1,10 @@
 Before 1.0.0:
-Move 'Sun Path Rotation' to 'Sky Settings'
 Improve cloud lighting
+Fix hand reprojection
 Add specular reflections? (should be encoded in block ids)
 Change data buffers to store ints instead of floats?
 Make volumetric sunrays work over dh terrain again
-Add 'dither or noise' options to everything that uses dithering or noise
-Add setting 'Shadows on Transparents'
+Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 Add setting 'Bright Terrain Decrease' (for smoothMin value)
 Make sure ALL settings work
 Make sure all vanilla effect work
@@ -15,9 +14,7 @@ Update performance and compatibility note (and make sure it is true in all / mos
 Fix rain reflections
 Go through and make sure that all `#include`s are used or removed
 Fix in-liquid fog
-See if `depthIsSky()` can take non-linear values
 Make sure it works with optifine
-Increase waviness of plant tops
 Make sure settings are tuned for:
 	Vanilla Day
 	Vanilla Night
@@ -41,6 +38,7 @@ Make sure settings are tuned for:
 Update documentation
 
 Possibly before 1.0.0:
+Add setting 'Shadows on Transparents'
 Add generalized volumetrics
 Make reflections (especially on water) noticeable at night
 Add settings for TAA
@@ -64,6 +62,8 @@ Make more example images:
 	Night
 	Reflections
 Realistic clouds
+See if `depthIsSky()` can take non-linear values
+Increase waviness of plant tops
 World curvature settings
 Make sunrays cave increase ignore sunrays max
 Add water caustics?
