@@ -722,11 +722,11 @@
 
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
-										#define SHARPEN_AMOUNT 1.25
+										#define SHARPEN_AMOUNT 1.0
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION
-										#define SHARPEN_VEL_ADDITION 1.2
+										#define SHARPEN_VEL_ADDITION 1.0
 #endif
 #if SHARPEN_DEPTH_ADDITION == -1
 #undef SHARPEN_DEPTH_ADDITION
@@ -734,7 +734,7 @@
 #endif
 #if SHARPENING_DETECT_SIZE == -1
 #undef SHARPENING_DETECT_SIZE
-										#define SHARPENING_DETECT_SIZE 5
+										#define SHARPENING_DETECT_SIZE 3
 #endif
 
 

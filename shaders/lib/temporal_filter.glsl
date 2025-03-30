@@ -52,8 +52,8 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	neighborhoodClamping(color, prevColor  ARGS_IN);
 	
-	const float blendVariable = 0.05;
-	const float blendConstant = 0.75;
+	const float blendVariable = 0.0;
+	const float blendConstant = 0.8;
 	#if TAA_ENABLED == 0
 		const float depthFactor = 0.0;
 	#else

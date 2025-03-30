@@ -31,7 +31,7 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
-	viewPos += viewPosStep * dither - 0.5;
+	viewPos += viewPosStep * (dither - 0.5);
 	
 	float total = 0.0;
 	for (int i = 0; i < SAMPLE_COUNT; i ++) {

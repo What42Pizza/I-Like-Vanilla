@@ -734,7 +734,7 @@
 #endif
 #if SHARPENING_DETECT_SIZE == -1
 #undef SHARPENING_DETECT_SIZE
-										#define SHARPENING_DETECT_SIZE 5
+										#define SHARPENING_DETECT_SIZE 3
 #endif
 
 
