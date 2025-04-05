@@ -13,6 +13,8 @@
 #ifdef FSH
 
 void main() {
+	discard;
+	return;
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	
 	float playerPosDist = max(length(playerPos.xz), abs(playerPos.y));

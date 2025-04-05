@@ -78,11 +78,11 @@
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.5
+										#define SKY_DAY_GREEN 0.55
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 0.7
+										#define SKY_DAY_BLUE 0.8
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -98,7 +98,7 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.7
+										#define SKY_HORIZON_DAY_RED 0.6
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 2.5
+										#define BLOOM_AMOUNT 2.0
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -722,11 +722,11 @@
 
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
-										#define SHARPEN_AMOUNT 1.0
+										#define SHARPEN_AMOUNT 1.2
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION
-										#define SHARPEN_VEL_ADDITION 1.0
+										#define SHARPEN_VEL_ADDITION 1.5
 #endif
 #if SHARPEN_DEPTH_ADDITION == -1
 #undef SHARPEN_DEPTH_ADDITION
@@ -763,7 +763,7 @@
 #endif
 #if AUTO_EXPOSURE_DARK_MULT == -1
 #undef AUTO_EXPOSURE_DARK_MULT
-										#define AUTO_EXPOSURE_DARK_MULT 2.5
+										#define AUTO_EXPOSURE_DARK_MULT 2.0
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE

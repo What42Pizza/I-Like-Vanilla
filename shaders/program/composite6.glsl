@@ -42,7 +42,6 @@ void main() {
 	#if SHARPENING_ENABLED == 1
 		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		float linearDepth = toLinearDepth(depth  ARGS_IN);
-		bool isSky = depthIsSky(linearDepth);
 		#include "/import/far.glsl"
 		float blockDepth = linearDepth * far;
 		doSharpening(color, blockDepth  ARGS_IN);
