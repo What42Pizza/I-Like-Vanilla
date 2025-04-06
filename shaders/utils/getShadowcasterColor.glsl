@@ -23,13 +23,11 @@ vec3 getSunlightColor(ARG_OUT) {
 	#include "/import/sunsetColorPercent.glsl"
 	vec3 sunSunsetLight = SKYLIGHT_SUNSET_COLOR * sunsetColorPercent;
 	vec3 sunlightColor = sunNoonLight + sunSunriseLight + sunSunsetLight;
-	#include "/import/rainStrength.glsl"
-	return sunlightColor * (1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT));
+	return sunlightColor;
 }
 
 vec3 getMoonlightColor(ARG_OUT) {
-	#include "/import/rainStrength.glsl"
-	return SKYLIGHT_NIGHT_COLOR * (1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT));
+	return SKYLIGHT_NIGHT_COLOR;
 }
 
 vec3 getShadowcasterColor(ARG_OUT) {

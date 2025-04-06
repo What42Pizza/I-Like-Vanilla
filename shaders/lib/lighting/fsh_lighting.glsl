@@ -253,10 +253,15 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#include "/import/sunLightBrightness.glsl"
 	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	skyBrightness *= 0.25 + 0.75 * ambientBrightness;
+	
+	#include "/import/rainStrength.glsl"
+	float rainDecrease = rainStrength * (1.0 - WEATHER_LIGHT_MULT);
+	skyBrightness *= 1.0 - rainDecrease;
 	vec3 skyLighting = shadowcasterColor * skyBrightness;
 	ambientLight *= 1.0 - skyBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;
+	lighting *= 1.0 - rainDecrease;
 	
 	float lightingBrightness = min(getColorLum(lighting), 1.0);
 	blockBrightness *= 1.1 - lightingBrightness;

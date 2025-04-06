@@ -22,19 +22,11 @@ vec3 getAmbientLight(float ambientBrightness  ARGS_OUT) {
 	#include "/import/ambientSunrisePercent.glsl"
 	#include "/import/ambientSunsetPercent.glsl"
 	
-	vec3 ambientSunLight     = AMBIENT_DAY_COLOR     * ambientSunPercent;
-	vec3 ambientMoonLight    = AMBIENT_NIGHT_COLOR   * ambientMoonPercent;
-	vec3 ambientSunriseLight = AMBIENT_SUNRISE_COLOR * ambientSunrisePercent;
-	vec3 ambientSunsetLight  = AMBIENT_SUNSET_COLOR  * ambientSunsetPercent;
-	
-	#include "/import/rainStrength.glsl"
-	float lightMult = 1.0 - rainStrength * (1.0 - RAIN_LIGHT_MULT);
-	
 	vec3 ambientLight =
-		ambientSunLight * lightMult
-		+ ambientMoonLight
-		+ ambientSunriseLight * lightMult
-		+ ambientSunsetLight * lightMult;
+		AMBIENT_DAY_COLOR * ambientSunPercent
+		+ AMBIENT_NIGHT_COLOR * ambientMoonPercent
+		+ AMBIENT_SUNRISE_COLOR * ambientSunrisePercent
+		+ AMBIENT_SUNSET_COLOR * ambientSunsetPercent;
 	
 	#include "/import/screenBrightness.glsl"
 	ambientBrightness *= 0.9 + 0.2 * screenBrightness;

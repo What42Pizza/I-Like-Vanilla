@@ -80,11 +80,11 @@ value.BORDER_FOG_ENABLED.0=Off
 value.BORDER_FOG_ENABLED.1=On
 
 option.BORDER_FOG_START=Fog Air Start
-option.BORDER_FOG_START.comment=Where fog starts during normal conditions (not raining or in liquids)
+option.BORDER_FOG_START.comment=Where fog starts during normal conditions
 value.BORDER_FOG_START.-1=Use Style
 
 option.BORDER_FOG_END=Fog Air End
-option.BORDER_FOG_END.comment=Where fog ends during normal conditions (not raining or in liquids)
+option.BORDER_FOG_END.comment=Where fog ends during normal conditions
 value.BORDER_FOG_END.-1=Use Style
 
 option.BORDER_FOG_CURVE=Fog Curve
@@ -444,8 +444,8 @@ option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.SIDE_SHADING_DARK.-1=Use Style
 
-option.RAIN_LIGHT_MULT=Rain Light Multiplier
-value.RAIN_LIGHT_MULT.-1=Use Style
+option.WEATHER_LIGHT_MULT=Weather Light Multiplier
+value.WEATHER_LIGHT_MULT.-1=Use Style
 
 
 
@@ -499,6 +499,8 @@ screen.BLOOM_SETTINGS=Bloom
 
 option.BLOOM_ENABLED=Bloom Enabled
 option.BLOOM_ENABLED.comment=Makes bright colors bleed into the surroundings\n\n(Performance cost: Low-Medium, depending on settings)
+value.BLOOM_ENABLED.0=Off
+value.BLOOM_ENABLED.1=On
 
 option.BLOOM_QUALITY=Bloom Quality
 option.BLOOM_QUALITY.comment=Controls the number of samples for bloom level
@@ -987,9 +989,9 @@ option.WAVING_AMOUNT_3=Waving Amount 3
 option.WAVING_AMOUNT_3.comment=How much waving there is for things like grass, wheat, etc
 value.WAVING_AMOUNT_3.-1=Use Style
 
-option.WAVING_RAIN_MULT=Waving Rain Multiplier
-option.WAVING_RAIN_MULT.comment=How much to increase / decrease the waving amount when it is raining
-value.WAVING_RAIN_MULT.-1=Use Style
+option.WAVING_WEATHER_MULT=Waving Weather Multiplier
+option.WAVING_WEATHER_MULT.comment=How much to increase / decrease the waving amount when it is raining / snowing
+value.WAVING_WEATHER_MULT.-1=Use Style
 
 option.WAVING_NIGHT_MULT=Waving Night Multiplier
 option.WAVING_NIGHT_MULT.comment=How much to increase / decrease the waving amount when it is night
@@ -1128,6 +1130,10 @@ value.ISOMETRIC_FORWARD_VISIBILITY.-1=Use Style
 
 
 screen.DEBUG_SETTINGS=Debug
+
+option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
+option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
+value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
 
 option.USE_BETTER_RAND=Use Better Random
 option.USE_BETTER_RAND.comment=The better random function is technically better, but the performance cost doesn't exactly make up for it

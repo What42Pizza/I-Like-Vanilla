@@ -1,6 +1,7 @@
 Before 1.0.0:
 Improve cloud lighting
 Fix hand reprojection
+Add settings for nether ambient color
 Add specular reflections? (should be encoded in block ids)
 Change data buffers to store ints instead of floats?
 Make volumetric sunrays work over dh terrain again

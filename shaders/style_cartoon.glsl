@@ -437,9 +437,9 @@
 #undef SIDE_SHADING_DARK
 										#define SIDE_SHADING_DARK 0.25
 #endif
-#if RAIN_LIGHT_MULT == -1
-#undef RAIN_LIGHT_MULT
-										#define RAIN_LIGHT_MULT 0.7
+#if WEATHER_LIGHT_MULT == -1
+#undef WEATHER_LIGHT_MULT
+										#define WEATHER_LIGHT_MULT 0.7
 #endif
 
 
@@ -893,9 +893,9 @@
 #undef WAVING_AMOUNT_3
 										#define WAVING_AMOUNT_3 1.0
 #endif
-#if WAVING_RAIN_MULT == -1
-#undef WAVING_RAIN_MULT
-										#define WAVING_RAIN_MULT 2.5
+#if WAVING_WEATHER_MULT == -1
+#undef WAVING_WEATHER_MULT
+										#define WAVING_WEATHER_MULT 2.5
 #endif
 #if WAVING_NIGHT_MULT == -1
 #undef WAVING_NIGHT_MULT
@@ -1026,6 +1026,10 @@
 
 
 
+#if NEARBY_PARTICLE_TRANSPARENCY == -1
+#undef NEARBY_PARTICLE_TRANSPARENCY
+										#define NEARBY_PARTICLE_TRANSPARENCY 1.0
+#endif
 #if USE_SIMPLE_LIGHT == -1
 #undef USE_SIMPLE_LIGHT
 										#define USE_SIMPLE_LIGHT 0

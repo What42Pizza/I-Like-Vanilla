@@ -47,7 +47,7 @@ void applyWaving(inout vec3 position  ARGS_OUT) {
 		wavingScale *= lmcoord.y * lmcoord.y;
 	#endif
 	#include "/import/betterRainStrength.glsl"
-	wavingScale *= 1.0 + betterRainStrength * (WAVING_RAIN_MULT - 1.0);
+	wavingScale *= 1.0 + betterRainStrength * (WAVING_WEATHER_MULT - 1.0);
 	#include "/import/ambientMoonPercent.glsl"
 	wavingScale *= 1.0 - ambientMoonPercent * (1.0 - WAVING_NIGHT_MULT);
 	position += getWavingAddition(position  ARGS_IN) * wavingScale;

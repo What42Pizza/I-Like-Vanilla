@@ -7,6 +7,7 @@
 	in_out vec2 lmcoord;
 	in_out vec3 glcolor;
 	flat in_out vec2 normal;
+	in_out float blockDepth;
 	
 #endif
 
@@ -19,7 +20,12 @@
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
-	if (albedo.a < 0.1) discard;
+	
+	albedo.a *= clamp(blockDepth * (2.0 - NEARBY_PARTICLE_TRANSPARENCY) - 0.5, 0.0, 1.0);
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	if (albedo.a < dither) discard;
 	
 	/* DRAWBUFFERS:02 */
 	gl_FragData[0] = vec4(albedo);
@@ -56,9 +62,9 @@ void main() {
 	glcolor = gl_Color.rgb;
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
-	
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	blockDepth = length(playerPos);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
@@ -77,7 +83,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(blockDepth  ARGS_IN);
 	
 }
 

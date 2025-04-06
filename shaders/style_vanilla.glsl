@@ -32,7 +32,7 @@
 #endif
 #if WEATHER_HORIZONTAL_AMOUNT == -1
 #undef WEATHER_HORIZONTAL_AMOUNT
-										#define WEATHER_HORIZONTAL_AMOUNT 0.5
+										#define WEATHER_HORIZONTAL_AMOUNT 0.4
 #endif
 #if CLOUD_TRANSPARENCY == -1
 #undef CLOUD_TRANSPARENCY
@@ -200,7 +200,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.95
+										#define AMBIENT_DAY_BRIGHTNESS 1.0
 #endif
 
 
@@ -209,11 +209,11 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 0.55
+										#define SKYLIGHT_NIGHT_RED 0.5
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.65
+										#define SKYLIGHT_NIGHT_GREEN 0.6
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
@@ -225,11 +225,11 @@
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.55
+										#define AMBIENT_NIGHT_RED 0.5
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.65
+										#define AMBIENT_NIGHT_GREEN 0.6
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
@@ -431,15 +431,15 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.3
+										#define SIDE_SHADING_BRIGHT 0.5
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
 										#define SIDE_SHADING_DARK 0.8
 #endif
-#if RAIN_LIGHT_MULT == -1
-#undef RAIN_LIGHT_MULT
-										#define RAIN_LIGHT_MULT 0.7
+#if WEATHER_LIGHT_MULT == -1
+#undef WEATHER_LIGHT_MULT
+										#define WEATHER_LIGHT_MULT 0.6
 #endif
 
 
@@ -482,7 +482,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.5
+										#define BLOOM_LOW_CUTOFF 0.6
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -573,7 +573,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.45
+										#define SUNRAYS_AMOUNT_DAY 0.4
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -893,9 +893,9 @@
 #undef WAVING_AMOUNT_3
 										#define WAVING_AMOUNT_3 1.0
 #endif
-#if WAVING_RAIN_MULT == -1
-#undef WAVING_RAIN_MULT
-										#define WAVING_RAIN_MULT 2.5
+#if WAVING_WEATHER_MULT == -1
+#undef WAVING_WEATHER_MULT
+										#define WAVING_WEATHER_MULT 1.5
 #endif
 #if WAVING_NIGHT_MULT == -1
 #undef WAVING_NIGHT_MULT
@@ -1026,6 +1026,10 @@
 
 
 
+#if NEARBY_PARTICLE_TRANSPARENCY == -1
+#undef NEARBY_PARTICLE_TRANSPARENCY
+										#define NEARBY_PARTICLE_TRANSPARENCY 0.0
+#endif
 #if USE_SIMPLE_LIGHT == -1
 #undef USE_SIMPLE_LIGHT
 										#define USE_SIMPLE_LIGHT 0

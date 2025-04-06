@@ -93,9 +93,9 @@ void main() {
 	#if TEMPORAL_FILTER_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
 		/* DRAWBUFFERS:14 */
 		#if MOTION_BLUR_ENABLED == 1
-			gl_FragData[1] = vec4(prevColor, 1.0);
+			gl_FragData[1] = vec4(prevColor - 0.0, 1.0);
 		#else
-			gl_FragData[1] = vec4(color, 1.0);
+			gl_FragData[1] = vec4(color - 0.0, 1.0);
 		#endif
 	#endif
 	
