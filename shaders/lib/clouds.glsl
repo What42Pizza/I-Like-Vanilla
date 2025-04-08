@@ -1,25 +1,45 @@
 #ifdef FIRST_PASS
-	const int quality = 12;
-	const float lowThreshold = 0.3;
-	const float highThreshold = 0.35;
-	const float startY = 150.0;
-	const float endY = 200.0;
-	const float yFadeSlope = 0.05;
+	
+	float valueHash(vec3 p) {
+		return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+	}
+	
+	float valueNoise(vec3 v) {
+		vec3 i = floor(v);
+		vec3 f = fract(v);
+		
+		float lll = valueHash(i);
+		float llh = valueHash(i + vec3(0.0, 0.0, 1.0));
+		float lhl = valueHash(i + vec3(0.0, 1.0, 0.0));
+		float lhh = valueHash(i + vec3(0.0, 1.0, 1.0));
+		float hll = valueHash(i + vec3(1.0, 0.0, 0.0));
+		float hlh = valueHash(i + vec3(1.0, 0.0, 1.0));
+		float hhl = valueHash(i + vec3(1.0, 1.0, 0.0));
+		float hhh = valueHash(i + vec3(1.0, 1.0, 1.0));
+		
+		vec3 u = f * f * (3.0 - 2.0 * f);
+		float ll = mix(lll, llh, u.z);
+		float lh = mix(lhl, lhh, u.z);
+		float hl = mix(hll, hlh, u.z);
+		float hh = mix(hhl, hhh, u.z);
+		float l = mix(ll, lh, u.y);
+		float h = mix(hl, hh, u.y);
+		return mix(l, h, u.x);
+	}
+	
 #endif
-
-
 
 #include "/utils/screen_to_view.glsl"
 
-float sampleCloud(vec3 pos, const bool detailed  ARGS_OUT) {
-	pos.y *= 2.0;
-	float sample = simplexNoise(pos.xz * 0.005);
-	sample += simplexNoise(pos.xz * 0.06) * 0.2;
-	if (detailed) sample += simplexNoise(pos * 0.04) * 0.2;
-	sample = clamp((sample - lowThreshold) / (highThreshold - lowThreshold), 0.0, 1.0);
-	pos.y /= 2.0;
-	sample *= clamp(yFadeSlope * (endY - startY) / 2.0 - yFadeSlope * abs(pos.y - (startY + endY) / 2.0), 0.0, 1.0);
-	return sample;
+float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
+	#include "/import/frameTimeCounter.glsl"
+	float sample = valueNoise((pos + vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
+	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_2_SPEED) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
+	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_3_SPEED) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
+	if (!isNormal) sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_4_SPEED) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
+	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
+	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
+	return sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
 }
 
 
@@ -39,37 +59,64 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	vec3 stepVec = playerPos;
 	stepVec.xz /= abs(stepVec.y);
 	stepVec.y = sign(stepVec.y);
-	float maxY = abs(playerPos.y);
 	
 	#include "/import/cameraPosition.glsl"
 	vec3 pos = cameraPosition;
-	float posStartY = clamp(pos.y, startY, endY);
-	float posEndY = clamp(posStartY + stepVec.y * 1000.0, startY, endY);
+	float posStartY = clamp(pos.y, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
+	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
+	float maxY = abs(playerPos.y);
 	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
 	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
 	if (posStartY == posEndY) return;
 	pos += stepVec * abs(posStartY - pos.y);
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
-	stepVec = endPos - pos;
+	stepVec = pos - endPos;
 	float dist = length(stepVec);
+	//stepVec *= 100000.0 / max(100000.0, length(stepVec));
+	stepVec /= CLOUDS_QUALITY;
 	pos = endPos;
-	stepVec = -stepVec;
-	stepVec /= quality;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	pos += stepVec * (dither - 0.5);
 	
-	float finalMult = 0.7 + 0.3 * (1.0 - 48.0 / (48.0 + dist)) - 0.02;
-	float sampleMult = pow(finalMult, quality);
-	
-	for (int i = 0; i < quality; i++) {
-		float sample = sampleCloud(pos, true  ARGS_IN);
-		float brightness = (pos.y - startY) / (endY - startY);
-		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
-		color = mix(color, vec3(0.6 + 0.4 * brightness), sample * sampleMult);
+	#include "/import/rainStrength.glsl"
+	float coverage = mix(1.0 - CLOUD_COVERAGE, 1.0 - CLOUD_WEATHER_COVERAGE, rainStrength);
+	vec3 enterPos;
+	float highestSample = 0.0;
+	float opacity = 0.0;
+	for (int i = 0; i < CLOUDS_QUALITY; i++) {
+		float sample = sampleCloud(pos, false  ARGS_IN);
+		sample = clamp((sample - coverage) / (1.0 - coverage), 0.0, 1.0);
+		opacity += sample;
+		if (sample > highestSample) {
+			enterPos = pos;
+			highestSample = sample;
+		}
+		highestSample *= 0.8;
 		pos += stepVec;
 	}
+	if (opacity == 0.0) return;
+	opacity /= CLOUDS_QUALITY;
+	opacity = 1.0 - (1.0 - opacity) * (1.0 - opacity);
+	opacity *= sqrt(dist);
+	float enterSample = sampleCloud(enterPos, true  ARGS_IN);
+	float dX = enterSample - sampleCloud(enterPos + vec3(0.01, 0.0, 0.0), true  ARGS_IN);
+	float dY = enterSample - sampleCloud(enterPos + vec3(0.0, 0.01, 0.0), true  ARGS_IN);
+	float dZ = enterSample - sampleCloud(enterPos + vec3(0.0, 0.0, 0.01), true  ARGS_IN);
+	vec3 cloudNormal = normalize(vec3(dX, dY, dZ));
+	#include "/import/shadowLightPosition.glsl"
+	vec3 shadowcasterPosition = mat3(gbufferModelViewInverse) * shadowLightPosition;
+	vec3 cloudColor = mix(vec3(0.65, 0.7, 0.8), vec3(1.0), dot(cloudNormal, normalize(shadowcasterPosition)) * 0.5 + 0.5);
+	cloudColor = clamp(cloudColor, 0.0, 1.0);
+	cloudColor *= 1.0 - CLOUD_WEATHER_DARKEN * rainStrength;
+	opacity *= 1.0 - CLOUD_OPACITY_DISTANCE / (length(playerPos) + CLOUD_OPACITY_DISTANCE);
+	//#include "/import/invFar.glsl"
+	//opacity *= clamp(1.0 - (length(pos - cameraPosition) * invFar * 0.23 - 0.7) / 0.3, 0.0, 1.0);
+	opacity = min(opacity * 0.5, 1.0);
+	opacity = opacity * opacity * (3.0 - 2.0 * opacity);
+	color = mix(color, cloudColor, opacity);
+	//if (opacity == 1.0) color = vec3(1.0, 0.0, 0.0);
 	
 }

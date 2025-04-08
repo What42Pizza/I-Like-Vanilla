@@ -26,9 +26,6 @@
 	#include "/lib/sunrays_vol.glsl"
 #endif
 
-#include "/lib/simplex_noise.glsl"
-#include "/lib/clouds.glsl"
-
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
 	vec3 noisyAdditions = vec3(0.0);
@@ -83,10 +80,6 @@ void main() {
 		#endif
 		
 	#endif
-	
-	
-	
-	renderClouds(color  ARGS_IN);
 	
 	
 	

@@ -8,6 +8,8 @@
 
 #include "/utils/depth.glsl"
 
+#include "/lib/clouds.glsl"
+
 #if DOF_ENABLED == 1
 	#include "/lib/depth_of_field.glsl"
 #endif
@@ -96,6 +98,10 @@ void main() {
 		}
 		
 	#endif
+	
+	
+	
+	renderClouds(color  ARGS_IN);
 	
 	
 	
