@@ -37,8 +37,6 @@
 	}
 #endif
 
-#include "/utils/getShadowcasterColor.glsl"
-
 vec3 getSkyColor(ARG_OUT) {
 	
 	const float GAMMA_CORRECTION = 2.0;

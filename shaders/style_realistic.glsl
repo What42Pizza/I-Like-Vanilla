@@ -188,11 +188,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.6
+										#define AMBIENT_DAY_RED 0.75
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.8
+										#define AMBIENT_DAY_GREEN 0.85
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -200,7 +200,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.3
+										#define AMBIENT_DAY_BRIGHTNESS 0.25
 #endif
 
 
@@ -474,7 +474,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.8
+										#define BLOOM_AMOUNT 1.5
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -532,7 +532,7 @@
 #endif
 #if WATER_REFLECTION_AMOUNT_SURFACE == -1
 #undef WATER_REFLECTION_AMOUNT_SURFACE
-										#define WATER_REFLECTION_AMOUNT_SURFACE 0.4
+										#define WATER_REFLECTION_AMOUNT_SURFACE 0.2
 #endif
 #if WATER_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef WATER_REFLECTION_AMOUNT_UNDERGROUND
@@ -722,11 +722,11 @@
 
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
-										#define SHARPEN_AMOUNT 0.8
+										#define SHARPEN_AMOUNT 0.6
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION
-										#define SHARPEN_VEL_ADDITION 1.4
+										#define SHARPEN_VEL_ADDITION 0.8
 #endif
 #if SHARPEN_DEPTH_ADDITION == -1
 #undef SHARPEN_DEPTH_ADDITION
@@ -734,7 +734,7 @@
 #endif
 #if SHARPENING_DETECT_SIZE == -1
 #undef SHARPENING_DETECT_SIZE
-										#define SHARPENING_DETECT_SIZE 3
+										#define SHARPENING_DETECT_SIZE 5
 #endif
 
 
@@ -936,7 +936,7 @@
 #endif
 #if WAVING_WATER_FRESNEL_MULT == -1
 #undef WAVING_WATER_FRESNEL_MULT
-										#define WAVING_WATER_FRESNEL_MULT 0.3
+										#define WAVING_WATER_FRESNEL_MULT 0.8
 #endif
 #if WAVING_WATER_NORMAL_AMOUNT == -1
 #undef WAVING_WATER_NORMAL_AMOUNT
@@ -978,11 +978,11 @@
 
 #if WATER_TRANSPARENCY_SHALLOW == -1
 #undef WATER_TRANSPARENCY_SHALLOW
-										#define WATER_TRANSPARENCY_SHALLOW 0.2
+										#define WATER_TRANSPARENCY_SHALLOW 0.5
 #endif
 #if WATER_TRANSPARENCY_DEEP == -1
 #undef WATER_TRANSPARENCY_DEEP
-										#define WATER_TRANSPARENCY_DEEP 0.2
+										#define WATER_TRANSPARENCY_DEEP 0.1
 #endif
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
@@ -994,11 +994,11 @@
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.3
+										#define WATER_COLOR_BLUE 0.25
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
-										#define WATER_COLOR_AMOUNT 0.8
+										#define WATER_COLOR_AMOUNT 1.0
 #endif
 
 

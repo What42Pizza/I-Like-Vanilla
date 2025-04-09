@@ -244,15 +244,15 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#elif BLOCK_BRIGHTNESS_CURVE == 5
 		blockBrightness = pow5(blockBrightness);
 	#endif
-	#include "/import/eyeBrightness.glsl"
 	#include "/import/moonLightBrightness.glsl"
 	#ifdef OVERWORLD
+		#include "/import/eyeBrightness.glsl"
 		blockBrightness *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	
 	#include "/import/sunLightBrightness.glsl"
 	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
-	skyBrightness *= 0.25 + 0.75 * ambientBrightness;
+	skyBrightness *= ambientBrightness;
 	
 	#include "/import/rainStrength.glsl"
 	float rainDecrease = rainStrength * (1.0 - WEATHER_LIGHT_MULT);

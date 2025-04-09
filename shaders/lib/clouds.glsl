@@ -1,4 +1,17 @@
 #ifdef FIRST_PASS
+	varying vec3 brightCloudColor;
+	varying vec3 darkCloudColor;
+#endif
+
+
+
+
+
+#ifdef FSH
+
+
+
+#ifdef FIRST_PASS
 	
 	float valueHash(vec3 p) {
 		return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
@@ -33,10 +46,10 @@
 
 float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
 	#include "/import/frameTimeCounter.glsl"
-	float sample = valueNoise((pos + vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
-	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_2_SPEED) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
-	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_3_SPEED) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
-	if (!isNormal) sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_4_SPEED) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
+	float sample = valueNoise((pos + vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
+	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
+	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_3_SPEED * 0.8) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
+	if (!isNormal) sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
 	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
 	sample = sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
@@ -92,10 +105,31 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 		float sample = sampleCloud(pos, coverage, false  ARGS_IN);
 		if (sample > 0.0) sample = 0.5 + 0.5 * sample;
 		float sampleUp = sampleCloud(pos + shadowcasterDir, coverage, true  ARGS_IN);
-		vec3 cloudColor = mix(vec3(0.3, 0.3, 0.4), vec3(1.0), 1.0 - sampleUp);
+		vec3 cloudColor = mix(darkCloudColor, brightCloudColor, 1.0 - sampleUp);
 		cloudColor *= 1.0 - CLOUD_WEATHER_DARKEN * rainStrength;
 		color = mix(color, cloudColor, sample * mixMult);
 		pos += stepVec;
 	}
 	
 }
+
+
+
+#endif
+
+
+
+
+
+#ifdef VSH
+
+
+
+void prepareClouds(ARG_OUT) {
+	brightCloudColor = vec3(1.0);
+	darkCloudColor = vec3(0.3, 0.3, 0.4);
+}
+
+
+
+#endif

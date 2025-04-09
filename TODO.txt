@@ -49,7 +49,6 @@ Check if SUNRAYS_FLICKERING_FIX is still needed
 Separate depth sunrays and vol sunrays settings
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
-Rework clouds
 Rework sky
 Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
@@ -62,7 +61,6 @@ Make more example images:
 	Rain
 	Night
 	Reflections
-Realistic clouds
 See if `depthIsSky()` can take non-linear values
 Increase waviness of plant tops
 World curvature settings

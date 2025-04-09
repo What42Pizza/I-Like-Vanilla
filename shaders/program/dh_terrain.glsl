@@ -14,8 +14,6 @@
 
 #ifdef FSH
 
-#include "/utils/getShadowcasterColor.glsl"
-
 void main() {
 	
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));

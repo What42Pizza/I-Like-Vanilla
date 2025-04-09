@@ -8,8 +8,6 @@
 
 #include "/utils/depth.glsl"
 
-#include "/lib/clouds.glsl"
-
 #if DOF_ENABLED == 1
 	#include "/lib/depth_of_field.glsl"
 #endif
@@ -19,6 +17,9 @@
 	#if BORDER_FOG_ENABLED == 1
 		#include "/lib/fog/getFogAmount.glsl"
 	#endif
+#endif
+#if REALISTIC_CLOUDS_ENABLED == 1
+	#include "/lib/clouds.glsl"
 #endif
 
 
@@ -101,7 +102,9 @@ void main() {
 	
 	
 	
-	renderClouds(color  ARGS_IN);
+	#if REALISTIC_CLOUDS_ENABLED == 1
+		renderClouds(color  ARGS_IN);
+	#endif
 	
 	
 	
@@ -116,9 +119,16 @@ void main() {
 
 #ifdef VSH
 
+#if REALISTIC_CLOUDS_ENABLED == 1
+	#include "/lib/clouds.glsl"
+#endif
+
 void main() {
 	gl_Position = ftransform();
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	#if REALISTIC_CLOUDS_ENABLED == 1
+		prepareClouds(ARG_IN);
+	#endif
 }
 
 #endif
