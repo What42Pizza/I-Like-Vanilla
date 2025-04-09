@@ -31,7 +31,7 @@
 
 #include "/utils/screen_to_view.glsl"
 
-float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
+float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
 	#include "/import/frameTimeCounter.glsl"
 	float sample = valueNoise((pos + vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
 	sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_2_SPEED) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
@@ -39,7 +39,8 @@ float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
 	if (!isNormal) sample += valueNoise((pos + frameTimeCounter * CLOUD_LAYER_4_SPEED) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
 	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
-	return sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
+	sample = sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
+	return clamp((sample - coverage) / CLOUD_TRANSPARENCY, 0.0, 1.0);
 }
 
 
@@ -72,7 +73,6 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
 	float dist = length(stepVec);
-	//stepVec *= 100000.0 / max(100000.0, length(stepVec));
 	stepVec /= CLOUDS_QUALITY;
 	pos = endPos;
 	
@@ -81,42 +81,21 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	pos += stepVec * (dither - 0.5);
 	
+	float mixMult = 0.8 + 0.2 * (1.0 - CLOUD_OPACITY_DISTANCE / (dist + CLOUD_OPACITY_DISTANCE)) - 0.02;
+	mixMult = pow(mixMult, CLOUDS_QUALITY);
+	
+	#include "/import/shadowLightPosition.glsl"
+	vec3 shadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition);
 	#include "/import/rainStrength.glsl"
 	float coverage = mix(1.0 - CLOUD_COVERAGE, 1.0 - CLOUD_WEATHER_COVERAGE, rainStrength);
-	vec3 enterPos;
-	float highestSample = 0.0;
-	float opacity = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
-		float sample = sampleCloud(pos, false  ARGS_IN);
-		sample = clamp((sample - coverage) / (1.0 - coverage), 0.0, 1.0);
-		opacity += sample;
-		if (sample > highestSample) {
-			enterPos = pos;
-			highestSample = sample;
-		}
-		highestSample *= 0.8;
+		float sample = sampleCloud(pos, coverage, false  ARGS_IN);
+		if (sample > 0.0) sample = 0.5 + 0.5 * sample;
+		float sampleUp = sampleCloud(pos + shadowcasterDir, coverage, true  ARGS_IN);
+		vec3 cloudColor = mix(vec3(0.3, 0.3, 0.4), vec3(1.0), 1.0 - sampleUp);
+		cloudColor *= 1.0 - CLOUD_WEATHER_DARKEN * rainStrength;
+		color = mix(color, cloudColor, sample * mixMult);
 		pos += stepVec;
 	}
-	if (opacity == 0.0) return;
-	opacity /= CLOUDS_QUALITY;
-	opacity = 1.0 - (1.0 - opacity) * (1.0 - opacity);
-	opacity *= sqrt(dist);
-	float enterSample = sampleCloud(enterPos, true  ARGS_IN);
-	float dX = enterSample - sampleCloud(enterPos + vec3(0.01, 0.0, 0.0), true  ARGS_IN);
-	float dY = enterSample - sampleCloud(enterPos + vec3(0.0, 0.01, 0.0), true  ARGS_IN);
-	float dZ = enterSample - sampleCloud(enterPos + vec3(0.0, 0.0, 0.01), true  ARGS_IN);
-	vec3 cloudNormal = normalize(vec3(dX, dY, dZ));
-	#include "/import/shadowLightPosition.glsl"
-	vec3 shadowcasterPosition = mat3(gbufferModelViewInverse) * shadowLightPosition;
-	vec3 cloudColor = mix(vec3(0.65, 0.7, 0.8), vec3(1.0), dot(cloudNormal, normalize(shadowcasterPosition)) * 0.5 + 0.5);
-	cloudColor = clamp(cloudColor, 0.0, 1.0);
-	cloudColor *= 1.0 - CLOUD_WEATHER_DARKEN * rainStrength;
-	opacity *= 1.0 - CLOUD_OPACITY_DISTANCE / (length(playerPos) + CLOUD_OPACITY_DISTANCE);
-	//#include "/import/invFar.glsl"
-	//opacity *= clamp(1.0 - (length(pos - cameraPosition) * invFar * 0.23 - 0.7) / 0.3, 0.0, 1.0);
-	opacity = min(opacity * 0.5, 1.0);
-	opacity = opacity * opacity * (3.0 - 2.0 * opacity);
-	color = mix(color, cloudColor, opacity);
-	//if (opacity == 1.0) color = vec3(1.0, 0.0, 0.0);
 	
 }
