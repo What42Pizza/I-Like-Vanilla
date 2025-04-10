@@ -13,8 +13,6 @@
 #ifdef FSH
 
 void main() {
-	discard;
-	return;
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	
 	float playerPosDist = max(length(playerPos.xz), abs(playerPos.y));
@@ -55,13 +53,19 @@ void main() {
 #endif
 
 void main() {
+	
+	#if REALISTIC_CLOUDS_ENABLED == 1
+		gl_Position = vec4(10.0);
+		return;
+	#endif
+	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	vec3 shadowcasterColor = getShadowcasterColor(ARG_IN);
 	vec3 ambientLight = getAmbientLight(1.0  ARGS_IN);
 	colorMult = shadowcasterColor + ambientLight;
 	//colorMult = mix(vec3(getColorLum(colorMult)), colorMult, vec3(1.0));
-	colorMult = normalize(colorMult) * 2.0 * CLOUDS_BRIGHTNESS;
+	colorMult = normalize(colorMult) * 2.0;
 	colorMult *= gl_Color.rgb;
 	
 	#include "/import/gbufferModelViewInverse.glsl"

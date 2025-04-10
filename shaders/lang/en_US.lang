@@ -23,9 +23,6 @@ value.SUN_BRIGHTNESS.-1=Use Style
 option.MOON_BRIGHTNESS=Moon Brightness
 value.MOON_BRIGHTNESS.-1=Use Style
 
-option.CLOUDS_BRIGHTNESS=Clouds Brightness
-value.CLOUDS_BRIGHTNESS.-1=Use Style
-
 option.DARKEN_SKY_UNDERGROUND=Darken Sky Underground
 option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground
 value.DARKEN_SKY_UNDERGROUND.-1=Use Style
@@ -55,16 +52,108 @@ option.WEATHER_HORIZONTAL_AMOUNT=Weather Horizontal Amount
 option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
 value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
+
+
+
+
+screen.CLOUD_SETTINGS=Cloud Settings
+
 option.CLOUD_TRANSPARENCY=Cloud Transparency
 value.CLOUD_TRANSPARENCY.-1=Use Style
 
 option.NEARBY_CLOUD_TRANSPARENCY=Nearby Cloud Transparency
-option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for clouds that the player is in
+option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only works for non-realistic clouds
 value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
 
 option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
-option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby
+option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby, only works for non-realistic clouds
 value.NEARBY_CLOUD_DIST.-1=Use Style
+
+option.CLOUD_WEATHER_DARKEN=Cloud Weather Darken
+option.CLOUD_WEATHER_DARKEN.comment=How much to darken clouds when raining / snowing
+value.CLOUD_WEATHER_DARKEN.-1=Use Style
+
+option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
+value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
+value.REALISTIC_CLOUDS_ENABLED.0=Off
+value.REALISTIC_CLOUDS_ENABLED.1=On
+
+option.CLOUDS_QUALITY=Clouds Quality
+option.CLOUDS_QUALITY.comment=Quality of realistic clouds
+
+option.CLOUD_COVERAGE=Cloud Coverage
+value.CLOUD_COVERAGE.-1=Use Style
+
+option.CLOUD_WEATHER_COVERAGE=Cloud Weather Coverage
+option.CLOUD_WEATHER_COVERAGE.comment=Coverage for clouds when raining / snowing
+value.CLOUD_WEATHER_COVERAGE.-1=Use Style
+
+option.CLOUD_BOTTOM_Y=Cloud Bottom Level
+option.CLOUD_BOTTOM_Y.comment=The y-level where realistic clouds start
+value.CLOUD_BOTTOM_Y.-1=Use Style
+
+option.CLOUD_TOP_Y=Cloud Top Level
+option.CLOUD_TOP_Y.comment=the y-level where realistic clouds stop
+value.CLOUD_TOP_Y.-1=Use Style
+
+option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
+option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
+value.CLOUD_OPACITY_DISTANCE.-1=Use Style
+
+
+
+
+
+screen.CLOUD_NOISE_SETTINGS=Cloud Noise Settings
+screen.CLOUD_NOISE_SETTINGS.comment=Settings for realistic clouds noise
+
+option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
+option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_1_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_1_WEIGHT=Layer 1 Weight
+option.CLOUD_LAYER_1_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_1_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_1_SPEED=Layer 1 Speed
+option.CLOUD_LAYER_1_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_1_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_2_SCALE=Layer 2 Scale
+option.CLOUD_LAYER_2_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_2_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_2_WEIGHT=Layer 2 Weight
+option.CLOUD_LAYER_2_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_2_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_2_SPEED=Layer 2 Speed
+option.CLOUD_LAYER_2_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_2_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_3_SCALE=Layer 3 Scale
+option.CLOUD_LAYER_3_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_3_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_3_WEIGHT=Layer 3 Weight
+option.CLOUD_LAYER_3_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_3_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_3_SPEED=Layer 3 Speed
+option.CLOUD_LAYER_3_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_3_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_4_SCALE=Layer 4 Scale
+option.CLOUD_LAYER_4_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_4_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_4_WEIGHT=Layer 4 Weight
+option.CLOUD_LAYER_4_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_4_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_4_SPEED=Layer 4 Speed
+option.CLOUD_LAYER_4_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 

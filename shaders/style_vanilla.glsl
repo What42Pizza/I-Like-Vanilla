@@ -6,10 +6,6 @@
 #undef MOON_BRIGHTNESS
 										#define MOON_BRIGHTNESS 1.0
 #endif
-#if CLOUDS_BRIGHTNESS == -1
-#undef CLOUDS_BRIGHTNESS
-										#define CLOUDS_BRIGHTNESS 1.0
-#endif
 #if DARKEN_SKY_UNDERGROUND == -1
 #undef DARKEN_SKY_UNDERGROUND
 										#define DARKEN_SKY_UNDERGROUND 1
@@ -34,9 +30,14 @@
 #undef WEATHER_HORIZONTAL_AMOUNT
 										#define WEATHER_HORIZONTAL_AMOUNT 0.4
 #endif
+
+
+
+
+
 #if CLOUD_TRANSPARENCY == -1
 #undef CLOUD_TRANSPARENCY
-										#define CLOUD_TRANSPARENCY 0.6
+										#define CLOUD_TRANSPARENCY 0.55
 #endif
 #if NEARBY_CLOUD_TRANSPARENCY == -1
 #undef NEARBY_CLOUD_TRANSPARENCY
@@ -45,6 +46,87 @@
 #if NEARBY_CLOUD_DIST == -1
 #undef NEARBY_CLOUD_DIST
 										#define NEARBY_CLOUD_DIST 30
+#endif
+#if CLOUD_WEATHER_DARKEN == -1
+#undef CLOUD_WEATHER_DARKEN
+										#define CLOUD_WEATHER_DARKEN 0.3
+#endif
+#if REALISTIC_CLOUDS_ENABLED == -1
+#undef REALISTIC_CLOUDS_ENABLED
+										#define REALISTIC_CLOUDS_ENABLED 1
+#endif
+#if CLOUD_COVERAGE == -1
+#undef CLOUD_COVERAGE
+										#define CLOUD_COVERAGE 0.4
+#endif
+#if CLOUD_WEATHER_COVERAGE == -1
+#undef CLOUD_WEATHER_COVERAGE
+										#define CLOUD_WEATHER_COVERAGE 0.75
+#endif
+#if CLOUD_BOTTOM_Y == -1
+#undef CLOUD_BOTTOM_Y
+										#define CLOUD_BOTTOM_Y 150
+#endif
+#if CLOUD_TOP_Y == -1
+#undef CLOUD_TOP_Y
+										#define CLOUD_TOP_Y 250
+#endif
+#if CLOUD_OPACITY_DISTANCE == -1
+#undef CLOUD_OPACITY_DISTANCE
+										#define CLOUD_OPACITY_DISTANCE 48.0
+#endif
+
+
+
+
+
+#if CLOUD_LAYER_1_SCALE == -1
+#undef CLOUD_LAYER_1_SCALE
+										#define CLOUD_LAYER_1_SCALE 0.012
+#endif
+#if CLOUD_LAYER_1_WEIGHT == -1
+#undef CLOUD_LAYER_1_WEIGHT
+										#define CLOUD_LAYER_1_WEIGHT 1.0
+#endif
+#if CLOUD_LAYER_1_SPEED == -1
+#undef CLOUD_LAYER_1_SPEED
+										#define CLOUD_LAYER_1_SPEED 2.0
+#endif
+#if CLOUD_LAYER_2_SCALE == -1
+#undef CLOUD_LAYER_2_SCALE
+										#define CLOUD_LAYER_2_SCALE 0.04
+#endif
+#if CLOUD_LAYER_2_WEIGHT == -1
+#undef CLOUD_LAYER_2_WEIGHT
+										#define CLOUD_LAYER_2_WEIGHT 0.6
+#endif
+#if CLOUD_LAYER_2_SPEED == -1
+#undef CLOUD_LAYER_2_SPEED
+										#define CLOUD_LAYER_2_SPEED 1.5
+#endif
+#if CLOUD_LAYER_3_SCALE == -1
+#undef CLOUD_LAYER_3_SCALE
+										#define CLOUD_LAYER_3_SCALE 0.15
+#endif
+#if CLOUD_LAYER_3_WEIGHT == -1
+#undef CLOUD_LAYER_3_WEIGHT
+										#define CLOUD_LAYER_3_WEIGHT 0.25
+#endif
+#if CLOUD_LAYER_3_SPEED == -1
+#undef CLOUD_LAYER_3_SPEED
+										#define CLOUD_LAYER_3_SPEED 1.0
+#endif
+#if CLOUD_LAYER_4_SCALE == -1
+#undef CLOUD_LAYER_4_SCALE
+										#define CLOUD_LAYER_4_SCALE 0.6
+#endif
+#if CLOUD_LAYER_4_WEIGHT == -1
+#undef CLOUD_LAYER_4_WEIGHT
+										#define CLOUD_LAYER_4_WEIGHT 0.2
+#endif
+#if CLOUD_LAYER_4_SPEED == -1
+#undef CLOUD_LAYER_4_SPEED
+										#define CLOUD_LAYER_4_SPEED 0.5
 #endif
 
 
