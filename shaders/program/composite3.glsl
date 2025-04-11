@@ -12,7 +12,9 @@
 
 #ifdef FSH
 
-#include "/lib/simplex_noise.glsl"
+#if UNDERWATER_WAVINESS_ENABLED == 1
+	#include "/lib/simplex_noise.glsl"
+#endif
 
 void main() {
 	

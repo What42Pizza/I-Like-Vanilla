@@ -159,13 +159,13 @@ void main() {
 		if (materialId == 7) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
-				#include "/import/far.glsl"
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+				#include "/import/far.glsl"
 				wavingAmount *= smoothstep(far * 0.95 - 10, far * 0.9 - 10, lengthCylinder);
 			#endif
 			#include "/import/cameraPosition.glsl"
-			#include "/import/frameTimeCounter.glsl"
 			playerPos += cameraPosition;
+			#include "/import/frameTimeCounter.glsl"
 			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.03 * wavingAmount;
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.02 * wavingAmount;
 			playerPos -= cameraPosition;

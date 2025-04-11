@@ -6,9 +6,10 @@
 
 #ifdef FSH
 
-#include "/utils/depth.glsl"
 #include "/utils/reprojection.glsl"
-#include "/utils/screen_to_view.glsl"
+#ifdef DISTANT_HORIZONS
+	#include "/utils/screen_to_view.glsl"
+#endif
 
 #if SSS_PHOSPHOR == 1
 	#include "/lib/super_secret_settings/phosphor.glsl"

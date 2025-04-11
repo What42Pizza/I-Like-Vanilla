@@ -1,19 +1,20 @@
-Before 1.0.0:
+Todo for v1.0:
 Improve cloud lighting
 Fix hand reprojection
-Add settings for nether ambient color
-Add specular reflections? (should be encoded in block ids)
-Make volumetric sunrays work over dh terrain again
+Darken sky when raining
+Fix far-away reflections
+See if gbuffers_hand needs better lighting
+turn betterNightVision into a uniform
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
-Add setting 'Bright Terrain Decrease' (for smoothMin value)
 Make sure ALL settings work
-Make dh terrain look like regular terrain
+Make sure dh terrain looks just like regular terrain
+Add setting 'Shadows on Transparents'
 Update ALL gallery images
 Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.")
 Fix rain reflections
-Go through and make sure that all `#include`s are used or removed
 Fix in-liquid fog
 Make sure it works with optifine
+Add settings for temporal filter
 Make sure settings are tuned for:
 	Vanilla Day
 	Vanilla Night
@@ -36,38 +37,35 @@ Make sure settings are tuned for:
 		BLOCK_REFLECTION_AMOUNT_UNDERGROUND
 Update documentation
 
-Possibly before 1.0.0:
+Todo for v1.1+:
+Add specular reflections? (should be encoded in block ids)
 Make sure all vanilla effect work
 Change data buffers to store ints instead of floats?
-Add setting 'Shadows on Transparents'
+Add settings for nether ambient color
+Add setting 'Bright Terrain Decrease' (for smoothMin value)
 Add generalized volumetrics
 Make reflections (especially on water) noticeable at night
-Add settings for TAA
+Increase waviness of plant tops
 Add setting `Light Mixing: Artistic / Realistic`
 Add close-up particle reduction
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Separate depth sunrays and vol sunrays settings
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
-Rework sky
-Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
-Rework outline detection to use normals instead of depth?
 
 
 
-Current:
+Other planned:
 Make more example images:
 	Rain
 	Night
 	Reflections
+Maybe add smaa from https://github.com/Luracasmus/smaa-mc
+Rework outline detection to use normals instead of depth?
 See if `depthIsSky()` can take non-linear values
-Increase waviness of plant tops
 World curvature settings
-Make sunrays cave increase ignore sunrays max
 Add water caustics?
-Move the moonLightBrightness calculation in basic_lighting to its own uniform
-Turn uniforms into "static" vars?
 Do a round of making sure different settings combinations work
 Improve TAA on moving entities
 Add documentation for super secret settings
@@ -75,17 +73,12 @@ Make only top of water wavy
 Add ripples to rain reflections
 Add void fog option?
 Add shader seasons?
-Add settings for manually disabling composite files?
 Add backwards depth check to reflections?
 Make reflections work with isometric rendering
 Move advanced options to 'advanced options' menus
-Add more TAA settings
-Add setting to fade fog into sky buffer (to make the sun and moon appear in fog) (would also need sunray depth fix)
-Do a round of general optimizations
 Exclude sun, moon, and sunrays based on horizon multiplier
 Do a round of adding debug settings
 Do a round of adding more ways to get to options (e.g. access to light brightnesses from the 'shading' menu)
-Switch to Contrast Adaptive Sharpening?
 Fix ssao causing desaturation on sand?
 Test glsl optimizer (https://github.com/aras-p/glsl-optimizer)
 Find a way to stop sugar cane base from waving?
@@ -95,6 +88,7 @@ Determine performance costs
 
 Ongoing / continuous:
 OPTIMIZE (see shader assembly?)
+Update documentation
 Keep the shader simple!
 Update documentation
 Cut down on the number of options

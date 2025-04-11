@@ -68,17 +68,13 @@ void main() {
 			#include "/import/gbufferModelViewInverse.glsl"
 			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
 			float fogAmount = getFogAmount(playerPos  ARGS_IN);
+			applyFog(color, fogAmount  ARGS_IN);
 		#endif
 		
 		
 		#if SSAO_ENABLED == 1
 			float aoFactor = getAoFactor(ARG_IN);
 			color *= 1.0 - aoFactor * AO_AMOUNT;
-		#endif
-		
-		
-		#if BORDER_FOG_ENABLED == 1
-			applyFog(color, fogAmount  ARGS_IN);
 		#endif
 		
 		

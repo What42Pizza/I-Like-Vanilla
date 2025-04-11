@@ -16,7 +16,7 @@ void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	
 	float playerPosDist = max(length(playerPos.xz), abs(playerPos.y));
-	color.a = 1.0 - mix(NEARBY_CLOUD_TRANSPARENCY, CLOUD_TRANSPARENCY, clamp(playerPosDist / NEARBY_CLOUD_DIST, 0.0, 1.0));
+	color.a = 1.0 - mix(NEARBY_CLOUD_TRANSPARENCY, VANILLA_CLOUD_TRANSPARENCY, clamp(playerPosDist / NEARBY_CLOUD_DIST, 0.0, 1.0));
 	
 	
 	color.rgb *= colorMult;
@@ -47,9 +47,6 @@ void main() {
 #endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
-#endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/lib/fog/getFogAmount.glsl"
 #endif
 
 void main() {

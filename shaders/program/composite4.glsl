@@ -6,12 +6,11 @@
 
 #ifdef FSH
 
-#include "/utils/depth.glsl"
-
 #if DOF_ENABLED == 1
 	#include "/lib/depth_of_field.glsl"
 #endif
 #if REFLECTIONS_ENABLED == 1
+	#include "/utils/depth.glsl"
 	#include "/utils/screen_to_view.glsl"
 	#include "/lib/reflections.glsl"
 	#if BORDER_FOG_ENABLED == 1

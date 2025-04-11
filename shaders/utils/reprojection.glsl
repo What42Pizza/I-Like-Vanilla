@@ -24,16 +24,16 @@
 	
 	// Previous frame reprojection from Chocapic13
 	vec2 reprojection(vec3 screenPos, vec3 cameraOffset  ARGS_OUT) {
-		#include "/import/gbufferProjectionInverse.glsl"
-		#include "/import/gbufferModelViewInverse.glsl"
-		#include "/import/gbufferPreviousProjection.glsl"
-		#include "/import/gbufferPreviousModelView.glsl"
 		screenPos = screenPos * 2.0 - 1.0;
 		
+		#include "/import/gbufferProjectionInverse.glsl"
+		#include "/import/gbufferModelViewInverse.glsl"
 		vec4 viewPos = gbufferProjectionInverse * vec4(screenPos, 1.0);
 		viewPos /= viewPos.w;
 		vec4 playerPos = gbufferModelViewInverse * viewPos;
 		
+		#include "/import/gbufferPreviousProjection.glsl"
+		#include "/import/gbufferPreviousModelView.glsl"
 		vec4 prevPlayerPos = playerPos + vec4(cameraOffset, 0.0);
 		vec4 prevCoord = gbufferPreviousProjection * gbufferPreviousModelView * prevPlayerPos;
 		return prevCoord.xy / prevCoord.w * 0.5 + 0.5;

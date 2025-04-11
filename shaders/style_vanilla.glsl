@@ -35,9 +35,9 @@
 
 
 
-#if CLOUD_TRANSPARENCY == -1
-#undef CLOUD_TRANSPARENCY
-										#define CLOUD_TRANSPARENCY 0.55
+#if VANILLA_CLOUD_TRANSPARENCY == -1
+#undef VANILLA_CLOUD_TRANSPARENCY
+										#define VANILLA_CLOUD_TRANSPARENCY 0.6
 #endif
 #if NEARBY_CLOUD_TRANSPARENCY == -1
 #undef NEARBY_CLOUD_TRANSPARENCY
@@ -53,7 +53,11 @@
 #endif
 #if REALISTIC_CLOUDS_ENABLED == -1
 #undef REALISTIC_CLOUDS_ENABLED
-										#define REALISTIC_CLOUDS_ENABLED 1
+										#define REALISTIC_CLOUDS_ENABLED 0
+#endif
+#if REALISTIC_CLOUD_TRANSPARENCY == -1
+#undef REALISTIC_CLOUD_TRANSPARENCY
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.1
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
@@ -61,7 +65,7 @@
 #endif
 #if CLOUD_WEATHER_COVERAGE == -1
 #undef CLOUD_WEATHER_COVERAGE
-										#define CLOUD_WEATHER_COVERAGE 0.75
+										#define CLOUD_WEATHER_COVERAGE 0.85
 #endif
 #if CLOUD_BOTTOM_Y == -1
 #undef CLOUD_BOTTOM_Y
@@ -82,7 +86,7 @@
 
 #if CLOUD_LAYER_1_SCALE == -1
 #undef CLOUD_LAYER_1_SCALE
-										#define CLOUD_LAYER_1_SCALE 0.012
+										#define CLOUD_LAYER_1_SCALE 0.015
 #endif
 #if CLOUD_LAYER_1_WEIGHT == -1
 #undef CLOUD_LAYER_1_WEIGHT
@@ -94,7 +98,7 @@
 #endif
 #if CLOUD_LAYER_2_SCALE == -1
 #undef CLOUD_LAYER_2_SCALE
-										#define CLOUD_LAYER_2_SCALE 0.04
+										#define CLOUD_LAYER_2_SCALE 0.045
 #endif
 #if CLOUD_LAYER_2_WEIGHT == -1
 #undef CLOUD_LAYER_2_WEIGHT
@@ -110,7 +114,7 @@
 #endif
 #if CLOUD_LAYER_3_WEIGHT == -1
 #undef CLOUD_LAYER_3_WEIGHT
-										#define CLOUD_LAYER_3_WEIGHT 0.25
+										#define CLOUD_LAYER_3_WEIGHT 0.2
 #endif
 #if CLOUD_LAYER_3_SPEED == -1
 #undef CLOUD_LAYER_3_SPEED
@@ -122,7 +126,7 @@
 #endif
 #if CLOUD_LAYER_4_WEIGHT == -1
 #undef CLOUD_LAYER_4_WEIGHT
-										#define CLOUD_LAYER_4_WEIGHT 0.2
+										#define CLOUD_LAYER_4_WEIGHT 0.15
 #endif
 #if CLOUD_LAYER_4_SPEED == -1
 #undef CLOUD_LAYER_4_SPEED
@@ -274,7 +278,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.95
+										#define AMBIENT_DAY_GREEN 0.96
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE

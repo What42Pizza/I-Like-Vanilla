@@ -1,6 +1,4 @@
 #include "/utils/screen_to_view.glsl"
-#include "/utils/depth.glsl"
-#include "/lib/fog/getFogAmount.glsl"
 
 
 
@@ -18,25 +16,24 @@ vec3 getShadowPos(vec3 viewPos  ARGS_OUT) {
 
 
 
-float getVolSunraysAmount(float depth  ARGS_OUT) {
+float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
 	const int SAMPLE_COUNT = int(SUNRAYS_QUALITY * SUNRAYS_QUALITY);
 	
-	vec3 viewPosStep = screenToView(vec3(texcoord, depth)  ARGS_IN);
-	float blockDepth = length(viewPosStep);
-	viewPosStep = normalize(viewPosStep) * (blockDepth / SAMPLE_COUNT);
-	vec3 viewPos = vec3(0.0);
+	float blockDepth = length(viewPos);
+	vec3 viewPosStep = normalize(viewPos) * (blockDepth / SAMPLE_COUNT);
+	vec3 pos = vec3(0.0);
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#if TEMPORAL_FILTER_ENABLED == 1
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
-	viewPos += viewPosStep * (dither - 0.5);
+	pos += viewPosStep * (dither - 0.5);
 	
 	float total = 0.0;
 	for (int i = 0; i < SAMPLE_COUNT; i ++) {
 		
-		vec3 shadowPos = getShadowPos(viewPos  ARGS_IN);
+		vec3 shadowPos = getShadowPos(pos  ARGS_IN);
 		float diff = texture2D(shadowtex0, shadowPos.xy).r - shadowPos.z;
 		if (diff > 0.0) {
 			total += 1.0;
@@ -44,7 +41,7 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 			total *= 1.0 + diff;
 		}
 		
-		viewPos += viewPosStep;
+		pos += viewPosStep;
 		
 	}
 	float sunraysAmount = total / SAMPLE_COUNT * blockDepth;
@@ -55,9 +52,7 @@ float getVolSunraysAmount(float depth  ARGS_OUT) {
 	sunraysAmount *= 0.01;
 	
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
-	float fogAmount = getFogAmount(playerPos  ARGS_IN);
-	sunraysAmount *= 1.0 - 0.7 * fogAmount;
+	vec3 playerPos = (gbufferModelViewInverse * startMat(pos)).xyz;
 	
 	return sunraysAmount;
 }

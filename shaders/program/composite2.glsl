@@ -14,7 +14,8 @@
 
 #ifdef FSH
 
-#include "/utils/depth.glsl"
+#include "/utils/screen_to_view.glsl"
+#include "/lib/fog/getFogAmount.glsl"
 
 #if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
@@ -31,15 +32,18 @@ void main() {
 	vec3 noisyAdditions = vec3(0.0);
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	float linearDepth = toLinearDepth(depth  ARGS_IN);
+	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
-		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float linearDhDepth = toLinearDepthDh(dhDepth  ARGS_IN);
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
+		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 	#endif
+	
 	#ifdef DISTANT_HORIZONS
-		bool isSky = depthIsSky(linearDepth) && depthIsSky(linearDhDepth);
+		float fogAmount = float(depth > 0.9999 && depthDh > 0.9999);
 	#else
-		bool isSky = depthIsSky(linearDepth);
+		#include "/import/gbufferModelView.glsl"
+		float fogAmount = getFogAmount(mat3(gbufferModelView) * viewPos  ARGS_IN);
 	#endif
 	
 	
@@ -47,10 +51,9 @@ void main() {
 	// ======== BLOOM CALCULATIONS ======== //
 	
 	#if BLOOM_ENABLED == 1
-		if (!isSky) {
-			vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
-			noisyAdditions += bloomAddition;
-		}
+		vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
+		bloomAddition *= 1.0 - fogAmount;
+		noisyAdditions += bloomAddition;
 	#endif
 	
 	
@@ -59,24 +62,23 @@ void main() {
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		
-		#include "/utils/var_rng.glsl"
 		#if DEPTH_SUNRAYS_ENABLED == 1
 			#include "/import/isSun.glsl"
 			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+			#include "/utils/var_rng.glsl"
 			vec3 depthSunraysAddition = getDepthSunraysAmount(rng  ARGS_IN) * depthSunraysAmountMult * depthSunraysColor;
-			if (isSky) depthSunraysAddition *= 0.2;
+			depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
 			noisyAdditions += depthSunraysAddition;
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1
-			if (!isSky) {
-				#include "/import/sunAngle.glsl"
-				vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
-				float rawVolSunraysAmount = getVolSunraysAmount(depth  ARGS_IN) * volSunraysAmountMult;
-				float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
-				color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-				float volSunraysAmountMax = 1.0 - 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
-				color = mix(volSunraysColor * 1.25, color, max(volSunraysAmount, volSunraysAmountMax));
-			}
+			#include "/import/sunAngle.glsl"
+			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+			float rawVolSunraysAmount = getVolSunraysAmount(viewPos  ARGS_IN) * volSunraysAmountMult;
+			rawVolSunraysAmount *= 1.0 - fogAmount;
+			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
+			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+			float volSunraysAmountMax = 1.0 - 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
+			color = mix(volSunraysColor * 1.25, color, max(volSunraysAmount, volSunraysAmountMax));
 		#endif
 		
 	#endif
@@ -123,7 +125,6 @@ void main() {
 		}
 		#include "/import/rainStrength.glsl"
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
-		//depthSunraysAmountMult *= 0.5;
 		
 	#endif
 	

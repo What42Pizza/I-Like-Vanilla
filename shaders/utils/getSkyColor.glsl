@@ -39,13 +39,12 @@
 
 vec3 getSkyColor(ARG_OUT) {
 	
-	const float GAMMA_CORRECTION = 2.0;
-	const vec3 DAY_COLOR = pow(SKY_DAY_COLOR, vec3(GAMMA_CORRECTION));
-	const vec3 NIGHT_COLOR = pow(SKY_NIGHT_COLOR, vec3(GAMMA_CORRECTION));
-	const vec3 HORIZON_DAY_COLOR = pow(SKY_HORIZON_DAY_COLOR, vec3(GAMMA_CORRECTION));
-	const vec3 HORIZON_NIGHT_COLOR = pow(SKY_HORIZON_NIGHT_COLOR, vec3(GAMMA_CORRECTION));
-	const vec3 HORIZON_SUNRISE_COLOR = pow(SKY_HORIZON_SUNRISE_COLOR, vec3(GAMMA_CORRECTION));
-	const vec3 HORIZON_SUNSET_COLOR = pow(SKY_HORIZON_SUNSET_COLOR, vec3(GAMMA_CORRECTION));
+	const vec3 DAY_COLOR = SKY_DAY_COLOR * SKY_DAY_COLOR;
+	const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * SKY_NIGHT_COLOR;
+	const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * SKY_HORIZON_DAY_COLOR;
+	const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * SKY_HORIZON_NIGHT_COLOR;
+	const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * SKY_HORIZON_SUNRISE_COLOR;
+	const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * SKY_HORIZON_SUNSET_COLOR;
 	
 	#include "/import/gbufferModelView.glsl"
 	#include "/import/invViewSize.glsl"
@@ -53,8 +52,8 @@ vec3 getSkyColor(ARG_OUT) {
 	vec3 upPos = gbufferModelView[1].xyz;
 	vec3 viewPos = endMat(gbufferProjectionInverse * vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0));
 	float upDot = dot(normalize(viewPos), upPos);
-	#include "/utils/var_rng.glsl"
 	
+	#include "/utils/var_rng.glsl"
 	#include "/import/ambientSunPercent.glsl"
 	#include "/import/ambientSunrisePercent.glsl"
 	#include "/import/ambientSunsetPercent.glsl"
@@ -73,7 +72,7 @@ vec3 getSkyColor(ARG_OUT) {
 	#include "/import/sunAngle.glsl"
 	skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 	
-	skyColor = pow(skyColor, vec3(1.0 / GAMMA_CORRECTION));
+	skyColor = sqrt(skyColor);
 	skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
 	
 	#if DARKEN_SKY_UNDERGROUND == 1

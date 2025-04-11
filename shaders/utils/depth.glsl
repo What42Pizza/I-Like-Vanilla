@@ -33,7 +33,6 @@ float toBlockDepth(float depth  ARGS_OUT) {
 	#include "/import/twoTimesNearTimesFar.glsl"
 	#include "/import/farPlusNear.glsl"
 	#include "/import/farMinusNear.glsl"
-	#include "/import/far.glsl"
 	return twoTimesNearTimesFar / (farPlusNear - depth * farMinusNear);
 }
 

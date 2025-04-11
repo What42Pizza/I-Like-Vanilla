@@ -54,7 +54,7 @@ float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
 	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
 	sample = sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
-	return clamp((sample - coverage) / CLOUD_TRANSPARENCY, 0.0, 1.0);
+	return clamp((sample - coverage) / (REALISTIC_CLOUD_TRANSPARENCY * REALISTIC_CLOUD_TRANSPARENCY + 0.01), 0.0, 1.0);
 }
 
 
@@ -99,9 +99,9 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	mixMult = pow(mixMult, CLOUDS_QUALITY);
 	
 	#include "/import/shadowLightPosition.glsl"
-	vec3 shadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition);
+	vec3 shadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition) * 10.0;
 	#include "/import/rainStrength.glsl"
-	float coverage = mix(1.0 - CLOUD_COVERAGE, 1.0 - CLOUD_WEATHER_COVERAGE, rainStrength);
+	float coverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float sample = sampleCloud(pos, coverage, false  ARGS_IN);
 		if (sample > 0.0) sample = 0.5 + 0.5 * sample;
@@ -128,7 +128,7 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 
 void prepareClouds(ARG_OUT) {
 	brightCloudColor = vec3(1.0);
-	darkCloudColor = vec3(0.3, 0.3, 0.4);
+	darkCloudColor = vec3(0.8, 0.85, 0.95);
 }
 
 

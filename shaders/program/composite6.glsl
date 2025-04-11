@@ -6,7 +6,9 @@
 
 #ifdef FSH
 
-#include "/utils/depth.glsl"
+#if SHARPENING_ENABLED == 1
+	#include "/utils/depth.glsl"
+#endif
 #if SSS_DECONVERGE == 1
 	#include "/lib/super_secret_settings/deconverge.glsl"
 #endif

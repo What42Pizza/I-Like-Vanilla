@@ -1,9 +1,11 @@
-#include "/lib/aces.glsl"
+#if TONEMAPPER == 3
+	#include "/lib/aces.glsl"
+#endif
 
 
 
 // custom tonemapper, probably trash according to color theory
-vec3 simpleTonemap(vec3 color  ARGS_OUT) {
+vec3 simpleTonemapper(vec3 color  ARGS_OUT) {
 	vec3 lowCurve = color * color;
 	vec3 highCurve = 1.0 - 1.0 / (color * 10.0 + 1.0);
 	return mix(lowCurve, highCurve, color);
@@ -23,7 +25,7 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	#elif TONEMAPPER == 1
 		color = smoothMin(color * 1.1, vec3(1.0), 0.03);
 	#elif TONEMAPPER == 2
-		color = simpleTonemap(color  ARGS_IN);
+		color = simpleTonemapper(color  ARGS_IN);
 	#elif TONEMAPPER == 3
 		color = acesFitted(color);
 	#endif
