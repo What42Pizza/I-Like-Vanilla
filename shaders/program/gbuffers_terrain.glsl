@@ -31,7 +31,7 @@ void main() {
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 		#include "/import/far.glsl"
-		if (lengthCylinder >= far - 4 - 12 * dither) discard;
+		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
 	#endif
 	
 	
@@ -43,7 +43,7 @@ void main() {
 	#if SHOW_DANGEROUS_LIGHT == 1
 		#include "/import/cameraPosition.glsl"
 		vec3 blockPos = fract(playerPos + cameraPosition);
-		float centerDist = length(blockPos -= 0.5);
+		float centerDist = length(blockPos - 0.5);
 		albedo.rgb = mix(albedo.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.3 * float(centerDist < 0.65));
 	#endif
 	

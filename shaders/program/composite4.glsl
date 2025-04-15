@@ -12,6 +12,7 @@
 #if REFLECTIONS_ENABLED == 1
 	#include "/utils/depth.glsl"
 	#include "/utils/screen_to_view.glsl"
+	#include "/utils/getSkyColor.glsl"
 	#include "/lib/reflections.glsl"
 	#if BORDER_FOG_ENABLED == 1
 		#include "/lib/fog/getFogAmount.glsl"

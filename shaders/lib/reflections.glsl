@@ -4,13 +4,12 @@
 
 
 
-void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  ARGS_OUT) {
+void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
 	
 	// basic setup
 	#include "/import/gbufferProjection.glsl"
 	vec3 screenPos = endMat(gbufferProjection * startMat(viewPos)) * 0.5 + 0.5;
-	vec3 viewStepVector = reflect(normalize(viewPos), normalize(normal));
-	vec3 nextScreenPos = endMat(gbufferProjection * startMat(viewPos + viewStepVector)) * 0.5 + 0.5;
+	vec3 nextScreenPos = endMat(gbufferProjection * startMat(viewPos + reflectionDir)) * 0.5 + 0.5;
 	
 	// calculate the optimal stepVector that will stop at the screen edge
 	vec3 stepVector = nextScreenPos - screenPos;
@@ -70,17 +69,19 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 normal  
 
 
 void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D texture, float reflectionStrength  ARGS_OUT) {
+	
+	vec3 reflectionDirection = reflect(normalize(viewPos), normalize(normal));
 	vec2 reflectionPos;
 	int error;
-	raytrace(reflectionPos, error, viewPos, normal  ARGS_IN);
+	raytrace(reflectionPos, error, viewPos, reflectionDirection, normal  ARGS_IN);
 	
 	float fresnel = 1.0 - abs(dot(normalize(viewPos), normal));
 	fresnel *= fresnel;
 	fresnel *= fresnel;
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
-	#include "/import/fogColor.glsl"
+	vec3 skyColor = getSkyColor(reflectionDirection, false  ARGS_IN);
 	#include "/import/eyeBrightnessSmooth.glsl"
-	vec3 alteredFogColor = fogColor * (0.15 + 0.6 * max(eyeBrightnessSmooth.x, eyeBrightnessSmooth.y) / 240.0);
+	vec3 alteredSkyColor = skyColor * (0.15 + 0.6 * max(eyeBrightnessSmooth.x, eyeBrightnessSmooth.y) / 240.0);
 	
 	const float inputColorWeight = 0.2;
 	
@@ -88,12 +89,12 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D textur
 	if (error == 0) {
 		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
-		reflectionColor = mix(alteredFogColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-		float reflectionColorBrightness = getColorLum(reflectionColor);
-		float alteredFogColorBrightness = getColorLum(alteredFogColor);
-		reflectionColor *= min(alteredFogColorBrightness * 2.0, reflectionColorBrightness) / reflectionColorBrightness;
+		reflectionColor = mix(alteredSkyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
+		//float reflectionColorBrightness = getColorLum(reflectionColor);
+		//float alteredSkyColorBrightness = getColorLum(alteredSkyColor);
+		//reflectionColor *= min(alteredSkyColorBrightness * 2.0, reflectionColorBrightness) / reflectionColorBrightness;
 	} else {
-		reflectionColor = alteredFogColor;
+		reflectionColor = alteredSkyColor;
 	}
 	reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
 	color = mix(color, reflectionColor, reflectionStrength);

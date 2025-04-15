@@ -10,7 +10,13 @@
 
 void main() {
 	
-	vec3 albedo = getSkyColor(ARG_IN);
+	
+	#include "/import/invViewSize.glsl"
+	#include "/import/gbufferProjectionInverse.glsl"
+	vec3 viewPos = endMat(gbufferProjectionInverse * vec4(gl_FragCoord.xy * invViewSize * 2.0 - 1.0, 1.0, 1.0));
+	vec3 albedo = getSkyColor(normalize(viewPos), true  ARGS_IN);
+	
+	
 	if (starData.a > 0.5) {
 		albedo = starData.rgb;
 		#if DARKEN_STARS_NEAR_BLOCKLIGHT == 1

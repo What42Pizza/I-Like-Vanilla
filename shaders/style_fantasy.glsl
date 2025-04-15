@@ -455,7 +455,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.06
+										#define CAVE_AMBIENT_BRIGHTNESS 0.1
 #endif
 
 

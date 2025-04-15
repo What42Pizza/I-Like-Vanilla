@@ -24,20 +24,17 @@ void main() {
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	#include "/import/mc_Entity.glsl"
-	int materialId = int(mc_Entity.x);
-	if (materialId >= 1000) {
-		int shadowData = (materialId % 100 - materialId % 10) / 10;
-		#if EXCLUDE_FOLIAGE == 1
-			#define SHADOW_DATA_THRESHOLD 0
-		#else
-			#define SHADOW_DATA_THRESHOLD 1
-		#endif
-		if (shadowData > SHADOW_DATA_THRESHOLD) {
-			gl_Position = vec4(10.0);
-			return;
+	#if EXCLUDE_FOLIAGE == 1
+		#include "/import/mc_Entity.glsl"
+		int materialId = int(mc_Entity.x);
+		if (materialId >= 1000) {
+			int shadowData = (materialId % 100 - materialId % 10) / 10;
+			if (shadowData > 0) {
+				gl_Position = vec4(10.0);
+				return;
+			}
 		}
-	}
+	#endif
 	
 	#if WAVING_ENABLED == 1
 		#include "/import/shadowModelViewInverse.glsl"

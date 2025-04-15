@@ -68,7 +68,7 @@ void main() {
 			#include "/import/gbufferModelViewInverse.glsl"
 			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
 			float fogAmount = getFogAmount(playerPos  ARGS_IN);
-			applyFog(color, fogAmount  ARGS_IN);
+			applyFog(color, viewPos, fogAmount  ARGS_IN);
 		#endif
 		
 		

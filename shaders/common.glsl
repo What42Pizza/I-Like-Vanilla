@@ -7,7 +7,7 @@ const float HALF_PI = PI / 2.0;
 
 uniform sampler2D texture;
 uniform sampler2D lightmap;
-uniform sampler2D colortex0;
+uniform sampler2D tex;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 uniform sampler2D colortex3;
@@ -43,7 +43,7 @@ uniform sampler2D shadowtex0;
 
 // buffer values:
 
-#define MAIN_TEXTURE              colortex0
+#define MAIN_TEXTURE              tex
 #define MAIN_TEXTURE_COPY         colortex1
 #define OPAQUE_DATA_TEXTURE       colortex2
 #define TRANSPARENT_DATA_TEXTURE  colortex3

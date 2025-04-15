@@ -36,12 +36,12 @@ void main() {
 	#endif
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 	#include "/import/far.glsl"
-	if (lengthCylinder < far - 10 - 8 * dither) discard;
+	if (lengthCylinder < far - 10.0 - 8.0 * dither) discard;
 	
-	float realDepth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#include "/import/invViewSize.glsl"
-	vec3 realPos = screenToView(vec3(gl_FragCoord.xy * invViewSize, realDepth)  ARGS_IN);
-	if (realDepth < 1.0 && length(realPos) < length(playerPos)) discard;
+	vec3 realPos = screenToView(vec3(gl_FragCoord.xy * invViewSize, depth)  ARGS_IN);
+	if (depth < 1.0 && dot(realPos, realPos) < dot(playerPos, playerPos)) discard;
 	
 	
 	vec4 color = glcolor;

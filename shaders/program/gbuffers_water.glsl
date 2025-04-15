@@ -93,7 +93,7 @@ void main() {
 	
 	// fog
 	#if BORDER_FOG_ENABLED == 1
-		applyFog(color.rgb, fogAmount  ARGS_IN);
+		applyFog(color.rgb, viewPos, fogAmount  ARGS_IN);
 	#endif
 	
 	

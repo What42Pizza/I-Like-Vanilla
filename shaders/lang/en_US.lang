@@ -520,9 +520,6 @@ value.CEL_SHADING_ENABLED.-1=Use Style
 value.CEL_SHADING_ENABLED.0=Off
 value.CEL_SHADING_ENABLED.1=On
 
-option.ambientOcclusionLevel=Vanilla AO (Direct)
-option.ambientOcclusionLevel.comment=How much to directly change the vanilla Ambient Occlusion levels
-
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
 option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.VANILLA_AO_BRIGHT.-1=Use Style

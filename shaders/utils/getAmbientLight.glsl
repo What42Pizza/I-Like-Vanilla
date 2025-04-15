@@ -30,7 +30,7 @@ vec3 getAmbientLight(float ambientBrightness  ARGS_OUT) {
 	
 	#include "/import/screenBrightness.glsl"
 	ambientBrightness *= 0.9 + 0.2 * screenBrightness;
-	ambientLight = mix(CAVE_AMBIENT_COLOR * (0.6 + 0.8 * screenBrightness), ambientLight, ambientBrightness);
+	ambientLight = mix(CAVE_AMBIENT_COLOR * (0.6 + 0.8 * screenBrightness) * 0.5, ambientLight, ambientBrightness);
 	#ifdef NETHER
 		ambientLight *= vec3(1.0, 0.5, 0.3);
 	#endif

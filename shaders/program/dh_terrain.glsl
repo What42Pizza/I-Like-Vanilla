@@ -18,7 +18,7 @@ void main() {
 	
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 	#include "/import/far.glsl"
-	if (lengthCylinder < far - 20) discard;
+	if (lengthCylinder < far - 20.0) discard;
 	
 	vec3 albedo = glcolor * 0.8;
 	
