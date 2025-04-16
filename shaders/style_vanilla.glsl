@@ -49,15 +49,19 @@
 #endif
 #if CLOUD_WEATHER_DARKEN == -1
 #undef CLOUD_WEATHER_DARKEN
-										#define CLOUD_WEATHER_DARKEN 0.3
+										#define CLOUD_WEATHER_DARKEN 0.25
 #endif
 #if REALISTIC_CLOUDS_ENABLED == -1
 #undef REALISTIC_CLOUDS_ENABLED
-										#define REALISTIC_CLOUDS_ENABLED 0
+										#define REALISTIC_CLOUDS_ENABLED 1
+#endif
+#if REALISTIC_CLOUD_DENSITY == -1
+#undef REALISTIC_CLOUD_DENSITY
+										#define REALISTIC_CLOUD_DENSITY 0.55
 #endif
 #if REALISTIC_CLOUD_TRANSPARENCY == -1
 #undef REALISTIC_CLOUD_TRANSPARENCY
-										#define REALISTIC_CLOUD_TRANSPARENCY 0.1
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.5
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
@@ -65,11 +69,11 @@
 #endif
 #if CLOUD_WEATHER_COVERAGE == -1
 #undef CLOUD_WEATHER_COVERAGE
-										#define CLOUD_WEATHER_COVERAGE 0.85
+										#define CLOUD_WEATHER_COVERAGE 0.95
 #endif
 #if CLOUD_BOTTOM_Y == -1
 #undef CLOUD_BOTTOM_Y
-										#define CLOUD_BOTTOM_Y 150
+										#define CLOUD_BOTTOM_Y 200
 #endif
 #if CLOUD_TOP_Y == -1
 #undef CLOUD_TOP_Y
@@ -98,11 +102,11 @@
 #endif
 #if CLOUD_LAYER_2_SCALE == -1
 #undef CLOUD_LAYER_2_SCALE
-										#define CLOUD_LAYER_2_SCALE 0.045
+										#define CLOUD_LAYER_2_SCALE 0.07
 #endif
 #if CLOUD_LAYER_2_WEIGHT == -1
 #undef CLOUD_LAYER_2_WEIGHT
-										#define CLOUD_LAYER_2_WEIGHT 0.6
+										#define CLOUD_LAYER_2_WEIGHT 0.35
 #endif
 #if CLOUD_LAYER_2_SPEED == -1
 #undef CLOUD_LAYER_2_SPEED
@@ -110,11 +114,11 @@
 #endif
 #if CLOUD_LAYER_3_SCALE == -1
 #undef CLOUD_LAYER_3_SCALE
-										#define CLOUD_LAYER_3_SCALE 0.15
+										#define CLOUD_LAYER_3_SCALE 0.2
 #endif
 #if CLOUD_LAYER_3_WEIGHT == -1
 #undef CLOUD_LAYER_3_WEIGHT
-										#define CLOUD_LAYER_3_WEIGHT 0.2
+										#define CLOUD_LAYER_3_WEIGHT 0.1
 #endif
 #if CLOUD_LAYER_3_SPEED == -1
 #undef CLOUD_LAYER_3_SPEED
@@ -122,11 +126,11 @@
 #endif
 #if CLOUD_LAYER_4_SCALE == -1
 #undef CLOUD_LAYER_4_SCALE
-										#define CLOUD_LAYER_4_SCALE 0.6
+										#define CLOUD_LAYER_4_SCALE 0.5
 #endif
 #if CLOUD_LAYER_4_WEIGHT == -1
 #undef CLOUD_LAYER_4_WEIGHT
-										#define CLOUD_LAYER_4_WEIGHT 0.15
+										#define CLOUD_LAYER_4_WEIGHT 0.04
 #endif
 #if CLOUD_LAYER_4_SPEED == -1
 #undef CLOUD_LAYER_4_SPEED

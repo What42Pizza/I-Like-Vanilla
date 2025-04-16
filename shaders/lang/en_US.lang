@@ -8,8 +8,8 @@ profile.UNPLAYABLE=§cUnplayable
 option.STYLE=Style
 option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (This does nothing on OptiFine version)\nNote: 'Cartoon' is meant to work with Bare Bones\n\nIf you want to see the default values are for each style, you can download the corresponding OptiFine version.
 value.STYLE.0=Vanilla
-value.STYLE.1=Realistic
-value.STYLE.2=Fantasy
+value.STYLE.1=Fantasy
+value.STYLE.2=Realistic
 value.STYLE.3=Cartoon
 
 
@@ -79,6 +79,10 @@ option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
 value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
 value.REALISTIC_CLOUDS_ENABLED.0=Off
 value.REALISTIC_CLOUDS_ENABLED.1=On
+
+option.REALISTIC_CLOUD_DENSITY=Cloud Density (Realistic)
+option.REALISTIC_CLOUD_DENSITY.comment=Density of realistic clouds
+value.REALISTIC_CLOUD_DENSITY.-1=Use Style
 
 option.REALISTIC_CLOUD_TRANSPARENCY=Cloud Transparency (Realistic)
 option.REALISTIC_CLOUD_TRANSPARENCY.comment=Transparency for realistic-style clouds

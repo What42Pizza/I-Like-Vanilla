@@ -7,6 +7,7 @@
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
 		flat in_out float volSunraysAmountMult;
+		flat in_out float volSunraysAmountMax;
 	#endif
 #endif
 
@@ -72,17 +73,15 @@ void main() {
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1
 			#include "/import/sunAngle.glsl"
-			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
 			float rawVolSunraysAmount = getVolSunraysAmount(viewPos  ARGS_IN) * volSunraysAmountMult;
 			rawVolSunraysAmount *= 1.0 - fogAmount;
 			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
 			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-			float volSunraysAmountMax = 1.0 - 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
-			color = mix(volSunraysColor * 1.25, color, max(volSunraysAmount, volSunraysAmountMax));
+			color = mix(volSunraysColor, color, max(volSunraysAmount, volSunraysAmountMax));
 		#endif
 		
 	#endif
-	
 	
 	
 	/* DRAWBUFFERS:06 */
@@ -135,8 +134,10 @@ void main() {
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY : SUNRAYS_AMOUNT_NIGHT;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
 		#include "/import/rainStrength.glsl"
-		volSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
 	
 }

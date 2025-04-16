@@ -34,10 +34,10 @@ const float ambientOcclusionLevel = 1.0;
 	#include "/style_vanilla.glsl"
 #endif
 #if STYLE == 1
-	#include "/style_realistic.glsl"
+	#include "/style_fantasy.glsl"
 #endif
 #if STYLE == 2
-	#include "/style_fantasy.glsl"
+	#include "/style_realistic.glsl"
 #endif
 #if STYLE == 3
 	#include "/style_cartoon.glsl"

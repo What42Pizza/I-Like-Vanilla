@@ -17,10 +17,9 @@ vec3 getShadowPos(vec3 viewPos  ARGS_OUT) {
 
 
 float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
-	const int SAMPLE_COUNT = int(SUNRAYS_QUALITY * SUNRAYS_QUALITY);
 	
 	float blockDepth = length(viewPos);
-	vec3 viewPosStep = normalize(viewPos) * (blockDepth / SAMPLE_COUNT);
+	vec3 viewPosStep = normalize(viewPos) * (blockDepth / SUNRAYS_QUALITY);
 	vec3 pos = vec3(0.0);
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -31,7 +30,7 @@ float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
 	pos += viewPosStep * (dither - 0.5);
 	
 	float total = 0.0;
-	for (int i = 0; i < SAMPLE_COUNT; i ++) {
+	for (int i = 0; i < SUNRAYS_QUALITY; i ++) {
 		
 		vec3 shadowPos = getShadowPos(pos  ARGS_IN);
 		float diff = texture2D(shadowtex0, shadowPos.xy).r - shadowPos.z;
@@ -44,7 +43,7 @@ float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
 		pos += viewPosStep;
 		
 	}
-	float sunraysAmount = total / SAMPLE_COUNT * blockDepth;
+	float sunraysAmount = total / SUNRAYS_QUALITY * blockDepth;
 	
 	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;

@@ -4,7 +4,6 @@ Fix hand reprojection
 Darken sky when raining
 Fix far-away reflections
 See if gbuffers_hand needs better lighting
-turn betterNightVision into a uniform
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 Make sure ALL settings work
 Make sure dh terrain looks just like regular terrain
@@ -38,6 +37,7 @@ Make sure settings are tuned for:
 Update documentation
 
 Todo for v1.1+:
+turn betterNightVision into a uniform
 Add specular reflections? (should be encoded in block ids)
 Make sure all vanilla effect work
 Change data buffers to store ints instead of floats?
