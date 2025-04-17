@@ -16,7 +16,7 @@
 #ifdef FSH
 
 #include "/utils/screen_to_view.glsl"
-#include "/lib/fog/getFogAmount.glsl"
+#include "/lib/borderFog/getBorderFogAmount.glsl"
 
 #if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
@@ -30,7 +30,6 @@
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
-	vec3 noisyAdditions = vec3(0.0);
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
@@ -41,10 +40,10 @@ void main() {
 	#endif
 	
 	#ifdef DISTANT_HORIZONS
-		float fogAmount = float(depth > 0.9999 && depthDh > 0.9999);
+		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#else
 		#include "/import/gbufferModelView.glsl"
-		float fogAmount = getFogAmount(mat3(gbufferModelView) * viewPos  ARGS_IN);
+		float fogAmount = getBorderFogAmount(mat3(gbufferModelView) * viewPos  ARGS_IN);
 	#endif
 	
 	
@@ -54,7 +53,7 @@ void main() {
 	#if BLOOM_ENABLED == 1
 		vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
 		bloomAddition *= 1.0 - fogAmount;
-		noisyAdditions += bloomAddition;
+		color += bloomAddition;
 	#endif
 	
 	
@@ -68,8 +67,8 @@ void main() {
 			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
 			#include "/utils/var_rng.glsl"
 			vec3 depthSunraysAddition = getDepthSunraysAmount(rng  ARGS_IN) * depthSunraysAmountMult * depthSunraysColor;
-			depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
-			noisyAdditions += depthSunraysAddition;
+			depthSunraysAddition *= 1.0 - fogAmount;
+			color += depthSunraysAddition;
 		#endif
 		#if VOL_SUNRAYS_ENABLED == 1
 			#include "/import/sunAngle.glsl"
@@ -84,9 +83,9 @@ void main() {
 	#endif
 	
 	
-	/* DRAWBUFFERS:06 */
+	
+	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);
-	gl_FragData[1] = vec4(noisyAdditions, 1.0);
 	
 }
 

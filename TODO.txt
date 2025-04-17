@@ -7,7 +7,6 @@ See if gbuffers_hand needs better lighting
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 Make sure ALL settings work
 Make sure dh terrain looks just like regular terrain
-Add setting 'Shadows on Transparents'
 Update ALL gallery images
 Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.")
 Fix rain reflections
@@ -37,6 +36,7 @@ Make sure settings are tuned for:
 Update documentation
 
 Todo for v1.1+:
+Add setting 'Shadows on Transparents'
 turn betterNightVision into a uniform
 Add specular reflections? (should be encoded in block ids)
 Make sure all vanilla effect work

@@ -6,7 +6,7 @@
 
 #include "/utils/getSkyColor.glsl"
 
-void applyFog(inout vec3 color, vec3 viewPos, float fogAmount  ARGS_OUT) {
+void applyBorderFog(inout vec3 color, vec3 viewPos, float fogAmount  ARGS_OUT) {
 	vec3 skyColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 	color.rgb = mix(color.rgb, skyColor, fogAmount);
 }

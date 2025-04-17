@@ -9,7 +9,6 @@ const bool  colortex2Clear        = false;
 const int   colortex3Format       = RGB32F;
 const bool  colortex4Clear        = false;
 const bool  colortex5Clear        = false;
-const bool  colortex6Clear        = false;
 const bool  colortex7Clear        = false;
 const bool  shadowtex0Mipmap      = false;
 const bool  shadowtex0Clear       = false;

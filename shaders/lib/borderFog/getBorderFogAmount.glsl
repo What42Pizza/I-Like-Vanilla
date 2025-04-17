@@ -1,4 +1,4 @@
-float getFogAmount(vec3 playerPos  ARGS_OUT) {
+float getBorderFogAmount(vec3 playerPos  ARGS_OUT) {
 	
 	float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 	#include "/import/invFar.glsl"

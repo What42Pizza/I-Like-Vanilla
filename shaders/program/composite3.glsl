@@ -1,11 +1,5 @@
 #ifdef FIRST_PASS
-	
 	in_out vec2 texcoord;
-	
-	#if BLOOM_ENABLED == 0
-		const bool colortex6MipmapEnabled = true;
-	#endif
-	
 #endif
 
 
@@ -37,14 +31,6 @@ void main() {
 	#endif
 	
 	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
-	
-	
-	
-	// ======== NOISY ADDITIONS ======== //
-	
-	const int noiseMipMap = 1;
-	vec3 noisyAdditions = texture2DLod(NOISY_TEXTURE, texcoord, noiseMipMap).rgb;
-	color += noisyAdditions;
 	
 	
 	

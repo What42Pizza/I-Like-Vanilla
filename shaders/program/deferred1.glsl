@@ -17,8 +17,8 @@
 	#include "/lib/ssao.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/fog/getFogAmount.glsl"
-	#include "/lib/fog/applyFog.glsl"
+	#include "/lib/borderFog/getBorderFogAmount.glsl"
+	#include "/lib/borderFog/applyBorderFog.glsl"
 #endif
 #include "/utils/depth.glsl"
 #include "/utils/screen_to_view.glsl"
@@ -67,8 +67,8 @@ void main() {
 		#if BORDER_FOG_ENABLED == 1
 			#include "/import/gbufferModelViewInverse.glsl"
 			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
-			float fogAmount = getFogAmount(playerPos  ARGS_IN);
-			applyFog(color, viewPos, fogAmount  ARGS_IN);
+			float fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
+			applyBorderFog(color, viewPos, fogAmount  ARGS_IN);
 		#endif
 		
 		

@@ -31,7 +31,7 @@
 	#include "/lib/simplex_noise.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/fog/applyFog.glsl"
+	#include "/lib/borderFog/applyBorderFog.glsl"
 #endif
 
 void main() {
@@ -78,11 +78,15 @@ void main() {
 		#endif
 		
 		
-		float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
-		float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
-		#include "/import/far.glsl"
-		float waterDepth = (opaqueBlockDepth - blockDepth) * far;
-		color.a = (1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 10.0 / (10.0 + waterDepth)));
+		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
+			float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
+			float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
+			#include "/import/far.glsl"
+			float waterDepth = (opaqueBlockDepth - blockDepth) * far;
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 8.0 / (8.0 + waterDepth));
+		#else
+			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
+		#endif
 		
 	}
 	
@@ -93,7 +97,7 @@ void main() {
 	
 	// fog
 	#if BORDER_FOG_ENABLED == 1
-		applyFog(color.rgb, viewPos, fogAmount  ARGS_IN);
+		applyBorderFog(color.rgb, viewPos, fogAmount  ARGS_IN);
 	#endif
 	
 	
@@ -130,7 +134,7 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/fog/getFogAmount.glsl"
+	#include "/lib/borderFog/getBorderFogAmount.glsl"
 #endif
 
 void main() {
@@ -190,7 +194,7 @@ void main() {
 	
 	
 	#if BORDER_FOG_ENABLED == 1
-		fogAmount = getFogAmount(playerPos  ARGS_IN);
+		fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
 	#endif
 	
 	

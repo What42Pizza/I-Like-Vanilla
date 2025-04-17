@@ -2,16 +2,21 @@
 
 float getDepthSunraysAmount(inout uint rng  ARGS_OUT) {
 	
+	float dither = bayer64(gl_FragCoord.xy);
+	#include "/import/frameCounter.glsl"
+	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	
 	#if DEPTH_SUNRAYS_STYLE == 1
 		vec2 pos = texcoord;
-		float noise = (randomFloat(rng) - 1.0) * 0.2 + 1.0;
+		//float noise = (randomFloat(rng) - 1.0) * 0.2 + 1.0;
+		float noise = 1.0 - 0.3 * dither;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY * noise;
 		
 	#elif DEPTH_SUNRAYS_STYLE == 2
 		vec2 pos = texcoord;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY;
-		float noise = randomFloat(rng) * 0.7;
+		//float noise = randomFloat(rng) * 0.7;
+		float noise = (dither * 2.0 - 1.0) * 0.7;
 		pos += coordStep * noise;
 		
 	#endif
@@ -37,6 +42,13 @@ float getDepthSunraysAmount(inout uint rng  ARGS_OUT) {
 	
 	float sunraysAmount = sqrt(total);
 	sunraysAmount *= max(1.0 - length(lightCoord - 0.5) * 1.5, 0.0);
+	
+	float dx = dFdx(sunraysAmount);
+	if (int(gl_FragCoord.x) % 2 == 1) dx = -dx;
+	sunraysAmount += dx * 0.25;
+	float dy = dFdy(sunraysAmount);
+	if (int(gl_FragCoord.y) % 2 == 1) dy = -dy;
+	sunraysAmount += dy * 0.25;
 	
 	return sunraysAmount * 0.5;
 }

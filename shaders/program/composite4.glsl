@@ -15,7 +15,7 @@
 	#include "/utils/getSkyColor.glsl"
 	#include "/lib/reflections.glsl"
 	#if BORDER_FOG_ENABLED == 1
-		#include "/lib/fog/getFogAmount.glsl"
+		#include "/lib/borderFog/getBorderFogAmount.glsl"
 	#endif
 #endif
 #if REALISTIC_CLOUDS_ENABLED == 1
@@ -46,7 +46,7 @@
 		#if BORDER_FOG_ENABLED == 1
 			#include "/import/gbufferModelViewInverse.glsl"
 			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
-			float fogAmount = getFogAmount(playerPos  ARGS_IN);
+			float fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
 			if (fogAmount > 0.99) return;
 			reflectionStrength *= 1.0 - fogAmount;
 		#endif

@@ -1,6 +1,6 @@
 # I Like Vanilla Documentation
 
-## Warning: Documentation might be out of date!
+## Warning: Documentation is currently out of date!
 
 <br>
 
@@ -136,7 +136,7 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 ### /program: &nbsp; Main shader code
 ### /lib: &nbsp; More complex, standalone code
-### /worldX: &nbsp; The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
+### /world*: &nbsp; The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
 ### /import: &nbsp; See 'Uniforms System' above
 ### /utils: &nbsp; Holds common functions that use uniforms (see 'Uniforms System' above for why)
 ### /lang: &nbsp; Holds shown names of setting options and setting values
@@ -187,9 +187,9 @@ This describes which /main_files-s handle different effects
 - - Main Processing:  /main_files/terrain.glsl  (via applyWaving())
 - - Main Processing (for shadows):  /main_files/shadow.glsl  (via applyWaving())
 - **Fog:**
-- - Main Processing:  /main_files/deferred.glsl  (via getFogDistance(), getFogAmount(), and applyFog())
-- - Main Processing (transparents):  /main_files/water.glsl  (via getFogDistance(), getFogAmount(), and applyFog())
-- - Main Processing (clouds):  /main_files/clouds.glsl  (via getFogDistance(), getFogAmount(), and applyFog())
+- - Main Processing:  /main_files/deferred.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
+- - Main Processing (transparents):  /main_files/water.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
+- - Main Processing (clouds):  /main_files/clouds.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
 - **Handheld Light**
 - - Main Processing:  /lib/lighting/basic_lighting.glsl
 - **Underwater Waviness**
@@ -217,11 +217,9 @@ This describes which /main_files-s handle different effects
 - - z: reflectiveness
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
-- **colortex6:  Noisy Texture**
 
 Notes:
 - If more data needs to be packed into the 'Opaque Data' and 'Transparent Data' buffers, it may be better to switch them to an integer format
-- The 'noisy texture' buffer is where things like bloom, sunrays, etc (anything that gives noisy results) are rendered before being added to the main image using LOD-sampling as a high-perf(?) blur
 
 <br>
 <br>

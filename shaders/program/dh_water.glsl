@@ -73,7 +73,11 @@ void main() {
 		#endif
 		
 		
-		color.a = (1.0 - WATER_TRANSPARENCY_DEEP);
+		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
+			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		#else
+			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
+		#endif
 		
 	}
 	
