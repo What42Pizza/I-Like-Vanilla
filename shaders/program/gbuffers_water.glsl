@@ -157,7 +157,8 @@ void main() {
 		vec3 playerPos;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
 		if (materialId == 7) {
@@ -176,12 +177,14 @@ void main() {
 		}
 	#endif
 	
+	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
 		#include "/import/gbufferModelView.glsl"
 		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
+	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 0
 		if (gl_Position.z < -1.5) return; // simple but effective optimization

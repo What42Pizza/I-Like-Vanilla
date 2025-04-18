@@ -66,7 +66,7 @@ void main() {
 	colorMult *= gl_Color.rgb;
 	
 	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos  ARGS_IN);

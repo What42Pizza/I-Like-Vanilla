@@ -66,7 +66,7 @@ void main() {
 	adjustLmcoord(lmcoord);
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	dhBlock = dhMaterialId;
 	
 	

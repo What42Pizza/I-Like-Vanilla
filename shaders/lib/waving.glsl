@@ -40,9 +40,9 @@ void applyWaving(inout vec3 position  ARGS_OUT) {
 	if (materialId < 1000) return;
 	int wavingData = materialId % 10;
 	if (wavingData < 2 || wavingData > 7) return;
-	float wavingScale = wavingScales[wavingData / 2];
 	#include "/import/mc_midTexCoord.glsl"
 	if (wavingData % 2 == 0 && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
+	float wavingScale = wavingScales[wavingData / 2];
 	#ifndef SHADER_SHADOW
 		wavingScale *= lmcoord.y * lmcoord.y;
 	#endif

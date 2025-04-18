@@ -105,7 +105,7 @@ void main() {
 		vec3 playerPos;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	
 	#if WAVING_ENABLED == 1

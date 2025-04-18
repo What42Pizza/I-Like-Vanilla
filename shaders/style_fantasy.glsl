@@ -98,7 +98,7 @@
 #endif
 #if CLOUD_LAYER_1_SPEED == -1
 #undef CLOUD_LAYER_1_SPEED
-										#define CLOUD_LAYER_1_SPEED 2.0
+										#define CLOUD_LAYER_1_SPEED 3.6
 #endif
 #if CLOUD_LAYER_2_SCALE == -1
 #undef CLOUD_LAYER_2_SCALE
@@ -110,7 +110,7 @@
 #endif
 #if CLOUD_LAYER_2_SPEED == -1
 #undef CLOUD_LAYER_2_SPEED
-										#define CLOUD_LAYER_2_SPEED 1.5
+										#define CLOUD_LAYER_2_SPEED 2.0
 #endif
 #if CLOUD_LAYER_3_SCALE == -1
 #undef CLOUD_LAYER_3_SCALE
@@ -134,7 +134,7 @@
 #endif
 #if CLOUD_LAYER_4_SPEED == -1
 #undef CLOUD_LAYER_4_SPEED
-										#define CLOUD_LAYER_4_SPEED 0.5
+										#define CLOUD_LAYER_4_SPEED 0.3
 #endif
 
 

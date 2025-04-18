@@ -1,6 +1,6 @@
 #include "/utils/depth.glsl"
 
-float getDepthSunraysAmount(inout uint rng  ARGS_OUT) {
+float getDepthSunraysAmount(ARG_OUT) {
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
@@ -8,14 +8,12 @@ float getDepthSunraysAmount(inout uint rng  ARGS_OUT) {
 	
 	#if DEPTH_SUNRAYS_STYLE == 1
 		vec2 pos = texcoord;
-		//float noise = (randomFloat(rng) - 1.0) * 0.2 + 1.0;
 		float noise = 1.0 - 0.3 * dither;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY * noise;
 		
 	#elif DEPTH_SUNRAYS_STYLE == 2
 		vec2 pos = texcoord;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY;
-		//float noise = randomFloat(rng) * 0.7;
 		float noise = (dither * 2.0 - 1.0) * 0.7;
 		pos += coordStep * noise;
 		

@@ -123,7 +123,7 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	if (dhBlock == DH_BLOCK_WATER) {
 		playerPos.y -= 0.11213;
 	}

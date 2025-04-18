@@ -63,7 +63,7 @@ void main() {
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	blockDepth = length(playerPos);
 	
 	

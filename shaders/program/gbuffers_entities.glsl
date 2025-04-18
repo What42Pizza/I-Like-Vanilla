@@ -64,7 +64,7 @@ void main() {
 	
 	
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex));
+	vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

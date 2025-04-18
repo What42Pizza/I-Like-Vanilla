@@ -1,8 +1,9 @@
 profile.POTATO=§4Potato
-profile.VERY_LOW=§6Very Low
-profile.LOW=§2Low
+profile.VERY_LOW=§2Very Low
+profile.LOW=§3Low
 profile.MEDIUM=§bMedium
 profile.HIGH=§eHigh
+profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
 
 option.STYLE=Style
