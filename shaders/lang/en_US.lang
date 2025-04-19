@@ -493,7 +493,7 @@ option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of closer sh
 value.SHADOW_DISTORT_ADDITION.-1=Use Style
 
 option.SHADOW_FILTERING=Shadow Filtering
-option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled)\n\n(Performance cost: Low)
+option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Low)
 value.SHADOW_FILTERING.0=Off (pixelated)
 value.SHADOW_FILTERING.1=Off (smooth)
 value.SHADOW_FILTERING.2=On (default)
@@ -504,7 +504,7 @@ option.SHADOWS_NOISE.comment=Amount of noise to apply to shadow filtering
 value.SHADOWS_NOISE.-1=Use Style
 
 option.PIXELATED_SHADOWS=Pixelated Shadows
-option.PIXELATED_SHADOWS.comment=Makes the shadows pixelated along the same grid as blocks\n\nNOTE: if the shadow filtering is set to On (default), sampling noise must be used to hide flickering
+option.PIXELATED_SHADOWS.comment=Makes the shadows pixelated along the same grid as blocks
 value.PIXELATED_SHADOWS.-1=Use Style
 value.PIXELATED_SHADOWS.0=Off
 value.PIXELATED_SHADOWS.8=8x

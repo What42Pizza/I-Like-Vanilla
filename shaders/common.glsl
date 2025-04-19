@@ -225,6 +225,10 @@ vec3 endMat(vec4 pos) {
 	return pos.xyz / pos.w;
 }
 
+vec3 transform(mat4 matrix, vec3 pos) {
+	return mat3(matrix) * pos + matrix[3].xyz;
+}
+
 bool depthIsSky(float depth) {
 	return depth > 0.99;
 }

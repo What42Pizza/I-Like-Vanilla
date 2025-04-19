@@ -857,7 +857,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.4
+										#define VIBRANCE 0.3
 #endif
 #if SATURATION == -1
 #undef SATURATION

@@ -2,9 +2,7 @@ Todo for v1.0:
 Improve cloud lighting
 Fix hand reprojection
 Darken sky when raining
-Fix far-away reflections
 See if gbuffers_hand needs better lighting
-Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 Make sure ALL settings work
 Make sure dh terrain looks just like regular terrain
 Update ALL gallery images
@@ -14,28 +12,19 @@ Fix in-liquid fog
 Make sure it works with optifine
 Add settings for temporal filter
 Make sure settings are tuned for:
-	Vanilla Day
-	Vanilla Night
-	Vanilla Sunrise
-	Vanilla Sunset
-	Realistic Day
-	Realistic Night
-	Realistic Sunrise
-	Realistic Sunset
-	Fantasy Day
-	Fantasy Night
-	Fantasy Sunrise
-	Fantasy Sunset
-	Cartoon Day
-	Cartoon Night
-	Cartoon Sunrise
-	Cartoon Sunset
+	Vanilla + Fantasy + Realistic + Cartoon
+	* Day + Night + Sunrise + Sunset + Nether + End
+	* Raining + dry
 	Especially settings:
 		BLOCK_REFLECTION_AMOUNT_SURFACE
 		BLOCK_REFLECTION_AMOUNT_UNDERGROUND
-Update documentation
 
-Todo for v1.1+:
+
+
+Other planned:
+Update documentation
+Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
+Fix far-away reflections
 Add setting 'Shadows on Transparents'
 turn betterNightVision into a uniform
 Add specular reflections? (should be encoded in block ids)
@@ -53,14 +42,6 @@ Separate depth sunrays and vol sunrays settings
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
-
-
-
-Other planned:
-Make more example images:
-	Rain
-	Night
-	Reflections
 Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Rework outline detection to use normals instead of depth?
 See if `depthIsSky()` can take non-linear values
@@ -90,7 +71,6 @@ Ongoing / continuous:
 OPTIMIZE (see shader assembly?)
 Update documentation
 Keep the shader simple!
-Update documentation
 Cut down on the number of options
 Add more values to options (to an extent)
 Add more comments to options

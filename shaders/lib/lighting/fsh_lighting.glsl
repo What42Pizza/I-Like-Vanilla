@@ -6,18 +6,18 @@
 
 
 
-vec3 getShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
+vec3 getShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec4 playerPos = gbufferModelViewInverse * startMat(viewPos);
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#if PIXELATED_SHADOWS > 0
 		#include "/import/cameraPosition.glsl"
-		playerPos.xyz += cameraPosition;
-		playerPos.xyz = floor(playerPos.xyz * PIXELATED_SHADOWS + 0.001) / PIXELATED_SHADOWS;
-		playerPos.xyz -= cameraPosition;
+		playerPos += cameraPosition;
+		playerPos = floor(playerPos * PIXELATED_SHADOWS + normal * 0.15) / PIXELATED_SHADOWS;
+		playerPos -= cameraPosition;
 	#endif
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
-	vec3 shadowPos = (shadowProjection * (shadowModelView * playerPos)).xyz; // convert to shadow screen space
+	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos)); // convert to shadow screen space
 	float distortFactor = getDistortFactor(shadowPos);
 	float bias =
 		0.05
@@ -31,16 +31,10 @@ vec3 getShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
 
 vec3 getLessBiasedShadowPos(vec3 viewPos  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec4 playerPos = gbufferModelViewInverse * startMat(viewPos);
-	#if PIXELATED_SHADOWS > 0
-		#include "/import/cameraPosition.glsl"
-		playerPos.xyz += cameraPosition;
-		playerPos.xyz = floor(playerPos.xyz * PIXELATED_SHADOWS + 0.001) / PIXELATED_SHADOWS;
-		playerPos.xyz -= cameraPosition;
-	#endif
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
-	vec3 shadowPos = (shadowProjection * (shadowModelView * playerPos)).xyz; // convert to shadow screen space
+	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos)); // convert to shadow screen space
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor); // apply shadow distortion
 	shadowPos = shadowPos * 0.5 + 0.5;
@@ -50,24 +44,27 @@ vec3 getLessBiasedShadowPos(vec3 viewPos  ARGS_OUT) {
 
 
 
-float sampleShadow(vec3 viewPos, float lightDot  ARGS_OUT) {
+float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	// surface is facing away from shadowLightPosition
 	if (lightDot < 0.0) return 0.0;
 	
-	#if SHADOW_FILTERING == 2
+	#if PIXELATED_SHADOWS > 0
+		
+		// no filtering, pixelated edges
+		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
+		
+	#elif SHADOW_FILTERING == 2
 		
 		
 		
 		// basic filtering
 		
-		vec3 floatShadowPos = getShadowPos(viewPos, lightDot  ARGS_IN);
+		vec3 floatShadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
 		
 		float noiseMult = length(floatShadowPos.xy * 2.0 - 1.0);
 		noiseMult = noiseMult * SHADOW_OFFSET_INCREASE + SHADOW_OFFSET_MIN;
 		noiseMult *= SHADOWS_NOISE * 2.0;
-		#if PIXELATED_SHADOWS > 0
-			noiseMult *= 24.0 / PIXELATED_SHADOWS;
-		#endif
 		#include "/utils/var_rng.glsl"
 		vec2 noise = randomVec2(rng);
 		noise = noise * noise * noiseMult;
@@ -177,13 +174,13 @@ float sampleShadow(vec3 viewPos, float lightDot  ARGS_OUT) {
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
 		return (texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#else
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
 		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#endif
@@ -203,7 +200,7 @@ float getSkyBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_
 	
 	// sample shadow
 	#if SHADOWS_ENABLED == 1
-		float skyBrightness = sampleShadow(viewPos, lightDot  ARGS_IN);
+		float skyBrightness = sampleShadow(viewPos, lightDot, normal  ARGS_IN);
 		#ifdef DISTANT_HORIZONS
 			#include "/import/invFar.glsl"
 			float len = max(length(viewPos) * invFar, 0.8);
