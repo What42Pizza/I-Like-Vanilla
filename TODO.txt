@@ -1,7 +1,6 @@
 Todo for v1.0:
 Improve cloud lighting
 Fix hand reprojection
-Darken sky when raining
 See if gbuffers_hand needs better lighting
 Make sure ALL settings work
 Make sure dh terrain looks just like regular terrain

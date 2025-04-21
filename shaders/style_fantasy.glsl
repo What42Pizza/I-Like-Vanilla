@@ -857,7 +857,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.6
+										#define VIBRANCE 0.4
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -869,11 +869,11 @@
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
-										#define SATURATION_LIGHT 0.4
+										#define SATURATION_LIGHT 0.3
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.3
+										#define CONTRAST 0.25
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED

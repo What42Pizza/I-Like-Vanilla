@@ -295,6 +295,10 @@ uniform float ambientSunrisePercent;
 uniform float ambientSunsetPercent;
 #endif
 
+#ifdef import_dayPercent
+uniform float dayPercent;
+#endif
+
 #ifdef import_sunAngle
 uniform float sunAngle;
 #endif

@@ -37,28 +37,32 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 	const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * SKY_HORIZON_SUNRISE_COLOR;
 	const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * SKY_HORIZON_SUNSET_COLOR;
 	
-	#include "/import/ambientSunPercent.glsl"
-	#include "/import/ambientSunrisePercent.glsl"
-	#include "/import/ambientSunsetPercent.glsl"
-	float skyMixFactor = ambientSunPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.75;
+	#include "/import/dayPercent.glsl"
+	float skyMixFactor = dayPercent;
 	skyMixFactor *= skyMixFactor;
-	vec3 horizonColor = mix(HORIZON_NIGHT_COLOR * 0.02, HORIZON_DAY_COLOR, skyMixFactor);
-	vec3 skyColor = mix(NIGHT_COLOR * 0.02, DAY_COLOR, skyMixFactor);
 	#include "/import/gbufferModelView.glsl"
 	float upDot = dot(viewDir, gbufferModelView[1].xyz);
 	#include "/utils/var_rng.glsl"
+	vec3 skyColor = mix(NIGHT_COLOR * 0.5, DAY_COLOR, skyMixFactor);
 	upDot += randomFloat(rng) * 0.05 * (0.8 - getColorLum(skyColor));
 	upDot = max(upDot, 0.0) + 0.01;
+	vec3 horizonColor = mix(HORIZON_NIGHT_COLOR * 0.5, HORIZON_DAY_COLOR, skyMixFactor);
 	skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 	
 	#include "/import/sunPosition.glsl"
 	float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
 	sunDot *= 1.0 - 0.8 * upDot;
+	#include "/import/ambientSunrisePercent.glsl"
+	#include "/import/ambientSunsetPercent.glsl"
 	sunDot *= (ambientSunrisePercent + ambientSunsetPercent) * (ambientSunrisePercent + ambientSunsetPercent);
 	#include "/import/sunAngle.glsl"
 	skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 	
-	skyColor = sqrt(skyColor);
+	#include "/import/rainStrength.glsl"
+	float rainAmount = 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
+	rainAmount *= rainStrength * 0.8;
+	skyColor = mix(skyColor, vec3(0.9, 0.95, 1.0) * dayPercent * 0.15, rainAmount);
+	
 	skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
 	
 	#if DARKEN_SKY_UNDERGROUND == 1
