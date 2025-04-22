@@ -45,7 +45,6 @@ Add a scary style?
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties
 Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Rework outline detection to use normals instead of depth?
-See if `depthIsSky()` can take non-linear values
 World curvature settings
 Add water caustics?
 Do a round of making sure different settings combinations work

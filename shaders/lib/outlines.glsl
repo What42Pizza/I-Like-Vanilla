@@ -32,7 +32,7 @@
 float getOutlineAmount(ARG_OUT) {
 	
 	float m = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 0,  0), 0).r  ARGS_IN);
-	if (depthIsSky(m)) {return 0.0;}
+	if (m == 1.0) {return 0.0;}
 	#include "/import/far.glsl"
 	m *= far;
 	float tl = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2(-1, -1), 0).r  ARGS_IN) * far;

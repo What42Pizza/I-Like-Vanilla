@@ -229,9 +229,6 @@ vec3 transform(mat4 matrix, vec3 pos) {
 	return mat3(matrix) * pos + matrix[3].xyz;
 }
 
-bool depthIsSky(float depth) {
-	return depth > 0.99;
-}
 bool depthIsHand(float depth) {
 	return depth < 0.003;
 }

@@ -27,22 +27,20 @@
 #if REFLECTIONS_ENABLED == 1
 	void doReflections(inout vec3 color, float depth, vec3 normal, float reflectionStrength  ARGS_OUT) {
 		
-		// skip sky and fog
-		float linearDepth = toLinearDepth(depth  ARGS_IN);
-		if (depthIsHand(linearDepth)) return;
 		#ifdef DISTANT_HORIZONS
 			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-			float linearDhDepth = toLinearDepthDh(dhDepth  ARGS_IN);
-			if (depthIsSky(linearDepth) && depthIsSky(linearDhDepth)) return;
+			if (depth == 1.0 && dhDepth == 1.0) return;
 		#else
-			if (depthIsSky(linearDepth)) return;
+			if (depth == 1.0) return;
 		#endif
+		float linearDepth = toLinearDepth(depth  ARGS_IN);
+		if (depthIsHand(linearDepth)) return;
 		
-		// apply fog
 		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 		#ifdef DISTANT_HORIZONS
-			if (depthIsSky(linearDepth)) viewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
+			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
 		#endif
+		
 		#if BORDER_FOG_ENABLED == 1
 			#include "/import/gbufferModelViewInverse.glsl"
 			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;

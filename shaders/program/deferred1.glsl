@@ -37,10 +37,8 @@ void main() {
 	
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	float linearDepth = toLinearDepth(depth  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float linearDhDepth = toLinearDepthDh(dhDepth  ARGS_IN);
 	#endif
 	
 	
@@ -53,9 +51,9 @@ void main() {
 	
 	
 	#ifdef DISTANT_HORIZONS
-		bool isNonSky = !depthIsSky(linearDepth) || !depthIsSky(linearDhDepth);
+		bool isNonSky = depth != 1.0 || dhDepth != 1.0;
 	#else
-		bool isNonSky = !depthIsSky(linearDepth);
+		bool isNonSky = depth != 1.0;
 	#endif
 	if (isNonSky) {
 		
