@@ -21,7 +21,6 @@ vec3 getAmbientLight(float ambientBrightness  ARGS_OUT) {
 	#include "/import/ambientMoonPercent.glsl"
 	#include "/import/ambientSunrisePercent.glsl"
 	#include "/import/ambientSunsetPercent.glsl"
-	
 	vec3 ambientLight =
 		AMBIENT_DAY_COLOR * ambientSunPercent
 		+ AMBIENT_NIGHT_COLOR * ambientMoonPercent

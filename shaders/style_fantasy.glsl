@@ -88,6 +88,59 @@
 
 
 
+#if CLOUD_DAY_RED == -1
+#undef CLOUD_DAY_RED
+										#define CLOUD_DAY_RED 1.0
+#endif
+#if CLOUD_DAY_GREEN == -1
+#undef CLOUD_DAY_GREEN
+										#define CLOUD_DAY_GREEN 1.0
+#endif
+#if CLOUD_DAY_BLUE == -1
+#undef CLOUD_DAY_BLUE
+										#define CLOUD_DAY_BLUE 1.0
+#endif
+#if CLOUD_NIGHT_RED == -1
+#undef CLOUD_NIGHT_RED
+										#define CLOUD_NIGHT_RED 1.0
+#endif
+#if CLOUD_NIGHT_GREEN == -1
+#undef CLOUD_NIGHT_GREEN
+										#define CLOUD_NIGHT_GREEN 1.0
+#endif
+#if CLOUD_NIGHT_BLUE == -1
+#undef CLOUD_NIGHT_BLUE
+										#define CLOUD_NIGHT_BLUE 1.0
+#endif
+#if CLOUD_SUNRISE_RED == -1
+#undef CLOUD_SUNRISE_RED
+										#define CLOUD_SUNRISE_RED 1.0
+#endif
+#if CLOUD_SUNRISE_GREEN == -1
+#undef CLOUD_SUNRISE_GREEN
+										#define CLOUD_SUNRISE_GREEN 1.0
+#endif
+#if CLOUD_SUNRISE_BLUE == -1
+#undef CLOUD_SUNRISE_BLUE
+										#define CLOUD_SUNRISE_BLUE 1.0
+#endif
+#if CLOUD_SUNSET_RED == -1
+#undef CLOUD_SUNSET_RED
+										#define CLOUD_SUNSET_RED 1.0
+#endif
+#if CLOUD_SUNSET_GREEN == -1
+#undef CLOUD_SUNSET_GREEN
+										#define CLOUD_SUNSET_GREEN 1.0
+#endif
+#if CLOUD_SUNSET_BLUE == -1
+#undef CLOUD_SUNSET_BLUE
+										#define CLOUD_SUNSET_BLUE 1.0
+#endif
+
+
+
+
+
 #if CLOUD_LAYER_1_SCALE == -1
 #undef CLOUD_LAYER_1_SCALE
 										#define CLOUD_LAYER_1_SCALE 0.01
@@ -373,31 +426,31 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.5
+										#define SKYLIGHT_SUNSET_RED 1.3
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
-										#define SKYLIGHT_SUNSET_GREEN 0.8
+										#define SKYLIGHT_SUNSET_GREEN 0.55
 #endif
 #if SKYLIGHT_SUNSET_BLUE == -1
 #undef SKYLIGHT_SUNSET_BLUE
-										#define SKYLIGHT_SUNSET_BLUE -0.2
+										#define SKYLIGHT_SUNSET_BLUE 0.05
 #endif
 #if SKYLIGHT_SUNSET_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNSET_BRIGHTNESS
-										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.7
+										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.8
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
-										#define AMBIENT_SUNSET_RED 1.1
+										#define AMBIENT_SUNSET_RED 1.05
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
-										#define AMBIENT_SUNSET_GREEN 0.6
+										#define AMBIENT_SUNSET_GREEN 0.65
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
-										#define AMBIENT_SUNSET_BLUE 1.0
+										#define AMBIENT_SUNSET_BLUE 0.6
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
@@ -597,7 +650,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.8
+										#define AO_AMOUNT 1.6
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

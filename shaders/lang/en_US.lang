@@ -115,6 +115,60 @@ value.CLOUD_OPACITY_DISTANCE.-1=Use Style
 
 
 
+screen.CLOUD_COLORS=Cloud Colors
+
+option.CLOUD_DAY_RED=
+option.CLOUD_DAY_RED.comment=
+value.CLOUD_DAY_RED.-1=Use Style
+
+option.CLOUD_DAY_GREEN=
+option.CLOUD_DAY_GREEN.comment=
+value.CLOUD_DAY_GREEN.-1=Use Style
+
+option.CLOUD_DAY_BLUE=
+option.CLOUD_DAY_BLUE.comment=
+value.CLOUD_DAY_BLUE.-1=Use Style
+
+option.CLOUD_NIGHT_RED=
+option.CLOUD_NIGHT_RED.comment=
+value.CLOUD_NIGHT_RED.-1=Use Style
+
+option.CLOUD_NIGHT_GREEN=
+option.CLOUD_NIGHT_GREEN.comment=
+value.CLOUD_NIGHT_GREEN.-1=Use Style
+
+option.CLOUD_NIGHT_BLUE=
+option.CLOUD_NIGHT_BLUE.comment=
+value.CLOUD_NIGHT_BLUE.-1=Use Style
+
+option.CLOUD_SUNRISE_RED=
+option.CLOUD_SUNRISE_RED.comment=
+value.CLOUD_SUNRISE_RED.-1=Use Style
+
+option.CLOUD_SUNRISE_GREEN=
+option.CLOUD_SUNRISE_GREEN.comment=
+value.CLOUD_SUNRISE_GREEN.-1=Use Style
+
+option.CLOUD_SUNRISE_BLUE=
+option.CLOUD_SUNRISE_BLUE.comment=
+value.CLOUD_SUNRISE_BLUE.-1=Use Style
+
+option.CLOUD_SUNSET_RED=
+option.CLOUD_SUNSET_RED.comment=
+value.CLOUD_SUNSET_RED.-1=Use Style
+
+option.CLOUD_SUNSET_GREEN=
+option.CLOUD_SUNSET_GREEN.comment=
+value.CLOUD_SUNSET_GREEN.-1=Use Style
+
+option.CLOUD_SUNSET_BLUE=
+option.CLOUD_SUNSET_BLUE.comment=
+value.CLOUD_SUNSET_BLUE.-1=Use Style
+
+
+
+
+
 screen.CLOUD_NOISE_SETTINGS=Cloud Noise Settings
 screen.CLOUD_NOISE_SETTINGS.comment=Settings for realistic clouds noise
 

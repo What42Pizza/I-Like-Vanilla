@@ -88,6 +88,59 @@
 
 
 
+#if CLOUD_DAY_RED == -1
+#undef CLOUD_DAY_RED
+										#define CLOUD_DAY_RED 1.0
+#endif
+#if CLOUD_DAY_GREEN == -1
+#undef CLOUD_DAY_GREEN
+										#define CLOUD_DAY_GREEN 1.0
+#endif
+#if CLOUD_DAY_BLUE == -1
+#undef CLOUD_DAY_BLUE
+										#define CLOUD_DAY_BLUE 1.0
+#endif
+#if CLOUD_NIGHT_RED == -1
+#undef CLOUD_NIGHT_RED
+										#define CLOUD_NIGHT_RED 1.0
+#endif
+#if CLOUD_NIGHT_GREEN == -1
+#undef CLOUD_NIGHT_GREEN
+										#define CLOUD_NIGHT_GREEN 1.0
+#endif
+#if CLOUD_NIGHT_BLUE == -1
+#undef CLOUD_NIGHT_BLUE
+										#define CLOUD_NIGHT_BLUE 1.0
+#endif
+#if CLOUD_SUNRISE_RED == -1
+#undef CLOUD_SUNRISE_RED
+										#define CLOUD_SUNRISE_RED 1.0
+#endif
+#if CLOUD_SUNRISE_GREEN == -1
+#undef CLOUD_SUNRISE_GREEN
+										#define CLOUD_SUNRISE_GREEN 1.0
+#endif
+#if CLOUD_SUNRISE_BLUE == -1
+#undef CLOUD_SUNRISE_BLUE
+										#define CLOUD_SUNRISE_BLUE 1.0
+#endif
+#if CLOUD_SUNSET_RED == -1
+#undef CLOUD_SUNSET_RED
+										#define CLOUD_SUNSET_RED 1.0
+#endif
+#if CLOUD_SUNSET_GREEN == -1
+#undef CLOUD_SUNSET_GREEN
+										#define CLOUD_SUNSET_GREEN 1.0
+#endif
+#if CLOUD_SUNSET_BLUE == -1
+#undef CLOUD_SUNSET_BLUE
+										#define CLOUD_SUNSET_BLUE 1.0
+#endif
+
+
+
+
+
 #if CLOUD_LAYER_1_SCALE == -1
 #undef CLOUD_LAYER_1_SCALE
 										#define CLOUD_LAYER_1_SCALE 0.015

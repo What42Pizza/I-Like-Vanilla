@@ -1,15 +1,13 @@
 Todo for v1.0:
-Improve cloud lighting
 Fix hand reprojection
 See if gbuffers_hand needs better lighting
 Make sure ALL settings work
 Make sure dh terrain looks just like regular terrain
+Fix in-liquid fog (add atmospheric fog)
 Update ALL gallery images
 Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.")
 Fix rain reflections
-Fix in-liquid fog
 Make sure it works with optifine
-Add settings for temporal filter
 Make sure settings are tuned for:
 	Vanilla + Fantasy + Realistic + Cartoon
 	* Day + Night + Sunrise + Sunset + Nether + End
@@ -20,24 +18,28 @@ Make sure settings are tuned for:
 
 
 
-Other planned:
+Planned for next version:
 Update documentation
-Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 Fix far-away reflections
 Add setting 'Shadows on Transparents'
-turn betterNightVision into a uniform
-Add specular reflections? (should be encoded in block ids)
 Make sure all vanilla effect work
+Add specular reflections? (should be encoded in block ids)
+Separate depth sunrays and vol sunrays settings
+Add settings for temporal filter
+
+
+
+Other planned:
+Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
+turn betterNightVision into a uniform
 Change data buffers to store ints instead of floats?
 Add settings for nether ambient color
 Add setting 'Bright Terrain Decrease' (for smoothMin value)
-Add generalized volumetrics
+Add generalized volumetrics?
 Make reflections (especially on water) noticeable at night
 Increase waviness of plant tops
 Add setting `Light Mixing: Artistic / Realistic`
-Add close-up particle reduction
 Check if SUNRAYS_FLICKERING_FIX is still needed
-Separate depth sunrays and vol sunrays settings
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
 Test `blend.<program>.<buffer>=<off|src dst srcA dstA>` in shader.properties

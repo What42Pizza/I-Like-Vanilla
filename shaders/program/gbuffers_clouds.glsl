@@ -40,7 +40,7 @@ void main() {
 #ifdef VSH
 
 #include "/utils/getShadowcasterColor.glsl"
-#include "/utils/getAmbientLight.glsl"
+#include "/utils/getCloudColor.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -58,12 +58,7 @@ void main() {
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	vec3 shadowcasterColor = getShadowcasterColor(ARG_IN);
-	vec3 ambientLight = getAmbientLight(1.0  ARGS_IN);
-	colorMult = shadowcasterColor + ambientLight;
-	//colorMult = mix(vec3(getColorLum(colorMult)), colorMult, vec3(1.0));
-	colorMult = normalize(colorMult) * 2.0;
-	colorMult *= gl_Color.rgb;
+	colorMult = getCloudColor(gl_NormalMatrix * gl_Normal  ARGS_IN);
 	
 	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);

@@ -28,8 +28,11 @@ float getDepthSunraysAmount(ARG_OUT) {
 			}
 		#endif
 		#include "/import/viewSize.glsl"
-		float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r;
-		if (depthIsSky(toLinearDepth(depth  ARGS_IN))) {
+		bool isSky = texelFetch(DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r == 1.0;
+		#ifdef DISTANT_HORIZONS
+			isSky = isSky && texelFetch(DH_DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r == 1.0;
+		#endif
+		if (isSky) {
 			total += 1.0 + float(i) / SUNRAYS_QUALITY;
 		}
 		pos += coordStep;
