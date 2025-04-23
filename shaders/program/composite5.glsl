@@ -18,6 +18,7 @@
 	#include "/lib/fxaa.glsl"
 #endif
 #if TEMPORAL_FILTER_ENABLED == 1
+	#include "/utils/depth.glsl"
 	#include "/lib/temporal_filter.glsl"
 #endif
 #if MOTION_BLUR_ENABLED == 1
@@ -59,10 +60,13 @@ void main() {
 	#endif
 	
 	vec3 pos = vec3(texcoord, depth);
-	#include "/import/cameraPosition.glsl"
-	#include "/import/previousCameraPosition.glsl"
-	vec3 cameraOffset = cameraPosition - previousCameraPosition;
-	vec2 prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
+	vec2 prevCoord = texcoord;
+	if (depth > 0.9) {
+		#include "/import/cameraPosition.glsl"
+		#include "/import/previousCameraPosition.glsl"
+		vec3 cameraOffset = cameraPosition - previousCameraPosition;
+		prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
+	}
 	
 	
 	
@@ -94,9 +98,9 @@ void main() {
 	#if TEMPORAL_FILTER_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
 		/* DRAWBUFFERS:14 */
 		#if MOTION_BLUR_ENABLED == 1
-			gl_FragData[1] = vec4(prevColor - 0.0, 1.0);
+			gl_FragData[1] = vec4(prevColor, 1.0);
 		#else
-			gl_FragData[1] = vec4(color - 0.0, 1.0);
+			gl_FragData[1] = vec4(color, 1.0);
 		#endif
 	#endif
 	

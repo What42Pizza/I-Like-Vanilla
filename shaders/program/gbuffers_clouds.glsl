@@ -56,9 +56,16 @@ void main() {
 		return;
 	#endif
 	
-	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	vec3 normal = gl_NormalMatrix * gl_Normal;
+	#include "/import/sunPosition.glsl"
+	#include "/import/moonPosition.glsl"
+	#include "/import/dayPercent.glsl"
+	float brightness = 0.7
+		+ 0.175 * dot(normal, normalize(sunPosition)) * dayPercent
+		+ 0.15 * dot(normal, normalize(moonPosition)) * (1.0 - dayPercent);
+	colorMult = getCloudColor(brightness  ARGS_IN);
 	
-	colorMult = getCloudColor(gl_NormalMatrix * gl_Normal  ARGS_IN);
+	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);

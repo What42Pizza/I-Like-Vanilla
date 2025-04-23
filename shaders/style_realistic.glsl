@@ -90,11 +90,11 @@
 
 #if CLOUD_DAY_RED == -1
 #undef CLOUD_DAY_RED
-										#define CLOUD_DAY_RED 1.0
+										#define CLOUD_DAY_RED 0.9
 #endif
 #if CLOUD_DAY_GREEN == -1
 #undef CLOUD_DAY_GREEN
-										#define CLOUD_DAY_GREEN 1.0
+										#define CLOUD_DAY_GREEN 0.9
 #endif
 #if CLOUD_DAY_BLUE == -1
 #undef CLOUD_DAY_BLUE
@@ -102,15 +102,15 @@
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 1.0
+										#define CLOUD_NIGHT_RED 0.35
 #endif
 #if CLOUD_NIGHT_GREEN == -1
 #undef CLOUD_NIGHT_GREEN
-										#define CLOUD_NIGHT_GREEN 1.0
+										#define CLOUD_NIGHT_GREEN 0.35
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 1.0
+										#define CLOUD_NIGHT_BLUE 0.55
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
@@ -118,11 +118,11 @@
 #endif
 #if CLOUD_SUNRISE_GREEN == -1
 #undef CLOUD_SUNRISE_GREEN
-										#define CLOUD_SUNRISE_GREEN 1.0
+										#define CLOUD_SUNRISE_GREEN 0.85
 #endif
 #if CLOUD_SUNRISE_BLUE == -1
 #undef CLOUD_SUNRISE_BLUE
-										#define CLOUD_SUNRISE_BLUE 1.0
+										#define CLOUD_SUNRISE_BLUE 0.5
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
@@ -130,11 +130,11 @@
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 1.0
+										#define CLOUD_SUNSET_GREEN 0.8
 #endif
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 1.0
+										#define CLOUD_SUNSET_BLUE 0.6
 #endif
 
 

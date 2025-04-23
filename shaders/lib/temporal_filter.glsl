@@ -52,6 +52,8 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	neighborhoodClamping(color, prevColor  ARGS_IN);
 	
+	//const float blendMin = 0.3;
+	//const float blendMax = 0.98;
 	const float blendVariable = 0.05;
 	const float blendConstant = 0.75;
 	const float depthFactor = 0.01;
@@ -61,7 +63,9 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	float velocityAmount = dot(velocity, velocity) * 10.0;
 	
 	#include "/import/far.glsl"
-	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(depth * far) * depthFactor);
+	float linearDepth = toLinearDepth(depth  ARGS_IN);
+	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(linearDepth * far) * depthFactor);
+	//blendAmount = clamp(blendAmount, blendMin, blendMax); // this can sometimes fix things but I don't think it's needed
 	
 	color = mix(color, prevColor, blendAmount);
 	

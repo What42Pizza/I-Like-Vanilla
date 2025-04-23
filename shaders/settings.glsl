@@ -7,6 +7,7 @@ const bool  colortex1Clear        = false;
 const int   colortex2Format       = RGB32F;
 const bool  colortex2Clear        = false;
 const int   colortex3Format       = RGB32F;
+const int   colortex4Format       = RGB16F;
 const bool  colortex4Clear        = false;
 const bool  colortex5Clear        = false;
 const bool  colortex7Clear        = false;
