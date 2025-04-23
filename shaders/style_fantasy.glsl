@@ -1,6 +1,6 @@
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.5
+										#define SUN_BRIGHTNESS 1.0
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
@@ -200,15 +200,15 @@
 #endif
 #if BORDER_FOG_START == -1
 #undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.5
+										#define BORDER_FOG_START 0.7
 #endif
 #if BORDER_FOG_END == -1
 #undef BORDER_FOG_END
-										#define BORDER_FOG_END 1.0
+										#define BORDER_FOG_END 0.95
 #endif
 #if BORDER_FOG_CURVE == -1
 #undef BORDER_FOG_CURVE
-										#define BORDER_FOG_CURVE 1
+										#define BORDER_FOG_CURVE 2
 #endif
 
 

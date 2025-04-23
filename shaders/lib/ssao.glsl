@@ -20,16 +20,16 @@ float getAoInfluence(float centerDepth, vec2 offset  ARGS_OUT) {
 
 
 
-float getAoFactor(ARG_OUT) {
+float getAoFactor(float depth, float trueBlockDepth  ARGS_OUT) {
 	
-	float depth = toBlockDepth(texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN);
+	float blockDepth = toBlockDepth(depth  ARGS_IN);
 	//#ifdef DISTANT_HORIZONS
-	//	depth = max(depth, toBlockDepthDh(texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN));
+	//	blockDepth = max(blockDepth, toBlockDepthDh(texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN));
 	//#endif
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	float noise = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * PI * 2.0;
-	float scale = AO_SIZE * 0.1 / depth;
+	float scale = AO_SIZE * 0.1 / blockDepth;
 	
 	float total = 0.0;
 	float maxTotal = 0.0; // this doesn't seem to have any performance impact vs total/=SAMPLE_COUNT at the end, so it's probably being pre-computed at comp-time
@@ -41,13 +41,13 @@ float getAoFactor(ARG_OUT) {
 		vec2 offset = vec2(cos(i + noise) * len * invAspectRatio, sin(i + noise) * len);
 		
 		float weight = 100 - float(i) / SAMPLE_COUNT;
-		total += getAoInfluence(depth, offset  ARGS_IN) * weight;
+		total += getAoInfluence(blockDepth, offset  ARGS_IN) * weight;
 		maxTotal += weight;
 		
 	}
 	total /= maxTotal;
 	#include "/import/invFar.glsl"
-	total *= smoothstep(0.65, 0.55, estimateDepthFSH(texcoord, depth * invFar));
+	total *= smoothstep(0.65, 0.55, trueBlockDepth * invFar);
 	
 	return total * 0.23;
 }

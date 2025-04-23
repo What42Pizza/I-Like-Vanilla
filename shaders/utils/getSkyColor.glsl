@@ -42,9 +42,11 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 	skyMixFactor *= skyMixFactor;
 	#include "/import/gbufferModelView.glsl"
 	float upDot = dot(viewDir, gbufferModelView[1].xyz);
-	#include "/utils/var_rng.glsl"
 	vec3 skyColor = mix(NIGHT_COLOR * 0.2, DAY_COLOR, skyMixFactor);
-	upDot += randomFloat(rng) * 0.05 * (0.8 - getColorLum(skyColor));
+	#ifndef SKIP_SKY_NOISE
+		#include "/utils/var_rng.glsl"
+		upDot += randomFloat(rng) * 0.05 * (0.8 - getColorLum(skyColor));
+	#endif
 	upDot = max(upDot, 0.0) + 0.01;
 	vec3 horizonColor = mix(HORIZON_NIGHT_COLOR * 0.2, HORIZON_DAY_COLOR, skyMixFactor);
 	skyColor = mix(horizonColor, skyColor, sqrt(upDot));

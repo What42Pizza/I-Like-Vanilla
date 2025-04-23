@@ -1,5 +1,6 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
+	in_out vec3 skyColor;
 	#ifdef END
 		in_out vec3 glcolor;
 	#endif
@@ -12,15 +13,13 @@
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
+	albedo.rgb = 1.0 - (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb);
 	
 	
 	#ifdef OVERWORLD
 		#include "/import/sunPosition.glsl"
-		if (sunPosition.z < 0.0) {
-			albedo.rgb *= SUN_BRIGHTNESS;
-		} else {
-			albedo.rgb *= MOON_BRIGHTNESS;
-		}
+		albedo.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
+		albedo.rgb *= 1.0 - skyColor;
 	#endif
 	
 	
@@ -41,6 +40,9 @@ void main() {
 
 #ifdef VSH
 
+#define SKIP_SKY_NOISE
+#include "/utils/getSkyColor.glsl"
+
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
 #endif
@@ -55,9 +57,13 @@ void main() {
 	#endif
 	
 	
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	skyColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+	
+	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		#include "/import/gbufferModelViewInverse.glsl"
-		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
 		gl_Position = ftransform();

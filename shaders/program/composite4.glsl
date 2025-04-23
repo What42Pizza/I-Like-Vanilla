@@ -27,14 +27,13 @@
 #if REFLECTIONS_ENABLED == 1
 	void doReflections(inout vec3 color, float depth, vec3 normal, float reflectionStrength  ARGS_OUT) {
 		
+		if (depthIsHand(depth)) return;
 		#ifdef DISTANT_HORIZONS
 			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 			if (depth == 1.0 && dhDepth == 1.0) return;
 		#else
 			if (depth == 1.0) return;
 		#endif
-		float linearDepth = toLinearDepth(depth  ARGS_IN);
-		if (depthIsHand(linearDepth)) return;
 		
 		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 		#ifdef DISTANT_HORIZONS

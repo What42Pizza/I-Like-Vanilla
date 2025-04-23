@@ -61,7 +61,7 @@ void main() {
 	
 	vec3 pos = vec3(texcoord, depth);
 	vec2 prevCoord = texcoord;
-	if (depth > 0.9) {
+	if (!depthIsHand(depth)) {
 		#include "/import/cameraPosition.glsl"
 		#include "/import/previousCameraPosition.glsl"
 		vec3 cameraOffset = cameraPosition - previousCameraPosition;

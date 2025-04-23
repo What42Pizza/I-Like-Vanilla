@@ -200,7 +200,7 @@
 #endif
 #if BORDER_FOG_START == -1
 #undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.75
+										#define BORDER_FOG_START 0.7
 #endif
 #if BORDER_FOG_END == -1
 #undef BORDER_FOG_END

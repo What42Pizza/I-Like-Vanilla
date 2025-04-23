@@ -31,10 +31,10 @@
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
 	
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
-		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
 		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 	#endif
@@ -42,8 +42,8 @@ void main() {
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#else
-		#include "/import/gbufferModelView.glsl"
-		float fogAmount = getBorderFogAmount(mat3(gbufferModelView) * viewPos  ARGS_IN);
+		#include "/import/gbufferModelViewInverse.glsl"
+		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
 	#endif
 	
 	

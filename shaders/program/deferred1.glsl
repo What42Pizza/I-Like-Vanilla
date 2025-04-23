@@ -31,11 +31,6 @@
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
-	vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-	vec2 lmcoord = unpackVec2(data.x) * 4.0;
-	vec3 normal = decodeNormal(unpackVec2(data.y));
-	
-	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
@@ -50,6 +45,7 @@ void main() {
 	#endif
 	
 	
+	
 	#ifdef DISTANT_HORIZONS
 		bool isNonSky = depth != 1.0 || dhDepth != 1.0;
 	#else
@@ -58,21 +54,25 @@ void main() {
 	if (isNonSky) {
 		
 		
+		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
+		vec2 lmcoord = unpackVec2(data.x) * 4.0;
+		vec3 normal = decodeNormal(unpackVec2(data.y));
 		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 		doFshLighting(color, lmcoord.x, lmcoord.y, viewPos, normal  ARGS_IN);
 		
 		
 		#if BORDER_FOG_ENABLED == 1
 			#include "/import/gbufferModelViewInverse.glsl"
-			vec3 playerPos = (gbufferModelViewInverse * startMat(viewPos)).xyz;
+			vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 			float fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
 			applyBorderFog(color, viewPos, fogAmount  ARGS_IN);
 		#endif
 		
 		
 		#if SSAO_ENABLED == 1
-			float aoFactor = getAoFactor(ARG_IN);
+			float aoFactor = getAoFactor(depth, length(viewPos)  ARGS_IN);
 			color *= 1.0 - aoFactor * AO_AMOUNT;
+			//color = vec3(aoFactor);
 		#endif
 		
 		
