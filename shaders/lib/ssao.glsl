@@ -47,7 +47,7 @@ float getAoFactor(float depth, float trueBlockDepth  ARGS_OUT) {
 	}
 	total /= maxTotal;
 	#include "/import/invFar.glsl"
-	total *= smoothstep(0.65, 0.55, trueBlockDepth * invFar);
+	total *= smoothstep(0.9, 0.8, trueBlockDepth * invFar);
 	
 	return total * 0.23;
 }

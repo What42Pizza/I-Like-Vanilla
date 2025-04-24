@@ -55,7 +55,7 @@ void main() {
 	gl_FragData[0] = vec4(albedo);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(normal.x, normal.y),
+		packVec2(normal),
 		reflectiveness,
 		1.0
 	);

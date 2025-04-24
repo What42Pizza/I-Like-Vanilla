@@ -36,8 +36,6 @@ uniform sampler2D shadowtex0;
 	#define in_out out
 #endif
 
-//#define HAND_DEPTH 0.19 // idk what should actually be here
-
 
 
 // buffer values:
@@ -108,11 +106,6 @@ float maxAbs(vec3 v) {
 	return max(max(r, g), b);
 }
 
-float percentThroughClamped(float value, float low, float high) {
-	float percentThrough = (value - low) / (high - low);
-	return clamp(percentThrough, 0.0, 1.0);
-}
-
 float getColorLum(vec3 color) {
 	return dot(color, vec3(0.2125, 0.7154, 0.0721));
 }
@@ -153,10 +146,6 @@ vec3 smoothMax(vec3 v1, vec3 v2, float a) {
 	float v1Lum = getColorLum(v1);
 	float v2Lum = getColorLum(v2);
 	return (v1 + v2 + sqrt((v1 - v2) * (v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
-}
-
-vec3 smoothClamp(vec3 v, vec3 minV, vec3 maxV, float a) {
-	return smoothMax(smoothMin(v, maxV, a), minV, a);
 }
 
 float cubicInterpolate(float edge0, float edge1, float edge2, float edge3, float value) {
@@ -232,14 +221,6 @@ vec3 transform(mat4 matrix, vec3 pos) {
 bool depthIsHand(float depth) {
 	return depth < 0.9;
 }
-
-// never underestimate trial and error
-#ifdef FSH
-	float estimateDepthFSH(vec2 texcoord, float linearDepth) {
-		float len = length(texcoord * 2.0 - 1.0);
-		return linearDepth + len * len / 8.0;
-	}
-#endif
 
 void adjustLmcoord(inout vec2 lmcoord) {
 	const float low = 0.03125;

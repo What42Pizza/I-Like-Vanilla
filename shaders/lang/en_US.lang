@@ -224,8 +224,7 @@ value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 
-screen.BORDER_FOG_SETTINGS=Border Fog
-screen.BORDER_FOG_SETTINGS.comment=The fog that appears at the edge of loaded chunks (automatically disabled when Distant Horizons is enabled)
+screen.FOG_SETTINGS=Fog Settings
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled
 option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
@@ -244,6 +243,14 @@ value.BORDER_FOG_END.-1=Use Style
 option.BORDER_FOG_CURVE=Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
+
+option.ATMOSPHERIC_FOG_ENABLED=Atmospheric Fog Enabled
+value.ATMOSPHERIC_FOG_ENABLED.-1=Use Style
+value.ATMOSPHERIC_FOG_ENABLED.0=Off
+value.ATMOSPHERIC_FOG_ENABLED.1=On
+
+option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
+value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 
 

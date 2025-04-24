@@ -36,7 +36,7 @@ void main() {
 	gl_FragData[0] = vec4(albedo, 1.0);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(normal.x, normal.y),
+		packVec2(normal),
 		0.0,
 		1.0
 	);
@@ -61,8 +61,8 @@ void main() {
 #endif
 
 void main() {
-	lmcoord = gl_MultiTexCoord2.xy;
 	glcolor = gl_Color.rgb;
+	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	#include "/import/gbufferModelViewInverse.glsl"

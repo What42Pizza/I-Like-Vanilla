@@ -18,6 +18,9 @@
 #include "/utils/screen_to_view.glsl"
 #include "/lib/borderFog/getBorderFogAmount.glsl"
 
+#if ATMOSPHERIC_FOG_ENABLED == 1
+	#include "/utils/getSkyColor.glsl"
+#endif
 #if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
 #endif
@@ -44,6 +47,18 @@ void main() {
 	#else
 		#include "/import/gbufferModelViewInverse.glsl"
 		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
+	#endif
+	
+	
+	
+	// ======== ATMOSPHERIC FOG ======== //
+	
+	#if ATMOSPHERIC_FOG_ENABLED == 1
+		const float FOG_SLOPE = 1000.0 / ATMOSPHERIC_FOG_DENSITY;
+		float dist = length(viewPos);
+		float fogMix = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
+		fogMix *= 1.0 - fogAmount;
+		color = mix(color, getSkyColor(viewPos / dist, false  ARGS_IN), fogMix);
 	#endif
 	
 	

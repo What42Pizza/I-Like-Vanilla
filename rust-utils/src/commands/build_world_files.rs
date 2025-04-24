@@ -92,7 +92,8 @@ uniform sampler2D colortex7;
 uniform sampler2D shadowtex0;
 
 void main() {
-	vec3 color = texelFetch(colortex7, ivec2(gl_FragCoord), 0).rgb;
+	vec3 color = texelFetch(colortex7, ivec2(gl_FragCoord.xy), 0).rgb;
+	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);
 }
 "##[1..];
@@ -103,11 +104,7 @@ void main() {
 #version 330 compatibility
 
 void main() {
-	#ifdef COPY_DEBUG_TO_OUTPUT
-		gl_Position = ftransform();
-	#else
-		gl_Position = vec4(-1.0);
-	#endif
+	gl_Position = ftransform();
 }
 "##[1..];
 	fs::write(world_path.join("composite99.vsh"), vsh_contents)?;

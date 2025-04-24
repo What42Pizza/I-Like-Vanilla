@@ -1,10 +1,10 @@
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.0
+										#define SUN_BRIGHTNESS 1.3
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
-										#define MOON_BRIGHTNESS 1.0
+										#define MOON_BRIGHTNESS 1.2
 #endif
 #if DARKEN_SKY_UNDERGROUND == -1
 #undef DARKEN_SKY_UNDERGROUND
@@ -209,6 +209,14 @@
 #if BORDER_FOG_CURVE == -1
 #undef BORDER_FOG_CURVE
 										#define BORDER_FOG_CURVE 2
+#endif
+#if ATMOSPHERIC_FOG_ENABLED == -1
+#undef ATMOSPHERIC_FOG_ENABLED
+										#define ATMOSPHERIC_FOG_ENABLED 1
+#endif
+#if ATMOSPHERIC_FOG_DENSITY == -1
+#undef ATMOSPHERIC_FOG_DENSITY
+										#define ATMOSPHERIC_FOG_DENSITY 1.5
 #endif
 
 
