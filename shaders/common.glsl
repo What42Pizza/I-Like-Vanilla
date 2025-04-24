@@ -219,7 +219,7 @@ vec3 transform(mat4 matrix, vec3 pos) {
 }
 
 bool depthIsHand(float depth) {
-	return depth < 0.9;
+	return depth < 0.68;
 }
 
 void adjustLmcoord(inout vec2 lmcoord) {

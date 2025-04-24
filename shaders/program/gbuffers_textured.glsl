@@ -17,11 +17,17 @@
 
 #ifdef FSH
 
+#ifdef FIRST_PASS
+	float percentThrough(float v, float low, float high) {
+		return clamp((v - low) / (high - low), 0.0, 1.0);
+	}
+#endif
+
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	
-	albedo.a *= clamp(blockDepth * (2.0 - NEARBY_PARTICLE_TRANSPARENCY) - 0.5, 0.0, 1.0);
+	albedo.a *= percentThrough(blockDepth, 1.0, 1.5);
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));

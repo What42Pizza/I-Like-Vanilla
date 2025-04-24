@@ -1,17 +1,4 @@
 #ifdef FIRST_PASS
-	varying vec3 brightCloudColor;
-	varying vec3 darkCloudColor;
-#endif
-
-
-
-
-
-#ifdef FSH
-
-
-
-#ifdef FIRST_PASS
 	
 	float valueHash(vec3 p) {
 		return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
@@ -117,24 +104,3 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	}
 	
 }
-
-
-
-#endif
-
-
-
-
-
-#ifdef VSH
-
-
-
-void prepareClouds(ARG_OUT) {
-	brightCloudColor = vec3(1.0);
-	darkCloudColor = vec3(0.8, 0.85, 0.95);
-}
-
-
-
-#endif
