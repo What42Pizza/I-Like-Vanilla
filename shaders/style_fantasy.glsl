@@ -1,10 +1,10 @@
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.3
+										#define SUN_BRIGHTNESS 1.25
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
-										#define MOON_BRIGHTNESS 1.2
+										#define MOON_BRIGHTNESS 1.0
 #endif
 #if DARKEN_SKY_UNDERGROUND == -1
 #undef DARKEN_SKY_UNDERGROUND
@@ -102,7 +102,7 @@
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 0.2
+										#define CLOUD_NIGHT_RED 0.15
 #endif
 #if CLOUD_NIGHT_GREEN == -1
 #undef CLOUD_NIGHT_GREEN
@@ -110,7 +110,7 @@
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.5
+										#define CLOUD_NIGHT_BLUE 0.6
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
@@ -118,7 +118,7 @@
 #endif
 #if CLOUD_SUNRISE_GREEN == -1
 #undef CLOUD_SUNRISE_GREEN
-										#define CLOUD_SUNRISE_GREEN 0.8
+										#define CLOUD_SUNRISE_GREEN 0.75
 #endif
 #if CLOUD_SUNRISE_BLUE == -1
 #undef CLOUD_SUNRISE_BLUE
@@ -126,15 +126,15 @@
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.0
+										#define CLOUD_SUNSET_RED 1.2
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 0.8
+										#define CLOUD_SUNSET_GREEN 0.75
 #endif
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 0.6
+										#define CLOUD_SUNSET_BLUE 0.35
 #endif
 
 
@@ -216,7 +216,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 1.5
+										#define ATMOSPHERIC_FOG_DENSITY 2.0
 #endif
 
 
@@ -237,15 +237,15 @@
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
-										#define SKY_NIGHT_RED 0.0
+										#define SKY_NIGHT_RED 0.1
 #endif
 #if SKY_NIGHT_GREEN == -1
 #undef SKY_NIGHT_GREEN
-										#define SKY_NIGHT_GREEN 0.2
+										#define SKY_NIGHT_GREEN 0.4
 #endif
 #if SKY_NIGHT_BLUE == -1
 #undef SKY_NIGHT_BLUE
-										#define SKY_NIGHT_BLUE 0.5
+										#define SKY_NIGHT_BLUE 0.7
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
@@ -265,11 +265,11 @@
 #endif
 #if SKY_HORIZON_NIGHT_GREEN == -1
 #undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 0.45
+										#define SKY_HORIZON_NIGHT_GREEN 0.5
 #endif
 #if SKY_HORIZON_NIGHT_BLUE == -1
 #undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 0.65
+										#define SKY_HORIZON_NIGHT_BLUE 0.8
 #endif
 #if SKY_HORIZON_SUNRISE_RED == -1
 #undef SKY_HORIZON_SUNRISE_RED
@@ -285,15 +285,15 @@
 #endif
 #if SKY_HORIZON_SUNSET_RED == -1
 #undef SKY_HORIZON_SUNSET_RED
-										#define SKY_HORIZON_SUNSET_RED 0.9
+										#define SKY_HORIZON_SUNSET_RED 1.0
 #endif
 #if SKY_HORIZON_SUNSET_GREEN == -1
 #undef SKY_HORIZON_SUNSET_GREEN
-										#define SKY_HORIZON_SUNSET_GREEN 0.85
+										#define SKY_HORIZON_SUNSET_GREEN 0.4
 #endif
 #if SKY_HORIZON_SUNSET_BLUE == -1
 #undef SKY_HORIZON_SUNSET_BLUE
-										#define SKY_HORIZON_SUNSET_BLUE 0.6
+										#define SKY_HORIZON_SUNSET_BLUE 0.2
 #endif
 
 
@@ -372,7 +372,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.5
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.55
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -401,11 +401,11 @@
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
-										#define SKYLIGHT_SUNRISE_GREEN 0.5
+										#define SKYLIGHT_SUNRISE_GREEN 0.6
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.0
+										#define SKYLIGHT_SUNRISE_BLUE 0.2
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
@@ -417,11 +417,11 @@
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
-										#define AMBIENT_SUNRISE_GREEN 0.65
+										#define AMBIENT_SUNRISE_GREEN 0.55
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.45
+										#define AMBIENT_SUNRISE_BLUE 0.65
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
@@ -438,11 +438,11 @@
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
-										#define SKYLIGHT_SUNSET_GREEN 0.55
+										#define SKYLIGHT_SUNSET_GREEN 0.5
 #endif
 #if SKYLIGHT_SUNSET_BLUE == -1
 #undef SKYLIGHT_SUNSET_BLUE
-										#define SKYLIGHT_SUNSET_BLUE 0.05
+										#define SKYLIGHT_SUNSET_BLUE 0.2
 #endif
 #if SKYLIGHT_SUNSET_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNSET_BRIGHTNESS
@@ -450,11 +450,11 @@
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
-										#define AMBIENT_SUNSET_RED 1.05
+										#define AMBIENT_SUNSET_RED 1.1
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
-										#define AMBIENT_SUNSET_GREEN 0.65
+										#define AMBIENT_SUNSET_GREEN 0.6
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
@@ -479,7 +479,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.3
+										#define BLOCK_BLUE 0.35
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -658,11 +658,11 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.6
+										#define AO_AMOUNT 1.5
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.0
+										#define AO_SIZE 1.2
 #endif
 
 
@@ -728,15 +728,15 @@
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.1
+										#define SUNRAYS_AMOUNT_NIGHT 0.15
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
-										#define SUNRAYS_INCREASE_SUNRISE 2.0
+										#define SUNRAYS_INCREASE_SUNRISE 2.2
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 2.0
+										#define SUNRAYS_INCREASE_SUNSET 2.2
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -930,11 +930,11 @@
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
-										#define SATURATION_LIGHT 0.3
+										#define SATURATION_LIGHT 0.2
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.25
+										#define CONTRAST 0.3
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED

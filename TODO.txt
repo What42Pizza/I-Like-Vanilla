@@ -29,6 +29,7 @@ Add settings for temporal filter
 
 
 Other planned:
+Try out 'alphatest.program' and 'blend.program' (in shader.properties, see photon for good examples)
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 turn betterNightVision into a uniform
 Change data buffers to store ints instead of floats?

@@ -1,6 +1,3 @@
-#undef SHADOWS_ENABLED
-#define SHADOWS_ENABLED 0
-
 #ifdef FIRST_PASS
 	
 	in_out vec2 texcoord;
@@ -27,7 +24,7 @@ void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	
-	albedo.a *= percentThrough(blockDepth, 1.0, 1.5);
+	albedo.a *= percentThrough(blockDepth, 1.0, 1.3);
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));

@@ -164,16 +164,15 @@ vec3 cubicInterpolate(vec3 edge0, vec3 edge1, vec3 edge2, vec3 edge3, float valu
 	return vec3(x, y, z);
 }
 
-float bayer2(vec2 a) {
-	a = floor(a);
-	return fract(dot(a, vec2(0.5, a.y * 0.75)));
-}
-float bayer4  (const vec2 a) {return bayer2 (0.5   * a) * 0.25     + bayer2(a); }
-float bayer8  (const vec2 a) {return bayer4 (0.5   * a) * 0.25     + bayer2(a); }
-float bayer16 (const vec2 a) {return bayer4 (0.25  * a) * 0.0625   + bayer4(a); }
-float bayer32 (const vec2 a) {return bayer8 (0.25  * a) * 0.0625   + bayer4(a); }
-float bayer64 (const vec2 a) {return bayer8 (0.125 * a) * 0.015625 + bayer8(a); }
-float bayer128(const vec2 a) {return bayer16(0.125 * a) * 0.015625 + bayer8(a); }
+// Thanks to Jessie (and Complementary) for dithering
+float bayer2  (vec2 a) { a = 0.5 * floor(a); return fract(1.5 * fract(a.y) + a.x); }
+float bayer4  (vec2 a) { return 0.25 * bayer2  (0.5 * a) + bayer2(a); }
+float bayer8  (vec2 a) { return 0.25 * bayer4  (0.5 * a) + bayer2(a); }
+float bayer16 (vec2 a) { return 0.25 * bayer8  (0.5 * a) + bayer2(a); }
+float bayer32 (vec2 a) { return 0.25 * bayer16 (0.5 * a) + bayer2(a); }
+float bayer64 (vec2 a) { return 0.25 * bayer32 (0.5 * a) + bayer2(a); }
+float bayer128(vec2 a) { return 0.25 * bayer64 (0.5 * a) + bayer2(a); }
+float bayer256(vec2 a) { return 0.25 * bayer128(0.5 * a) + bayer2(a); }
 
 float packVec2(vec2 v) {
 	int bits = 0x3F000000; // 0b00111111000000000000000000000000, the perfect float
