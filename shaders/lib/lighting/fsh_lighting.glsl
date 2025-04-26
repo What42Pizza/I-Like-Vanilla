@@ -17,15 +17,15 @@ vec3 getShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#endif
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
-	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos)); // convert to shadow screen space
+	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
 	float bias =
 		0.05
 		+ 0.01 / (lightDot + 0.03)
 		+ distortFactor * distortFactor * 0.5;
-	shadowPos = distort(shadowPos, distortFactor); // apply shadow distortion
+	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= bias * 0.02; // apply shadow bias
+	shadowPos.z -= bias * 0.02;
 	return shadowPos;
 }
 
@@ -34,19 +34,18 @@ vec3 getLessBiasedShadowPos(vec3 viewPos  ARGS_OUT) {
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
-	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos)); // convert to shadow screen space
+	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
-	shadowPos = distort(shadowPos, distortFactor); // apply shadow distortion
+	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= 0.005 * distortFactor; // apply shadow bias
+	shadowPos.z -= 0.005 * distortFactor;
 	return shadowPos;
 }
 
 
 
 float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
-	// surface is facing away from shadowLightPosition
-	if (lightDot < 0.0) return 0.0;
+	if (lightDot < 0.0) return 0.0; // surface is facing away from shadowLightPosition
 	
 	#if PIXELATED_SHADOWS > 0
 		
@@ -54,107 +53,90 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
 		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
 		
-	#elif SHADOW_FILTERING == 2
+	#elif SHADOW_FILTERING == 0
+		
+		// no filtering, pixelated edges
+		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
+		
+	#elif SHADOW_FILTERING == 1
+		
+		// no filtering, smooth edges
+		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		return (texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z) ? 1.0 : 0.0;
+		
+	#else
 		
 		
 		
-		// basic filtering
+		// strange filtering
 		
-		vec3 floatShadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
-		
-		float noiseMult = length(floatShadowPos.xy * 2.0 - 1.0);
-		noiseMult = noiseMult * SHADOW_OFFSET_INCREASE + SHADOW_OFFSET_MIN;
-		noiseMult *= SHADOWS_NOISE * 2.0;
-		#include "/utils/var_rng.glsl"
-		vec2 noise = randomVec2(rng);
-		noise = noise * noise * noiseMult;
-		floatShadowPos.xy += noise;
-		
-		floatShadowPos.xy *= shadowMapResolution;
-		int calcDatasIndex = 0;
-		
-		// sample 2x2 grid and treat sample off/on result as 0/1 bit in calcDatasIndex
-		ivec2 samplePos = ivec2(floatShadowPos.xy);
-		calcDatasIndex += int(texelFetch(shadowtex0, samplePos, 0).r >= floatShadowPos.z);
-		samplePos.x += (fract(floatShadowPos.x) > 0.5) ? 1 : -1;
-		calcDatasIndex += int(texelFetch(shadowtex0, samplePos, 0).r >= floatShadowPos.z) * 2;
-		samplePos.y += (fract(floatShadowPos.y) > 0.5) ? 1 : -1;
-		calcDatasIndex += int(texelFetch(shadowtex0, samplePos, 0).r >= floatShadowPos.z) * 4;
-		samplePos.x += (fract(floatShadowPos.x) > 0.5) ? -1 : 1;
-		calcDatasIndex += int(texelFetch(shadowtex0, samplePos, 0).r >= floatShadowPos.z) * 8;
-		
-		// basically marching squares
-		const vec3[16] allCalcDatas = vec3[16] (
-			vec3(0.0, 0.0, 0.0),
-			vec3(1.0, -1.0, -1.0),
-			vec3(0.0, 1.0, -1.0),
-			vec3(1.0, 0.0, -1.0),
-			vec3(-1.0, 1.0, 1.0),
-			vec3(0.0, 1.0, -1.0),
-			vec3(0.0, 1.0, 0.0),
-			vec3(1.0, 1.0, -1.0),
-			vec3(0.0, -1.0, 1.0),
-			vec3(1.0, -1.0, 0.0),
-			vec3(1.0, -1.0, -1.0),
-			vec3(2.0, -1.0, -1.0),
-			vec3(0.0, 0.0, 1.0),
-			vec3(1.0, -1.0, 1.0),
-			vec3(0.0, 1.0, 1.0),
-			vec3(1.0, 0.0, 0.0)
-		);
-		vec3 calcData = allCalcDatas[calcDatasIndex];
-		
-		float xt = abs(fract(floatShadowPos.x) - 0.5);
-		float yt = abs(fract(floatShadowPos.y) - 0.5);
-		float shadowBrightness = calcData.x + xt * calcData.y + yt * calcData.z;
-		if (calcDatasIndex == 5 || calcDatasIndex == 10) {
-			shadowBrightness = 1.0 - abs(shadowBrightness);
-		}
-		shadowBrightness = clamp(shadowBrightness, 0.0, 1.0);
-		
-		return shadowBrightness;
-		
-		
-		
-	#elif SHADOW_FILTERING == 3
-		
-		
-		
-		// legacy filtering
-		
-		const int SHADOW_OFFSET_COUNT = 17;
-		const float SHADOW_OFFSET_WEIGHTS_TOTAL = 1.0 + 0.94 * 8 + 0.78 * 8;
-		const vec3[SHADOW_OFFSET_COUNT] SHADOW_OFFSETS = vec3[SHADOW_OFFSET_COUNT] (
-			vec3( 0.0 ,  0.0 , 1.0 ),
-			vec3( 0.5 ,  0.0 , 0.94),
-			vec3( 0.0 ,  0.5 , 0.94),
-			vec3(-0.5 ,  0.0 , 0.94),
-			vec3( 0.0 , -0.5 , 0.94),
-			vec3( 0.35,  0.35, 0.94),
-			vec3(-0.35,  0.35, 0.94),
-			vec3( 0.35, -0.35, 0.94),
-			vec3(-0.35, -0.35, 0.94),
-			vec3( 0.38,  0.92, 0.78),
-			vec3( 0.92,  0.38, 0.78),
-			vec3( 0.92, -0.38, 0.78),
-			vec3( 0.38, -0.92, 0.78),
-			vec3(-0.38, -0.92, 0.78),
-			vec3(-0.92, -0.38, 0.78),
-			vec3(-0.92,  0.38, 0.78),
-			vec3(-0.38,  0.92, 0.78)
-		);
+		#if SHADOW_FILTERING == 2
+			const int SHADOW_OFFSET_COUNT = 5;
+			const float SHADOW_OFFSET_WEIGHTS_TOTAL = 3.584;
+			const vec3[SHADOW_OFFSET_COUNT] SHADOW_OFFSETS = vec3[SHADOW_OFFSET_COUNT] (
+				vec3(-0.200,  0.013, 0.967),
+				vec3(-0.124, -0.380, 0.873),
+				vec3(-0.383,  0.462, 0.736),
+				vec3( 0.747, -0.285, 0.580),
+				vec3( 0.613,  0.790, 0.427)
+			);
+		#elif SHADOW_FILTERING == 3
+			const int SHADOW_OFFSET_COUNT = 10;
+			const float SHADOW_OFFSET_WEIGHTS_TOTAL = 7.472;
+			const vec3[SHADOW_OFFSET_COUNT] SHADOW_OFFSETS = vec3[SHADOW_OFFSET_COUNT] (
+				vec3(-0.069,  0.072, 0.992),
+				vec3( 0.161, -0.119, 0.967),
+				vec3( 0.212,  0.212, 0.926),
+				vec3(-0.261, -0.303, 0.873),
+				vec3(-0.497, -0.058, 0.809),
+				vec3( 0.027, -0.599, 0.736),
+				vec3(-0.460,  0.528, 0.659),
+				vec3( 0.702, -0.384, 0.580),
+				vec3( 0.215,  0.874, 0.502),
+				vec3( 0.917,  0.400, 0.427)
+			);
+		#elif SHADOW_FILTERING == 4
+			const int SHADOW_OFFSET_COUNT = 20;
+			const float SHADOW_OFFSET_WEIGHTS_TOTAL = 15.239;
+			const vec3[SHADOW_OFFSET_COUNT] SHADOW_OFFSETS = vec3[SHADOW_OFFSET_COUNT] (
+				vec3(-0.029,  0.040, 0.998),
+				vec3( 0.094, -0.034, 0.992),
+				vec3(-0.100, -0.112, 0.981),
+				vec3( 0.101,  0.173, 0.967),
+				vec3(-0.248,  0.033, 0.948),
+				vec3( 0.028, -0.299, 0.926),
+				vec3(-0.189,  0.295, 0.901),
+				vec3( 0.353, -0.188, 0.873),
+				vec3( 0.417,  0.170, 0.842),
+				vec3( 0.159,  0.474, 0.809),
+				vec3(-0.439, -0.331, 0.773),
+				vec3(-0.593, -0.091, 0.736),
+				vec3(-0.264, -0.594, 0.698),
+				vec3( 0.169, -0.679, 0.659),
+				vec3(-0.672,  0.333, 0.620),
+				vec3(-0.315,  0.736, 0.580),
+				vec3( 0.668, -0.526, 0.541),
+				vec3( 0.900,  0.010, 0.502),
+				vec3( 0.729,  0.609, 0.464),
+				vec3( 0.233,  0.972, 0.427)
+			);
+		#endif
 		
 		vec3 shadowPos = getLessBiasedShadowPos(viewPos  ARGS_IN);
-		float offsetMult = length(shadowPos.xy * 2.0 - 1.0);
-		offsetMult = offsetMult * SHADOW_OFFSET_INCREASE + SHADOW_OFFSET_MIN;
-		vec3 offsetShadowPos = shadowPos;
-		#include "/utils/var_rng.glsl"
-		vec2 noise = randomVec2(rng);
-		offsetShadowPos.xy += noise * offsetMult * 0.2;
+		
+		float dither = bayer64(gl_FragCoord.xy);
+		#include "/import/frameCounter.glsl"
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		float randomAngle = (dither - 0.5) * 2.0 * PI;
+		mat2 rotationMatrix;
+		#include "/import/invAspectRatio.glsl"
+		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * 0.005 * SHADOWS_NOISE;
+		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * 0.005 * SHADOWS_NOISE;
 		
 		float shadowBrightness = 0.0;
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {
-			if (texture2D(shadowtex0, offsetShadowPos.xy + SHADOW_OFFSETS[i].xy * offsetMult).r >= offsetShadowPos.z) {
+			if (texture2D(shadowtex0, shadowPos.xy + rotationMatrix * SHADOW_OFFSETS[i].xy).r >= shadowPos.z) {
 				float currentShadowWeight = SHADOW_OFFSETS[i].z;
 				shadowBrightness += currentShadowWeight;
 			}
@@ -167,21 +149,8 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			const float shadowMult1 = 2.0; // for when lightDot is 1.0 (sun is directly facing surface)
 			const float shadowMult2 = 3.0; // for when lightDot is 0.0 (sun is angled relative to surface)
 		#endif
-		return min(shadowBrightness * (shadowMult2 - lightDot * (shadowMult2 - shadowMult1)), 1.0);
-		
-		
-		
-	#elif SHADOW_FILTERING == 1
-		
-		// no filtering, smooth edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
-		return (texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z) ? 1.0 : 0.0;
-		
-	#else
-		
-		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
-		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
+		float shadowSample = min(shadowBrightness * mix(shadowMult1, shadowMult2, lightDot), 1.0);
+		return shadowSample * shadowSample;
 		
 	#endif
 }

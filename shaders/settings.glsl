@@ -19,6 +19,7 @@ const float drynessHalflife       = 50.0f;
 const float centerDepthHalflife   = 2.5f;
 const float eyeBrightnessHalflife = 3.0f;
 const float ambientOcclusionLevel = 1.0;
+const float shadowIntervalSize    = 0.25;
 */
 
 
@@ -153,12 +154,3 @@ const float ambientOcclusionLevel = 1.0;
 
 #define CONTRAST_DETECT_COLOR vec3(CONTRAST_DETECT_RED, CONTRAST_DETECT_GREEN, CONTRAST_DETECT_BLUE)
 #define HSV_POSTERIZE_QUALITY vec3(HSV_POSTERIZE_HUE_QUALITY, HSV_POSTERIZE_SATURATION_QUALITY, HSV_POSTERIZE_BRIGHTNESS_QUALITY)
-
-
-
-
-
-// misc
-
-const float SHADOW_OFFSET_INCREASE = 1.3 / shadowMapResolution;
-const float SHADOW_OFFSET_MIN = 1.1 / pow(shadowMapResolution, 0.95);

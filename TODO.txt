@@ -18,6 +18,8 @@ Make sure settings are tuned for:
 
 
 Planned for next version:
+Rework shadow bias
+Move side shading and handheld lighting to deferred
 Update documentation
 Fix far-away reflections
 Add setting 'Shadows on Transparents'

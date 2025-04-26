@@ -557,8 +557,9 @@ option.SHADOW_FILTERING=Shadow Filtering
 option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Low)
 value.SHADOW_FILTERING.0=Off (pixelated)
 value.SHADOW_FILTERING.1=Off (smooth)
-value.SHADOW_FILTERING.2=On (default)
-value.SHADOW_FILTERING.3=On (legacy version)
+value.SHADOW_FILTERING.2=On (Low)
+value.SHADOW_FILTERING.3=On (Medium)
+value.SHADOW_FILTERING.4=On (High)
 
 option.SHADOWS_NOISE=Shadows Noise Amount
 option.SHADOWS_NOISE.comment=Amount of noise to apply to shadow filtering

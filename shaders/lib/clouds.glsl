@@ -70,6 +70,7 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	vec3 pos = cameraPosition;
 	float posStartY = clamp(pos.y, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
+	//if (posStartY == posEndY) return; // TODO: test if this improve performance
 	float maxY = abs(playerPos.y);
 	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
 	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;

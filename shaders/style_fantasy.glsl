@@ -61,7 +61,7 @@
 #endif
 #if REALISTIC_CLOUD_TRANSPARENCY == -1
 #undef REALISTIC_CLOUD_TRANSPARENCY
-										#define REALISTIC_CLOUD_TRANSPARENCY 0.0
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.3
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
@@ -558,7 +558,7 @@
 #endif
 #if SHADOWS_NOISE == -1
 #undef SHADOWS_NOISE
-										#define SHADOWS_NOISE 0.25
+										#define SHADOWS_NOISE 0.4
 #endif
 #if PIXELATED_SHADOWS == -1
 #undef PIXELATED_SHADOWS
