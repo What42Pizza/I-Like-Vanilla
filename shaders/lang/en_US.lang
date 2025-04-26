@@ -550,11 +550,10 @@ option.shadowDistance=Shadow Distance
 option.shadowDistance.comment=Maximum distance that shadows are rendered\n\n(Performance cost: Unknown)
 
 option.SHADOW_DISTORT_ADDITION=Shadow Distortion
-option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of closer shadows. Lower values make closer shadows sharper, and vice versa\n\n(Performance cost: None)
-value.SHADOW_DISTORT_ADDITION.-1=Use Style
+option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of nearby shadows. Lower values make closer shadows sharper, and vice versa\n\n(Performance cost: None)
 
 option.SHADOW_FILTERING=Shadow Filtering
-option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Low)
+option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Medium)
 value.SHADOW_FILTERING.0=Off (pixelated)
 value.SHADOW_FILTERING.1=Off (smooth)
 value.SHADOW_FILTERING.2=On (Low)

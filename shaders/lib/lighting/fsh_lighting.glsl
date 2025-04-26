@@ -19,17 +19,13 @@ vec3 getShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#include "/import/shadowModelView.glsl"
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
-	float bias =
-		0.05
-		+ 0.01 / (lightDot + 0.03)
-		+ distortFactor * distortFactor * 0.5;
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= bias * 0.02;
+	shadowPos.z -= distortFactor * (1.0 - lightDot) * (1.0 - lightDot) / shadowMapResolution * 10.0 + shadowPos.z * shadowPos.z * 0.00065;
 	return shadowPos;
 }
 
-vec3 getLessBiasedShadowPos(vec3 viewPos  ARGS_OUT) {
+vec3 getLessBiasedShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#include "/import/shadowProjection.glsl"
@@ -38,7 +34,7 @@ vec3 getLessBiasedShadowPos(vec3 viewPos  ARGS_OUT) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= 0.005 * distortFactor;
+	shadowPos.z -= shadowPos.z * shadowPos.z * shadowPos.z * 0.00135;
 	return shadowPos;
 }
 
@@ -123,7 +119,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			);
 		#endif
 		
-		vec3 shadowPos = getLessBiasedShadowPos(viewPos  ARGS_IN);
+		vec3 shadowPos = getLessBiasedShadowPos(viewPos, lightDot  ARGS_IN);
 		
 		float dither = bayer64(gl_FragCoord.xy);
 		#include "/import/frameCounter.glsl"
@@ -131,8 +127,8 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		float randomAngle = (dither - 0.5) * 2.0 * PI;
 		mat2 rotationMatrix;
 		#include "/import/invAspectRatio.glsl"
-		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * 0.005 * SHADOWS_NOISE;
-		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * 0.005 * SHADOWS_NOISE;
+		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * SHADOWS_NOISE / shadowMapResolution * 5.0;
+		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * SHADOWS_NOISE / shadowMapResolution * 5.0;
 		
 		float shadowBrightness = 0.0;
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {

@@ -552,10 +552,6 @@
 
 
 
-#if SHADOW_DISTORT_ADDITION == -1
-#undef SHADOW_DISTORT_ADDITION
-										#define SHADOW_DISTORT_ADDITION 0.09
-#endif
 #if SHADOWS_NOISE == -1
 #undef SHADOWS_NOISE
 										#define SHADOWS_NOISE 0.4
