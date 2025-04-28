@@ -5,7 +5,7 @@ use std::fs;
 
 pub fn create_file_contents(world_name: &str, shader_name: &str, shader_type: &str) -> String {
 	let shader_name_uppercase = shader_name.to_uppercase();
-	let mut output = format!(r##"
+	format!(r##"
 #version 330 compatibility
 
 #define SHADER_{shader_name_uppercase}
@@ -39,8 +39,7 @@ pub fn create_file_contents(world_name: &str, shader_name: &str, shader_type: &s
 #define ARG_IN
 #define ARG_OUT
 #include "/program/{shader_name}.glsl"
-"##);
-	output[1..].to_string()
+"##)[1..].to_string()
 }
 
 

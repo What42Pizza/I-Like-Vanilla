@@ -172,7 +172,7 @@ const int shadowMapResolution = 1280; // [256 384 512 768 896 1024 1280 1536 204
 const float shadowDistance = 160.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0 224.0 256.0 320.0 384.0 512.0 768.0 1024.0]
 #define SHADOW_DISTORT_ADDITION 0.09 // [0.05 0.06 0.07 0.08 0.09 0.1 0.11 0.12 0.13 0.14 0.15 0.2 0.25 0.3]
 #define SHADOW_FILTERING 3 // [0 1 2 3 4]
-#define SHADOWS_NOISE -1 // [-1 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
+#define SHADOWS_NOISE -1 // [-1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]
 #define PIXELATED_SHADOWS -1 // [-1 0 8 16 32 64 128]
 #define EXCLUDE_FOLIAGE -1 // [-1 0 1]
 #define CEL_SHADING_ENABLED -1 // [-1 0 1]

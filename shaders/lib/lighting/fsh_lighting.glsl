@@ -34,7 +34,7 @@ vec3 getLessBiasedShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= shadowPos.z * shadowPos.z * shadowPos.z * 0.00135;
+	shadowPos.z -= SHADOWS_NOISE * 0.02 / shadowMapResolution + length(viewPos) * 0.000003;
 	return shadowPos;
 }
 
@@ -124,11 +124,13 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		float dither = bayer64(gl_FragCoord.xy);
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-		float randomAngle = (dither - 0.5) * 2.0 * PI;
+		float randomAngle = dither * 2.0 * PI;
 		mat2 rotationMatrix;
-		#include "/import/invAspectRatio.glsl"
-		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * SHADOWS_NOISE / shadowMapResolution * 5.0;
-		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * SHADOWS_NOISE / shadowMapResolution * 5.0;
+		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle));
+		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle));
+		float noiseMult = SHADOWS_NOISE / shadowMapResolution * 3.0 * (1.0 + 2.0 * length(shadowPos.xy - 0.5));
+		rotationMatrix[0] *= noiseMult;
+		rotationMatrix[1] *= noiseMult;
 		
 		float shadowBrightness = 0.0;
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {
@@ -145,7 +147,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			const float shadowMult1 = 2.0; // for when lightDot is 1.0 (sun is directly facing surface)
 			const float shadowMult2 = 3.0; // for when lightDot is 0.0 (sun is angled relative to surface)
 		#endif
-		float shadowSample = min(shadowBrightness * mix(shadowMult1, shadowMult2, lightDot), 1.0);
+		float shadowSample = min(shadowBrightness * 3.0, 1.0);
 		return shadowSample * shadowSample;
 		
 	#endif

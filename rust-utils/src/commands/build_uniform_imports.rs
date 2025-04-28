@@ -4,44 +4,32 @@ use std::fs;
 
 
 pub fn create_file_contents(uniform: &UniformData) -> String {
-	let raw_output = format!(
-		r##"
-			#define import_{name}
-			#ifdef FIRST_PASS
-				{type_str} {name} = {dummy_value_str};
-			#endif
-		"##,
+	format!(
+r##"
+#define import_{name}
+#ifdef FIRST_PASS
+	{type_str} {name} = {dummy_value_str};
+#endif
+"##,
 		name = uniform.name,
 		type_str = uniform.type_str,
 		dummy_value_str = uniform.dummy_value_str
-	);
-	let mut output = String::with_capacity(raw_output.len());
-	for curr_char in raw_output.chars() {
-		if curr_char == '\t' {continue;}
-		output.push(curr_char);
-	}
-	output
+	)[1..].to_string()
 }
 
 
 
 pub fn create_switchboard_file_contents(uniform: &UniformData) -> String {
-	let raw_output = format!(
-		r##"
-			#ifdef import_{name}
-				{input_type_str} {type_str} {name};
-			#endif
-		"##,
+	format!(
+r##"
+	#ifdef import_{name}
+		{input_type_str} {type_str} {name};
+	#endif
+"##,
 		name = uniform.name,
 		type_str = uniform.type_str,
 		input_type_str = if uniform.is_attribute {"attribute"} else {"uniform"}
-	);
-	let mut output = String::with_capacity(raw_output.len());
-	for curr_char in raw_output.chars() {
-		if curr_char == '\t' {continue;}
-		output.push(curr_char);
-	}
-	output
+	)[1..].to_string()
 }
 
 

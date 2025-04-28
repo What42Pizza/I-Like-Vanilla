@@ -42,11 +42,16 @@ void main() {
 		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 	#endif
 	
+	#include "/import/gbufferModelViewInverse.glsl"
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#else
-		#include "/import/gbufferModelViewInverse.glsl"
 		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
+	#endif
+	#if ATMOSPHERIC_FOG_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		playerPos.y *= 0.02;
+		float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
 	#endif
 	
 	
@@ -56,6 +61,7 @@ void main() {
 	#if ATMOSPHERIC_FOG_ENABLED == 1
 		const float FOG_SLOPE = 1000.0 / ATMOSPHERIC_FOG_DENSITY;
 		float dist = length(viewPos);
+		dist *= distMult;
 		float fogMix = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
 		fogMix *= 1.0 - fogAmount;
 		color = mix(color, getSkyColor(viewPos / dist, false  ARGS_IN), fogMix);
@@ -87,7 +93,7 @@ void main() {
 		#if VOL_SUNRAYS_ENABLED == 1
 			#include "/import/sunAngle.glsl"
 			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
-			float rawVolSunraysAmount = getVolSunraysAmount(viewPos  ARGS_IN) * volSunraysAmountMult;
+			float rawVolSunraysAmount = getVolSunraysAmount(viewPos, distMult  ARGS_IN) * volSunraysAmountMult;
 			rawVolSunraysAmount *= 1.0 - fogAmount;
 			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
 			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;

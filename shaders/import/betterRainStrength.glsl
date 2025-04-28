@@ -1,5 +1,4 @@
-
 #define import_betterRainStrength
 #ifdef FIRST_PASS
-float betterRainStrength = 0.0;
+	float betterRainStrength = 0.0;
 #endif

@@ -554,7 +554,7 @@
 
 #if SHADOWS_NOISE == -1
 #undef SHADOWS_NOISE
-										#define SHADOWS_NOISE 0.5
+										#define SHADOWS_NOISE 0.6
 #endif
 #if PIXELATED_SHADOWS == -1
 #undef PIXELATED_SHADOWS

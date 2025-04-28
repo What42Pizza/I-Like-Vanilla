@@ -16,7 +16,7 @@ vec3 getShadowPos(vec3 viewPos  ARGS_OUT) {
 
 
 
-float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
+float getVolSunraysAmount(vec3 viewPos, float distMult  ARGS_OUT) {
 	
 	float blockDepth = length(viewPos);
 	vec3 viewPosStep = normalize(viewPos) * (blockDepth / SUNRAYS_QUALITY);
@@ -43,7 +43,7 @@ float getVolSunraysAmount(vec3 viewPos  ARGS_OUT) {
 		pos += viewPosStep;
 		
 	}
-	float sunraysAmount = total / SUNRAYS_QUALITY * blockDepth;
+	float sunraysAmount = total / SUNRAYS_QUALITY * blockDepth * distMult;
 	
 	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;
