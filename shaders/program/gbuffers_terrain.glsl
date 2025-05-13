@@ -82,6 +82,23 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 
+vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal  ARGS_OUT) {
+    // Step 1: Project the point onto the plane
+    vec3 toPoint = point - planeOrigin;
+    vec3 normal = normalize(planeNormal);
+    vec3 projected = point - dot(toPoint, normal) * normal;
+
+    // Step 2: Create 2D basis vectors (u and v) on the plane
+    vec3 x = cross(normal, vec3(0.0, 1.0, 0.0));
+    if (dot(x, x) < 0.001) x = cross(normal, vec3(1.0, 0.0, 0.0));
+    x = normalize(x);
+    vec3 y = cross(normal, x);
+
+    // Step 3: Get 2D coordinates
+    vec3 relative = projected - planeOrigin;
+    return vec2(dot(relative, x), dot(relative, y));
+}
+
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
@@ -106,6 +123,35 @@ void main() {
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	
+	
+	//#define WORLD_TEXTURE_SCALING 2
+	//#define TEXTURE_SIZE 16
+	//vec2 scale = textureSize(MAIN_TEXTURE, 0) / TEXTURE_SIZE;
+	////texcoord *= scale;
+	//vec2 texcoordFract = fract(texcoord);
+	//#include "/import/cameraPosition.glsl"
+	//vec3 worldPos = playerPos + cameraPosition;
+	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal  ARGS_IN);
+	//texcoordFract += mod(worldTexPos, WORLD_TEXTURE_SCALING);
+	//texcoordFract /= WORLD_TEXTURE_SCALING;
+	////texcoord = floor(texcoord) + texcoordFract;
+	////texcoord /= scale;
+	
+	
+	// fun way to screw up the textures:
+	//#define WORLD_TEXTURE_SCALING 2
+	//#define TEXTURE_SIZE 16
+	//vec2 scale = textureSize(MAIN_TEXTURE, 0) / TEXTURE_SIZE;
+	//texcoord *= scale;
+	//vec2 texcoordFract = fract(texcoord);
+	//#include "/import/cameraPosition.glsl"
+	//vec3 worldPos = playerPos + cameraPosition;
+	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal  ARGS_IN);
+	//texcoordFract += mod(worldTexPos, WORLD_TEXTURE_SCALING);
+	//texcoordFract /= WORLD_TEXTURE_SCALING;
+	//texcoord = floor(texcoord) + texcoordFract;
+	//texcoord /= scale;
 	
 	
 	#if WAVING_ENABLED == 1
