@@ -6,26 +6,25 @@
 
 
 
-vec3 getShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
+vec3 getPixelatedShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-	#if PIXELATED_SHADOWS > 0
-		#include "/import/cameraPosition.glsl"
-		playerPos += cameraPosition;
-		playerPos = floor(playerPos * PIXELATED_SHADOWS + normal * 0.15) / PIXELATED_SHADOWS;
-		playerPos -= cameraPosition;
-	#endif
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
+	#include "/import/cameraPosition.glsl"
+	playerPos += cameraPosition;
+	playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
+	playerPos -= cameraPosition;
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= distortFactor * (1.0 - lightDot) * (1.0 - lightDot) / shadowMapResolution * 10.0 + shadowPos.z * shadowPos.z * 0.00065;
+	shadowPos.z -= 0.00009 + length(viewPos) * 0.02 / shadowMapResolution;
 	return shadowPos;
 }
 
-vec3 getLessBiasedShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
+vec3 getShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
+	viewPos += normal * 0.001 * (25.0 + length(viewPos));
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#include "/import/shadowProjection.glsl"
@@ -34,7 +33,6 @@ vec3 getLessBiasedShadowPos(vec3 viewPos, float lightDot  ARGS_OUT) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= SHADOWS_NOISE * 0.02 / shadowMapResolution + length(viewPos) * 0.000003;
 	return shadowPos;
 }
 
@@ -46,19 +44,19 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#if PIXELATED_SHADOWS > 0
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		vec3 shadowPos = getPixelatedShadowPos(viewPos, lightDot, normal  ARGS_IN);
 		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
 		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
-		vec3 shadowPos = getShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
 		return (texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#else
@@ -119,7 +117,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			);
 		#endif
 		
-		vec3 shadowPos = getLessBiasedShadowPos(viewPos, lightDot  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
 		
 		float dither = bayer64(gl_FragCoord.xy);
 		#include "/import/frameCounter.glsl"
@@ -140,14 +138,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			}
 		}
 		shadowBrightness /= SHADOW_OFFSET_WEIGHTS_TOTAL;
-		#if TEMPORAL_FILTER_ENABLED == 1
-			const float shadowMult1 = 1.4; // for when lightDot is 1.0 (sun is directly facing surface)
-			const float shadowMult2 = 2.2; // for when lightDot is 0.0 (sun is angled relative to surface)
-		#else
-			const float shadowMult1 = 2.0; // for when lightDot is 1.0 (sun is directly facing surface)
-			const float shadowMult2 = 3.0; // for when lightDot is 0.0 (sun is angled relative to surface)
-		#endif
-		float shadowSample = min(shadowBrightness * 3.0, 1.0);
+		float shadowSample = min(shadowBrightness * 2.5, 1.0);
 		return shadowSample * shadowSample;
 		
 	#endif

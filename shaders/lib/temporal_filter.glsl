@@ -54,8 +54,8 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
 	//const float blendMin = 0.3;
 	//const float blendMax = 0.98;
-	const float blendVariable = 0.05;
-	const float blendConstant = 0.75;
+	const float blendVariable = 0.07;
+	const float blendConstant = 0.73;
 	const float depthFactor = 0.01;
 	
 	#include "/import/viewSize.glsl"

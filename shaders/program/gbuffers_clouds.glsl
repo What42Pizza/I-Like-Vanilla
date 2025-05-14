@@ -60,9 +60,9 @@ void main() {
 	#include "/import/sunPosition.glsl"
 	#include "/import/moonPosition.glsl"
 	#include "/import/dayPercent.glsl"
-	float brightness = 0.7
-		+ 0.175 * dot(normal, normalize(sunPosition)) * dayPercent
-		+ 0.15 * dot(normal, normalize(moonPosition)) * (1.0 - dayPercent);
+	float brightness = 0.725
+		+ 0.1 * dot(normal, normalize(sunPosition)) * dayPercent
+		+ 0.075 * dot(normal, normalize(moonPosition)) * (1.0 - dayPercent);
 	colorMult = getCloudColor(brightness  ARGS_IN);
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;

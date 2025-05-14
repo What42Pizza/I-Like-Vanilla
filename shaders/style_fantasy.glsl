@@ -61,7 +61,7 @@
 #endif
 #if REALISTIC_CLOUD_TRANSPARENCY == -1
 #undef REALISTIC_CLOUD_TRANSPARENCY
-										#define REALISTIC_CLOUD_TRANSPARENCY 0.3
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.25
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
@@ -216,7 +216,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 1.2
+										#define ATMOSPHERIC_FOG_DENSITY 1.0
 #endif
 
 
@@ -327,7 +327,7 @@
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.95
+										#define SKYLIGHT_DAY_GREEN 0.9
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -339,11 +339,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.65
+										#define AMBIENT_DAY_RED 0.55
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.7
+										#define AMBIENT_DAY_GREEN 0.65
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -554,7 +554,7 @@
 
 #if SHADOWS_NOISE == -1
 #undef SHADOWS_NOISE
-										#define SHADOWS_NOISE 0.5
+										#define SHADOWS_NOISE 0.6
 #endif
 #if PIXELATED_SHADOWS == -1
 #undef PIXELATED_SHADOWS
@@ -1034,11 +1034,11 @@
 #endif
 #if WAVING_AMOUNT_2 == -1
 #undef WAVING_AMOUNT_2
-										#define WAVING_AMOUNT_2 0.75
+										#define WAVING_AMOUNT_2 0.7
 #endif
 #if WAVING_AMOUNT_3 == -1
 #undef WAVING_AMOUNT_3
-										#define WAVING_AMOUNT_3 1.5
+										#define WAVING_AMOUNT_3 1.3
 #endif
 #if WAVING_WEATHER_MULT == -1
 #undef WAVING_WEATHER_MULT
