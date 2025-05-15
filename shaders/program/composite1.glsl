@@ -1,17 +1,55 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		flat in_out vec2 lightCoord;
+		flat in_out float depthSunraysAmountMult;
+	#endif
+	#if VOL_SUNRAYS_ENABLED == 1
+		flat in_out float volSunraysAmountMult;
+		flat in_out float volSunraysAmountMax;
+	#endif
 #endif
 
 
 
 #ifdef FSH
 
+#include "/utils/screen_to_view.glsl"
+#include "/lib/borderFog/getBorderFogAmount.glsl"
 
+#if ATMOSPHERIC_FOG_ENABLED == 1
+	#include "/utils/getSkyColor.glsl"
+#endif
+#if DEPTH_SUNRAYS_ENABLED == 1
+	#include "/lib/sunrays_depth.glsl"
+#endif
+#if VOL_SUNRAYS_ENABLED == 1
+	#include "/lib/sunrays_vol.glsl"
+#endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
-	#if BLOOM_ENABLED == 1
-		vec3 bloomColor = color;
+	
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+	#ifdef DISTANT_HORIZONS
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
+		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
+	#endif
+	
+	#include "/import/gbufferModelViewInverse.glsl"
+	#ifdef DISTANT_HORIZONS
+		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
+	#else
+		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
+	#endif
+	#if ATMOSPHERIC_FOG_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		playerPos.y *= 0.02;
+		float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
+		playerPos.y /= 0.02;
 	#endif
 	
 	
@@ -28,7 +66,48 @@ void main() {
 		#endif
 		normalizedBrightness *= vec2(0.5, 1.0); // weights
 		float autoExposureAmount = max(normalizedBrightness.x, normalizedBrightness.y);
-		color *= mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureAmount);
+		float autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureAmount);
+		autoExposureMult = mix(autoExposureMult, 1.0, fogAmount);
+		color *= autoExposureMult;
+	#endif
+	
+	
+	
+	// ======== ATMOSPHERIC FOG ======== //
+	
+	#if ATMOSPHERIC_FOG_ENABLED == 1
+		const float FOG_SLOPE = 400.0 / ATMOSPHERIC_FOG_DENSITY;
+		float dist = length(viewPos);
+		dist *= distMult;
+		float atmoFogAmount = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
+		atmoFogAmount *= 1.0 - fogAmount;
+		vec3 fogColor = getSkyColor(viewPos / dist, false  ARGS_IN);
+		color += fogColor * atmoFogAmount;
+	#endif
+	
+	
+	
+	// ======== SUNRAYS ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		
+		#if DEPTH_SUNRAYS_ENABLED == 1
+			#include "/import/isSun.glsl"
+			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+			vec3 depthSunraysAddition = getDepthSunraysAmount(ARG_IN) * depthSunraysAmountMult * depthSunraysColor;
+			depthSunraysAddition *= 1.0 - fogAmount;
+			color += depthSunraysAddition;
+		#endif
+		#if VOL_SUNRAYS_ENABLED == 1
+			#include "/import/sunAngle.glsl"
+			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
+			float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN) * volSunraysAmountMult;
+			rawVolSunraysAmount *= 1.0 - fogAmount;
+			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
+			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+			color = mix(volSunraysColor, color, max(volSunraysAmount, volSunraysAmountMax));
+		#endif
+		
 	#endif
 	
 	
@@ -36,10 +115,10 @@ void main() {
 	// ======== BLOOM FILTERING ======== //
 	
 	#if BLOOM_ENABLED == 1
-		float bloomMult = getColorLum(bloomColor * vec3(2.0, 1.0, 0.4));
+		float bloomMult = getColorLum(color * vec3(2.0, 1.0, 0.4));
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
-		bloomMult = clamp(bloomMult, 0.0, 1.0);
-		bloomColor *= bloomMult;
+		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
+		vec3 bloomColor = color * bloomMult;
 	#endif
 	
 	
@@ -62,6 +141,47 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		#include "/import/ambientSunPercent.glsl"
+		#include "/import/ambientMoonPercent.glsl"
+		#include "/import/ambientSunrisePercent.glsl"
+		#include "/import/ambientSunsetPercent.glsl"
+	#endif
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+	
+		#include "/import/shadowLightPosition.glsl"
+		#include "/import/gbufferProjection.glsl"
+		vec3 lightPos = shadowLightPosition * mat3(gbufferProjection);
+		lightPos /= lightPos.z;
+		lightCoord = lightPos.xy * 0.5 + 0.5;
+		
+		#include "/import/isSun.glsl"
+		if (isSun) {
+			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY;
+			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		} else {
+			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT;
+		}
+		#include "/import/rainStrength.glsl"
+		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		
+	#endif
+	
+	#if VOL_SUNRAYS_ENABLED == 1
+		#include "/import/sunLightBrightness.glsl"
+		#include "/import/moonLightBrightness.glsl"
+		#include "/import/sunAngle.glsl"
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY : SUNRAYS_AMOUNT_NIGHT;
+		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
+		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
+		#include "/import/rainStrength.glsl"
+		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
+	#endif
+	
 }
 
 #endif

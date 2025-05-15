@@ -67,6 +67,7 @@ void main() {
 	
 	
 	// ======== HSV POSTERIZE ======== //
+	
 	#if HSV_POSTERIZE_ENABLED == 1
 		doHsvPosterize(color  ARGS_IN);
 	#endif

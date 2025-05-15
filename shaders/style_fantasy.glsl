@@ -520,7 +520,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.1
+										#define CAVE_AMBIENT_BRIGHTNESS 0.15
 #endif
 
 
@@ -778,7 +778,7 @@
 
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 15
+										#define SUNRAYS_MIN_SURFACE 12
 #endif
 #if SUNRAYS_MIN_UNDERGROUND == -1
 #undef SUNRAYS_MIN_UNDERGROUND
@@ -910,7 +910,7 @@
 #endif
 #if AUTO_EXPOSURE_DARK_MULT == -1
 #undef AUTO_EXPOSURE_DARK_MULT
-										#define AUTO_EXPOSURE_DARK_MULT 2.0
+										#define AUTO_EXPOSURE_DARK_MULT 1.7
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE

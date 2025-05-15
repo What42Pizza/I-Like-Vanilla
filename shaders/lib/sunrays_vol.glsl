@@ -1,25 +1,19 @@
-#include "/utils/screen_to_view.glsl"
-
-
-
-vec3 getShadowPos(vec3 viewPos  ARGS_OUT) {
-	#include "/import/gbufferModelViewInverse.glsl"
-	vec4 playerPos = gbufferModelViewInverse * startMat(viewPos);
+vec3 getShadowPos(vec3 playerPos  ARGS_OUT) {
 	#include "/import/shadowProjection.glsl"
 	#include "/import/shadowModelView.glsl"
-	vec3 shadowPos = (shadowProjection * (shadowModelView * playerPos)).xyz; // convert to shadow screen space
+	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
-	shadowPos = distort(shadowPos, distortFactor); // apply shadow distortion
+	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
 	return shadowPos;
 }
 
 
 
-float getVolSunraysAmount(vec3 viewPos, float distMult  ARGS_OUT) {
+float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	
-	float blockDepth = length(viewPos);
-	vec3 viewPosStep = normalize(viewPos) * (blockDepth / SUNRAYS_QUALITY);
+	float blockDepth = length(playerPos);
+	vec3 playerPosStep = normalize(playerPos) * (blockDepth / SUNRAYS_QUALITY);
 	vec3 pos = vec3(0.0);
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -27,7 +21,7 @@ float getVolSunraysAmount(vec3 viewPos, float distMult  ARGS_OUT) {
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
-	pos += viewPosStep * (dither - 0.5);
+	pos += playerPosStep * (dither - 0.5);
 	
 	float total = 0.0;
 	for (int i = 0; i < SUNRAYS_QUALITY; i ++) {
@@ -40,18 +34,17 @@ float getVolSunraysAmount(vec3 viewPos, float distMult  ARGS_OUT) {
 			total *= 1.0 + diff;
 		}
 		
-		pos += viewPosStep;
+		pos += playerPosStep;
 		
 	}
 	float sunraysAmount = total / SUNRAYS_QUALITY * blockDepth * distMult;
 	
 	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;
-	sunraysAmount += (sunraysAmount > 0.0 ? 1.0 : 0.0) * mix(SUNRAYS_MIN_UNDERGROUND, SUNRAYS_MIN_SURFACE, skyBrightness);
+	float amountMin = mix(SUNRAYS_MIN_UNDERGROUND, SUNRAYS_MIN_SURFACE, skyBrightness * skyBrightness);
+	vec2 blockLmCoords = unpackVec2(texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).x);
+	sunraysAmount += (sunraysAmount > 0.0 ? 1.0 : 0.0) * amountMin * (0.3 + 1.5 * blockLmCoords.y);
 	sunraysAmount *= 0.01;
-	
-	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = (gbufferModelViewInverse * startMat(pos)).xyz;
 	
 	return sunraysAmount;
 }
