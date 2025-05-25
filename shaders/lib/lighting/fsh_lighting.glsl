@@ -146,7 +146,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 
 
 
-float getSkyBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_OUT) {
+float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_OUT) {
 	
 	// get normal dot sun/moon pos
 	#ifdef OVERWORLD
@@ -158,24 +158,24 @@ float getSkyBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_
 	
 	// sample shadow
 	#if SHADOWS_ENABLED == 1
-		float skyBrightness = sampleShadow(viewPos, lightDot, normal  ARGS_IN);
+		float shadowBrightness = sampleShadow(viewPos, lightDot, normal  ARGS_IN);
 		#ifdef DISTANT_HORIZONS
 			#include "/import/invFar.glsl"
 			float len = max(length(viewPos) * invFar, 0.8);
-			skyBrightness = mix(skyBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
+			shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
 		#endif
 	#else
-		float skyBrightness = ambientBrightness;
+		float shadowBrightness = ambientBrightness;
 	#endif
 	
-	skyBrightness *= max(lightDot, 0.0);
+	shadowBrightness *= max(lightDot, 0.0);
 	
-	return skyBrightness;
+	return shadowBrightness;
 }
 
 
 
-void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, vec3 viewPos, vec3 normal  ARGS_OUT) {
+void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal  ARGS_OUT) {
 	
 	#if CEL_SHADING_ENABLED == 1
 		blockBrightness =
@@ -206,15 +206,25 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#endif
 	
 	#include "/import/sunLightBrightness.glsl"
-	float skyBrightness = getSkyBrightness(viewPos, normal, ambientBrightness  ARGS_IN) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
-	skyBrightness *= ambientBrightness;
+	float shadowBrightness = getShadowBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
+	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
+	shadowBrightness *= ambientBrightness;
+	
+	vec3 reflectedDir = normalize(reflect(viewPos, normal));
+	#include "/import/shadowLightPosition.glsl"
+	vec3 lightDir = normalize(shadowLightPosition);
+	float specular = max(dot(reflectedDir, lightDir), 0.0);
+	specular *= specular;
+	specular *= specular;
+	specular *= specular;
+	shadowBrightness *= 1.0 + specular * (0.5 + 0.5 * specular_amount);
 	
 	#include "/import/rainStrength.glsl"
 	#include "/import/dayPercent.glsl"
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_LIGHT_MULT);
-	skyBrightness *= 1.0 - rainDecrease;
-	vec3 skyLighting = shadowcasterColor * skyBrightness;
-	ambientLight *= 1.0 - skyBrightness;
+	shadowBrightness *= 1.0 - rainDecrease;
+	vec3 skyLighting = shadowcasterColor * shadowBrightness;
+	ambientLight *= 1.0 - shadowBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;
 	lighting *= 1.0 - rainDecrease;

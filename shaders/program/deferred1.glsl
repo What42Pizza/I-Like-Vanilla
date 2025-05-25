@@ -57,9 +57,10 @@ void main() {
 		
 		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		vec2 lmcoord = unpackVec2(data.x) * 4.0;
+		float specular_amount = unpackVec2(data.z).y;
 		vec3 normal = decodeNormal(unpackVec2(data.y));
 		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
-		doFshLighting(color, lmcoord.x, lmcoord.y, viewPos, normal  ARGS_IN);
+		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 		
 		
 		#if BORDER_FOG_ENABLED == 1

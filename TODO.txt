@@ -4,7 +4,7 @@ Make sure dh terrain looks just like regular terrain
 Add in-liquid alterations for atmospheric fog
 Update ALL gallery images
 Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Windows and mainly on Iris 1.21.1 and (occasionally) Optifine 1.12.2. I can average up to 100 fps with Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset.")
-Fix rain reflections
+Re-add reflective rain puddles
 Make sure it works with optifine
 Make sure ALL settings work
 Make sure settings are tuned for:
@@ -18,18 +18,19 @@ Make sure settings are tuned for:
 
 
 Planned for next version:
-Move side shading and handheld lighting to deferred
+Move as much as possible to deferred (side shading, handheld lighting, etc)
 Update documentation
 Fix far-away reflections
 Add setting 'Shadows on Transparents'
 Make sure all vanilla effect work
-Add specular reflections? (should be encoded in block ids)
 Separate depth sunrays and vol sunrays settings
 Add settings for temporal filter
+Make data buffers store ints
 
 
 
 Other planned:
+Test replacing all `1-(1-x)(1-x)` with `x(2-x)`
 Try out 'alphatest.program' and 'blend.program' (in shader.properties, see photon for good examples)
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 turn betterNightVision into a uniform

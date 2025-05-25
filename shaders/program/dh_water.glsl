@@ -82,8 +82,12 @@ void main() {
 	}
 	
 	
+	float reflectiveness = dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0;
+	float specular_amount = dhBlock == DH_BLOCK_WATER ? 0.99 : 0.3;
+	
+	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, viewPos, normal  ARGS_IN);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 	
 	
 	/* DRAWBUFFERS:03 */
@@ -91,7 +95,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0,
+		packVec2(reflectiveness, specular_amount),
 		1.0
 	);
 	

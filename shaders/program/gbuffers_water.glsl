@@ -56,7 +56,7 @@ void main() {
 	#endif
 	
 	
-	if (materialId == 7) {
+	if (materialId == 9007) {
 		
 		color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
@@ -91,8 +91,13 @@ void main() {
 	}
 	
 	
+	float reflectiveness = ((materialId % 1000 - materialId % 100) / 100) * 0.15;
+	if (materialId == 9007) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
+	float specular_amount = ((materialId - materialId % 1000) / 1000) * 0.11;
+	
+	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, viewPos, normal  ARGS_IN);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 	
 	
 	// fog
@@ -101,16 +106,12 @@ void main() {
 	#endif
 	
 	
-	float reflectiveness = ((materialId - materialId % 100) / 100) * 0.15;
-	if (materialId == 7) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
-	
-	
 	/* DRAWBUFFERS:03 */
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		reflectiveness,
+		packVec2(reflectiveness, specular_amount),
 		1.0
 	);
 	
@@ -148,7 +149,7 @@ void main() {
 	#include "/import/mc_Entity.glsl"
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
-	materialId %= 1000;
+	materialId %= 10000;
 	
 	shadowcasterColor = getShadowcasterColor(ARG_IN);
 	
@@ -161,7 +162,7 @@ void main() {
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 7) {
+		if (materialId == 9007) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));

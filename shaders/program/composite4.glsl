@@ -89,7 +89,7 @@ void main() {
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectionStrength = 1.0;
 		#else
-			float reflectionStrength = data.z;
+			float reflectionStrength = unpackVec2(data.z).x;
 		#endif
 		if (reflectionStrength > 0.01) {
 			doReflections(color, depth0, normal, reflectionStrength  ARGS_IN);

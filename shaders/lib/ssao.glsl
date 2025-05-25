@@ -14,8 +14,9 @@ float getAoInfluence(float centerDepth, vec2 offset  ARGS_OUT) {
 	float diff2 = centerDepth - depth2;
 	
 	float diffTotal = max(diff1 + diff2, 0.0);
-	diffTotal *= 4.0;
-	return (diffTotal * diffTotal) / pow(2.0, diffTotal);
+	return float(diffTotal > 0.01);
+	//diffTotal *= 4.0;
+	//return (diffTotal * diffTotal) / pow(2.0, diffTotal);
 }
 
 

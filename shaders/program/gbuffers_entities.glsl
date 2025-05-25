@@ -32,7 +32,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),
-		0.0,
+		packVec2(0.0, 0.3),
 		1.0
 	);
 	

@@ -210,16 +210,13 @@ This describes which /main_files-s handle different effects
 - **colortex2:  Opaque Data**
 - - x: lmcoord.x & lmcoord.y
 - - y: normal x & normal y
-- - z: reflectiveness
+- - z: reflectiveness & specular amount
 - **colortex3:  Transparent Data**
 - - x: lmcoord.x & lmcoord.y
 - - y: normal x & normal y
-- - z: reflectiveness
+- - z: reflectiveness & specular amount
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
-
-Notes:
-- If more data needs to be packed into the 'Opaque Data' and 'Transparent Data' buffers, it may be better to switch them to an integer format
 
 <br>
 <br>

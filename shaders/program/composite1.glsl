@@ -76,12 +76,13 @@ void main() {
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	#if ATMOSPHERIC_FOG_ENABLED == 1
-		const float FOG_SLOPE = 400.0 / ATMOSPHERIC_FOG_DENSITY;
+		const float FOG_SLOPE = 250.0 / ATMOSPHERIC_FOG_DENSITY;
 		float dist = length(viewPos);
 		dist *= distMult;
 		float atmoFogAmount = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
 		atmoFogAmount *= 1.0 - fogAmount;
 		vec3 fogColor = getSkyColor(viewPos / dist, false  ARGS_IN);
+		color *= 1.0 - 0.5 * atmoFogAmount;
 		color += fogColor * atmoFogAmount;
 	#endif
 	
