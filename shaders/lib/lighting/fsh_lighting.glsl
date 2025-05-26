@@ -210,15 +210,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness;
 	
-	vec3 reflectedDir = normalize(reflect(viewPos, normal));
-	#include "/import/shadowLightPosition.glsl"
-	vec3 lightDir = normalize(shadowLightPosition);
-	float specular = max(dot(reflectedDir, lightDir), 0.0);
-	specular *= specular;
-	specular *= specular;
-	specular *= specular;
-	shadowBrightness *= 1.0 + specular * (0.5 + 0.5 * specular_amount);
-	
 	#include "/import/rainStrength.glsl"
 	#include "/import/dayPercent.glsl"
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_LIGHT_MULT);
@@ -228,6 +219,15 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 lighting = ambientLight + skyLighting;
 	lighting *= 1.0 - rainDecrease;
+	
+	vec3 reflectedDir = normalize(reflect(viewPos, normal));
+	#include "/import/shadowLightPosition.glsl"
+	vec3 lightDir = normalize(shadowLightPosition);
+	float specular = max(dot(reflectedDir, lightDir), 0.0);
+	specular *= specular;
+	specular *= specular;
+	specular *= specular;
+	lighting += vec3(1.0, 1.0, 0.0) * specular * (0.5 + 0.5 * specular_amount) * 0.5;
 	
 	float lightingBrightness = min(getColorLum(lighting), 1.0);
 	blockBrightness *= 1.1 - lightingBrightness;

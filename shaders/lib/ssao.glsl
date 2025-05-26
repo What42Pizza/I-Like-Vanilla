@@ -50,5 +50,5 @@ float getAoFactor(float depth, float trueBlockDepth  ARGS_OUT) {
 	#include "/import/invFar.glsl"
 	total *= smoothstep(0.9, 0.8, trueBlockDepth * invFar);
 	
-	return total * 0.23;
+	return total * 0.2;
 }
