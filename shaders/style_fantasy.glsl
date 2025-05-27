@@ -126,15 +126,15 @@
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.2
+										#define CLOUD_SUNSET_RED 1.4
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 0.75
+										#define CLOUD_SUNSET_GREEN 0.65
 #endif
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 0.35
+										#define CLOUD_SUNSET_BLUE 0.4
 #endif
 
 
@@ -458,7 +458,7 @@
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
-										#define AMBIENT_SUNSET_BLUE 0.6
+										#define AMBIENT_SUNSET_BLUE 0.7
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
@@ -728,11 +728,11 @@
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
-										#define SUNRAYS_INCREASE_SUNRISE 2.2
+										#define SUNRAYS_INCREASE_SUNRISE 2.5
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 2.2
+										#define SUNRAYS_INCREASE_SUNSET 2.5
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -740,7 +740,7 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.3
+										#define SUNRAYS_SUN_GREEN 0.2
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
@@ -778,7 +778,7 @@
 
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 13
+										#define SUNRAYS_MIN_SURFACE 15
 #endif
 #if SUNRAYS_MIN_UNDERGROUND == -1
 #undef SUNRAYS_MIN_UNDERGROUND

@@ -35,15 +35,15 @@ float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
 	pos.xz -= pos.zx * 0.15;
 	//pos.xz = floor(pos.xz / 16.0) * 16.0;
 	#include "/import/frameTimeCounter.glsl"
-	float sample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
-	sample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
-	sample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_3_SPEED * 0.8) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
-	if (!isNormal) sample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
+	float cloudSample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
+	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
+	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_3_SPEED * 0.8) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
+	if (!isNormal) cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
 	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
-	sample = sample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
+	cloudSample = cloudSample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
 	const float divisor = 1.0 / ((1.0 - REALISTIC_CLOUD_DENSITY) * (1.0 - REALISTIC_CLOUD_DENSITY) + 0.01);
-	return clamp((sample - coverage) * divisor, 0.0, 1.0);
+	return clamp((cloudSample - coverage) * divisor, 0.0, 1.0);
 }
 
 
@@ -96,11 +96,11 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	#include "/import/rainStrength.glsl"
 	float coverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
-		float sample = sampleCloud(pos, coverage, false  ARGS_IN);
-		if (sample > 0.0) sample = 0.5 + 0.5 * sample;
+		float cloudSample = sampleCloud(pos, coverage, false  ARGS_IN);
+		if (cloudSample > 0.0) cloudSample = 0.5 + 0.5 * cloudSample;
 		float sampleUp = sampleCloud(pos + shadowcasterDir, coverage, true  ARGS_IN);
 		vec3 cloudColor = getCloudColor(1.0 - 0.25 * sampleUp  ARGS_IN);
-		color = mix(color, cloudColor, sample * mixMult);
+		color = mix(color, cloudColor, cloudSample * mixMult);
 		pos += stepVec;
 	}
 	

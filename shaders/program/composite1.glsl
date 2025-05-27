@@ -76,7 +76,7 @@ void main() {
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	#if ATMOSPHERIC_FOG_ENABLED == 1
-		const float FOG_SLOPE = 250.0 / ATMOSPHERIC_FOG_DENSITY;
+		const float FOG_SLOPE = 300.0 / ATMOSPHERIC_FOG_DENSITY;
 		float dist = length(viewPos);
 		dist *= distMult;
 		float atmoFogAmount = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
