@@ -1,295 +1,38 @@
-#if SUN_BRIGHTNESS == -1
-#undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 0.5
-#endif
-#if MOON_BRIGHTNESS == -1
-#undef MOON_BRIGHTNESS
-										#define MOON_BRIGHTNESS 1.0
-#endif
-#if DARKEN_SKY_UNDERGROUND == -1
-#undef DARKEN_SKY_UNDERGROUND
-										#define DARKEN_SKY_UNDERGROUND 1
-#endif
-#if STARS_BRIGHTNESS == -1
-#undef STARS_BRIGHTNESS
-										#define STARS_BRIGHTNESS 1.3
-#endif
-#if DARKEN_STARS_NEAR_BLOCKLIGHT == -1
-#undef DARKEN_STARS_NEAR_BLOCKLIGHT
-										#define DARKEN_STARS_NEAR_BLOCKLIGHT 1
-#endif
-#if DARKENED_STARS_BRIGHTNESS == -1
-#undef DARKENED_STARS_BRIGHTNESS
-										#define DARKENED_STARS_BRIGHTNESS 0.2
-#endif
-#if WEATHER_TRANSPARENCY == -1
-#undef WEATHER_TRANSPARENCY
-										#define WEATHER_TRANSPARENCY 0.3
-#endif
-#if WEATHER_HORIZONTAL_AMOUNT == -1
-#undef WEATHER_HORIZONTAL_AMOUNT
-										#define WEATHER_HORIZONTAL_AMOUNT 0.5
-#endif
-
-
-
-
-
-#if VANILLA_CLOUD_TRANSPARENCY == -1
-#undef VANILLA_CLOUD_TRANSPARENCY
-										#define VANILLA_CLOUD_TRANSPARENCY 0.5
-#endif
-#if NEARBY_CLOUD_TRANSPARENCY == -1
-#undef NEARBY_CLOUD_TRANSPARENCY
-										#define NEARBY_CLOUD_TRANSPARENCY 0.8
-#endif
-#if NEARBY_CLOUD_DIST == -1
-#undef NEARBY_CLOUD_DIST
-										#define NEARBY_CLOUD_DIST 30
-#endif
-#if CLOUD_WEATHER_DARKEN == -1
-#undef CLOUD_WEATHER_DARKEN
-										#define CLOUD_WEATHER_DARKEN 0.3
-#endif
-#if REALISTIC_CLOUDS_ENABLED == -1
-#undef REALISTIC_CLOUDS_ENABLED
-										#define REALISTIC_CLOUDS_ENABLED 1
-#endif
-#if REALISTIC_CLOUD_DENSITY == -1
-#undef REALISTIC_CLOUD_DENSITY
-										#define REALISTIC_CLOUD_DENSITY 1.0
-#endif
-#if REALISTIC_CLOUD_TRANSPARENCY == -1
-#undef REALISTIC_CLOUD_TRANSPARENCY
-										#define REALISTIC_CLOUD_TRANSPARENCY 0.0
-#endif
-#if CLOUD_COVERAGE == -1
-#undef CLOUD_COVERAGE
-										#define CLOUD_COVERAGE 0.45
-#endif
-#if CLOUD_WEATHER_COVERAGE == -1
-#undef CLOUD_WEATHER_COVERAGE
-										#define CLOUD_WEATHER_COVERAGE 0.85
-#endif
-#if CLOUD_BOTTOM_Y == -1
-#undef CLOUD_BOTTOM_Y
-										#define CLOUD_BOTTOM_Y 150
-#endif
-#if CLOUD_TOP_Y == -1
-#undef CLOUD_TOP_Y
-										#define CLOUD_TOP_Y 250
-#endif
-#if CLOUD_OPACITY_DISTANCE == -1
-#undef CLOUD_OPACITY_DISTANCE
-										#define CLOUD_OPACITY_DISTANCE 48.0
-#endif
-
-
-
-
-
-#if CLOUD_DAY_RED == -1
-#undef CLOUD_DAY_RED
-										#define CLOUD_DAY_RED 0.9
-#endif
-#if CLOUD_DAY_GREEN == -1
-#undef CLOUD_DAY_GREEN
-										#define CLOUD_DAY_GREEN 0.9
-#endif
-#if CLOUD_DAY_BLUE == -1
-#undef CLOUD_DAY_BLUE
-										#define CLOUD_DAY_BLUE 1.0
-#endif
-#if CLOUD_NIGHT_RED == -1
-#undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 0.35
-#endif
-#if CLOUD_NIGHT_GREEN == -1
-#undef CLOUD_NIGHT_GREEN
-										#define CLOUD_NIGHT_GREEN 0.35
-#endif
-#if CLOUD_NIGHT_BLUE == -1
-#undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.55
-#endif
-#if CLOUD_SUNRISE_RED == -1
-#undef CLOUD_SUNRISE_RED
-										#define CLOUD_SUNRISE_RED 1.0
-#endif
-#if CLOUD_SUNRISE_GREEN == -1
-#undef CLOUD_SUNRISE_GREEN
-										#define CLOUD_SUNRISE_GREEN 0.85
-#endif
-#if CLOUD_SUNRISE_BLUE == -1
-#undef CLOUD_SUNRISE_BLUE
-										#define CLOUD_SUNRISE_BLUE 0.5
-#endif
-#if CLOUD_SUNSET_RED == -1
-#undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.0
-#endif
-#if CLOUD_SUNSET_GREEN == -1
-#undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 0.8
-#endif
-#if CLOUD_SUNSET_BLUE == -1
-#undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 0.6
-#endif
-
-
-
-
-
-#if CLOUD_LAYER_1_SCALE == -1
-#undef CLOUD_LAYER_1_SCALE
-										#define CLOUD_LAYER_1_SCALE 0.015
-#endif
-#if CLOUD_LAYER_1_WEIGHT == -1
-#undef CLOUD_LAYER_1_WEIGHT
-										#define CLOUD_LAYER_1_WEIGHT 1.0
-#endif
-#if CLOUD_LAYER_1_SPEED == -1
-#undef CLOUD_LAYER_1_SPEED
-										#define CLOUD_LAYER_1_SPEED 2.0
-#endif
-#if CLOUD_LAYER_2_SCALE == -1
-#undef CLOUD_LAYER_2_SCALE
-										#define CLOUD_LAYER_2_SCALE 0.045
-#endif
-#if CLOUD_LAYER_2_WEIGHT == -1
-#undef CLOUD_LAYER_2_WEIGHT
-										#define CLOUD_LAYER_2_WEIGHT 0.6
-#endif
-#if CLOUD_LAYER_2_SPEED == -1
-#undef CLOUD_LAYER_2_SPEED
-										#define CLOUD_LAYER_2_SPEED 1.5
-#endif
-#if CLOUD_LAYER_3_SCALE == -1
-#undef CLOUD_LAYER_3_SCALE
-										#define CLOUD_LAYER_3_SCALE 0.15
-#endif
-#if CLOUD_LAYER_3_WEIGHT == -1
-#undef CLOUD_LAYER_3_WEIGHT
-										#define CLOUD_LAYER_3_WEIGHT 0.2
-#endif
-#if CLOUD_LAYER_3_SPEED == -1
-#undef CLOUD_LAYER_3_SPEED
-										#define CLOUD_LAYER_3_SPEED 1.0
-#endif
-#if CLOUD_LAYER_4_SCALE == -1
-#undef CLOUD_LAYER_4_SCALE
-										#define CLOUD_LAYER_4_SCALE 0.6
-#endif
-#if CLOUD_LAYER_4_WEIGHT == -1
-#undef CLOUD_LAYER_4_WEIGHT
-										#define CLOUD_LAYER_4_WEIGHT 0.15
-#endif
-#if CLOUD_LAYER_4_SPEED == -1
-#undef CLOUD_LAYER_4_SPEED
-										#define CLOUD_LAYER_4_SPEED 0.5
-#endif
-
-
-
-
-
-#if BORDER_FOG_ENABLED == -1
-#undef BORDER_FOG_ENABLED
-										#define BORDER_FOG_ENABLED 1
-#endif
-#if BORDER_FOG_START == -1
-#undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.8
-#endif
-#if BORDER_FOG_END == -1
-#undef BORDER_FOG_END
-										#define BORDER_FOG_END 1.0
-#endif
-#if BORDER_FOG_CURVE == -1
-#undef BORDER_FOG_CURVE
-										#define BORDER_FOG_CURVE 3
-#endif
-#if ATMOSPHERIC_FOG_DENSITY == -1
-#undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 1.0
-#endif
-
-
-
-
-
-#if SKY_DAY_RED == -1
-#undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.6
-#endif
-#if SKY_DAY_GREEN == -1
-#undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.75
-#endif
-#if SKY_DAY_BLUE == -1
-#undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
-#endif
-#if SKY_NIGHT_RED == -1
-#undef SKY_NIGHT_RED
-										#define SKY_NIGHT_RED 1.0
-#endif
-#if SKY_NIGHT_GREEN == -1
-#undef SKY_NIGHT_GREEN
-										#define SKY_NIGHT_GREEN 1.0
-#endif
-#if SKY_NIGHT_BLUE == -1
-#undef SKY_NIGHT_BLUE
-										#define SKY_NIGHT_BLUE 1.0
-#endif
-#if SKY_HORIZON_DAY_RED == -1
-#undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.95
-#endif
-#if SKY_HORIZON_DAY_GREEN == -1
-#undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 1.0
-#endif
-#if SKY_HORIZON_DAY_BLUE == -1
-#undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 1.0
-#endif
-#if SKY_HORIZON_NIGHT_RED == -1
-#undef SKY_HORIZON_NIGHT_RED
-										#define SKY_HORIZON_NIGHT_RED 1.0
-#endif
-#if SKY_HORIZON_NIGHT_GREEN == -1
-#undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 1.0
-#endif
-#if SKY_HORIZON_NIGHT_BLUE == -1
-#undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 1.0
-#endif
-#if SKY_HORIZON_SUNRISE_RED == -1
-#undef SKY_HORIZON_SUNRISE_RED
-										#define SKY_HORIZON_SUNRISE_RED 0.95
-#endif
-#if SKY_HORIZON_SUNRISE_GREEN == -1
-#undef SKY_HORIZON_SUNRISE_GREEN
-										#define SKY_HORIZON_SUNRISE_GREEN 0.9
-#endif
-#if SKY_HORIZON_SUNRISE_BLUE == -1
-#undef SKY_HORIZON_SUNRISE_BLUE
-										#define SKY_HORIZON_SUNRISE_BLUE 0.4
-#endif
-#if SKY_HORIZON_SUNSET_RED == -1
-#undef SKY_HORIZON_SUNSET_RED
-										#define SKY_HORIZON_SUNSET_RED 0.9
-#endif
-#if SKY_HORIZON_SUNSET_GREEN == -1
-#undef SKY_HORIZON_SUNSET_GREEN
-										#define SKY_HORIZON_SUNSET_GREEN 0.85
-#endif
-#if SKY_HORIZON_SUNSET_BLUE == -1
-#undef SKY_HORIZON_SUNSET_BLUE
-										#define SKY_HORIZON_SUNSET_BLUE 0.6
+#if SHADOWS_NOISE == -1
+#undef SHADOWS_NOISE
+										#define SHADOWS_NOISE 0.2
+#endif
+#if PIXELATED_SHADOWS == -1
+#undef PIXELATED_SHADOWS
+										#define PIXELATED_SHADOWS 0
+#endif
+#if EXCLUDE_FOLIAGE == -1
+#undef EXCLUDE_FOLIAGE
+										#define EXCLUDE_FOLIAGE 1
+#endif
+#if CEL_SHADING_ENABLED == -1
+#undef CEL_SHADING_ENABLED
+										#define CEL_SHADING_ENABLED 1
+#endif
+#if VANILLA_AO_BRIGHT == -1
+#undef VANILLA_AO_BRIGHT
+										#define VANILLA_AO_BRIGHT 0.15
+#endif
+#if VANILLA_AO_DARK == -1
+#undef VANILLA_AO_DARK
+										#define VANILLA_AO_DARK 1.0
+#endif
+#if SIDE_SHADING_BRIGHT == -1
+#undef SIDE_SHADING_BRIGHT
+										#define SIDE_SHADING_BRIGHT 0.25
+#endif
+#if SIDE_SHADING_DARK == -1
+#undef SIDE_SHADING_DARK
+										#define SIDE_SHADING_DARK 0.25
+#endif
+#if WEATHER_LIGHT_MULT == -1
+#undef WEATHER_LIGHT_MULT
+										#define WEATHER_LIGHT_MULT 0.7
 #endif
 
 
@@ -542,47 +285,6 @@
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
 										#define NETHER_BLOCKLIGHT_BRIGHTNESS_MULT 1.3
-#endif
-
-
-
-
-
-#if SHADOWS_NOISE == -1
-#undef SHADOWS_NOISE
-										#define SHADOWS_NOISE 0.2
-#endif
-#if PIXELATED_SHADOWS == -1
-#undef PIXELATED_SHADOWS
-										#define PIXELATED_SHADOWS 0
-#endif
-#if EXCLUDE_FOLIAGE == -1
-#undef EXCLUDE_FOLIAGE
-										#define EXCLUDE_FOLIAGE 1
-#endif
-#if CEL_SHADING_ENABLED == -1
-#undef CEL_SHADING_ENABLED
-										#define CEL_SHADING_ENABLED 1
-#endif
-#if VANILLA_AO_BRIGHT == -1
-#undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 0.15
-#endif
-#if VANILLA_AO_DARK == -1
-#undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 1.0
-#endif
-#if SIDE_SHADING_BRIGHT == -1
-#undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.25
-#endif
-#if SIDE_SHADING_DARK == -1
-#undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.25
-#endif
-#if WEATHER_LIGHT_MULT == -1
-#undef WEATHER_LIGHT_MULT
-										#define WEATHER_LIGHT_MULT 0.7
 #endif
 
 
@@ -1142,6 +844,304 @@
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
 										#define WATER_COLOR_AMOUNT 0.2
+#endif
+
+
+
+
+
+#if SUN_BRIGHTNESS == -1
+#undef SUN_BRIGHTNESS
+										#define SUN_BRIGHTNESS 0.5
+#endif
+#if MOON_BRIGHTNESS == -1
+#undef MOON_BRIGHTNESS
+										#define MOON_BRIGHTNESS 1.0
+#endif
+#if DARKEN_SKY_UNDERGROUND == -1
+#undef DARKEN_SKY_UNDERGROUND
+										#define DARKEN_SKY_UNDERGROUND 1
+#endif
+#if STARS_BRIGHTNESS == -1
+#undef STARS_BRIGHTNESS
+										#define STARS_BRIGHTNESS 1.3
+#endif
+#if DARKEN_STARS_NEAR_BLOCKLIGHT == -1
+#undef DARKEN_STARS_NEAR_BLOCKLIGHT
+										#define DARKEN_STARS_NEAR_BLOCKLIGHT 1
+#endif
+#if DARKENED_STARS_BRIGHTNESS == -1
+#undef DARKENED_STARS_BRIGHTNESS
+										#define DARKENED_STARS_BRIGHTNESS 0.2
+#endif
+#if WEATHER_TRANSPARENCY == -1
+#undef WEATHER_TRANSPARENCY
+										#define WEATHER_TRANSPARENCY 0.3
+#endif
+#if WEATHER_HORIZONTAL_AMOUNT == -1
+#undef WEATHER_HORIZONTAL_AMOUNT
+										#define WEATHER_HORIZONTAL_AMOUNT 0.5
+#endif
+
+
+
+
+
+#if VANILLA_CLOUD_TRANSPARENCY == -1
+#undef VANILLA_CLOUD_TRANSPARENCY
+										#define VANILLA_CLOUD_TRANSPARENCY 0.5
+#endif
+#if NEARBY_CLOUD_TRANSPARENCY == -1
+#undef NEARBY_CLOUD_TRANSPARENCY
+										#define NEARBY_CLOUD_TRANSPARENCY 0.8
+#endif
+#if NEARBY_CLOUD_DIST == -1
+#undef NEARBY_CLOUD_DIST
+										#define NEARBY_CLOUD_DIST 30
+#endif
+#if CLOUD_WEATHER_DARKEN == -1
+#undef CLOUD_WEATHER_DARKEN
+										#define CLOUD_WEATHER_DARKEN 0.3
+#endif
+#if REALISTIC_CLOUDS_ENABLED == -1
+#undef REALISTIC_CLOUDS_ENABLED
+										#define REALISTIC_CLOUDS_ENABLED 1
+#endif
+#if REALISTIC_CLOUD_DENSITY == -1
+#undef REALISTIC_CLOUD_DENSITY
+										#define REALISTIC_CLOUD_DENSITY 1.0
+#endif
+#if REALISTIC_CLOUD_TRANSPARENCY == -1
+#undef REALISTIC_CLOUD_TRANSPARENCY
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.0
+#endif
+#if CLOUD_COVERAGE == -1
+#undef CLOUD_COVERAGE
+										#define CLOUD_COVERAGE 0.45
+#endif
+#if CLOUD_WEATHER_COVERAGE == -1
+#undef CLOUD_WEATHER_COVERAGE
+										#define CLOUD_WEATHER_COVERAGE 0.85
+#endif
+#if CLOUD_BOTTOM_Y == -1
+#undef CLOUD_BOTTOM_Y
+										#define CLOUD_BOTTOM_Y 150
+#endif
+#if CLOUD_TOP_Y == -1
+#undef CLOUD_TOP_Y
+										#define CLOUD_TOP_Y 250
+#endif
+#if CLOUD_OPACITY_DISTANCE == -1
+#undef CLOUD_OPACITY_DISTANCE
+										#define CLOUD_OPACITY_DISTANCE 48.0
+#endif
+
+
+
+
+
+#if CLOUD_DAY_RED == -1
+#undef CLOUD_DAY_RED
+										#define CLOUD_DAY_RED 0.9
+#endif
+#if CLOUD_DAY_GREEN == -1
+#undef CLOUD_DAY_GREEN
+										#define CLOUD_DAY_GREEN 0.9
+#endif
+#if CLOUD_DAY_BLUE == -1
+#undef CLOUD_DAY_BLUE
+										#define CLOUD_DAY_BLUE 1.0
+#endif
+#if CLOUD_NIGHT_RED == -1
+#undef CLOUD_NIGHT_RED
+										#define CLOUD_NIGHT_RED 0.35
+#endif
+#if CLOUD_NIGHT_GREEN == -1
+#undef CLOUD_NIGHT_GREEN
+										#define CLOUD_NIGHT_GREEN 0.35
+#endif
+#if CLOUD_NIGHT_BLUE == -1
+#undef CLOUD_NIGHT_BLUE
+										#define CLOUD_NIGHT_BLUE 0.55
+#endif
+#if CLOUD_SUNRISE_RED == -1
+#undef CLOUD_SUNRISE_RED
+										#define CLOUD_SUNRISE_RED 1.0
+#endif
+#if CLOUD_SUNRISE_GREEN == -1
+#undef CLOUD_SUNRISE_GREEN
+										#define CLOUD_SUNRISE_GREEN 0.85
+#endif
+#if CLOUD_SUNRISE_BLUE == -1
+#undef CLOUD_SUNRISE_BLUE
+										#define CLOUD_SUNRISE_BLUE 0.5
+#endif
+#if CLOUD_SUNSET_RED == -1
+#undef CLOUD_SUNSET_RED
+										#define CLOUD_SUNSET_RED 1.0
+#endif
+#if CLOUD_SUNSET_GREEN == -1
+#undef CLOUD_SUNSET_GREEN
+										#define CLOUD_SUNSET_GREEN 0.8
+#endif
+#if CLOUD_SUNSET_BLUE == -1
+#undef CLOUD_SUNSET_BLUE
+										#define CLOUD_SUNSET_BLUE 0.6
+#endif
+
+
+
+
+
+#if CLOUD_LAYER_1_SCALE == -1
+#undef CLOUD_LAYER_1_SCALE
+										#define CLOUD_LAYER_1_SCALE 0.015
+#endif
+#if CLOUD_LAYER_1_WEIGHT == -1
+#undef CLOUD_LAYER_1_WEIGHT
+										#define CLOUD_LAYER_1_WEIGHT 1.0
+#endif
+#if CLOUD_LAYER_1_SPEED == -1
+#undef CLOUD_LAYER_1_SPEED
+										#define CLOUD_LAYER_1_SPEED 2.0
+#endif
+#if CLOUD_LAYER_2_SCALE == -1
+#undef CLOUD_LAYER_2_SCALE
+										#define CLOUD_LAYER_2_SCALE 0.045
+#endif
+#if CLOUD_LAYER_2_WEIGHT == -1
+#undef CLOUD_LAYER_2_WEIGHT
+										#define CLOUD_LAYER_2_WEIGHT 0.6
+#endif
+#if CLOUD_LAYER_2_SPEED == -1
+#undef CLOUD_LAYER_2_SPEED
+										#define CLOUD_LAYER_2_SPEED 1.5
+#endif
+#if CLOUD_LAYER_3_SCALE == -1
+#undef CLOUD_LAYER_3_SCALE
+										#define CLOUD_LAYER_3_SCALE 0.15
+#endif
+#if CLOUD_LAYER_3_WEIGHT == -1
+#undef CLOUD_LAYER_3_WEIGHT
+										#define CLOUD_LAYER_3_WEIGHT 0.2
+#endif
+#if CLOUD_LAYER_3_SPEED == -1
+#undef CLOUD_LAYER_3_SPEED
+										#define CLOUD_LAYER_3_SPEED 1.0
+#endif
+#if CLOUD_LAYER_4_SCALE == -1
+#undef CLOUD_LAYER_4_SCALE
+										#define CLOUD_LAYER_4_SCALE 0.6
+#endif
+#if CLOUD_LAYER_4_WEIGHT == -1
+#undef CLOUD_LAYER_4_WEIGHT
+										#define CLOUD_LAYER_4_WEIGHT 0.15
+#endif
+#if CLOUD_LAYER_4_SPEED == -1
+#undef CLOUD_LAYER_4_SPEED
+										#define CLOUD_LAYER_4_SPEED 0.5
+#endif
+
+
+
+
+
+#if BORDER_FOG_ENABLED == -1
+#undef BORDER_FOG_ENABLED
+										#define BORDER_FOG_ENABLED 1
+#endif
+#if BORDER_FOG_START == -1
+#undef BORDER_FOG_START
+										#define BORDER_FOG_START 0.8
+#endif
+#if BORDER_FOG_END == -1
+#undef BORDER_FOG_END
+										#define BORDER_FOG_END 1.0
+#endif
+#if BORDER_FOG_CURVE == -1
+#undef BORDER_FOG_CURVE
+										#define BORDER_FOG_CURVE 3
+#endif
+#if ATMOSPHERIC_FOG_DENSITY == -1
+#undef ATMOSPHERIC_FOG_DENSITY
+										#define ATMOSPHERIC_FOG_DENSITY 1.0
+#endif
+
+
+
+
+
+#if SKY_DAY_RED == -1
+#undef SKY_DAY_RED
+										#define SKY_DAY_RED 0.6
+#endif
+#if SKY_DAY_GREEN == -1
+#undef SKY_DAY_GREEN
+										#define SKY_DAY_GREEN 0.75
+#endif
+#if SKY_DAY_BLUE == -1
+#undef SKY_DAY_BLUE
+										#define SKY_DAY_BLUE 1.0
+#endif
+#if SKY_NIGHT_RED == -1
+#undef SKY_NIGHT_RED
+										#define SKY_NIGHT_RED 1.0
+#endif
+#if SKY_NIGHT_GREEN == -1
+#undef SKY_NIGHT_GREEN
+										#define SKY_NIGHT_GREEN 1.0
+#endif
+#if SKY_NIGHT_BLUE == -1
+#undef SKY_NIGHT_BLUE
+										#define SKY_NIGHT_BLUE 1.0
+#endif
+#if SKY_HORIZON_DAY_RED == -1
+#undef SKY_HORIZON_DAY_RED
+										#define SKY_HORIZON_DAY_RED 0.95
+#endif
+#if SKY_HORIZON_DAY_GREEN == -1
+#undef SKY_HORIZON_DAY_GREEN
+										#define SKY_HORIZON_DAY_GREEN 1.0
+#endif
+#if SKY_HORIZON_DAY_BLUE == -1
+#undef SKY_HORIZON_DAY_BLUE
+										#define SKY_HORIZON_DAY_BLUE 1.0
+#endif
+#if SKY_HORIZON_NIGHT_RED == -1
+#undef SKY_HORIZON_NIGHT_RED
+										#define SKY_HORIZON_NIGHT_RED 1.0
+#endif
+#if SKY_HORIZON_NIGHT_GREEN == -1
+#undef SKY_HORIZON_NIGHT_GREEN
+										#define SKY_HORIZON_NIGHT_GREEN 1.0
+#endif
+#if SKY_HORIZON_NIGHT_BLUE == -1
+#undef SKY_HORIZON_NIGHT_BLUE
+										#define SKY_HORIZON_NIGHT_BLUE 1.0
+#endif
+#if SKY_HORIZON_SUNRISE_RED == -1
+#undef SKY_HORIZON_SUNRISE_RED
+										#define SKY_HORIZON_SUNRISE_RED 0.95
+#endif
+#if SKY_HORIZON_SUNRISE_GREEN == -1
+#undef SKY_HORIZON_SUNRISE_GREEN
+										#define SKY_HORIZON_SUNRISE_GREEN 0.9
+#endif
+#if SKY_HORIZON_SUNRISE_BLUE == -1
+#undef SKY_HORIZON_SUNRISE_BLUE
+										#define SKY_HORIZON_SUNRISE_BLUE 0.4
+#endif
+#if SKY_HORIZON_SUNSET_RED == -1
+#undef SKY_HORIZON_SUNSET_RED
+										#define SKY_HORIZON_SUNSET_RED 0.9
+#endif
+#if SKY_HORIZON_SUNSET_GREEN == -1
+#undef SKY_HORIZON_SUNSET_GREEN
+										#define SKY_HORIZON_SUNSET_GREEN 0.85
+#endif
+#if SKY_HORIZON_SUNSET_BLUE == -1
+#undef SKY_HORIZON_SUNSET_BLUE
+										#define SKY_HORIZON_SUNSET_BLUE 0.6
 #endif
 
 

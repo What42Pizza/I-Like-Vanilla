@@ -17,295 +17,73 @@ value.STYLE.3=Cartoon
 
 
 
-screen.SKY_MENU=Sky
-
-option.SUN_BRIGHTNESS=Sun Brightness
-value.SUN_BRIGHTNESS.-1=Use Style
-
-option.MOON_BRIGHTNESS=Moon Brightness
-value.MOON_BRIGHTNESS.-1=Use Style
-
-option.DARKEN_SKY_UNDERGROUND=Darken Sky Underground
-option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground
-value.DARKEN_SKY_UNDERGROUND.-1=Use Style
-value.DARKEN_SKY_UNDERGROUND.0=Off
-value.DARKEN_SKY_UNDERGROUND.1=On
-
-option.STARS_BRIGHTNESS=Stars Brightness
-value.STARS_BRIGHTNESS.-1=Use Style
-
-option.sunPathRotation=Sun Path Rotation
-option.sunPathRotation.comment=How tilted the sun's rotation is. 0 is vanilla
-
-option.DARKEN_STARS_NEAR_BLOCKLIGHT=Darken Stars Near Blocklight
-option.DARKEN_STARS_NEAR_BLOCKLIGHT.comment=Simulates light pollution by darkening stars when you're near blocklight
-value.DARKEN_STARS_NEAR_BLOCKLIGHT.-1=Use Style
-value.DARKEN_STARS_NEAR_BLOCKLIGHT.0=Off
-value.DARKEN_STARS_NEAR_BLOCKLIGHT.1=On
-
-option.DARKENED_STARS_BRIGHTNESS=Darkened Stars Brightness
-option.DARKENED_STARS_BRIGHTNESS.comment=Brightness of stars when darkened by blocklight. Only takes effect when 'Darken Stars Near Blocklight' is enabled
-value.DARKENED_STARS_BRIGHTNESS.-1=Use Style
-
-option.WEATHER_TRANSPARENCY=Weather Transparency
-value.WEATHER_TRANSPARENCY.-1=Use Style
-
-option.WEATHER_HORIZONTAL_AMOUNT=Weather Horizontal Amount
-option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
-value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
-
-
-
-
-
-screen.CLOUDS_MENU=Clouds
-
-option.VANILLA_CLOUD_TRANSPARENCY=Cloud Transparency (Vanilla)
-option.VANILLA_CLOUD_TRANSPARENCY.comment=Transparency for vanilla-style clouds
-value.VANILLA_CLOUD_TRANSPARENCY.-1=Use Style
-
-option.NEARBY_CLOUD_TRANSPARENCY=Nearby Cloud Transparency
-option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only works for non-realistic clouds
-value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
-
-option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
-option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby, only works for non-realistic clouds
-value.NEARBY_CLOUD_DIST.-1=Use Style
-
-option.CLOUD_WEATHER_DARKEN=Cloud Weather Darken
-option.CLOUD_WEATHER_DARKEN.comment=How much to darken clouds when raining / snowing
-value.CLOUD_WEATHER_DARKEN.-1=Use Style
-
-option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
-value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
-value.REALISTIC_CLOUDS_ENABLED.0=Off
-value.REALISTIC_CLOUDS_ENABLED.1=On
-
-option.REALISTIC_CLOUD_DENSITY=Cloud Density (Realistic)
-option.REALISTIC_CLOUD_DENSITY.comment=Density of realistic clouds
-value.REALISTIC_CLOUD_DENSITY.-1=Use Style
-
-option.REALISTIC_CLOUD_TRANSPARENCY=Cloud Transparency (Realistic)
-option.REALISTIC_CLOUD_TRANSPARENCY.comment=Transparency for realistic-style clouds
-value.REALISTIC_CLOUD_TRANSPARENCY.-1=Use Style
-
-option.CLOUDS_QUALITY=Clouds Quality
-option.CLOUDS_QUALITY.comment=Quality of realistic clouds
-
-option.CLOUD_COVERAGE=Cloud Coverage
-value.CLOUD_COVERAGE.-1=Use Style
-
-option.CLOUD_WEATHER_COVERAGE=Cloud Weather Coverage
-option.CLOUD_WEATHER_COVERAGE.comment=Coverage for clouds when raining / snowing
-value.CLOUD_WEATHER_COVERAGE.-1=Use Style
-
-option.CLOUD_BOTTOM_Y=Cloud Bottom Level
-option.CLOUD_BOTTOM_Y.comment=The y-level where realistic clouds start
-value.CLOUD_BOTTOM_Y.-1=Use Style
-
-option.CLOUD_TOP_Y=Cloud Top Level
-option.CLOUD_TOP_Y.comment=the y-level where realistic clouds stop
-value.CLOUD_TOP_Y.-1=Use Style
-
-option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
-option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
-value.CLOUD_OPACITY_DISTANCE.-1=Use Style
-
-
-
-
-
-screen.CLOUD_COLORS_MENU=Cloud Colors
-
-option.CLOUD_DAY_RED=Cloud Day Red
-option.CLOUD_DAY_RED.comment=Clouds red color during the day
-value.CLOUD_DAY_RED.-1=Use Style
-
-option.CLOUD_DAY_GREEN=Cloud Day Green
-option.CLOUD_DAY_GREEN.comment=Clouds green color during the day
-value.CLOUD_DAY_GREEN.-1=Use Style
-
-option.CLOUD_DAY_BLUE=Cloud Day Blue
-option.CLOUD_DAY_BLUE.comment=Clouds blue color during the day
-value.CLOUD_DAY_BLUE.-1=Use Style
-
-option.CLOUD_NIGHT_RED=Cloud Night Red
-option.CLOUD_NIGHT_RED.comment=Clouds red color during the night
-value.CLOUD_NIGHT_RED.-1=Use Style
-
-option.CLOUD_NIGHT_GREEN=Cloud Night Green
-option.CLOUD_NIGHT_GREEN.comment=Clouds green color during the night
-value.CLOUD_NIGHT_GREEN.-1=Use Style
-
-option.CLOUD_NIGHT_BLUE=Cloud Night Blue
-option.CLOUD_NIGHT_BLUE.comment=Clouds blue color during the night
-value.CLOUD_NIGHT_BLUE.-1=Use Style
-
-option.CLOUD_SUNRISE_RED=Cloud Sunrise Red
-option.CLOUD_SUNRISE_RED.comment=Clouds red color during sunrise
-value.CLOUD_SUNRISE_RED.-1=Use Style
-
-option.CLOUD_SUNRISE_GREEN=Cloud Sunrise Green
-option.CLOUD_SUNRISE_GREEN.comment=Clouds green color during sunrise
-value.CLOUD_SUNRISE_GREEN.-1=Use Style
-
-option.CLOUD_SUNRISE_BLUE=Cloud Sunrise Blue
-option.CLOUD_SUNRISE_BLUE.comment=Clouds blue color during sunrise
-value.CLOUD_SUNRISE_BLUE.-1=Use Style
-
-option.CLOUD_SUNSET_RED=Cloud Sunset Red
-option.CLOUD_SUNSET_RED.comment=Clouds red color during sunset
-value.CLOUD_SUNSET_RED.-1=Use Style
-
-option.CLOUD_SUNSET_GREEN=Cloud Sunset Green
-option.CLOUD_SUNSET_GREEN.comment=Clouds green color during sunset
-value.CLOUD_SUNSET_GREEN.-1=Use Style
-
-option.CLOUD_SUNSET_BLUE=Cloud Sunset Blue
-option.CLOUD_SUNSET_BLUE.comment=Clouds blue color during sunset
-value.CLOUD_SUNSET_BLUE.-1=Use Style
-
-
-
-
-
-screen.CLOUD_NOISES_MENU=Cloud Noise Values
-screen.CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
-
-option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
-option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_1_SCALE.-1=Use Style
-
-option.CLOUD_LAYER_1_WEIGHT=Layer 1 Weight
-option.CLOUD_LAYER_1_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_1_WEIGHT.-1=Use Style
-
-option.CLOUD_LAYER_1_SPEED=Layer 1 Speed
-option.CLOUD_LAYER_1_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_1_SPEED.-1=Use Style
-
-option.CLOUD_LAYER_2_SCALE=Layer 2 Scale
-option.CLOUD_LAYER_2_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_2_SCALE.-1=Use Style
-
-option.CLOUD_LAYER_2_WEIGHT=Layer 2 Weight
-option.CLOUD_LAYER_2_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_2_WEIGHT.-1=Use Style
-
-option.CLOUD_LAYER_2_SPEED=Layer 2 Speed
-option.CLOUD_LAYER_2_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_2_SPEED.-1=Use Style
-
-option.CLOUD_LAYER_3_SCALE=Layer 3 Scale
-option.CLOUD_LAYER_3_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_3_SCALE.-1=Use Style
-
-option.CLOUD_LAYER_3_WEIGHT=Layer 3 Weight
-option.CLOUD_LAYER_3_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_3_WEIGHT.-1=Use Style
-
-option.CLOUD_LAYER_3_SPEED=Layer 3 Speed
-option.CLOUD_LAYER_3_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_3_SPEED.-1=Use Style
-
-option.CLOUD_LAYER_4_SCALE=Layer 4 Scale
-option.CLOUD_LAYER_4_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_4_SCALE.-1=Use Style
-
-option.CLOUD_LAYER_4_WEIGHT=Layer 4 Weight
-option.CLOUD_LAYER_4_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_4_WEIGHT.-1=Use Style
-
-option.CLOUD_LAYER_4_SPEED=Layer 4 Speed
-option.CLOUD_LAYER_4_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_4_SPEED.-1=Use Style
-
-
-
-
-
-screen.FOG_MENU=Fog
-
-option.BORDER_FOG_ENABLED=Border Fog Enabled
-option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
-value.BORDER_FOG_ENABLED.-1=Use Style
-value.BORDER_FOG_ENABLED.0=Off
-value.BORDER_FOG_ENABLED.1=On
-
-option.BORDER_FOG_START=Fog Air Start
-option.BORDER_FOG_START.comment=Where fog starts during normal conditions
-value.BORDER_FOG_START.-1=Use Style
-
-option.BORDER_FOG_END=Fog Air End
-option.BORDER_FOG_END.comment=Where fog ends during normal conditions
-value.BORDER_FOG_END.-1=Use Style
-
-option.BORDER_FOG_CURVE=Fog Curve
-option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
-value.BORDER_FOG_CURVE.-1=Use Style
-
-option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
-value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
-
-
-
-
-
-screen.SKY_COLORS_MENU=Sky Colors
-
-option.SKY_DAY_RED=Sky Day Red
-value.SKY_DAY_RED.-1=use Style
-
-option.SKY_DAY_GREEN=Sky Day Green
-value.SKY_DAY_GREEN.-1=use Style
-
-option.SKY_DAY_BLUE=Sky Day Blue
-value.SKY_DAY_BLUE.-1=use Style
-
-option.SKY_NIGHT_RED=Sky Night Red
-value.SKY_NIGHT_RED.-1=use Style
-
-option.SKY_NIGHT_GREEN=Sky Night Green
-value.SKY_NIGHT_GREEN.-1=use Style
-
-option.SKY_NIGHT_BLUE=Sky Night Blue
-value.SKY_NIGHT_BLUE.-1=use Style
-
-option.SKY_HORIZON_DAY_RED=Horizon Day Red
-value.SKY_HORIZON_DAY_RED.-1=use Style
-
-option.SKY_HORIZON_DAY_GREEN=Horizon Day Green
-value.SKY_HORIZON_DAY_GREEN.-1=use Style
-
-option.SKY_HORIZON_DAY_BLUE=Horizon Day Blue
-value.SKY_HORIZON_DAY_BLUE.-1=use Style
-
-option.SKY_HORIZON_NIGHT_RED=Horizon Night Red
-value.SKY_HORIZON_NIGHT_RED.-1=use Style
-
-option.SKY_HORIZON_NIGHT_GREEN=Horizon Night Green
-value.SKY_HORIZON_NIGHT_GREEN.-1=use Style
-
-option.SKY_HORIZON_NIGHT_BLUE=Horizon Night Blue
-value.SKY_HORIZON_NIGHT_BLUE.-1=use Style
-
-option.SKY_HORIZON_SUNRISE_RED=Horizon Sunrise Red
-value.SKY_HORIZON_SUNRISE_RED.-1=use Style
-
-option.SKY_HORIZON_SUNRISE_GREEN=Horizon Sunrise Green
-value.SKY_HORIZON_SUNRISE_GREEN.-1=use Style
-
-option.SKY_HORIZON_SUNRISE_BLUE=Horizon Sunrise Blue
-value.SKY_HORIZON_SUNRISE_BLUE.-1=use Style
-
-option.SKY_HORIZON_SUNSET_RED=Horizon Sunset Red
-value.SKY_HORIZON_SUNSET_RED.-1=use Style
-
-option.SKY_HORIZON_SUNSET_GREEN=Horizon Sunset Green
-value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
-
-option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
-value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
+screen.SHADING_MENU=Shading
+
+option.SHADOWS_ENABLED=Shadows Enabled
+value.SHADOWS_ENABLED.0=Off
+value.SHADOWS_ENABLED.1=On
+
+option.shadowMapResolution=Shadow Map Resolution
+option.shadowMapResolution.comment=Resolution of the shadow map. Higher is more accurate, lower is more performance\n\n(Performance cost: HIGH)
+
+option.shadowDistance=Shadow Distance
+option.shadowDistance.comment=Maximum distance that shadows are rendered\n\n(Performance cost: Unknown)
+
+option.SHADOW_DISTORT_ADDITION=Shadow Distortion
+option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of nearby shadows. Lower values make closer shadows sharper, and vice versa\n\n(Performance cost: None)
+
+option.SHADOW_FILTERING=Shadow Filtering
+option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Medium)
+value.SHADOW_FILTERING.0=Off (pixelated)
+value.SHADOW_FILTERING.1=Off (smooth)
+value.SHADOW_FILTERING.2=On (Low)
+value.SHADOW_FILTERING.3=On (Medium)
+value.SHADOW_FILTERING.4=On (High)
+
+option.SHADOWS_NOISE=Shadows Noise Amount
+option.SHADOWS_NOISE.comment=Amount of noise to apply to shadow filtering
+value.SHADOWS_NOISE.-1=Use Style
+
+option.PIXELATED_SHADOWS=Pixelated Shadows
+option.PIXELATED_SHADOWS.comment=Makes the shadows pixelated along the same grid as blocks
+value.PIXELATED_SHADOWS.-1=Use Style
+value.PIXELATED_SHADOWS.0=Off
+value.PIXELATED_SHADOWS.8=8x
+value.PIXELATED_SHADOWS.16=16x
+value.PIXELATED_SHADOWS.32=32x
+value.PIXELATED_SHADOWS.64=64x
+value.PIXELATED_SHADOWS.128=128x
+
+option.EXCLUDE_FOLIAGE=Exclude Foliage
+option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Performance cost: Low)
+value.EXCLUDE_FOLIAGE.-1=Use Style
+value.EXCLUDE_FOLIAGE.0=Off
+value.EXCLUDE_FOLIAGE.1=On
+
+option.CEL_SHADING_ENABLED=Cel Shading
+option.CEL_SHADING_ENABLED.comment=Mostly affects blocklight, makes light fully bright or no brightness (well kinda, it's more complicated so that it looks better)\nThis is similar to (and pairs well with) Posterize is super-secret-settings
+value.CEL_SHADING_ENABLED.-1=Use Style
+value.CEL_SHADING_ENABLED.0=Off
+value.CEL_SHADING_ENABLED.1=On
+
+option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
+option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+value.VANILLA_AO_BRIGHT.-1=Use Style
+
+option.VANILLA_AO_DARK=Vanilla AO (Dark)
+option.VANILLA_AO_DARK.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+value.VANILLA_AO_DARK.-1=Use Style
+
+option.SIDE_SHADING_BRIGHT=Side Shading (Bright)
+option.SIDE_SHADING_BRIGHT.comment=How much to increase / decrease the sides of blocks at brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+value.SIDE_SHADING_BRIGHT.-1=Use Style
+
+option.SIDE_SHADING_DARK=Side Shading (Dark)
+option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+value.SIDE_SHADING_DARK.-1=Use Style
+
+option.WEATHER_LIGHT_MULT=Weather Light Multiplier
+value.WEATHER_LIGHT_MULT.-1=Use Style
 
 
 
@@ -527,78 +305,6 @@ value.NETHER_BLOCKLIGHT_BLUE_MULT.-1=Use Style
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT=Nether Blocklight Brightness Mult
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.comment=How much to increase / decrease the blue channel of blocklight when in the nether
 value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
-
-
-
-
-
-screen.SHADING_MENU=Shading
-
-option.SHADOWS_ENABLED=Shadows Enabled
-value.SHADOWS_ENABLED.0=Off
-value.SHADOWS_ENABLED.1=On
-
-option.shadowMapResolution=Shadow Map Resolution
-option.shadowMapResolution.comment=Resolution of the shadow map. Higher is more accurate, lower is more performance\n\n(Performance cost: HIGH)
-
-option.shadowDistance=Shadow Distance
-option.shadowDistance.comment=Maximum distance that shadows are rendered\n\n(Performance cost: Unknown)
-
-option.SHADOW_DISTORT_ADDITION=Shadow Distortion
-option.SHADOW_DISTORT_ADDITION.comment=This controls the resolution of nearby shadows. Lower values make closer shadows sharper, and vice versa\n\n(Performance cost: None)
-
-option.SHADOW_FILTERING=Shadow Filtering
-option.SHADOW_FILTERING.comment=Smoothens shadow edges (works best with Temporal Filter enabled, has no effect when pixelated shadows is enabled)\n\n(Performance cost: Medium)
-value.SHADOW_FILTERING.0=Off (pixelated)
-value.SHADOW_FILTERING.1=Off (smooth)
-value.SHADOW_FILTERING.2=On (Low)
-value.SHADOW_FILTERING.3=On (Medium)
-value.SHADOW_FILTERING.4=On (High)
-
-option.SHADOWS_NOISE=Shadows Noise Amount
-option.SHADOWS_NOISE.comment=Amount of noise to apply to shadow filtering
-value.SHADOWS_NOISE.-1=Use Style
-
-option.PIXELATED_SHADOWS=Pixelated Shadows
-option.PIXELATED_SHADOWS.comment=Makes the shadows pixelated along the same grid as blocks
-value.PIXELATED_SHADOWS.-1=Use Style
-value.PIXELATED_SHADOWS.0=Off
-value.PIXELATED_SHADOWS.8=8x
-value.PIXELATED_SHADOWS.16=16x
-value.PIXELATED_SHADOWS.32=32x
-value.PIXELATED_SHADOWS.64=64x
-value.PIXELATED_SHADOWS.128=128x
-
-option.EXCLUDE_FOLIAGE=Exclude Foliage
-option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Performance cost: Low)
-value.EXCLUDE_FOLIAGE.-1=Use Style
-value.EXCLUDE_FOLIAGE.0=Off
-value.EXCLUDE_FOLIAGE.1=On
-
-option.CEL_SHADING_ENABLED=Cel Shading
-option.CEL_SHADING_ENABLED.comment=Mostly affects blocklight, makes light fully bright or no brightness (well kinda, it's more complicated so that it looks better)\nThis is similar to (and pairs well with) Posterize is super-secret-settings
-value.CEL_SHADING_ENABLED.-1=Use Style
-value.CEL_SHADING_ENABLED.0=Off
-value.CEL_SHADING_ENABLED.1=On
-
-option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
-option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
-value.VANILLA_AO_BRIGHT.-1=Use Style
-
-option.VANILLA_AO_DARK=Vanilla AO (Dark)
-option.VANILLA_AO_DARK.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
-value.VANILLA_AO_DARK.-1=Use Style
-
-option.SIDE_SHADING_BRIGHT=Side Shading (Bright)
-option.SIDE_SHADING_BRIGHT.comment=How much to increase / decrease the sides of blocks at brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
-value.SIDE_SHADING_BRIGHT.-1=Use Style
-
-option.SIDE_SHADING_DARK=Side Shading (Dark)
-option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
-value.SIDE_SHADING_DARK.-1=Use Style
-
-option.WEATHER_LIGHT_MULT=Weather Light Multiplier
-value.WEATHER_LIGHT_MULT.-1=Use Style
 
 
 
@@ -1258,6 +964,300 @@ value.WATER_COLOR_BLUE.-1=Use Style
 option.WATER_COLOR_AMOUNT=Water Color Amount
 option.WATER_COLOR_AMOUNT.comment=How much to mix in the custom water color (0.0 means use only the loaded water texture and 1.0 means only use the water color defined above)
 value.WATER_COLOR_AMOUNT.-1=Use Style
+
+
+
+
+
+screen.SKY_MENU=Sky
+
+option.SUN_BRIGHTNESS=Sun Brightness
+value.SUN_BRIGHTNESS.-1=Use Style
+
+option.MOON_BRIGHTNESS=Moon Brightness
+value.MOON_BRIGHTNESS.-1=Use Style
+
+option.DARKEN_SKY_UNDERGROUND=Darken Sky Underground
+option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground
+value.DARKEN_SKY_UNDERGROUND.-1=Use Style
+value.DARKEN_SKY_UNDERGROUND.0=Off
+value.DARKEN_SKY_UNDERGROUND.1=On
+
+option.STARS_BRIGHTNESS=Stars Brightness
+value.STARS_BRIGHTNESS.-1=Use Style
+
+option.sunPathRotation=Sun Path Rotation
+option.sunPathRotation.comment=How tilted the sun's rotation is. 0 is vanilla
+
+option.DARKEN_STARS_NEAR_BLOCKLIGHT=Darken Stars Near Blocklight
+option.DARKEN_STARS_NEAR_BLOCKLIGHT.comment=Simulates light pollution by darkening stars when you're near blocklight
+value.DARKEN_STARS_NEAR_BLOCKLIGHT.-1=Use Style
+value.DARKEN_STARS_NEAR_BLOCKLIGHT.0=Off
+value.DARKEN_STARS_NEAR_BLOCKLIGHT.1=On
+
+option.DARKENED_STARS_BRIGHTNESS=Darkened Stars Brightness
+option.DARKENED_STARS_BRIGHTNESS.comment=Brightness of stars when darkened by blocklight. Only takes effect when 'Darken Stars Near Blocklight' is enabled
+value.DARKENED_STARS_BRIGHTNESS.-1=Use Style
+
+option.WEATHER_TRANSPARENCY=Weather Transparency
+value.WEATHER_TRANSPARENCY.-1=Use Style
+
+option.WEATHER_HORIZONTAL_AMOUNT=Weather Horizontal Amount
+option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
+value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
+
+
+
+
+
+screen.CLOUDS_MENU=Clouds
+
+option.VANILLA_CLOUD_TRANSPARENCY=Cloud Transparency (Vanilla)
+option.VANILLA_CLOUD_TRANSPARENCY.comment=Transparency for vanilla-style clouds
+value.VANILLA_CLOUD_TRANSPARENCY.-1=Use Style
+
+option.NEARBY_CLOUD_TRANSPARENCY=Nearby Cloud Transparency
+option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only works for non-realistic clouds
+value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
+
+option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
+option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby, only works for non-realistic clouds
+value.NEARBY_CLOUD_DIST.-1=Use Style
+
+option.CLOUD_WEATHER_DARKEN=Cloud Weather Darken
+option.CLOUD_WEATHER_DARKEN.comment=How much to darken clouds when raining / snowing
+value.CLOUD_WEATHER_DARKEN.-1=Use Style
+
+option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
+value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
+value.REALISTIC_CLOUDS_ENABLED.0=Off
+value.REALISTIC_CLOUDS_ENABLED.1=On
+
+option.REALISTIC_CLOUD_DENSITY=Cloud Density (Realistic)
+option.REALISTIC_CLOUD_DENSITY.comment=Density of realistic clouds
+value.REALISTIC_CLOUD_DENSITY.-1=Use Style
+
+option.REALISTIC_CLOUD_TRANSPARENCY=Cloud Transparency (Realistic)
+option.REALISTIC_CLOUD_TRANSPARENCY.comment=Transparency for realistic-style clouds
+value.REALISTIC_CLOUD_TRANSPARENCY.-1=Use Style
+
+option.CLOUDS_QUALITY=Clouds Quality
+option.CLOUDS_QUALITY.comment=Quality of realistic clouds
+
+option.CLOUD_COVERAGE=Cloud Coverage
+value.CLOUD_COVERAGE.-1=Use Style
+
+option.CLOUD_WEATHER_COVERAGE=Cloud Weather Coverage
+option.CLOUD_WEATHER_COVERAGE.comment=Coverage for clouds when raining / snowing
+value.CLOUD_WEATHER_COVERAGE.-1=Use Style
+
+option.CLOUD_BOTTOM_Y=Cloud Bottom Level
+option.CLOUD_BOTTOM_Y.comment=The y-level where realistic clouds start
+value.CLOUD_BOTTOM_Y.-1=Use Style
+
+option.CLOUD_TOP_Y=Cloud Top Level
+option.CLOUD_TOP_Y.comment=the y-level where realistic clouds stop
+value.CLOUD_TOP_Y.-1=Use Style
+
+option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
+option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
+value.CLOUD_OPACITY_DISTANCE.-1=Use Style
+
+
+
+
+
+screen.CLOUD_COLORS_MENU=Cloud Colors
+
+option.CLOUD_DAY_RED=Cloud Day Red
+option.CLOUD_DAY_RED.comment=Clouds red color during the day
+value.CLOUD_DAY_RED.-1=Use Style
+
+option.CLOUD_DAY_GREEN=Cloud Day Green
+option.CLOUD_DAY_GREEN.comment=Clouds green color during the day
+value.CLOUD_DAY_GREEN.-1=Use Style
+
+option.CLOUD_DAY_BLUE=Cloud Day Blue
+option.CLOUD_DAY_BLUE.comment=Clouds blue color during the day
+value.CLOUD_DAY_BLUE.-1=Use Style
+
+option.CLOUD_NIGHT_RED=Cloud Night Red
+option.CLOUD_NIGHT_RED.comment=Clouds red color during the night
+value.CLOUD_NIGHT_RED.-1=Use Style
+
+option.CLOUD_NIGHT_GREEN=Cloud Night Green
+option.CLOUD_NIGHT_GREEN.comment=Clouds green color during the night
+value.CLOUD_NIGHT_GREEN.-1=Use Style
+
+option.CLOUD_NIGHT_BLUE=Cloud Night Blue
+option.CLOUD_NIGHT_BLUE.comment=Clouds blue color during the night
+value.CLOUD_NIGHT_BLUE.-1=Use Style
+
+option.CLOUD_SUNRISE_RED=Cloud Sunrise Red
+option.CLOUD_SUNRISE_RED.comment=Clouds red color during sunrise
+value.CLOUD_SUNRISE_RED.-1=Use Style
+
+option.CLOUD_SUNRISE_GREEN=Cloud Sunrise Green
+option.CLOUD_SUNRISE_GREEN.comment=Clouds green color during sunrise
+value.CLOUD_SUNRISE_GREEN.-1=Use Style
+
+option.CLOUD_SUNRISE_BLUE=Cloud Sunrise Blue
+option.CLOUD_SUNRISE_BLUE.comment=Clouds blue color during sunrise
+value.CLOUD_SUNRISE_BLUE.-1=Use Style
+
+option.CLOUD_SUNSET_RED=Cloud Sunset Red
+option.CLOUD_SUNSET_RED.comment=Clouds red color during sunset
+value.CLOUD_SUNSET_RED.-1=Use Style
+
+option.CLOUD_SUNSET_GREEN=Cloud Sunset Green
+option.CLOUD_SUNSET_GREEN.comment=Clouds green color during sunset
+value.CLOUD_SUNSET_GREEN.-1=Use Style
+
+option.CLOUD_SUNSET_BLUE=Cloud Sunset Blue
+option.CLOUD_SUNSET_BLUE.comment=Clouds blue color during sunset
+value.CLOUD_SUNSET_BLUE.-1=Use Style
+
+
+
+
+
+screen.CLOUD_NOISES_MENU=Cloud Noise Values
+screen.CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
+
+option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
+option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_1_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_1_WEIGHT=Layer 1 Weight
+option.CLOUD_LAYER_1_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_1_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_1_SPEED=Layer 1 Speed
+option.CLOUD_LAYER_1_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_1_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_2_SCALE=Layer 2 Scale
+option.CLOUD_LAYER_2_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_2_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_2_WEIGHT=Layer 2 Weight
+option.CLOUD_LAYER_2_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_2_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_2_SPEED=Layer 2 Speed
+option.CLOUD_LAYER_2_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_2_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_3_SCALE=Layer 3 Scale
+option.CLOUD_LAYER_3_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_3_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_3_WEIGHT=Layer 3 Weight
+option.CLOUD_LAYER_3_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_3_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_3_SPEED=Layer 3 Speed
+option.CLOUD_LAYER_3_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_3_SPEED.-1=Use Style
+
+option.CLOUD_LAYER_4_SCALE=Layer 4 Scale
+option.CLOUD_LAYER_4_SCALE.comment=How large this layer of noise is
+value.CLOUD_LAYER_4_SCALE.-1=Use Style
+
+option.CLOUD_LAYER_4_WEIGHT=Layer 4 Weight
+option.CLOUD_LAYER_4_WEIGHT.comment=How much this layer affects the noise
+value.CLOUD_LAYER_4_WEIGHT.-1=Use Style
+
+option.CLOUD_LAYER_4_SPEED=Layer 4 Speed
+option.CLOUD_LAYER_4_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
+value.CLOUD_LAYER_4_SPEED.-1=Use Style
+
+
+
+
+
+screen.FOG_MENU=Fog
+
+option.BORDER_FOG_ENABLED=Border Fog Enabled
+option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
+value.BORDER_FOG_ENABLED.-1=Use Style
+value.BORDER_FOG_ENABLED.0=Off
+value.BORDER_FOG_ENABLED.1=On
+
+option.BORDER_FOG_START=Fog Air Start
+option.BORDER_FOG_START.comment=Where fog starts during normal conditions
+value.BORDER_FOG_START.-1=Use Style
+
+option.BORDER_FOG_END=Fog Air End
+option.BORDER_FOG_END.comment=Where fog ends during normal conditions
+value.BORDER_FOG_END.-1=Use Style
+
+option.BORDER_FOG_CURVE=Fog Curve
+option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
+value.BORDER_FOG_CURVE.-1=Use Style
+
+option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
+value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+
+
+
+
+screen.SKY_COLORS_MENU=Sky Colors
+
+option.SKY_DAY_RED=Sky Day Red
+value.SKY_DAY_RED.-1=use Style
+
+option.SKY_DAY_GREEN=Sky Day Green
+value.SKY_DAY_GREEN.-1=use Style
+
+option.SKY_DAY_BLUE=Sky Day Blue
+value.SKY_DAY_BLUE.-1=use Style
+
+option.SKY_NIGHT_RED=Sky Night Red
+value.SKY_NIGHT_RED.-1=use Style
+
+option.SKY_NIGHT_GREEN=Sky Night Green
+value.SKY_NIGHT_GREEN.-1=use Style
+
+option.SKY_NIGHT_BLUE=Sky Night Blue
+value.SKY_NIGHT_BLUE.-1=use Style
+
+option.SKY_HORIZON_DAY_RED=Horizon Day Red
+value.SKY_HORIZON_DAY_RED.-1=use Style
+
+option.SKY_HORIZON_DAY_GREEN=Horizon Day Green
+value.SKY_HORIZON_DAY_GREEN.-1=use Style
+
+option.SKY_HORIZON_DAY_BLUE=Horizon Day Blue
+value.SKY_HORIZON_DAY_BLUE.-1=use Style
+
+option.SKY_HORIZON_NIGHT_RED=Horizon Night Red
+value.SKY_HORIZON_NIGHT_RED.-1=use Style
+
+option.SKY_HORIZON_NIGHT_GREEN=Horizon Night Green
+value.SKY_HORIZON_NIGHT_GREEN.-1=use Style
+
+option.SKY_HORIZON_NIGHT_BLUE=Horizon Night Blue
+value.SKY_HORIZON_NIGHT_BLUE.-1=use Style
+
+option.SKY_HORIZON_SUNRISE_RED=Horizon Sunrise Red
+value.SKY_HORIZON_SUNRISE_RED.-1=use Style
+
+option.SKY_HORIZON_SUNRISE_GREEN=Horizon Sunrise Green
+value.SKY_HORIZON_SUNRISE_GREEN.-1=use Style
+
+option.SKY_HORIZON_SUNRISE_BLUE=Horizon Sunrise Blue
+value.SKY_HORIZON_SUNRISE_BLUE.-1=use Style
+
+option.SKY_HORIZON_SUNSET_RED=Horizon Sunset Red
+value.SKY_HORIZON_SUNSET_RED.-1=use Style
+
+option.SKY_HORIZON_SUNSET_GREEN=Horizon Sunset Green
+value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
+
+option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
+value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
 
 
 
