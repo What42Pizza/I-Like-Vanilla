@@ -829,6 +829,11 @@
 #undef WATER_TRANSPARENCY_DEEP
 										#define WATER_TRANSPARENCY_DEEP 0.1
 #endif
+
+
+
+
+
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
 										#define WATER_COLOR_RED 0.1

@@ -949,6 +949,12 @@ value.WATER_TRANSPARENCY_SHALLOW.-1=Use Style
 option.WATER_TRANSPARENCY_DEEP=Water Transparency (Deep)
 value.WATER_TRANSPARENCY_DEEP.-1=Use Style
 
+
+
+
+
+screen.WATER_COLOR_MENU=Water Color
+
 option.WATER_COLOR_RED=Water Color Red
 option.WATER_COLOR_RED.comment=Red value for custom water color
 value.WATER_COLOR_RED.-1=Use Style
@@ -1184,20 +1190,62 @@ value.BORDER_FOG_ENABLED.-1=Use Style
 value.BORDER_FOG_ENABLED.0=Off
 value.BORDER_FOG_ENABLED.1=On
 
-option.BORDER_FOG_START=Fog Air Start
+option.BORDER_FOG_START=Border Fog Start
 option.BORDER_FOG_START.comment=Where fog starts during normal conditions
 value.BORDER_FOG_START.-1=Use Style
 
-option.BORDER_FOG_END=Fog Air End
+option.BORDER_FOG_END=Border Fog End
 option.BORDER_FOG_END.comment=Where fog ends during normal conditions
 value.BORDER_FOG_END.-1=Use Style
 
-option.BORDER_FOG_CURVE=Fog Curve
+option.BORDER_FOG_CURVE=Border Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
 
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+
+
+
+
+screen.IN_LIQUID_FOG_MENU=In-Liquid Fog
+
+option.IN_WATER_RED=Water Fog Red
+option.IN_WATER_RED.comment=Fog color when underwater
+value.IN_WATER_RED.-1=Use Style
+
+option.IN_WATER_GREEN=Water Fog Green
+option.IN_WATER_GREEN.comment=Fog color when underwater
+value.IN_WATER_GREEN.-1=Use Style
+
+option.IN_WATER_BLUE=Water Fog Blue
+option.IN_WATER_BLUE.comment=Fog color when underwater
+value.IN_WATER_BLUE.-1=Use Style
+
+option.IN_LAVA_RED=Lava Fog Red
+option.IN_LAVA_RED.comment=Fog color when in lava
+value.IN_LAVA_RED.-1=Use Style
+
+option.IN_LAVA_GREEN=Lava Fog Green
+option.IN_LAVA_GREEN.comment=Fog color when in lava
+value.IN_LAVA_GREEN.-1=Use Style
+
+option.IN_LAVA_BLUE=Lava Fog Blue
+option.IN_LAVA_BLUE.comment=Fog color when in lava
+value.IN_LAVA_BLUE.-1=Use Style
+
+option.IN_SNOW_RED=Snow Fog Red
+option.IN_SNOW_RED.comment=Fog color when in powdered snow
+value.IN_SNOW_RED.-1=Use Style
+
+option.IN_SNOW_GREEN=Snow Fog Green
+option.IN_SNOW_GREEN.comment=Fog color when in powdered snow
+value.IN_SNOW_GREEN.-1=Use Style
+
+option.IN_SNOW_BLUE=Snow Fog Blue
+option.IN_SNOW_BLUE.comment=Fog color when in powdered snow
+value.IN_SNOW_BLUE.-1=Use Style
 
 
 
@@ -1282,6 +1330,13 @@ value.ISOMETRIC_BACKWARD_VISIBILITY.-1=Use Style
 option.ISOMETRIC_FORWARD_VISIBILITY=Isometric Forward Visibility
 option.ISOMETRIC_FORWARD_VISIBILITY.comment=This controls how close the clipping plane is in front of you
 value.ISOMETRIC_FORWARD_VISIBILITY.-1=Use Style
+
+
+
+
+
+screen.PERFORMANCE_MENU=Performance
+screen.PERFORMANCE_MENU.comment=The settings that have the biggest impact on performance
 
 
 

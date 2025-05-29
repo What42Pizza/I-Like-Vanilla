@@ -83,16 +83,16 @@ void main() {
 		fogSlope = 325.0 / ATMOSPHERIC_FOG_DENSITY;
 		fogMax = 0.5;
 	} else if (isEyeInWater == 1) {
-		fogColor = vec3(0.0, 0.1, 0.6);
-		fogSlope = 5.0;
+		fogColor = IN_WATER_COLOR;
+		fogSlope = 7.5;
 		fogDist += 4.0;
 		fogMax = 0.9;
 	} else if (isEyeInWater == 2) {
-		fogColor = vec3(0.85, 0.15, 0.0);
+		fogColor = IN_LAVA_COLOR;
 		fogSlope = 0.1;
 		fogMax = 1.0;
 	} else if (isEyeInWater == 3) {
-		fogColor = vec3(0.6, 0.9, 1.0);
+		fogColor = IN_POWDERED_SNOW_COLOR;
 		fogSlope = 0.1;
 		fogMax = 1.0;
 	}

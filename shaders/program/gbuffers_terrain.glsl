@@ -5,10 +5,8 @@
 	in_out vec3 glcolor;
 	flat in_out vec2 normal;
 	flat in_out int materialId;
+	in_out vec3 playerPos;
 	
-	#if defined DISTANT_HORIZONS || SHOW_DANGEROUS_LIGHT == 1
-		in_out vec3 playerPos;
-	#endif
 	#if SHOW_DANGEROUS_LIGHT == 1
 		in_out float isDangerousLight;
 	#endif
@@ -32,6 +30,11 @@ void main() {
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
+	#else
+		//float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+		//#include "/import/invFar.glsl"
+		//fogDistance *= invFar;
+		//if (fogDistance >= 0.96) {discard; return;}
 	#endif
 	
 	
@@ -83,22 +86,22 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 
-vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal  ARGS_OUT) {
-    // Step 1: Project the point onto the plane
-    vec3 toPoint = point - planeOrigin;
-    vec3 normal = normalize(planeNormal);
-    vec3 projected = point - dot(toPoint, normal) * normal;
+//vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal  ARGS_OUT) {
+//	// Step 1: Project the point onto the plane
+//	vec3 toPoint = point - planeOrigin;
+//	vec3 normal = normalize(planeNormal);
+//	vec3 projected = point - dot(toPoint, normal) * normal;
 
-    // Step 2: Create 2D basis vectors (u and v) on the plane
-    vec3 x = cross(normal, vec3(0.0, 1.0, 0.0));
-    if (dot(x, x) < 0.001) x = cross(normal, vec3(1.0, 0.0, 0.0));
-    x = normalize(x);
-    vec3 y = cross(normal, x);
+//	// Step 2: Create 2D basis vectors (u and v) on the plane
+//	vec3 x = cross(normal, vec3(0.0, 1.0, 0.0));
+//	if (dot(x, x) < 0.001) x = cross(normal, vec3(1.0, 0.0, 0.0));
+//	x = normalize(x);
+//	vec3 y = cross(normal, x);
 
-    // Step 3: Get 2D coordinates
-    vec3 relative = projected - planeOrigin;
-    return vec2(dot(relative, x), dot(relative, y));
-}
+//	// Step 3: Get 2D coordinates
+//	vec3 relative = projected - planeOrigin;
+//	return vec2(dot(relative, x), dot(relative, y));
+//}
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
@@ -119,9 +122,6 @@ void main() {
 	#endif
 	
 	
-	#if !(defined DISTANT_HORIZONS || SHOW_DANGEROUS_LIGHT == 1)
-		vec3 playerPos;
-	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	

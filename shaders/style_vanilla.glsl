@@ -62,7 +62,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 0.97
+										#define SKYLIGHT_DAY_RED 0.98
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -74,19 +74,19 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.25
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.90
+										#define AMBIENT_DAY_RED 0.9
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.92
+										#define AMBIENT_DAY_GREEN 0.95
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
-										#define AMBIENT_DAY_BLUE 1.0
+										#define AMBIENT_DAY_BLUE 1.05
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
@@ -160,7 +160,7 @@
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.75
+										#define AMBIENT_SUNRISE_BLUE 0.7
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
@@ -173,7 +173,7 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.0
+										#define SKYLIGHT_SUNSET_RED 1.05
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
@@ -352,7 +352,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.0
+										#define AO_AMOUNT 0.9
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -612,7 +612,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.2
+										#define VIBRANCE 0.15
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -628,7 +628,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.1
+										#define CONTRAST 0.2
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED
@@ -829,17 +829,22 @@
 #undef WATER_TRANSPARENCY_DEEP
 										#define WATER_TRANSPARENCY_DEEP 0.1
 #endif
+
+
+
+
+
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.2
+										#define WATER_COLOR_RED 0.1
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.2
+										#define WATER_COLOR_GREEN 0.3
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.2
+										#define WATER_COLOR_BLUE 0.5
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
@@ -1071,6 +1076,47 @@
 
 
 
+#if IN_WATER_RED == -1
+#undef IN_WATER_RED
+										#define IN_WATER_RED 0.0
+#endif
+#if IN_WATER_GREEN == -1
+#undef IN_WATER_GREEN
+										#define IN_WATER_GREEN 0.1
+#endif
+#if IN_WATER_BLUE == -1
+#undef IN_WATER_BLUE
+										#define IN_WATER_BLUE 0.6
+#endif
+#if IN_LAVA_RED == -1
+#undef IN_LAVA_RED
+										#define IN_LAVA_RED 0.85
+#endif
+#if IN_LAVA_GREEN == -1
+#undef IN_LAVA_GREEN
+										#define IN_LAVA_GREEN 0.15
+#endif
+#if IN_LAVA_BLUE == -1
+#undef IN_LAVA_BLUE
+										#define IN_LAVA_BLUE 0.0
+#endif
+#if IN_SNOW_RED == -1
+#undef IN_SNOW_RED
+										#define IN_SNOW_RED 0.6
+#endif
+#if IN_SNOW_GREEN == -1
+#undef IN_SNOW_GREEN
+										#define IN_SNOW_GREEN 0.9
+#endif
+#if IN_SNOW_BLUE == -1
+#undef IN_SNOW_BLUE
+										#define IN_SNOW_BLUE 1.0
+#endif
+
+
+
+
+
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
 										#define SKY_DAY_RED 0.5
@@ -1133,15 +1179,15 @@
 #endif
 #if SKY_HORIZON_SUNSET_RED == -1
 #undef SKY_HORIZON_SUNSET_RED
-										#define SKY_HORIZON_SUNSET_RED 1.0
+										#define SKY_HORIZON_SUNSET_RED 1.1
 #endif
 #if SKY_HORIZON_SUNSET_GREEN == -1
 #undef SKY_HORIZON_SUNSET_GREEN
-										#define SKY_HORIZON_SUNSET_GREEN 0.6
+										#define SKY_HORIZON_SUNSET_GREEN 0.55
 #endif
 #if SKY_HORIZON_SUNSET_BLUE == -1
 #undef SKY_HORIZON_SUNSET_BLUE
-										#define SKY_HORIZON_SUNSET_BLUE 0.25
+										#define SKY_HORIZON_SUNSET_BLUE 0.2
 #endif
 
 
@@ -1171,7 +1217,7 @@
 
 #if NEARBY_PARTICLE_TRANSPARENCY == -1
 #undef NEARBY_PARTICLE_TRANSPARENCY
-										#define NEARBY_PARTICLE_TRANSPARENCY 0.0
+										#define NEARBY_PARTICLE_TRANSPARENCY 0.8
 #endif
 #if USE_SIMPLE_LIGHT == -1
 #undef USE_SIMPLE_LIGHT
