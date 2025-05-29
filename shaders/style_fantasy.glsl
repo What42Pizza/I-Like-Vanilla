@@ -210,10 +210,6 @@
 #undef BORDER_FOG_CURVE
 										#define BORDER_FOG_CURVE 2
 #endif
-#if ATMOSPHERIC_FOG_ENABLED == -1
-#undef ATMOSPHERIC_FOG_ENABLED
-										#define ATMOSPHERIC_FOG_ENABLED 1
-#endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
 										#define ATMOSPHERIC_FOG_DENSITY 1.0
@@ -347,7 +343,7 @@
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
-										#define AMBIENT_DAY_BLUE 1.05
+										#define AMBIENT_DAY_BLUE 1.1
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
@@ -621,7 +617,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 2.0
+										#define BLOOM_AMOUNT 1.8
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE

@@ -18,9 +18,7 @@
 #include "/utils/screen_to_view.glsl"
 #include "/lib/borderFog/getBorderFogAmount.glsl"
 
-#if ATMOSPHERIC_FOG_ENABLED == 1
-	#include "/utils/getSkyColor.glsl"
-#endif
+#include "/utils/getSkyColor.glsl"
 #if DEPTH_SUNRAYS_ENABLED == 1
 	#include "/lib/sunrays_depth.glsl"
 #endif
@@ -45,12 +43,11 @@ void main() {
 	#else
 		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
 	#endif
-	#if ATMOSPHERIC_FOG_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
-		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-		playerPos.y *= 0.02;
-		float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
-		playerPos.y /= 0.02;
-	#endif
+	
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	playerPos.y *= 0.02;
+	float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
+	playerPos.y /= 0.02;
 	
 	
 	
@@ -75,16 +72,34 @@ void main() {
 	
 	// ======== ATMOSPHERIC FOG ======== //
 	
-	#if ATMOSPHERIC_FOG_ENABLED == 1
-		const float FOG_SLOPE = 300.0 / ATMOSPHERIC_FOG_DENSITY;
-		float dist = length(viewPos);
-		dist *= distMult;
-		float atmoFogAmount = 1.0 - FOG_SLOPE / (FOG_SLOPE + dist);
-		atmoFogAmount *= 1.0 - fogAmount;
-		vec3 fogColor = getSkyColor(viewPos / dist, false  ARGS_IN);
-		color *= 1.0 - 0.5 * atmoFogAmount;
-		color += fogColor * atmoFogAmount;
-	#endif
+	float fogDist = length(viewPos);
+	fogDist *= distMult;
+	vec3 fogColor;
+	float fogSlope;
+	float fogMax;
+	#include "/import/isEyeInWater.glsl"
+	if (isEyeInWater == 0) {
+		fogColor = getSkyColor(viewPos / fogDist, false  ARGS_IN);
+		fogSlope = 325.0 / ATMOSPHERIC_FOG_DENSITY;
+		fogMax = 0.5;
+	} else if (isEyeInWater == 1) {
+		fogColor = vec3(0.0, 0.1, 0.6);
+		fogSlope = 5.0;
+		fogDist += 4.0;
+		fogMax = 0.9;
+	} else if (isEyeInWater == 2) {
+		fogColor = vec3(0.85, 0.15, 0.0);
+		fogSlope = 0.1;
+		fogMax = 1.0;
+	} else if (isEyeInWater == 3) {
+		fogColor = vec3(0.6, 0.9, 1.0);
+		fogSlope = 0.1;
+		fogMax = 1.0;
+	}
+	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist);
+	atmoFogAmount *= 1.0 - fogAmount;
+	color *= 1.0 - fogMax * atmoFogAmount;
+	color += fogColor * atmoFogAmount;
 	
 	
 	

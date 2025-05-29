@@ -244,11 +244,6 @@ option.BORDER_FOG_CURVE=Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
 
-option.ATMOSPHERIC_FOG_ENABLED=Atmospheric Fog Enabled
-value.ATMOSPHERIC_FOG_ENABLED.-1=Use Style
-value.ATMOSPHERIC_FOG_ENABLED.0=Off
-value.ATMOSPHERIC_FOG_ENABLED.1=On
-
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 

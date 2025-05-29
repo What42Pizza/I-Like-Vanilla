@@ -210,13 +210,9 @@
 #undef BORDER_FOG_CURVE
 										#define BORDER_FOG_CURVE 3
 #endif
-#if ATMOSPHERIC_FOG_ENABLED == -1
-#undef ATMOSPHERIC_FOG_ENABLED
-										#define ATMOSPHERIC_FOG_ENABLED 0
-#endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 1.0
+										#define ATMOSPHERIC_FOG_DENSITY 0.2
 #endif
 
 
