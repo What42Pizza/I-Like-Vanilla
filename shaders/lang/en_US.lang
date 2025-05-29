@@ -17,7 +17,7 @@ value.STYLE.3=Cartoon
 
 
 
-screen.SKY_SETTINGS=Sky
+screen.SKY_MENU=Sky
 
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style
@@ -58,7 +58,7 @@ value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
 
 
-screen.CLOUD_SETTINGS=Cloud Settings
+screen.CLOUDS_MENU=Clouds
 
 option.VANILLA_CLOUD_TRANSPARENCY=Cloud Transparency (Vanilla)
 option.VANILLA_CLOUD_TRANSPARENCY.comment=Transparency for vanilla-style clouds
@@ -115,62 +115,62 @@ value.CLOUD_OPACITY_DISTANCE.-1=Use Style
 
 
 
-screen.CLOUD_COLORS=Cloud Colors
+screen.CLOUD_COLORS_MENU=Cloud Colors
 
-option.CLOUD_DAY_RED=
-option.CLOUD_DAY_RED.comment=
+option.CLOUD_DAY_RED=Cloud Day Red
+option.CLOUD_DAY_RED.comment=Clouds red color during the day
 value.CLOUD_DAY_RED.-1=Use Style
 
-option.CLOUD_DAY_GREEN=
-option.CLOUD_DAY_GREEN.comment=
+option.CLOUD_DAY_GREEN=Cloud Day Green
+option.CLOUD_DAY_GREEN.comment=Clouds green color during the day
 value.CLOUD_DAY_GREEN.-1=Use Style
 
-option.CLOUD_DAY_BLUE=
-option.CLOUD_DAY_BLUE.comment=
+option.CLOUD_DAY_BLUE=Cloud Day Blue
+option.CLOUD_DAY_BLUE.comment=Clouds blue color during the day
 value.CLOUD_DAY_BLUE.-1=Use Style
 
-option.CLOUD_NIGHT_RED=
-option.CLOUD_NIGHT_RED.comment=
+option.CLOUD_NIGHT_RED=Cloud Night Red
+option.CLOUD_NIGHT_RED.comment=Clouds red color during the night
 value.CLOUD_NIGHT_RED.-1=Use Style
 
-option.CLOUD_NIGHT_GREEN=
-option.CLOUD_NIGHT_GREEN.comment=
+option.CLOUD_NIGHT_GREEN=Cloud Night Green
+option.CLOUD_NIGHT_GREEN.comment=Clouds green color during the night
 value.CLOUD_NIGHT_GREEN.-1=Use Style
 
-option.CLOUD_NIGHT_BLUE=
-option.CLOUD_NIGHT_BLUE.comment=
+option.CLOUD_NIGHT_BLUE=Cloud Night Blue
+option.CLOUD_NIGHT_BLUE.comment=Clouds blue color during the night
 value.CLOUD_NIGHT_BLUE.-1=Use Style
 
-option.CLOUD_SUNRISE_RED=
-option.CLOUD_SUNRISE_RED.comment=
+option.CLOUD_SUNRISE_RED=Cloud Sunrise Red
+option.CLOUD_SUNRISE_RED.comment=Clouds red color during sunrise
 value.CLOUD_SUNRISE_RED.-1=Use Style
 
-option.CLOUD_SUNRISE_GREEN=
-option.CLOUD_SUNRISE_GREEN.comment=
+option.CLOUD_SUNRISE_GREEN=Cloud Sunrise Green
+option.CLOUD_SUNRISE_GREEN.comment=Clouds green color during sunrise
 value.CLOUD_SUNRISE_GREEN.-1=Use Style
 
-option.CLOUD_SUNRISE_BLUE=
-option.CLOUD_SUNRISE_BLUE.comment=
+option.CLOUD_SUNRISE_BLUE=Cloud Sunrise Blue
+option.CLOUD_SUNRISE_BLUE.comment=Clouds blue color during sunrise
 value.CLOUD_SUNRISE_BLUE.-1=Use Style
 
-option.CLOUD_SUNSET_RED=
-option.CLOUD_SUNSET_RED.comment=
+option.CLOUD_SUNSET_RED=Cloud Sunset Red
+option.CLOUD_SUNSET_RED.comment=Clouds red color during sunset
 value.CLOUD_SUNSET_RED.-1=Use Style
 
-option.CLOUD_SUNSET_GREEN=
-option.CLOUD_SUNSET_GREEN.comment=
+option.CLOUD_SUNSET_GREEN=Cloud Sunset Green
+option.CLOUD_SUNSET_GREEN.comment=Clouds green color during sunset
 value.CLOUD_SUNSET_GREEN.-1=Use Style
 
-option.CLOUD_SUNSET_BLUE=
-option.CLOUD_SUNSET_BLUE.comment=
+option.CLOUD_SUNSET_BLUE=Cloud Sunset Blue
+option.CLOUD_SUNSET_BLUE.comment=Clouds blue color during sunset
 value.CLOUD_SUNSET_BLUE.-1=Use Style
 
 
 
 
 
-screen.CLOUD_NOISE_SETTINGS=Cloud Noise Settings
-screen.CLOUD_NOISE_SETTINGS.comment=Settings for realistic clouds noise
+screen.CLOUD_NOISES_MENU=Cloud Noise Values
+screen.CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
 
 option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
 option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is
@@ -224,7 +224,7 @@ value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 
-screen.FOG_SETTINGS=Fog Settings
+screen.FOG_MENU=Fog
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled
 option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
@@ -251,7 +251,7 @@ value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 
 
-screen.SKY_COLOR_SETTINGS=Sky Color Settings
+screen.SKY_COLORS_MENU=Sky Colors
 
 option.SKY_DAY_RED=Sky Day Red
 value.SKY_DAY_RED.-1=use Style
@@ -311,7 +311,7 @@ value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
 
 
 
-screen.COLOR_SETTINGS=Lights and Colors
+screen.COLORS_AND_LIGHTING_MENU=Colors and Lighting
 
 option.FOLIAGE_SATURATION=Foliage Saturation
 option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
@@ -332,7 +332,7 @@ value.NIGHT_VISION_GREEN_AMOUNT.-1=Use Style
 
 
 
-screen.DAY_COLOR_SETTINGS=Day Color Settings
+screen.DAY_LIGHTING_MENU=Day Lighting
 
 option.SKYLIGHT_DAY_RED=Skylight Day Red
 value.SKYLIGHT_DAY_RED.-1=Use Style
@@ -362,7 +362,7 @@ value.AMBIENT_DAY_BRIGHTNESS.-1=Use Style
 
 
 
-screen.NIGHT_COLOR_SETTINGS=Night Color Settings
+screen.NIGHT_LIGHTING_MENU=Night Lighting
 
 option.SKYLIGHT_NIGHT_RED=Skylight Night Red
 value.SKYLIGHT_NIGHT_RED.-1=Use Style
@@ -392,7 +392,7 @@ value.AMBIENT_NIGHT_BRIGHTNESS.-1=Use Style
 
 
 
-screen.SUNRISE_COLOR_SETTINGS=Sunrise Color Settings
+screen.SUNRISE_LIGHTING_MENU=Sunrise Lighting
 
 option.SKYLIGHT_SUNRISE_RED=Skylight Sunrise Red
 value.SKYLIGHT_SUNRISE_RED.-1=Use Style
@@ -422,7 +422,7 @@ value.AMBIENT_SUNRISE_BRIGHTNESS.-1=Use Style
 
 
 
-screen.SUNSET_COLOR_SETTINGS=Sunset Color Settings
+screen.SUNSET_LIGHTING_MENU=Sunset Lighting
 
 option.SKYLIGHT_SUNSET_RED=Skylight Sunset Red
 value.SKYLIGHT_SUNSET_RED.-1=Use Style
@@ -452,7 +452,7 @@ value.AMBIENT_SUNSET_BRIGHTNESS.-1=Use Style
 
 
 
-screen.BLOCK_COLOR_SETTINGS=Block Color Settings
+screen.BLOCKLIGHT_LIGHTING_MENU=Blocklight Lighting
 
 option.BLOCK_RED=Block Red
 value.BLOCK_RED.-1=Use Style
@@ -467,7 +467,7 @@ option.BLOCK_BRIGHTNESS=Block Brightness
 value.BLOCK_BRIGHTNESS.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_CURVE=Block Brightness Curve
-option.BLOCK_BRIGHTNESS_CURVE.comment=Take the calculated block brightness to the power of [this settings]
+option.BLOCK_BRIGHTNESS_CURVE.comment=Take the calculated block brightness to the power of [this setting]
 value.BLOCK_BRIGHTNESS_CURVE.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_NIGHT_MULT=Block Brightness Night Multiplier
@@ -488,7 +488,7 @@ value.BLOCKLIGHT_FLICKERING_AMOUNT.-1=Use Style
 
 
 
-screen.CAVE_COLOR_SETTINGS=Cave Color Settings
+screen.CAVE_LIGHTING_MENU=Cave Lighting
 
 option.CAVE_AMBIENT_RED=Cave Red
 value.CAVE_AMBIENT_RED.-1=Use Style
@@ -506,7 +506,7 @@ value.CAVE_AMBIENT_BRIGHTNESS.-1=Use Style
 
 
 
-screen.NETHER_COLOR_SETTINGS=Nether Color Settings
+screen.NETHER_LIGHTING_MENU=Nether Lighting
 
 option.NETHER_AMBIENT_BRIGHTNESS=Nether Ambient Brightness
 option.NETHER_AMBIENT_BRIGHTNESS.comment=Base brightness level
@@ -532,7 +532,7 @@ value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 
 
 
-screen.SHADING_SETTINGS=Shading
+screen.SHADING_MENU=Shading
 
 option.SHADOWS_ENABLED=Shadows Enabled
 value.SHADOWS_ENABLED.0=Off
@@ -604,7 +604,7 @@ value.WEATHER_LIGHT_MULT.-1=Use Style
 
 
 
-screen.HANDHELD_LIGHT_SETTINGS=Handheld Light
+screen.HANDHELD_LIGHT_MENU=Handheld Light
 
 option.HANDHELD_LIGHT_ENABLED=Handheld Light Enabled
 value.HANDHELD_LIGHT_ENABLED.-1=Use Style
@@ -621,7 +621,7 @@ value.HANDHELD_LIGHT_BRIGHTNESS.-1=Use Style
 
 
 
-screen.POST_PROCESSING_SETTINGS=Post Processing
+screen.POST_PROCESSING_MENU=Post Processing
 
 option.TEMPORAL_FILTER_ENABLED=Temporal Filter
 option.TEMPORAL_FILTER_ENABLED.comment=Blends frames together to reduce flickering
@@ -648,7 +648,7 @@ value.OUTLINES_ENABLED.1=On
 
 
 
-screen.BLOOM_SETTINGS=Bloom
+screen.BLOOM_MENU=Bloom
 
 option.BLOOM_ENABLED=Bloom Enabled
 option.BLOOM_ENABLED.comment=Makes bright colors bleed into the surroundings\n\n(Performance cost: Low-Medium, depending on settings)
@@ -685,7 +685,7 @@ value.BLOOM_END_MULT.-1=Use Style
 
 
 
-screen.SSAO_SETTINGS=SSAO
+screen.SSAO_MENU=SSAO
 
 option.SSAO_ENABLED=SSAO Enabled
 option.SSAO_ENABLED.comment=Darkens corners / crevasses
@@ -708,7 +708,7 @@ option.AO_QUALITY.comment=Controls the number of samples for SSAO
 
 
 
-screen.REFLECTION_SETTINGS=Reflections
+screen.REFLECTION_MENU=Reflections
 
 option.REFLECTIONS_ENABLED=Reflections Enabled
 option.REFLECTIONS_ENABLED.comment=Enabled reflections\n\n(Performance cost: HIGH)
@@ -761,7 +761,7 @@ value.RAIN_REFLECTION_SLOPE.-1=Use Style
 
 
 
-screen.SUNRAYS_SETTINGS=Sunrays
+screen.SUNRAYS_MENU=Sunrays
 
 option.DEPTH_SUNRAYS_ENABLED=Sunrays Enabled (Depth-Based)
 option.DEPTH_SUNRAYS_ENABLED.comment=(Performance cost: Low-Medium, depending on settings)
@@ -818,8 +818,8 @@ value.SUNRAYS_MOON_BLUE.-1=Use Style
 
 
 
-screen.DEPTH_SUNRAYS_SETTINGS=Depth Sunrays Settings
-screen.DEPTH_SUNRAYS_SETTINGS.comment=Settings specific to depth-based sunrays
+screen.DEPTH_SUNRAYS_MENU=Depth Sunrays
+screen.DEPTH_SUNRAYS_MENU.comment=Settings specific to depth-based sunrays
 
 option.DEPTH_SUNRAYS_STYLE=Sunrays Style
 option.DEPTH_SUNRAYS_STYLE.comment=Alters how the sunrays are calculated. Option 1 is more natural, option 2 is more impressive looking
@@ -835,8 +835,8 @@ value.SUNRAYS_FLICKERING_FIX.1=On
 
 
 
-screen.VOL_SUNRAYS_SETTINGS=Volumetric Sunrays Settings
-screen.VOL_SUNRAYS_SETTINGS.comment=Settings specific to volumetric sunrays
+screen.VOL_SUNRAYS_MENU=Volumetric Sunrays
+screen.VOL_SUNRAYS_MENU.comment=Settings specific to volumetric sunrays
 
 option.SUNRAYS_MIN_SURFACE=Sunrays Min Surface
 option.SUNRAYS_MIN_SURFACE.comment=How much is added to the detected sunrays amount while on the surface, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
@@ -862,7 +862,7 @@ value.SUNRAYS_BRIGHTNESS_INCREASE.-1=Use Style
 
 
 
-screen.DOF_SETTINGS=Depth Of Field
+screen.DOF_MENU=Depth Of Field
 
 option.DOF_ENABLED=Depth Of Field Enabled
 value.DOF_ENABLED.-1=Use Style
@@ -913,7 +913,7 @@ value.DOF_FOCAL_PLANE_DISTANCE.-1=Use Style
 
 
 
-screen.MOTION_BLUR_SETTINGS=Motion Blur
+screen.MOTION_BLUR_MENU=Motion Blur
 
 option.MOTION_BLUR_ENABLED=Motion Blur Enabled
 value.MOTION_BLUR_ENABLED.-1=Use Style
@@ -929,7 +929,7 @@ option.MOTION_BLUR_QUALITY=Motion Blur Quality
 
 
 
-screen.SHARPENING_SETTINGS=Sharpening
+screen.SHARPENING_MENU=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
 option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA / FXAA). (Performance cost: Low)
@@ -958,7 +958,7 @@ value.SHARPENING_DETECT_SIZE.7=7x7
 
 
 
-screen.COLOR_PROCESSING_SETTINGS=Color Processing Settings
+screen.COLOR_PROCESSING_MENU=Color Correction
 
 option.USE_GAMMA_CORRECTION=Use Gamma Correction
 option.USE_GAMMA_CORRECTION.comment=Corrects for gamma before and after color correction
@@ -1050,7 +1050,7 @@ value.COLORBLIND_INTENSITY.-1=Use Style
 
 
 
-screen.VIGNETTE_SETTINGS=Vignette
+screen.VIGNETTE_MENU=Vignette
 
 option.VIGNETTE_ENABLED=Vignette Enabled
 option.VIGNETTE_ENABLED.comment=Darkens the edges of the screen. (Performance cost: Low-None)
@@ -1079,7 +1079,7 @@ value.VIGNETTE_NOISE_ENABLED.1=On
 
 
 
-screen.HSV_POSTERIZE_SETTINGS=HSV Posterize
+screen.HSV_POSTERIZE_MENU=HSV Posterize
 
 option.HSV_POSTERIZE_ENABLED=HSV Posterize Enabled
 option.HSV_POSTERIZE_ENABLED.comment=Similar to Posterize in super-secret-settings, but works with HSV instead of RGB
@@ -1110,13 +1110,13 @@ value.HSV_POSTERIZE_STEP_SLOPE.-1=Use Style
 
 
 
-screen.WAVING_SETTINGS=Waving
+screen.WAVING_MENU=Waving
 
 
 
 
 
-screen.WAVING_BLOCKS_SETTINGS=Waving Blocks Settings
+screen.WAVING_BLOCKS_MENU=Waving Blocks
 
 option.WAVING_ENABLED=Waving Enabled
 option.WAVING_ENABLED.comment=(Performance cost: Low-None)
@@ -1160,7 +1160,7 @@ value.HEIGHT_BASED_WAVING_ENABLED.1=On
 
 
 
-screen.WAVING_WATER_SETTINGS=Waving Water
+screen.WAVING_WATER_MENU=Waving Water
 
 option.PHYSICALLY_WAVING_WATER_ENABLED=Physical Waving Enabled
 option.PHYSICALLY_WAVING_WATER_ENABLED.comment=Makes the water actually wave
@@ -1210,7 +1210,7 @@ value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style
 
 
 
-screen.UNDERWATER_WAVINESS_SETTINGS=Underwater Waviness
+screen.UNDERWATER_WAVINESS_MENU=Underwater Waviness
 
 option.UNDERWATER_WAVINESS_ENABLED=Underwater Waviness Enabled
 value.UNDERWATER_WAVINESS_ENABLED.-1=Use Style
@@ -1230,7 +1230,7 @@ value.UNDERWATER_WAVINESS_SPEED.-1=Use Style
 
 
 
-screen.WATER_SETTINGS=Water
+screen.WATER_MENU=Water
 
 option.WATER_DEPTH_BASED_TRANSPARENCY=Depth-Based Transparency
 option.WATER_DEPTH_BASED_TRANSPARENCY.comment=Changes the transparency of water based on how deep it is. This might slightly impact performance, which is why disabling it is an option. If it is disabled, the transparency for water is set to always be the average of the shallow and deep transparency values
@@ -1263,7 +1263,7 @@ value.WATER_COLOR_AMOUNT.-1=Use Style
 
 
 
-screen.ISOMETRIC_SETTINGS=Isometric Settings
+screen.ISOMETRIC_MENU=Isometric Rendering
 
 option.ISOMETRIC_RENDERING_ENABLED=Isometric Rendering Enabled
 option.ISOMETRIC_RENDERING_ENABLED.comment=Changes the projection to Isometric
@@ -1287,7 +1287,7 @@ value.ISOMETRIC_FORWARD_VISIBILITY.-1=Use Style
 
 
 
-screen.DEBUG_SETTINGS=Debug
+screen.DEBUG_MENU=Debug
 
 option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
 option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
@@ -1319,8 +1319,8 @@ value.REFLECTIVE_EVERYTHING.1=On
 
 
 
-screen.SUPER_SECRET_SETTINGS=Super Secret Settings
-screen.SUPER_SECRET_SETTINGS.comment=Recreations of easter-egg shader effects from 1.8-
+screen.SUPER_SECRET_MENU=Super Secret Settings
+screen.SUPER_SECRET_MENU.comment=Recreations of easter-egg shader effects from 1.8-
 
 option.SSS_PIXELS=Pixels
 option.SSS_PIXELS.comment=Pixelates the screen
