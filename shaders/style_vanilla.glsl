@@ -377,7 +377,7 @@
 #endif
 #if WATER_REFLECTION_AMOUNT_SURFACE == -1
 #undef WATER_REFLECTION_AMOUNT_SURFACE
-										#define WATER_REFLECTION_AMOUNT_SURFACE 0.3
+										#define WATER_REFLECTION_AMOUNT_SURFACE 0.35
 #endif
 #if WATER_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef WATER_REFLECTION_AMOUNT_UNDERGROUND
@@ -612,11 +612,11 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.15
+										#define VIBRANCE 0.05
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.2
+										#define SATURATION -0.15
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -840,11 +840,11 @@
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.3
+										#define WATER_COLOR_GREEN 0.25
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.5
+										#define WATER_COLOR_BLUE 0.35
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
@@ -906,7 +906,7 @@
 #endif
 #if CLOUD_WEATHER_DARKEN == -1
 #undef CLOUD_WEATHER_DARKEN
-										#define CLOUD_WEATHER_DARKEN 0.25
+										#define CLOUD_WEATHER_DARKEN 0.55
 #endif
 #if REALISTIC_CLOUDS_ENABLED == -1
 #undef REALISTIC_CLOUDS_ENABLED

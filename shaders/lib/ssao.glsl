@@ -30,25 +30,24 @@ float getAoFactor(float depth, float trueBlockDepth  ARGS_OUT) {
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	float noise = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * PI * 2.0;
-	float scale = AO_SIZE * 0.1 / blockDepth;
+	float scale = AO_SIZE * 0.08 / blockDepth;
 	
 	float total = 0.0;
-	float maxTotal = 0.0; // this doesn't seem to have any performance impact vs total/=SAMPLE_COUNT at the end, so it's probably being pre-computed at comp-time
 	const int SAMPLE_COUNT = AO_QUALITY * AO_QUALITY;
 	for (int i = 1; i <= SAMPLE_COUNT; i ++) {
 		
-		float len = (float(i) / SAMPLE_COUNT + 0.3) * scale;
+		float len = (float(i) / SAMPLE_COUNT + 0.75) * scale;
 		#include "/import/invAspectRatio.glsl"
 		vec2 offset = vec2(cos(i + noise) * len * invAspectRatio, sin(i + noise) * len);
 		
-		float weight = 100 - float(i) / SAMPLE_COUNT;
-		total += getAoInfluence(blockDepth, offset  ARGS_IN) * weight;
-		maxTotal += weight;
+		total += getAoInfluence(blockDepth, offset  ARGS_IN);
 		
 	}
-	total /= maxTotal;
+	total /= SAMPLE_COUNT;
 	#include "/import/invFar.glsl"
 	total *= smoothstep(0.9, 0.8, trueBlockDepth * invFar);
 	
-	return total * 0.18;
+	total *= total;
+	total *= total;
+	return total * 0.25;
 }

@@ -2,7 +2,7 @@ vec3 getCloudColor(float brightness  ARGS_OUT) {
 	#include "/import/dayPercent.glsl"
 	brightness += 0.2 * dayPercent;
 	#include "/import/rainStrength.glsl"
-	brightness *= 1.0 - 0.65 * rainStrength;
+	brightness *= 1.0 - (0.3 + 0.7 * CLOUD_WEATHER_DARKEN) * rainStrength;
 	#include "/import/ambientSunPercent.glsl"
 	#include "/import/ambientMoonPercent.glsl"
 	#include "/import/ambientSunrisePercent.glsl"

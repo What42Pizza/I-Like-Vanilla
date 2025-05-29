@@ -32,7 +32,7 @@
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	if (depthIsHand(depth)) depth += 0.38;
+	//if (depthIsHand(depth)) depth += 0.38;
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#endif
@@ -59,7 +59,7 @@ void main() {
 		vec2 lmcoord = unpackVec2(data.x) * 4.0;
 		float specular_amount = unpackVec2(data.z).y;
 		vec3 normal = decodeNormal(unpackVec2(data.y));
-		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+		vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0))  ARGS_IN);
 		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 		
 		
@@ -72,8 +72,12 @@ void main() {
 		
 		
 		#if SSAO_ENABLED == 1
-			float aoFactor = getAoFactor(depth, length(viewPos)  ARGS_IN);
-			color *= 1.0 - aoFactor * AO_AMOUNT;
+			if (!depthIsHand(depth)) {
+				float aoFactor = getAoFactor(depth, length(viewPos)  ARGS_IN);
+				aoFactor *= 1.0 - 0.7 * getColorLum(color);
+				color *= 1.0 - aoFactor * AO_AMOUNT;
+				//color = vec3(aoFactor);
+			}
 		#endif
 		
 		

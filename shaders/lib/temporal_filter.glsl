@@ -47,6 +47,8 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	) {
 		return;
 	}
+	float prevDepth = texture2D(DEPTH_BUFFER_WO_TRANS, prevCoord).r;
+	if (depthIsHand(prevDepth)) prevCoord = texcoord;
 	
 	vec3 prevColor = texture2D(PREV_TEXTURE, prevCoord).rgb;
 	

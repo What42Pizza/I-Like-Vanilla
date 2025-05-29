@@ -36,15 +36,19 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	
 	// contrast
 	color = mix(CONTRAST_DETECT_COLOR, color, CONTRAST / 5.0 + 1.0);
+	color = clamp(color, 0.0, 1.0);
 	
 	// saturation & vibrance
+	float maxChannel = max(max(color.r, color.g), color.b);
+    float minChannel = min(min(color.r, color.g), color.b);
+    float delta = maxChannel - minChannel;
+    float saturation = (maxChannel == 0.0) ? 0.0 : delta / maxChannel;
+    float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
 	float colorLum = getColorLum(color);
 	vec3 lumDiff = color - colorLum;
 	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1 - colorLum) * 2.0) / 2.0;
-	float vibranceAmount = maxAbs(lumDiff);
-	vibranceAmount = sqrt(vibranceAmount);
-	vibranceAmount *= pow10(1 - vibranceAmount * vibranceAmount) * VIBRANCE * 3.0;
 	color += lumDiff * (saturationAmount + vibranceAmount);
+	color = clamp(color, 0.0, 1.0);
 	
 	#if USE_GAMMA_CORRECTION == 1
 		#if GAMMA == 0
