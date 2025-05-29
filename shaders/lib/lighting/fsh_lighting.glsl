@@ -238,6 +238,11 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#endif
 	lighting += blockLight;
 	
+	float colorLum = getColorLum(color);
+	colorLum *= colorLum;
+	lighting *= 1.0 - 0.3 * colorLum;
+	lighting = mix(vec3(getColorLum(lighting)), lighting, 1.0 + colorLum * 0.1);
+	
 	color *= lighting * 1.2;
 	
 }

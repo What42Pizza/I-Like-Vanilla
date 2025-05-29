@@ -17,7 +17,7 @@ void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
 	if (albedo.a < 0.1) discard;
-	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.2);
+	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.25);
 	albedo.rgb *= glcolor.rgb;
 	
 	

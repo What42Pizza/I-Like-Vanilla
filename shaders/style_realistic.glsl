@@ -1076,6 +1076,47 @@
 
 
 
+#if IN_WATER_RED == -1
+#undef IN_WATER_RED
+										#define IN_WATER_RED 0.0
+#endif
+#if IN_WATER_GREEN == -1
+#undef IN_WATER_GREEN
+										#define IN_WATER_GREEN 0.1
+#endif
+#if IN_WATER_BLUE == -1
+#undef IN_WATER_BLUE
+										#define IN_WATER_BLUE 0.6
+#endif
+#if IN_LAVA_RED == -1
+#undef IN_LAVA_RED
+										#define IN_LAVA_RED 0.85
+#endif
+#if IN_LAVA_GREEN == -1
+#undef IN_LAVA_GREEN
+										#define IN_LAVA_GREEN 0.15
+#endif
+#if IN_LAVA_BLUE == -1
+#undef IN_LAVA_BLUE
+										#define IN_LAVA_BLUE 0.0
+#endif
+#if IN_SNOW_RED == -1
+#undef IN_SNOW_RED
+										#define IN_SNOW_RED 0.6
+#endif
+#if IN_SNOW_GREEN == -1
+#undef IN_SNOW_GREEN
+										#define IN_SNOW_GREEN 0.9
+#endif
+#if IN_SNOW_BLUE == -1
+#undef IN_SNOW_BLUE
+										#define IN_SNOW_BLUE 1.0
+#endif
+
+
+
+
+
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
 										#define SKY_DAY_RED 0.6

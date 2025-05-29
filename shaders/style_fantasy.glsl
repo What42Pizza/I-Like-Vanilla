@@ -74,7 +74,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -628,7 +628,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.3
+										#define CONTRAST 0.7
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED
@@ -1070,6 +1070,47 @@
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
 										#define ATMOSPHERIC_FOG_DENSITY 1.0
+#endif
+
+
+
+
+
+#if IN_WATER_RED == -1
+#undef IN_WATER_RED
+										#define IN_WATER_RED 0.0
+#endif
+#if IN_WATER_GREEN == -1
+#undef IN_WATER_GREEN
+										#define IN_WATER_GREEN 0.1
+#endif
+#if IN_WATER_BLUE == -1
+#undef IN_WATER_BLUE
+										#define IN_WATER_BLUE 0.6
+#endif
+#if IN_LAVA_RED == -1
+#undef IN_LAVA_RED
+										#define IN_LAVA_RED 0.85
+#endif
+#if IN_LAVA_GREEN == -1
+#undef IN_LAVA_GREEN
+										#define IN_LAVA_GREEN 0.15
+#endif
+#if IN_LAVA_BLUE == -1
+#undef IN_LAVA_BLUE
+										#define IN_LAVA_BLUE 0.0
+#endif
+#if IN_SNOW_RED == -1
+#undef IN_SNOW_RED
+										#define IN_SNOW_RED 0.6
+#endif
+#if IN_SNOW_GREEN == -1
+#undef IN_SNOW_GREEN
+										#define IN_SNOW_GREEN 0.9
+#endif
+#if IN_SNOW_BLUE == -1
+#undef IN_SNOW_BLUE
+										#define IN_SNOW_BLUE 1.0
 #endif
 
 

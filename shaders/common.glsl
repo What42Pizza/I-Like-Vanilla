@@ -139,13 +139,13 @@ float getColorLum(vec3 color) {
 vec3 smoothMin(vec3 v1, vec3 v2, float a) {
 	float v1Lum = getColorLum(v1);
 	float v2Lum = getColorLum(v2);
-	return (v1 + v2 - sqrt((v1 - v2) * (v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
+	return (v1 + v2 - sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 
 vec3 smoothMax(vec3 v1, vec3 v2, float a) {
 	float v1Lum = getColorLum(v1);
 	float v2Lum = getColorLum(v2);
-	return (v1 + v2 + sqrt((v1 - v2) * (v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
+	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 
 float cubicInterpolate(float edge0, float edge1, float edge2, float edge3, float value) {

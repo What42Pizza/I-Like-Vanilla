@@ -16,7 +16,7 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.0
+										#define VANILLA_AO_BRIGHT 1.1
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -62,7 +62,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 0.98
+										#define SKYLIGHT_DAY_RED 0.97
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -144,7 +144,7 @@
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.4
+										#define SKYLIGHT_SUNRISE_BLUE 0.45
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
@@ -418,7 +418,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.45
+										#define SUNRAYS_AMOUNT_DAY 0.5
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -612,7 +612,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.05
+										#define VIBRANCE 0.1
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -628,7 +628,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.2
+										#define CONTRAST 0.35
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED
