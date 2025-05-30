@@ -1,4 +1,9 @@
-void doSharpening(inout vec3 color, float blockDepth  ARGS_OUT) {
+void doSharpening(inout vec3 color  ARGS_OUT) {
+	
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	#ifdef END
+		if (depth == 1.0) return;
+	#endif
 	
 	#if SHARPENING_DETECT_SIZE == 3
 		
@@ -90,6 +95,10 @@ void doSharpening(inout vec3 color, float blockDepth  ARGS_OUT) {
 		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION;
 		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION;
 	#endif
+	
+	float linearDepth = toLinearDepth(depth  ARGS_IN);
+	#include "/import/far.glsl"
+	float blockDepth = linearDepth * far;
 	
 	#include "/import/sharpenVelocityFactor.glsl"
 	float velocityFactor = sharpenVelocityFactor * alteredSharpenVelocityAddition;

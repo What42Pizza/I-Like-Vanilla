@@ -41,6 +41,10 @@ void neighborhoodClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
 
 void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	
+	#ifdef END
+		if (depth == 1.0) return;
+	#endif
+	
 	if (
 		prevCoord.x < 0.0 || prevCoord.x > 1.0 ||
 		prevCoord.y < 0.0 || prevCoord.y > 1.0

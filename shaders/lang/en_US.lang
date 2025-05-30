@@ -95,10 +95,6 @@ option.FOLIAGE_SATURATION=Foliage Saturation
 option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
 value.FOLIAGE_SATURATION.-1=Use Style
 
-option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
-option.END_AMBIENT_BRIGHTNESS.comment=Base brightness level
-value.END_AMBIENT_BRIGHTNESS.-1=Use Style
-
 option.NIGHT_VISION_BRIGHTNESS=Night Vision Brightness
 value.NIGHT_VISION_BRIGHTNESS.-1=Use Style
 
@@ -286,8 +282,16 @@ value.CAVE_AMBIENT_BRIGHTNESS.-1=Use Style
 
 screen.NETHER_LIGHTING_MENU=Nether Lighting
 
+option.NETHER_AMBIENT_RED=Nether Ambient Red
+value.NETHER_AMBIENT_RED.-1=Use Style
+
+option.NETHER_AMBIENT_GREEN=Nether Ambient Green
+value.NETHER_AMBIENT_GREEN.-1=Use Style
+
+option.NETHER_AMBIENT_BLUE=Nether Ambient Blue
+value.NETHER_AMBIENT_BLUE.-1=Use Style
+
 option.NETHER_AMBIENT_BRIGHTNESS=Nether Ambient Brightness
-option.NETHER_AMBIENT_BRIGHTNESS.comment=Base brightness level
 value.NETHER_AMBIENT_BRIGHTNESS.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_RED_MULT=Nether Blocklight Red Mult
@@ -305,6 +309,36 @@ value.NETHER_BLOCKLIGHT_BLUE_MULT.-1=Use Style
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT=Nether Blocklight Brightness Mult
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.comment=How much to increase / decrease the blue channel of blocklight when in the nether
 value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
+
+
+
+
+
+screen.END_LIGHTING_MENU=End Lighting
+
+option.END_SKYLIGHT_RED=End Skylight Red
+value.END_AMBIENT_RED.-1=Use Style
+
+option.END_SKYLIGHT_GREEN=End Skylight Green
+value.END_AMBIENT_GREEN.-1=Use Style
+
+option.END_SKYLIGHT_BLUE=End Skylight Blue
+value.END_AMBIENT_BLUE.-1=Use Style
+
+option.END_SKYLIGHT_BRIGHTNESS=End Skylight Brightness
+value.END_SKYLIGHT_BRIGHTNESS.-1=Use Style
+
+option.END_AMBIENT_RED=End Ambient Red
+value.END_AMBIENT_RED.-1=Use Style
+
+option.END_AMBIENT_GREEN=End Ambient Green
+value.END_AMBIENT_GREEN.-1=Use Style
+
+option.END_AMBIENT_BLUE=End Ambient Blue
+value.END_AMBIENT_BLUE.-1=Use Style
+
+option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
+value.END_AMBIENT_BRIGHTNESS.-1=Use Style
 
 
 

@@ -12,12 +12,14 @@ Make sure settings are tuned for:
 	Especially settings:
 		BLOCK_REFLECTION_AMOUNT_SURFACE
 		BLOCK_REFLECTION_AMOUNT_UNDERGROUND
+		IN_[LIQUID]_[CHANNEL]
 
 
 
 Planned for next version:
 Move as much as possible to deferred (side shading, handheld lighting, etc)
 Update documentation
+Add atmospheric-fog-density settings for each dimension
 Fix far-away reflections
 Add setting 'Shadows on Transparents'
 Make sure all vanilla effect work

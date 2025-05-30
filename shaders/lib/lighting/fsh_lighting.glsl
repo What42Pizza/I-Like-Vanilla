@@ -177,6 +177,10 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  AR
 
 void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal  ARGS_OUT) {
 	
+	#ifdef END
+		ambientBrightness = 1.0;
+	#endif
+	
 	#if CEL_SHADING_ENABLED == 1
 		blockBrightness =
 			0.8 * sqrt(blockBrightness) +
@@ -220,15 +224,17 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	vec3 lighting = ambientLight + skyLighting;
 	lighting *= 1.0 - rainDecrease;
 	
-	vec3 reflectedDir = normalize(reflect(viewPos, normal));
-	#include "/import/shadowLightPosition.glsl"
-	vec3 lightDir = normalize(shadowLightPosition);
-	float specular = max(dot(reflectedDir, lightDir), 0.0);
-	specular *= specular;
-	specular *= specular;
-	specular *= specular;
-	#include "/import/ambientMoonPercent.glsl"
-	lighting += vec3(1.0, 1.0, 0.0) * specular * (0.2 + 0.8 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent) * 0.5;
+	#ifdef OVERWORLD
+		vec3 reflectedDir = normalize(reflect(viewPos, normal));
+		#include "/import/shadowLightPosition.glsl"
+		vec3 lightDir = normalize(shadowLightPosition);
+		float specular = max(dot(reflectedDir, lightDir), 0.0);
+		specular *= specular;
+		specular *= specular;
+		specular *= specular;
+		#include "/import/ambientMoonPercent.glsl"
+		lighting += vec3(1.0, 1.0, 0.0) * specular * (0.2 + 0.8 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent) * 0.5;
+	#endif
 	
 	float lightingBrightness = min(getColorLum(lighting), 1.0);
 	blockBrightness *= 1.1 - lightingBrightness;
@@ -238,10 +244,12 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#endif
 	lighting += blockLight;
 	
-	float colorLum = getColorLum(color);
-	colorLum *= colorLum;
-	lighting *= 1.0 - 0.3 * colorLum;
-	lighting = mix(vec3(getColorLum(lighting)), lighting, 1.0 + colorLum * 0.1);
+	#ifdef OVERWORLD
+		float colorLum = getColorLum(color);
+		colorLum *= colorLum;
+		lighting *= 1.0 - 0.3 * colorLum;
+		lighting = mix(vec3(getColorLum(lighting)), lighting, 1.0 + colorLum * 0.2);
+	#endif
 	
 	color *= lighting * 1.2;
 	

@@ -13,7 +13,12 @@
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
-	albedo.rgb = 1.0 - (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb);
+	#ifdef OVERWORLD
+		albedo.rgb = 1.0 - (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb);
+	#endif
+	#ifdef END
+		albedo.rgb *= 0.3;
+	#endif
 	
 	
 	#ifdef OVERWORLD

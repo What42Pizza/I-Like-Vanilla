@@ -81,6 +81,11 @@ void main() {
 		#endif
 		
 		
+	} else {
+		#ifdef NETHER
+			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
+			color = getSkyColor(normalize(viewPos), true  ARGS_IN);
+		#endif
 	}
 	
 	

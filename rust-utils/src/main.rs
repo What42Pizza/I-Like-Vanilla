@@ -19,7 +19,7 @@ use std::env;
 
 
 
-pub const SHADERS_LIST: &[&str] = &[
+pub const SHADERS_LIST: [&str; 24] = [
 	"composite1",
 	"composite2",
 	"composite3",
@@ -72,7 +72,7 @@ pub const ALL_UNIFORMS_PATH: &str = include_str!("all_uniforms.txt");
 
 
 
-pub const STYLES: &[&str] = &["vanilla", "realistic", "fantasy", "cartoon"];
+pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic", "cartoon"];
 
 
 
