@@ -25,6 +25,8 @@ void main() {
 		#include "/import/sunPosition.glsl"
 		albedo.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
 		albedo.rgb *= 1.0 - skyColor;
+		#include "/import/rainStrength.glsl"
+		albedo.rgb *= 1.0 - 0.6 * rainStrength;
 	#endif
 	
 	

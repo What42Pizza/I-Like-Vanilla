@@ -214,7 +214,7 @@ This describes which /main_files-s handle different effects
 - **colortex3:  Transparent Data**
 - - x: lmcoord.x & lmcoord.y
 - - y: normal x & normal y
-- - z: reflectiveness & specular amount
+- - z: reflectiveness & is cloud
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
 

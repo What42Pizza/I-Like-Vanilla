@@ -661,7 +661,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.1
+										#define SATURATION -0.2
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -669,7 +669,7 @@
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
-										#define SATURATION_LIGHT 0.2
+										#define SATURATION_LIGHT 0.4
 #endif
 #if CONTRAST == -1
 #undef CONTRAST

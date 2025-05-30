@@ -28,11 +28,12 @@
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
+	bool isCloud = unpackVec2(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
 	
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float depth = texelFetch(isCloud ? DEPTH_BUFFER_WO_TRANS : DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
-		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float depthDh = texelFetch(isCloud ? DEPTH_BUFFER_WO_TRANS : DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
 		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 	#endif
@@ -43,6 +44,7 @@ void main() {
 	#else
 		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
 	#endif
+	if (isCloud) fogAmount = min(fogAmount, 0.6);
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	playerPos.y *= 0.02;
@@ -80,7 +82,7 @@ void main() {
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		fogColor = getSkyColor(viewPos / fogDist, false  ARGS_IN);
-		fogSlope = 325.0 / ATMOSPHERIC_FOG_DENSITY;
+		fogSlope = 325.0 / (ATMOSPHERIC_FOG_DENSITY + 0.00001);
 		fogMax = 0.5;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;

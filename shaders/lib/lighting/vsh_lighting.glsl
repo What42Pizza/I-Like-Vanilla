@@ -1,5 +1,3 @@
-#ifdef VSH
-
 void doVshLighting(float depth  ARGS_OUT) {
 	
 	#if HANDHELD_LIGHT_ENABLED == 1
@@ -21,5 +19,3 @@ void doVshLighting(float depth  ARGS_OUT) {
 	glcolor *= 1.0 + sideShading;
 	
 }
-
-#endif

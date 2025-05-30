@@ -32,12 +32,13 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 	
 	#ifdef OVERWORLD
 		
-		const vec3 DAY_COLOR = SKY_DAY_COLOR * SKY_DAY_COLOR;
-		const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * SKY_NIGHT_COLOR;
-		const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * SKY_HORIZON_DAY_COLOR;
-		const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * SKY_HORIZON_NIGHT_COLOR;
-		const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * SKY_HORIZON_SUNRISE_COLOR;
-		const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * SKY_HORIZON_SUNSET_COLOR;
+		// for if you want to edit the input colors
+		const vec3 DAY_COLOR = SKY_DAY_COLOR;
+		const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR;
+		const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR;
+		const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR;
+		const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
+		const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
 		
 		#include "/import/dayPercent.glsl"
 		float skyMixFactor = dayPercent;
@@ -58,7 +59,7 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		sunDot *= 1.0 - 0.8 * upDot;
 		#include "/import/ambientSunrisePercent.glsl"
 		#include "/import/ambientSunsetPercent.glsl"
-		sunDot *= (ambientSunrisePercent + ambientSunsetPercent) * (ambientSunrisePercent + ambientSunsetPercent);
+		sunDot *= ambientSunrisePercent + ambientSunsetPercent;
 		#include "/import/sunAngle.glsl"
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		
@@ -75,7 +76,7 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 			}
 		#endif
 		
-		return clamp(skyColor, 0.0, 1.0);
+		return clamp(skyColor, 0.0, 1.0) * 0.95;
 		
 	#elif defined NETHER
 		#include "/import/fogColor.glsl"

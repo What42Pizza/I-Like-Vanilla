@@ -28,7 +28,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(0.0, 0.25),
 		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.0),
+		packVec2(0.0, 0.99),
 		1.0
 	);
 	

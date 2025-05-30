@@ -95,7 +95,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		packVec2(reflectiveness, specular_amount),
+		packVec2(reflectiveness, 0.0),
 		1.0
 	);
 	
