@@ -57,6 +57,8 @@ void main() {
 		#include "/import/gbufferProjection.glsl"
 		vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
+	#else
+		float depthDh = 1.0;
 	#endif
 	
 	vec3 pos = vec3(texcoord, depth);
@@ -77,7 +79,7 @@ void main() {
 	
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
-		doTemporalFilter(color, depth, prevCoord  ARGS_IN);
+		doTemporalFilter(color, depth, depthDh, prevCoord  ARGS_IN);
 	#endif
 	
 	

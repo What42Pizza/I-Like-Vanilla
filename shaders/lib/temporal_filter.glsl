@@ -39,10 +39,14 @@ void neighborhoodClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
 
 
 
-void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
+void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoord  ARGS_OUT) {
 	
 	#ifdef END
-		if (depth == 1.0) return;
+		#ifdef DISTANT_HORIZONS
+			if (depth == 1.0 && dhDepth == 1.0) return;
+		#else
+			if (depth == 1.0) return;
+		#endif
 	#endif
 	
 	if (
@@ -62,7 +66,7 @@ void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord  ARGS_OUT) {
 	//const float blendMax = 0.98;
 	const float blendVariable = 0.07;
 	const float blendConstant = 0.73;
-	const float depthFactor = 0.01;
+	const float depthFactor = 0.012;
 	
 	#include "/import/viewSize.glsl"
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;

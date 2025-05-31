@@ -13,9 +13,16 @@
 void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
+	
 	#ifdef OVERWORLD
-		albedo.rgb = 1.0 - (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb) * (1.0 - albedo.rgb);
+		albedo.rgb = 1.0 - albedo.rgb;
+		albedo.rgb *= albedo.rgb;
+		if (sunPosition.z < 0.0) {
+			albedo.rgb *= albedo.rgb; // apply extra brightness to sun
+		}
+		albedo.rgb = 1.0 - albedo.rgb;
 	#endif
+	
 	#ifdef END
 		albedo.rgb *= 0.3;
 	#endif

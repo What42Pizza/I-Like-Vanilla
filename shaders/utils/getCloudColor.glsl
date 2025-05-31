@@ -12,5 +12,5 @@ vec3 getCloudColor(float brightness  ARGS_OUT) {
 		+ CLOUD_NIGHT_COLOR * 0.5 * ambientMoonPercent
 		+ CLOUD_SUNRISE_COLOR * ambientSunrisePercent
 		+ CLOUD_SUNSET_COLOR * ambientSunsetPercent;
-	return mix(vec3(0.0, 0.1, 0.3) * (0.1 + 0.9 * dayPercent), cloudColor, brightness) ;
+	return mix(vec3(0.0, 0.1, 0.3) * (0.1 + 0.9 * dayPercent), cloudColor, brightness);
 }

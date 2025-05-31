@@ -81,7 +81,7 @@ void main() {
 	float fogMax;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		fogColor = getSkyColor(viewPos / fogDist, false  ARGS_IN);
+		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
 		fogSlope = 325.0 / (ATMOSPHERIC_FOG_DENSITY + 0.00001);
 		fogMax = 0.5;
 	} else if (isEyeInWater == 1) {

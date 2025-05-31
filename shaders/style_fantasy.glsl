@@ -1180,11 +1180,11 @@
 #endif
 #if SKY_NIGHT_GREEN == -1
 #undef SKY_NIGHT_GREEN
-										#define SKY_NIGHT_GREEN 0.4
+										#define SKY_NIGHT_GREEN 0.6
 #endif
 #if SKY_NIGHT_BLUE == -1
 #undef SKY_NIGHT_BLUE
-										#define SKY_NIGHT_BLUE 0.7
+										#define SKY_NIGHT_BLUE 1.0
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
