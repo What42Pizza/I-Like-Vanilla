@@ -850,6 +850,27 @@ value.HSV_POSTERIZE_STEP_SLOPE.-1=Use Style
 
 
 
+screen.GAMEPLAY_EFFECTS_MENU=Gameplay Effects
+
+option.HEALTH_EFFECT_ENABLED=Low-Health Effect Enabled
+option.HEALTH_EFFECT_ENABLED.comment=Adds a red vignette when low on health\n\nNOTE: only works on Iris
+value.HEALTH_EFFECT_ENABLED.-1=Use Style
+
+option.HEALTH_EFFECT_STRENGTH=Low-Health Effect Strength
+value.HEALTH_EFFECT_STRENGTH.-1=Use Style
+
+option.DAMAGE_EFFECT_ENABLED=Damage Effect Enabled
+option.DAMAGE_EFFECT_ENABLED.comment=Adds a red vignette when taking damage\n\nNOTE: only works on Iris
+value.DAMAGE_EFFECT_ENABLED.-1=Use Style
+
+option.DAMAGE_EFFECT_STRENGTH=Damage Effect Strength
+value.DAMAGE_EFFECT_STRENGTH.-1=Use Style
+
+
+
+
+
+
 screen.WAVING_MENU=Waving
 
 
@@ -1237,7 +1258,12 @@ option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (hi
 value.BORDER_FOG_CURVE.-1=Use Style
 
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
+option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
 value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+option.WEATHER_FOG_DENSITY=Rain Fog Density
+option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
+value.WEATHER_FOG_DENSITY.-1=Use Style
 
 
 

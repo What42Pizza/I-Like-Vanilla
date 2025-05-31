@@ -238,3 +238,9 @@
 	#ifdef import_dhProjectionInverse
 		uniform mat4 dhProjectionInverse;
 	#endif
+	#ifdef import_smoothPlayerHealth
+		uniform float smoothPlayerHealth;
+	#endif
+	#ifdef import_damageAmount
+		uniform float damageAmount;
+	#endif

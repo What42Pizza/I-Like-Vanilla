@@ -214,11 +214,11 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.65
+										#define BLOCK_BLUE 0.7
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.0
+										#define BLOCK_BRIGHTNESS 1.1
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -657,7 +657,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.1
+										#define VIBRANCE 0.05
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -665,7 +665,7 @@
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK -0.2
+										#define SATURATION_DARK 0.0
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
@@ -723,7 +723,7 @@
 #endif
 #if VIGNETTE_AMOUNT_UNDERGROUND == -1
 #undef VIGNETTE_AMOUNT_UNDERGROUND
-										#define VIGNETTE_AMOUNT_UNDERGROUND 0.8
+										#define VIGNETTE_AMOUNT_UNDERGROUND 0.7
 #endif
 #if VIGNETTE_NOISE_ENABLED == -1
 #undef VIGNETTE_NOISE_ENABLED
@@ -753,6 +753,27 @@
 #if HSV_POSTERIZE_STEP_SLOPE == -1
 #undef HSV_POSTERIZE_STEP_SLOPE
 										#define HSV_POSTERIZE_STEP_SLOPE 4.0
+#endif
+
+
+
+
+
+#if HEALTH_EFFECT_ENABLED == -1
+#undef HEALTH_EFFECT_ENABLED
+										#define HEALTH_EFFECT_ENABLED 1
+#endif
+#if HEALTH_EFFECT_STRENGTH == -1
+#undef HEALTH_EFFECT_STRENGTH
+										#define HEALTH_EFFECT_STRENGTH 1.1
+#endif
+#if DAMAGE_EFFECT_ENABLED == -1
+#undef DAMAGE_EFFECT_ENABLED
+										#define DAMAGE_EFFECT_ENABLED 1
+#endif
+#if DAMAGE_EFFECT_STRENGTH == -1
+#undef DAMAGE_EFFECT_STRENGTH
+										#define DAMAGE_EFFECT_STRENGTH 0.5
 #endif
 
 
@@ -1115,6 +1136,10 @@
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
 										#define ATMOSPHERIC_FOG_DENSITY 0.1
+#endif
+#if WEATHER_FOG_DENSITY == -1
+#undef WEATHER_FOG_DENSITY
+										#define WEATHER_FOG_DENSITY 5.0
 #endif
 
 

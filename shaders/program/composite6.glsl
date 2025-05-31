@@ -72,17 +72,26 @@ void main() {
 	
 	// ======== VIGNETTE ======== //
 	
-	#if VIGNETTE_ENABLED == 1 && !defined END
-		#include "/import/eyeBrightnessSmooth.glsl"
-		float vignetteSkyAmount = 1.0 - eyeBrightnessSmooth.y / 240.0;
-		vignetteSkyAmount = vignetteSkyAmount * (VIGNETTE_AMOUNT_UNDERGROUND - VIGNETTE_AMOUNT_SURFACE) + VIGNETTE_AMOUNT_SURFACE;
-		float vignetteAlpha = length(texcoord - 0.5) * VIGNETTE_SCALE * 0.7;
+	#if (VIGNETTE_ENABLED == 1 && !defined END) || HEALTH_EFFECT_ENABLED == 1 || DAMAGE_EFFECT_ENABLED == 1
+		float vignetteAmount = length(texcoord - 0.5) * VIGNETTE_SCALE / sqrt(0.5);
 		#if VIGNETTE_NOISE_ENABLED == 1
 			#include "/utils/var_rng.glsl"
-			vignetteAlpha += randomFloat(rng) * 0.02;
+			vignetteAmount += randomFloat(rng) * 0.02;
 		#endif
-		vignetteAlpha *= vignetteSkyAmount;
-		color *= 1.0 - vignetteAlpha;
+		#include "/import/eyeBrightnessSmooth.glsl"
+		#if VIGNETTE_ENABLED == 1 && !defined END
+			color *= 1.0 - vignetteAmount * mix(VIGNETTE_AMOUNT_UNDERGROUND, VIGNETTE_AMOUNT_SURFACE, eyeBrightnessSmooth.y / 240.0);
+		#endif
+		#if HEALTH_EFFECT_ENABLED == 1
+			#include "/import/smoothPlayerHealth.glsl"
+			float healthEffectAmount = 1.0 - smoothPlayerHealth;
+			healthEffectAmount *= healthEffectAmount;
+			color.gb *= 1.0 - vignetteAmount * healthEffectAmount * HEALTH_EFFECT_STRENGTH * 0.5;
+		#endif
+		#if DAMAGE_EFFECT_ENABLED == 1
+			#include "/import/damageAmount.glsl"
+			color.gb *= 1.0 - vignetteAmount * damageAmount * DAMAGE_EFFECT_STRENGTH * 0.3;
+		#endif
 	#endif
 	
 	

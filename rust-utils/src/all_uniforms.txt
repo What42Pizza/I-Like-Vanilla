@@ -78,3 +78,5 @@ float nightVision = 0.0
 float dhNearPlane = 0.0
 float dhFarPlane = 0.0
 mat4 dhProjectionInverse = mat4(0.0)
+float smoothPlayerHealth = 0.0;
+float damageAmount = 0.0;
