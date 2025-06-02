@@ -78,7 +78,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.65
+										#define AMBIENT_DAY_GREEN 0.6
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -86,7 +86,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.65
+										#define AMBIENT_DAY_BRIGHTNESS 0.75
 #endif
 
 
@@ -255,7 +255,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.15
+										#define CAVE_AMBIENT_BRIGHTNESS 0.2
 #endif
 
 
@@ -715,7 +715,7 @@
 #endif
 #if VIGNETTE_SCALE == -1
 #undef VIGNETTE_SCALE
-										#define VIGNETTE_SCALE 1.5
+										#define VIGNETTE_SCALE 1.0
 #endif
 #if VIGNETTE_AMOUNT_SURFACE == -1
 #undef VIGNETTE_AMOUNT_SURFACE
@@ -723,7 +723,7 @@
 #endif
 #if VIGNETTE_AMOUNT_UNDERGROUND == -1
 #undef VIGNETTE_AMOUNT_UNDERGROUND
-										#define VIGNETTE_AMOUNT_UNDERGROUND 0.8
+										#define VIGNETTE_AMOUNT_UNDERGROUND 0.5
 #endif
 #if VIGNETTE_NOISE_ENABLED == -1
 #undef VIGNETTE_NOISE_ENABLED
@@ -1189,7 +1189,7 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.65
+										#define SKY_DAY_RED 0.6
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
@@ -1213,11 +1213,11 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.8
+										#define SKY_HORIZON_DAY_RED 0.9
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.7
+										#define SKY_HORIZON_DAY_GREEN 0.6
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE

@@ -20,7 +20,7 @@ void main() {
 	#include "/import/far.glsl"
 	if (lengthCylinder < far - 20.0) discard;
 	
-	vec3 albedo = glcolor * 0.825;
+	vec3 albedo = glcolor * 0.85;
 	
 	
 	// add noise for fake texture
@@ -28,7 +28,7 @@ void main() {
 	#include "/import/cameraPosition.glsl"
 	uvec3 noisePos = uvec3(ivec3((playerPos + cameraPosition) * ceil(worldScale) + 0.5));
 	uint noise = randomizeUint(noisePos.x) ^ randomizeUint(noisePos.y) ^ randomizeUint(noisePos.z);
-	albedo += 0.0325 * randomFloat(noise);
+	albedo += 0.03 * randomFloat(noise);
 	albedo = clamp(albedo, vec3(0.0), vec3(1.0));
 	
 	
@@ -70,9 +70,9 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	glcolor = (glcolor - 0.5) * 1.15 + 0.5;
-	glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 1.03);
-	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor.rgb *= 1.1;
+	glcolor = (glcolor - 0.5) * 1.3 + 0.5;
+	glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.8);
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor.rgb *= 1.25;
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

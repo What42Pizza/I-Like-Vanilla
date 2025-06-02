@@ -16,7 +16,7 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.1
+										#define VANILLA_AO_BRIGHT 1.0
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -82,7 +82,7 @@
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
-										#define AMBIENT_DAY_BLUE 1.05
+										#define AMBIENT_DAY_BLUE 1.0
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
@@ -529,7 +529,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.7
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.6
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -661,11 +661,11 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.15
+										#define SATURATION -0.2
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK 0.0
+										#define SATURATION_DARK 0.05
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT

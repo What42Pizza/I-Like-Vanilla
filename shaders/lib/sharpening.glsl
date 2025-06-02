@@ -103,7 +103,7 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	#include "/import/sharpenVelocityFactor.glsl"
 	float velocityFactor = sharpenVelocityFactor * alteredSharpenVelocityAddition;
 	float depthAddition = alteredSharpenDepthAddition * 0.0144 + velocityFactor * 0.04;
-	float sharpenAmount = alteredSharpenAmount * 0.37 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.33;
+	float sharpenAmount = alteredSharpenAmount * 0.37 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.35;
 	blur = min(blur, 1.0);
 	color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 	

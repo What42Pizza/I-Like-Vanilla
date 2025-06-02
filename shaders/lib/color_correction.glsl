@@ -46,7 +46,7 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
     float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
 	float colorLum = getColorLum(color);
 	vec3 lumDiff = color - colorLum;
-	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1 - colorLum) * 2.0) * 0.25;
+	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1.0 - colorLum) * 2.0) * 0.25;
 	color += lumDiff * (saturationAmount + vibranceAmount);
 	color = clamp(color, 0.0, 1.0);
 	

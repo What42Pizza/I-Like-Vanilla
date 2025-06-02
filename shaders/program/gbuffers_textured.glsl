@@ -24,7 +24,7 @@ void main() {
 	
 	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	
-	float transparency = percentThrough(blockDepth, 1.0, 1.3);
+	float transparency = percentThrough(blockDepth, 1.0, 1.4);
 	albedo.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
@@ -63,7 +63,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = gl_Color.rgb;
+	glcolor = gl_Color.rgb * 1.2;
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	#include "/import/gbufferModelViewInverse.glsl"
