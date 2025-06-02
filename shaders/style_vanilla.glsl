@@ -661,7 +661,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.2
+										#define SATURATION -0.15
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -773,7 +773,7 @@
 #endif
 #if DAMAGE_EFFECT_STRENGTH == -1
 #undef DAMAGE_EFFECT_STRENGTH
-										#define DAMAGE_EFFECT_STRENGTH 0.5
+										#define DAMAGE_EFFECT_STRENGTH 0.7
 #endif
 
 
@@ -1135,7 +1135,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.1
+										#define ATMOSPHERIC_FOG_DENSITY 0.05
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY

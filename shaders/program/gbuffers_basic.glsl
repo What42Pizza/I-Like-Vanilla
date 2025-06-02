@@ -11,14 +11,8 @@ void main() {
 	vec4 albedo = glcolor;
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(albedo);
-	gl_FragData[1] = vec4(
-		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.0),
-		1.0
-	);
 }
 
 #endif

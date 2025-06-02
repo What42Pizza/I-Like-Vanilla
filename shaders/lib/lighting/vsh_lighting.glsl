@@ -10,12 +10,11 @@ void doVshLighting(float depth  ARGS_OUT) {
 	#endif
 	
 	vec3 shadingNormals = vec3(abs(gl_Normal.x), gl_Normal.y, abs(gl_Normal.z));
-	//#ifdef SHADER_DH_TERRAIN
-	//	float sideShading = dot(shadingNormals, vec3(-0.4, 0.15, -0.3));
-	//#else
-		float sideShading = dot(shadingNormals, vec3(-0.8, 0.3, -0.6));
-	//#endif
+	float sideShading = dot(shadingNormals, vec3(-0.8, 0.3, -0.6));
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(lmcoord.x, lmcoord.y)) * 0.5;
+	#ifdef SHADER_DH_TERRAIN
+		sideShading *= 1.2;
+	#endif
 	glcolor *= 1.0 + sideShading;
 	
 }
