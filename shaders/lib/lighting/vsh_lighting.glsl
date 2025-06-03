@@ -9,13 +9,17 @@ void doVshLighting(float depth  ARGS_OUT) {
 		}
 	#endif
 	
-	vec3 shadingNormals = vec3(abs(gl_Normal.x), gl_Normal.y, abs(gl_Normal.z));
-	#ifdef SHADER_DH_TERRAIN
-		float sideShading = dot(shadingNormals, vec3(-1.2, 0.4, -0.8));
-	#else
-		float sideShading = dot(shadingNormals, vec3(-0.8, 0.3, -0.6));
-	#endif
+	vec3 shadingNormals = gl_Normal.xyz;
+	float ySign = sign(shadingNormals.y);
+	shadingNormals *= shadingNormals; // this allows diagonal stuff (like grass) to be less affected
+	shadingNormals *= shadingNormals;
+	shadingNormals.y *= ySign;
+	shadingNormals.y -= 0.1;
+	float sideShading = dot(shadingNormals, vec3(-0.8, 0.35, -0.6));
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(lmcoord.x, lmcoord.y)) * 0.5;
 	glcolor *= 1.0 + sideShading;
+	#ifdef SHADER_DH_TERRAIN
+		glcolor *= 1.0 - 0.15 * shadingNormals.x;
+	#endif
 	
 }

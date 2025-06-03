@@ -71,7 +71,7 @@ void main() {
 	
 	
 	glcolor = (glcolor - 0.5) * 1.3 + 0.5;
-	glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.8);
+	glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.85);
 	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor.rgb *= 1.25;
 	
 	

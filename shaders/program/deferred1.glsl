@@ -32,7 +32,6 @@
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	//if (depthIsHand(depth)) depth += 0.38;
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#endif

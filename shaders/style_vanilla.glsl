@@ -24,7 +24,7 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.7
+										#define SIDE_SHADING_BRIGHT 0.8
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
@@ -86,7 +86,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 1.05
+										#define AMBIENT_DAY_BRIGHTNESS 1.0
 #endif
 
 
@@ -107,7 +107,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.5
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.55
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -123,7 +123,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.4
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.45
 #endif
 
 
@@ -218,7 +218,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.1
+										#define BLOCK_BRIGHTNESS 1.2
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -657,7 +657,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.05
+										#define VIBRANCE 0.1
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -673,7 +673,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.25
+										#define CONTRAST 0.2
 #endif
 #if CONTRAST_DETECT_RED == -1
 #undef CONTRAST_DETECT_RED
