@@ -53,7 +53,7 @@ void main() {
 void main() {
 	
 	#if REALISTIC_CLOUDS_ENABLED == 1
-		gl_Position = vec4(10.0);
+		gl_Position = vec4(1.0);
 		return;
 	#endif
 	

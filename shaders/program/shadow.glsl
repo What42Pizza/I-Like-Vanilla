@@ -30,7 +30,7 @@ void main() {
 		if (materialId >= 1000) {
 			int shadowData = (materialId % 100 - materialId % 10) / 10;
 			if (shadowData > 0) {
-				gl_Position = vec4(10.0);
+				gl_Position = vec4(1.0);
 				return;
 			}
 		}

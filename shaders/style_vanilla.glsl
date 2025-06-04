@@ -74,11 +74,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.9
+										#define AMBIENT_DAY_RED 0.92
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.95
+										#define AMBIENT_DAY_GREEN 0.96
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -657,11 +657,11 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.05
+										#define VIBRANCE 0.0
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.15
+										#define SATURATION -0.1
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK

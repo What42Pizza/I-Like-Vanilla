@@ -12,39 +12,33 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
+	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
 	
 	#ifdef OVERWORLD
-		albedo.rgb = 1.0 - albedo.rgb;
-		albedo.rgb *= albedo.rgb;
+		
+		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
+		color = 1.0 - color;
+		color *= color;
 		if (sunPosition.z < 0.0) {
-			albedo.rgb *= albedo.rgb; // apply extra brightness to sun
+			color *= color; // apply extra brightness to sun
 		}
-		albedo.rgb = 1.0 - albedo.rgb;
+		color = 1.0 - color;
+		
+		#include "/import/sunPosition.glsl"
+		color *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
+		#include "/import/rainStrength.glsl"
+		color *= 1.0 - 0.6 * rainStrength;
+		
 	#endif
+	
 	
 	#ifdef END
-		albedo.rgb *= 0.3;
+		color *= 0.3;
 	#endif
 	
 	
-	#ifdef OVERWORLD
-		#include "/import/sunPosition.glsl"
-		albedo.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
-		albedo.rgb *= 1.0 - skyColor;
-		#include "/import/rainStrength.glsl"
-		albedo.rgb *= 1.0 - 0.6 * rainStrength;
-	#endif
-	
-	
-	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo);
-	gl_FragData[1] = vec4(
-		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.0),
-		1.0
-	);
+	/* DRAWBUFFERS:6 */
+	gl_FragData[0] = vec4(color, 1.0);
 	
 }
 

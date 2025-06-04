@@ -217,6 +217,9 @@ This describes which /main_files-s handle different effects
 - - z: reflectiveness & is cloud
 - **colortex4:  Prev Texture**
 - **colortex5:  Bloom Texture**
+- **colortex6:  Sky Objects Texture**
+- - x: red & green
+- - y: blue & alpha
 
 <br>
 <br>

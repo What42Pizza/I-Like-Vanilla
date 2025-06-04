@@ -12,7 +12,12 @@
 
 
 #include "/lib/lighting/fsh_lighting.glsl"
+#include "/utils/depth.glsl"
+#include "/utils/screen_to_view.glsl"
 
+#if OUTLINES_ENABLED == 1
+	#include "/lib/outlines.glsl"
+#endif
 #if SSAO_ENABLED == 1
 	#include "/lib/ssao.glsl"
 #endif
@@ -20,11 +25,8 @@
 	#include "/lib/borderFog/getBorderFogAmount.glsl"
 	#include "/lib/borderFog/applyBorderFog.glsl"
 #endif
-#include "/utils/depth.glsl"
-#include "/utils/screen_to_view.glsl"
-
-#if OUTLINES_ENABLED == 1
-	#include "/lib/outlines.glsl"
+#ifndef END
+	#include "/utils/getSkyColor.glsl"
 #endif
 
 
@@ -81,9 +83,10 @@ void main() {
 		
 		
 	} else {
-		#ifdef NETHER
+		#ifndef END
 			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
 			color = getSkyColor(normalize(viewPos), true  ARGS_IN);
+			color += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - color);
 		#endif
 	}
 	
