@@ -32,7 +32,7 @@
 #endif
 #if WEATHER_LIGHT_MULT == -1
 #undef WEATHER_LIGHT_MULT
-										#define WEATHER_LIGHT_MULT 0.6
+										#define WEATHER_LIGHT_MULT 0.7
 #endif
 
 
@@ -41,7 +41,7 @@
 
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.95
+										#define FOLIAGE_SATURATION 1.0
 #endif
 #if NIGHT_VISION_BRIGHTNESS == -1
 #undef NIGHT_VISION_BRIGHTNESS
@@ -58,11 +58,11 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 0.97
+										#define SKYLIGHT_DAY_RED 1.0
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.99
+										#define SKYLIGHT_DAY_GREEN 1.0
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -70,7 +70,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -132,35 +132,35 @@
 
 #if SKYLIGHT_SUNRISE_RED == -1
 #undef SKYLIGHT_SUNRISE_RED
-										#define SKYLIGHT_SUNRISE_RED 1.05
+										#define SKYLIGHT_SUNRISE_RED 1.0
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
-										#define SKYLIGHT_SUNRISE_GREEN 0.75
+										#define SKYLIGHT_SUNRISE_GREEN 0.85
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.45
+										#define SKYLIGHT_SUNRISE_BLUE 0.6
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.25
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.3
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
-										#define AMBIENT_SUNRISE_RED 1.0
+										#define AMBIENT_SUNRISE_RED 0.9
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
-										#define AMBIENT_SUNRISE_GREEN 0.8
+										#define AMBIENT_SUNRISE_GREEN 0.95
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.7
+										#define AMBIENT_SUNRISE_BLUE 1.0
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
-										#define AMBIENT_SUNRISE_BRIGHTNESS 0.8
+										#define AMBIENT_SUNRISE_BRIGHTNESS 0.85
 #endif
 
 
@@ -169,7 +169,7 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.05
+										#define SKYLIGHT_SUNSET_RED 1.0
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
@@ -185,15 +185,15 @@
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
-										#define AMBIENT_SUNSET_RED 0.95
+										#define AMBIENT_SUNSET_RED 1.0
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
-										#define AMBIENT_SUNSET_GREEN 0.8
+										#define AMBIENT_SUNSET_GREEN 0.97
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
-										#define AMBIENT_SUNSET_BLUE 0.8
+										#define AMBIENT_SUNSET_BLUE 0.95
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
@@ -346,7 +346,7 @@
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
-										#define HANDHELD_LIGHT_BRIGHTNESS 1.0
+										#define HANDHELD_LIGHT_BRIGHTNESS 0.95
 #endif
 
 
@@ -471,11 +471,11 @@
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
-										#define SUNRAYS_INCREASE_SUNRISE 0.5
+										#define SUNRAYS_INCREASE_SUNRISE 0.4
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 0.5
+										#define SUNRAYS_INCREASE_SUNSET 0.4
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -657,11 +657,11 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.1
+										#define VIBRANCE 0.05
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.2
+										#define SATURATION -0.15
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -765,7 +765,7 @@
 #endif
 #if HEALTH_EFFECT_STRENGTH == -1
 #undef HEALTH_EFFECT_STRENGTH
-										#define HEALTH_EFFECT_STRENGTH 1.1
+										#define HEALTH_EFFECT_STRENGTH 1.0
 #endif
 #if DAMAGE_EFFECT_ENABLED == -1
 #undef DAMAGE_EFFECT_ENABLED
@@ -902,7 +902,7 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.1
+										#define WATER_COLOR_RED 0.15
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
@@ -1139,7 +1139,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 5.0
+										#define WEATHER_FOG_DENSITY 3.0
 #endif
 
 

@@ -38,9 +38,10 @@ void main() {
 	#endif
 	
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
+	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
 	if (albedo.a < 0.1) discard;
-	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.25);
+	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.35);
+	albedo.rgb *= glcolor;
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1

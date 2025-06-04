@@ -55,8 +55,8 @@ void main() {
 	
 	// ======== AUTO EXPOSURE ======== //
 	
+	#include "/import/eyeBrightnessSmooth.glsl"
 	#if AUTO_EXPOSURE_ENABLED == 1
-		#include "/import/eyeBrightnessSmooth.glsl"
 		vec2 normalizedBrightness = eyeBrightnessSmooth / 240.0;
 		#ifdef NETHER
 			normalizedBrightness.y = 0.5;
@@ -81,9 +81,10 @@ void main() {
 	float fogMax;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
+		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 		#include "/import/betterRainStrength.glsl"
 		fogSlope = 325.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
+		fogDist += betterRainStrength * 16.0;
 		fogMax = 0.5;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
@@ -102,7 +103,7 @@ void main() {
 	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist);
 	atmoFogAmount *= 1.0 - fogAmount;
 	color *= 1.0 - fogMax * atmoFogAmount;
-	color += fogColor * atmoFogAmount;
+	color += fogColor * atmoFogAmount * (0.5 + 0.5 * eyeBrightnessSmooth.y / 240.0);
 	
 	
 	

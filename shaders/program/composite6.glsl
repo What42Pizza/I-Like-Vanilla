@@ -73,7 +73,7 @@ void main() {
 	// ======== VIGNETTE ======== //
 	
 	#if (VIGNETTE_ENABLED == 1 && !defined END) || HEALTH_EFFECT_ENABLED == 1 || DAMAGE_EFFECT_ENABLED == 1
-		float vignetteAmount = length(texcoord - 0.5) * VIGNETTE_SCALE / sqrt(0.5);
+		float vignetteAmount = length(texcoord - 0.5) * VIGNETTE_SCALE;
 		#if VIGNETTE_NOISE_ENABLED == 1
 			#include "/utils/var_rng.glsl"
 			vignetteAmount += randomFloat(rng) * 0.02;
@@ -86,11 +86,16 @@ void main() {
 			#include "/import/smoothPlayerHealth.glsl"
 			float healthEffectAmount = 1.0 - smoothPlayerHealth;
 			healthEffectAmount *= healthEffectAmount;
-			color.gb *= 1.0 - vignetteAmount * healthEffectAmount * HEALTH_EFFECT_STRENGTH * 0.5;
+			healthEffectAmount *= vignetteAmount * HEALTH_EFFECT_STRENGTH * 0.7;
+			color.gb *= 1.0 - healthEffectAmount;
+			color.r += healthEffectAmount * 0.4;
 		#endif
 		#if DAMAGE_EFFECT_ENABLED == 1
 			#include "/import/damageAmount.glsl"
-			color.gb *= 1.0 - vignetteAmount * damageAmount * DAMAGE_EFFECT_STRENGTH * 0.3;
+			float damageEffectAmount = damageAmount;
+			damageEffectAmount *= vignetteAmount * DAMAGE_EFFECT_STRENGTH * 0.5;
+			color.gb *= 1.0 - damageEffectAmount;
+			color.r += damageEffectAmount * 0.2;
 		#endif
 	#endif
 	
