@@ -11,10 +11,11 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	
 	/* DRAWBUFFERS:0 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 	
 }
 

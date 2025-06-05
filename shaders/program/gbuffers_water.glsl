@@ -83,7 +83,7 @@ void main() {
 			float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
 			#include "/import/far.glsl"
 			float waterDepth = (opaqueBlockDepth - blockDepth) * far;
-			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 8.0 / (8.0 + waterDepth));
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
 		#else
 			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
 		#endif
@@ -93,7 +93,7 @@ void main() {
 	
 	float reflectiveness = ((materialId % 1000 - materialId % 100) / 100) * 0.15;
 	if (materialId == 9007) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
-	float specular_amount = ((materialId - materialId % 1000) / 1000) * 0.11;
+	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
 	
 	
 	// main lighting
@@ -107,6 +107,7 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:03 */
+	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
@@ -149,7 +150,7 @@ void main() {
 	#include "/import/mc_Entity.glsl"
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
-	materialId %= 10000;
+	materialId %= 100000;
 	
 	shadowcasterColor = getShadowcasterColor(ARG_IN);
 	
@@ -172,8 +173,8 @@ void main() {
 			#include "/import/cameraPosition.glsl"
 			playerPos += cameraPosition;
 			#include "/import/frameTimeCounter.glsl"
-			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.03 * wavingAmount;
-			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.02 * wavingAmount;
+			playerPos.y += (sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.5 - 0.5) * 0.03 * wavingAmount;
+			playerPos.y += (sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.5 - 0.5) * 0.02 * wavingAmount;
 			playerPos -= cameraPosition;
 		}
 	#endif

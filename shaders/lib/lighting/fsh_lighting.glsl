@@ -1,4 +1,4 @@
-vec3 getPixelatedShadowPos(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
+vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
 	#include "/import/cameraPosition.glsl"
@@ -36,7 +36,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#if PIXELATED_SHADOWS > 0
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getPixelatedShadowPos(viewPos, lightDot, normal  ARGS_IN);
+		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal  ARGS_IN);
 		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
 		
 	#elif SHADOW_FILTERING == 0
@@ -277,13 +277,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#endif
 	lighting += blockLight;
 	
-	#ifdef OVERWORLD
-		float colorLum = getColorLum(color);
-		colorLum *= colorLum;
-		lighting *= 1.0 - 0.3 * colorLum;
-		lighting = mix(vec3(getColorLum(lighting)), lighting, 1.0 + colorLum * 0.2);
-	#endif
-	
-	color *= lighting * 1.2;
+	color *= lighting;
 	
 }

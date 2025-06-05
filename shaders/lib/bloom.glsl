@@ -2,10 +2,11 @@
 
 
 
-vec3 getBloomAddition(float depth  ARGS_OUT) {
+void addBloom(inout vec3 color  ARGS_OUT) {
 	
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	float blockDepth = toBlockDepth(depth  ARGS_IN);
-	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.15;
+	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.25;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
@@ -13,7 +14,7 @@ vec3 getBloomAddition(float depth  ARGS_OUT) {
 	float randomAngle = (dither - 0.5) * 2.0 * PI;
 	mat2 rotationMatrix;
 	#include "/import/invAspectRatio.glsl"
-	rotationMatrix[0] = vec2(cos(randomAngle) * invAspectRatio, -sin(randomAngle) * invAspectRatio);
+	rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * invAspectRatio;
 	rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle));
 	
 	// these values were generated with https://github.com/What42Pizza/Small-Rust-Programs/tree/master/point-distribution
@@ -29,6 +30,7 @@ vec3 getBloomAddition(float depth  ARGS_OUT) {
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.702, -0.384)) * sizeMult).rgb * 0.580;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.215,  0.874)) * sizeMult).rgb * 0.502;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.917,  0.400)) * sizeMult).rgb * 0.427;
+		bloomAddition *= 2.0;
 		bloomAddition /= 7.472;
 	#elif BLOOM_QUALITY == 3
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2(-0.029,  0.040)) * sizeMult).rgb * 0.998;
@@ -51,6 +53,7 @@ vec3 getBloomAddition(float depth  ARGS_OUT) {
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.900,  0.010)) * sizeMult).rgb * 0.502;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.729,  0.609)) * sizeMult).rgb * 0.464;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.233,  0.972)) * sizeMult).rgb * 0.427;
+		bloomAddition *= 2.0;
 		bloomAddition /= 15.239;
 	#elif BLOOM_QUALITY == 4
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2(-0.003, -0.025)) * sizeMult).rgb * 0.999;
@@ -93,6 +96,7 @@ vec3 getBloomAddition(float depth  ARGS_OUT) {
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.077,  0.947)) * sizeMult).rgb * 0.464;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.974, -0.054)) * sizeMult).rgb * 0.446;
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + (rotationMatrix * vec2( 0.883,  0.470)) * sizeMult).rgb * 0.427;
+		bloomAddition *= 2.0;
 		bloomAddition /= 30.769;
 	#endif
 	
@@ -103,5 +107,7 @@ vec3 getBloomAddition(float depth  ARGS_OUT) {
 		bloomAddition *= BLOOM_END_MULT;
 	#endif
 	
-	return bloomAddition * BLOOM_AMOUNT * 0.17;
+	bloomAddition *= 1.0 - 0.8 * getColorLum(color);
+	color += bloomAddition * BLOOM_AMOUNT * 0.2;
+	
 }

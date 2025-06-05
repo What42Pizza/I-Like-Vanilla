@@ -87,7 +87,7 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D textur
 	
 	vec3 reflectionColor;
 	if (error == 0) {
-		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb;
+		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb * 2.0;
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
 		reflectionColor = mix(alteredSkyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
 		//float reflectionColorBrightness = getColorLum(reflectionColor);

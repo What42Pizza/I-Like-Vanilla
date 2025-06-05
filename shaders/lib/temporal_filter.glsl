@@ -24,8 +24,8 @@
 
 
 void neighborhoodClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
-	vec3 minColor = color;
-	vec3 maxColor = color;
+	vec3 minColor = color * 0.5;
+	vec3 maxColor = color * 0.5;
 	
 	for (int i = 0; i < clampingOffsetCount; i++) {
 		ivec2 offsetCoord = texelcoord + clampingOffsets[i];
@@ -33,6 +33,8 @@ void neighborhoodClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
 		minColor = min(minColor, offsetColor);
 		maxColor = max(maxColor, offsetColor);
 	}
+	minColor *= 2.0;
+	maxColor *= 2.0;
 	
 	prevColor = clamp(prevColor, minColor, maxColor);
 }
@@ -58,7 +60,7 @@ void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoo
 	float prevDepth = texture2D(DEPTH_BUFFER_WO_TRANS, prevCoord).r;
 	if (depthIsHand(prevDepth)) prevCoord = texcoord;
 	
-	vec3 prevColor = texture2D(PREV_TEXTURE, prevCoord).rgb;
+	vec3 prevColor = texture2D(PREV_TEXTURE, prevCoord).rgb * 2.0;
 	
 	neighborhoodClamping(color, prevColor  ARGS_IN);
 	

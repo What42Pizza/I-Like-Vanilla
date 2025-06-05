@@ -38,26 +38,26 @@ void main() {
 	#endif
 	
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
-	if (albedo.a < 0.1) discard;
-	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.35);
-	albedo.rgb *= glcolor;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
+	if (color.a < 0.1) discard;
+	color.rgb *= glcolor;
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		#include "/import/cameraPosition.glsl"
 		vec3 blockPos = fract(playerPos + cameraPosition);
 		float centerDist = length(blockPos - 0.5);
-		albedo.rgb = mix(albedo.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.3 * float(centerDist < 0.65));
+		color.rgb = mix(color.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.3 * float(centerDist < 0.65));
 	#endif
 	
 	
 	float reflectiveness = ((materialId % 1000 - materialId % 100) / 100) * 0.15 * mix(BLOCK_REFLECTION_AMOUNT_UNDERGROUND, BLOCK_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
-	float specular_amount = ((materialId - materialId % 1000) / 1000) * 0.11;
+	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
 	
 	
 	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),
@@ -115,7 +115,7 @@ void main() {
 	#include "/import/mc_Entity.glsl"
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
-	materialId %= 10000;
+	materialId %= 100000;
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1

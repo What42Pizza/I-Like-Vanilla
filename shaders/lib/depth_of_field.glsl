@@ -26,6 +26,7 @@ vec3 getBlurredColor(vec2 coord, float size  ARGS_OUT) {
 	colorTotal += texture2D(MAIN_TEXTURE_COPY, coord + vec2(-1,  2) * pixelSize * size, 0).rgb * 0.574;
 	colorTotal += texture2D(MAIN_TEXTURE_COPY, coord + vec2( 0,  2) * pixelSize * size, 0).rgb * 0.641;
 	colorTotal += texture2D(MAIN_TEXTURE_COPY, coord + vec2( 1,  2) * pixelSize * size, 0).rgb * 0.574;
+	colorTotal *= 2.0;
 	return colorTotal / 14.94; // value is pre-calculated total of weights (weights are gaussian of (offset length over 3))
 }
 

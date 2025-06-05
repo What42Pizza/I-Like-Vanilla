@@ -91,6 +91,7 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:03 */
+	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),

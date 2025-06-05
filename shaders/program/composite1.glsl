@@ -27,7 +27,7 @@
 #endif
 
 void main() {
-	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
+	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	bool isCloud = unpackVec2(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
 	
 	float depth = texelFetch(isCloud ? DEPTH_BUFFER_WO_TRANS : DEPTH_BUFFER_ALL, texelcoord, 0).r;
@@ -138,15 +138,18 @@ void main() {
 		float bloomMult = getColorLum(color * vec3(2.0, 1.0, 0.4));
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
+		bloomMult = sqrt(bloomMult);
 		vec3 bloomColor = color * bloomMult;
 	#endif
 	
 	
 	
 	/* DRAWBUFFERS:1 */
+	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	#if BLOOM_ENABLED == 1
 		/* DRAWBUFFERS:15 */
+		bloomColor *= 0.5;
 		gl_FragData[1] = vec4(bloomColor, 1.0);
 	#endif
 	

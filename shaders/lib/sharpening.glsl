@@ -7,7 +7,7 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	
 	#if SHARPENING_DETECT_SIZE == 3
 		
-		vec3 colorTotal = color;
+		vec3 colorTotal = color * 0.5;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1, -1), 0).rgb * 0.801;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0, -1), 0).rgb * 0.895;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1, -1), 0).rgb * 0.801;
@@ -16,11 +16,12 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1,  1), 0).rgb * 0.801;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0,  1), 0).rgb * 0.895;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1,  1), 0).rgb * 0.801;
+		colorTotal *= 2.0;
 		vec3 blur = colorTotal / 7.784; // value is pre-calculated total of weights + 1 (weights are gaussian of (offset length over 3))
 		
 	#elif SHARPENING_DETECT_SIZE == 5
 		
-		vec3 colorTotal = color;
+		vec3 colorTotal = color * 0.5;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1, -2), 0).rgb * 0.574;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0, -2), 0).rgb * 0.641;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1, -2), 0).rgb * 0.574;
@@ -41,11 +42,12 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1,  2), 0).rgb * 0.574;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0,  2), 0).rgb * 0.641;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1,  2), 0).rgb * 0.574;
+		colorTotal *= 2.0;
 		vec3 blur = colorTotal / 14.94; // value is pre-calculated total of weights + 1 (weights are gaussian of (offset length over 3))
 		
 	#elif SHARPENING_DETECT_SIZE == 7
 		
-		vec3 colorTotal = color;
+		vec3 colorTotal = color * 0.5;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1, -3), 0).rgb * 0.329;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0, -3), 0).rgb * 0.368;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1, -3), 0).rgb * 0.329;
@@ -82,6 +84,7 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2(-1,  3), 0).rgb * 0.329;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 0,  3), 0).rgb * 0.368;
 		colorTotal += texelFetch(MAIN_TEXTURE_COPY, texelcoord + ivec2( 1,  3), 0).rgb * 0.329;
+		colorTotal *= 2.0;
 		vec3 blur = colorTotal / 20.688; // value is pre-calculated total of weights + 1 (weights are gaussian of (offset length over 3))
 		
 	#endif
@@ -104,7 +107,6 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	float velocityFactor = sharpenVelocityFactor * alteredSharpenVelocityAddition;
 	float depthAddition = alteredSharpenDepthAddition * 0.0144 + velocityFactor * 0.04;
 	float sharpenAmount = alteredSharpenAmount * 0.37 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.35;
-	blur = min(blur, 1.0);
 	color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 	
 }

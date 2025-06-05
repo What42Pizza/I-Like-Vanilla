@@ -30,11 +30,12 @@ void main() {
 		}
 	#endif
 	
-	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
+	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb * 2.0;
 	
 	
 	
 	/* DRAWBUFFERS:1 */
+	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	
 }

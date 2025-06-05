@@ -20,7 +20,7 @@ void main() {
 	#include "/import/far.glsl"
 	if (lengthCylinder < far - 20.0) discard;
 	
-	vec3 albedo = glcolor * 0.85;
+	vec3 color = glcolor * 0.85;
 	
 	
 	// add noise for fake texture
@@ -28,12 +28,13 @@ void main() {
 	#include "/import/cameraPosition.glsl"
 	uvec3 noisePos = uvec3(ivec3((playerPos + cameraPosition) * ceil(worldScale) + 0.5));
 	uint noise = randomizeUint(noisePos.x) ^ randomizeUint(noisePos.y) ^ randomizeUint(noisePos.z);
-	albedo += 0.03 * randomFloat(noise);
-	albedo = clamp(albedo, vec3(0.0), vec3(1.0));
+	color += 0.03 * randomFloat(noise);
+	color = clamp(color, vec3(0.0), vec3(1.0));
 	
 	
 	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo, 1.0);
+	color *= 0.5;
+	gl_FragData[0] = vec4(color, 1.0);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),

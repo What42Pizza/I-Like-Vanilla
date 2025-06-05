@@ -11,21 +11,20 @@
 #endif
 
 void main() {
-	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
+	vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
 	
 	
 	
 	// ======== BLOOM CALCULATIONS ======== //
 	
 	#if BLOOM_ENABLED == 1
-		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		vec3 bloomAddition = getBloomAddition(depth  ARGS_IN);
-		color += bloomAddition;
+		addBloom(color  ARGS_IN);
 	#endif
 	
 	
 	
 	/* DRAWBUFFERS:0 */
+	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	
 }

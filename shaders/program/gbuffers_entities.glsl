@@ -15,20 +15,21 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord);
-	if (albedo.a < 0.1) discard;
-	albedo.rgb = smoothMin(albedo.rgb, vec3(1.0), 0.35);
-	albedo.rgb *= glcolor.rgb;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
+	if (color.a < 0.1) discard;
+	//color.rgb = smoothMin(color.rgb, vec3(1.0), 0.5) * 1.1;
+	color.rgb *= glcolor;
 	
 	
 	// hurt flash, creeper flash, etc
 	#include "/import/entityColor.glsl"
-	albedo.rgb = mix(albedo.rgb, entityColor.rgb, entityColor.a);
-	albedo.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
+	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
+	color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
 	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),

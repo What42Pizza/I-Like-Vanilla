@@ -15,12 +15,13 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
-	if (albedo.a < 0.1) discard;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
+	if (color.a < 0.1) discard;
 	
 	
 	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),

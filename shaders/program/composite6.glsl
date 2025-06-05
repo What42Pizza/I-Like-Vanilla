@@ -31,9 +31,9 @@ void main() {
 	#else
 		#if SSS_FLIP == 1
 			#include "/import/viewSize.glsl"
-			vec3 color = texelFetch(MAIN_TEXTURE_COPY, ivec2(viewSize) - texelcoord, 0).rgb;
+			vec3 color = texelFetch(MAIN_TEXTURE_COPY, ivec2(viewSize) - texelcoord, 0).rgb * 2.0;
 		#else
-			vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb;
+			vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
 		#endif
 	#endif
 	

@@ -7,12 +7,10 @@
 #ifdef FSH
 
 void main() {
-	
-	vec4 albedo = glcolor;
-	
-	
+	vec4 color = glcolor;
 	/* DRAWBUFFERS:0 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 }
 
 #endif

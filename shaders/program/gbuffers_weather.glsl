@@ -18,6 +18,7 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:0 */
+	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	
 }

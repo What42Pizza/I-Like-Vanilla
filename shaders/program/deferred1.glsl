@@ -32,7 +32,7 @@
 
 
 void main() {
-	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb;
+	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
@@ -93,6 +93,7 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:0 */
+	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	
 }

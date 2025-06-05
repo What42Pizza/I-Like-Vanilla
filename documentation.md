@@ -205,8 +205,8 @@ This describes which /main_files-s handle different effects
 
 ## Buffers:
 
-- **colortex0:  Main Image**
-- **colortex1:  Main Image Copy**
+- **colortex0:  Main Image** (stored with 0.5 multiplier)
+- **colortex1:  Main Image Copy** (stored with 0.5 multiplier)
 - **colortex2:  Opaque Data**
 - - x: lmcoord.x & lmcoord.y
 - - y: normal x & normal y
@@ -215,8 +215,8 @@ This describes which /main_files-s handle different effects
 - - x: lmcoord.x & lmcoord.y
 - - y: normal x & normal y
 - - z: reflectiveness & is cloud
-- **colortex4:  Prev Texture**
-- **colortex5:  Bloom Texture**
+- **colortex4:  Prev Texture** (stored with 0.5 multiplier)
+- **colortex5:  Bloom Texture** (stored with 0.5 multiplier)
 - **colortex6:  Sky Objects Texture**
 - - x: red & green
 - - y: blue & alpha

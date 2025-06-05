@@ -22,17 +22,18 @@
 
 void main() {
 	
-	vec4 albedo = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	
 	float transparency = percentThrough(blockDepth, 1.0, 1.4);
-	albedo.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
+	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	if (albedo.a < dither) discard;
+	if (color.a < dither) discard;
 	
 	/* DRAWBUFFERS:02 */
-	gl_FragData[0] = vec4(albedo);
+	color.rgb *= 0.5;
+	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),

@@ -36,7 +36,7 @@ void main() {
 		sampleCoord *= texelSize;
 	#endif
 	
-	vec3 color = texelFetch(MAIN_TEXTURE, sampleCoord, 0).rgb;
+	vec3 color = texelFetch(MAIN_TEXTURE, sampleCoord, 0).rgb * 2.0;
 	
 	
 	
@@ -96,10 +96,12 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:1 */
+	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	#if TEMPORAL_FILTER_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
 		/* DRAWBUFFERS:14 */
 		#if MOTION_BLUR_ENABLED == 1
+			prevColor *= 0.5;
 			gl_FragData[1] = vec4(prevColor, 1.0);
 		#else
 			gl_FragData[1] = vec4(color, 1.0);
