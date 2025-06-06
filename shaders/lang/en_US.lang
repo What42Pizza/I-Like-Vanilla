@@ -85,6 +85,10 @@ value.SIDE_SHADING_DARK.-1=Use Style
 option.WEATHER_LIGHT_MULT=Weather Light Multiplier
 value.WEATHER_LIGHT_MULT.-1=Use Style
 
+option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
+option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
+value.NIGHT_SATURATION_DECREASE.-1=Use Style 
+
 
 
 
@@ -1256,6 +1260,9 @@ value.BORDER_FOG_END.-1=Use Style
 option.BORDER_FOG_CURVE=Border Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
+
+option.ADVANCED_TERRAIN_BLENDING=Advanced Terrain-Sky Blending
+option.ADVANCED_TERRAIN_BLENDING.comment=Makes the terrain blend with the sky slightly better (does nothing when Distant Horizons is enabled). The cost for this is basically nothing, but if you're desperate for performance then this is another settings you can disable
 
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog

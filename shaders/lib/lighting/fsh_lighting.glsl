@@ -213,10 +213,11 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	// night saturation decrease
 	#include "/import/dayPercent.glsl"
 	float nightPercent = 1.0 - dayPercent;
-	nightPercent *= nightPercent;
 	nightPercent *= ambientBrightness * (1.0 - blockBrightness);
-	color = mix(vec3(getColorLum(color)), color, 1.0 - nightPercent * 0.25);
-	color += nightPercent * 0.05;
+	nightPercent *= nightPercent;
+	nightPercent *= NIGHT_SATURATION_DECREASE;
+	color = mix(vec3(getColorLum(color)), color, 1.0 - nightPercent * 0.1);
+	color += nightPercent * 0.06;
 	
 	#ifdef END
 		ambientBrightness = 1.0;

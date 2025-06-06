@@ -34,6 +34,10 @@
 #undef WEATHER_LIGHT_MULT
 										#define WEATHER_LIGHT_MULT 0.7
 #endif
+#if NIGHT_SATURATION_DECREASE == -1
+#undef NIGHT_SATURATION_DECREASE
+										#define NIGHT_SATURATION_DECREASE 1.0
+#endif
 
 
 

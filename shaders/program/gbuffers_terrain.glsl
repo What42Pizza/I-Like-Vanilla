@@ -30,11 +30,14 @@ void main() {
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
-	#else
-		//float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
-		//#include "/import/invFar.glsl"
-		//fogDistance *= invFar;
-		//if (fogDistance >= 0.96) {discard; return;}
+	#elif ADVANCED_TERRAIN_BLENDING == 1
+		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+		#include "/import/invFar.glsl"
+		fogDistance *= invFar;
+		float dither = bayer64(gl_FragCoord.xy);
+		#include "/import/frameCounter.glsl"
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		if (fogDistance >= 0.96 - 0.02 * dither) {discard; return;}
 	#endif
 	
 	
