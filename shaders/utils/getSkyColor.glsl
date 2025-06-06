@@ -33,9 +33,9 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 	#ifdef OVERWORLD
 		
 		const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.2;
-		const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.35;
+		const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.25;
 		const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.2;
-		const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.35;
+		const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
 		const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
 		const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
 		
@@ -49,7 +49,7 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 			#include "/utils/var_rng.glsl"
 			upDot += randomFloat(rng) * 0.08 * (1.0 - 0.8 * sqrt(getColorLum(skyColor)));
 		#endif
-		upDot = max(upDot, 0.0);// + 0.01;
+		upDot = clamp(upDot, 0.0, 1.0);// + 0.01;
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 		
@@ -66,13 +66,14 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		#include "/import/rainStrength.glsl"
 		float rainAmount = 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
 		rainAmount *= rainStrength * 0.8;
-		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * 0.4 * dayPercent, rainAmount);
+		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * 0.3 * dayPercent, rainAmount);
 		
 		//skyColor *= skyColor;
 		//skyColor *= 0.5;
 		//skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
 		skyColor = pow(skyColor, vec3(0.75));
 		skyColor *= 1.1;
+		skyColor *= 0.3 + 0.7 * dayPercent;
 		
 		#if DARKEN_SKY_UNDERGROUND == 1
 			if (darkenUndergroundSky) {
