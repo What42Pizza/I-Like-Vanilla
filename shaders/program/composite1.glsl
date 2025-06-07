@@ -89,8 +89,8 @@ void main() {
 		fogMax = 0.5;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
-		fogSlope = 7.5;
-		fogDist += 4.0;
+		fogSlope = 7.0;
+		fogDist += 6.0;
 		fogMax = 0.9;
 	} else if (isEyeInWater == 2) {
 		fogColor = IN_LAVA_COLOR;

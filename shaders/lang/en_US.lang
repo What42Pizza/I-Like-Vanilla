@@ -1262,7 +1262,9 @@ option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (hi
 value.BORDER_FOG_CURVE.-1=Use Style
 
 option.ADVANCED_TERRAIN_BLENDING=Advanced Terrain-Sky Blending
-option.ADVANCED_TERRAIN_BLENDING.comment=Makes the terrain blend with the sky slightly better (does nothing when Distant Horizons is enabled). The cost for this is basically nothing, but if you're desperate for performance then this is another settings you can disable
+option.ADVANCED_TERRAIN_BLENDING.comment=Makes the border fog blend with the sky slightly better. The cost for this is basically nothing, but if you're desperate for performance then this is another setting you can disable. (this setting does nothing when Distant Horizons is enabled)
+value.ADVANCED_TERRAIN_BLENDING.0=Off
+value.ADVANCED_TERRAIN_BLENDING.1=On
 
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
@@ -1414,6 +1416,9 @@ screen.DEBUG_MENU=Debug
 option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
 option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
 value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
+
+option.HAND_DEPTH=Hand Depth
+option.HAND_DEPTH.comment=Depth test value for the hand and hand items\nIf this is too low, the hand won't be detected and will be shaded incorrectly\nIf this is too high, close-up objects will be treated as hand items and will be shaded incorrectly
 
 option.USE_BETTER_RAND=Use Better Random
 option.USE_BETTER_RAND.comment=The better random function is technically better, but the performance cost doesn't exactly make up for it

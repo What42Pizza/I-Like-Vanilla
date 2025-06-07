@@ -79,11 +79,16 @@ void main() {
 		
 		
 		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-			float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
-			float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
-			#include "/import/far.glsl"
-			float waterDepth = (opaqueBlockDepth - blockDepth) * far;
-			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
+			#include "/import/isEyeInWater.glsl"
+			if (isEyeInWater == 1) {
+				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+			} else {
+				float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
+				float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
+				#include "/import/far.glsl"
+				float waterDepth = (opaqueBlockDepth - blockDepth) * far;
+				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
+			}
 		#else
 			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
 		#endif
