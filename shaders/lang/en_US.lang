@@ -66,6 +66,10 @@ value.CEL_SHADING_ENABLED.-1=Use Style
 value.CEL_SHADING_ENABLED.0=Off
 value.CEL_SHADING_ENABLED.1=On
 
+option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
+option.BRIGHT_BLOCK_DECREASE.comment=How much to darken block like sand that would otherwise be too bright
+value.BRIGHT_BLOCK_DECREASE.-1=Use Style
+
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
 option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.VANILLA_AO_BRIGHT.-1=Use Style
@@ -751,18 +755,6 @@ value.SATURATION_LIGHT.-1=Use Style
 option.CONTRAST=Contrast
 option.CONTRAST.comment=Contrast applied to the final image, making colors stick out more
 value.CONTRAST.-1=Use Style
-
-option.CONTRAST_DETECT_RED=Contrast Detect Red
-option.CONTRAST_DETECT_RED.comment=Contrast Detect is the color that Contrast moves away from
-value.CONTRAST_DETECT_RED.-1=Use Style
-
-option.CONTRAST_DETECT_GREEN=Contrast Detect Green
-option.CONTRAST_DETECT_GREEN.comment=Contrast Detect is the color that Contrast moves away from
-value.CONTRAST_DETECT_GREEN.-1=Use Style
-
-option.CONTRAST_DETECT_BLUE=Contrast Detect Blue
-option.CONTRAST_DETECT_BLUE.comment=Contrast Detect is the color that Contrast moves away from
-value.CONTRAST_DETECT_BLUE.-1=Use Style
 
 option.TONEMAPPER=Tonemapper
 option.TONEMAPPER.comment=This defines how light data is interpreted.\n\nNone: clamps the value into 0-1\nExtra simple: same as 'none' but uses a smoothened clamp function\nSimple: Custom simple tonemapper\nACES: Industry standard for good, realistic graphics

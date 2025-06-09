@@ -14,6 +14,10 @@
 #undef CEL_SHADING_ENABLED
 										#define CEL_SHADING_ENABLED 1
 #endif
+#if BRIGHT_BLOCK_DECREASE == -1
+#undef BRIGHT_BLOCK_DECREASE
+										#define BRIGHT_BLOCK_DECREASE 0.3
+#endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
 										#define VANILLA_AO_BRIGHT 0.15
@@ -678,18 +682,6 @@
 #if CONTRAST == -1
 #undef CONTRAST
 										#define CONTRAST 0.3
-#endif
-#if CONTRAST_DETECT_RED == -1
-#undef CONTRAST_DETECT_RED
-										#define CONTRAST_DETECT_RED 0.5
-#endif
-#if CONTRAST_DETECT_GREEN == -1
-#undef CONTRAST_DETECT_GREEN
-										#define CONTRAST_DETECT_GREEN 0.5
-#endif
-#if CONTRAST_DETECT_BLUE == -1
-#undef CONTRAST_DETECT_BLUE
-										#define CONTRAST_DETECT_BLUE 0.5
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER

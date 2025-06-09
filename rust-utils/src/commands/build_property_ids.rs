@@ -34,11 +34,15 @@ pub fn build_ids_for_file(file_name: &str) -> Result<()> {
 	let aliases = get_aliases(&file_lines, &mut i, "# START_1_12_IDS")?;
 	apply_aliases(&mut ids, aliases);
 	let entity_mappings = collect_entity_mappings(ids);
+	let mut entity_mappings = entity_mappings.iter().collect::<Vec<_>>();
+	entity_mappings.sort();
 	
 	let mut old_ids = get_ids(&file_lines, &mut i, "# START_1_12_ALIASES")?;
 	let old_aliases = get_aliases(&file_lines, &mut i, "# START_GENERATED_CODE")?;
 	apply_aliases(&mut old_ids, old_aliases);
 	let old_entity_mappings = collect_entity_mappings(old_ids);
+	let mut old_entity_mappings = old_entity_mappings.iter().collect::<Vec<_>>();
+	old_entity_mappings.sort();
 	
 	let mut output_data = vec!();
 	let mut push_line = |line: &str| {

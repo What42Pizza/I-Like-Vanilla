@@ -14,6 +14,10 @@
 #undef CEL_SHADING_ENABLED
 										#define CEL_SHADING_ENABLED 0
 #endif
+#if BRIGHT_BLOCK_DECREASE == -1
+#undef BRIGHT_BLOCK_DECREASE
+										#define BRIGHT_BLOCK_DECREASE 0.7
+#endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
 										#define VANILLA_AO_BRIGHT 1.2
@@ -62,7 +66,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.05
+										#define SKYLIGHT_DAY_RED 1.00
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -78,7 +82,7 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.5
+										#define AMBIENT_DAY_RED 0.55
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
@@ -86,11 +90,11 @@
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
-										#define AMBIENT_DAY_BLUE 1.1
+										#define AMBIENT_DAY_BLUE 1.05
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.75
+										#define AMBIENT_DAY_BRIGHTNESS 0.7
 #endif
 
 
@@ -487,7 +491,7 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.2
+										#define SUNRAYS_SUN_GREEN 0.4
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
@@ -678,18 +682,6 @@
 #if CONTRAST == -1
 #undef CONTRAST
 										#define CONTRAST 0.7
-#endif
-#if CONTRAST_DETECT_RED == -1
-#undef CONTRAST_DETECT_RED
-										#define CONTRAST_DETECT_RED 0.5
-#endif
-#if CONTRAST_DETECT_GREEN == -1
-#undef CONTRAST_DETECT_GREEN
-										#define CONTRAST_DETECT_GREEN 0.5
-#endif
-#if CONTRAST_DETECT_BLUE == -1
-#undef CONTRAST_DETECT_BLUE
-										#define CONTRAST_DETECT_BLUE 0.5
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -1193,15 +1185,15 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.6
+										#define SKY_DAY_RED 0.35
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.75
+										#define SKY_DAY_GREEN 0.45
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
+										#define SKY_DAY_BLUE 0.9
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -1217,15 +1209,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.9
+										#define SKY_HORIZON_DAY_RED 0.4
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.6
+										#define SKY_HORIZON_DAY_GREEN 0.35
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 1.0
+										#define SKY_HORIZON_DAY_BLUE 0.8
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED

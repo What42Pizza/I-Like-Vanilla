@@ -20,7 +20,7 @@ void main() {
 	#include "/import/far.glsl"
 	if (lengthCylinder < far - 20.0) discard;
 	
-	vec3 color = glcolor * 0.85;
+	vec3 color = glcolor;
 	
 	
 	// add noise for fake texture
@@ -71,8 +71,8 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	glcolor = (glcolor - 0.5) * 1.3 + 0.5;
-	glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.85);
+	glcolor = (glcolor - 0.5) * 1.05 + 0.5;
+	//glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.85);
 	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor.rgb *= 1.25;
 	
 	

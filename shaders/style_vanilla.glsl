@@ -14,6 +14,10 @@
 #undef CEL_SHADING_ENABLED
 										#define CEL_SHADING_ENABLED 0
 #endif
+#if BRIGHT_BLOCK_DECREASE == -1
+#undef BRIGHT_BLOCK_DECREASE
+										#define BRIGHT_BLOCK_DECREASE 1.0
+#endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
 										#define VANILLA_AO_BRIGHT 1.0
@@ -24,7 +28,7 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.8
+										#define SIDE_SHADING_BRIGHT 0.9
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
@@ -36,7 +40,7 @@
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
-										#define NIGHT_SATURATION_DECREASE 0.8
+										#define NIGHT_SATURATION_DECREASE 0.2
 #endif
 
 
@@ -99,11 +103,11 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 0.45
+										#define SKYLIGHT_NIGHT_RED 0.55
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.6
+										#define SKYLIGHT_NIGHT_GREEN 0.7
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
@@ -111,15 +115,15 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.5
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.45
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.45
+										#define AMBIENT_NIGHT_RED 0.55
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.6
+										#define AMBIENT_NIGHT_GREEN 0.7
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
@@ -127,7 +131,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.4
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.35
 #endif
 
 
@@ -679,18 +683,6 @@
 #undef CONTRAST
 										#define CONTRAST 0.2
 #endif
-#if CONTRAST_DETECT_RED == -1
-#undef CONTRAST_DETECT_RED
-										#define CONTRAST_DETECT_RED 0.5
-#endif
-#if CONTRAST_DETECT_GREEN == -1
-#undef CONTRAST_DETECT_GREEN
-										#define CONTRAST_DETECT_GREEN 0.5
-#endif
-#if CONTRAST_DETECT_BLUE == -1
-#undef CONTRAST_DETECT_BLUE
-										#define CONTRAST_DETECT_BLUE 0.5
-#endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
 										#define TONEMAPPER 0
@@ -769,7 +761,7 @@
 #endif
 #if HEALTH_EFFECT_STRENGTH == -1
 #undef HEALTH_EFFECT_STRENGTH
-										#define HEALTH_EFFECT_STRENGTH 1.0
+										#define HEALTH_EFFECT_STRENGTH 0.8
 #endif
 #if DAMAGE_EFFECT_ENABLED == -1
 #undef DAMAGE_EFFECT_ENABLED
@@ -906,7 +898,7 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.15
+										#define WATER_COLOR_RED 0.1
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
@@ -1139,7 +1131,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.05
+										#define ATMOSPHERIC_FOG_DENSITY 0.0
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY

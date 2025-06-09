@@ -78,32 +78,28 @@ void main() {
 	fogDist *= distMult;
 	vec3 fogColor;
 	float fogSlope;
-	float fogMax;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 		#include "/import/betterRainStrength.glsl"
-		fogSlope = 325.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
-		#include "/import/dayPercent.glsl"
-		fogDist += betterRainStrength * 12.0;// + (1.0 - dayPercent) * 10000.0;
-		fogMax = 0.5;
+		fogSlope = 250.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
+		#include "/import/eyeBrightnessSmooth.glsl"
+		fogDist += betterRainStrength * 8.0 * eyeBrightnessSmooth.y / 240.0;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
 		fogSlope = 7.0;
 		fogDist += 6.0;
-		fogMax = 0.9;
 	} else if (isEyeInWater == 2) {
 		fogColor = IN_LAVA_COLOR;
 		fogSlope = 0.1;
-		fogMax = 1.0;
 	} else if (isEyeInWater == 3) {
 		fogColor = IN_POWDERED_SNOW_COLOR;
 		fogSlope = 0.1;
-		fogMax = 1.0;
 	}
 	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist);
 	atmoFogAmount *= 1.0 - fogAmount;
-	color *= 1.0 - fogMax * atmoFogAmount;
+	atmoFogAmount *= 0.75;
+	color *= 1.0 - atmoFogAmount;
 	color += fogColor * atmoFogAmount * (0.5 + 0.5 * eyeBrightnessSmooth.y / 240.0);
 	
 	

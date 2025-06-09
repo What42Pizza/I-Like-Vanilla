@@ -32,10 +32,10 @@
 #include "/utils/screen_to_view.glsl"
 
 float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
-	pos.xz -= pos.zx * 0.15;
 	//pos.xz = floor(pos.xz / 16.0) * 16.0;
 	#include "/import/frameTimeCounter.glsl"
 	float cloudSample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
+	pos.xz -= pos.zx * 0.2;
 	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
 	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_3_SPEED * 0.8) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
 	if (!isNormal) cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
