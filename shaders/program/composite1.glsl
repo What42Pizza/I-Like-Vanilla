@@ -82,7 +82,7 @@ void main() {
 	if (isEyeInWater == 0) {
 		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 		#include "/import/betterRainStrength.glsl"
-		fogSlope = 250.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
+		fogSlope = 200.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
 		#include "/import/eyeBrightnessSmooth.glsl"
 		fogDist += betterRainStrength * 8.0 * eyeBrightnessSmooth.y / 240.0;
 	} else if (isEyeInWater == 1) {

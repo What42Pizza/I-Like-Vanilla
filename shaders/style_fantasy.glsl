@@ -251,15 +251,15 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.05
+										#define CAVE_AMBIENT_RED 1.0
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.75
+										#define CAVE_AMBIENT_GREEN 0.65
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.5
+										#define CAVE_AMBIENT_BLUE 0.6
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
@@ -405,11 +405,11 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.2
+										#define AO_AMOUNT 0.7
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.3
+										#define AO_SIZE 1.5
 #endif
 
 

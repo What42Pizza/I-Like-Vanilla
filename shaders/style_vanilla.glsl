@@ -66,11 +66,11 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 0.95
+										#define SKYLIGHT_DAY_RED 1.05
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.97
+										#define SKYLIGHT_DAY_GREEN 1.02
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE

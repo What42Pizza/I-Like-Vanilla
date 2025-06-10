@@ -25,7 +25,7 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	#endif
 	
 	// contrast
-	color = mix(CONTRAST_DETECT_COLOR, color, CONTRAST * 0.1 + 1.0);
+	color = mix(vec3(0.5), color, CONTRAST * 0.1 + 1.0);
 	color = clamp(color, 0.0, 1.0);
 	
 	// saturation & vibrance
