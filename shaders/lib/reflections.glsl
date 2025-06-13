@@ -4,7 +4,8 @@
 
 
 
-void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
+void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initialDepth, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
+	initialDepth *= 0.9997;
 	
 	// basic setup
 	#include "/import/gbufferProjection.glsl"
@@ -24,7 +25,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 		stepVector.xz *= clampedStepY / stepVector.y;
 		stepVector.y = clampedStepY;
 	}
-	stepVector /= (REFLECTION_ITERATIONS - 15); // ensure that the ray will reach the edge of the screen 15 steps early, allows for fine-tuning to not be cut short
+	stepVector /= (REFLECTION_ITERATIONS - 8); // ensure that the ray will reach the edge of the screen 8 steps early, allows for fine-tuning to not be cut short
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#if TEMPORAL_FILTER_ENABLED == 1
@@ -42,15 +43,15 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 			vec3 realBlockViewPos = screenToView(vec3(texcoord, realDepth)  ARGS_IN);
 			float realDepthDh = texture2D(DH_DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
 			vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, realDepthDh)  ARGS_IN);
-			if (dot(realBlockViewPosDh, realBlockViewPosDh) < dot(realBlockViewPos, realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
+			if (realBlockViewPosDh.z > realBlockViewPos.z) realBlockViewPos = realBlockViewPosDh;
 			vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 			realDepth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 		#endif
 		float realToScreen = screenPos.z - realDepth;
 		
-		if (realToScreen > 0.0) {
+		if (realToScreen > 0.0 && realDepth > initialDepth) {
 			hitCount ++;
-			if (hitCount >= 10) { // converged on point
+			if (hitCount >= 5) { // converged on point
 				reflectionPos = screenPos.xy;
 				error = 0;
 				return;
@@ -68,12 +69,12 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 
 
 
-void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D texture, float reflectionStrength  ARGS_OUT) {
+void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 normal, sampler2D texture, float reflectionStrength  ARGS_OUT) {
 	
 	vec3 reflectionDirection = reflect(normalize(viewPos), normalize(normal));
 	vec2 reflectionPos;
 	int error;
-	raytrace(reflectionPos, error, viewPos, reflectionDirection, normal  ARGS_IN);
+	raytrace(reflectionPos, error, viewPos, initialDepth, reflectionDirection, normal  ARGS_IN);
 	
 	float fresnel = 1.0 - abs(dot(normalize(viewPos), normal));
 	fresnel *= fresnel;
@@ -90,9 +91,6 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, sampler2D textur
 		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb * 2.0;
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
 		reflectionColor = mix(alteredSkyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-		//float reflectionColorBrightness = getColorLum(reflectionColor);
-		//float alteredSkyColorBrightness = getColorLum(alteredSkyColor);
-		//reflectionColor *= min(alteredSkyColorBrightness * 2.0, reflectionColorBrightness) / reflectionColorBrightness;
 	} else {
 		reflectionColor = alteredSkyColor;
 	}

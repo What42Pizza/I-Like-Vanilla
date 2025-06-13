@@ -25,11 +25,10 @@
 
 
 #if REFLECTIONS_ENABLED == 1
-	void doReflections(inout vec3 color, float depth, vec3 normal, float reflectionStrength  ARGS_OUT) {
+	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, float reflectionStrength  ARGS_OUT) {
 		
 		if (depthIsHand(depth)) return;
 		#ifdef DISTANT_HORIZONS
-			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 			if (depth == 1.0 && dhDepth == 1.0) return;
 		#else
 			if (depth == 1.0) return;
@@ -48,7 +47,9 @@
 			reflectionStrength *= 1.0 - fogAmount;
 		#endif
 		
-		addReflection(color, viewPos, normal, MAIN_TEXTURE, reflectionStrength  ARGS_IN);
+		float initialDepth = depth;
+		if (depth == 1.0) initialDepth = dhDepth;
+		addReflection(color, viewPos, initialDepth, normal, MAIN_TEXTURE, reflectionStrength  ARGS_IN);
 		
 	}
 #endif
@@ -92,7 +93,11 @@ void main() {
 			float reflectionStrength = unpackVec2(data.z).x;
 		#endif
 		if (reflectionStrength > 0.01) {
-			doReflections(color, depth0, normal, reflectionStrength  ARGS_IN);
+			#ifdef DISTANT_HORIZONS
+				doReflections(color, depth0, dhDepth0, normal, reflectionStrength  ARGS_IN);
+			#else
+				doReflections(color, depth0, 0.0, normal, reflectionStrength  ARGS_IN);
+			#endif
 		}
 		
 	#endif
