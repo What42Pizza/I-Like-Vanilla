@@ -41,15 +41,12 @@ void main() {
 	glcolor.a *= 3.0;
 	
 	
-	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-	
-	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
+		#include "/import/gbufferModelViewInverse.glsl"
+		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
-		#include "/import/gbufferModelView.glsl"
-		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
+		gl_Position = ftransform();
 	#endif
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 0

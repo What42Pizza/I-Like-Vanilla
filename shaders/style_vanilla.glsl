@@ -20,7 +20,7 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.0
+										#define VANILLA_AO_BRIGHT 1.1
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -28,7 +28,7 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.9
+										#define SIDE_SHADING_BRIGHT 0.75
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
@@ -107,7 +107,7 @@
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.7
+										#define SKYLIGHT_NIGHT_GREEN 0.65
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
@@ -123,11 +123,11 @@
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.7
+										#define AMBIENT_NIGHT_GREEN 0.65
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.0
+										#define AMBIENT_NIGHT_BLUE 1.05
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
@@ -1135,7 +1135,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 2.5
+										#define WEATHER_FOG_DENSITY 4.0
 #endif
 
 

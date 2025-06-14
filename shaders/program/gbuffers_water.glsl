@@ -56,7 +56,7 @@ void main() {
 	#endif
 	
 	
-	if (materialId == 9007) {
+	if (materialId == 9000) {
 		
 		color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
@@ -97,7 +97,7 @@ void main() {
 	
 	
 	float reflectiveness = ((materialId % 1000 - materialId % 100) / 100) * 0.15;
-	if (materialId == 9007) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
+	if (materialId == 9000) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
 	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
 	
 	
@@ -168,7 +168,7 @@ void main() {
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 9007) {
+		if (materialId == 9000) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));

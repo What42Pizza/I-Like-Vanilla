@@ -1418,7 +1418,7 @@ value.USE_BETTER_RAND.0=Off
 value.USE_BETTER_RAND.1=On
 
 option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
-option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate)
+option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, also works at night)
 value.SHOW_DANGEROUS_LIGHT.0=Off
 value.SHOW_DANGEROUS_LIGHT.1=On
 
