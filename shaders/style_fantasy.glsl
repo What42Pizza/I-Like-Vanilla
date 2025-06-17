@@ -20,7 +20,7 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.2
+										#define VANILLA_AO_BRIGHT 1.1
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -94,7 +94,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.7
+										#define AMBIENT_DAY_BRIGHTNESS 0.75
 #endif
 
 
@@ -230,7 +230,7 @@
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
-										#define BLOCK_BRIGHTNESS_CURVE 1
+										#define BLOCK_BRIGHTNESS_CURVE 2
 #endif
 #if BLOCK_BRIGHTNESS_NIGHT_MULT == -1
 #undef BLOCK_BRIGHTNESS_NIGHT_MULT
@@ -380,7 +380,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.35
+										#define BLOOM_LOW_CUTOFF 0.5
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -491,7 +491,7 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.2
+										#define SUNRAYS_SUN_GREEN 0.1
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
@@ -685,7 +685,7 @@
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
-										#define TONEMAPPER 0
+										#define TONEMAPPER 1
 #endif
 
 

@@ -91,8 +91,8 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	
 	#if FXAA_ENABLED == 1
 		const float alteredSharpenAmount = SHARPEN_AMOUNT * 1.25;
-		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION * 1.25;
-		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION * 1.3;
+		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION * 1.5;
+		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION * 1.2;
 	#else
 		const float alteredSharpenAmount = SHARPEN_AMOUNT;
 		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION;

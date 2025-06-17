@@ -405,7 +405,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.0
+										#define AO_AMOUNT 0.6
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -685,7 +685,7 @@
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
-										#define TONEMAPPER 2
+										#define TONEMAPPER 3
 #endif
 
 

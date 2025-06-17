@@ -12,11 +12,14 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	// tonemapper
 	color = max(color, 0.0);
 	#if TONEMAPPER == 0
-		color = min(color, vec3(1.0));
+		color = min(color, 1.0);
 	#elif TONEMAPPER == 1
+		color = min(color, 1.5);
+		color = color - (4.0 / 27.0) * color * color * color;
+	#elif TONEMAPPER == 2
 		float lum = getColorLum(color);
 		color /= 1.0 + lum * 0.5;
-	#elif TONEMAPPER == 2
+	#elif TONEMAPPER == 3
 		color = acesFitted(color);
 	#endif
 	

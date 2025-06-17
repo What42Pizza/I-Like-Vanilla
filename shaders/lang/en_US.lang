@@ -757,11 +757,11 @@ option.CONTRAST.comment=Contrast applied to the final image, making colors stick
 value.CONTRAST.-1=Use Style
 
 option.TONEMAPPER=Tonemapper
-option.TONEMAPPER.comment=This defines how light data is interpreted.\n\nNone: clamps the value into 0-1\nExtra simple: same as 'none' but uses a smoothened clamp function\nSimple: Custom simple tonemapper\nACES: Industry standard for good, realistic graphics
+option.TONEMAPPER.comment=This defines how light data is interpreted (note: the shader internally uses values from 0-2, so the brightness is still capped).\n\nNone: clamps the value into 0-1\nSimple: basic tonemapper that accounts for slightly brighter colors than none\nReinhard: Simple tonemapper that can handle any brightness\nACES: Industry standard for good, realistic graphics
 value.TONEMAPPER.-1=Use Style
 value.TONEMAPPER.0=None
-value.TONEMAPPER.1=Extra Simple
-value.TONEMAPPER.2=Simple
+value.TONEMAPPER.1=Simple
+value.TONEMAPPER.2=Reinhard
 value.TONEMAPPER.3=ACES
 
 

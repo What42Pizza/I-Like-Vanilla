@@ -31,11 +31,11 @@ void doVshLighting(float depth  ARGS_OUT) {
 	
 	#if defined SHADER_GBUFFERS_TERRAIN || defined SHADER_GBUFFERS_WATER
 		int brightnessDecreaseInt = ((materialId % 100000) - (materialId % 10000)) / 10000;
-		float brightnessDecrease = brightnessDecreaseInt * 0.025 * BRIGHT_BLOCK_DECREASE;
+		float brightnessDecrease = brightnessDecreaseInt * 0.015 * BRIGHT_BLOCK_DECREASE;
 		glcolor *= 1.0 - brightnessDecrease;
 	#endif
 	#ifdef SHADER_DH_TERRAIN
-		if (dhMaterialId == DH_BLOCK_SAND) glcolor.rgb *= 1.0 - 9.0 * 0.025 * BRIGHT_BLOCK_DECREASE;
+		if (dhMaterialId == DH_BLOCK_SAND) glcolor.rgb *= 1.0 - 9.0 * 0.015 * BRIGHT_BLOCK_DECREASE;
 	#endif
 	
 }

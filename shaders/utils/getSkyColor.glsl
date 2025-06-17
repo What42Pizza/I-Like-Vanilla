@@ -41,7 +41,6 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		
 		#include "/import/dayPercent.glsl"
 		float skyMixFactor = dayPercent;
-		skyMixFactor *= skyMixFactor;
 		#include "/import/gbufferModelView.glsl"
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
 		vec3 skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);

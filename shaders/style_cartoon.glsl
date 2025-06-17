@@ -685,7 +685,7 @@
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
-										#define TONEMAPPER 0
+										#define TONEMAPPER 1
 #endif
 
 

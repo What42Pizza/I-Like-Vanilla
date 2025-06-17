@@ -78,15 +78,15 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.92
+										#define AMBIENT_DAY_RED 0.95
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.96
+										#define AMBIENT_DAY_GREEN 0.97
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -94,7 +94,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 1.0
+										#define AMBIENT_DAY_BRIGHTNESS 1.05
 #endif
 
 
@@ -148,11 +148,11 @@
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.6
+										#define SKYLIGHT_SUNRISE_BLUE 0.55
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.3
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.35
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
@@ -160,15 +160,15 @@
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
-										#define AMBIENT_SUNRISE_GREEN 0.99
+										#define AMBIENT_SUNRISE_GREEN 0.98
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.98
+										#define AMBIENT_SUNRISE_BLUE 0.95
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
-										#define AMBIENT_SUNRISE_BRIGHTNESS 0.8
+										#define AMBIENT_SUNRISE_BRIGHTNESS 0.85
 #endif
 
 
@@ -189,7 +189,7 @@
 #endif
 #if SKYLIGHT_SUNSET_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNSET_BRIGHTNESS
-										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.25
+										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.35
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
@@ -205,7 +205,7 @@
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
-										#define AMBIENT_SUNSET_BRIGHTNESS 0.8
+										#define AMBIENT_SUNSET_BRIGHTNESS 0.85
 #endif
 
 
@@ -665,11 +665,11 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.1
+										#define VIBRANCE 0.15
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.0
+										#define SATURATION 0.05
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -685,7 +685,7 @@
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
-										#define TONEMAPPER 0
+										#define TONEMAPPER 1
 #endif
 
 
@@ -919,7 +919,7 @@
 
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.0
+										#define SUN_BRIGHTNESS 1.05
 #endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
