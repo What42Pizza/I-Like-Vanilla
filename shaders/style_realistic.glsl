@@ -78,7 +78,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.5
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -94,7 +94,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.25
+										#define AMBIENT_DAY_BRIGHTNESS 0.35
 #endif
 
 
@@ -144,15 +144,15 @@
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
-										#define SKYLIGHT_SUNRISE_GREEN 0.8
+										#define SKYLIGHT_SUNRISE_GREEN 0.7
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.1
+										#define SKYLIGHT_SUNRISE_BLUE 0.25
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 5.0
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 2.0
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
@@ -160,15 +160,15 @@
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
-										#define AMBIENT_SUNRISE_GREEN 1.0
+										#define AMBIENT_SUNRISE_GREEN 0.9
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 1.0
+										#define AMBIENT_SUNRISE_BLUE 0.8
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
-										#define AMBIENT_SUNRISE_BRIGHTNESS 0.3
+										#define AMBIENT_SUNRISE_BRIGHTNESS 0.35
 #endif
 
 
@@ -495,7 +495,7 @@
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
-										#define SUNRAYS_SUN_BLUE 0.5
+										#define SUNRAYS_SUN_BLUE 0.4
 #endif
 #if SUNRAYS_MOON_RED == -1
 #undef SUNRAYS_MOON_RED
@@ -669,7 +669,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.2
+										#define SATURATION 0.0
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -677,11 +677,11 @@
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
-										#define SATURATION_LIGHT -0.4
+										#define SATURATION_LIGHT 0.0
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST -0.1
+										#define CONTRAST -0.05
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -835,15 +835,15 @@
 #endif
 #if WAVING_WATER_SCALE == -1
 #undef WAVING_WATER_SCALE
-										#define WAVING_WATER_SCALE 0.6
+										#define WAVING_WATER_SCALE 0.8
 #endif
 #if WAVING_WATER_SPEED == -1
 #undef WAVING_WATER_SPEED
-										#define WAVING_WATER_SPEED 1.5
+										#define WAVING_WATER_SPEED 1.7
 #endif
 #if WAVING_WATER_FRESNEL_MULT == -1
 #undef WAVING_WATER_FRESNEL_MULT
-										#define WAVING_WATER_FRESNEL_MULT 0.8
+										#define WAVING_WATER_FRESNEL_MULT 0.5
 #endif
 #if WAVING_WATER_NORMAL_AMOUNT == -1
 #undef WAVING_WATER_NORMAL_AMOUNT
@@ -889,7 +889,7 @@
 #endif
 #if WATER_TRANSPARENCY_DEEP == -1
 #undef WATER_TRANSPARENCY_DEEP
-										#define WATER_TRANSPARENCY_DEEP 0.1
+										#define WATER_TRANSPARENCY_DEEP 0.5
 #endif
 
 
@@ -898,15 +898,15 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.1
+										#define WATER_COLOR_RED 0.35
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.15
+										#define WATER_COLOR_GREEN 0.55
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.25
+										#define WATER_COLOR_BLUE 0.8
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
@@ -984,7 +984,7 @@
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
-										#define CLOUD_COVERAGE 0.45
+										#define CLOUD_COVERAGE 0.4
 #endif
 #if CLOUD_WEATHER_COVERAGE == -1
 #undef CLOUD_WEATHER_COVERAGE
@@ -1009,7 +1009,7 @@
 
 #if CLOUD_DAY_RED == -1
 #undef CLOUD_DAY_RED
-										#define CLOUD_DAY_RED 0.9
+										#define CLOUD_DAY_RED 0.85
 #endif
 #if CLOUD_DAY_GREEN == -1
 #undef CLOUD_DAY_GREEN
@@ -1131,7 +1131,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 1.0
+										#define ATMOSPHERIC_FOG_DENSITY 0.1
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
@@ -1152,7 +1152,7 @@
 #endif
 #if IN_WATER_BLUE == -1
 #undef IN_WATER_BLUE
-										#define IN_WATER_BLUE 0.6
+										#define IN_WATER_BLUE 0.2
 #endif
 #if IN_LAVA_RED == -1
 #undef IN_LAVA_RED
@@ -1185,11 +1185,11 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.6
+										#define SKY_DAY_RED 0.2
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.75
+										#define SKY_DAY_GREEN 0.3
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
@@ -1209,15 +1209,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.95
+										#define SKY_HORIZON_DAY_RED 0.25
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 1.0
+										#define SKY_HORIZON_DAY_GREEN 0.3
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 1.0
+										#define SKY_HORIZON_DAY_BLUE 0.7
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED

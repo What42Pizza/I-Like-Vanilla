@@ -17,7 +17,6 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.1) discard;
-	//color.rgb = smoothMin(color.rgb, vec3(1.0), 0.5) * 1.1;
 	color.rgb *= glcolor;
 	
 	

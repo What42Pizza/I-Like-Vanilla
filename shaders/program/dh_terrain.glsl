@@ -71,9 +71,7 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	glcolor = (glcolor - 0.5) * 1.05 + 0.5;
-	//glcolor = mix(vec3(getColorLum(glcolor)), glcolor, 0.85);
-	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor.rgb *= 1.25;
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.25;
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

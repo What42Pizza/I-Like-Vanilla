@@ -7,7 +7,7 @@ profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
 
 option.STYLE=Style
-option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (This does nothing on OptiFine version)\nNote: 'Cartoon' is meant to work with Bare Bones\n\nIf you want to see the default values are for each style, you can download the corresponding OptiFine version.
+option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (This does nothing on OptiFine versions)\n\nIf you want to see the default values for each style, you can download the corresponding OptiFine version.
 value.STYLE.0=Vanilla
 value.STYLE.1=Fantasy
 value.STYLE.2=Realistic

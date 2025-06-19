@@ -255,7 +255,7 @@
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.65
+										#define CAVE_AMBIENT_GREEN 0.7
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
@@ -350,11 +350,11 @@
 #endif
 #if HANDHELD_LIGHT_DISTANCE == -1
 #undef HANDHELD_LIGHT_DISTANCE
-										#define HANDHELD_LIGHT_DISTANCE 14
+										#define HANDHELD_LIGHT_DISTANCE 15
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
-										#define HANDHELD_LIGHT_BRIGHTNESS 0.75
+										#define HANDHELD_LIGHT_BRIGHTNESS 1.0
 #endif
 
 
@@ -1029,11 +1029,11 @@
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.6
+										#define CLOUD_NIGHT_BLUE 0.65
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
-										#define CLOUD_SUNRISE_RED 1.0
+										#define CLOUD_SUNRISE_RED 1.2
 #endif
 #if CLOUD_SUNRISE_GREEN == -1
 #undef CLOUD_SUNRISE_GREEN
@@ -1041,11 +1041,11 @@
 #endif
 #if CLOUD_SUNRISE_BLUE == -1
 #undef CLOUD_SUNRISE_BLUE
-										#define CLOUD_SUNRISE_BLUE 0.4
+										#define CLOUD_SUNRISE_BLUE 0.35
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.4
+										#define CLOUD_SUNSET_RED 1.2
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
