@@ -33,7 +33,7 @@ void main() {
 	
 	
 	#ifdef END
-		color *= 0.3;
+		color *= 0.25;
 	#endif
 	
 	

@@ -410,6 +410,14 @@ value.BLOOM_QUALITY.-1=Use Style
 option.BLOOM_AMOUNT=Bloom Amount
 value.BLOOM_AMOUNT.-1=Use Style
 
+option.BLOOM_NETHER_AMOUNT=Bloom Nether Amount
+option.BLOOM_NETHER_AMOUNT.comment=How much to increase Bloom Amount when in the nether
+value.BLOOM_NETHER_AMOUNT.-1=Use Style
+
+option.BLOOM_END_AMOUNT=Bloom End Amount
+option.BLOOM_END_AMOUNT.comment=How much to increase Bloom Amount when in the end
+value.BLOOM_END_AMOUNT.-1=Use Style
+
 option.BLOOM_SIZE=Bloom Size
 value.BLOOM_SIZE.-1=Use Style
 
@@ -420,14 +428,6 @@ value.BLOOM_LOW_CUTOFF.-1=Use Style
 option.BLOOM_HIGH_CUTOFF=Bloom High Cutoff
 option.BLOOM_HIGH_CUTOFF.comment=The value at which all colors are treated as equally light
 value.BLOOM_HIGH_CUTOFF.-1=Use Style
-
-option.BLOOM_NETHER_MULT=Bloom Nether Multiplier
-option.BLOOM_NETHER_MULT.comment=How much to increase Bloom Amount when in the nether
-value.BLOOM_NETHER_MULT.-1=Use Style
-
-option.BLOOM_END_MULT=Bloom End Multiplier
-option.BLOOM_END_MULT.comment=How much to increase Bloom Amount when in the end
-value.BLOOM_END_MULT.-1=Use Style
 
 
 

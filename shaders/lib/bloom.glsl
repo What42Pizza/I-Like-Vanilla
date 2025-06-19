@@ -100,14 +100,17 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 		bloomAddition /= 30.769;
 	#endif
 	
+	#ifdef OVERWORLD
+		const float bloomAmount = BLOOM_AMOUNT;
+	#endif
 	#ifdef NETHER
-		bloomAddition *= BLOOM_NETHER_MULT;
+		const float bloomAmount = BLOOM_NETHER_AMOUNT;
 	#endif
 	#ifdef END
-		bloomAddition *= BLOOM_END_MULT;
+		const float bloomAmount = BLOOM_END_AMOUNT;
 	#endif
 	
 	bloomAddition *= 1.0 - 0.8 * getColorLum(color);
-	color += bloomAddition * BLOOM_AMOUNT * 0.2;
+	color += bloomAddition * bloomAmount * 0.2;
 	
 }

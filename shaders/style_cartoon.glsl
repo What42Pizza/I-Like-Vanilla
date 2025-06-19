@@ -374,6 +374,14 @@
 #undef BLOOM_AMOUNT
 										#define BLOOM_AMOUNT 0.9
 #endif
+#if BLOOM_NETHER_AMOUNT == -1
+#undef BLOOM_NETHER_AMOUNT
+										#define BLOOM_NETHER_AMOUNT 2.5
+#endif
+#if BLOOM_END_AMOUNT == -1
+#undef BLOOM_END_AMOUNT
+										#define BLOOM_END_AMOUNT 0.3
+#endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
 										#define BLOOM_SIZE 1.0
@@ -385,14 +393,6 @@
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
 										#define BLOOM_HIGH_CUTOFF 1.0
-#endif
-#if BLOOM_NETHER_MULT == -1
-#undef BLOOM_NETHER_MULT
-										#define BLOOM_NETHER_MULT 2.0
-#endif
-#if BLOOM_END_MULT == -1
-#undef BLOOM_END_MULT
-										#define BLOOM_END_MULT 0.3
 #endif
 
 

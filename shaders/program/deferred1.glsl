@@ -83,7 +83,9 @@ void main() {
 		
 		
 	} else {
-		#ifndef END
+		#ifdef END
+			color = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
+		#else
 			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
 			color = getSkyColor(normalize(viewPos), true  ARGS_IN);
 			color += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - color);

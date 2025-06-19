@@ -32,19 +32,21 @@ void main() {
 	}
 	
 	
-	#if DARKEN_STARS_NEAR_BLOCKLIGHT == 1
-		#include "/import/eyeBrightnessSmooth.glsl"
-		float blockBrightness = eyeBrightnessSmooth.x / 240.0;
-		blockBrightness = min(blockBrightness * 8.0, 1.0);
-		float starsBrightness = mix(STARS_BRIGHTNESS, DARKENED_STARS_BRIGHTNESS, blockBrightness);
-	#else
-		const float starsBrightness = STARS_BRIGHTNESS;
+	#ifdef OVERWORLD
+		#if DARKEN_STARS_NEAR_BLOCKLIGHT == 1
+			#include "/import/eyeBrightnessSmooth.glsl"
+			float blockBrightness = eyeBrightnessSmooth.x / 240.0;
+			blockBrightness = min(blockBrightness * 8.0, 1.0);
+			float starsBrightness = mix(STARS_BRIGHTNESS, DARKENED_STARS_BRIGHTNESS, blockBrightness);
+		#else
+			const float starsBrightness = STARS_BRIGHTNESS;
+		#endif
+		#include "/import/ambientMoonPercent.glsl"
+		#include "/import/ambientSunrisePercent.glsl"
+		#include "/import/ambientSunsetPercent.glsl"
+		float nightPercent = ambientMoonPercent + max(ambientSunrisePercent + ambientSunsetPercent, 0.0);
+		color = vec3(gl_Color.rgb * starsBrightness * float(isStar) * nightPercent);
 	#endif
-	#include "/import/ambientMoonPercent.glsl"
-	#include "/import/ambientSunrisePercent.glsl"
-	#include "/import/ambientSunsetPercent.glsl"
-	float nightPercent = ambientMoonPercent + max(ambientSunrisePercent + ambientSunsetPercent, 0.0);
-	color = vec3(gl_Color.rgb * starsBrightness * float(isStar) * nightPercent);
 	
 	
 	#if TAA_ENABLED == 1

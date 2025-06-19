@@ -104,7 +104,7 @@ void main() {
 	
 	
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
+	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
 		renderClouds(color  ARGS_IN);
 	#endif
 	
