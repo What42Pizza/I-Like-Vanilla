@@ -28,7 +28,7 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.75
+										#define SIDE_SHADING_BRIGHT 0.8
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
@@ -288,7 +288,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_RED_MULT == -1
 #undef NETHER_BLOCKLIGHT_RED_MULT
-										#define NETHER_BLOCKLIGHT_RED_MULT 1.2
+										#define NETHER_BLOCKLIGHT_RED_MULT 1.1
 #endif
 #if NETHER_BLOCKLIGHT_GREEN_MULT == -1
 #undef NETHER_BLOCKLIGHT_GREEN_MULT
@@ -296,7 +296,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BLUE_MULT == -1
 #undef NETHER_BLOCKLIGHT_BLUE_MULT
-										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.5
+										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.55
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
@@ -309,35 +309,35 @@
 
 #if END_SKYLIGHT_RED == -1
 #undef END_SKYLIGHT_RED
-										#define END_SKYLIGHT_RED 1.02
+										#define END_SKYLIGHT_RED 1.05
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 1.05
+										#define END_SKYLIGHT_GREEN 0.9
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
-										#define END_SKYLIGHT_BLUE 1.0
+										#define END_SKYLIGHT_BLUE 1.1
 #endif
 #if END_SKYLIGHT_BRIGHTNESS == -1
 #undef END_SKYLIGHT_BRIGHTNESS
-										#define END_SKYLIGHT_BRIGHTNESS 0.75
+										#define END_SKYLIGHT_BRIGHTNESS 0.65
 #endif
 #if END_AMBIENT_RED == -1
 #undef END_AMBIENT_RED
-										#define END_AMBIENT_RED 0.98
+										#define END_AMBIENT_RED 1.05
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.99
+										#define END_AMBIENT_GREEN 0.9
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.0
+										#define END_AMBIENT_BLUE 1.15
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
-										#define END_AMBIENT_BRIGHTNESS 0.55
+										#define END_AMBIENT_BRIGHTNESS 0.5
 #endif
 
 

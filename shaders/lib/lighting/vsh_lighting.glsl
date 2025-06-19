@@ -18,7 +18,7 @@ void doVshLighting(float depth  ARGS_OUT) {
 	if (doSideShading) {
 		vec3 shadingNormals = vec3(abs(gl_Normal.x), gl_Normal.y, abs(gl_Normal.z));
 		#ifdef SHADER_DH_TERRAIN
-			const vec3 sideShadingVec = vec3(-0.8, 0.4, -0.5);
+			const vec3 sideShadingVec = vec3(-0.9, 0.4, -0.5);
 		#else
 			const vec3 sideShadingVec = vec3(-0.5, 0.3, -0.25);
 		#endif

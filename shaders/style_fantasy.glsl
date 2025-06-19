@@ -296,7 +296,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BLUE_MULT == -1
 #undef NETHER_BLOCKLIGHT_BLUE_MULT
-										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.4
+										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.5
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
@@ -309,35 +309,35 @@
 
 #if END_SKYLIGHT_RED == -1
 #undef END_SKYLIGHT_RED
-										#define END_SKYLIGHT_RED 1.0
+										#define END_SKYLIGHT_RED 0.9
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 1.1
+										#define END_SKYLIGHT_GREEN 0.7
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
-										#define END_SKYLIGHT_BLUE 1.04
+										#define END_SKYLIGHT_BLUE 1.2
 #endif
 #if END_SKYLIGHT_BRIGHTNESS == -1
 #undef END_SKYLIGHT_BRIGHTNESS
-										#define END_SKYLIGHT_BRIGHTNESS 0.8
+										#define END_SKYLIGHT_BRIGHTNESS 0.65
 #endif
 #if END_AMBIENT_RED == -1
 #undef END_AMBIENT_RED
-										#define END_AMBIENT_RED 0.9
+										#define END_AMBIENT_RED 0.85
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.96
+										#define END_AMBIENT_GREEN 0.7
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.0
+										#define END_AMBIENT_BLUE 1.25
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
-										#define END_AMBIENT_BRIGHTNESS 0.65
+										#define END_AMBIENT_BRIGHTNESS 0.45
 #endif
 
 

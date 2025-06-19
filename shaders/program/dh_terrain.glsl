@@ -71,6 +71,7 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
+	glcolor *= 0.98;
 	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.25;
 	
 	

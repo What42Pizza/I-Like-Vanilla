@@ -229,6 +229,9 @@ void adjustLmcoord(inout vec2 lmcoord) {
 	lmcoord -= low;
 	lmcoord /= high - low;
 	lmcoord = clamp(lmcoord, 0.0, 1.0);
+	#ifdef END
+		lmcoord.y *= 2.0;
+	#endif
 }
 
 
