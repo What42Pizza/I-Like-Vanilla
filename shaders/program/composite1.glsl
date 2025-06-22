@@ -30,10 +30,14 @@ void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	bool isCloud = unpackVec2(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
 	
-	float depth = texelFetch(isCloud ? DEPTH_BUFFER_WO_TRANS : DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float depth;
+	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+	else depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
-		float depthDh = texelFetch(isCloud ? DH_DEPTH_BUFFER_WO_TRANS : DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float depthDh;
+		if (isCloud) depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		else depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
 		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 	#endif
