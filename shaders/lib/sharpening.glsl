@@ -90,8 +90,8 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	#endif
 	
 	#if FXAA_ENABLED == 1
-		const float alteredSharpenAmount = SHARPEN_AMOUNT * 1.25;
-		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION * 1.5;
+		const float alteredSharpenAmount = SHARPEN_AMOUNT * 1.5;
+		const float alteredSharpenVelocityAddition = SHARPEN_VEL_ADDITION * 1.25;
 		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION * 1.2;
 	#else
 		const float alteredSharpenAmount = SHARPEN_AMOUNT;
@@ -106,7 +106,7 @@ void doSharpening(inout vec3 color  ARGS_OUT) {
 	#include "/import/sharpenVelocityFactor.glsl"
 	float velocityFactor = sharpenVelocityFactor * alteredSharpenVelocityAddition;
 	float depthAddition = alteredSharpenDepthAddition * 0.032 + velocityFactor * 0.02;
-	float sharpenAmount = alteredSharpenAmount * 0.36 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.33;
+	float sharpenAmount = alteredSharpenAmount * 0.36 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.35;
 	color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 	
 }
