@@ -47,10 +47,6 @@
 
 
 
-#if FOLIAGE_SATURATION == -1
-#undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 1.0
-#endif
 #if NIGHT_VISION_BRIGHTNESS == -1
 #undef NIGHT_VISION_BRIGHTNESS
 										#define NIGHT_VISION_BRIGHTNESS 1.0
@@ -58,6 +54,14 @@
 #if NIGHT_VISION_GREEN_AMOUNT == -1
 #undef NIGHT_VISION_GREEN_AMOUNT
 										#define NIGHT_VISION_GREEN_AMOUNT 0.25
+#endif
+#if TEXTURE_CONTRAST == -1
+#undef TEXTURE_CONTRAST
+										#define TEXTURE_CONTRAST 0.05
+#endif
+#if FOLIAGE_SATURATION == -1
+#undef FOLIAGE_SATURATION
+										#define FOLIAGE_SATURATION 1.0
 #endif
 
 
@@ -226,7 +230,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.2
+										#define BLOCK_BRIGHTNESS 1.15
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -263,7 +267,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.2
+										#define CAVE_AMBIENT_BRIGHTNESS 0.18
 #endif
 
 

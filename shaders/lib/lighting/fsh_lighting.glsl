@@ -278,7 +278,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#endif
 	
 	float lightingBrightness = min(getColorLum(lighting), 1.0);
-	blockBrightness *= 1.1 - lightingBrightness;
+	blockBrightness *= 1.2 - lightingBrightness;
 	vec3 blockLight = blockBrightness * BLOCK_COLOR;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);

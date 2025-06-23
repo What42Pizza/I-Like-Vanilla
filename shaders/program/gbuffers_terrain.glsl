@@ -43,6 +43,9 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.1) discard;
+	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
+	color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.5);
+	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
 	
 	
@@ -50,7 +53,7 @@ void main() {
 		#include "/import/cameraPosition.glsl"
 		vec3 blockPos = fract(playerPos + cameraPosition);
 		float centerDist = length(blockPos - 0.5);
-		color.rgb = mix(color.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.3 * float(centerDist < 0.65));
+		color.rgb = mix(color.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.35 * float(centerDist < 0.65));
 	#endif
 	
 	
