@@ -64,8 +64,8 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		
 		#include "/import/rainStrength.glsl"
 		float rainAmount = 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
-		rainAmount *= rainStrength * 0.8;
-		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * 0.25 * dayPercent, rainAmount);
+		rainAmount *= rainStrength * 0.65;
+		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * 0.3 * dayPercent, rainAmount);
 		
 		skyColor = min(skyColor, 1.0);
 		skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);

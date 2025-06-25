@@ -273,6 +273,8 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular *= specular;
 		specular *= specular;
 		specular *= specular;
+		#include "/import/betterRainStrength.glsl"
+		specular *= 1.0 - betterRainStrength;
 		#include "/import/ambientMoonPercent.glsl"
 		lighting += vec3(1.0, 1.0, 0.0) * specular * (0.2 + 0.8 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent) * 0.6;
 	#endif

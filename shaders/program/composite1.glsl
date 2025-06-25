@@ -90,7 +90,7 @@ void main() {
 		#include "/import/betterRainStrength.glsl"
 		fogSlope = 300.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
 		#include "/import/eyeBrightnessSmooth.glsl"
-		fogDist += betterRainStrength * 8.0 * eyeBrightnessSmooth.y / 240.0;
+		//fogDist += betterRainStrength * eyeBrightnessSmooth.y / 240.0;
 		fogMult = 0.75;
 		fogDarken = 0.5;
 	} else if (isEyeInWater == 1) {

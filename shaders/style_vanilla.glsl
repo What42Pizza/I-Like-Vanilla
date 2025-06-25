@@ -36,7 +36,7 @@
 #endif
 #if WEATHER_LIGHT_MULT == -1
 #undef WEATHER_LIGHT_MULT
-										#define WEATHER_LIGHT_MULT 0.6
+										#define WEATHER_LIGHT_MULT 0.7
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -61,7 +61,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 1.0
+										#define FOLIAGE_SATURATION 0.95
 #endif
 
 
@@ -889,7 +889,7 @@
 
 #if WATER_TRANSPARENCY_SHALLOW == -1
 #undef WATER_TRANSPARENCY_SHALLOW
-										#define WATER_TRANSPARENCY_SHALLOW 0.55
+										#define WATER_TRANSPARENCY_SHALLOW 0.5
 #endif
 #if WATER_TRANSPARENCY_DEEP == -1
 #undef WATER_TRANSPARENCY_DEEP
@@ -1139,7 +1139,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 4.0
+										#define WEATHER_FOG_DENSITY 2.4
 #endif
 
 
