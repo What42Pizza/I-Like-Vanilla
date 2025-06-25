@@ -27,7 +27,6 @@ void main() {
 	#if EXCLUDE_FOLIAGE == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
 		#include "/import/mc_Entity.glsl"
 		int materialId = int(mc_Entity.x);
-		materialId %= 100000;
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
@@ -48,7 +47,7 @@ void main() {
 			applyWaving(playerPos.xyz  ARGS_IN);
 		#endif
 		#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-			if (materialId == 9000) {
+			if (materialId % 100000 == 9000) {
 				float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;
 				#ifdef DISTANT_HORIZONS
 					float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
@@ -63,7 +62,6 @@ void main() {
 				playerPos -= cameraPosition;
 			}
 		#endif
-		applyWaving(playerPos  ARGS_IN);
 		#include "/import/shadowProjection.glsl"
 		#include "/import/shadowModelView.glsl"
 		gl_Position = shadowProjection * shadowModelView * vec4(playerPos, 1.0);

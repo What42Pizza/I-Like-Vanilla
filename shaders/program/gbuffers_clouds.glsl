@@ -58,16 +58,7 @@ void main() {
 		return;
 	#endif
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
-	#include "/import/sunPosition.glsl"
-	#include "/import/moonPosition.glsl"
-	#include "/import/dayPercent.glsl"
-	#include "/import/gbufferModelView.glsl"
-	float brightness = 0.725
-		+ 0.075 * dot(normal, normalize(sunPosition)) * dayPercent
-		+ 0.075 * dot(normal, normalize(moonPosition)) * (1.0 - dayPercent)
-		+ 0.1 * dot(normal, gbufferModelView[1].xyz);
-	colorMult = getCloudColor(brightness  ARGS_IN);
+	colorMult = getCloudColor(0.2 + 0.8 * gl_Color.r  ARGS_IN);
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	

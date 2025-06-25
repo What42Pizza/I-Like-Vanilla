@@ -86,11 +86,11 @@ void main() {
 	float fogDarken;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
+		float density = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, eyeBrightnessSmooth.y / 240.0);
 		#include "/import/betterRainStrength.glsl"
-		fogSlope = 300.0 / (mix(ATMOSPHERIC_FOG_DENSITY, WEATHER_FOG_DENSITY, betterRainStrength) + 0.00001);
-		#include "/import/eyeBrightnessSmooth.glsl"
-		//fogDist += betterRainStrength * eyeBrightnessSmooth.y / 240.0;
+		density = mix(density, WEATHER_FOG_DENSITY, betterRainStrength);
+		fogSlope = 300.0 / (density + 0.00001);
 		fogMult = 0.75;
 		fogDarken = 0.5;
 	} else if (isEyeInWater == 1) {
