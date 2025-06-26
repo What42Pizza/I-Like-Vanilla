@@ -167,7 +167,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 		output_line += setting_name;
 		output_line.push(' ');
 		
-		if line_parts[2] != "-1" {return error!("Invalid line in setting_defines line {}: Expect setting set be -1, but found {}", line_num, line_parts[2]);}
+		if line_parts[2] != "-1" {continue;}
 		let Some(setting_value) = default_settings.get(setting_name) else {return error!("Invalid line in setting_defines line {}: Could not find default value for setting {}", line_num, setting_name);};
 		output_line += setting_value;
 		output_line += " // ";

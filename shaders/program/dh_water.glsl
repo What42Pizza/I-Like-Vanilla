@@ -122,6 +122,8 @@ void main() {
 
 void main() {
 	glcolor = gl_Color;
+	glcolor.rgb = (glcolor.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
+	glcolor.rgb = mix(vec3(getColorLum(glcolor.rgb)), glcolor.rgb, 1.0 - TEXTURE_CONTRAST * 0.3);
 	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	normal = gl_NormalMatrix * gl_Normal;

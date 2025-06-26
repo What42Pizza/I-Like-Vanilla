@@ -72,7 +72,7 @@ pub const ALL_UNIFORMS_PATH: &str = include_str!("all_uniforms.txt");
 
 
 
-pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic", "cartoon"];
+pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic"];//, "cartoon"
 
 
 
