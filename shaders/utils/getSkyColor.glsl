@@ -54,6 +54,7 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		
 		#include "/import/sunPosition.glsl"
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
+		sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
 		sunDot *= 1.0 - 0.8 * upDot;
 		#include "/import/ambientSunrisePercent.glsl"
 		#include "/import/ambientSunsetPercent.glsl"
@@ -82,7 +83,9 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		
 	#elif defined NETHER
 		#include "/import/fogColor.glsl"
-		return fogColor;
+		vec3 skyColor = fogColor;
+		skyColor += 0.15;
+		return skyColor;
 	#elif defined END
 		return vec3(0.0);
 	#endif

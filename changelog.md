@@ -1,4 +1,13 @@
-- **1.0.0** (25/06/25)
+- v1.0.1 (25/07/07)
+  - Added settings:
+    - Nether Fog Density
+    - End Fog Density
+  - Tweaked some effects
+  - Tweaked settings, especially for the nether
+
+<br>
+
+- **v1.0.0** (25/06/25)
   - Relaunched as "I Like Vanilla" (previously "What42's Shader Base")
   - Now trying to be more exciting in general
   - Major performance improvements through massive internal rewrites, though balanced out with more demanding settings (better shadows, sunrays, reflections, etc)

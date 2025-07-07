@@ -49,6 +49,8 @@ void main() {
 	
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
+	float reflectiveness = getColorLum(color.rgb) * 1.5;
+	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.5);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
@@ -99,8 +101,11 @@ void main() {
 	}
 	
 	
-	float reflectiveness = ((materialId % 1000 - materialId % 100) / 100) * 0.15;
-	if (materialId == 9000) reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
+	if (materialId == 9000) {
+		reflectiveness *= mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
+	} else {
+		reflectiveness *= ((materialId % 1000 - materialId % 100) / 100) * 0.15;
+	}
 	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
 	
 	
@@ -120,7 +125,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		packVec2(reflectiveness, 0.0),
+		packVec2(reflectiveness * 0.5, 0.0),
 		1.0
 	);
 	

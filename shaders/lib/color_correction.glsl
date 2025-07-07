@@ -7,7 +7,7 @@
 void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	
 	// brightness
-	color *= (BRIGHTNESS - 1.0) / 1.5 + 1.0;
+	color *= (BRIGHTNESS - 1.0) * 0.5 + 1.0;
 	
 	// tonemapper
 	color = max(color, 0.0);

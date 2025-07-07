@@ -90,7 +90,7 @@ void main() {
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectionStrength = 1.0;
 		#else
-			float reflectionStrength = unpackVec2(data.z).x;
+			float reflectionStrength = unpackVec2(data.z).x * 2.0;
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS

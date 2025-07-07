@@ -45,6 +45,8 @@ void main() {
 	
 	
 	vec4 color = glcolor;
+	float reflectiveness = getColorLum(color.rgb) * 1.5;
+	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
 		vec3 normal = normal;
@@ -82,7 +84,7 @@ void main() {
 	}
 	
 	
-	float reflectiveness = dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0;
+	reflectiveness *= dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0;
 	float specular_amount = dhBlock == DH_BLOCK_WATER ? 0.99 : 0.3;
 	
 	
@@ -96,7 +98,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(encodeNormal(normal)),
-		packVec2(reflectiveness, 0.0),
+		packVec2(reflectiveness * 0.5, 0.0),
 		1.0
 	);
 	

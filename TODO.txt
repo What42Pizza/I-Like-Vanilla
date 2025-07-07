@@ -1,16 +1,6 @@
 Todo for v1.0:
 Make sure dh terrain looks just like regular terrain
-Update ALL gallery images
-Update performance and compatibility note (and make sure it is true in all / most cases) ("Note: This shader is only tested with a GTX 1070 on Linux and mainly on Iris 1.21.4 and (occasionally) Optifine 1.12.2. With Fabulously Optimized + Distant Horizons + 16 Chunks + 1080p + Medium preset, I can average up to 100 fps.")
 Make sure it works with optifine
-Make sure settings are tuned for:
-	Vanilla + Fantasy + Realistic + Cartoon
-	* Day + Night + Sunrise + Sunset + Nether + End
-	* Raining + dry
-	Especially settings:
-		BLOCK_REFLECTION_AMOUNT_SURFACE
-		BLOCK_REFLECTION_AMOUNT_UNDERGROUND
-		IN_[LIQUID]_[CHANNEL]
 
 
 
@@ -21,7 +11,6 @@ Add 'scenario' effects:
 	water foam
 Move as much as possible to deferred (side shading, handheld lighting, etc)
 Update documentation
-Add atmospheric-fog-density settings for each dimension
 Fix far-away reflections
 Add setting 'Shadows on Transparents'
 Make sure all vanilla effects work

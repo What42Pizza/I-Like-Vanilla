@@ -60,15 +60,16 @@ void main() {
 	// ======== AUTO EXPOSURE ======== //
 	
 	#include "/import/eyeBrightnessSmooth.glsl"
+	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
 	#if AUTO_EXPOSURE_ENABLED == 1
-		vec2 normalizedBrightness = eyeBrightnessSmooth / 240.0;
+		vec2 normalizedBrightnesses = brightnesses;
 		#ifdef NETHER
-			normalizedBrightness.y = 0.5;
+			normalizedBrightnesses.y = 0.5;
 		#elif defined END
-			normalizedBrightness.y = 1.0;
+			normalizedBrightnesses.y = 1.0;
 		#endif
-		normalizedBrightness *= vec2(0.5, 1.0); // weights
-		float autoExposureAmount = max(normalizedBrightness.x, normalizedBrightness.y);
+		normalizedBrightnesses *= vec2(0.5, 1.0); // weights
+		float autoExposureAmount = max(normalizedBrightnesses.x, normalizedBrightnesses.y);
 		float autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureAmount);
 		autoExposureMult = mix(autoExposureMult, 1.0, fogAmount);
 		color *= autoExposureMult;
@@ -87,12 +88,23 @@ void main() {
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
-		float density = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, eyeBrightnessSmooth.y / 240.0);
+		#ifdef OVERWORLD
+			float density = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
+		#elif defined NETHER
+			float density = NETHER_FOG_DENSITY;
+		#elif defined END
+			float density = END_FOG_DENSITY;
+		#endif
 		#include "/import/betterRainStrength.glsl"
 		density = mix(density, WEATHER_FOG_DENSITY, betterRainStrength);
 		fogSlope = 300.0 / (density + 0.00001);
-		fogMult = 0.75;
-		fogDarken = 0.5;
+		#ifdef OVERWORLD
+			fogMult = 0.75;
+			fogDarken = 0.5;
+		#else
+			fogMult = 1.0;
+			fogDarken = 1.0;
+		#endif
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
 		fogSlope = 7.0;
@@ -114,7 +126,7 @@ void main() {
 	atmoFogAmount *= 1.0 - fogAmount;
 	atmoFogAmount *= fogMult;
 	color *= 1.0 - atmoFogAmount * fogDarken;
-	color += fogColor * atmoFogAmount * (0.5 + 0.5 * eyeBrightnessSmooth.y / 240.0);
+	color += fogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
 	
 	

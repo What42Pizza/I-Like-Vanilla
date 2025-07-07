@@ -1274,6 +1274,14 @@ option.WEATHER_FOG_DENSITY=Rain Fog Density
 option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
 value.WEATHER_FOG_DENSITY.-1=Use Style
 
+option.NETHER_FOG_DENSITY=Nether Fog Density
+option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether
+value.NETHER_FOG_DENSITY.-1=Use Style
+
+option.END_FOG_DENSITY=End Fog Density
+option.END_FOG_DENSITY.comment=Atmospheric fog density for the end
+value.END_FOG_DENSITY.-1=Use Style
+
 
 
 

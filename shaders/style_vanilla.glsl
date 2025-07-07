@@ -1037,27 +1037,27 @@
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
-										#define CLOUD_SUNRISE_RED 1.0
+										#define CLOUD_SUNRISE_RED 1.2
 #endif
 #if CLOUD_SUNRISE_GREEN == -1
 #undef CLOUD_SUNRISE_GREEN
-										#define CLOUD_SUNRISE_GREEN 0.75
+										#define CLOUD_SUNRISE_GREEN 1.0
 #endif
 #if CLOUD_SUNRISE_BLUE == -1
 #undef CLOUD_SUNRISE_BLUE
-										#define CLOUD_SUNRISE_BLUE 0.45
+										#define CLOUD_SUNRISE_BLUE 0.7
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.0
+										#define CLOUD_SUNSET_RED 1.3
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 0.7
+										#define CLOUD_SUNSET_GREEN 0.95
 #endif
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 0.4
+										#define CLOUD_SUNSET_BLUE 0.7
 #endif
 
 
@@ -1145,6 +1145,14 @@
 #undef WEATHER_FOG_DENSITY
 										#define WEATHER_FOG_DENSITY 2.6
 #endif
+#if NETHER_FOG_DENSITY == -1
+#undef NETHER_FOG_DENSITY
+										#define NETHER_FOG_DENSITY 2.0
+#endif
+#if END_FOG_DENSITY == -1
+#undef END_FOG_DENSITY
+										#define END_FOG_DENSITY 0.0
+#endif
 
 
 
@@ -1193,15 +1201,15 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.15
+										#define SKY_DAY_RED 0.2
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.3
+										#define SKY_DAY_GREEN 0.35
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 0.75
+										#define SKY_DAY_BLUE 1.0
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -1249,7 +1257,7 @@
 #endif
 #if SKY_HORIZON_SUNRISE_BLUE == -1
 #undef SKY_HORIZON_SUNRISE_BLUE
-										#define SKY_HORIZON_SUNRISE_BLUE 0.15
+										#define SKY_HORIZON_SUNRISE_BLUE 0.2
 #endif
 #if SKY_HORIZON_SUNSET_RED == -1
 #undef SKY_HORIZON_SUNSET_RED
@@ -1257,7 +1265,7 @@
 #endif
 #if SKY_HORIZON_SUNSET_GREEN == -1
 #undef SKY_HORIZON_SUNSET_GREEN
-										#define SKY_HORIZON_SUNSET_GREEN 0.5
+										#define SKY_HORIZON_SUNSET_GREEN 0.4
 #endif
 #if SKY_HORIZON_SUNSET_BLUE == -1
 #undef SKY_HORIZON_SUNSET_BLUE

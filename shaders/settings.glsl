@@ -17,7 +17,7 @@ const bool  shadowtex1Clear       = false;
 const float wetnessHalflife       = 50.0f;
 const float drynessHalflife       = 50.0f;
 const float centerDepthHalflife   = 2.5f;
-const float eyeBrightnessHalflife = 3.0f;
+const float eyeBrightnessHalflife = 4.0f;
 const float ambientOcclusionLevel = 1.0;
 const float shadowIntervalSize    = 2.0;
 */

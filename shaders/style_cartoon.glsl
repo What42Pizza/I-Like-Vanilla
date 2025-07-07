@@ -1145,6 +1145,14 @@
 #undef WEATHER_FOG_DENSITY
 										#define WEATHER_FOG_DENSITY 10.0
 #endif
+#if NETHER_FOG_DENSITY == -1
+#undef NETHER_FOG_DENSITY
+										#define NETHER_FOG_DENSITY 5.0
+#endif
+#if END_FOG_DENSITY == -1
+#undef END_FOG_DENSITY
+										#define END_FOG_DENSITY 1.0
+#endif
 
 
 
