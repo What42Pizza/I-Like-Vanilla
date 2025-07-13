@@ -23,6 +23,46 @@ option.SHADOWS_ENABLED=Shadows Enabled
 value.SHADOWS_ENABLED.0=Off
 value.SHADOWS_ENABLED.1=On
 
+option.SHADOWS_BRIGHTNESS=Shadows Brightness
+option.SHADOWS_BRIGHTNESS.comment=A multiplier for the brightness of shadows (also slightly inversely affects the non-shadow brightness)
+value.SHADOWS_BRIGHTNESS.0.0=x0.0
+value.SHADOWS_BRIGHTNESS.0.05=x0.05
+value.SHADOWS_BRIGHTNESS.0.1=x0.1
+value.SHADOWS_BRIGHTNESS.0.15=x0.15
+value.SHADOWS_BRIGHTNESS.0.2=x0.2
+value.SHADOWS_BRIGHTNESS.0.25=x0.25
+value.SHADOWS_BRIGHTNESS.0.3=x0.3
+value.SHADOWS_BRIGHTNESS.0.35=x0.35
+value.SHADOWS_BRIGHTNESS.0.4=x0.4
+value.SHADOWS_BRIGHTNESS.0.45=x0.45
+value.SHADOWS_BRIGHTNESS.0.5=x0.5
+value.SHADOWS_BRIGHTNESS.0.55=x0.55
+value.SHADOWS_BRIGHTNESS.0.6=x0.6
+value.SHADOWS_BRIGHTNESS.0.65=x0.65
+value.SHADOWS_BRIGHTNESS.0.7=x0.7
+value.SHADOWS_BRIGHTNESS.0.75=x0.75
+value.SHADOWS_BRIGHTNESS.0.8=x0.8
+value.SHADOWS_BRIGHTNESS.0.85=x0.85
+value.SHADOWS_BRIGHTNESS.0.9=x0.9
+value.SHADOWS_BRIGHTNESS.0.92=x0.92
+value.SHADOWS_BRIGHTNESS.0.94=x0.94
+value.SHADOWS_BRIGHTNESS.0.96=x0.96
+value.SHADOWS_BRIGHTNESS.0.98=x0.98
+value.SHADOWS_BRIGHTNESS.1.0=x1.0
+value.SHADOWS_BRIGHTNESS.1.02=x1.02
+value.SHADOWS_BRIGHTNESS.1.04=x1.04
+value.SHADOWS_BRIGHTNESS.1.06=x1.06
+value.SHADOWS_BRIGHTNESS.1.08=x1.08
+value.SHADOWS_BRIGHTNESS.1.1=x1.1
+value.SHADOWS_BRIGHTNESS.1.15=x1.15
+value.SHADOWS_BRIGHTNESS.1.2=x1.2
+value.SHADOWS_BRIGHTNESS.1.25=x1.25
+value.SHADOWS_BRIGHTNESS.1.3=x1.3
+value.SHADOWS_BRIGHTNESS.1.35=x1.35
+value.SHADOWS_BRIGHTNESS.1.4=x1.4
+value.SHADOWS_BRIGHTNESS.1.45=x1.45
+value.SHADOWS_BRIGHTNESS.1.5=x1.5
+
 option.shadowMapResolution=Shadow Map Resolution
 option.shadowMapResolution.comment=Resolution of the shadow map. Higher is more accurate, lower is more performance\n\n(Performance cost: HIGH)
 
@@ -60,16 +100,6 @@ value.EXCLUDE_FOLIAGE.-1=Use Style
 value.EXCLUDE_FOLIAGE.0=Off
 value.EXCLUDE_FOLIAGE.1=On
 
-option.CEL_SHADING_ENABLED=Cel Shading
-option.CEL_SHADING_ENABLED.comment=Mostly affects blocklight, makes light fully bright or no brightness (well kinda, it's more complicated so that it looks better)\nThis is similar to (and pairs well with) Posterize is super-secret-settings
-value.CEL_SHADING_ENABLED.-1=Use Style
-value.CEL_SHADING_ENABLED.0=Off
-value.CEL_SHADING_ENABLED.1=On
-
-option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
-option.BRIGHT_BLOCK_DECREASE.comment=How much to darken block like sand that would otherwise be too bright
-value.BRIGHT_BLOCK_DECREASE.-1=Use Style
-
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
 option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.VANILLA_AO_BRIGHT.-1=Use Style
@@ -86,12 +116,78 @@ option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.SIDE_SHADING_DARK.-1=Use Style
 
-option.WEATHER_LIGHT_MULT=Weather Light Multiplier
-value.WEATHER_LIGHT_MULT.-1=Use Style
+option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
+option.BRIGHT_BLOCK_DECREASE.comment=How much to darken blocks like sand that would otherwise be too bright
+value.BRIGHT_BLOCK_DECREASE.-1=Use Style
 
 option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
 value.NIGHT_SATURATION_DECREASE.-1=Use Style 
+
+option.WEATHER_BRIGHTNESS_MULT=Weather Brightness Multiplier
+option.WEATHER_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing
+value.WEATHER_BRIGHTNESS_MULT.-1=Use Style
+
+
+
+
+
+screen.CEL_SHADING_MENU=Cel Shading
+
+option.SUNLIGHT_CEL_AMOUNT=Sunlight Amount
+option.SUNLIGHT_CEL_AMOUNT.comment=How much to apply the cel shading affect to sunlight / moonlight\n\nThis is much less noticeable than the ambient and blocklight cel shading, all it does is make the lighting ignore the angle of the surface (and give all in-light surfaces the exact same brightness)
+value.SUNLIGHT_CEL_AMOUNT.-1=Use Style
+value.SUNLIGHT_CEL_AMOUNT.0=Disabled
+
+option.AMBIENT_CEL_AMOUNT=Ambient Amount
+option.AMBIENT_CEL_AMOUNT.comment=How much to apply the cel shading affect to ambient lighting
+value.AMBIENT_CEL_AMOUNT.-1=Use Style
+value.AMBIENT_CEL_AMOUNT.0=Disabled
+value.AMBIENT_CEL_AMOUNT.5=0.05
+value.AMBIENT_CEL_AMOUNT.10=0.1
+value.AMBIENT_CEL_AMOUNT.15=0.15
+value.AMBIENT_CEL_AMOUNT.20=0.2
+value.AMBIENT_CEL_AMOUNT.25=0.25
+value.AMBIENT_CEL_AMOUNT.30=0.3
+value.AMBIENT_CEL_AMOUNT.35=0.35
+value.AMBIENT_CEL_AMOUNT.40=0.4
+value.AMBIENT_CEL_AMOUNT.45=0.45
+value.AMBIENT_CEL_AMOUNT.50=0.5
+value.AMBIENT_CEL_AMOUNT.55=0.55
+value.AMBIENT_CEL_AMOUNT.60=0.6
+value.AMBIENT_CEL_AMOUNT.65=0.65
+value.AMBIENT_CEL_AMOUNT.70=0.7
+value.AMBIENT_CEL_AMOUNT.75=0.75
+value.AMBIENT_CEL_AMOUNT.80=0.8
+value.AMBIENT_CEL_AMOUNT.85=0.85
+value.AMBIENT_CEL_AMOUNT.90=0.9
+value.AMBIENT_CEL_AMOUNT.95=0.95
+value.AMBIENT_CEL_AMOUNT.100=1.0
+
+option.BLOCKLIGHT_CEL_AMOUNT=Blocklight Amount
+option.BLOCKLIGHT_CEL_AMOUNT.comment=How much to apply the cel shading affect to block lighting
+value.BLOCKLIGHT_CEL_AMOUNT.-1=Use Style
+value.BLOCKLIGHT_CEL_AMOUNT.0=Disabled
+value.BLOCKLIGHT_CEL_AMOUNT.5=0.05
+value.BLOCKLIGHT_CEL_AMOUNT.10=0.1
+value.BLOCKLIGHT_CEL_AMOUNT.15=0.15
+value.BLOCKLIGHT_CEL_AMOUNT.20=0.2
+value.BLOCKLIGHT_CEL_AMOUNT.25=0.25
+value.BLOCKLIGHT_CEL_AMOUNT.30=0.3
+value.BLOCKLIGHT_CEL_AMOUNT.35=0.35
+value.BLOCKLIGHT_CEL_AMOUNT.40=0.4
+value.BLOCKLIGHT_CEL_AMOUNT.45=0.45
+value.BLOCKLIGHT_CEL_AMOUNT.50=0.5
+value.BLOCKLIGHT_CEL_AMOUNT.55=0.55
+value.BLOCKLIGHT_CEL_AMOUNT.60=0.6
+value.BLOCKLIGHT_CEL_AMOUNT.65=0.65
+value.BLOCKLIGHT_CEL_AMOUNT.70=0.7
+value.BLOCKLIGHT_CEL_AMOUNT.75=0.75
+value.BLOCKLIGHT_CEL_AMOUNT.80=0.8
+value.BLOCKLIGHT_CEL_AMOUNT.85=0.85
+value.BLOCKLIGHT_CEL_AMOUNT.90=0.9
+value.BLOCKLIGHT_CEL_AMOUNT.95=0.95
+value.BLOCKLIGHT_CEL_AMOUNT.100=1.0
 
 
 
@@ -1039,7 +1135,7 @@ option.MOON_BRIGHTNESS=Moon Brightness
 value.MOON_BRIGHTNESS.-1=Use Style
 
 option.DARKEN_SKY_UNDERGROUND=Darken Sky Underground
-option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground
+option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground (has no effect when Distant Horizons is enabled)
 value.DARKEN_SKY_UNDERGROUND.-1=Use Style
 value.DARKEN_SKY_UNDERGROUND.0=Off
 value.DARKEN_SKY_UNDERGROUND.1=On

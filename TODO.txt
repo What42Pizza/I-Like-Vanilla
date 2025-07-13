@@ -1,5 +1,4 @@
 Todo for v1.0:
-Make sure dh terrain looks just like regular terrain
 Make sure it works with optifine
 
 
@@ -9,7 +8,7 @@ Add 'scenario' effects:
 	reflective rain puddles
 	nether clouds
 	water foam
-Move as much as possible to deferred (side shading, handheld lighting, etc)
+Overhaul procedural water waves
 Update documentation
 Fix far-away reflections
 Add setting 'Shadows on Transparents'
@@ -24,14 +23,11 @@ Other planned:
 Test replacing all `1-(1-x)(1-x)` with `x(2-x)`
 Try out 'alphatest.program' and 'blend.program' (in shader.properties, see photon for good examples)
 Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
-turn betterNightVision into a uniform
-Change data buffers to store ints instead of floats?
-Add settings for nether ambient color
-Add setting 'Bright Terrain Decrease' (for smoothMin value)
+turn betterNightVision into a uniform?
 Add generalized volumetrics?
 Make reflections (especially on water) noticeable at night
 Increase waviness of plant tops
-Add setting `Light Mixing: Artistic / Realistic`
+Add setting `Light Mixing: Artistic / Realistic`?
 Check if SUNRAYS_FLICKERING_FIX is still needed
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
@@ -40,16 +36,14 @@ Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Rework outline detection to use normals instead of depth?
 World curvature settings
 Add water caustics?
-Do a round of making sure different settings combinations work
 Improve TAA on moving entities
 Add documentation for super secret settings
-Make only top of water wavy
 Add ripples to rain reflections
 Add void fog option?
 Add shader seasons?
 Add backwards depth check to reflections?
 Make reflections work with isometric rendering
-Move advanced options to 'advanced options' menus
+Move advanced options to 'advanced options' menus?
 Exclude sun, moon, and sunrays based on horizon multiplier
 Do a round of adding debug settings
 Do a round of adding more ways to get to options (e.g. access to light brightnesses from the 'shading' menu)

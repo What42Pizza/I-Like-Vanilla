@@ -1,6 +1,8 @@
 <h1 style="text-align: center;">I Like Vanilla</h1>
 
-![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/1e800f93c1755166542bd0c4875850b7922f8424.jpeg)
+![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
+
+<p style="text-align: center;">Note: I am currently looking for a job</p>
 
 <h3 style="text-align: center;"><a href="https://discord.com/invite/h99ZBex9nZ">Discord</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla">Source Code</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/issues">Bug Reports</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/blob/main/LICENSE">License</a></h3>
 

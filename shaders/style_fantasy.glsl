@@ -10,14 +10,6 @@
 #undef EXCLUDE_FOLIAGE
 										#define EXCLUDE_FOLIAGE 0
 #endif
-#if CEL_SHADING_ENABLED == -1
-#undef CEL_SHADING_ENABLED
-										#define CEL_SHADING_ENABLED 0
-#endif
-#if BRIGHT_BLOCK_DECREASE == -1
-#undef BRIGHT_BLOCK_DECREASE
-										#define BRIGHT_BLOCK_DECREASE 0.7
-#endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
 										#define VANILLA_AO_BRIGHT 1.1
@@ -34,13 +26,34 @@
 #undef SIDE_SHADING_DARK
 										#define SIDE_SHADING_DARK 0.4
 #endif
-#if WEATHER_LIGHT_MULT == -1
-#undef WEATHER_LIGHT_MULT
-										#define WEATHER_LIGHT_MULT 0.5
+#if BRIGHT_BLOCK_DECREASE == -1
+#undef BRIGHT_BLOCK_DECREASE
+										#define BRIGHT_BLOCK_DECREASE 0.7
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
 										#define NIGHT_SATURATION_DECREASE 1.0
+#endif
+#if WEATHER_BRIGHTNESS_MULT == -1
+#undef WEATHER_BRIGHTNESS_MULT
+										#define WEATHER_BRIGHTNESS_MULT 0.5
+#endif
+
+
+
+
+
+#if SUNLIGHT_CEL_AMOUNT == -1
+#undef SUNLIGHT_CEL_AMOUNT
+										#define SUNLIGHT_CEL_AMOUNT 0
+#endif
+#if AMBIENT_CEL_AMOUNT == -1
+#undef AMBIENT_CEL_AMOUNT
+										#define AMBIENT_CEL_AMOUNT 0
+#endif
+#if BLOCKLIGHT_CEL_AMOUNT == -1
+#undef BLOCKLIGHT_CEL_AMOUNT
+										#define BLOCKLIGHT_CEL_AMOUNT 0
 #endif
 
 

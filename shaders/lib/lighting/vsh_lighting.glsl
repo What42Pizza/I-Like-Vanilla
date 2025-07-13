@@ -1,14 +1,5 @@
 void doVshLighting(float depth  ARGS_OUT) {
 	
-	#if HANDHELD_LIGHT_ENABLED == 1
-		if (depth <= HANDHELD_LIGHT_DISTANCE) {
-			float handLightBrightness = max(1.0 - depth / HANDHELD_LIGHT_DISTANCE, 0.0);
-			#include "/import/heldBlockLightValue.glsl"
-			handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
-			lmcoord.x = max(lmcoord.x, handLightBrightness);
-		}
-	#endif
-	
 	#ifdef SHADER_GBUFFERS_TERRAIN
 		bool doSideShading = (materialId % 100) - (materialId % 10) != 10;
 	#else

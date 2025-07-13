@@ -1,3 +1,14 @@
+- v1.0.2 (25/07/12)
+  - Setting changes:
+    - Added setting 'Shadows Brightness'
+	- Renamed setting 'WEATHER_LIGHT_MULT' to 'WEATHER_BRIGHTNESS_MULT'
+	- More misc settings updates (reordered settings, fixed typos, etc)
+  - Overhauled cel shading
+  - Fixed player names and nametags (and possibly more) not being transparent
+  - Misc tweaks to features
+
+<br>
+
 - v1.0.1 (25/07/07)
   - Added settings:
     - Nether Fog Density

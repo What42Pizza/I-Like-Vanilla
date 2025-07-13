@@ -49,5 +49,5 @@ float getAoFactor(float depth, float trueBlockDepth  ARGS_OUT) {
 	
 	total *= total;
 	total *= total;
-	return total * 0.25;
+	return total * 0.27;
 }

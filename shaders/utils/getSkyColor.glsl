@@ -17,7 +17,7 @@
 
 #if DARKEN_SKY_UNDERGROUND == 1
 	float getHorizonMultiplier(float upDot  ARGS_OUT) {
-		#ifdef OVERWORLD
+		#if defined OVERWORLD && !defined DISTANT_HORIZONS
 			#include "/import/horizonAltitudeAddend.glsl"
 			#include "/import/eyeBrightnessSmooth.glsl"
 			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light

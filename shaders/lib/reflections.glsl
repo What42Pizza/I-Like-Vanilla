@@ -35,7 +35,6 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 	screenPos += stepVector * dither * REFLECTION_DITHER_AMOUNT;
 	
 	int hitCount = 0;
-	
 	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
 		
 		float realDepth = texture2D(DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
@@ -62,10 +61,9 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 			}
 			stepVector *= 0.5;
 			screenPos -= stepVector;
-			continue;
+		} else {
+			screenPos += stepVector;
 		}
-		
-		screenPos += stepVector;
 	}
 	
 	error = 1;

@@ -2,7 +2,7 @@
 	
 	in_out vec2 texcoord;
 	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
+	in_out vec4 glcolor;
 	flat in_out vec2 normal;
 	
 #endif
@@ -20,7 +20,7 @@ void main() {
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.5);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
-	color.rgb *= glcolor;
+	color *= glcolor;
 	
 	
 	// hurt flash, creeper flash, etc
@@ -62,7 +62,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = gl_Color.rgb;
+	glcolor = gl_Color;
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	
