@@ -74,7 +74,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 1.0
+										#define FOLIAGE_SATURATION 1.05
 #endif
 
 
@@ -280,7 +280,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.05
+										#define CAVE_AMBIENT_BRIGHTNESS 0.08
 #endif
 
 
@@ -686,7 +686,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.0
+										#define SATURATION -0.2
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -698,7 +698,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST -0.05
+										#define CONTRAST -0.1
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -1152,7 +1152,7 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 1.0
+										#define UNDERGROUND_FOG_DENSITY 0.1
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY

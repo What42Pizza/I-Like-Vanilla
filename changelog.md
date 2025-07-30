@@ -1,8 +1,9 @@
 - v1.0.2 (25/07/12)
   - Setting changes:
     - Added setting 'Shadows Brightness'
-	- Renamed setting 'WEATHER_LIGHT_MULT' to 'WEATHER_BRIGHTNESS_MULT'
-	- More misc settings updates (reordered settings, fixed typos, etc)
+    - Added settings 'Cel Sunlight Amount', 'Cel Ambient Amount', and 'Cel Blocklight Amount'
+    - Renamed setting 'WEATHER_LIGHT_MULT' to 'WEATHER_BRIGHTNESS_MULT'
+    - More misc settings updates (reordered settings, fixed typos, etc)
   - Overhauled cel shading
   - Fixed player names and nametags (and possibly more) not being transparent
   - Misc tweaks to features

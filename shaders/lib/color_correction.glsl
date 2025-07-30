@@ -12,14 +12,22 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	// tonemapper
 	color = max(color, 0.0);
 	#if TONEMAPPER == 0
+		// None
 		color = min(color, 1.0);
 	#elif TONEMAPPER == 1
+		// What42's Cubic
 		color = min(color, 1.5);
 		color = color - (4.0 / 27.0) * color * color * color;
+		// Reasoning: slope should be 1 near 0, 0 near 1, and generally closer to 1 than to 0, so derivative should be something like `1-x^2`
+		// Integral of `1-x^2` maxes out at 2/3
+		// Integral of `1-4/9*x^2` maxes out at 1 (because it has more area)
+		// Integral of `1-4/9*x^2` is `x-4/27*x^3`
 	#elif TONEMAPPER == 2
+		// Reinhard
 		float lum = getColorLum(color);
 		color /= 1.0 + lum * 0.5;
 	#elif TONEMAPPER == 3
+		// ACES
 		color = acesFitted(color);
 	#endif
 	
@@ -33,10 +41,10 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	
 	// saturation & vibrance
 	float maxChannel = max(max(color.r, color.g), color.b);
-    float minChannel = min(min(color.r, color.g), color.b);
-    float delta = maxChannel - minChannel;
-    float saturation = (maxChannel == 0.0) ? 0.0 : delta / maxChannel;
-    float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
+	float minChannel = min(min(color.r, color.g), color.b);
+	float delta = maxChannel - minChannel;
+	float saturation = (maxChannel == 0.0) ? 0.0 : delta / maxChannel;
+	float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
 	float colorLum = getColorLum(color);
 	vec3 lumDiff = color - colorLum;
 	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1.0 - colorLum) * 2.0) * 0.25;
