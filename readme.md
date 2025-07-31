@@ -1,6 +1,6 @@
 # I Like Vanilla (MC Shader)
 
-<iframe style="text-align: center;" width="853" height="480" src="https://www.youtube.com/embed/yaY3NHZZ7c0?si=PIp_R834NMNwrSfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Watch the Trailer](https://img.youtube.com/vi/yaY3NHZZ7c0/0.jpg)](https://www.youtube.com/watch?v=yaY3NHZZ7c0)
 
 Shaders typically fall into one of two camps: too similar to vanilla or too far from vanilla. This shader aims to overhauls the vanilla graphics while making it feel like nothing has changed.
 
