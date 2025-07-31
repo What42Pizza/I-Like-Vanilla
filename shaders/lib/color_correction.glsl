@@ -24,7 +24,7 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 		// Integral of `1-4/9*x^2` is `x-4/27*x^3`
 	#elif TONEMAPPER == 2
 		// Reinhard
-		float lum = getColorLum(color);
+		float lum = getLum(color);
 		color /= 1.0 + lum * 0.5;
 	#elif TONEMAPPER == 3
 		// ACES
@@ -45,7 +45,7 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	float delta = maxChannel - minChannel;
 	float saturation = (maxChannel == 0.0) ? 0.0 : delta / maxChannel;
 	float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
-	float colorLum = getColorLum(color);
+	float colorLum = getLum(color);
 	vec3 lumDiff = color - colorLum;
 	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1.0 - colorLum) * 2.0) * 0.25;
 	color += lumDiff * (saturationAmount + vibranceAmount);

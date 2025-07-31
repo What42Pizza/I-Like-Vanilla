@@ -1,6 +1,12 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
 	
+	flat in_out vec3 fogColor;
+	flat in_out float fogSlope;
+	flat in_out float fogMult;
+	flat in_out float fogDarken;
+	flat in_out float extraFogDist;
+	
 	#if DEPTH_SUNRAYS_ENABLED == 1
 		flat in_out vec2 lightCoord;
 		flat in_out float depthSunraysAmountMult;
@@ -16,7 +22,7 @@
 #ifdef FSH
 
 #include "/utils/screen_to_view.glsl"
-#include "/lib/borderFog/getBorderFogAmount.glsl"
+#include "/lib/borderFogAmount.glsl"
 
 #include "/utils/getSkyColor.glsl"
 #if DEPTH_SUNRAYS_ENABLED == 1
@@ -48,7 +54,6 @@ void main() {
 	#else
 		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
 	#endif
-	if (isCloud) fogAmount = min(fogAmount, 0.6);
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	playerPos.y *= 0.02;
@@ -81,48 +86,28 @@ void main() {
 	
 	float fogDist = length(viewPos);
 	fogDist *= distMult;
-	vec3 fogColor;
-	float fogSlope;
-	float fogMult;
-	float fogDarken;
+	
+	vec3 fogColor = fogColor;
+	float fogSlope = fogSlope;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
 		#ifdef OVERWORLD
 			float density = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
+			#include "/import/betterRainStrength.glsl"
+			density = mix(density, WEATHER_FOG_DENSITY, betterRainStrength);
+			#include "/import/dayPercent.glsl"
+			#include "/import/inPaleGarden.glsl"
+			density = mix(density, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
 		#elif defined NETHER
 			float density = NETHER_FOG_DENSITY;
 		#elif defined END
 			float density = END_FOG_DENSITY;
 		#endif
-		#include "/import/betterRainStrength.glsl"
-		density = mix(density, WEATHER_FOG_DENSITY, betterRainStrength);
 		fogSlope = 300.0 / (density + 0.00001);
-		#ifdef OVERWORLD
-			fogMult = 0.75;
-			fogDarken = 0.5;
-		#else
-			fogMult = 1.0;
-			fogDarken = 1.0;
-		#endif
-	} else if (isEyeInWater == 1) {
-		fogColor = IN_WATER_COLOR;
-		fogSlope = 7.0;
-		fogDist += 6.0;
-		fogMult = 1.0;
-		fogDarken = 1.0;
-	} else if (isEyeInWater == 2) {
-		fogColor = IN_LAVA_COLOR;
-		fogSlope = 0.1;
-		fogMult = 0.75;
-		fogDarken = 0.5;
-	} else if (isEyeInWater == 3) {
-		fogColor = IN_POWDERED_SNOW_COLOR;
-		fogSlope = 0.1;
-		fogMult = 0.75;
-		fogDarken = 0.5;
 	}
-	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist);
+	
+	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist + extraFogDist);
 	atmoFogAmount *= 1.0 - fogAmount;
 	atmoFogAmount *= fogMult;
 	color *= 1.0 - atmoFogAmount * fogDarken;
@@ -158,7 +143,7 @@ void main() {
 	// ======== BLOOM FILTERING ======== //
 	
 	#if BLOOM_ENABLED == 1
-		float bloomMult = getColorLum(color * vec3(2.0, 1.0, 0.4));
+		float bloomMult = getLum(color * vec3(2.0, 1.0, 0.4));
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
 		bloomMult = sqrt(bloomMult);
@@ -188,6 +173,45 @@ void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
 	
+	
+
+	// ======== ATMOSPHERIC FOG ======== //
+	
+	#include "/import/isEyeInWater.glsl"
+	if (isEyeInWater == 0) {
+		#include "/import/inPaleGarden.glsl"
+		#ifdef OVERWORLD
+			fogMult = 0.75 + 0.2 * inPaleGarden;
+			fogDarken = 0.5 + 0.4 * inPaleGarden;
+		#else
+			fogMult = 1.0;
+			fogDarken = 1.0;
+		#endif
+		extraFogDist = 2.0 * inPaleGarden;
+	} else if (isEyeInWater == 1) {
+		fogColor = IN_WATER_COLOR;
+		fogSlope = 7.0;
+		fogMult = 1.0;
+		fogDarken = 1.0;
+		extraFogDist = 6.0;
+	} else if (isEyeInWater == 2) {
+		fogColor = IN_LAVA_COLOR;
+		fogSlope = 0.1;
+		fogMult = 0.75;
+		fogDarken = 0.5;
+		extraFogDist = 0.0;
+	} else if (isEyeInWater == 3) {
+		fogColor = IN_POWDERED_SNOW_COLOR;
+		fogSlope = 0.1;
+		fogMult = 0.75;
+		fogDarken = 0.5;
+		extraFogDist = 0.0;
+	}
+	
+	
+	
+	// ======== SUNRAYS ======== //
+	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		#include "/import/ambientSunPercent.glsl"
 		#include "/import/ambientMoonPercent.glsl"
@@ -212,6 +236,7 @@ void main() {
 		}
 		#include "/import/rainStrength.glsl"
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		
 	#endif
 	
@@ -222,11 +247,14 @@ void main() {
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY : SUNRAYS_AMOUNT_NIGHT;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
 		#include "/import/rainStrength.glsl"
 		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
+	
+	
 	
 }
 

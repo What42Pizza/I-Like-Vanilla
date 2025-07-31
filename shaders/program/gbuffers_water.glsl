@@ -30,9 +30,6 @@
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFog/applyBorderFog.glsl"
-#endif
 
 void main() {
 	
@@ -45,14 +42,19 @@ void main() {
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.95;
 		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 10 - 8 * dither) discard;
+	#else
+		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+		#include "/import/invFar.glsl"
+		fogDistance *= invFar;
+		if (fogDistance >= 0.95) {discard; return;}
 	#endif
 	
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	float reflectiveness = getColorLum(color.rgb) * 1.5;
+	float reflectiveness = getLum(color.rgb) * 1.5;
 	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.5);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.5);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
 	
@@ -63,7 +65,7 @@ void main() {
 	
 	if (materialId == 9000) {
 		
-		color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 0.8);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
 		
 		
@@ -115,7 +117,7 @@ void main() {
 	
 	// fog
 	#if BORDER_FOG_ENABLED == 1
-		applyBorderFog(color.rgb, viewPos, fogAmount  ARGS_IN);
+		color.a *= 1.0 - fogAmount;
 	#endif
 	
 	
@@ -149,7 +151,7 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFog/getBorderFogAmount.glsl"
+	#include "/lib/borderFogAmount.glsl"
 #endif
 
 void main() {

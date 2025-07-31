@@ -22,8 +22,7 @@
 	#include "/lib/ssao.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFog/getBorderFogAmount.glsl"
-	#include "/lib/borderFog/applyBorderFog.glsl"
+	#include "/lib/borderFogAmount.glsl"
 #endif
 #ifndef END
 	#include "/utils/getSkyColor.glsl"
@@ -34,10 +33,24 @@
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0))  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		vec3 dhViewPos = screenToViewDh(vec3(texcoord, DH_DEPTH_BUFFER_ALL)  ARGS_IN);
+		if (dhViewPos.z > viewPos.z) viewPos = dhViewPos;
 	#endif
 	
+	#include "/import/gbufferModelViewInverse.glsl"
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	#ifdef DISTANT_HORIZONS
+		float skyAmount = float(depth == 1.0 && dhDepth == 1.0);
+	#else
+		#if BORDER_FOG_ENABLED == 1
+			float skyAmount = getBorderFogAmount(playerPos  ARGS_IN);
+		#else
+			float skyAmount = float(depth == 1.0);
+		#endif
+	#endif
 	
 	
 	// ======== OUTLINES ======== //
@@ -47,51 +60,42 @@ void main() {
 	#endif
 	
 	
+	vec3 skyColor = vec3(0.0);
+	if (skyAmount > 0.0) {
+		#ifdef END
+			skyColor = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
+		#else
+			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
+			skyColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - skyColor);
+		#endif
+	}
 	
-	#ifdef DISTANT_HORIZONS
-		bool isNonSky = depth != 1.0 || dhDepth != 1.0;
-	#else
-		bool isNonSky = depth != 1.0;
-	#endif
-	if (isNonSky) {
-		
+	
+	if (skyAmount == 1.0) {
+		color = skyColor;
+	} else {
 		
 		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		vec2 lmcoord = unpackVec2(data.x) * 4.0;
 		float specular_amount = unpackVec2(data.z).y;
 		vec3 normal = decodeNormal(unpackVec2(data.y));
-		vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0))  ARGS_IN);
 		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 		
-		
 		#if BORDER_FOG_ENABLED == 1
-			#include "/import/gbufferModelViewInverse.glsl"
-			vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-			float fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
-			applyBorderFog(color, viewPos, fogAmount  ARGS_IN);
+			color = mix(color, skyColor, skyAmount);
 		#endif
-		
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
 				float aoFactor = getAoFactor(depth, length(viewPos)  ARGS_IN);
-				aoFactor *= 1.0 - 0.7 * getColorLum(color);
+				aoFactor *= 1.0 - 0.7 * getLum(color);
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
 			}
 		#endif
 		
-		
-	} else {
-		#ifdef END
-			color = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
-		#else
-			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
-			color = getSkyColor(normalize(viewPos), true  ARGS_IN);
-			color += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - color);
-		#endif
 	}
-	
 	
 	
 	/* DRAWBUFFERS:0 */

@@ -44,12 +44,15 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		#include "/import/gbufferModelView.glsl"
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
 		vec3 skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
+		#include "/import/inPaleGarden.glsl"
+		skyColor = mix(skyColor, vec3(dayPercent * 0.4), inPaleGarden);
 		#ifndef SKIP_SKY_NOISE
 			#include "/utils/var_rng.glsl"
-			upDot += randomFloat(rng) * 0.08 * (1.0 - 0.8 * sqrt(getColorLum(skyColor)));
+			upDot += randomFloat(rng) * 0.08 * (1.0 - 0.8 * sqrt(getLum(skyColor)));
 		#endif
 		upDot = clamp(upDot, 0.0, 1.0);// + 0.01;
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
+		horizonColor = mix(horizonColor, vec3(0.05 + 0.25 * dayPercent), inPaleGarden);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 		
 		#include "/import/sunPosition.glsl"
@@ -60,12 +63,13 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		#include "/import/ambientSunsetPercent.glsl"
 		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
 		sunDot *= sunriseSunsetPercent * sunriseSunsetPercent * (3.0 - 2.0 * sunriseSunsetPercent);
+		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		#include "/import/sunAngle.glsl"
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		
 		#include "/import/rainStrength.glsl"
-		float rainAmount = 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
-		rainAmount *= rainStrength * 0.65;
+		float rainAmount = rainStrength * 0.7;
+		rainAmount *= 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
 		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * 0.3 * dayPercent, rainAmount);
 		
 		skyColor = min(skyColor, 1.0);

@@ -110,7 +110,7 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 		const float bloomAmount = BLOOM_END_AMOUNT;
 	#endif
 	
-	bloomAddition *= 1.0 - 0.8 * getColorLum(color);
+	bloomAddition *= 1.0 - 0.8 * getLum(color);
 	color += bloomAddition * bloomAmount * 0.2;
 	
 }

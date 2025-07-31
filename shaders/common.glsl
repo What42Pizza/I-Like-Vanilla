@@ -108,7 +108,7 @@ float maxAbs(vec3 v) {
 	return max(max(r, g), b);
 }
 
-float getColorLum(vec3 color) {
+float getLum(vec3 color) {
 	return dot(color, vec3(0.2125, 0.7154, 0.0721));
 }
 
@@ -139,14 +139,14 @@ float getColorLum(vec3 color) {
 //}
 
 vec3 smoothMin(vec3 v1, vec3 v2, float a) {
-	float v1Lum = getColorLum(v1);
-	float v2Lum = getColorLum(v2);
+	float v1Lum = getLum(v1);
+	float v2Lum = getLum(v2);
 	return (v1 + v2 - sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 
 vec3 smoothMax(vec3 v1, vec3 v2, float a) {
-	float v1Lum = getColorLum(v1);
-	float v2Lum = getColorLum(v2);
+	float v1Lum = getLum(v1);
+	float v2Lum = getLum(v2);
 	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 

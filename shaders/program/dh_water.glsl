@@ -45,7 +45,7 @@ void main() {
 	
 	
 	vec4 color = glcolor;
-	float reflectiveness = getColorLum(color.rgb) * 1.5;
+	float reflectiveness = getLum(color.rgb) * 1.5;
 	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
@@ -55,7 +55,7 @@ void main() {
 	
 	if (dhBlock == DH_BLOCK_WATER) {
 		
-		color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 0.8);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
 		
 		
@@ -125,7 +125,7 @@ void main() {
 void main() {
 	glcolor = gl_Color;
 	glcolor.rgb = (glcolor.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	glcolor.rgb = mix(vec3(getColorLum(glcolor.rgb)), glcolor.rgb, 1.0 - TEXTURE_CONTRAST * 0.3);
+	glcolor.rgb = mix(vec3(getLum(glcolor.rgb)), glcolor.rgb, 1.0 - TEXTURE_CONTRAST * 0.3);
 	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	normal = gl_NormalMatrix * gl_Normal;

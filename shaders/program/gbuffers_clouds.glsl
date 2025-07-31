@@ -21,6 +21,9 @@ void main() {
 	
 	
 	color.rgb *= colorMult;
+	float dist = max(max(abs(playerPos.x), abs(playerPos.y)), abs(playerPos.z));
+	float mult = clamp(1.6 * (1.0 - dist / 1700.0), 0.0, 1.0);
+	color.a *= mult * mult;
 	
 	
 	/* DRAWBUFFERS:03 */

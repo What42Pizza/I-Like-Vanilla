@@ -83,11 +83,11 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.04
+										#define SKYLIGHT_DAY_RED 1.03
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 1.02
+										#define SKYLIGHT_DAY_GREEN 1.01
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -1038,15 +1038,15 @@
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 0.1
+										#define CLOUD_NIGHT_RED 0.3
 #endif
 #if CLOUD_NIGHT_GREEN == -1
 #undef CLOUD_NIGHT_GREEN
-										#define CLOUD_NIGHT_GREEN 0.2
+										#define CLOUD_NIGHT_GREEN 0.4
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.4
+										#define CLOUD_NIGHT_BLUE 0.6
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
@@ -1136,7 +1136,7 @@
 #endif
 #if BORDER_FOG_START == -1
 #undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.7
+										#define BORDER_FOG_START 0.6
 #endif
 #if BORDER_FOG_END == -1
 #undef BORDER_FOG_END
@@ -1156,7 +1156,15 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 2.6
+										#define WEATHER_FOG_DENSITY 2.4
+#endif
+#if PALE_GARDEN_FOG_DENSITY == -1
+#undef PALE_GARDEN_FOG_DENSITY
+										#define PALE_GARDEN_FOG_DENSITY 5.0
+#endif
+#if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
+#undef PALE_GARDEN_FOG_NIGHT_DENSITY
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
@@ -1238,15 +1246,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.4
+										#define SKY_HORIZON_DAY_RED 0.35
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.5
+										#define SKY_HORIZON_DAY_GREEN 0.55
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 1.0
+										#define SKY_HORIZON_DAY_BLUE 0.8
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED

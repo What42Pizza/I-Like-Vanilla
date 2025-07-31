@@ -25,7 +25,7 @@ void main() {
 
 void main() {
 	gl_Position = ftransform();
-	bool isStar = gl_Color.r == gl_Color.g && gl_Color.g == gl_Color.b && gl_Color.r > 0.0 && gl_Color.r < 0.51; // vanilla Star Detection by Builderb0y
+	bool isStar = gl_Color.r == gl_Color.g && gl_Color.g == gl_Color.b && gl_Color.r > 0.0 && gl_Color.r < 0.51 && gl_Color.a < 0.8; // vanilla Star Detection by Builderb0y (edited by What42)
 	if (!isStar) {
 		gl_Position = vec4(1.0);
 		return;

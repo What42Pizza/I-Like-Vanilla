@@ -244,3 +244,6 @@
 	#ifdef import_damageAmount
 		uniform float damageAmount;
 	#endif
+	#ifdef import_inPaleGarden
+		uniform float inPaleGarden;
+	#endif

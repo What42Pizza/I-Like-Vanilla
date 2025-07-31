@@ -1353,11 +1353,6 @@ option.BORDER_FOG_CURVE=Border Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
 
-option.ADVANCED_TERRAIN_BLENDING=Advanced Terrain-Sky Blending
-option.ADVANCED_TERRAIN_BLENDING.comment=Makes the border fog blend with the sky slightly better. The cost for this is basically nothing, but if you're desperate for performance then this is another setting you can disable. (this setting does nothing when Distant Horizons is enabled)
-value.ADVANCED_TERRAIN_BLENDING.0=Off
-value.ADVANCED_TERRAIN_BLENDING.1=On
-
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
 value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
@@ -1369,6 +1364,14 @@ value.UNDERGROUND_FOG_DENSITY.-1=Use Style
 option.WEATHER_FOG_DENSITY=Rain Fog Density
 option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
 value.WEATHER_FOG_DENSITY.-1=Use Style
+
+option.PALE_GARDEN_FOG_DENSITY=Pale Garden Fog Density
+option.PALE_GARDEN_FOG_DENSITY.comment=Atmospheric fog density when in the pale garden
+value.PALE_GARDEN_FOG_DENSITY.-1=Use Style
+
+option.PALE_GARDEN_FOG_NIGHT_DENSITY=Pale Garden Fog Night Density
+option.PALE_GARDEN_FOG_NIGHT_DENSITY.comment=Atmospheric fog density when in the pale garden at night
+value.PALE_GARDEN_FOG_NIGHT_DENSITY.-1=Use Style
 
 option.NETHER_FOG_DENSITY=Nether Fog Density
 option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether

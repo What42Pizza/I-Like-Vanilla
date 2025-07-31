@@ -30,23 +30,20 @@ void main() {
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
-	#elif ADVANCED_TERRAIN_BLENDING == 1
+	#else
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		#include "/import/invFar.glsl"
 		fogDistance *= invFar;
-		float dither = bayer64(gl_FragCoord.xy);
-		#include "/import/frameCounter.glsl"
-		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-		if (fogDistance >= 0.96 - 0.02 * dither) {discard; return;}
+		if (fogDistance >= 0.95) {discard; return;}
 	#endif
 	
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.1) discard;
-	float reflectiveness = getColorLum(color.rgb) * 1.5;
+	float reflectiveness = getLum(color.rgb) * 1.5;
 	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getColorLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
 	
@@ -70,7 +67,8 @@ void main() {
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),
 		packVec2(reflectiveness * 0.5, specular_amount),
-		1.0	);
+		1.0
+	);
 	
 }
 
@@ -115,7 +113,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = mix(vec3(getColorLum(gl_Color.rgb)), gl_Color.rgb, FOLIAGE_SATURATION);
+	glcolor = mix(vec3(getLum(gl_Color.rgb)), gl_Color.rgb, FOLIAGE_SATURATION);
 	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	

@@ -1,3 +1,15 @@
+- v1.0.3 (25/07/30)
+  - Setting changes:
+    - Add settings 'Pale Garden Fog Density' and 'Pale Garden Fog Night Density'
+	- Removed setting 'Advanced Terrain-Sky Blending' (is now always on)
+  - Added effects for the pale garden biome
+  - Significantly improved terrain-sky blending
+  - Made far-away clouds fade into sky
+  - Fixed multiple bugs
+  - Tweaked some settings
+
+<br>
+
 - v1.0.2 (25/07/12)
   - Setting changes:
     - Added setting 'Shadows Brightness'

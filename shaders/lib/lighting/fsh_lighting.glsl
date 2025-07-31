@@ -239,7 +239,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	nightPercent *= ambientBrightness * (1.0 - blockBrightness);
 	nightPercent *= nightPercent;
 	nightPercent *= NIGHT_SATURATION_DECREASE;
-	color = mix(vec3(getColorLum(color)), color, 1.0 - nightPercent * 0.1);
+	color = mix(vec3(getLum(color)), color, 1.0 - nightPercent * 0.1);
 	color += nightPercent * 0.06;
 	
 	#ifdef END
@@ -276,8 +276,11 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
 	shadowBrightness *= 1.0 - rainDecrease;
 	vec3 skyLighting = shadowcasterColor * shadowBrightness * (1.0 - 0.2 * (SHADOWS_BRIGHTNESS - 1.0));
+	#include "/import/inPaleGarden.glsl"
+	skyLighting *= 1.0 - 0.3 * inPaleGarden;
 	ambientLight *= 1.0 - shadowBrightness;
 	ambientLight *= SHADOWS_BRIGHTNESS;
+	ambientLight *= 1.0 - 0.1 * inPaleGarden;
 	
 	vec3 lighting = ambientLight + skyLighting;
 	lighting *= 1.0 - rainDecrease;
@@ -295,10 +298,10 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		#include "/import/betterRainStrength.glsl"
 		specular *= 1.0 - betterRainStrength;
 		#include "/import/ambientMoonPercent.glsl"
-		lighting += vec3(1.0, 1.0, 0.5) * specular * (0.2 + 0.8 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent);
+		lighting += vec3(1.0, 1.0, 0.5) * specular * (0.2 + 0.75 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent);
 	#endif
 	
-	float lightingBrightness = min(getColorLum(lighting), 1.0);
+	float lightingBrightness = min(getLum(lighting), 1.0);
 	blockBrightness *= 1.2 - lightingBrightness;
 	vec3 blockLight = blockBrightness * BLOCK_COLOR;
 	#ifdef NETHER

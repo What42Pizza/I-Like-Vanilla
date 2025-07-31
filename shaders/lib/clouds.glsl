@@ -57,7 +57,7 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 screenPosDh = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
-		if (dot(screenPosDh, screenPosDh) < dot(screenPos, screenPos)) screenPos = screenPosDh;
+		if (screenPosDh.z > screenPos.z) screenPos = screenPosDh;
 	#endif
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = mat3(gbufferModelViewInverse) * screenPos;
