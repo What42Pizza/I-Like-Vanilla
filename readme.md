@@ -1,6 +1,6 @@
 # I Like Vanilla (MC Shader)
 
-![Example Image (Village)](/images/village.png)
+<iframe style="text-align: center;" width="853" height="480" src="https://www.youtube.com/embed/yaY3NHZZ7c0?si=PIp_R834NMNwrSfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Shaders typically fall into one of two camps: too similar to vanilla or too far from vanilla. This shader aims to overhauls the vanilla graphics while making it feel like nothing has changed.
 
@@ -11,7 +11,7 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 <br>
 <br>
 
-## Download on [Modrinth](https://modrinth.com/shader/what42s-shader-base)
+## Download on [Modrinth](https://modrinth.com/shader/i-like-vanilla)
 
 <br>
 <br>
@@ -52,7 +52,7 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 <br>
 <br>
 
-![Example Image (River)](/images/river.png)
+![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
 
 <br>
 <br>

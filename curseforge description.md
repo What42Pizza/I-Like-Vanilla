@@ -1,6 +1,4 @@
-<h1 style="text-align: center;">I Like Vanilla</h1>
-
-![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
+<iframe style="text-align: center;" width="853" height="480" src="https://www.youtube.com/embed/yaY3NHZZ7c0?si=PIp_R834NMNwrSfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <p style="text-align: center;">Note: I am currently looking for a job</p>
 
@@ -104,6 +102,10 @@ Complementary Reimagined:  41  | Ultra
 </div>
 
 All of these tests were done with a GTX 1070 + 16 Chunks + 1080p + Distant Horizons + Fabulously Optimized + Linux + default shader settings.
+
+<br>
+
+![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
 
 <br>
 
