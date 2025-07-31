@@ -36,7 +36,7 @@ void main() {
 	vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0))  ARGS_IN);
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		vec3 dhViewPos = screenToViewDh(vec3(texcoord, DH_DEPTH_BUFFER_ALL)  ARGS_IN);
+		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
 		if (dhViewPos.z > viewPos.z) viewPos = dhViewPos;
 	#endif
 	
@@ -52,8 +52,6 @@ void main() {
 		#endif
 	#endif
 	
-	
-	// ======== OUTLINES ======== //
 	
 	#if OUTLINES_ENABLED == 1
 		color *= 1.0 - getOutlineAmount(ARG_IN);

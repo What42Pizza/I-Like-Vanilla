@@ -39,7 +39,7 @@ void main() {
 			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
-		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.95;
+		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.99;
 		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 10 - 8 * dither) discard;
 	#else
@@ -90,10 +90,9 @@ void main() {
 			if (isEyeInWater == 1) {
 				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 			} else {
-				float blockDepth = toLinearDepth(gl_FragCoord.z  ARGS_IN);
-				float opaqueBlockDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
-				#include "/import/far.glsl"
-				float waterDepth = (opaqueBlockDepth - blockDepth) * far;
+				float blockDepth = toBlockDepth(gl_FragCoord.z  ARGS_IN);
+				float opaqueBlockDepth = toBlockDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
+				float waterDepth = opaqueBlockDepth - blockDepth;
 				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
 			}
 		#else

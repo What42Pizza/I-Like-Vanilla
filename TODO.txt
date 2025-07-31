@@ -8,6 +8,7 @@ Add 'scenario' effects:
 	reflective rain puddles
 	nether clouds
 	water foam
+Make most (all that can) settings be relative to style value
 Overhaul procedural water waves
 Update documentation
 Fix far-away reflections

@@ -42,7 +42,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 			vec3 realBlockViewPos = screenToView(vec3(texcoord, realDepth)  ARGS_IN);
 			float realDepthDh = texture2D(DH_DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
 			vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, realDepthDh)  ARGS_IN);
-			if (realBlockViewPosDh.z < realBlockViewPos.z) realBlockViewPos = realBlockViewPosDh;
+			if (realBlockViewPosDh.z > realBlockViewPos.z) realBlockViewPos = realBlockViewPosDh;
 			vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 			realDepth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 		#endif

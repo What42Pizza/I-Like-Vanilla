@@ -21,6 +21,7 @@
 #ifdef FSH
 
 #include "/lib/lighting/fsh_lighting.glsl"
+#include "/utils/depth.glsl"
 
 #include "/utils/screen_to_view.glsl"
 #if WAVING_WATER_SURFACE_ENABLED == 1
@@ -39,9 +40,8 @@ void main() {
 	if (lengthCylinder < far - 10.0 - 8.0 * dither) discard;
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	#include "/import/invViewSize.glsl"
-	vec3 realPos = screenToView(vec3(gl_FragCoord.xy * invViewSize, depth)  ARGS_IN);
-	if (depth < 1.0 && dot(realPos, realPos) < dot(playerPos, playerPos)) discard;
+	#include "/import/far.glsl"
+	if (depth < 1.0 && length(playerPos) > toLinearDepth(depth  ARGS_IN) * far) discard;
 	
 	
 	vec4 color = glcolor;
