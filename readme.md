@@ -1,19 +1,15 @@
 # I Like Vanilla (MC Shader)
 
+### Watch the trailer:
+
 [![Watch the Trailer](https://img.youtube.com/vi/yaY3NHZZ7c0/0.jpg)](https://www.youtube.com/watch?v=yaY3NHZZ7c0)
-
-Shaders typically fall into one of two camps: too similar to vanilla or too far from vanilla. This shader aims to overhauls the vanilla graphics while making it feel like nothing has changed.
-
-<br>
 
 Note: OptiFine is considered a second-class platform and the majority of development and support is for Iris 1.21+
 
 <br>
-<br>
 
 ## Download on [Modrinth](https://modrinth.com/shader/i-like-vanilla)
 
-<br>
 <br>
 
 ## Unique Features:
@@ -50,11 +46,9 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - **Thorough Settings Menu** (300+ settings)
 
 <br>
-<br>
 
 ![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
 
-<br>
 <br>
 
 ## Credits:
