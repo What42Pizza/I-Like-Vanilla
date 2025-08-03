@@ -1,6 +1,6 @@
 # I Like Vanilla Documentation
 
-## Warning: Documentation is currently out of date!
+## Warning: Documentation is currently very out of date!
 
 <br>
 

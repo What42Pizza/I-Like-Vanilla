@@ -217,6 +217,8 @@ void main() {
 		#include "/import/ambientMoonPercent.glsl"
 		#include "/import/ambientSunrisePercent.glsl"
 		#include "/import/ambientSunsetPercent.glsl"
+		#include "/import/rainStrength.glsl"
+		#include "/import/inPaleGarden.glsl"
 	#endif
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
@@ -234,7 +236,6 @@ void main() {
 		} else {
 			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT;
 		}
-		#include "/import/rainStrength.glsl"
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		
@@ -248,8 +249,7 @@ void main() {
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
-		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT);
-		#include "/import/rainStrength.glsl"
+		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
 		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif

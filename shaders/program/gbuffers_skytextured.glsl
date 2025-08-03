@@ -19,12 +19,12 @@ void main() {
 		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
 		color = 1.0 - color;
 		color *= color;
+		#include "/import/sunPosition.glsl"
 		if (sunPosition.z < 0.0) {
 			color *= color; // apply extra brightness to sun
 		}
 		color = 1.0 - color;
 		
-		#include "/import/sunPosition.glsl"
 		color *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
 		#include "/import/rainStrength.glsl"
 		color *= 1.0 - 0.6 * rainStrength;
