@@ -1181,11 +1181,11 @@
 
 #if IN_WATER_RED == -1
 #undef IN_WATER_RED
-										#define IN_WATER_RED 0.0
+										#define IN_WATER_RED 0.05
 #endif
 #if IN_WATER_GREEN == -1
 #undef IN_WATER_GREEN
-										#define IN_WATER_GREEN 0.1
+										#define IN_WATER_GREEN 0.15
 #endif
 #if IN_WATER_BLUE == -1
 #undef IN_WATER_BLUE

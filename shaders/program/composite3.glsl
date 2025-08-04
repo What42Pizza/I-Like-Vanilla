@@ -23,10 +23,10 @@ void main() {
 			texcoord = (texcoord - 0.5) * 0.95 + 0.5;
 			#include "/import/frameTimeCounter.glsl"
 			vec3 simplexInput = vec3(
-				texcoord * 6.0 * UNDERWATER_WAVINESS_SCALE,
-				frameTimeCounter * 0.65 * UNDERWATER_WAVINESS_SPEED
+				texcoord * 32.0 * UNDERWATER_WAVINESS_SCALE,
+				frameTimeCounter * 0.5 * UNDERWATER_WAVINESS_SPEED
 			);
-			texcoord += simplexNoise2From3(simplexInput) * 0.0015 * UNDERWATER_WAVINESS_AMOUNT;
+			texcoord += simplexNoise2From3(simplexInput) * 0.002 * UNDERWATER_WAVINESS_AMOUNT;
 		}
 	#endif
 	

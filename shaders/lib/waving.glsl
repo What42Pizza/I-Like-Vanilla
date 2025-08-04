@@ -16,7 +16,7 @@ vec3 getWavingAddition(vec3 playerPos  ARGS_OUT) {
 	vec3 pos2 = randomVec3FromRValue(timePosFloor + 1u);
 	vec3 pos3 = randomVec3FromRValue(timePosFloor + 2u);
 	vec3 pos4 = randomVec3FromRValue(timePosFloor + 3u);
-	vec3 wavingAmount = cubicInterpolate(pos1, pos2, pos3, pos4, mod(timePos, 1.0)) * vec3(1.0, 0.2, 1.0) * 0.08;
+	vec3 wavingAmount = cubicInterpolate(pos1, pos2, pos3, pos4, mod(timePos, 1.0)) * vec3(1.0, 0.2, 1.0) * 0.075;
 	//timePos *= WAVING_SPEED * 0.4;
 	//float x = simplexNoise(vec2(timePos, 0));
 	//float y = simplexNoise(vec2(timePos, 10)) * 0.5;
@@ -44,7 +44,8 @@ void applyWaving(inout vec3 position  ARGS_OUT) {
 	if (wavingData % 2 == 0 && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
 	float wavingScale = wavingScales[wavingData / 2];
 	#ifndef SHADER_SHADOW
-		wavingScale *= lmcoord.y * lmcoord.y;
+		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
+		if (wavingScale == 0.0) return;
 	#endif
 	#include "/import/betterRainStrength.glsl"
 	wavingScale *= 1.0 + betterRainStrength * (WAVING_WEATHER_MULT - 1.0);

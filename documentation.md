@@ -1,6 +1,6 @@
 # I Like Vanilla Documentation
 
-## Warning: Documentation is currently very out of date!
+## Warning: Documentation is still a bit out of date!
 
 <br>
 
@@ -40,16 +40,7 @@ As always, you can edit your repo's rust-utils to add more commands and/or tweak
 
 ## OptiFine Support:
 
-With the release of b1.9.0, OptiFine is treated as a second-class platform. I'll make sure it still works with OptiFine on 1.12.2, but Iris 1.20.4 is where I currently put most of my effort. The default shader code for Iris does still work on OptiFine without any modification, but the endless list of errors that OptiFine generates makes it almost unusable. The OptiFine version is generated using rust-utils, which can automatically remove the styles functionality.
-
-If you want to develop for OptiFine first, you have 2 options:
-
-- 1: Clone this repo into the shaders folder and deal with the initial loading time
-- - Pro: you can work on both versions at once, while having OptiFine be first-class
-- - Con: you have to deal with long initial loading times and huge log files
-- 2: Replace this repo's /shaders folder with the /shaders folder from the latest OptiFine export
-- - Pro: development is greatly simplified
-- - Con: you can no longer support multiple styles
+OptiFine is somewhat supported by this shader, but just barely. I'll sometimes make sure it works with OptiFine on 1.12.2, but Iris is what I use to develop the shader. The biggest problem with using this shader on (older versions of) OptiFine is that it causes a VERY long list of warnings to be logged, which makes it take a very long time to load / reload. The OptiFine versions that are published to CurseForge and Modrinth are generated using rust-utils, which can automatically remove the styles functionality (which is what causes the endless stream of logged warnings).
 
 <br>
 <br>
@@ -88,7 +79,7 @@ Hopefully with a bit of thinking, it's very clear why the defines are needed: yo
 
 ## Settings:
 
-In the settings menu, you can define which base style you use than override any settings that you want to change. This requires some kinda complex and really tedious code (for example, en_US.lang is over 1100 lines long), but I think it's worth it.
+In the settings menu, users can define which base style they use, then override any settings they want to change. This requires some kinda complex and really tedious code (for example, style_vanilla.glsl is over 1400 lines long), but I think it's worth it.
 
 ### Basics:
 
@@ -148,7 +139,7 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 <br>
 
-## Shading Effect Locations:
+## Shading Effect Locations: (VERY OUTDATED)
 
 This describes which /main_files-s handle different effects
 
@@ -203,7 +194,7 @@ This describes which /main_files-s handle different effects
 
 <br>
 
-## Buffers:
+## Buffers: (up to date)
 
 - **colortex0:  Main Image** (stored with 0.5 multiplier)
 - **colortex1:  Main Image Copy** (stored with 0.5 multiplier)
@@ -218,8 +209,6 @@ This describes which /main_files-s handle different effects
 - **colortex4:  Prev Texture** (stored with 0.5 multiplier)
 - **colortex5:  Bloom Texture** (stored with 0.5 multiplier)
 - **colortex6:  Sky Objects Texture**
-- - x: red & green
-- - y: blue & alpha
 
 <br>
 <br>

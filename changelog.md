@@ -1,5 +1,6 @@
-- v1.0.4 (25/08/03)
+- v1.0.4 (25/08/04)
   - Re-added OptiFine support
+  - Added support for more 1.21 blocks
   - Tweaked fantasy style (and others)
   - Slightly tweaked many effects
 

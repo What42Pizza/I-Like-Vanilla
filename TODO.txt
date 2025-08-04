@@ -1,10 +1,5 @@
-Todo for v1.0:
-Make sure it works with optifine
-
-
-
-Planned for next version:
-Add 'scenario' effects:
+Planned for next major version:
+Add situational effects:
 	reflective rain puddles
 	nether clouds
 	water foam
