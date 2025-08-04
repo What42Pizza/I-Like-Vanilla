@@ -82,9 +82,9 @@ void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 norm
 	fresnel *= fresnel;
 	fresnel *= fresnel;
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
-	vec3 skyColor = getSkyColor(reflectionDirection, false  ARGS_IN);
+	vec3 skyColor = getSkyColor(reflectionDirection, true  ARGS_IN);
 	#include "/import/eyeBrightnessSmooth.glsl"
-	vec3 alteredSkyColor = skyColor * (0.15 + 0.6 * max(eyeBrightnessSmooth.x, eyeBrightnessSmooth.y) / 240.0);
+	vec3 alteredSkyColor = skyColor * (0.1 + 0.9 * max(eyeBrightnessSmooth.x, eyeBrightnessSmooth.y) / 240.0);
 	
 	const float inputColorWeight = 0.2;
 	

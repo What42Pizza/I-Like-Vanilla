@@ -15,19 +15,6 @@
 
 
 
-#if DARKEN_SKY_UNDERGROUND == 1
-	float getHorizonMultiplier(float upDot  ARGS_OUT) {
-		#if defined OVERWORLD && !defined DISTANT_HORIZONS
-			#include "/import/horizonAltitudeAddend.glsl"
-			#include "/import/eyeBrightnessSmooth.glsl"
-			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light
-			return clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
-		#else
-			return 1.0;
-		#endif
-	}
-#endif
-
 vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 	
 	#ifdef OVERWORLD
@@ -45,14 +32,14 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
 		vec3 skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
 		#include "/import/inPaleGarden.glsl"
-		skyColor = mix(skyColor, vec3(dayPercent * 0.4), inPaleGarden);
+		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.35), inPaleGarden);
 		#ifndef SKIP_SKY_NOISE
 			#include "/utils/var_rng.glsl"
 			upDot += randomFloat(rng) * 0.08 * (1.0 - 0.8 * sqrt(getLum(skyColor)));
 		#endif
 		upDot = clamp(upDot, 0.0, 1.0);// + 0.01;
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
-		horizonColor = mix(horizonColor, vec3(0.05 + 0.25 * dayPercent), inPaleGarden);
+		horizonColor = mix(horizonColor, vec3(0.1 + 0.2 * dayPercent), inPaleGarden);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 		
 		#include "/import/sunPosition.glsl"
@@ -77,9 +64,13 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		skyColor *= 1.2;
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
-		#if DARKEN_SKY_UNDERGROUND == 1
+		#if DARKEN_SKY_UNDERGROUND == 1 && defined OVERWORLD
 			if (darkenUndergroundSky) {
-				skyColor *= getHorizonMultiplier(upDot  ARGS_IN);
+				#include "/import/horizonAltitudeAddend.glsl"
+				#include "/import/eyeBrightnessSmooth.glsl"
+				float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light
+				float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
+				skyColor = mix(vec3(0.25), skyColor, darkenMult);
 			}
 		#endif
 		

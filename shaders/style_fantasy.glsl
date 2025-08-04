@@ -16,7 +16,7 @@
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 1.0
+										#define VANILLA_AO_DARK 0.9
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -91,7 +91,7 @@
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.65
+										#define SKYLIGHT_DAY_BLUE 0.75
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
@@ -268,7 +268,7 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.0
+										#define CAVE_AMBIENT_RED 0.97
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
@@ -280,7 +280,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.2
+										#define CAVE_AMBIENT_BRIGHTNESS 0.18
 #endif
 
 
@@ -488,7 +488,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.25
+										#define SUNRAYS_AMOUNT_DAY 0.2
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -546,15 +546,15 @@
 
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 15
+										#define SUNRAYS_MIN_SURFACE 10
 #endif
 #if SUNRAYS_MIN_UNDERGROUND == -1
 #undef SUNRAYS_MIN_UNDERGROUND
-										#define SUNRAYS_MIN_UNDERGROUND 75
+										#define SUNRAYS_MIN_UNDERGROUND 90
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.5
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.4
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -666,7 +666,7 @@
 #endif
 #if BRIGHTNESS == -1
 #undef BRIGHTNESS
-										#define BRIGHTNESS 1.1
+										#define BRIGHTNESS 1.15
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED
@@ -993,11 +993,11 @@
 #endif
 #if REALISTIC_CLOUD_DENSITY == -1
 #undef REALISTIC_CLOUD_DENSITY
-										#define REALISTIC_CLOUD_DENSITY 0.8
+										#define REALISTIC_CLOUD_DENSITY 0.75
 #endif
 #if REALISTIC_CLOUD_TRANSPARENCY == -1
 #undef REALISTIC_CLOUD_TRANSPARENCY
-										#define REALISTIC_CLOUD_TRANSPARENCY 0.25
+										#define REALISTIC_CLOUD_TRANSPARENCY 0.1
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
@@ -1030,7 +1030,7 @@
 #endif
 #if CLOUD_DAY_GREEN == -1
 #undef CLOUD_DAY_GREEN
-										#define CLOUD_DAY_GREEN 0.9
+										#define CLOUD_DAY_GREEN 0.95
 #endif
 #if CLOUD_DAY_BLUE == -1
 #undef CLOUD_DAY_BLUE
@@ -1152,7 +1152,7 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 1.0
+										#define UNDERGROUND_FOG_DENSITY 4.0
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
@@ -1160,11 +1160,11 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 10.0
+										#define PALE_GARDEN_FOG_DENSITY 12.0
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY
-										#define PALE_GARDEN_FOG_NIGHT_DENSITY 30.0
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY

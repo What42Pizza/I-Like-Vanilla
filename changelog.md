@@ -1,3 +1,10 @@
+- v1.0.4 (25/08/03)
+  - Re-added OptiFine support
+  - Tweaked fantasy style (and others)
+  - Slightly tweaked many effects
+
+<br>
+
 - v1.0.3 (25/07/30)
   - Setting changes:
     - Add settings 'Pale Garden Fog Density' and 'Pale Garden Fog Night Density'

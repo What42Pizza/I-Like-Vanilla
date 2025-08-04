@@ -1050,7 +1050,7 @@
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
-										#define CLOUD_SUNRISE_RED 1.2
+										#define CLOUD_SUNRISE_RED 1.5
 #endif
 #if CLOUD_SUNRISE_GREEN == -1
 #undef CLOUD_SUNRISE_GREEN
@@ -1058,19 +1058,19 @@
 #endif
 #if CLOUD_SUNRISE_BLUE == -1
 #undef CLOUD_SUNRISE_BLUE
-										#define CLOUD_SUNRISE_BLUE 0.7
+										#define CLOUD_SUNRISE_BLUE 0.4
 #endif
 #if CLOUD_SUNSET_RED == -1
 #undef CLOUD_SUNSET_RED
-										#define CLOUD_SUNSET_RED 1.3
+										#define CLOUD_SUNSET_RED 1.5
 #endif
 #if CLOUD_SUNSET_GREEN == -1
 #undef CLOUD_SUNSET_GREEN
-										#define CLOUD_SUNSET_GREEN 0.95
+										#define CLOUD_SUNSET_GREEN 1.0
 #endif
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
-										#define CLOUD_SUNSET_BLUE 0.7
+										#define CLOUD_SUNSET_BLUE 0.5
 #endif
 
 
@@ -1152,7 +1152,7 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 0.5
+										#define UNDERGROUND_FOG_DENSITY 0.8
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
@@ -1164,7 +1164,7 @@
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY
-										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 30.0
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY

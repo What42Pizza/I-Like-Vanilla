@@ -61,7 +61,7 @@ void main() {
 		return;
 	#endif
 	
-	colorMult = getCloudColor(0.2 + 0.8 * gl_Color.r  ARGS_IN);
+	colorMult = getCloudColor(0.25 + 0.75 * gl_Color.r  ARGS_IN);
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	

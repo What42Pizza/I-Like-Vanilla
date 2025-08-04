@@ -120,11 +120,11 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 1.0
+										#define SKYLIGHT_NIGHT_RED 0.6
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 1.0
+										#define SKYLIGHT_NIGHT_GREEN 0.7
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
@@ -132,7 +132,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.2
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.27
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -148,7 +148,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.15
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.25
 #endif
 
 
@@ -492,7 +492,7 @@
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.1
+										#define SUNRAYS_AMOUNT_NIGHT 0.05
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
@@ -1038,15 +1038,15 @@
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 0.35
+										#define CLOUD_NIGHT_RED 0.13
 #endif
 #if CLOUD_NIGHT_GREEN == -1
 #undef CLOUD_NIGHT_GREEN
-										#define CLOUD_NIGHT_GREEN 0.35
+										#define CLOUD_NIGHT_GREEN 0.15
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.55
+										#define CLOUD_NIGHT_BLUE 0.21
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
@@ -1079,7 +1079,7 @@
 
 #if CLOUD_LAYER_1_SCALE == -1
 #undef CLOUD_LAYER_1_SCALE
-										#define CLOUD_LAYER_1_SCALE 0.015
+										#define CLOUD_LAYER_1_SCALE 0.01
 #endif
 #if CLOUD_LAYER_1_WEIGHT == -1
 #undef CLOUD_LAYER_1_WEIGHT
@@ -1091,7 +1091,7 @@
 #endif
 #if CLOUD_LAYER_2_SCALE == -1
 #undef CLOUD_LAYER_2_SCALE
-										#define CLOUD_LAYER_2_SCALE 0.045
+										#define CLOUD_LAYER_2_SCALE 0.03
 #endif
 #if CLOUD_LAYER_2_WEIGHT == -1
 #undef CLOUD_LAYER_2_WEIGHT
@@ -1103,7 +1103,7 @@
 #endif
 #if CLOUD_LAYER_3_SCALE == -1
 #undef CLOUD_LAYER_3_SCALE
-										#define CLOUD_LAYER_3_SCALE 0.15
+										#define CLOUD_LAYER_3_SCALE 0.1
 #endif
 #if CLOUD_LAYER_3_WEIGHT == -1
 #undef CLOUD_LAYER_3_WEIGHT
@@ -1115,7 +1115,7 @@
 #endif
 #if CLOUD_LAYER_4_SCALE == -1
 #undef CLOUD_LAYER_4_SCALE
-										#define CLOUD_LAYER_4_SCALE 0.6
+										#define CLOUD_LAYER_4_SCALE 0.3
 #endif
 #if CLOUD_LAYER_4_WEIGHT == -1
 #undef CLOUD_LAYER_4_WEIGHT
@@ -1160,11 +1160,11 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 10.0
+										#define PALE_GARDEN_FOG_DENSITY 3.4
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY
-										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 30.0
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
@@ -1234,15 +1234,15 @@
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
-										#define SKY_NIGHT_RED 1.0
+										#define SKY_NIGHT_RED 0.1
 #endif
 #if SKY_NIGHT_GREEN == -1
 #undef SKY_NIGHT_GREEN
-										#define SKY_NIGHT_GREEN 1.0
+										#define SKY_NIGHT_GREEN 0.2
 #endif
 #if SKY_NIGHT_BLUE == -1
 #undef SKY_NIGHT_BLUE
-										#define SKY_NIGHT_BLUE 1.0
+										#define SKY_NIGHT_BLUE 0.35
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
@@ -1258,15 +1258,15 @@
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
-										#define SKY_HORIZON_NIGHT_RED 1.0
+										#define SKY_HORIZON_NIGHT_RED 0.35
 #endif
 #if SKY_HORIZON_NIGHT_GREEN == -1
 #undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 1.0
+										#define SKY_HORIZON_NIGHT_GREEN 0.4
 #endif
 #if SKY_HORIZON_NIGHT_BLUE == -1
 #undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 1.0
+										#define SKY_HORIZON_NIGHT_BLUE 0.55
 #endif
 #if SKY_HORIZON_SUNRISE_RED == -1
 #undef SKY_HORIZON_SUNRISE_RED

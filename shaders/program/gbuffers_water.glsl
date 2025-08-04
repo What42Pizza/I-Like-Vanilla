@@ -4,14 +4,12 @@
 	in_out vec2 lmcoord;
 	in_out vec3 glcolor;
 	in_out vec3 viewPos;
+	in_out vec3 playerPos;
 	flat in_out vec3 normal;
 	flat in_out int materialId;
 	
 	flat in_out vec3 shadowcasterColor;
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS
-		in_out vec3 playerPos;
-	#endif
 	#if BORDER_FOG_ENABLED == 1
 		in_out float fogAmount;
 	#endif
@@ -159,6 +157,8 @@ void main() {
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
 	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
+	#include "/import/gbufferModelViewInverse.glsl"
+	playerPos = endMat(gbufferModelViewInverse * vec4(viewPos, 1.0));
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	#include "/import/mc_Entity.glsl"
@@ -167,13 +167,6 @@ void main() {
 	materialId %= 100000;
 	
 	shadowcasterColor = getShadowcasterColor(ARG_IN);
-	
-	
-	#if !(WAVING_WATER_SURFACE_ENABLED == 1 || defined DISTANT_HORIZONS)
-		vec3 playerPos;
-	#endif
-	#include "/import/gbufferModelViewInverse.glsl"
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1

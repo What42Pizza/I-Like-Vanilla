@@ -36,7 +36,7 @@ void main() {
 		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
 		packVec2(normal),
 		packVec2(0.0, 0.3),
-		1.0
+		0.0 // if this isn't 0.0 then the vanilla entity shadows (with shadow casting disabled) are black bc of zeroed lmcoord
 	);
 	
 }

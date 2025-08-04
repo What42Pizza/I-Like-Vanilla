@@ -2,7 +2,7 @@
 	in_out vec2 texcoord;
 	
 	flat in_out vec3 fogColor;
-	flat in_out float fogSlope;
+	flat in_out float fogDensity;
 	flat in_out float fogMult;
 	flat in_out float fogDarken;
 	flat in_out float extraFogDist;
@@ -88,26 +88,26 @@ void main() {
 	fogDist *= distMult;
 	
 	vec3 fogColor = fogColor;
-	float fogSlope = fogSlope;
+	float fogDensity = fogDensity;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		fogColor = getSkyColor(normalize(viewPos), false  ARGS_IN);
+		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 		#ifdef OVERWORLD
-			float density = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
+			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
 			#include "/import/betterRainStrength.glsl"
-			density = mix(density, WEATHER_FOG_DENSITY, betterRainStrength);
+			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
 			#include "/import/dayPercent.glsl"
 			#include "/import/inPaleGarden.glsl"
-			density = mix(density, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
+			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
 		#elif defined NETHER
-			float density = NETHER_FOG_DENSITY;
+			fogDensity = NETHER_FOG_DENSITY;
 		#elif defined END
-			float density = END_FOG_DENSITY;
+			fogDensity = END_FOG_DENSITY;
 		#endif
-		fogSlope = 300.0 / (density + 0.00001);
+		fogDensity /= 300.0;
 	}
 	
-	float atmoFogAmount = 1.0 - fogSlope / (fogSlope + fogDist + extraFogDist);
+	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	atmoFogAmount *= 1.0 - fogAmount;
 	atmoFogAmount *= fogMult;
 	color *= 1.0 - atmoFogAmount * fogDarken;
@@ -131,7 +131,7 @@ void main() {
 			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
 			float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN) * volSunraysAmountMult;
 			rawVolSunraysAmount *= 1.0 - fogAmount;
-			float volSunraysAmount = 1.0 / (rawVolSunraysAmount + 1.0);
+			float volSunraysAmount = exp(-rawVolSunraysAmount);
 			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
 			color = mix(volSunraysColor, color, max(volSunraysAmount, volSunraysAmountMax));
 		#endif
@@ -181,8 +181,8 @@ void main() {
 	if (isEyeInWater == 0) {
 		#include "/import/inPaleGarden.glsl"
 		#ifdef OVERWORLD
-			fogMult = 0.75 + 0.2 * inPaleGarden;
-			fogDarken = 0.5 + 0.4 * inPaleGarden;
+			fogMult = 0.75 + 0.25 * inPaleGarden;
+			fogDarken = 0.5;
 		#else
 			fogMult = 1.0;
 			fogDarken = 1.0;
@@ -190,19 +190,19 @@ void main() {
 		extraFogDist = 2.0 * inPaleGarden;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
-		fogSlope = 7.0;
+		fogDensity = 0.05;
 		fogMult = 1.0;
 		fogDarken = 1.0;
-		extraFogDist = 6.0;
+		extraFogDist = 8.0;
 	} else if (isEyeInWater == 2) {
 		fogColor = IN_LAVA_COLOR;
-		fogSlope = 0.1;
+		fogDensity = 10.0;
 		fogMult = 0.75;
 		fogDarken = 0.5;
 		extraFogDist = 0.0;
 	} else if (isEyeInWater == 3) {
 		fogColor = IN_POWDERED_SNOW_COLOR;
-		fogSlope = 0.1;
+		fogDensity = 10.0;
 		fogMult = 0.75;
 		fogDarken = 0.5;
 		extraFogDist = 0.0;
