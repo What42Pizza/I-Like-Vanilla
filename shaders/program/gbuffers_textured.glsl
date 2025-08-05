@@ -2,7 +2,7 @@
 	
 	in_out vec2 texcoord;
 	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
+	in_out vec4 glcolor;
 	flat in_out vec2 normal;
 	in_out float blockDepth;
 	
@@ -22,14 +22,16 @@
 
 void main() {
 	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	
-	float transparency = percentThrough(blockDepth, 1.0, 1.4);
-	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
-	float dither = bayer64(gl_FragCoord.xy);
-	#include "/import/frameCounter.glsl"
-	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	if (color.a < dither) discard;
+	if (glcolor.a > 0.5) {
+		float transparency = percentThrough(blockDepth, 1.0, 1.4);
+		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
+		float dither = bayer64(gl_FragCoord.xy);
+		#include "/import/frameCounter.glsl"
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		if (color.a < dither) discard;
+	}
 	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
@@ -64,7 +66,12 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = gl_Color.rgb * 1.2;
+	glcolor = vec4(gl_Color.rgb * 1.2, 0.7 + 0.3 * gl_Color.a);
+	lmcoord.y *= 0.6 + 0.4 * gl_Color.a;
+	if (gl_Color.a < 0.5) {
+		#include "/import/dayPercent.glsl"
+		lmcoord.y *= 0.1 + 0.9 * dayPercent;
+	}
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	#include "/import/gbufferModelViewInverse.glsl"

@@ -187,7 +187,7 @@ void main() {
 			fogMult = 1.0;
 			fogDarken = 1.0;
 		#endif
-		extraFogDist = 2.0 * inPaleGarden;
+		extraFogDist = 1.0 * inPaleGarden;
 	} else if (isEyeInWater == 1) {
 		fogColor = IN_WATER_COLOR;
 		fogDensity = 0.03;

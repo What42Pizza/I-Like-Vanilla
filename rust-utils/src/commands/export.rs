@@ -157,7 +157,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 		let line_num = i + 1;
 		let line = line.trim();
 		output.push(b'\n');
-		if !line.starts_with("#define ") {continue;}
+		if !line.starts_with("#define ") {output.extend_from_slice(line.as_bytes()); continue;}
 		
 		let line_parts = line.split(" ").filter(|line| !line.is_empty()).collect::<Vec<&str>>();
 		if line_parts.len() < 6 {return error!("Invalid line in setting_defines line {}: Expected at least 6 space-separated-tokens, but found {}", line_num, line_parts.len());}
@@ -167,7 +167,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 		output_line += setting_name;
 		output_line.push(' ');
 		
-		if line_parts[2] != "-1" {continue;}
+		if line_parts[2] != "-1" {output.extend_from_slice(line.as_bytes()); continue;}
 		let Some(setting_value) = default_settings.get(setting_name) else {return error!("Invalid line in setting_defines line {}: Could not find default value for setting {}", line_num, setting_name);};
 		output_line += setting_value;
 		output_line += " // ";
@@ -177,7 +177,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 		let new_setting_values = process_setting_values(&line_parts[4..], line_num)?;
 		output_line += &new_setting_values;
 		
-		output.append(&mut output_line.into_bytes());
+		output.extend_from_slice(output_line.as_bytes());
 	}
 	
 	Ok(output)
