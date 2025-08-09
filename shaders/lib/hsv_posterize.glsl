@@ -34,9 +34,13 @@ float compress(float v, int quality) {
 
 
 
-void doHsvPosterize(inout vec3 color  ARGS_OUT) {
-	float depth = toLinearDepth(texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN);
-	if (depth == 1) {return;}
+void doHsvPosterize(inout vec3 color, float depth  ARGS_OUT) {
+	bool isSky = depth == 1.0;
+	#ifdef DISTANT_HORIZONS
+		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		isSky = isSky && dhDepth == 1.0;
+	#endif
+	if (isSky) {return;}
 	color = rgb2hsv(color);
 	#if HSV_POSTERIZE_HUE_QUALITY > 0
 		color.x = compress(color.x, HSV_POSTERIZE_HUE_QUALITY);

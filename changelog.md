@@ -1,5 +1,9 @@
-- v1.0.5
-  - Fix rain particle weather rendering
+- v1.0.5 (25/08/08)
+  - Settings changes:
+    - Removed setting 'Waving Normal Amount'
+  - Overhauled water surface rendering
+  - Fixed 'Rain Particle Weather' rendering
+  - Fixed bugs
 
 <br>
 

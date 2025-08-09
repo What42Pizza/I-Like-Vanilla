@@ -181,6 +181,9 @@
 	#ifdef import_mc_midTexCoord
 		attribute vec2 mc_midTexCoord;
 	#endif
+	#ifdef import_at_tangent
+		attribute vec4 at_tangent;
+	#endif
 	#ifdef import_shadowModelViewInverse
 		uniform mat4 shadowModelViewInverse;
 	#endif

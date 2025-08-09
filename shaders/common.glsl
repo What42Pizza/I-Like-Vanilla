@@ -292,6 +292,53 @@ vec3 randomVec3FromRValue(uint rng) {
 	return randomVec3(rng);
 }
 
+float valueHash(vec3 p) {
+	p = fract(p * 0.3183099 + vec3(0.71, 0.113, 0.419));
+	p *= 17.0;
+	return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+}
+
+float valueNoise(vec3 v) {
+	vec3 i = floor(v);
+	vec3 f = fract(v);
+	
+	float lll = valueHash(i);
+	float llh = valueHash(i + vec3(0.0, 0.0, 1.0));
+	float lhl = valueHash(i + vec3(0.0, 1.0, 0.0));
+	float lhh = valueHash(i + vec3(0.0, 1.0, 1.0));
+	float hll = valueHash(i + vec3(1.0, 0.0, 0.0));
+	float hlh = valueHash(i + vec3(1.0, 0.0, 1.0));
+	float hhl = valueHash(i + vec3(1.0, 1.0, 0.0));
+	float hhh = valueHash(i + vec3(1.0, 1.0, 1.0));
+	
+	vec3 u = f * f * (3.0 - 2.0 * f);
+	float ll = mix(lll, llh, u.z);
+	float lh = mix(lhl, lhh, u.z);
+	float hl = mix(hll, hlh, u.z);
+	float hh = mix(hhl, hhh, u.z);
+	float l = mix(ll, lh, u.y);
+	float h = mix(hl, hh, u.y);
+	return mix(l, h, u.x);
+}
+
+vec3 valueNoise3(vec3 v) {
+	return vec3(
+		valueNoise(v + vec3(31.416, 0.0, 0.0)),
+		valueNoise(v + vec3(0.0, 47.853, 0.0)),
+		valueNoise(v + vec3(0.0, 0.0, 12.793))
+	);
+}
+
+vec2 projectOntoPlane(vec3 p, vec3 normal) {
+	// Create two vectors perpendicular to the normal (tangent space basis)
+	vec3 tangent = normalize(abs(normal.x) > 0.5 ? cross(normal, vec3(0.0, 1.0, 0.0)) 
+												 : cross(normal, vec3(1.0, 0.0, 0.0)));
+	vec3 bitangent = cross(normal, tangent);
+
+	// Project point onto the 2D plane basis
+	return vec2(dot(p, tangent), dot(p, bitangent));
+}
+
 
 
 float cubeLength(vec2 v) {

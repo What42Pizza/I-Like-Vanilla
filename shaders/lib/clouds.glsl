@@ -1,34 +1,3 @@
-#ifdef FIRST_PASS
-	
-	float valueHash(vec3 p) {
-		return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
-	}
-	
-	float valueNoise(vec3 v) {
-		vec3 i = floor(v);
-		vec3 f = fract(v);
-		
-		float lll = valueHash(i);
-		float llh = valueHash(i + vec3(0.0, 0.0, 1.0));
-		float lhl = valueHash(i + vec3(0.0, 1.0, 0.0));
-		float lhh = valueHash(i + vec3(0.0, 1.0, 1.0));
-		float hll = valueHash(i + vec3(1.0, 0.0, 0.0));
-		float hlh = valueHash(i + vec3(1.0, 0.0, 1.0));
-		float hhl = valueHash(i + vec3(1.0, 1.0, 0.0));
-		float hhh = valueHash(i + vec3(1.0, 1.0, 1.0));
-		
-		vec3 u = f * f * (3.0 - 2.0 * f);
-		float ll = mix(lll, llh, u.z);
-		float lh = mix(lhl, lhh, u.z);
-		float hl = mix(hll, hlh, u.z);
-		float hh = mix(hhl, hhh, u.z);
-		float l = mix(ll, lh, u.y);
-		float h = mix(hl, hh, u.y);
-		return mix(l, h, u.x);
-	}
-	
-#endif
-
 #include "/utils/screen_to_view.glsl"
 
 float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {

@@ -1,6 +1,5 @@
-void doSharpening(inout vec3 color  ARGS_OUT) {
+void doSharpening(inout vec3 color, float depth  ARGS_OUT) {
 	
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#ifdef END
 		if (depth == 1.0) return;
 	#endif

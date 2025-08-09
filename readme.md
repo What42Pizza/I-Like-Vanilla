@@ -12,15 +12,12 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 
 <br>
 
-## Unique Features:
+## Features:
 
 - **Settings-based Styles System**
 - **Extremely sharp AA**
 - **Colorblindness Correction**
 - **Isometric Rendering**
-
-## Standard Features:
-
 - **Volumetric Clouds** (optional, disabled in default config)
 - **Distant Horizons Support**
 - **Shadows**
@@ -29,7 +26,7 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - **Sharpening** (velocity based)
 - **Sunrays** (both basic and volumetric)
 - **Depth of Field**
-- **Optional World-Pixelated Shadows**
+- **World-Pixelated Shadows**
 - **SSAO**
 - **Bloom**
 - **Motion Blur**
@@ -38,13 +35,22 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - - Underwater Waviness
 - - Vignette
 - - Tonemapping and Color Correction
-- Many, many more
-
-### Misc Features:
 - **Good Code Structuring**
 - **Vanilla-Like Graphics and Style**
 - **Thorough Settings Menu** (300+ settings)
+- Many, many more
 
+<br>
+
+### Try out the latest build:
+
+To use the latest build (which is likely the latest published), just:
+
+- 1: Download the latest build [here](https://github.com/What42Pizza/I-Like-Vanilla/archive/refs/heads/main.zip)
+- 2: Unzip the downloaded 'I-Like-Vanilla-main.zip' file
+- 3: Move the unzipped 'I-Like-Vanilla-main' folder into your shaderpacks folder (which can be opened from the in-game shaderpacks menu)
+
+<br>
 <br>
 
 ![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)

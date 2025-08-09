@@ -24,6 +24,10 @@
 	#include "/lib/hsv_posterize.glsl"
 #endif
 
+//#ifdef FIRST_PASS
+//	uniform sampler2D colortex7;
+//#endif
+
 void main() {
 	
 	#if SSS_DECONVERGE == 1
@@ -37,12 +41,16 @@ void main() {
 		#endif
 	#endif
 	
+	#if SHARPENING_ENABLED == 1 || HSV_POSTERIZE_ENABLED == 1
+		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	#endif
+	
 	
 	
 	// ======== SHARPENING ======== //
 	
 	#if SHARPENING_ENABLED == 1
-		doSharpening(color  ARGS_IN);
+		doSharpening(color, depth  ARGS_IN);
 	#endif
 	
 	
@@ -65,7 +73,7 @@ void main() {
 	// ======== HSV POSTERIZE ======== //
 	
 	#if HSV_POSTERIZE_ENABLED == 1
-		doHsvPosterize(color  ARGS_IN);
+		doHsvPosterize(color, depth  ARGS_IN);
 	#endif
 	
 	
@@ -110,7 +118,9 @@ void main() {
 	
 	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);
-	//gl_FragData[0] = texelFetch(colortex7, texelcoord, 0);
+	//vec3 debugOut = texelFetch(colortex7, texelcoord, 0).rgb;
+	//if (length(debugOut) > 0.00000001)
+	//gl_FragData[0] = vec4(debugOut, 1.0);
 	
 }
 

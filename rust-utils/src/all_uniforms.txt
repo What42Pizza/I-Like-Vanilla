@@ -59,6 +59,7 @@ float invFarMinusNear = 0.0
 float isDry = 0.0
 attribute vec3 mc_Entity = vec3(0.0)
 attribute vec2 mc_midTexCoord = vec2(0.0)
+attribute vec4 at_tangent = vec4(0.0)
 mat4 shadowModelViewInverse = mat4(0.0)
 mat4 shadowProjectionInverse = mat4(0.0)
 float blockFlickerAmount = 0.0

@@ -23,6 +23,11 @@ option.SHADOWS_ENABLED=Shadows Enabled
 value.SHADOWS_ENABLED.0=Off
 value.SHADOWS_ENABLED.1=On
 
+option.SHADOWS_ON_TRANSPARENTS=Shadows On Transparents
+option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, stained glass, etc
+value.SHADOWS_ON_TRANSPARENTS.0=Off
+value.SHADOWS_ON_TRANSPARENTS.1=On
+
 option.SHADOWS_BRIGHTNESS=Shadows Brightness
 option.SHADOWS_BRIGHTNESS.comment=A multiplier for the brightness of shadows (also slightly inversely affects the non-shadow brightness)
 value.SHADOWS_BRIGHTNESS.0.0=x0.0
@@ -1050,10 +1055,6 @@ value.WAVING_WATER_SPEED.-1=Use Style
 option.WAVING_WATER_FRESNEL_MULT=Waving Fresnel Mult
 option.WAVING_WATER_FRESNEL_MULT.comment=How much to darken the water based on the viewing direction
 value.WAVING_WATER_FRESNEL_MULT.-1=Use Style
-
-option.WAVING_WATER_NORMAL_AMOUNT=Waving Normal Amount
-option.WAVING_WATER_NORMAL_AMOUNT.comment=How much the waving surface should affect the water surface's normal (surface direction)
-value.WAVING_WATER_NORMAL_AMOUNT.-1=Use Style
 
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE=Normals Waving Amount Surface
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE.comment=How much waving to apply when under skylight

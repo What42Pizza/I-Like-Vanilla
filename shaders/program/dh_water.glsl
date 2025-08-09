@@ -5,11 +5,11 @@
 	
 	in_out vec4 glcolor;
 	in_out vec2 lmcoord;
+	in_out vec3 viewPos;
+	in_out vec3 playerPos;
 	flat in_out vec3 normal;
 	flat in_out int dhBlock;
 	
-	in_out vec3 playerPos;
-	in_out vec3 viewPos;
 	flat in_out vec3 shadowcasterColor;
 	
 #endif
@@ -61,17 +61,24 @@ void main() {
 		
 		// waving water normals
 		#if WAVING_WATER_SURFACE_ENABLED == 1
-			#include "/import/frameTimeCounter.glsl"
+			float fresnel = -dot(normal, normalize(viewPos));
 			#include "/import/cameraPosition.glsl"
-			vec3 randomPoint = simplexNoise3From4(vec4((playerPos + cameraPosition) / WAVING_WATER_SCALE, frameTimeCounter * WAVING_WATER_SPEED));
-			randomPoint = normalize(randomPoint);
-			randomPoint += simplexNoise3From4(vec4((playerPos + cameraPosition) / WAVING_WATER_SCALE / 0.2, frameTimeCounter * WAVING_WATER_SPEED * 2.0)) * 0.5;
-			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y);
-			randomPoint = mix(randomPoint, normal, wavingSurfaceAmount);
-			randomPoint = normalize(randomPoint);
-			normal = normalize(normal + randomPoint * 0.05 * WAVING_WATER_NORMAL_AMOUNT * dot(normal, normalize(viewPos)));
-			float fresnel = dot(-randomPoint, normalize(viewPos));
-			color.rgb *= 1.0 - fresnel * fresnel * WAVING_WATER_FRESNEL_MULT * 0.5;
+			#include "/import/frameTimeCounter.glsl"
+			vec3 noisePos = vec3(playerPos.xz + cameraPosition.xz, frameTimeCounter * WAVING_WATER_SPEED);
+			noisePos.xy /= WAVING_WATER_SCALE * 2.0;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.02;
+			float height = 1.0 - abs(simplexNoise(noisePos));
+			float heightX = 1.0 - abs(simplexNoise(noisePos + vec3(0.01, 0.0, 0.0)));
+			float heightZ = 1.0 - abs(simplexNoise(noisePos + vec3(0.0, 0.01, 0.0)));
+			vec3 dirX = vec3(0.01, (height - heightX) * wavingSurfaceAmount, 0.0);
+			vec3 dirZ = vec3(0.0, (height - heightZ) * wavingSurfaceAmount, 0.01);
+			normal = cross(dirZ, dirX);
+			normal = normalize(normal);
+			//normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up
+			#include "/import/gbufferModelView.glsl"
+			normal = mat3(gbufferModelView) * normal;
+			float newFresnel = dot(normal, normalize(viewPos)); // should be inverted but it would be inverted again in the next step anyways
+			color.rgb *= clamp(1.0 + WAVING_WATER_FRESNEL_MULT / wavingSurfaceAmount * 0.035 * (fresnel + newFresnel), 0.0, 1.5); // basically `color *= 1+(fresnel-newFresnel)` but it's weird because of settings and wavingSurfaceAmount
 		#endif
 		
 		
