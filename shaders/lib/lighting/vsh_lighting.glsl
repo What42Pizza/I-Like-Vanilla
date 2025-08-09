@@ -15,9 +15,9 @@ void doVshLighting(float depth  ARGS_OUT) {
 		#endif
 		float sideShading = dot(shadingNormals, sideShadingVec);
 		sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(lmcoord.x, lmcoord.y)) * 0.5;
-		glcolor *= 1.0 + sideShading;
+		glcolor.rgb *= 1.0 + sideShading;
 	} else {
-		glcolor *= 1.1;
+		glcolor.rgb *= 1.1;
 	}
 	
 	#if defined SHADER_GBUFFERS_TERRAIN || defined SHADER_GBUFFERS_WATER

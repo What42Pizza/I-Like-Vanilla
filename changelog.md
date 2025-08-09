@@ -1,4 +1,4 @@
-- v1.0.5 (25/08/08)
+- v1.0.5 (25/08/09)
   - Settings changes:
     - Removed setting 'Waving Normal Amount'
   - Overhauled water surface rendering
