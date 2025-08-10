@@ -278,12 +278,12 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	vec3 skyLighting = shadowcasterColor * shadowBrightness * (1.0 - 0.2 * (SHADOWS_BRIGHTNESS - 1.0));
 	#include "/import/inPaleGarden.glsl"
 	skyLighting *= 1.0 - 0.3 * inPaleGarden;
+	skyLighting *= 1.0 - rainDecrease;
 	ambientLight *= 1.0 - shadowBrightness;
 	ambientLight *= SHADOWS_BRIGHTNESS;
 	ambientLight *= 1.0 - 0.1 * inPaleGarden;
 	
 	vec3 lighting = ambientLight + skyLighting;
-	lighting *= 1.0 - rainDecrease;
 	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));

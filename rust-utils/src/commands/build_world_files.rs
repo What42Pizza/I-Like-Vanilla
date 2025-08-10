@@ -6,7 +6,7 @@ use std::fs;
 pub fn create_file_contents(world_name: &str, shader_name: &str, shader_type: &str) -> String {
 	let shader_name_uppercase = shader_name.to_uppercase();
 	format!(r##"
-#version 330 compatibility
+#version 130
 
 #define SHADER_{shader_name_uppercase}
 #define {world_name}
@@ -85,7 +85,7 @@ pub fn build_final_shader_files(world_name: &str, world_path: &Path) -> Result<(
 	
 	// fsh
 	let fsh_contents = &r##"
-#version 330 compatibility
+#version 130
 
 uniform sampler2D colortex7;
 uniform sampler2D shadowtex0;
@@ -100,7 +100,7 @@ void main() {
 	
 	// vsh
 	let vsh_contents = &r##"
-#version 330 compatibility
+#version 130
 
 void main() {
 	gl_Position = ftransform();

@@ -1,4 +1,4 @@
-#version 330 compatibility
+#version 130
 
 #define SHADER_GBUFFERS_SKYTEXTURED
 #define NETHER

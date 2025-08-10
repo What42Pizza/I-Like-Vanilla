@@ -1,3 +1,10 @@
+- v1.0.6 (25/08/10)
+  - Settings changes:
+    - Replaced setting 'Waving Fresnel Mult' with 'Waving Fresnel Surface' and 'Waving Fresnel Underground'
+  - Fixed bugs
+
+<br>
+
 - v1.0.5 (25/08/09)
   - Settings changes:
     - Removed setting 'Waving Normal Amount'

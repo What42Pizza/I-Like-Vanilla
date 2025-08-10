@@ -83,16 +83,19 @@ void main() {
 			vec3 noisePos = vec3(playerPos.xz + cameraPosition.xz, frameTimeCounter * WAVING_WATER_SPEED);
 			noisePos.xy /= WAVING_WATER_SCALE * 2.0;
 			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.02;
-			float height = 1.0 - abs(simplexNoise(noisePos));
-			float heightX = 1.0 - abs(simplexNoise(noisePos + vec3(0.01, 0.0, 0.0)));
-			float heightZ = 1.0 - abs(simplexNoise(noisePos + vec3(0.0, 0.01, 0.0)));
-			vec3 dirX = vec3(0.01, (height - heightX) * wavingSurfaceAmount, 0.0);
-			vec3 dirZ = vec3(0.0, (height - heightZ) * wavingSurfaceAmount, 0.01);
-			normal = cross(dirZ, dirX);
-			normal = normalize(normal);
-			normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> world
-			float newFresnel = dot(normal, normalize(viewPos)); // should be inverted but it would be inverted again in the next step anyways
-			color.rgb *= clamp(1.0 + WAVING_WATER_FRESNEL_MULT / wavingSurfaceAmount * 0.07 * (fresnel + newFresnel), 0.0, 1.5); // basically `color *= 1+(fresnel-newFresnel)` but it's weird because of settings and wavingSurfaceAmount
+			if (wavingSurfaceAmount > 0.00001) {
+				float height = 1.0 - abs(simplexNoise(noisePos));
+				float heightX = 1.0 - abs(simplexNoise(noisePos + vec3(0.01, 0.0, 0.0)));
+				float heightZ = 1.0 - abs(simplexNoise(noisePos + vec3(0.0, 0.01, 0.0)));
+				vec3 dirX = vec3(0.01, (height - heightX) * wavingSurfaceAmount, 0.0);
+				vec3 dirZ = vec3(0.0, (height - heightZ) * wavingSurfaceAmount, 0.01);
+				normal = cross(dirZ, dirX);
+				normal = normalize(normal);
+				normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> world
+				float newFresnel = dot(normal, normalize(viewPos)); // should be inverted but it would be inverted again in the next step anyways
+				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND, WAVING_WATER_FRESNEL_SURFACE, lmcoord.y);
+				color.rgb *= clamp(1.0 + fresnelMult / wavingSurfaceAmount * 0.07 * (fresnel + newFresnel), 0.0, 1.5); // basically `color *= 1+(fresnel-newFresnel)` but it's weird because of settings and wavingSurfaceAmount
+			}
 		#endif
 		
 		

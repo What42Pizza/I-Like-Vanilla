@@ -1,4 +1,4 @@
-#version 330 compatibility
+#version 130
 
 uniform sampler2D colortex7;
 uniform sampler2D shadowtex0;

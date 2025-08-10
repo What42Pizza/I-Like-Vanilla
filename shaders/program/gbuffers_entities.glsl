@@ -65,12 +65,12 @@ void main() {
 	glcolor = gl_Color;
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
-	
-	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	vec3 viewPos = mat3(gl_ModelViewMatrix) * gl_Vertex.xyz;
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
+		#include "/import/gbufferModelViewInverse.glsl"
+		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
 		gl_Position = ftransform();
@@ -78,7 +78,7 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -5.0) return; // simple but effective optimization
+		if (gl_Position.z < -5.0) return; // simple but effective(?) optimization
 	#endif
 	
 	
@@ -87,7 +87,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(length(viewPos)  ARGS_IN);
 	
 }
 

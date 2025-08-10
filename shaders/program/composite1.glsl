@@ -1,7 +1,7 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
 	
-	flat in_out vec3 fogColor;
+	flat in_out vec3 atmoFogColor;
 	flat in_out float fogDensity;
 	flat in_out float fogMult;
 	flat in_out float fogDarken;
@@ -87,11 +87,11 @@ void main() {
 	float fogDist = length(viewPos);
 	fogDist *= distMult;
 	
-	vec3 fogColor = fogColor;
+	vec3 atmoFogColor = atmoFogColor;
 	float fogDensity = fogDensity;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		fogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+		atmoFogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
 			#include "/import/betterRainStrength.glsl"
@@ -111,7 +111,7 @@ void main() {
 	atmoFogAmount *= 1.0 - fogAmount;
 	atmoFogAmount *= fogMult;
 	color *= 1.0 - atmoFogAmount * fogDarken;
-	color += fogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
+	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
 	
 	
@@ -189,19 +189,19 @@ void main() {
 		#endif
 		extraFogDist = 1.0 * inPaleGarden;
 	} else if (isEyeInWater == 1) {
-		fogColor = IN_WATER_COLOR;
+		atmoFogColor = IN_WATER_COLOR;
 		fogDensity = 0.03;
 		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 16.0;
 	} else if (isEyeInWater == 2) {
-		fogColor = IN_LAVA_COLOR;
+		atmoFogColor = IN_LAVA_COLOR;
 		fogDensity = 10.0;
 		fogMult = 0.75;
 		fogDarken = 0.5;
 		extraFogDist = 0.0;
 	} else if (isEyeInWater == 3) {
-		fogColor = IN_POWDERED_SNOW_COLOR;
+		atmoFogColor = IN_POWDERED_SNOW_COLOR;
 		fogDensity = 10.0;
 		fogMult = 0.75;
 		fogDarken = 0.5;
