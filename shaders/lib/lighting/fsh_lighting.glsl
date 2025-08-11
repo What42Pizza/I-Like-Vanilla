@@ -195,16 +195,6 @@ vec3 getAmbientLight(float ambientBrightness  ARGS_OUT) {
 		ambientLight *= 0.8 + 0.4 * screenBrightness;
 	#endif
 	
-	#include "/import/nightVision.glsl"
-	float betterNightVision = nightVision;
-	if (betterNightVision > 0.0) {
-		betterNightVision = 0.6 + 0.2 * betterNightVision;
-		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
-	}
-	vec3 lightVisionMin = vec3(betterNightVision);
-	lightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
-	ambientLight = max(ambientLight, lightVisionMin);
-	
 	return ambientLight;
 }
 
@@ -248,6 +238,10 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 ambientLight = getAmbientLight(ambientBrightness  ARGS_IN);
 	
+	#include "/import/darknessFactor.glsl"
+	blockBrightness *= 1.0 - 0.2 * darknessFactor;
+	#include "/import/darknessLightFactor.glsl"
+	blockBrightness = max(blockBrightness - 1.5 * darknessLightFactor, 0.0);
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
 		#include "/import/blockFlickerAmount.glsl"
 		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT;
@@ -284,6 +278,19 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	ambientLight *= 1.0 - 0.1 * inPaleGarden;
 	
 	vec3 lighting = ambientLight + skyLighting;
+	
+	#include "/import/nightVision.glsl"
+	float betterNightVision = nightVision;
+	if (betterNightVision > 0.0) {
+		betterNightVision = 0.6 + 0.2 * betterNightVision;
+		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
+	}
+	vec3 betterNightVisionChannels = vec3(betterNightVision);
+	betterNightVisionChannels.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
+	lighting = betterNightVisionChannels + (1.0 - betterNightVisionChannels) * lighting;
+	//vec3 lightVisionMin = vec3(betterNightVision);
+	//lightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
+	//lighting = max(lighting, lightVisionMin);
 	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));

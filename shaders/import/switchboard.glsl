@@ -250,3 +250,12 @@
 	#ifdef import_inPaleGarden
 		uniform float inPaleGarden;
 	#endif
+	#ifdef import_blindness
+		uniform float blindness;
+	#endif
+	#ifdef import_darknessFactor
+		uniform float darknessFactor;
+	#endif
+	#ifdef import_darknessLightFactor
+		uniform float darknessLightFactor;
+	#endif

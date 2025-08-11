@@ -1378,6 +1378,14 @@ option.PALE_GARDEN_FOG_NIGHT_DENSITY=Pale Garden Fog Night Density
 option.PALE_GARDEN_FOG_NIGHT_DENSITY.comment=Atmospheric fog density when in the pale garden at night
 value.PALE_GARDEN_FOG_NIGHT_DENSITY.-1=Use Style
 
+option.BLINDNESS_EFFECT_FOG_DENSITY=Blindness Effect Fog Density
+option.BLINDNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Blindness effect
+value.BLINDNESS_EFFECT_FOG_DENSITY.-1=Use Style
+
+option.DARKNESS_EFFECT_FOG_DENSITY=Darkness Effect Fog Density
+option.DARKNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Darkness effect
+value.DARKNESS_EFFECT_FOG_DENSITY.-1=Use Style
+
 option.NETHER_FOG_DENSITY=Nether Fog Density
 option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether
 value.NETHER_FOG_DENSITY.-1=Use Style

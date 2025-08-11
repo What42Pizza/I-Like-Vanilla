@@ -92,6 +92,10 @@ void main() {
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		atmoFogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+		#include "/import/blindness.glsl"
+		atmoFogColor *= 1.0 - blindness;
+		#include "/import/darknessFactor.glsl"
+		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
 			#include "/import/betterRainStrength.glsl"
@@ -104,6 +108,8 @@ void main() {
 		#elif defined END
 			fogDensity = END_FOG_DENSITY;
 		#endif
+		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
+		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
 		fogDensity /= 300.0;
 	}
 	
@@ -207,6 +213,20 @@ void main() {
 		fogDarken = 0.5;
 		extraFogDist = 0.0;
 	}
+	
+	#include "/import/blindness.glsl"
+	atmoFogColor *= 1.0 - blindness;
+	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
+	fogMult = mix(fogMult, 1.0, blindness);
+	fogDarken = mix(fogDarken, 1.0, blindness);
+	extraFogDist *= 1.0 - blindness;
+	
+	#include "/import/darknessFactor.glsl"
+	atmoFogColor *= 1.0 - darknessFactor;
+	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
+	fogMult = mix(fogMult, 1.0, darknessFactor);
+	fogDarken = mix(fogDarken, 1.0, darknessFactor);
+	extraFogDist = mix(extraFogDist, 4.0, darknessFactor);
 	
 	
 	

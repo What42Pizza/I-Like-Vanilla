@@ -1,15 +1,17 @@
 - v1.0.6 (25/08/10)
+  - Added support for Blindness and Darkness effects
   - Settings changes:
     - Replaced setting 'Waving Fresnel Mult' with 'Waving Fresnel Surface' and 'Waving Fresnel Underground'
+	- Added settings 'Blindness Effect Fog Density' and 'Darkness Effect Fog Density'
   - Fixed bugs
 
 <br>
 
 - v1.0.5 (25/08/09)
-  - Settings changes:
-    - Removed setting 'Waving Normal Amount'
   - Overhauled water surface rendering
   - Fixed 'Rain Particle Weather' rendering
+  - Settings changes:
+    - Removed setting 'Waving Normal Amount'
   - Fixed bugs
 
 <br>

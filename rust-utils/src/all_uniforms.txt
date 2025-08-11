@@ -82,3 +82,6 @@ mat4 dhProjectionInverse = mat4(0.0)
 float smoothPlayerHealth = 0.0
 float damageAmount = 0.0
 float inPaleGarden = 0.0
+float blindness = 0.0
+float darknessFactor = 0.0
+float darknessLightFactor = 0.0
