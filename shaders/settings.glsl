@@ -72,6 +72,11 @@ const float shadowIntervalSize    = 2.0;
 	#define VOL_SUNRAYS_ENABLED 0
 #endif
 
+#if KUWAHARA_ENABLED == 1
+	#undef SHARPENING_ENABLED
+	#define SHARPENING_ENABLED 0
+#endif
+
 #ifdef DISTANT_HORIZONS
 	#undef BORDER_FOG_ENABLED
 	#define BORDER_FOG_ENABLED 0

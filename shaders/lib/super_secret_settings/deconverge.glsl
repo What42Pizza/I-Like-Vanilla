@@ -5,7 +5,7 @@
 
 
 
-vec3 sss_deconverge(ARG_OUT) {
+vec3 sss_deconverge(sampler2D tex, vec2 texcoord  ARGS_OUT) {
 	
 	#include "/import/pixelSize.glsl"
 	vec3 convergeX = ConvergeX * pixelSize.x / SSS_DECONVERGE_QUALITY * SSS_DECONVERGE_AMOUNT;
@@ -13,18 +13,14 @@ vec3 sss_deconverge(ARG_OUT) {
 	
 	vec3 CoordX = vec3(texcoord.x);
 	vec3 CoordY = vec3(texcoord.y);
-	#if SSS_FLIP == 1
-		CoordX = 1.0 - CoordX;
-		CoordY = 1.0 - CoordY;
-	#endif
 	vec3 color = vec3(0.0);
 	
 	for (int i = 0; i < SSS_DECONVERGE_QUALITY; i++) {
 		CoordX += convergeX;
 		CoordY += convergeY;
-		color.r += texture2D(MAIN_TEXTURE_COPY, vec2(CoordX.x, CoordY.x)).r * 2.0;
-		color.g += texture2D(MAIN_TEXTURE_COPY, vec2(CoordX.y, CoordY.y)).g * 2.0;
-		color.b += texture2D(MAIN_TEXTURE_COPY, vec2(CoordX.z, CoordY.z)).b * 2.0;
+		color.r += texture2D(tex, vec2(CoordX.x, CoordY.x)).r;
+		color.g += texture2D(tex, vec2(CoordX.y, CoordY.y)).g;
+		color.b += texture2D(tex, vec2(CoordX.z, CoordY.z)).b;
 	}
 	
 	return color / SSS_DECONVERGE_QUALITY;

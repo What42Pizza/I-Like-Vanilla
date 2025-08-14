@@ -782,6 +782,20 @@ option.MOTION_BLUR_QUALITY=Motion Blur Quality
 
 
 
+screen.PAINTED_EFFECT_MENU=Painted Effect
+
+option.KUWAHARA_ENABLED=Painted Effect Enabled
+option.KUWAHARA_ENABLED.comment=Enabled the Kuwahara effect, giving a painterly aesthetic
+value.option.KUWAHARA_ENABLED.-1=Use Style
+
+option.KUWAHARA_SIZE=Painted Effect Size
+option.KUWAHARA_SIZE.comment=The size of the painted (kuwahara) effect
+value.option.KUWAHARA_SIZE.-1=Use Style
+
+
+
+
+
 screen.SHARPENING_MENU=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
@@ -1571,81 +1585,64 @@ screen.SUPER_SECRET_MENU.comment=Recreations of easter-egg shader effects from 1
 
 option.SSS_PIXELS=Pixels
 option.SSS_PIXELS.comment=Pixelates the screen
-value.SSS_PIXELS.-1=Use Style
 
 option.SSS_DECONVERGE=Deconverge
 option.SSS_DECONVERGE.comment=Offsets different colors
-value.SSS_DECONVERGE.-1=Use Style
 value.SSS_DECONVERGE.0=Off
 value.SSS_DECONVERGE.1=On
 
 option.SSS_DECONVERGE_AMOUNT=Deconverge Amount
-value.SSS_DECONVERGE_AMOUNT.-1=Use Style
 
 option.SSS_DECONVERGE_QUALITY=Deconverge Quality
-value.SSS_DECONVERGE_QUALITY.-1=Use Style
 
 option.SSS_FLIP=Flip
 option.SSS_FLIP.comment=Flips image horizontally and vertically
-value.SSS_FLIP.-1=Use Style
 value.SSS_FLIP.0=Off
 value.SSS_FLIP.1=On
 
 option.SSS_POSTERIZE=Posterize
 option.SSS_POSTERIZE.comment=Compresses the color quality
-value.SSS_POSTERIZE.-1=Use Style
 value.SSS_POSTERIZE.0=Off
 value.SSS_POSTERIZE.1=On
 
 option.SSS_POSTERIZE_QUALITY=Posterize Quality
-value.SSS_POSTERIZE_QUALITY.-1=Use Style
 
 option.SSS_NOTCH=Notch
 option.SSS_NOTCH.comment=One of Notch's effects
-value.SSS_NOTCH.-1=Use Style
 value.SSS_NOTCH.0=Off
 value.SSS_NOTCH.1=On
 
 option.SSS_NOTCH_QUALITY=Notch Quality
-value.SSS_NOTCH_QUALITY.-1=Use Style
 
 option.SSS_BUMPY=Bumpy
 option.SSS_BUMPY.comment=Adds outlines
-value.SSS_BUMPY.-1=Use Style
 value.SSS_BUMPY.0=Off
 value.SSS_BUMPY.1=On
 
 option.SSS_SCANLINES=Scanlines
 option.SSS_SCANLINES.comment=Adds scanlines
-value.SSS_SCANLINES.-1=Use Style
 value.SSS_SCANLINES.0=Off
 value.SSS_SCANLINES.1=On
 
 option.SSS_SCANLINES_AMOUNT=Scanlines Amount
 option.SSS_SCANLINES_AMOUNT.comment=How dark the scanlines are
-value.SSS_SCANLINES_AMOUNT.-1=Use Style
 
 option.SSS_SCANLINES_SCALE=Scanlines Scale
 option.SSS_SCANLINES_SCALE.comment=How big the lines are
-value.SSS_SCANLINES_SCALE.-1=Use Style
 
 option.SSS_PHOSPHOR=Phosphor
 option.SSS_PHOSPHOR.comment=Makes brighter pixels linger on screen longer
-value.SSS_PHOSPHOR.-1=Use Style
 value.SSS_PHOSPHOR.0=Off
 value.SSS_PHOSPHOR.1=On
 
 option.SSS_PHOSPHOR_AMOUNT=Phosphor Amount
 option.SSS_PHOSPHOR_AMOUNT.comment=How long brighter pixels linger
-value.SSS_PHOSPHOR_AMOUNT.-1=Use Style
 
 option.SSS_PHOSPHOR_CURVE=Phosphor Curve
 option.SSS_PHOSPHOR_CURVE.comment=How brighter pixels need to be to linger
-value.SSS_PHOSPHOR_CURVE.-1=Use Style
 
 option.SSS_INVERT=Invert
 option.SSS_INVERT.comment=Inverts color data
-value.SSS_INVERT.-1=Use Style
 value.SSS_INVERT.0=Off
 value.SSS_INVERT.1=On
 
@@ -1656,4 +1653,3 @@ value.SSS_BARREL.1=On
 
 option.SSS_BARREL_AMOUNT=Barrel Amount
 option.SSS_BARREL_AMOUNT.comment=How strong the distortion is
-value.SSS_BARREL_AMOUNT.-1=Use Style

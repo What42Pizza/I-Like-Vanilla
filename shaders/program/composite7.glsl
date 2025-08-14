@@ -6,14 +6,33 @@
 
 #ifdef FSH
 
+#if SSS_DECONVERGE == 1
+	#include "/lib/super_secret_settings/deconverge.glsl"
+#endif
+
 void main() {
 	
-	vec2 barrelTexCoord = texcoord * 2.0 - 1.0;
-	barrelTexCoord *= SSS_BARREL_AMOUNT * (length(barrelTexCoord) - 1) + 1.0;
-	barrelTexCoord = barrelTexCoord * 0.5 + 0.5;
+	vec2 texcoord = texcoord;
 	
-	vec3 color = texture2D(MAIN_TEXTURE, barrelTexCoord).rgb;
-	if (barrelTexCoord != clamp(barrelTexCoord, 0.0, 1.0)) color = vec3(0.0);
+	#if SSS_FLIP == 1
+		texcoord = 1.0 - texcoord;
+	#endif
+	
+	#if SSS_BARREL == 1
+		texcoord = texcoord * 2.0 - 1.0;
+		texcoord *= SSS_BARREL_AMOUNT * (length(texcoord) - 1.0) + 1.0;
+		texcoord = texcoord * 0.5 + 0.5;
+		if (texcoord != clamp(texcoord, 0.0, 1.0)) {
+			gl_FragData[0] = vec4(0.0, 0.0, 0.0, 1.0);
+			return;
+		}
+	#endif
+	
+	#if SSS_DECONVERGE == 1
+		vec3 color = sss_deconverge(MAIN_TEXTURE, texcoord  ARGS_IN);
+	#else
+		vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
+	#endif
 	
 	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);

@@ -6,11 +6,11 @@
 
 #ifdef FSH
 
-#if SHARPENING_ENABLED == 1
+#if SHARPENING_ENABLED == 1 || KUWAHARA_ENABLED == 1
 	#include "/utils/depth.glsl"
 #endif
-#if SSS_DECONVERGE == 1
-	#include "/lib/super_secret_settings/deconverge.glsl"
+#if KUWAHARA_ENABLED == 1
+	#include "/lib/kuwahara.glsl"
 #endif
 #if SHARPENING_ENABLED == 1
 	#include "/lib/sharpening.glsl"
@@ -24,25 +24,16 @@
 	#include "/lib/hsv_posterize.glsl"
 #endif
 
-//#ifdef FIRST_PASS
-//	uniform sampler2D colortex7;
-//#endif
-
 void main() {
 	
-	#if SSS_DECONVERGE == 1
-		vec3 color = sss_deconverge(ARG_IN);
-	#else
-		#if SSS_FLIP == 1
-			#include "/import/viewSize.glsl"
-			vec3 color = texelFetch(MAIN_TEXTURE_COPY, ivec2(viewSize) - texelcoord, 0).rgb * 2.0;
-		#else
-			vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
-		#endif
+	#if SHARPENING_ENABLED == 1 || HSV_POSTERIZE_ENABLED == 1 || KUWAHARA_ENABLED == 1
+		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	#endif
 	
-	#if SHARPENING_ENABLED == 1 || HSV_POSTERIZE_ENABLED == 1
-		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	#if KUWAHARA_ENABLED == 1
+		vec3 color = doKuwaharaEffect(MAIN_TEXTURE_COPY, depth  ARGS_IN) * 2.0;
+	#else
+		vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
 	#endif
 	
 	
@@ -118,9 +109,6 @@ void main() {
 	
 	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);
-	//vec3 debugOut = texelFetch(colortex7, texelcoord, 0).rgb;
-	//if (length(debugOut) > 0.00000001)
-	//gl_FragData[0] = vec4(debugOut, 1.0);
 	
 }
 
