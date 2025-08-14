@@ -787,6 +787,8 @@ screen.PAINTED_EFFECT_MENU=Painted Effect
 option.KUWAHARA_ENABLED=Painted Effect Enabled
 option.KUWAHARA_ENABLED.comment=Enabled the Kuwahara effect, giving a painterly aesthetic
 value.option.KUWAHARA_ENABLED.-1=Use Style
+value.option.KUWAHARA_ENABLED.0=Off
+value.option.KUWAHARA_ENABLED.1=On
 
 option.KUWAHARA_SIZE=Painted Effect Size
 option.KUWAHARA_SIZE.comment=The size of the painted (kuwahara) effect
