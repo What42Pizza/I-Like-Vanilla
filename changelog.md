@@ -1,8 +1,9 @@
-- v1.0.6 (25/08/10)
+- v1.0.6 (25/08/15)
   - Added support for Blindness and Darkness effects
   - Settings changes:
     - Replaced setting 'Waving Fresnel Mult' with 'Waving Fresnel Surface' and 'Waving Fresnel Underground'
 	- Added settings 'Blindness Effect Fog Density' and 'Darkness Effect Fog Density'
+	- Removed setting 'Use Better Rand'
   - Fully specified usages of copyrighted code within shader
   - Fixed bugs
 

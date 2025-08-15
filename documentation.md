@@ -17,6 +17,21 @@
 <br>
 <br>
 
+## Usages of others' copyrighted code
+
+This is the full list of outside code that is used within this shader:
+
+- The file [/shaders/lib/aces.glsl](/shaders/lib/aces.glsl) (under a custom license)
+- The file [/shaders/lib/colorblindness.glsl](/shaders/lib/colorblindness.glsl) (public domain)
+- The file [/shaders/lib/fxaa.glsl](/shaders/lib/fxaa.glsl) (under the MIT license)
+- The file [/shaders/lib/kuwahara.glsl](/shaders/lib/kuwahara.glsl) (public domain)
+- The file [/shaders/lib/simplex_noise.glsl](/shaders/lib/simplex_noise.glsl) (under the MIT license)
+- Some code in the file [/shaders/lib/hsv_posterize.glsl](/shaders/lib/hsv_posterize.glsl) (public domain)
+
+<br>
+<br>
+<br>
+
 # Differences from other shaders (ESSENTIAL KNOWLEDGE)
 
 <br>
@@ -125,17 +140,17 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 ## File Structure:
 
-### /program: &nbsp; Main shader code
-### /lib: &nbsp; More complex, standalone code
-### /world*: &nbsp; The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
-### /import: &nbsp; See 'Uniforms System' above
-### /utils: &nbsp; Holds common functions that use uniforms (see 'Uniforms System' above for why)
-### /lang: &nbsp; Holds shown names of setting options and setting values
-### setting_defines.glsl: &nbsp; Holds the definition for every setting
-### settings.glsl: &nbsp; Miscellaneous settings loading stuff
-### common.glsl: &nbsp; Holds commonly used code and macros for easier programming (cannot use uniforms, see 'Uniforms System' above for why)
-### shaders.properties: &nbsp; Defines the settings menu plus many other details about the shader internals
-### blocks.properties: &nbsp; Defines what different blocks are mapped to. The shaders retrieve these value from `mc_Entity.x`
+- **/program**: Main shader code
+- **/lib**: More complex, standalone code
+- **/world\***: The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
+- **/import**: See 'Uniforms System' above
+- **/utils**: Holds common functions that use uniforms (see 'Uniforms System' above for why)
+- **/lang**: Holds shown names of setting options and setting values
+- **setting_defines.glsl**: Holds the definition for every setting
+- **settings.glsl**: Miscellaneous settings loading stuff
+- **common.glsl**: Holds commonly used code and macros for easier programming (cannot use uniforms, see 'Uniforms System' above for why)
+- **shaders.properties**: Defines the settings menu plus many other details about the shader internals
+- **blocks.properties**: Defines what different blocks are mapped to. The shaders retrieve these value from `mc_Entity.x`
 
 <br>
 

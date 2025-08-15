@@ -786,13 +786,13 @@ screen.PAINTED_EFFECT_MENU=Painted Effect
 
 option.KUWAHARA_ENABLED=Painted Effect Enabled
 option.KUWAHARA_ENABLED.comment=Enabled the Kuwahara effect, giving a painterly aesthetic
-value.option.KUWAHARA_ENABLED.-1=Use Style
-value.option.KUWAHARA_ENABLED.0=Off
-value.option.KUWAHARA_ENABLED.1=On
+value.KUWAHARA_ENABLED.-1=Use Style
+value.KUWAHARA_ENABLED.0=Off
+value.KUWAHARA_ENABLED.1=On
 
 option.KUWAHARA_SIZE=Painted Effect Size
 option.KUWAHARA_SIZE.comment=The size of the painted (kuwahara) effect
-value.option.KUWAHARA_SIZE.-1=Use Style
+value.KUWAHARA_SIZE.-1=Use Style
 
 
 
@@ -1555,11 +1555,6 @@ value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
 
 option.HAND_DEPTH=Hand Depth
 option.HAND_DEPTH.comment=Depth test value for the hand and hand items\nIf this is too low, the hand won't be detected and will be shaded incorrectly\nIf this is too high, close-up objects will be treated as hand items and will be shaded incorrectly
-
-option.USE_BETTER_RAND=Use Better Random
-option.USE_BETTER_RAND.comment=The better random function is technically better, but the performance cost doesn't exactly make up for it
-value.USE_BETTER_RAND.0=Off
-value.USE_BETTER_RAND.1=On
 
 option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
 option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, also works at night)

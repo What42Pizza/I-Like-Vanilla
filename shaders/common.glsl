@@ -210,37 +210,14 @@ void adjustLmcoord(inout vec2 lmcoord) {
 
 
 
-#if USE_BETTER_RAND == 1
-	// taken from: https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/
-	uint randomizeUint(inout uint rng) {
-		rng = rng * 747796405u + 2891336453u;
-		uint v = ((rng >> ((rng >> 28u) + 4u)) ^ rng) * 277803737u;
-		return (v >> 22u) ^ v;
-	}
-	/*
-	// maybe switch to this:
-	// taken from: https://www.pcg-random.org/download.html
-	uint32_t pcg32_random_r(pcg32_random_t* rng)
-	{
-		uint64_t oldstate = rng->state;
-		rng->state = oldstate * 6364136223846793005ULL + rng->inc;
-		uint32_t xorshifted = ((oldstate >> 18u) ^ oldstate) >> 27u;
-		uint32_t rot = oldstate >> 59u;
-		return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
-	}
-	*/
-#else
-	uint rotateRight(uint value, uint shift) {
-		return (value >> shift) | (value << (32u - shift));
-	}
-	uint randomizeUint(inout uint rng) {
-		rng = rng * 747796405u + 2891336453u;
-		rng ^= rotateRight(rng, 11u);
-		rng ^= rotateRight(rng, 17u);
-		rng ^= rotateRight(rng, 23u);
-		return rng;
-	}
-#endif
+uint randomizeUint(inout uint rng) {
+	#define ROTATE_RIGHT(value, shift) (value >> shift) | (value << (32u - shift))
+	rng = rng * 747796405u + 2891336453u;
+	rng ^= ROTATE_RIGHT(rng, 11u);
+	rng ^= ROTATE_RIGHT(rng, 17u);
+	rng ^= ROTATE_RIGHT(rng, 23u);
+	return rng;
+}
 
 float randomFloat(inout uint rng) {
 	uint v = randomizeUint(rng);

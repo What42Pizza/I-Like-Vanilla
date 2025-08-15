@@ -24,7 +24,7 @@ vec4 grad4(float j, vec4 ip) {
 	p.xyz = floor(fract(vec3(j) * ip.xyz) * 7.0) * ip.z - 1.0;
 	p.w = 1.5 - dot(abs(p.xyz), ones.xyz);
 	s = vec4(lessThan(p, vec4(0.0)));
-	p.xyz = p.xyz + (s.xyz * 2.0 - 1.0) * s.www; 
+	p.xyz = p.xyz + (s.xyz * 2.0 - 1.0) * s.www;
 	
 	return p;
 }
@@ -49,9 +49,9 @@ float simplexNoise(vec2 v) {
 	//i1.x = step(x0.y, x0.x); // x0.x > x0.y ? 1.0 : 0.0
 	//i1.y = 1.0 - i1.x;
 	i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-	// x0 = x0 - 0.0 + 0.0 * C.xx;
-	// x1 = x0 - i1 + 1.0 * C.xx;
-	// x2 = x0 - 1.0 + 2.0 * C.xx;
+	//x0 = x0 - 0.0 + 0.0 * C.xx;
+	//x1 = x0 - i1 + 1.0 * C.xx;
+	//x2 = x0 - 1.0 + 2.0 * C.xx;
 	vec4 x12 = x0.xyxy + C.xxzz;
 	x12.xy -= i1;
 	
@@ -105,7 +105,7 @@ float simplexNoise(vec3 v) {
 	vec3 x3 = x0 - D.yyy; // -1.0+3.0*C.x = -0.5 = -D.y
 	
 	// Permutations
-	i = mod289(i); 
+	i = mod289(i);
 	vec4 p = permute(permute(permute(
 			  i.z + vec4(0.0, i1.z, i2.z, 1.0))
 			+ i.y + vec4(0.0, i1.y, i2.y, 1.0))
@@ -198,7 +198,7 @@ float snoise(vec4 v) {
 	vec4 x4 = x0 + C.wwww;
 	
 	// Permutations
-	i = mod289(i); 
+	i = mod289(i);
 	float j0 = permute(permute(permute(permute(i.w) + i.z) + i.y) + i.x);
 	vec4 j1 = permute(permute(permute(permute (
 			  i.w + vec4(i1.w, i2.w, i3.w, 1.0))
@@ -208,7 +208,7 @@ float snoise(vec4 v) {
 	
 	// Gradients: 7x7x6 points over a cube, mapped onto a 4-cross polytope
 	// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
-	vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0) ;
+	vec4 ip = vec4(1.0 / 294.0, 1.0 / 49.0, 1.0 / 7.0, 0.0) ;
 	
 	vec4 p0 = grad4(j0,   ip);
 	vec4 p1 = grad4(j1.x, ip);
