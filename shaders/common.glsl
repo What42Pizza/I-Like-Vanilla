@@ -112,32 +112,6 @@ float getLum(vec3 color) {
 	return dot(color, vec3(0.2125, 0.7154, 0.0721));
 }
 
-// all these smooth functions seem the same for speed
-
-//// from: https://iquilezles.org/articles/smin/
-//vec3 smoothMin(vec3 a, vec3 b, float k) {
-//	vec3 h = max(k-abs(a-b), 0.0)/k;
-//	return min(a, b) - h*h*k*0.25;
-//}
-
-//// same as smoothMin but w/ in&out inverted
-//vec3 smoothMax(vec3 a, vec3 b, float k) {
-//	vec3 h = max(k-abs(a-b), 0.0)/k;
-//	return max(a, b) + h*h*k*0.25;
-//}
-
-//// from: https://www.shadertoy.com/view/Ml3Gz8
-//vec3 smoothMin(vec3 a, vec3 b, float k) {
-//	vec3 h = clamp(0.5 + 0.5*(a-b)/k, 0.0, 1.0);
-//	return mix(a, b, h) - k*h*(1.0-h);
-//}
-
-//// same as smoothMin but w/ in&out inverted
-//vec3 smoothMax(vec3 a, vec3 b, float k) {
-//	vec3 h = clamp(0.5 + 0.5*(b-a)/k, 0.0, 1.0);
-//	return mix(a, b, h) + k*h*(1.0-h);
-//}
-
 vec3 smoothMin(vec3 v1, vec3 v2, float a) {
 	float v1Lum = getLum(v1);
 	float v2Lum = getLum(v2);

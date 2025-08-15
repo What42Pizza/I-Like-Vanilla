@@ -60,6 +60,7 @@ To use the latest build (which is likely the latest published), just:
 ## Credits:
 
 - **[Ian McEwan, Ashima Arts](https://github.com/ashima/webgl-noise):** Simplex noise implementation
+- **[Vildravn](https://godotshaders.com/shader/colorblindness-correction-shader/):** Colorblindness correction filters
 - **[Simon Rodriguez](https://github.com/kosua20/MIDIVisualizer/blob/master/resources/shaders/fxaa.frag)** FXAA implementation
 - **[Nathan Reed](https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/):** Easy hashing function
 - **[Stephen Hill](https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl):** ACES tonemapper implementation

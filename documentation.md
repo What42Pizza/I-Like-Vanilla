@@ -217,4 +217,4 @@ This describes which /main_files-s handle different effects
 ## Extras:
 
 - **[Noise Functions](https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83)**
-- **[Permission to use Complementary's code](https://discord.com/channels/744189556768636941/744189557913681972/1135737539412643880) (TAA and transform functions)**
+- **[Permission to use Complementary's code](https://discord.com/channels/744189556768636941/744189557913681972/1135737539412643880)** (TAA and transform functions, now basically entirely outdated)

@@ -1,4 +1,5 @@
 // This code was taken from: https://godotshaders.com/shader/colorblindness-correction-shader/
+// This file is distributed under the Creative Commons Zero v1.0 Universal license
 
 
 
