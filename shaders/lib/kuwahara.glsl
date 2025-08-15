@@ -1,4 +1,7 @@
-// Code was originally taken from: https://github.com/PeterEve/godot-kuwahara
+// This code was (originally) taken from: https://github.com/PeterEve/godot-kuwahara
+// This file is distributed under the Creative Commons Zero v1.0 Universal license
+
+
 
 #ifdef FIRST_PASS
 	// The coordinates of every point in a quadrant / kernel

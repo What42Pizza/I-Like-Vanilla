@@ -3,6 +3,7 @@
   - Settings changes:
     - Replaced setting 'Waving Fresnel Mult' with 'Waving Fresnel Surface' and 'Waving Fresnel Underground'
 	- Added settings 'Blindness Effect Fog Density' and 'Darkness Effect Fog Density'
+  - Fully specified usages of copyrighted code within shader
   - Fixed bugs
 
 <br>

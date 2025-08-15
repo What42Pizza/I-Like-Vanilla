@@ -1,9 +1,3 @@
-//---------------------------//
-//        REFLECTIONS        //
-//---------------------------//
-
-
-
 void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initialDepth, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
 	initialDepth *= 0.9997;
 	

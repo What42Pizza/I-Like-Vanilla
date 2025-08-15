@@ -1,7 +1,3 @@
-// this code is used in both TAA and Motion Blur
-
-
-
 #undef INCLUDE_REPROJECTION
 
 #if defined FIRST_PASS && !defined REPROJECTION_FIRST_FINISHED
@@ -21,27 +17,22 @@
 
 #if ISOMETRIC_RENDERING_ENABLED == 0
 	
-	
-	// Previous frame reprojection from Chocapic13
 	vec2 reprojection(vec3 screenPos, vec3 cameraOffset  ARGS_OUT) {
 		screenPos = screenPos * 2.0 - 1.0;
-		
 		#include "/import/gbufferProjectionInverse.glsl"
 		#include "/import/gbufferModelViewInverse.glsl"
 		vec4 viewPos = gbufferProjectionInverse * vec4(screenPos, 1.0);
-		viewPos /= viewPos.w;
-		vec4 playerPos = gbufferModelViewInverse * viewPos;
+		vec3 playerPos = mat3(gbufferModelViewInverse) * (viewPos.xyz / viewPos.w);
 		
 		#include "/import/gbufferPreviousProjection.glsl"
 		#include "/import/gbufferPreviousModelView.glsl"
-		vec4 prevPlayerPos = playerPos + vec4(cameraOffset, 0.0);
-		vec4 prevCoord = gbufferPreviousProjection * gbufferPreviousModelView * prevPlayerPos;
+		vec3 prevPlayerPos = playerPos + cameraOffset;
+		vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
+		vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
 		return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
 	}
 	
-	
 #else
-	
 	
 	#include "/lib/isometric.glsl"
 	
@@ -60,7 +51,6 @@
 		prevCoord.xy *= getIsometricScale(ARG_IN).xy;
 		return prevCoord.xy * 0.5 + 0.5;
 	}
-	
 	
 #endif
 

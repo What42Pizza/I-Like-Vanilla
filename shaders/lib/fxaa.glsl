@@ -1,11 +1,7 @@
-// This was taken from Complementary Reimagined
+// This code was taken from: https://github.com/kosua20/MIDIVisualizer/blob/master/resources/shaders/fxaa.frag
+// This file is distributed under the MIT license
 
 
-
-//FXAA 3.11 from http://blog.simonrodriguez.fr/articles/30-07-2016_implementing_fxaa.html
-#ifdef FIRST_PASS
-	float quality[12] = float[12] (1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 2.0, 2.0, 2.0, 2.0, 4.0, 8.0);
-#endif
 
 void doFxaa(inout vec3 color, sampler2D tex  ARGS_OUT) {
 	float edgeThresholdMin = 0.03125;
@@ -47,7 +43,7 @@ void doFxaa(inout vec3 color, sampler2D tex  ARGS_OUT) {
 			+ abs(-2.0 * lumaCenter + lumaLeftRight) * 2.0
 			+ abs(-2.0 * lumaDown + lumaDownCorners);
 		
-		bool isHorizontal = (edgeHorizontal >= edgeVertical);
+		bool isHorizontal = edgeHorizontal >= edgeVertical;
 		
 		float luma1 = isHorizontal ? lumaDown : lumaLeft;
 		float luma2 = isHorizontal ? lumaUp : lumaRight;
@@ -112,6 +108,7 @@ void doFxaa(inout vec3 color, sampler2D tex  ARGS_OUT) {
 				reached2 = abs(lumaEnd2) >= gradientScaled;
 				reachedBoth = reached1 && reached2;
 				
+				const float quality[12] = float[12] (1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 2.0, 2.0, 2.0, 2.0, 4.0, 8.0);
 				if (!reached1) {
 					uv1 -= offset * quality[i];
 				}

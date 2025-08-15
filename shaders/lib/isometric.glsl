@@ -1,12 +1,3 @@
-//------------------------------------//
-//        ISOMETRIC PROJECTION        //
-//------------------------------------//
-
-// This code was originally taken from XorDev's Ortho Shaderpack
-// Link: https://github.com/XorDev/Ortho-Shaderpack/tree/master
-
-
-
 vec3 getIsometricScale(ARG_OUT) {
 	const float scale = ISOMETRIC_WORLD_SCALE * 0.5;
 	const float forwardPlusBackward = ISOMETRIC_FORWARD_VISIBILITY * 0.5 + ISOMETRIC_BACKWARD_VISIBILITY * 0.5;
