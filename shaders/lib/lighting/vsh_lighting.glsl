@@ -1,5 +1,10 @@
 void doVshLighting(float depth  ARGS_OUT) {
 	
+	#include "/import/darknessFactor.glsl"
+	lmcoord *= 1.0 - 0.2 * darknessFactor;
+	#include "/import/darknessLightFactor.glsl"
+	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);
+	
 	#ifdef SHADER_GBUFFERS_TERRAIN
 		bool doSideShading = (materialId % 100) - (materialId % 10) != 10;
 	#else

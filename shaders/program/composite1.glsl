@@ -138,8 +138,9 @@ void main() {
 			float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN) * volSunraysAmountMult;
 			rawVolSunraysAmount *= 1.0 - fogAmount;
 			float volSunraysAmount = exp(-rawVolSunraysAmount);
+			volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
 			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-			color = mix(volSunraysColor, color, max(volSunraysAmount, volSunraysAmountMax));
+			color = mix(volSunraysColor, color, volSunraysAmount);
 		#endif
 		
 	#endif

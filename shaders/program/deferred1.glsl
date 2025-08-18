@@ -1,6 +1,6 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
-	flat in_out vec3 shadowcasterColor;
+	flat in_out vec3 shadowcasterLight;
 #endif
 
 
@@ -108,12 +108,12 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getShadowcasterColor.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
-	shadowcasterColor = getShadowcasterColor(ARG_IN);
+	shadowcasterLight = getShadowcasterLight(ARG_IN);
 }
 
 #endif

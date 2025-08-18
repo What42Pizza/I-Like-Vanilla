@@ -1,3 +1,7 @@
+#include "/utils/getAmbientLight.glsl"
+
+
+
 vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
 	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
@@ -169,35 +173,6 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  AR
 
 
 
-vec3 getAmbientLight(float ambientBrightness  ARGS_OUT) {
-	
-	#ifdef OVERWORLD
-		
-		#include "/import/ambientSunPercent.glsl"
-		#include "/import/ambientMoonPercent.glsl"
-		#include "/import/ambientSunrisePercent.glsl"
-		#include "/import/ambientSunsetPercent.glsl"
-		vec3 ambientLight =
-			AMBIENT_DAY_COLOR * ambientSunPercent
-			+ AMBIENT_NIGHT_COLOR * ambientMoonPercent
-			+ AMBIENT_SUNRISE_COLOR * ambientSunrisePercent
-			+ AMBIENT_SUNSET_COLOR * ambientSunsetPercent;
-		
-		#include "/import/screenBrightness.glsl"
-		ambientBrightness *= 0.9 + 0.2 * screenBrightness;
-		ambientLight = mix(CAVE_AMBIENT_COLOR * (0.6 + 0.8 * screenBrightness) * 0.6, ambientLight, ambientBrightness);
-		
-	#elif defined NETHER
-		vec3 ambientLight = NETHER_AMBIENT_COLOR;
-	#elif defined END
-		vec3 ambientLight = END_AMBIENT_COLOR;
-		#include "/import/screenBrightness.glsl"
-		ambientLight *= 0.8 + 0.4 * screenBrightness;
-	#endif
-	
-	return ambientLight;
-}
-
 
 
 void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal  ARGS_OUT) {
@@ -238,10 +213,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 ambientLight = getAmbientLight(ambientBrightness  ARGS_IN);
 	
-	#include "/import/darknessFactor.glsl"
-	blockBrightness *= 1.0 - 0.2 * darknessFactor;
-	#include "/import/darknessLightFactor.glsl"
-	blockBrightness = max(blockBrightness - 1.5 * darknessLightFactor, 0.0);
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
 		#include "/import/blockFlickerAmount.glsl"
 		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT;
@@ -265,17 +236,12 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	float shadowBrightness = getShadowBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness;
-	
 	#include "/import/rainStrength.glsl"
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
 	shadowBrightness *= 1.0 - rainDecrease;
-	vec3 skyLighting = shadowcasterColor * shadowBrightness * (1.0 - 0.2 * (SHADOWS_BRIGHTNESS - 1.0));
-	#include "/import/inPaleGarden.glsl"
-	skyLighting *= 1.0 - 0.3 * inPaleGarden;
-	skyLighting *= 1.0 - rainDecrease;
+	
+	vec3 skyLighting = shadowcasterLight * shadowBrightness;
 	ambientLight *= 1.0 - shadowBrightness;
-	ambientLight *= SHADOWS_BRIGHTNESS;
-	ambientLight *= 1.0 - 0.1 * inPaleGarden;
 	
 	vec3 lighting = ambientLight + skyLighting;
 	
@@ -288,9 +254,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	vec3 betterNightVisionChannels = vec3(betterNightVision);
 	betterNightVisionChannels.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
 	lighting = betterNightVisionChannels + (1.0 - betterNightVisionChannels) * lighting;
-	//vec3 lightVisionMin = vec3(betterNightVision);
-	//lightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
-	//lighting = max(lighting, lightVisionMin);
 	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));

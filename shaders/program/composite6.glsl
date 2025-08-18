@@ -31,7 +31,8 @@ void main() {
 	#endif
 	
 	#if KUWAHARA_ENABLED == 1
-		vec3 color = doKuwaharaEffect(MAIN_TEXTURE_COPY, depth  ARGS_IN) * 2.0;
+		vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
+		color = doKuwaharaEffect(color, MAIN_TEXTURE_COPY, depth  ARGS_IN) * 2.0;
 	#else
 		vec3 color = texelFetch(MAIN_TEXTURE_COPY, texelcoord, 0).rgb * 2.0;
 	#endif

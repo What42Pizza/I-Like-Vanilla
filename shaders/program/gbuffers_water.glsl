@@ -13,7 +13,7 @@
 	flat in_out vec3 normal;
 	flat in_out int materialId;
 	
-	flat in_out vec3 shadowcasterColor;
+	flat in_out vec3 shadowcasterLight;
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
 		in_out mat3 tbn;
@@ -155,7 +155,7 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterColor.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -182,7 +182,7 @@ void main() {
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
 	
-	shadowcasterColor = getShadowcasterColor(ARG_IN);
+	shadowcasterLight = getShadowcasterLight(ARG_IN);
 	
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1

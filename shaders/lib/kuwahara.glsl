@@ -5,8 +5,8 @@
 
 #ifdef FIRST_PASS
 	// The coordinates of every point in a quadrant / kernel
-	#define kernelLength 30
-	const ivec2 kernel[kernelLength] = ivec2[kernelLength] (ivec2(-4, 5), ivec2(-3, 4), ivec2(-3, 5), ivec2(-2, 3), ivec2(-2, 4), ivec2(-2, 5), ivec2(-2, 6), ivec2(-1, 2), ivec2(-1, 3), ivec2(-1, 4), ivec2(-1, 5), ivec2(-1, 6), ivec2(0, 1), ivec2(0, 2), ivec2(0, 3), ivec2(0, 4), ivec2(0, 5), ivec2(0, 6), ivec2(1, 2), ivec2(1, 3), ivec2(1, 4), ivec2(1, 5), ivec2(1, 6), ivec2(2, 3), ivec2(2, 4), ivec2(2, 5), ivec2(2, 6), ivec2(3, 4), ivec2(3, 5), ivec2(4, 5));
+	#define kernelLength 28
+	const ivec2 kernel[kernelLength] = ivec2[kernelLength] (ivec2(-3, 4), ivec2(-3, 5), ivec2(-2, 3), ivec2(-2, 4), ivec2(-2, 5), ivec2(-2, 6), ivec2(-1, 2), ivec2(-1, 3), ivec2(-1, 4), ivec2(-1, 5), ivec2(-1, 6), ivec2(0, 1), ivec2(0, 2), ivec2(0, 3), ivec2(0, 4), ivec2(0, 5), ivec2(0, 6), ivec2(1, 2), ivec2(1, 3), ivec2(1, 4), ivec2(1, 5), ivec2(1, 6), ivec2(2, 3), ivec2(2, 4), ivec2(2, 5), ivec2(2, 6), ivec2(3, 4), ivec2(3, 5));
 #endif
 
 // Get the mean color and standard deviation of a single quadrant around the current pixel
@@ -35,7 +35,7 @@ vec4 quadrant(sampler2D tex, int xDir, int yDir, vec2 sizeMult  ARGS_OUT) {
 	return vec4(pointTotal.x, pointTotal.y, pointTotal.z, standardDeviation);
 }
 
-vec3 doKuwaharaEffect(sampler2D tex, float depth  ARGS_OUT) {
+vec3 doKuwaharaEffect(vec3 color, sampler2D tex, float depth  ARGS_OUT) {
 	
 	#include "/import/invViewSize.glsl"
 	vec2 sizeMult = KUWAHARA_SIZE * invViewSize;
@@ -50,7 +50,7 @@ vec3 doKuwaharaEffect(sampler2D tex, float depth  ARGS_OUT) {
 	
 	// Find the quadrant with the lowest standard deviation
 	float minStandardDeviation = 1000.0;
-	vec3 color = vec3(0.0);
+	color = vec3(0.0);
 	for (int i = 0; i < 2; i++) {
 		if (quadrants[i].a < minStandardDeviation) {
 			minStandardDeviation = quadrants[i].a;

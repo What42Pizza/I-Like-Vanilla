@@ -44,7 +44,7 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getShadowcasterColor.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 #include "/utils/getCloudColor.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1

@@ -1,3 +1,8 @@
+- v1.0.7 (25/08/18)
+  - Fixed bugs
+
+<br>
+
 - v1.0.6 (25/08/15)
   - Added support for Blindness and Darkness effects
   - Settings changes:

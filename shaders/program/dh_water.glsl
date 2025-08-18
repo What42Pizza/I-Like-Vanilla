@@ -10,7 +10,7 @@
 	flat in_out vec3 normal;
 	flat in_out int dhBlock;
 	
-	flat in_out vec3 shadowcasterColor;
+	flat in_out vec3 shadowcasterLight;
 	
 #endif
 
@@ -123,7 +123,7 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterColor.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/lib/isometric.glsl"
@@ -147,7 +147,7 @@ void main() {
 		playerPos.y -= 0.11213;
 	}
 	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
-	shadowcasterColor = getShadowcasterColor(ARG_IN);
+	shadowcasterLight = getShadowcasterLight(ARG_IN);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
