@@ -129,8 +129,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		float shadowBrightness = 0.0;
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {
 			if (texture2D(shadowtex0, shadowPos.xy + rotationMatrix * SHADOW_OFFSETS[i].xy).r >= shadowPos.z) {
-				float currentShadowWeight = SHADOW_OFFSETS[i].z;
-				shadowBrightness += currentShadowWeight;
+				shadowBrightness += SHADOW_OFFSETS[i].z;
 			}
 		}
 		shadowBrightness /= SHADOW_OFFSET_WEIGHTS_TOTAL;
@@ -269,8 +268,8 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular *= 1.0 - betterRainStrength;
 		#include "/import/sunAngle.glsl"
 		#include "/import/ambientMoonPercent.glsl"
-		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9);
-		lighting += specularColor * specular * (0.2 + 0.7 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent);
+		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15;
+		lighting += specularColor * specular * (0.2 + 0.7 * specular_amount) * shadowBrightness;
 	#endif
 	
 	float lightingBrightness = min(getLum(lighting), 1.0);

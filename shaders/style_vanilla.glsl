@@ -422,11 +422,11 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.9
+										#define AO_AMOUNT 0.7
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 0.7
+										#define AO_SIZE 1.0
 #endif
 
 
