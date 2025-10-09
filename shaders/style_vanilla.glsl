@@ -20,7 +20,7 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.8
+										#define SIDE_SHADING_BRIGHT 0.7
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
