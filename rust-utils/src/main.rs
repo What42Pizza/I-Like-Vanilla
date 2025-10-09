@@ -1,5 +1,3 @@
-#![feature(let_chains)]
-
 #![allow(unused)]
 #![warn(unused_must_use)]
 

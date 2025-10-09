@@ -39,21 +39,21 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	
 	#if PIXELATED_SHADOWS > 0
 		
-		// no filtering, pixelated edges
+		// no filtering, world-aligned pixelated
 		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal  ARGS_IN);
-		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
+		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
 		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
-		return (texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution), 0).r >= shadowPos.z) ? 1.0 : 0.0;
+		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
 		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
-		return (texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z) ? 1.0 : 0.0;
+		return float(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
 		
 	#else
 		
@@ -119,12 +119,10 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		float randomAngle = dither * 2.0 * PI;
-		mat2 rotationMatrix;
-		rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle));
-		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle));
 		float noiseMult = SHADOWS_NOISE / shadowMapResolution * 3.0 * (1.0 + 2.0 * length(shadowPos.xy - 0.5));
-		rotationMatrix[0] *= noiseMult;
-		rotationMatrix[1] *= noiseMult;
+		mat2 rotationMatrix;
+		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * noiseMult;
+		rotationMatrix[0] = vec2(-rotationMatrix[1].y, rotationMatrix[1].x);
 		
 		float shadowBrightness = 0.0;
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {

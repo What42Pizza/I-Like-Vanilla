@@ -1184,6 +1184,10 @@ option.WEATHER_HORIZONTAL_AMOUNT=Weather Horizontal Amount
 option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
 value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
+option.SKY_WEATHER_BRIGHTNESS=Sky Weather Brightness
+option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing
+value.SKY_WEATHER_BRIGHTNESS.-1=Use Style
+
 
 
 

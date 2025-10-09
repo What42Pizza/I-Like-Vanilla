@@ -26,7 +26,7 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	for (int i = 0; i < SUNRAYS_QUALITY; i ++) {
 		
 		vec3 distortedShadowPos = getDistortedShadowPos(shadowPos  ARGS_IN);
-		float diff = texture2D(shadowtex0, distortedShadowPos.xy).r - distortedShadowPos.z;
+		float diff = texelFetch(shadowtex0, ivec2(distortedShadowPos.xy * shadowMapResolution), 0).r - distortedShadowPos.z;
 		if (diff > 0.0) {
 			total += 1.0;
 		} else {
