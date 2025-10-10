@@ -1,6 +1,10 @@
-- v1.0.7 (25/08/18)
+- v1.0.7 (25/10/09)
+  - Settings changes:
+    - Added setting 'Sky Weather Brightness'
+	- Added setting 'Underground Fog Brightness'
+	- Removed setting 'Darken Sky Underground'
+  - Tweaked lighting
   - Fixed bugs
-  - Added setting 'Sky Weather Brightness'
 
 <br>
 

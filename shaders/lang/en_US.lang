@@ -1155,12 +1155,6 @@ value.SUN_BRIGHTNESS.-1=Use Style
 option.MOON_BRIGHTNESS=Moon Brightness
 value.MOON_BRIGHTNESS.-1=Use Style
 
-option.DARKEN_SKY_UNDERGROUND=Darken Sky Underground
-option.DARKEN_SKY_UNDERGROUND.comment=Darken the sky when underground (has no effect when Distant Horizons is enabled)
-value.DARKEN_SKY_UNDERGROUND.-1=Use Style
-value.DARKEN_SKY_UNDERGROUND.0=Off
-value.DARKEN_SKY_UNDERGROUND.1=On
-
 option.STARS_BRIGHTNESS=Stars Brightness
 value.STARS_BRIGHTNESS.-1=Use Style
 
@@ -1385,6 +1379,10 @@ value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
 option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground
 value.UNDERGROUND_FOG_DENSITY.-1=Use Style
+
+option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
+option.UNDERGROUND_FOG_BRIGHTNESS.comment=Defines the brightness of underground fog (and the brightness of the sky while underground)
+value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
 
 option.WEATHER_FOG_DENSITY=Rain Fog Density
 option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing

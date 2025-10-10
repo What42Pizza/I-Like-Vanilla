@@ -6,7 +6,7 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	float blockDepth = toBlockDepth(depth  ARGS_IN);
-	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.25;
+	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.2;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
@@ -110,7 +110,7 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 		const float bloomAmount = BLOOM_END_AMOUNT;
 	#endif
 	
-	bloomAddition *= 1.0 - 0.8 * getLum(color);
-	color += bloomAddition * bloomAmount * 0.2;
+	bloomAddition *= 1.0 - 0.75 * getLum(color);
+	color += bloomAddition * bloomAmount * 0.5;
 	
 }

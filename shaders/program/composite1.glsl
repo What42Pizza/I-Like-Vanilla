@@ -91,7 +91,7 @@ void main() {
 	float fogDensity = fogDensity;
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		atmoFogColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
+		atmoFogColor = getSkyColor(normalize(viewPos)  ARGS_IN);
 		#include "/import/blindness.glsl"
 		atmoFogColor *= 1.0 - blindness;
 		#include "/import/darknessFactor.glsl"
@@ -150,10 +150,10 @@ void main() {
 	// ======== BLOOM FILTERING ======== //
 	
 	#if BLOOM_ENABLED == 1
-		float bloomMult = getLum(color * vec3(2.0, 1.0, 0.4));
+		float bloomMult = dot(color, vec3(1.0, 0.8, 0.4) * 0.5);
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
-		bloomMult = sqrt(bloomMult);
+		bloomMult *= bloomMult;
 		vec3 bloomColor = color * bloomMult;
 	#endif
 	

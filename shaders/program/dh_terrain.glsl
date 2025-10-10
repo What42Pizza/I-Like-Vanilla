@@ -72,9 +72,10 @@ void main() {
 	
 	
 	glcolor *= 0.98;
-	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.15;
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.95) * 1.05;
 	glcolor = (glcolor - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	glcolor = mix(vec3(getLum(glcolor)), glcolor, 1.0 - TEXTURE_CONTRAST * 0.3);
+	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.0 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
