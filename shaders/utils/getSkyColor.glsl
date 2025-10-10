@@ -15,7 +15,7 @@
 
 
 
-vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
+vec3 getSkyColor(vec3 viewDir  ARGS_OUT) {
 	
 	#ifdef OVERWORLD
 		
@@ -64,14 +64,12 @@ vec3 getSkyColor(vec3 viewDir, const bool darkenUndergroundSky  ARGS_OUT) {
 		skyColor *= 1.2;
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
-		#if DARKEN_SKY_UNDERGROUND == 1 && defined OVERWORLD
-			if (darkenUndergroundSky) {
-				#include "/import/horizonAltitudeAddend.glsl"
-				#include "/import/eyeBrightnessSmooth.glsl"
-				float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light
-				float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
-				skyColor = mix(vec3(0.25), skyColor, darkenMult);
-			}
+		#ifdef OVERWORLD
+			#include "/import/horizonAltitudeAddend.glsl"
+			#include "/import/eyeBrightnessSmooth.glsl"
+			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light
+			float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
+			skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		#endif
 		
 		return skyColor;

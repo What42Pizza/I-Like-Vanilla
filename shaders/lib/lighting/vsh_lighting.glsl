@@ -5,26 +5,6 @@ void doVshLighting(float depth  ARGS_OUT) {
 	#include "/import/darknessLightFactor.glsl"
 	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);
 	
-	#ifdef SHADER_GBUFFERS_TERRAIN
-		bool doSideShading = (materialId % 100) - (materialId % 10) != 10;
-	#else
-		const bool doSideShading = true;
-	#endif
-	
-	if (doSideShading) {
-		vec3 shadingNormals = vec3(abs(gl_Normal.x), gl_Normal.y, abs(gl_Normal.z));
-		#ifdef SHADER_DH_TERRAIN
-			const vec3 sideShadingVec = vec3(-0.9, 0.4, -0.5);
-		#else
-			const vec3 sideShadingVec = vec3(-0.5, 0.3, -0.25);
-		#endif
-		float sideShading = dot(shadingNormals, sideShadingVec);
-		sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(lmcoord.x, lmcoord.y)) * 0.5;
-		glcolor.rgb *= 1.0 + sideShading;
-	} else {
-		glcolor.rgb *= 1.1;
-	}
-	
 	#if defined SHADER_GBUFFERS_TERRAIN || defined SHADER_GBUFFERS_WATER
 		int brightnessDecreaseInt = ((materialId % 100000) - (materialId % 10000)) / 10000;
 		float brightnessDecrease = brightnessDecreaseInt * 0.015 * BRIGHT_BLOCK_DECREASE;

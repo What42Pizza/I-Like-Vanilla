@@ -122,6 +122,8 @@ void main() {
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
 	
+	if ((materialId % 100) - (materialId % 10) == 10) normal = encodeNormal(vec3(0.0, 1.0, 0.0));
+	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = float(gl_Normal.y > 0.9 && lmcoord.x < 0.5);

@@ -24,7 +24,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 1.0
+										#define SIDE_SHADING_DARK 0.85
 #endif
 #if BRIGHT_BLOCK_DECREASE == -1
 #undef BRIGHT_BLOCK_DECREASE
@@ -74,7 +74,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.95
+										#define FOLIAGE_SATURATION 0.9
 #endif
 
 
@@ -83,11 +83,11 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.03
+										#define SKYLIGHT_DAY_RED 1.05
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 1.01
+										#define SKYLIGHT_DAY_GREEN 1.02
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -99,11 +99,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.95
+										#define AMBIENT_DAY_RED 0.93
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.97
+										#define AMBIENT_DAY_GREEN 0.96
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -111,7 +111,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 1.05
+										#define AMBIENT_DAY_BRIGHTNESS 1.0
 #endif
 
 
@@ -955,10 +955,6 @@
 #undef MOON_BRIGHTNESS
 										#define MOON_BRIGHTNESS 1.0
 #endif
-#if DARKEN_SKY_UNDERGROUND == -1
-#undef DARKEN_SKY_UNDERGROUND
-										#define DARKEN_SKY_UNDERGROUND 1
-#endif
 #if STARS_BRIGHTNESS == -1
 #undef STARS_BRIGHTNESS
 										#define STARS_BRIGHTNESS 1.3
@@ -1169,7 +1165,11 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 0.8
+										#define UNDERGROUND_FOG_DENSITY 1.6
+#endif
+#if UNDERGROUND_FOG_BRIGHTNESS == -1
+#undef UNDERGROUND_FOG_BRIGHTNESS
+										#define UNDERGROUND_FOG_BRIGHTNESS 0.25
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY

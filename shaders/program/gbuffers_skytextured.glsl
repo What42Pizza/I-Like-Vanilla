@@ -1,6 +1,5 @@
 #ifdef FIRST_PASS
 	in_out vec2 texcoord;
-	in_out vec3 skyColor;
 	#ifdef END
 		in_out vec3 glcolor;
 	#endif
@@ -63,10 +62,6 @@ void main() {
 	#ifdef END
 		glcolor = gl_Color.rgb;
 	#endif
-	
-	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
-	skyColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

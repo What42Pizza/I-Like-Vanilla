@@ -64,8 +64,8 @@ void main() {
 			skyColor = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
 		#else
 			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
-			skyColor = getSkyColor(normalize(viewPos), true  ARGS_IN);
-			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - skyColor);
+			skyColor = getSkyColor(normalize(viewPos)  ARGS_IN);
+			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.75 * skyColor);
 		#endif
 	}
 	
