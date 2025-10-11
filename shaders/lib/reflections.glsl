@@ -31,7 +31,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 	int hitCount = 0;
 	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
 		
-		float realDepth = texture2D(DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
+		float realDepth = texture2D(DEPTH_BUFFER_WO_TRANS_OR_HANDHELD, screenPos.xy).r;
 		#ifdef DISTANT_HORIZONS
 			vec3 realBlockViewPos = screenToView(vec3(texcoord, realDepth)  ARGS_IN);
 			float realDepthDh = texture2D(DH_DEPTH_BUFFER_WO_TRANS, screenPos.xy).r;
@@ -48,8 +48,12 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 				reflectionPos = screenPos.xy;
 				error = 0;
 				if (realDepth < initialDepth) {
-					vec2 start = endMat(gbufferProjection * startMat(viewPos)).xy * 0.5 + 0.5;
-					reflectionPos = mix(start, reflectionPos, dither);
+					if (stepVector.z > 0.0) {
+						vec2 start = endMat(gbufferProjection * startMat(viewPos)).xy * 0.5 + 0.5;
+						reflectionPos = mix(start, reflectionPos, dither);
+					} else {
+						error = 1;
+					}
 				}
 				return;
 			}

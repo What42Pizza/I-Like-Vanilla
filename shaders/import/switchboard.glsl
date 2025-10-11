@@ -130,9 +130,6 @@
 	#ifdef import_velocity
 		uniform float velocity;
 	#endif
-	#ifdef import_sharpenVelocityFactor
-		uniform float sharpenVelocityFactor;
-	#endif
 	#ifdef import_betterRainStrength
 		uniform float betterRainStrength;
 	#endif

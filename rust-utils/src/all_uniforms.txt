@@ -42,7 +42,6 @@ vec2 viewSize = vec2(0.0)
 vec2 pixelSize = vec2(0.0)
 int frameMod8 = 0
 float velocity = 0.0
-float sharpenVelocityFactor = 0.0
 float betterRainStrength = 0.0
 float horizonAltitudeAddend = 0.0
 bool isSun = false

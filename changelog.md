@@ -1,3 +1,8 @@
+- v1.0.8
+  - Fixed bugs
+
+<br>
+
 - v1.0.7 (25/10/09)
   - Settings changes:
     - Added setting 'Sky Weather Brightness'
