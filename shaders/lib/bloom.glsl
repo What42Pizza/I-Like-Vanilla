@@ -111,6 +111,6 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 	#endif
 	
 	bloomAddition *= 1.0 - 0.75 * getLum(color);
-	color += bloomAddition * bloomAmount * 0.5;
+	color += bloomAddition * bloomAmount * 0.45;
 	
 }

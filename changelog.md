@@ -1,5 +1,6 @@
 - v1.0.8
   - Improved reflections and sharpening
+  - Tweaked many settings
   - Fixed bugs
 
 <br>

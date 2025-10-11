@@ -42,24 +42,11 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 		#endif
 		float realToScreen = screenPos.z - realDepth;
 		
-		if (realToScreen > 0.0) {
+		if (realToScreen > 0.0 && realToScreen < sqrt(stepVector.z) * 0.5) {
 			hitCount ++;
 			if (hitCount >= 5) { // converged on point
 				reflectionPos = screenPos.xy;
 				error = 0;
-				if (realToScreen > 0.002) {
-					//vec2 start = endMat(gbufferProjection * startMat(viewPos)).xy * 0.5 + 0.5;
-					//reflectionPos = mix(start, reflectionPos, dither);
-					error = 1;
-				}
-				//if (realDepth < initialDepth) {
-				//	if (stepVector.z > 0.0) {
-				//		vec2 start = endMat(gbufferProjection * startMat(viewPos)).xy * 0.5 + 0.5;
-				//		reflectionPos = mix(start, reflectionPos, dither);
-				//	} else {
-				//		error = 1;
-				//	}
-				//}
 				return;
 			}
 			stepVector *= 0.5;
