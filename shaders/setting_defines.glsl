@@ -439,6 +439,8 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 #define REFLECTIVE_EVERYTHING -1 // [-1 0 1]
 //#define SIMPLE_SHARPENING
 
+#define EXPERIMENTAL_FIXES -1 // [-1 0 1]
+
 
 
 #define SSS_PIXELS 0 // [0 720 480 360 240 200 144 120 100 72 50]

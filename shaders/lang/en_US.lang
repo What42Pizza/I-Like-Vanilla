@@ -1575,6 +1575,12 @@ value.REFLECTIVE_EVERYTHING.-1=Use Style
 value.REFLECTIVE_EVERYTHING.0=Off
 value.REFLECTIVE_EVERYTHING.1=On
 
+option.EXPERIMENTAL_FIXES=Experimental Fixes
+option.EXPERIMENTAL_FIXES.comment=Toggle new fixes and behavior currently under test. Disable if something looks wrong.
+value.EXPERIMENTAL_FIXES.-1=Use Style
+value.EXPERIMENTAL_FIXES.0=Off
+value.EXPERIMENTAL_FIXES.1=On
+
 
 
 
