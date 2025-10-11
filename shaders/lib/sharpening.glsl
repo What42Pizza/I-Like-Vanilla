@@ -98,19 +98,20 @@ void doSharpening(inout vec3 color, float depth  ARGS_OUT) {
 		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION;
 	#endif
 	
-	//#ifdef SIMPLE_SHARPENING
+	#ifdef SIMPLE_SHARPENING
 		
-	//	float linearDepth = toLinearDepth(depth  ARGS_IN);
-	//	#include "/import/far.glsl"
-	//	float blockDepth = clamp(linearDepth * far - 8.0, 0.0, 128.0);
+		float linearDepth = toLinearDepth(depth  ARGS_IN);
+		#include "/import/far.glsl"
+		float blockDepth = clamp(linearDepth * far - 8.0, 0.0, 128.0);
 		
-	//	#include "/import/sharpenVelocityFactor.glsl"
-	//	float velocityFactor = sharpenVelocityFactor * alteredSharpenVelocityAddition;
-	//	float depthAddition = alteredSharpenDepthAddition * 0.033 + velocityFactor * 0.019;
-	//	float sharpenAmount = alteredSharpenAmount * 0.36 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.38;
-	//	color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
+		#include "/import/cameraPosition.glsl"
+		#include "/import/previousCameraPosition.glsl"
+		float velocityFactor = float(cameraPosition != previousCameraPosition) * alteredSharpenVelocityAddition;
+		float depthAddition = alteredSharpenDepthAddition * 0.033 + velocityFactor * 0.019;
+		float sharpenAmount = alteredSharpenAmount * 0.36 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.39;
+		color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 		
-	//#else
+	#else
 		
 		float linearDepth = toLinearDepth(depth  ARGS_IN);
 		#include "/import/far.glsl"
@@ -122,6 +123,6 @@ void doSharpening(inout vec3 color, float depth  ARGS_OUT) {
 		float sharpenAmount = alteredSharpenAmount * 0.36 + sqrt(blockDepth) * depthAddition + velocityFactor * 0.39;
 		color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 	
-	//#endif
+	#endif
 	
 }
