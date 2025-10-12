@@ -389,7 +389,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.0
+										#define BLOOM_AMOUNT 0.9
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -422,7 +422,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.7
+										#define AO_AMOUNT 0.75
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

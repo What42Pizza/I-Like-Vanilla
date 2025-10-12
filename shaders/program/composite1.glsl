@@ -97,7 +97,7 @@ void main() {
 		#include "/import/darknessFactor.glsl"
 		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
-			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, brightnesses.y);
+			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			#include "/import/betterRainStrength.glsl"
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
 			#include "/import/dayPercent.glsl"
