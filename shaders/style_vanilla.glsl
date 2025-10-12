@@ -350,11 +350,11 @@
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.15
+										#define END_AMBIENT_BLUE 1.05
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
-										#define END_AMBIENT_BRIGHTNESS 0.5
+										#define END_AMBIENT_BRIGHTNESS 0.45
 #endif
 
 
@@ -393,7 +393,7 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 2.5
+										#define BLOOM_NETHER_AMOUNT 1.3
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT

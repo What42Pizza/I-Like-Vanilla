@@ -142,7 +142,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_OUT) {
 	
 	// get normal dot sun/moon pos
-	#ifdef OVERWORLD
+	#if defined OVERWORLD || defined END
 		#include "/import/shadowLightPosition.glsl"
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 	#else
@@ -246,6 +246,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	shadowBrightness *= 1.0 - rainDecrease;
 	
 	vec3 skyLighting = shadowcasterLight * shadowBrightness;
+	skyLighting *= 1.0 + 0.5 * sideShading;
 	ambientLight *= 1.0 - shadowBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;

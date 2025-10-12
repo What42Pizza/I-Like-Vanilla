@@ -5,6 +5,6 @@ If you find an issue with the shader, please report it [here](https://github.com
 <br>
 
 - **[Repository](https://github.com/What42Pizza/I-Like-Vanilla)**
-- **[Official Download](https://modrinth.com/shader/what42s-shader-base)** (Modrinth, recommended)
-- **[Official Download](https://legacy.curseforge.com/minecraft/shaders/what42s-shader-base)** (CurseForge)
+- **[Official Download](https://modrinth.com/shader/i-like-vanilla)** (Modrinth, recommended)
+- **[Official Download](https://www.curseforge.com/minecraft/shaders/i-like-vanilla)** (CurseForge)
 - **[License](LICENSE)**
