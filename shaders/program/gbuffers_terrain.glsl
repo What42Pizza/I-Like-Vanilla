@@ -6,6 +6,7 @@
 	flat in_out vec2 normal;
 	flat in_out int materialId;
 	in_out vec3 playerPos;
+	in_out float specularMult;
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		in_out float isDangerousLight;
@@ -57,7 +58,7 @@ void main() {
 	
 	
 	reflectiveness *= ((materialId % 1000 - materialId % 100) / 100) * 0.15 * mix(BLOCK_REFLECTION_AMOUNT_UNDERGROUND, BLOCK_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
-	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
+	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11 * specularMult;
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -122,7 +123,12 @@ void main() {
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
 	
-	if ((materialId % 100) - (materialId % 10) == 10) normal = encodeNormal(vec3(0.0, 1.0, 0.0));
+	if ((materialId % 100) - (materialId % 10) == 10) {
+		normal = encodeNormal(gl_NormalMatrix * vec3(0.0, 1.0, 0.0));
+		specularMult = 0.25;
+	} else {
+		specularMult = 1.0;
+	}
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1

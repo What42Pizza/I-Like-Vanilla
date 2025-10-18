@@ -36,7 +36,7 @@
 #endif
 #if WEATHER_BRIGHTNESS_MULT == -1
 #undef WEATHER_BRIGHTNESS_MULT
-										#define WEATHER_BRIGHTNESS_MULT 0.7
+										#define WEATHER_BRIGHTNESS_MULT 0.6
 #endif
 
 
@@ -74,7 +74,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.9
+										#define FOLIAGE_SATURATION 0.92
 #endif
 
 
@@ -488,7 +488,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.4
+										#define SUNRAYS_AMOUNT_DAY 0.35
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT

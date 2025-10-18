@@ -63,6 +63,14 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	
 	vec3 ambientLight = getAmbientLight(ambientBrightness  ARGS_IN);
 	
+	#include "/import/gbufferModelViewInverse.glsl"
+	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
+	worldNormal.xz = abs(worldNormal.xz);
+	float sideShading = dot(worldNormal, vec3(-0.5, 0.3, -0.15));
+	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(blockBrightness, ambientBrightness)) * 0.85;
+	ambientLight *= 1.0 + sideShading;
+	blockBrightness *= 1.0 + sideShading;
+	
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
 		#include "/import/blockFlickerAmount.glsl"
 		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT;
