@@ -74,7 +74,12 @@ void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 norm
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
 	vec3 skyColor = getSkyColor(reflectionDirection  ARGS_IN);
 	#include "/import/eyeBrightnessSmooth.glsl"
-	vec3 alteredSkyColor = skyColor * max(eyeBrightnessSmooth.x * 0.5 / 240.0 * 0.99, eyeBrightnessSmooth.y / 240.0 * 0.99);
+	skyColor *= max(eyeBrightnessSmooth.x * 0.5 / 240.0 * 0.99, eyeBrightnessSmooth.y / 240.0 * 0.99);
+	#include "/import/isEyeInWater.glsl"
+	if (isEyeInWater == 1) {
+		skyColor = 0.08 + 0.125 * skyColor;
+		skyColor += vec3(0.0, 0.03, 0.3);
+	}
 	
 	const float inputColorWeight = 0.2;
 	
@@ -82,9 +87,9 @@ void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 norm
 	if (error == 0) {
 		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb * 2.0;
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
-		reflectionColor = mix(alteredSkyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
+		reflectionColor = mix(skyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
 	} else {
-		reflectionColor = alteredSkyColor;
+		reflectionColor = skyColor;
 	}
 	reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
 	color = mix(color, reflectionColor, reflectionStrength);
