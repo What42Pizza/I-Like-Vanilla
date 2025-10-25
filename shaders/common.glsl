@@ -112,6 +112,12 @@ float getLum(vec3 color) {
 	return dot(color, vec3(0.2125, 0.7154, 0.0721));
 }
 
+float getSaturation(vec3 v) {
+    float maxv = max(max(v.r, v.g), v.b);
+    float minv = min(min(v.r, v.g), v.b);
+    return (maxv == 0.0) ? 0.0 : (maxv - minv) / maxv;
+}
+
 vec3 smoothMin(vec3 v1, vec3 v2, float a) {
 	float v1Lum = getLum(v1);
 	float v2Lum = getLum(v2);

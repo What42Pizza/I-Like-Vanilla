@@ -1,3 +1,9 @@
+- v1.0.9 (25/10/24)
+  - Tweaked effects and settings
+  - Fixed bugs
+
+<br>
+
 - v1.0.8 (25/10/12)
   - Improved reflections and sharpening
   - Tweaked many settings
