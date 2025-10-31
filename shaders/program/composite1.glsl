@@ -150,7 +150,7 @@ void main() {
 	// ======== BLOOM FILTERING ======== //
 	
 	#if BLOOM_ENABLED == 1
-		float bloomMult = dot(color, vec3(1.0, 0.8, 0.4) * 0.5);
+		float bloomMult = dot(color, vec3(1.0, 0.8, 0.0) * 0.5);
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
 		bloomMult *= bloomMult;

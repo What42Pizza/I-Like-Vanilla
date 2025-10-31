@@ -35,6 +35,7 @@ void main() {
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
 		gl_Position = ftransform();
+		gl_Position.z -= 0.0001;
 	#endif
 	
 	#if TAA_ENABLED == 1

@@ -17,7 +17,6 @@ Make data buffers store ints
 Other planned:
 Test replacing all `1-(1-x)(1-x)` with `x(2-x)`
 Try out 'alphatest.program' and 'blend.program' (in shader.properties, see photon for good examples)
-Add 'dither or noise' options to everything that uses dithering or noise (maybe not idk)
 turn betterNightVision into a uniform?
 Add generalized volumetrics?
 Make reflections (especially on water) noticeable at night

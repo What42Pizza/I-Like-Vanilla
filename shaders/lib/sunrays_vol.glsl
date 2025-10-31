@@ -20,7 +20,15 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	float dither = bayer64(gl_FragCoord.xy);
 	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	shadowPos += shadowPosStep * (dither - 0.5);
+	
+	// good values: 21.0015, 22.001, 0.02
+	#ifdef GRADIENT_NOISE_SPEED
+		#undef GRADIENT_NOISE_SPEED
+	#endif
+	#define GRADIENT_NOISE_SPEED 21.0015
+	#include "/utils/var_gradient_noise.glsl"
+	
+	shadowPos += shadowPosStep * (noise - 0.0);
 	
 	float total = 0.0;
 	for (int i = 0; i < SUNRAYS_QUALITY; i ++) {
@@ -36,7 +44,16 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 		shadowPos += shadowPosStep;
 		
 	}
-	float sunraysAmount = total / SUNRAYS_QUALITY * blockDepth * distMult;
+	float sunraysAmount = total / SUNRAYS_QUALITY;
+	sunraysAmount *= sunraysAmount;
+	sunraysAmount *= blockDepth * distMult;
+	
+	float dx = dFdx(sunraysAmount);
+	if ((int(gl_FragCoord.x) & 1) == 1) dx = -dx;
+	sunraysAmount += dx * 0.25;
+	float dy = dFdy(sunraysAmount);
+	if ((int(gl_FragCoord.y) & 1) == 1) dy = -dy;
+	sunraysAmount += dy * 0.25;
 	
 	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;
@@ -44,6 +61,7 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	vec2 blockLmCoords = unpackVec2(texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).x);
 	sunraysAmount += (sunraysAmount > 0.0 ? 1.0 : 0.0) * amountMin * (0.3 + 1.5 * blockLmCoords.y);
 	sunraysAmount *= 0.01;
+	//sunraysAmount *= sunraysAmount * 0.001;
 	
 	return sunraysAmount;
 }

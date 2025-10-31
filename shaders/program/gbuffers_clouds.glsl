@@ -12,9 +12,19 @@
 
 #ifdef FSH
 
+#ifdef DISTANT_HORIZONS
+	#include "/utils/depth.glsl"
+#endif
+
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.1) discard;
+	
+	#ifdef DISTANT_HORIZONS
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		float blockDepthDh = toBlockDepthDh(depthDh  ARGS_IN);
+		if (blockDepthDh < length(playerPos)) discard;
+	#endif
 	
 	float playerPosDist = max(length(playerPos.xz), abs(playerPos.y));
 	color.a = 1.0 - mix(NEARBY_CLOUD_TRANSPARENCY, VANILLA_CLOUD_TRANSPARENCY, clamp(playerPosDist / NEARBY_CLOUD_DIST, 0.0, 1.0));

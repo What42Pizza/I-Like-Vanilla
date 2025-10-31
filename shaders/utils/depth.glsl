@@ -46,9 +46,9 @@ float toBlockDepth(float depth  ARGS_OUT) {
 	}
 	
 	float toBlockDepthDh(float depth  ARGS_OUT) {
-	#include "/import/dhNearPlane.glsl"
-	#include "/import/dhFarPlane.glsl"
-		return mix(dhNearPlane, dhFarPlane, toLinearDepth(depth  ARGS_IN));
+		#include "/import/dhNearPlane.glsl"
+		#include "/import/dhFarPlane.glsl"
+		return mix(dhNearPlane, dhFarPlane, toLinearDepthDh(depth  ARGS_IN));
 	}
 	
 #endif

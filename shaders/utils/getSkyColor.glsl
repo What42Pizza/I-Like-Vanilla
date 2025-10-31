@@ -33,11 +33,7 @@ vec3 getSkyColor(vec3 viewDir  ARGS_OUT) {
 		vec3 skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
 		#include "/import/inPaleGarden.glsl"
 		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.35), inPaleGarden);
-		#ifndef SKIP_SKY_NOISE
-			#include "/utils/var_rng.glsl"
-			upDot += randomFloat(rng) * 0.08 * (1.0 - 0.8 * sqrt(getLum(skyColor)));
-		#endif
-		upDot = clamp(upDot, 0.0, 1.0);// + 0.01;
+		upDot = clamp(upDot, 0.0, 1.0);
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.2 * dayPercent), inPaleGarden);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));

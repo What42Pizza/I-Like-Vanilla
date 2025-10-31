@@ -389,7 +389,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.7
+										#define BLOOM_AMOUNT 1.25
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -546,15 +546,15 @@
 
 #if SUNRAYS_MIN_SURFACE == -1
 #undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 10
+										#define SUNRAYS_MIN_SURFACE 2
 #endif
 #if SUNRAYS_MIN_UNDERGROUND == -1
 #undef SUNRAYS_MIN_UNDERGROUND
-										#define SUNRAYS_MIN_UNDERGROUND 90
+										#define SUNRAYS_MIN_UNDERGROUND 8
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.4
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.35
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
