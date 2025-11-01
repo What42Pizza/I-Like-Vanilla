@@ -13,7 +13,6 @@ uniform sampler2D colortex2;
 uniform sampler2D colortex3;
 uniform sampler2D colortex4;
 uniform sampler2D colortex5;
-uniform sampler2D colortex6;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D depthtex2;
@@ -42,12 +41,11 @@ uniform sampler2D shadowtex0;
 // buffer values:
 
 #define MAIN_TEXTURE              tex
-#define MAIN_TEXTURE_COPY         colortex1
-#define OPAQUE_DATA_TEXTURE       colortex2
-#define TRANSPARENT_DATA_TEXTURE  colortex3
-#define PREV_TEXTURE              colortex4
-#define BLOOM_TEXTURE             colortex5
-#define SKY_OBJECTS_TEXTURE       colortex6
+#define OPAQUE_DATA_TEXTURE       colortex1
+#define TRANSPARENT_DATA_TEXTURE  colortex2
+#define PREV_TEXTURE              colortex3
+#define BLOOM_TEXTURE             colortex4
+#define SKY_OBJECTS_TEXTURE       colortex5
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1
@@ -157,6 +155,7 @@ float bayer128(vec2 a) { return 0.25 * bayer64 (0.5 * a) + bayer2(a); }
 float bayer256(vec2 a) { return 0.25 * bayer128(0.5 * a) + bayer2(a); }
 
 float packVec2(vec2 v) {
+	v *= 0.99;
     return floor(v.x * 255.0 + 0.5) / 256.0 + v.y / 256.0;
 }
 
@@ -166,7 +165,7 @@ vec2 unpackVec2(float v) {
     v *= 256.0;
     float a = floor(v) / 255.0;
     float b = fract(v);
-    return vec2(a, b);
+    return vec2(a, b) / 0.99;
 }
 
 // octahedral encoding/decoding

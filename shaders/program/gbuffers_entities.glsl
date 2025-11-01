@@ -28,7 +28,7 @@ void main() {
 	color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:01 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(

@@ -44,7 +44,7 @@ void main() {
 	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal  ARGS_IN);
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:01 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(

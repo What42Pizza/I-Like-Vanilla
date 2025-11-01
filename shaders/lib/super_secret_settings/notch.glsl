@@ -22,7 +22,7 @@ void sss_notch(inout vec3 color  ARGS_OUT) {
 	
 	ivec2 noiseCoord = ivec2(steppedCoord * halfSize * 2);
 	float noise = notch_dither[(noiseCoord.x % 4) + (noiseCoord.y % 4) * 4];
-	vec3 col = texture2D(MAIN_TEXTURE_COPY, steppedCoord).rgb * 2.0 + noise * vec3(RG_NOISE, RG_NOISE, B_NOISE);
+	vec3 col = texture2D(MAIN_TEXTURE, steppedCoord).rgb * 2.0 + noise * vec3(RG_NOISE, RG_NOISE, B_NOISE);
 	float r = floor(col.r * QUALITY) / QUALITY;
 	float g = floor(col.g * QUALITY) / QUALITY;
 	float b = floor(col.b * B_QUALITY) / B_QUALITY;

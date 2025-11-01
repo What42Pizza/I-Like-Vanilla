@@ -22,7 +22,7 @@ void main() {
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:01 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(

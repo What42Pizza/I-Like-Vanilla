@@ -34,7 +34,7 @@ void main() {
 	
 	
 	
-	/* DRAWBUFFERS:1 */
+	/* DRAWBUFFERS:0 */
 	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	

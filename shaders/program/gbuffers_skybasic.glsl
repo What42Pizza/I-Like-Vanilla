@@ -7,7 +7,7 @@
 #ifdef FSH
 
 void main() {
-	/* DRAWBUFFERS:6 */
+	/* DRAWBUFFERS:5 */
 	gl_FragData[0] = vec4(color, 1.0);
 }
 

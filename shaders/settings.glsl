@@ -2,14 +2,12 @@
 /*
 const int   colortex0Format       = RGB16F;
 const bool  colortex0Clear        = false;
-const int   colortex1Format       = RGB16F;
+const int   colortex1Format       = RGB16;
 const bool  colortex1Clear        = false;
 const int   colortex2Format       = RGB16;
-const bool  colortex2Clear        = false;
-const int   colortex3Format       = RGB16;
-const int   colortex4Format       = RGB16F;
+const int   colortex3Format       = RGB16F;
+const bool  colortex3Clear        = false;
 const bool  colortex4Clear        = false;
-const bool  colortex5Clear        = false;
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Clear       = false;
 const float wetnessHalflife       = 50.0f;

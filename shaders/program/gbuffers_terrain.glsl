@@ -61,7 +61,7 @@ void main() {
 	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11 * specularMult;
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:01 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
