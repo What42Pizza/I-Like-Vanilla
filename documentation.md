@@ -214,13 +214,13 @@ This describes which /main_files-s handle different effects
 - **colortex0:  Main Image** (stored with 0.5 multiplier)
 - **colortex1:  Main Image Copy** (stored with 0.5 multiplier)
 - **colortex2:  Opaque Data**
-- - x: lmcoord.x & lmcoord.y
-- - y: normal x & normal y
-- - z: reflectiveness & specular amount
+- - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
+- - y: normal x (8-bit) & normal y (8-bit)
+- - z: reflectiveness (8-bit) & specular amount (8-bit)
 - **colortex3:  Transparent Data**
-- - x: lmcoord.x & lmcoord.y
-- - y: normal x & normal y
-- - z: reflectiveness & is cloud
+- - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
+- - y: normal x (8-bit) & normal y (8-bit)
+- - z: reflectiveness (8-bit) & is cloud (8-bit)
 - **colortex4:  Prev Texture** (stored with 0.5 multiplier)
 - **colortex5:  Bloom Texture** (stored with 0.5 multiplier)
 - **colortex6:  Sky Objects Texture**

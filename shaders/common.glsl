@@ -157,18 +157,16 @@ float bayer128(vec2 a) { return 0.25 * bayer64 (0.5 * a) + bayer2(a); }
 float bayer256(vec2 a) { return 0.25 * bayer128(0.5 * a) + bayer2(a); }
 
 float packVec2(vec2 v) {
-	int bits = 0x3F000000; // 0b00111111000000000000000000000000, the perfect float
-	ivec2 vInt = ivec2(v * 2047.0 + 0.5);
-	bits += vInt.x + (vInt.y << 11);
-	return intBitsToFloat(bits);
+    return floor(v.x * 255.0 + 0.5) / 256.0 + v.y / 256.0;
 }
 
 float packVec2(float x, float y) {return packVec2(vec2(x, y));}
 
 vec2 unpackVec2(float v) {
-	int bits = floatBitsToInt(v);
-	ivec2 vInt = ivec2(bits & 0x7FF, (bits & 0x3ff800) >> 11);
-	return vInt / 2047.0;
+    v *= 256.0;
+    float a = floor(v) / 255.0;
+    float b = fract(v);
+    return vec2(a, b);
 }
 
 // octahedral encoding/decoding
