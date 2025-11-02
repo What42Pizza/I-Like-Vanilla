@@ -46,12 +46,5 @@ float getDepthSunraysAmount(ARG_OUT) {
 	float sunraysAmount = sqrt(total);
 	sunraysAmount *= max(1.0 - length(lightCoord - 0.5) * 1.2, 0.0);
 	
-	float dx = dFdx(sunraysAmount);
-	if ((int(gl_FragCoord.x) & 1) == 1) dx = -dx;
-	sunraysAmount += dx * 0.25;
-	float dy = dFdy(sunraysAmount);
-	if ((int(gl_FragCoord.y) & 1) == 1) dy = -dy;
-	sunraysAmount += dy * 0.25;
-	
 	return sunraysAmount * 0.5;
 }

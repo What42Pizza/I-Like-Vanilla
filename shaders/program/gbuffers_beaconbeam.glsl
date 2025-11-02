@@ -13,13 +13,13 @@ void main() {
 	
 	color.rgb *= 1.1;
 	
-	/* DRAWBUFFERS:01 */
+	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		packVec2(0.0, 0.25),
-		packVec2(normal),
-		packVec2(0.0, 0.0),
+		pack_2x8(0.0, 0.25),
+		pack_2x8(normal),
+		pack_2x8(0.0, 0.0),
 		1.0
 	);
 	

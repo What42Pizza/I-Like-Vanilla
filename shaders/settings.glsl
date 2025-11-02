@@ -1,13 +1,19 @@
 // optifine settings (DON'T DELETE)
 /*
-const int   colortex0Format       = RGB16F;
+const int   colortex0Format       = RGB10_A2;
 const bool  colortex0Clear        = false;
-const int   colortex1Format       = RGB16;
+const int   colortex1Format       = RGB10_A2;
 const bool  colortex1Clear        = false;
 const int   colortex2Format       = RGB16;
-const int   colortex3Format       = RGB16F;
-const bool  colortex3Clear        = false;
+const bool  colortex2Clear        = false;
+const int   colortex3Format       = RGB16;
+const bool  colortex3Clear        = true;
+const int   colortex4Format       = RGB10_A2;
 const bool  colortex4Clear        = false;
+const int   colortex5Format       = RGB10_A2;
+const bool  colortex5Clear        = true;
+const int   colortex6Format       = RG16;
+const bool  colortex6Clear        = false;
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Clear       = false;
 const float wetnessHalflife       = 50.0f;

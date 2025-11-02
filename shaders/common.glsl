@@ -13,6 +13,7 @@ uniform sampler2D colortex2;
 uniform sampler2D colortex3;
 uniform sampler2D colortex4;
 uniform sampler2D colortex5;
+uniform sampler2D colortex6;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D depthtex2;
@@ -41,11 +42,12 @@ uniform sampler2D shadowtex0;
 // buffer values:
 
 #define MAIN_TEXTURE              tex
-#define OPAQUE_DATA_TEXTURE       colortex1
-#define TRANSPARENT_DATA_TEXTURE  colortex2
-#define PREV_TEXTURE              colortex3
+#define PREV_TEXTURE              colortex1
+#define OPAQUE_DATA_TEXTURE       colortex2
+#define TRANSPARENT_DATA_TEXTURE  colortex3
 #define BLOOM_TEXTURE             colortex4
 #define SKY_OBJECTS_TEXTURE       colortex5
+#define NOISY_RENDERS_TEXTURE     colortex6
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1
@@ -111,9 +113,9 @@ float getLum(vec3 color) {
 }
 
 float getSaturation(vec3 v) {
-    float maxv = max(max(v.r, v.g), v.b);
-    float minv = min(min(v.r, v.g), v.b);
-    return (maxv == 0.0) ? 0.0 : (maxv - minv) / maxv;
+	float maxv = max(max(v.r, v.g), v.b);
+	float minv = min(min(v.r, v.g), v.b);
+	return (maxv == 0.0) ? 0.0 : (maxv - minv) / maxv;
 }
 
 vec3 smoothMin(vec3 v1, vec3 v2, float a) {
@@ -154,18 +156,14 @@ float bayer64 (vec2 a) { return 0.25 * bayer32 (0.5 * a) + bayer2(a); }
 float bayer128(vec2 a) { return 0.25 * bayer64 (0.5 * a) + bayer2(a); }
 float bayer256(vec2 a) { return 0.25 * bayer128(0.5 * a) + bayer2(a); }
 
-float packVec2(vec2 v) {
-	v *= 0.99;
-    return floor(v.x * 255.0 + 0.5) / 256.0 + v.y / 256.0;
+float pack_2x8(vec2 v) {
+	return dot(floor(255.0 * v + 0.5), vec2(1.0 / 65535.0, 256.0 / 65535.0));
 }
+float pack_2x8(float x, float y) { return pack_2x8(vec2(x, y)); }
 
-float packVec2(float x, float y) {return packVec2(vec2(x, y));}
-
-vec2 unpackVec2(float v) {
-    v *= 256.0;
-    float a = floor(v) / 255.0;
-    float b = fract(v);
-    return vec2(a, b) / 0.99;
+vec2 unpack_2x8(float pack) {
+	vec2 xy; xy.x = modf((65535.0 / 256.0) * pack, xy.y);
+	return xy * vec2(256.0 / 255.0, 1.0 / 255.0);
 }
 
 // octahedral encoding/decoding
@@ -206,9 +204,6 @@ void adjustLmcoord(inout vec2 lmcoord) {
 	lmcoord -= low;
 	lmcoord /= high - low;
 	lmcoord = clamp(lmcoord, 0.0, 1.0);
-	#ifdef END
-		lmcoord.y *= 2.0;
-	#endif
 }
 
 

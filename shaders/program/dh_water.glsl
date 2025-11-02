@@ -102,13 +102,13 @@ void main() {
 	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(encodeNormal(normal)),
-		packVec2(reflectiveness * 0.5, 0.0),
+		pack_2x8(lmcoord),
+		pack_2x8(encodeNormal(normal)),
+		pack_2x8(reflectiveness * 0.5, 0.0),
 		1.0
 	);
 	

@@ -1,4 +1,4 @@
-#version 130
+#version 140
 
 uniform sampler2D colortex7;
 uniform sampler2D shadowtex0;

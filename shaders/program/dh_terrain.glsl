@@ -32,13 +32,13 @@ void main() {
 	color = clamp(color, vec3(0.0), vec3(1.0));
 	
 	
-	/* DRAWBUFFERS:01 */
+	/* DRAWBUFFERS:02 */
 	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
 	gl_FragData[1] = vec4(
-		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(normal),
-		packVec2(0.0, 0.3),
+		pack_2x8(lmcoord),
+		pack_2x8(normal),
+		pack_2x8(0.0, 0.3),
 		1.0
 	);
 	

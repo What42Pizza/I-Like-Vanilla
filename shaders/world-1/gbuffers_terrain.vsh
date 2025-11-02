@@ -1,4 +1,4 @@
-#version 130
+#version 140
 
 #define SHADER_GBUFFERS_TERRAIN
 #define NETHER

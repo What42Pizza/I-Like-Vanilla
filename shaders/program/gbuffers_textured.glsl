@@ -44,13 +44,13 @@ void main() {
 	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal  ARGS_IN);
 	
 	
-	/* DRAWBUFFERS:01 */
+	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
-		packVec2(lmcoord.x * 0.25, lmcoord.y * 0.25),
-		packVec2(encodeNormal(normal)),
-		packVec2(0.0, 0.3),
+		pack_2x8(lmcoord),
+		pack_2x8(encodeNormal(normal)),
+		pack_2x8(0.0, 0.3),
 		1.0
 	);
 	
@@ -78,8 +78,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	//lmcoord = 0.05 + 0.95 * lmcoord;
-	lmcoord += 0.05;
+	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
 	glcolor.a = sqrt(glcolor.a);
 	normal = gl_NormalMatrix * gl_Normal;

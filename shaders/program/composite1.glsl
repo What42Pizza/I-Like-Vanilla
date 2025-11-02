@@ -15,6 +15,11 @@
 		flat in_out float volSunraysAmountMult;
 		flat in_out float volSunraysAmountMax;
 	#endif
+	#if REALISTIC_CLOUDS_ENABLED == 1
+		flat in_out vec3 cloudsShadowcasterDir;
+		flat in_out float cloudsCoverage;
+	#endif
+	
 #endif
 
 
@@ -31,10 +36,13 @@
 #if VOL_SUNRAYS_ENABLED == 1
 	#include "/lib/sunrays_vol.glsl"
 #endif
+#if REALISTIC_CLOUDS_ENABLED == 1
+	#include "/lib/clouds.glsl"
+#endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	bool isCloud = unpackVec2(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
+	bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
 	
 	float depth;
 	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
@@ -123,26 +131,29 @@ void main() {
 	
 	// ======== SUNRAYS ======== //
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
-		
-		#if DEPTH_SUNRAYS_ENABLED == 1
-			#include "/import/isSun.glsl"
-			vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
-			vec3 depthSunraysAddition = getDepthSunraysAmount(ARG_IN) * depthSunraysAmountMult * depthSunraysColor;
-			depthSunraysAddition *= 1.0 - fogAmount;
-			color += depthSunraysAddition;
-		#endif
-		#if VOL_SUNRAYS_ENABLED == 1
-			#include "/import/sunAngle.glsl"
-			vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
-			float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN) * volSunraysAmountMult;
-			rawVolSunraysAmount *= 1.0 - fogAmount;
-			float volSunraysAmount = exp(-rawVolSunraysAmount);
-			volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
-			color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-			color = mix(volSunraysColor, color, volSunraysAmount);
-		#endif
-		
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		float depthSunraysAddition = getDepthSunraysAmount(ARG_IN) * depthSunraysAmountMult;
+		depthSunraysAddition *= 1.0 - fogAmount;
+	#else
+		float depthSunraysAddition = 0.0;
+	#endif
+	#if VOL_SUNRAYS_ENABLED == 1
+		float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN);
+		rawVolSunraysAmount *= 1.0 - fogAmount;
+		float volSunraysAmount = exp(-rawVolSunraysAmount);
+		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax); // at this point, the amount is inverted (1-x)
+	#else
+		float volSunraysAmount = 1.0;
+	#endif
+	
+	
+	
+	// ======== CLOUDS RENDERING ======== //
+	
+	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
+		vec2 cloudData = computeClouds(ARG_IN);
+	#else
+		vec2 cloudData = vec2(0.0);
 	#endif
 	
 	
@@ -159,13 +170,43 @@ void main() {
 	
 	
 	
-	/* DRAWBUFFERS:0 */
-	color *= 0.5;
-	gl_FragData[0] = vec4(color, 1.0);
-	#if BLOOM_ENABLED == 1
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
+		#define NOISY_RENDERS_ACTIVE
+	#endif
+	
+	#if BLOOM_ENABLED == 0 && !defined NOISY_RENDERS_ACTIVE
+		/* DRAWBUFFERS:0 */
+		color *= 0.5;
+		gl_FragData[0] = vec4(color, 1.0);
+	#endif
+	#if BLOOM_ENABLED == 1 && !defined NOISY_RENDERS_ACTIVE
 		/* DRAWBUFFERS:04 */
+		color *= 0.5;
 		bloomColor *= 0.5;
+		gl_FragData[0] = vec4(color, 1.0);
 		gl_FragData[1] = vec4(bloomColor, 1.0);
+	#endif
+	#if BLOOM_ENABLED == 0 && defined NOISY_RENDERS_ACTIVE
+		/* DRAWBUFFERS:06 */
+		color *= 0.5;
+		gl_FragData[0] = vec4(color, 1.0);
+		gl_FragData[1] = vec4(
+			pack_2x8(depthSunraysAddition, volSunraysAmount),
+			pack_2x8(cloudData),
+			0.0, 1.0
+		);
+	#endif
+	#if BLOOM_ENABLED == 1 && defined NOISY_RENDERS_ACTIVE
+		/* DRAWBUFFERS:046 */
+		color *= 0.5;
+		bloomColor *= 0.5;
+		gl_FragData[0] = vec4(color, 1.0);
+		gl_FragData[1] = vec4(bloomColor, 1.0);
+		gl_FragData[2] = vec4(
+			pack_2x8(depthSunraysAddition, volSunraysAmount),
+			pack_2x8(cloudData),
+			0.0, 1.0
+		);
 	#endif
 	
 }
@@ -231,20 +272,28 @@ void main() {
 	
 	
 	
-	// ======== SUNRAYS ======== //
-	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		#include "/import/ambientSunPercent.glsl"
 		#include "/import/ambientMoonPercent.glsl"
 		#include "/import/ambientSunrisePercent.glsl"
 		#include "/import/ambientSunsetPercent.glsl"
-		#include "/import/rainStrength.glsl"
 		#include "/import/inPaleGarden.glsl"
 	#endif
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
+		#include "/import/rainStrength.glsl"
+	#endif
 	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
 		#include "/import/shadowLightPosition.glsl"
+	#endif
+	
+	
+	
+	// ======== SUNRAYS ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		
 		#include "/import/gbufferProjection.glsl"
 		vec3 lightPos = shadowLightPosition * mat3(gbufferProjection);
 		lightPos /= lightPos.z;
@@ -252,10 +301,10 @@ void main() {
 		
 		#include "/import/isSun.glsl"
 		if (isSun) {
-			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY;
+			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.5;
 			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		} else {
-			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT;
+			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.5;
 		}
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
@@ -266,13 +315,23 @@ void main() {
 		#include "/import/sunLightBrightness.glsl"
 		#include "/import/moonLightBrightness.glsl"
 		#include "/import/sunAngle.glsl"
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY : SUNRAYS_AMOUNT_NIGHT;
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.5 : SUNRAYS_AMOUNT_NIGHT * 0.5;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
 		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
+	#endif
+	
+	
+	
+	// ======== CLOUDS ======== //
+	
+	#if REALISTIC_CLOUDS_ENABLED == 1
+		#include "/import/gbufferModelViewInverse.glsl"
+		cloudsShadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition) * 10.0;
+		cloudsCoverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
 	#endif
 	
 	

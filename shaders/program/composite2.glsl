@@ -15,6 +15,42 @@ void main() {
 	
 	
 	
+	// ======== NOISY RENDERS ADDITION ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
+		vec2 noisyRendersData      = texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).rg;
+		#include "/import/viewWidth.glsl"
+		#include "/import/viewHeight.glsl"
+		vec2 noisyRendersDataUp    = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0,  1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
+		vec2 noisyRendersDataDown  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0, -1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
+		vec2 noisyRendersDataLeft  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2(-1,  0), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
+		vec2 noisyRendersDataRight = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 1,  0), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
+	#endif
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		vec2 sunraysDatas = unpack_2x8(noisyRendersData.x);
+		sunraysDatas += unpack_2x8(noisyRendersDataUp.x   );
+		sunraysDatas += unpack_2x8(noisyRendersDataDown.x );
+		sunraysDatas += unpack_2x8(noisyRendersDataLeft.x );
+		sunraysDatas += unpack_2x8(noisyRendersDataRight.x);
+		sunraysDatas *= 0.2;
+	#endif
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		#include "/import/isSun.glsl"
+		vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+		color += sunraysDatas.x * depthSunraysColor;
+	#endif
+	#if VOL_SUNRAYS_ENABLED == 1
+		#include "/import/sunAngle.glsl"
+		vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
+		color *= 1.0 + (1.0 - sunraysDatas.y) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+		color = mix(volSunraysColor, color, sunraysDatas.y);
+	#endif
+	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
+		add cloud rendering!
+	#endif
+
+	
+	
 	// ======== BLOOM CALCULATIONS ======== //
 	
 	#if BLOOM_ENABLED == 1

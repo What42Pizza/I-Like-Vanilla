@@ -1,6 +1,6 @@
 #include "/utils/screen_to_view.glsl"
 
-float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
+float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
 	//pos.xz = floor(pos.xz / 16.0) * 16.0;
 	#include "/import/frameTimeCounter.glsl"
 	float cloudSample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
@@ -12,14 +12,15 @@ float sampleCloud(vec3 pos, float coverage, const bool isNormal  ARGS_OUT) {
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
 	cloudSample = cloudSample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
 	const float divisor = 1.0 / ((1.0 - REALISTIC_CLOUD_DENSITY) * (1.0 - REALISTIC_CLOUD_DENSITY) + 0.01);
-	return clamp((cloudSample - coverage) * divisor, 0.0, 1.0);
+	return clamp((cloudSample - cloudsCoverage) * divisor, 0.0, 1.0);
 }
 
 
 
 #include "/utils/getCloudColor.glsl"
 
-void renderClouds(inout vec3 color  ARGS_OUT) {
+// returns the cloud thinkness and brightness for this pixel
+vec2 computeClouds(ARG_OUT) {
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	vec3 screenPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
@@ -39,11 +40,11 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	vec3 pos = cameraPosition;
 	float posStartY = clamp(pos.y, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
-	//if (posStartY == posEndY) return; // TODO: test if this improve performance
+	if (posStartY == posEndY) return vec2(1.0, 1.0); // TODO: test if this improve performance
 	float maxY = abs(playerPos.y);
 	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
 	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
-	if (posStartY == posEndY) return;
+	if (posStartY == posEndY) return vec2(1.0, 1.0);
 	pos += stepVec * abs(posStartY - pos.y);
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
@@ -57,20 +58,19 @@ void renderClouds(inout vec3 color  ARGS_OUT) {
 	pos += stepVec * (dither - 0.5);
 	
 	float mixMult = 0.8 + 0.2 * (1.0 - CLOUD_OPACITY_DISTANCE / (dist + CLOUD_OPACITY_DISTANCE)) - 0.02;
-	mixMult *= 1.0 - 0.1 * REALISTIC_CLOUD_TRANSPARENCY;
+	mixMult *= (1.0 - 0.1 * REALISTIC_CLOUD_TRANSPARENCY);
 	mixMult = pow(mixMult, CLOUDS_QUALITY);
 	
-	#include "/import/shadowLightPosition.glsl"
-	vec3 shadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition) * 10.0;
-	#include "/import/rainStrength.glsl"
-	float coverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
+	float invThickness = 1.0;
+	float brightness = 1.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
-		float cloudSample = sampleCloud(pos, coverage, false  ARGS_IN);
+		float cloudSample = sampleCloud(pos, false  ARGS_IN);
 		if (cloudSample > 0.0) cloudSample = 0.5 + 0.5 * cloudSample;
-		float sampleUp = sampleCloud(pos + shadowcasterDir, coverage, true  ARGS_IN);
-		vec3 cloudColor = getCloudColor(1.0 - 0.25 * sampleUp  ARGS_IN);
-		color = mix(color, cloudColor, cloudSample * mixMult);
+		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true  ARGS_IN);
+		//vec3 cloudColor = getCloudColor(1.0 - 0.25 * sampleUp  ARGS_IN);
+		//color = mix(color, cloudColor, cloudSample * mixMult);
 		pos += stepVec;
 	}
 	
+	return vec2(invThickness, brightness);
 }

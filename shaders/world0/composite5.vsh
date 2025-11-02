@@ -1,4 +1,4 @@
-#version 130
+#version 140
 
 #define SHADER_COMPOSITE5
 #define OVERWORLD

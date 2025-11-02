@@ -74,10 +74,10 @@ void main() {
 		color = skyColor;
 	} else {
 		
-		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-		vec2 lmcoord = unpackVec2(data.x) * 4.0;
-		float specular_amount = unpackVec2(data.z).y;
-		vec3 normal = decodeNormal(unpackVec2(data.y));
+		vec3 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).rgb;
+		vec2 lmcoord = unpack_2x8(data.x);
+		float specular_amount = unpack_2x8(data.z).y;
+		vec3 normal = decodeNormal(unpack_2x8(data.y));
 		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
 		
 		#if BORDER_FOG_ENABLED == 1

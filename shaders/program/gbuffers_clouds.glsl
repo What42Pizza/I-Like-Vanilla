@@ -36,13 +36,13 @@ void main() {
 	color.a *= mult * mult;
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		packVec2(0.0, 0.25),
-		packVec2(0.0, 0.0),
-		packVec2(0.0, 0.99),
+		pack_2x8(0.0, 0.25),
+		pack_2x8(0.0, 0.0),
+		pack_2x8(0.0, 0.99),
 		1.0
 	);
 	

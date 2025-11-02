@@ -43,10 +43,12 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	sunraysAmount *= blockDepth * distMult;
 	sunraysAmount *= sunraysAmount;
 	
+	sunraysAmount *= volSunraysAmountMult;
+	
 	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;
 	float amountMin = mix(SUNRAYS_MIN_UNDERGROUND, SUNRAYS_MIN_SURFACE, skyBrightness * skyBrightness);
-	vec2 blockLmCoords = unpackVec2(texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).x);
+	vec2 blockLmCoords = unpack_2x8(texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).x);
 	sunraysAmount += (sunraysAmount > 0.0 ? 1.0 : 0.0) * amountMin * (0.3 + 1.5 * blockLmCoords.y);
 	sunraysAmount *= 0.01;
 	
