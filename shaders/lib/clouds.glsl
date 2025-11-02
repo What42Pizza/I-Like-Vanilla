@@ -17,20 +17,8 @@ float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
 
 
 
-#include "/utils/getCloudColor.glsl"
-
-// returns the cloud thinkness and brightness for this pixel
-vec2 computeClouds(ARG_OUT) {
-	
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	vec3 screenPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
-	#ifdef DISTANT_HORIZONS
-		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		vec3 screenPosDh = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
-		if (screenPosDh.z > screenPos.z) screenPos = screenPosDh;
-	#endif
-	#include "/import/gbufferModelViewInverse.glsl"
-	vec3 playerPos = mat3(gbufferModelViewInverse) * screenPos;
+// returns the cloud thinkness and brightness (both inverted) for this pixel
+vec2 computeClouds(vec3 playerPos  ARGS_OUT) {
 	
 	vec3 stepVec = playerPos;
 	stepVec.xz /= abs(stepVec.y);
@@ -62,15 +50,15 @@ vec2 computeClouds(ARG_OUT) {
 	mixMult = pow(mixMult, CLOUDS_QUALITY);
 	
 	float invThickness = 1.0;
-	float brightness = 1.0;
+	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float cloudSample = sampleCloud(pos, false  ARGS_IN);
 		if (cloudSample > 0.0) cloudSample = 0.5 + 0.5 * cloudSample;
 		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true  ARGS_IN);
-		//vec3 cloudColor = getCloudColor(1.0 - 0.25 * sampleUp  ARGS_IN);
-		//color = mix(color, cloudColor, cloudSample * mixMult);
+		invThickness *= 1.0 - cloudSample;
+		invBrightness = mix(invBrightness, sampleUp, cloudSample * mixMult);
 		pos += stepVec;
 	}
 	
-	return vec2(invThickness, brightness);
+	return vec2(invThickness, invBrightness);
 }

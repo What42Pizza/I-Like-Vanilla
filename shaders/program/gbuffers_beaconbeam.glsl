@@ -18,9 +18,8 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(0.0, 0.25),
-		pack_2x8(normal),
 		pack_2x8(0.0, 0.0),
-		1.0
+		normal
 	);
 	
 }

@@ -488,11 +488,11 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.35
+										#define SUNRAYS_AMOUNT_DAY 0.7
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.1
+										#define SUNRAYS_AMOUNT_NIGHT 0.2
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
@@ -711,7 +711,7 @@
 #endif
 #if CONTRAST == -1
 #undef CONTRAST
-										#define CONTRAST 0.2
+										#define CONTRAST 0.25
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER

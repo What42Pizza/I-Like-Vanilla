@@ -94,8 +94,11 @@ void main() {
 	}
 	
 	
-	reflectiveness *= dhBlock == DH_BLOCK_WATER ? mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) : 0.0;
-	float specular_amount = dhBlock == DH_BLOCK_WATER ? 0.99 : 0.3;
+	float specular_amount = 0.3;
+	if (dhBlock == DH_BLOCK_WATER) {
+		reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
+		specular_amount = 0.99;
+	}
 	
 	
 	// main lighting
@@ -107,9 +110,8 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(encodeNormal(normal)),
 		pack_2x8(reflectiveness * 0.5, 0.0),
-		1.0
+		encodeNormal(normal)
 	);
 	
 }

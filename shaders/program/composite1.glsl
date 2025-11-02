@@ -28,6 +28,7 @@
 
 #include "/utils/screen_to_view.glsl"
 #include "/lib/borderFogAmount.glsl"
+#include "/utils/reprojection.glsl"
 
 #include "/utils/getSkyColor.glsl"
 #if DEPTH_SUNRAYS_ENABLED == 1
@@ -40,9 +41,13 @@
 	#include "/lib/clouds.glsl"
 #endif
 
+#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
+	#define NOISY_RENDERS_ACTIVE
+#endif
+
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).z).y > 0.5;
+	bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).y > 0.5;
 	
 	float depth;
 	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
@@ -53,7 +58,7 @@ void main() {
 		if (isCloud) depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 		else depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
-		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
+		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
 	
 	#include "/import/gbufferModelViewInverse.glsl"
@@ -64,9 +69,36 @@ void main() {
 	#endif
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	vec3 playerPosForFog = playerPos;
 	playerPos.y *= 0.02;
 	float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
 	playerPos.y /= 0.02;
+	
+	
+	
+	#ifdef NOISY_RENDERS_ACTIVE
+		vec3 pos = vec3(texcoord, min(depth, 0.99995));
+		vec2 prevCoord = texcoord;
+		if (!depthIsHand(depth)) {
+			#include "/import/cameraPosition.glsl"
+			#include "/import/previousCameraPosition.glsl"
+			vec3 cameraOffset = cameraPosition - previousCameraPosition;
+			prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
+		}
+		vec2 prevNoisyRender;
+		bool prevIsValid = prevCoord == clamp(prevCoord, 0.0, 1.0);
+		ivec2 iPrevCoord = ivec2(prevCoord * viewSize);
+		if (prevIsValid) {
+			float prevDepth;
+			if (isCloud) prevDepth = texelFetch(DEPTH_BUFFER_WO_TRANS, iPrevCoord, 0).r;
+			else prevDepth = texelFetch(DEPTH_BUFFER_ALL, iPrevCoord, 0).r;
+			prevIsValid = prevDepth - 0.0001 <= depth;
+		}
+		if (prevIsValid) {
+			#include "/import/viewSize.glsl"
+			prevNoisyRender = texelFetch(NOISY_RENDERS_TEXTURE, iPrevCoord, 0).rg;
+		}
+	#endif
 	
 	
 	
@@ -92,7 +124,7 @@ void main() {
 	
 	// ======== ATMOSPHERIC FOG ======== //
 	
-	float fogDist = length(viewPos);
+	float fogDist = length(playerPosForFog);
 	fogDist *= distMult;
 	
 	vec3 atmoFogColor = atmoFogColor;
@@ -138,7 +170,7 @@ void main() {
 		float depthSunraysAddition = 0.0;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		float rawVolSunraysAmount = getVolSunraysAmount(playerPos, distMult  ARGS_IN);
+		float rawVolSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult  ARGS_IN);
 		rawVolSunraysAmount *= 1.0 - fogAmount;
 		float volSunraysAmount = exp(-rawVolSunraysAmount);
 		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax); // at this point, the amount is inverted (1-x)
@@ -151,9 +183,30 @@ void main() {
 	// ======== CLOUDS RENDERING ======== //
 	
 	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
-		vec2 cloudData = computeClouds(ARG_IN);
+		vec2 cloudData = computeClouds(playerPos ARGS_IN);
 	#else
 		vec2 cloudData = vec2(0.0);
+	#endif
+	
+	
+	
+	// ======== TEMPORAL FILTERING FOR CLOUDS AND SUNRAYS ======== //
+	
+	#ifdef NOISY_RENDERS_ACTIVE
+		if (prevIsValid) {
+			#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+				vec2 prevSunraysDatas = unpack_2x8(prevNoisyRender.x);
+			#endif
+			#if DEPTH_SUNRAYS_ENABLED == 1
+				depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.25);
+			#endif
+			#if VOL_SUNRAYS_ENABLED == 1
+				volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.25);
+			#endif
+			#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
+				cloudData = mix(unpack_2x8(prevNoisyRender.y), cloudData, 0.5);
+			#endif
+		}
 	#endif
 	
 	
@@ -169,10 +222,6 @@ void main() {
 	#endif
 	
 	
-	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
-		#define NOISY_RENDERS_ACTIVE
-	#endif
 	
 	#if BLOOM_ENABLED == 0 && !defined NOISY_RENDERS_ACTIVE
 		/* DRAWBUFFERS:0 */
@@ -315,7 +364,7 @@ void main() {
 		#include "/import/sunLightBrightness.glsl"
 		#include "/import/moonLightBrightness.glsl"
 		#include "/import/sunAngle.glsl"
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.5 : SUNRAYS_AMOUNT_NIGHT * 0.5;
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.2;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;

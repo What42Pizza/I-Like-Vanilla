@@ -6,6 +6,9 @@
 
 #ifdef FSH
 
+#if REALISTIC_CLOUDS_ENABLED == 1
+	#include "/utils/getCloudColor.glsl"
+#endif
 #if BLOOM_ENABLED == 1
 	#include "/lib/bloom.glsl"
 #endif
@@ -46,7 +49,16 @@ void main() {
 		color = mix(volSunraysColor, color, sunraysDatas.y);
 	#endif
 	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
-		add cloud rendering!
+		vec2 cloudsData = unpack_2x8(noisyRendersData.y);
+		cloudsData += unpack_2x8(noisyRendersDataUp.y   );
+		cloudsData += unpack_2x8(noisyRendersDataDown.y );
+		cloudsData += unpack_2x8(noisyRendersDataLeft.y );
+		cloudsData += unpack_2x8(noisyRendersDataRight.y);
+		cloudsData *= 0.2;
+		float thickness = 1.0 - cloudsData.x;
+		float brightness = 1.0 - cloudsData.y;
+		vec3 cloudColor = getCloudColor(0.25 + 0.75 * brightness  ARGS_IN);
+		color = mix(color, cloudColor, thickness * 0.5);
 	#endif
 
 	

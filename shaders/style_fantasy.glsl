@@ -422,7 +422,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.7
+										#define AO_AMOUNT 0.65
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -650,7 +650,7 @@
 
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
-										#define SHARPEN_AMOUNT 1.2
+										#define SHARPEN_AMOUNT 1.0
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION

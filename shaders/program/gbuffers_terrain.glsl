@@ -66,9 +66,8 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(normal),
 		pack_2x8(reflectiveness * 0.5, specular_amount),
-		1.0
+		normal
 	);
 	
 }

@@ -117,7 +117,7 @@ void main() {
 	
 	
 	if (materialId == 9000) {
-		reflectiveness *= mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
+		reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
 	} else {
 		reflectiveness *= ((materialId % 1000 - materialId % 100) / 100) * 0.15;
 	}
@@ -139,9 +139,8 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(encodeNormal(normal)),
 		pack_2x8(reflectiveness * 0.5, 0.0),
-		1.0
+		encodeNormal(normal)
 	);
 	
 }
