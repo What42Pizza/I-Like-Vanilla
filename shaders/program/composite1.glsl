@@ -204,7 +204,7 @@ void main() {
 				volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.25);
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
-				cloudData = mix(unpack_2x8(prevNoisyRender.y), cloudData, 0.5);
+				cloudData = mix(unpack_2x8(prevNoisyRender.y), cloudData, 0.35);
 			#endif
 		}
 	#endif

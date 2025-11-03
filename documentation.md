@@ -224,6 +224,8 @@ This describes which /main_files-s handle different effects
 - **colortex4:  Bloom Texture** (stored with 0.5 multiplier)
 - **colortex5:  Sky Objects Texture**
 - **colortex6:  Noisy Renders Texture**
+- - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit)
+- - y: clouds transparency (8-bit, inverted) & clouds brightness (8-bit, inverted)
 
 <br>
 <br>

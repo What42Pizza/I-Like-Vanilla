@@ -57,8 +57,8 @@ void main() {
 		cloudsData *= 0.2;
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		vec3 cloudColor = getCloudColor(0.25 + 0.75 * brightness  ARGS_IN);
-		color = mix(color, cloudColor, thickness * 0.5);
+		vec3 cloudColor = getCloudColor(0.6 + 0.4 * brightness  ARGS_IN);
+		color = mix(color, cloudColor, thickness);
 	#endif
 
 	

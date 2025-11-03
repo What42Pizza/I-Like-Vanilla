@@ -28,16 +28,16 @@ vec2 computeClouds(vec3 playerPos  ARGS_OUT) {
 	vec3 pos = cameraPosition;
 	float posStartY = clamp(pos.y, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
-	if (posStartY == posEndY) return vec2(1.0, 1.0); // TODO: test if this improve performance
+	//if (posStartY == posEndY) return vec2(1.0, 0.0); // TODO: test if this improve performance
 	float maxY = abs(playerPos.y);
 	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
 	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
-	if (posStartY == posEndY) return vec2(1.0, 1.0);
+	if (posStartY == posEndY) return vec2(1.0, 0.0);
 	pos += stepVec * abs(posStartY - pos.y);
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
-	float dist = length(stepVec);
 	stepVec /= CLOUDS_QUALITY;
+	float dist = length(stepVec) * 0.25;
 	pos = endPos;
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -45,18 +45,14 @@ vec2 computeClouds(vec3 playerPos  ARGS_OUT) {
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	pos += stepVec * (dither - 0.5);
 	
-	float mixMult = 0.8 + 0.2 * (1.0 - CLOUD_OPACITY_DISTANCE / (dist + CLOUD_OPACITY_DISTANCE)) - 0.02;
-	mixMult *= (1.0 - 0.1 * REALISTIC_CLOUD_TRANSPARENCY);
-	mixMult = pow(mixMult, CLOUDS_QUALITY);
-	
 	float invThickness = 1.0;
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
-		float cloudSample = sampleCloud(pos, false  ARGS_IN);
-		if (cloudSample > 0.0) cloudSample = 0.5 + 0.5 * cloudSample;
+		float density = sampleCloud(pos, false  ARGS_IN);
+		float invDensity = exp(-density * dist);
 		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true  ARGS_IN);
-		invThickness *= 1.0 - cloudSample;
-		invBrightness = mix(invBrightness, sampleUp, cloudSample * mixMult);
+		invThickness *= invDensity;
+		invBrightness = mix(invBrightness, sampleUp, 1.0 - sqrt(invDensity));
 		pos += stepVec;
 	}
 	

@@ -36,7 +36,8 @@ void doColorCorrection(inout vec3 color  ARGS_OUT) {
 	#endif
 	
 	// contrast
-	color = mix(vec3(0.5), color, CONTRAST * 0.1 + 1.0);
+	#include "/import/eyeBrightnessSmooth.glsl"
+	color = mix(vec3(0.5), color, mix(UNDERGROUND_CONTRAST, SURFACE_CONTRAST, eyeBrightnessSmooth.y / 240.0) * 0.1 + 1.0);
 	color = clamp(color, 0.0, 1.0);
 	
 	// saturation & vibrance

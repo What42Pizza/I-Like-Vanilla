@@ -873,9 +873,13 @@ option.SATURATION_LIGHT=Saturation Light
 option.SATURATION_LIGHT.comment=How much to saturation light areas
 value.SATURATION_LIGHT.-1=Use Style
 
-option.CONTRAST=Contrast
-option.CONTRAST.comment=Contrast applied to the final image, making colors stick out more
-value.CONTRAST.-1=Use Style
+option.SURFACE_CONTRAST=Surface Contrast
+option.SURFACE_CONTRAST.comment=Amount of contrast applied to the final image when not underground
+value.SURFACE_CONTRAST.-1=Use Style
+
+option.UNDERGROUND_CONTRAST=Underground Contrast
+option.UNDERGROUND_CONTRAST.comment=Amount of contrast applied to the final image when underground
+value.UNDERGROUND_CONTRAST.-1=Use Style
 
 option.TONEMAPPER=Tonemapper
 option.TONEMAPPER.comment=This defines how light data is interpreted (note: the shader internally uses values from 0-2, so the brightness is still capped).\n\nNone: clamps the value into 0-1\nSimple: basic tonemapper that accounts for slightly brighter colors than none\nReinhard: Simple tonemapper that can handle any brightness\nACES: Industry standard for good, realistic graphics
@@ -1212,10 +1216,6 @@ value.REALISTIC_CLOUDS_ENABLED.1=On
 option.REALISTIC_CLOUD_DENSITY=Cloud Density (Realistic)
 option.REALISTIC_CLOUD_DENSITY.comment=Density of realistic clouds
 value.REALISTIC_CLOUD_DENSITY.-1=Use Style
-
-option.REALISTIC_CLOUD_TRANSPARENCY=Cloud Transparency (Realistic)
-option.REALISTIC_CLOUD_TRANSPARENCY.comment=Transparency for realistic-style clouds
-value.REALISTIC_CLOUD_TRANSPARENCY.-1=Use Style
 
 option.CLOUDS_QUALITY=Clouds Quality
 option.CLOUDS_QUALITY.comment=Quality of realistic clouds

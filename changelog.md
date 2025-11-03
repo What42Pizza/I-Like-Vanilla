@@ -1,3 +1,10 @@
+- v1.0.10
+  - Split setting 'Contrast' into surface and underground values
+  - Removed setting 'Cloud Transparency (Realistic)'
+  - Improved performance
+
+<br>
+
 - v1.0.9 (25/10/24)
   - Tweaked effects and settings
   - Fixed bugs
