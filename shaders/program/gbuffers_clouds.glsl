@@ -18,7 +18,7 @@
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	if (color.a < 0.1) discard;
+	if (color.a == 0.0) discard;
 	
 	#ifdef DISTANT_HORIZONS
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;

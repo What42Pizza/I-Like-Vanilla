@@ -447,7 +447,7 @@
 #endif
 #if WATER_REFLECTION_AMOUNT_SURFACE == -1
 #undef WATER_REFLECTION_AMOUNT_SURFACE
-										#define WATER_REFLECTION_AMOUNT_SURFACE 0.4
+										#define WATER_REFLECTION_AMOUNT_SURFACE 0.35
 #endif
 #if WATER_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef WATER_REFLECTION_AMOUNT_UNDERGROUND
@@ -932,11 +932,11 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.1
+										#define WATER_COLOR_RED 0.0
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.25
+										#define WATER_COLOR_GREEN 0.15
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
@@ -944,7 +944,7 @@
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
-										#define WATER_COLOR_AMOUNT 0.3
+										#define WATER_COLOR_AMOUNT 0.25
 #endif
 
 

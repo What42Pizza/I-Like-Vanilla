@@ -33,10 +33,6 @@ void main() {
 	if (color.a > 0.99) {
 		float transparency = percentThrough(blockDepth, 0.5, 1.2);
 		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
-		float dither = bayer64(gl_FragCoord.xy);
-		#include "/import/frameCounter.glsl"
-		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-		if (color.a < dither) {discard; return;}
 	}
 	
 	
