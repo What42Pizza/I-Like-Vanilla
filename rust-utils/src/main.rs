@@ -61,7 +61,7 @@ pub const EXPORT_FOLDERS: &[&str] = &[
 pub const EXPORT_FILES: &[FileCopyData] = &[
 	FileCopyData::new("LICENSE", None),
 	FileCopyData::new("changelog.md", None),
-	FileCopyData::new("shader readme.md", Some("readme.md")),
+	FileCopyData::new("shader readme.txt", Some("readme.txt")),
 ];
 
 
