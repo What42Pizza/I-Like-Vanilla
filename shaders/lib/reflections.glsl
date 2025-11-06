@@ -1,5 +1,4 @@
-void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initialDepth, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
-	initialDepth *= 0.9997;
+void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflectionDir, vec3 normal  ARGS_OUT) {
 	
 	// basic setup
 	#include "/import/gbufferProjection.glsl"
@@ -61,12 +60,12 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, float initial
 
 
 
-void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 normal, sampler2D texture, float reflectionStrength  ARGS_OUT) {
+void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sampler2D texture, float reflectionStrength  ARGS_OUT) {
 	
 	vec3 reflectionDirection = reflect(normalize(viewPos), normalize(normal));
 	vec2 reflectionPos;
 	int error;
-	raytrace(reflectionPos, error, viewPos, initialDepth, reflectionDirection, normal  ARGS_IN);
+	raytrace(reflectionPos, error, viewPos, reflectionDirection, normal  ARGS_IN);
 	
 	float fresnel = 1.0 - abs(dot(normalize(viewPos), normal));
 	fresnel *= fresnel;
@@ -74,7 +73,7 @@ void addReflection(inout vec3 color, vec3 viewPos, float initialDepth, vec3 norm
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
 	vec3 skyColor = getSkyColor(reflectionDirection  ARGS_IN);
 	#include "/import/eyeBrightnessSmooth.glsl"
-	skyColor *= max(eyeBrightnessSmooth.x * 0.5 / 240.0 * 0.99, eyeBrightnessSmooth.y / 240.0 * 0.99);
+	skyColor *= max(lmcoord.x * 0.5, lmcoord.y);
 	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 1) {
 		skyColor = 0.08 + 0.125 * skyColor;

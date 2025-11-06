@@ -1,7 +1,10 @@
 - v1.0.10
   - Split setting 'Contrast' into surface and underground values
   - Removed setting 'Cloud Transparency (Realistic)'
-  - Improved performance
+  - Improved performance and effects quality
+    - Added separate temporal filtering for sunrays and realistic clouds
+	- Improved noise/dithering patterns
+  - Tweaked settings
 
 <br>
 

@@ -14,6 +14,7 @@ uniform sampler2D colortex3;
 uniform sampler2D colortex4;
 uniform sampler2D colortex5;
 uniform sampler2D colortex6;
+uniform sampler2D colortex7;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D depthtex2;
@@ -48,6 +49,7 @@ uniform sampler2D shadowtex0;
 #define BLOOM_TEXTURE             colortex4
 #define SKY_OBJECTS_TEXTURE       colortex5
 #define NOISY_RENDERS_TEXTURE     colortex6
+#define PREV_DEPTH_TEXTURE        colortex7
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1

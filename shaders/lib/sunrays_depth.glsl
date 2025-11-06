@@ -43,7 +43,8 @@ float getDepthSunraysAmount(ARG_OUT) {
 	
 	if (total > 0.0) total = max(total, 0.2);
 	
-	float sunraysAmount = sqrt(total);
+	float sunraysAmount = (total);
+	sunraysAmount *= sunraysAmount;
 	sunraysAmount *= max(1.0 - length(lightCoord - 0.5) * 1.2, 0.0);
 	
 	return sunraysAmount * 0.5;

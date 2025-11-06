@@ -41,9 +41,6 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.01) discard;
-	//#ifdef BLOCK
-	//	color.a = 1.0;
-	//#endif
 	float reflectiveness = getLum(color.rgb) * 1.5;
 	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;

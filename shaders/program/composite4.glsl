@@ -19,7 +19,7 @@
 
 
 #if REFLECTIONS_ENABLED == 1
-	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, float reflectionStrength  ARGS_OUT) {
+	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, vec2 lmcoord, float reflectionStrength  ARGS_OUT) {
 		
 		if (depthIsHand(depth)) return;
 		#ifdef DISTANT_HORIZONS
@@ -33,9 +33,7 @@
 			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
 		#endif
 		
-		float initialDepth = depth;
-		if (depth == 1.0) initialDepth = dhDepth;
-		addReflection(color, viewPos, initialDepth, normal, MAIN_TEXTURE, reflectionStrength  ARGS_IN);
+		addReflection(color, viewPos, normal, lmcoord, MAIN_TEXTURE, reflectionStrength  ARGS_IN);
 		
 	}
 #endif
@@ -72,6 +70,7 @@ void main() {
 			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		}
 		vec3 normal = decodeNormal(data.zw);
+		vec2 lmcoord = unpack_2x8(data.x);
 		
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectionStrength = 1.0;
@@ -80,9 +79,9 @@ void main() {
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS
-				doReflections(color, depth0, dhDepth0, normal, reflectionStrength  ARGS_IN);
+				doReflections(color, depth0, dhDepth0, normal, lmcoord, reflectionStrength  ARGS_IN);
 			#else
-				doReflections(color, depth0, 0.0, normal, reflectionStrength  ARGS_IN);
+				doReflections(color, depth0, 0.0, normal, lmcoord, reflectionStrength  ARGS_IN);
 			#endif
 		}
 		

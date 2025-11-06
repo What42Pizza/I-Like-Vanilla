@@ -77,7 +77,7 @@ void main() {
 	
 	
 	#ifdef NOISY_RENDERS_ACTIVE
-		vec3 pos = vec3(texcoord, min(depth, 0.99995));
+		vec3 pos = vec3(texcoord, depth);
 		vec2 prevCoord = texcoord;
 		if (!depthIsHand(depth)) {
 			#include "/import/cameraPosition.glsl"
@@ -86,16 +86,15 @@ void main() {
 			prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
 		}
 		vec2 prevNoisyRender;
-		bool prevIsValid = prevCoord == clamp(prevCoord, 0.0, 1.0);
-		ivec2 iPrevCoord = ivec2(prevCoord * viewSize);
+		bool prevIsValid = all(greaterThanEqual(prevCoord, vec2(0.0))) && all(lessThan(prevCoord, vec2(1.0)));
 		if (prevIsValid) {
-			float prevDepth;
-			if (isCloud) prevDepth = texelFetch(DEPTH_BUFFER_WO_TRANS, iPrevCoord, 0).r;
-			else prevDepth = texelFetch(DEPTH_BUFFER_ALL, iPrevCoord, 0).r;
-			prevIsValid = prevDepth - 0.0001 <= depth;
+			float prevDepth = texture2D(PREV_DEPTH_TEXTURE, prevCoord).r;
+			float depthDiff = (depth - prevDepth) / depth;
+			prevIsValid = depthDiff < 0.00015;
 		}
 		if (prevIsValid) {
 			#include "/import/viewSize.glsl"
+			ivec2 iPrevCoord = ivec2(prevCoord * viewSize);
 			prevNoisyRender = texelFetch(NOISY_RENDERS_TEXTURE, iPrevCoord, 0).rg;
 		}
 	#endif
@@ -198,13 +197,16 @@ void main() {
 				vec2 prevSunraysDatas = unpack_2x8(prevNoisyRender.x);
 			#endif
 			#if DEPTH_SUNRAYS_ENABLED == 1
-				depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.25);
+				if (abs(prevSunraysDatas.x - depthSunraysAddition) > 0.02)
+					depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.2);
 			#endif
 			#if VOL_SUNRAYS_ENABLED == 1
-				volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.25);
+				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
+					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.2);
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
-				cloudData = mix(unpack_2x8(prevNoisyRender.y), cloudData, 0.35);
+				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);
+				cloudData = mix(prevCloudsData, cloudData, 0.5);
 			#endif
 		}
 	#endif
