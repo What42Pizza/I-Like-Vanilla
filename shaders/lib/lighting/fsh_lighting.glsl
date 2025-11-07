@@ -41,7 +41,13 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 		
 		// no filtering, world-aligned pixelated
 		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal  ARGS_IN);
-		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
+		float shadowSample = 0.0;
+		const float offset = PIXELATED_SHADOWS_SOFTNESS / shadowMapResolution;
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2( offset,  offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2( offset, -offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2(-offset,  offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2(-offset, -offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
+		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
 		

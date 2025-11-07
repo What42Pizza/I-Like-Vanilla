@@ -99,6 +99,9 @@ value.PIXELATED_SHADOWS.32=32x
 value.PIXELATED_SHADOWS.64=64x
 value.PIXELATED_SHADOWS.128=128x
 
+option.PIXELATED_SHADOWS_SOFTNESS=Pixelated Shadows Softness
+option.PIXELATED_SHADOWS_SOFTNESS.comment=How soft the transition from in-shadow to in-brightness should be when Pixelated Shadows is turned on
+
 option.EXCLUDE_FOLIAGE=Exclude Foliage
 option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Performance cost: Low)
 value.EXCLUDE_FOLIAGE.-1=Use Style

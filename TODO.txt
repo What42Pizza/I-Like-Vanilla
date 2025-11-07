@@ -19,24 +19,26 @@ New pipeline:
 composite pass 1:
 auto exposure
 atmospheric fog
+
+composite pass 2: (half res)
 bloom filtering
 sunrays processing (writes to "noisies" buffer)
 clouds processing (writes to "noisies" buffer)
 
-composite pass 2:
+composite pass 3:
 sunrays and clouds addition (samples and blurs the "noisies" buffer)
 bloom processing (writes to "noisies" buffer)
 
-composite pass 3:
+composite pass 4:
 bloom addition (samples and blurs the "noisies" buffer)
 reflections
 
-composite pass 4:
+composite pass 5:
 TAA
 DOF
 motion blur
 
-composite pass 5:
+composite pass 6:
 final post-processing (color correction, etc)
 
 

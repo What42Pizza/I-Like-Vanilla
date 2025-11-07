@@ -1,4 +1,5 @@
 - v1.0.10
+  - Enabled pixelated shadows on the vanilla style
   - Split setting 'Contrast' into surface and underground values
   - Removed setting 'Cloud Transparency (Realistic)'
   - Improved performance and effects quality
