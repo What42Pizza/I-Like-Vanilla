@@ -54,6 +54,13 @@
 		return pos;
 	}
 	
+	vec3 screenToViewDh(vec3 pos  ARGS_OUT) {
+		pos = pos * 2.0 - 1.0;
+		pos.z += getIsometricOffset(ARG_IN);
+		pos /= getIsometricScale(ARG_IN);
+		return pos;
+	}
+	
 #endif
 
 

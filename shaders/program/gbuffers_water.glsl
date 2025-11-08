@@ -13,6 +13,9 @@
 	flat in_out vec3 normal;
 	flat in_out int materialId;
 	
+	flat in_out vec2 midTexCoord;
+	flat in_out vec2 midCoordOffset;
+	
 	flat in_out vec3 shadowcasterLight;
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1
@@ -91,7 +94,7 @@ void main() {
 				vec3 dirZ = vec3(0.0, (height - heightZ) * wavingSurfaceAmount, 0.01);
 				normal = cross(dirZ, dirX);
 				normal = normalize(normal);
-				normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> world
+				normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> view
 				float newFresnel = dot(normal, normalize(viewPos)); // should be inverted but it would be inverted again in the next step anyways
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND, WAVING_WATER_FRESNEL_SURFACE, lmcoord.y);
 				color.rgb *= clamp(1.0 + fresnelMult / wavingSurfaceAmount * 0.07 * (fresnel + newFresnel), 0.0, 1.5); // basically `color *= 1+(fresnel-newFresnel)` but it's weird because of settings and wavingSurfaceAmount
@@ -112,6 +115,37 @@ void main() {
 		#else
 			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
 		#endif
+		
+	}
+	
+	
+	// nether portal
+	if (materialId == 10020) {
+		vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
+		tangentViewDir.x *= -1.0;
+		
+		#include "/import/atlasSize.glsl"
+		vec2 texcoordInt = texcoord * atlasSize;
+		vec2 distToNext = fract(texcoordInt);
+		
+		distToNext = mix(1.0 - distToNext, distToNext, step(0.0, tangentViewDir.xy)); // invert distToNext depending on direction of tangentViewDir
+		distToNext /= abs(tangentViewDir.xy);
+		
+		tangentViewDir *= min(distToNext.x, distToNext.y);
+		float dist = length(tangentViewDir);
+		
+		ivec2 neighborCoord = ivec2(texcoordInt);
+		neighborCoord -= distToNext.x < distToNext.y ? ivec2(sign(tangentViewDir.x), 0) : ivec2(0, sign(tangentViewDir.y)); // I'm not entirely sure why it's -= instead of +=, must be coord space shenanigans
+		
+		ivec2 minCoord = ivec2((midTexCoord - midCoordOffset) * atlasSize);
+		ivec2 maxCoord = ivec2((midTexCoord + midCoordOffset) * atlasSize + 1.0);
+		neighborCoord -= minCoord;
+		neighborCoord %= maxCoord - minCoord;
+		neighborCoord += minCoord;
+		
+		vec4 neighborPixel = texelFetch(MAIN_TEXTURE, neighborCoord, 0);
+		neighborPixel /= 1.0 + dist * 0.1;
+		color = max(color, neighborPixel * 0.9);
 		
 	}
 	
@@ -180,6 +214,10 @@ void main() {
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
+	
+	#include "/import/mc_midTexCoord.glsl"
+	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
+	midCoordOffset = abs(texcoord - midTexCoord);
 	
 	shadowcasterLight = getShadowcasterLight(ARG_IN);
 	

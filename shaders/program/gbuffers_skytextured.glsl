@@ -66,7 +66,7 @@ void main() {
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		#include "/import/gbufferModelViewInverse.glsl"
-		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		vec3 playerPos = transform(gbufferModelViewInverse, mat3(gl_ModelViewMatrix) * gl_Vertex.xyz);
 		gl_Position = projectIsometric(playerPos  ARGS_IN);
 	#else
 		gl_Position = ftransform();

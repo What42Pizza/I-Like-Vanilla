@@ -78,7 +78,19 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.93
+										#define FOLIAGE_SATURATION 0.92
+#endif
+#if FOLIAGE_TINT_RED == -1
+#undef FOLIAGE_TINT_RED
+										#define FOLIAGE_TINT_RED 0.98
+#endif
+#if FOLIAGE_TINT_GREEN == -1
+#undef FOLIAGE_TINT_GREEN
+										#define FOLIAGE_TINT_GREEN 1.04
+#endif
+#if FOLIAGE_TINT_BLUE == -1
+#undef FOLIAGE_TINT_BLUE
+										#define FOLIAGE_TINT_BLUE 0.98
 #endif
 
 
@@ -393,7 +405,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.9
+										#define BLOOM_AMOUNT 0.85
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -807,7 +819,11 @@
 #endif
 #if DAMAGE_EFFECT_STRENGTH == -1
 #undef DAMAGE_EFFECT_STRENGTH
-										#define DAMAGE_EFFECT_STRENGTH 0.7
+										#define DAMAGE_EFFECT_STRENGTH 0.8
+#endif
+#if FANCY_NETHER_PORTAL_ENABLED == -1
+#undef FANCY_NETHER_PORTAL_ENABLED
+										#define FANCY_NETHER_PORTAL_ENABLED 1
 #endif
 
 
@@ -1340,7 +1356,7 @@
 #endif
 #if ISOMETRIC_FORWARD_VISIBILITY == -1
 #undef ISOMETRIC_FORWARD_VISIBILITY
-										#define ISOMETRIC_FORWARD_VISIBILITY 128
+										#define ISOMETRIC_FORWARD_VISIBILITY 512
 #endif
 
 

@@ -256,3 +256,6 @@
 	#ifdef import_darknessLightFactor
 		uniform float darknessLightFactor;
 	#endif
+	#ifdef import_atlasSize
+		uniform ivec2 atlasSize;
+	#endif

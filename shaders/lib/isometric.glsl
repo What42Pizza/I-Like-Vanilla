@@ -1,3 +1,20 @@
+#undef INCLUDE_ISOMETRIC
+
+#if defined FIRST_PASS && !defined ISOMETRIC_FIRST_FINISHED
+	#define INCLUDE_ISOMETRIC
+	#define ISOMETRIC_FIRST_FINISHED
+#endif
+#if defined SECOND_PASS && !defined ISOMETRIC_SECOND_FINISHED
+	#define INCLUDE_ISOMETRIC
+	#define ISOMETRIC_SECOND_FINISHED
+#endif
+
+
+
+#ifdef INCLUDE_ISOMETRIC
+
+
+
 vec3 getIsometricScale(ARG_OUT) {
 	const float scale = ISOMETRIC_WORLD_SCALE * 0.5;
 	const float forwardPlusBackward = ISOMETRIC_FORWARD_VISIBILITY * 0.5 + ISOMETRIC_BACKWARD_VISIBILITY * 0.5;
@@ -21,3 +38,7 @@ vec4 projectIsometric(vec3 playerPos  ARGS_OUT) {
 	screenPos.z -= getIsometricOffset(ARG_IN);
 	return vec4(screenPos, 1.0);
 }
+
+
+
+#endif

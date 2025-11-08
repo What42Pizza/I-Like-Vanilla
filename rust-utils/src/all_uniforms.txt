@@ -84,3 +84,4 @@ float inPaleGarden = 0.0
 float blindness = 0.0
 float darknessFactor = 0.0
 float darknessLightFactor = 0.0
+ivec2 atlasSize = ivec2(0)

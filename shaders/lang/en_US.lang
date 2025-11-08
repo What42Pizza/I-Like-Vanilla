@@ -218,6 +218,19 @@ option.FOLIAGE_SATURATION=Foliage Saturation
 option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
 value.FOLIAGE_SATURATION.-1=Use Style
 
+option.FOLIAGE_TINT_RED=Foliage Tint Red
+option.FOLIAGE_TINT_RED.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_RED.-1=Use Style
+
+option.FOLIAGE_TINT_GREEN=Foliage Tint Green
+option.FOLIAGE_TINT_GREEN.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_GREEN.-1=Use Style
+
+option.FOLIAGE_TINT_BLUE=Foliage Tint Blue
+option.FOLIAGE_TINT_BLUE.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_BLUE.-1=Use Style
+
+
 
 
 
@@ -989,6 +1002,12 @@ value.DAMAGE_EFFECT_ENABLED.-1=Use Style
 
 option.DAMAGE_EFFECT_STRENGTH=Damage Effect Strength
 value.DAMAGE_EFFECT_STRENGTH.-1=Use Style
+
+option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
+option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals
+value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
+value.FANCY_NETHER_PORTAL_ENABLED.0=Off
+value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
 
 

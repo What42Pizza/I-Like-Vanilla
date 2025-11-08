@@ -114,6 +114,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = mix(vec3(getLum(gl_Color.rgb)), gl_Color.rgb, FOLIAGE_SATURATION);
+	if (glcolor != vec3(1.0)) glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
 	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	

@@ -1,11 +1,13 @@
 - v1.0.10
   - Enabled pixelated shadows on the vanilla style
+  - Added 'Fancy Nether Portals' option (enabled by default)
+  - Added 'Foliage Tint Red/Green/Blue' settings
   - Split setting 'Contrast' into surface and underground values
   - Removed setting 'Cloud Transparency (Realistic)'
   - Improved performance and effects quality
     - Added separate temporal filtering for sunrays and realistic clouds
 	- Improved noise/dithering patterns
-  - Tweaked settings
+  - Tweaked settings and effects
 
 <br>
 

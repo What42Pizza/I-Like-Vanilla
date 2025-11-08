@@ -15,7 +15,7 @@ vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= 0.00009 + length(viewPos) * 0.02 / shadowMapResolution;
+	shadowPos.z -= 0.00025 + length(viewPos) * 0.02 / shadowMapResolution;
 	return shadowPos;
 }
 
@@ -179,6 +179,8 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  AR
 
 
 void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal  ARGS_OUT) {
+	
+	ambientBrightness = (ambientBrightness * ambientBrightness + ambientBrightness) * 0.5; // kinda like squaring but not as intense
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
