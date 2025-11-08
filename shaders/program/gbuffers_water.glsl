@@ -18,7 +18,7 @@
 	
 	flat in_out vec3 shadowcasterLight;
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
 		in_out mat3 tbn;
 	#endif
 	#if BORDER_FOG_ENABLED == 1
@@ -120,34 +120,36 @@ void main() {
 	
 	
 	// nether portal
-	if (materialId == 10020) {
-		vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
-		tangentViewDir.x *= -1.0;
-		
-		#include "/import/atlasSize.glsl"
-		vec2 texcoordInt = texcoord * atlasSize;
-		vec2 distToNext = fract(texcoordInt);
-		
-		distToNext = mix(1.0 - distToNext, distToNext, step(0.0, tangentViewDir.xy)); // invert distToNext depending on direction of tangentViewDir
-		distToNext /= abs(tangentViewDir.xy);
-		
-		tangentViewDir *= min(distToNext.x, distToNext.y);
-		float dist = length(tangentViewDir);
-		
-		ivec2 neighborCoord = ivec2(texcoordInt);
-		neighborCoord -= distToNext.x < distToNext.y ? ivec2(sign(tangentViewDir.x), 0) : ivec2(0, sign(tangentViewDir.y)); // I'm not entirely sure why it's -= instead of +=, must be coord space shenanigans
-		
-		ivec2 minCoord = ivec2((midTexCoord - midCoordOffset) * atlasSize);
-		ivec2 maxCoord = ivec2((midTexCoord + midCoordOffset) * atlasSize + 1.0);
-		neighborCoord -= minCoord;
-		neighborCoord %= maxCoord - minCoord;
-		neighborCoord += minCoord;
-		
-		vec4 neighborPixel = texelFetch(MAIN_TEXTURE, neighborCoord, 0);
-		neighborPixel /= 1.0 + dist * 0.1;
-		color = max(color, neighborPixel * 0.9);
-		
-	}
+	#if FANCY_NETHER_PORTAL_ENABLED == 1
+		if (materialId == 10020) {
+			vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
+			tangentViewDir.x *= -1.0;
+			
+			#include "/import/atlasSize.glsl"
+			vec2 texcoordInt = texcoord * atlasSize;
+			vec2 distToNext = fract(texcoordInt);
+			
+			distToNext = mix(1.0 - distToNext, distToNext, step(0.0, tangentViewDir.xy)); // invert distToNext depending on direction of tangentViewDir
+			distToNext /= abs(tangentViewDir.xy);
+			
+			tangentViewDir *= min(distToNext.x, distToNext.y);
+			float dist = length(tangentViewDir);
+			
+			ivec2 neighborCoord = ivec2(texcoordInt);
+			neighborCoord -= distToNext.x < distToNext.y ? ivec2(sign(tangentViewDir.x), 0) : ivec2(0, sign(tangentViewDir.y)); // I'm not entirely sure why it's -= instead of +=, must be coord space shenanigans
+			
+			ivec2 minCoord = ivec2((midTexCoord - midCoordOffset) * atlasSize);
+			ivec2 maxCoord = ivec2((midTexCoord + midCoordOffset) * atlasSize + 1.0);
+			neighborCoord -= minCoord;
+			neighborCoord %= maxCoord - minCoord;
+			neighborCoord += minCoord;
+			
+			vec4 neighborPixel = texelFetch(MAIN_TEXTURE, neighborCoord, 0);
+			neighborPixel /= 1.0 + dist * 0.1;
+			color = max(color, neighborPixel * 0.9);
+			
+		}
+	#endif
 	
 	
 	if (materialId == 9000) {
@@ -222,7 +224,7 @@ void main() {
 	shadowcasterLight = getShadowcasterLight(ARG_IN);
 	
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
 		#include "/import/at_tangent.glsl"
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);

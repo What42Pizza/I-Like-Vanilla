@@ -164,7 +164,7 @@ void main() {
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
 		float depthSunraysAddition = getDepthSunraysAmount(ARG_IN) * depthSunraysAmountMult;
-		depthSunraysAddition *= 1.0 - fogAmount;
+		depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
 	#else
 		float depthSunraysAddition = 0.0;
 	#endif
@@ -352,10 +352,10 @@ void main() {
 		
 		#include "/import/isSun.glsl"
 		if (isSun) {
-			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.5;
+			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.8;
 			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		} else {
-			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.5;
+			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.8;
 		}
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;

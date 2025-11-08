@@ -10,7 +10,7 @@ float getDepthSunraysAmount(ARG_OUT) {
 	
 	#if DEPTH_SUNRAYS_STYLE == 1
 		vec2 pos = texcoord;
-		noise = 1.0 - 0.4 * noise;
+		noise = 1.0 - 0.9 * noise;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY * noise;
 		
 	#elif DEPTH_SUNRAYS_STYLE == 2

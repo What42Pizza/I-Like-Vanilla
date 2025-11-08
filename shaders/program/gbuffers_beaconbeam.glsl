@@ -17,7 +17,7 @@ void main() {
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		pack_2x8(0.0, 0.25),
+		pack_2x8(1.0, 1.0),
 		pack_2x8(0.0, 0.0),
 		normal
 	);
@@ -39,7 +39,7 @@ void main() {
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
-	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
+	normal = encodeNormal(gl_NormalMatrix * vec3(0, -1, 0)); // probably bad way to disable shadows
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		#include "/import/gbufferModelViewInverse.glsl"

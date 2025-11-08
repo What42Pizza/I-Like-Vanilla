@@ -25,7 +25,7 @@ void main() {
 	// hurt flash, creeper flash, etc
 	#include "/import/entityColor.glsl"
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
-	color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
+	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
 	/* DRAWBUFFERS:02 */

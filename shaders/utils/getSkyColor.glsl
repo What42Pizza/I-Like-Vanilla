@@ -41,7 +41,7 @@ vec3 getSkyColor(vec3 viewDir  ARGS_OUT) {
 		#include "/import/sunPosition.glsl"
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
 		sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
-		sunDot *= 1.0 - 0.8 * upDot;
+		sunDot *= 1.0 - upDot;
 		#include "/import/ambientSunrisePercent.glsl"
 		#include "/import/ambientSunsetPercent.glsl"
 		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
