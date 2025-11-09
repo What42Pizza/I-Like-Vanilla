@@ -3,7 +3,7 @@
 
 
 
-void doFxaa(inout vec3 color, sampler2D tex  ARGS_OUT) {
+void doFxaa(inout vec3 color, sampler2D tex) {
 	float edgeThresholdMin = 0.03125;
 	float edgeThresholdMax = 0.0625;
 	float subpixelQuality = 0.75;
@@ -53,7 +53,6 @@ void doFxaa(inout vec3 color, sampler2D tex  ARGS_OUT) {
 		bool is1Steepest = abs(gradient1) >= abs(gradient2);
 		float gradientScaled = 0.25 * max(abs(gradient1), abs(gradient2));
 		
-		#include "/import/invViewSize.glsl"
 		float stepLength = isHorizontal ? invViewSize.y : invViewSize.x;
 		
 		float lumaLocalAverage = 0.0;

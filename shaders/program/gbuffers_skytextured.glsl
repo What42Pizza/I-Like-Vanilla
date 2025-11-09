@@ -1,8 +1,6 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-	#ifdef END
-		in_out vec3 glcolor;
-	#endif
+in_out vec2 texcoord;
+#ifdef END
+	in_out vec3 glcolor;
 #endif
 
 
@@ -18,14 +16,12 @@ void main() {
 		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
 		color = 1.0 - color;
 		color *= color;
-		#include "/import/sunPosition.glsl"
 		if (sunPosition.z < 0.0) {
 			color *= color; // apply extra brightness to sun
 		}
 		color = 1.0 - color;
 		
 		color *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
-		#include "/import/rainStrength.glsl"
 		color *= 1.0 - 0.6 * rainStrength;
 		
 	#endif
@@ -65,16 +61,15 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = transform(gbufferModelViewInverse, mat3(gl_ModelViewMatrix) * gl_Vertex.xyz);
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
 	
 	
 	#if TAA_ENABLED == 1 && !defined END
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	

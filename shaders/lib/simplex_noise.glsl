@@ -3,8 +3,6 @@
 
 
 
-#ifdef FIRST_PASS
-
 float mod289(float x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -244,5 +242,3 @@ vec2 simplexNoise2From3(vec3 x){
 	float s1 = simplexNoise(vec3(x.y - 19.1 * 10, x.z + 33.4 * 10, x.x + 47.2 * 10));
 	return vec2(s, s1);
 }
-
-#endif

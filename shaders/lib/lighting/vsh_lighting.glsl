@@ -1,8 +1,6 @@
-void doVshLighting(float depth  ARGS_OUT) {
+void doVshLighting(float depth) {
 	
-	#include "/import/darknessFactor.glsl"
 	lmcoord *= 1.0 - 0.2 * darknessFactor;
-	#include "/import/darknessLightFactor.glsl"
 	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);
 	
 	#if defined SHADER_GBUFFERS_TERRAIN || defined SHADER_GBUFFERS_WATER

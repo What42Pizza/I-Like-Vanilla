@@ -1,20 +1,14 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
-	flat in_out vec2 normal;
-	flat in_out int materialId;
-	in_out vec3 playerPos;
-	in_out float specularMult;
-	
-	#if SHOW_DANGEROUS_LIGHT == 1
-		in_out float isDangerousLight;
-	#endif
-	
+in_out vec2 texcoord;
+in_out vec2 lmcoord;
+in_out vec3 glcolor;
+flat in_out vec2 normal;
+flat in_out int materialId;
+in_out vec3 playerPos;
+in_out float specularMult;
+
+#if SHOW_DANGEROUS_LIGHT == 1
+	in_out float isDangerousLight;
 #endif
-
-
 
 
 
@@ -25,15 +19,12 @@ void main() {
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
 		#if TEMPORAL_FILTER_ENABLED == 1
-			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
 	#else
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
-		#include "/import/invFar.glsl"
 		fogDistance *= invFar;
 		if (fogDistance >= 0.95) {discard; return;}
 	#endif
@@ -50,7 +41,6 @@ void main() {
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
-		#include "/import/cameraPosition.glsl"
 		vec3 blockPos = fract(playerPos + cameraPosition);
 		float centerDist = length(blockPos - 0.5);
 		color.rgb = mix(color.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.35 * float(centerDist < 0.65));
@@ -76,8 +66,6 @@ void main() {
 
 
 
-
-
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
@@ -92,7 +80,7 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 
-//vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal  ARGS_OUT) {
+//vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal) {
 //	// Step 1: Project the point onto the plane
 //	vec3 toPoint = point - planeOrigin;
 //	vec3 normal = normalize(planeNormal);
@@ -118,7 +106,6 @@ void main() {
 	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
-	#include "/import/mc_Entity.glsl"
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
@@ -136,7 +123,6 @@ void main() {
 	#endif
 	
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	
@@ -145,9 +131,8 @@ void main() {
 	//vec2 scale = textureSize(MAIN_TEXTURE, 0) / TEXTURE_SIZE;
 	////texcoord *= scale;
 	//vec2 texcoordFract = fract(texcoord);
-	//#include "/import/cameraPosition.glsl"
 	//vec3 worldPos = playerPos + cameraPosition;
-	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal  ARGS_IN);
+	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal);
 	//texcoordFract += mod(worldTexPos, WORLD_TEXTURE_SCALING);
 	//texcoordFract /= WORLD_TEXTURE_SCALING;
 	////texcoord = floor(texcoord) + texcoordFract;
@@ -160,9 +145,8 @@ void main() {
 	//vec2 scale = textureSize(MAIN_TEXTURE, 0) / TEXTURE_SIZE;
 	//texcoord *= scale;
 	//vec2 texcoordFract = fract(texcoord);
-	//#include "/import/cameraPosition.glsl"
 	//vec3 worldPos = playerPos + cameraPosition;
-	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal  ARGS_IN);
+	//vec2 worldTexPos = Project3DPointTo2D(worldPos, vec3(0.0), gl_Normal);
 	//texcoordFract += mod(worldTexPos, WORLD_TEXTURE_SCALING);
 	//texcoordFract /= WORLD_TEXTURE_SCALING;
 	//texcoord = floor(texcoord) + texcoordFract;
@@ -170,14 +154,13 @@ void main() {
 	
 	
 	#if WAVING_ENABLED == 1
-		applyWaving(playerPos  ARGS_IN);
+		applyWaving(playerPos);
 	#endif
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
-		#include "/import/gbufferModelView.glsl"
 		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
 	
@@ -188,7 +171,7 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
@@ -199,7 +182,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(length(playerPos));
 	
 }
 

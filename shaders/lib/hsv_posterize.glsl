@@ -1,6 +1,3 @@
-#ifdef FIRST_PASS
-
-
 // taken from: https://stackoverflow.com/a/17897228, which is licensed under WTFPL (public domain)
 vec3 rgb2hsv(vec3 c) {
 	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
@@ -29,11 +26,8 @@ float compress(float v, int quality) {
 //}
 
 
-#endif
 
-
-
-void doHsvPosterize(inout vec3 color, float depth  ARGS_OUT) {
+void doHsvPosterize(inout vec3 color, float depth) {
 	bool isSky = depth == 1.0;
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;

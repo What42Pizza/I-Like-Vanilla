@@ -3,7 +3,7 @@
 
 
 
-void applyColorblindnessCorrection(inout vec3 color  ARGS_OUT) {
+void applyColorblindnessCorrection(inout vec3 color) {
 	
 	float L = (17.8824 * color.r) + (43.5161 * color.g) + (4.11935 * color.b);
 	float M = (3.45565 * color.r) + (27.1554 * color.g) + (3.86714 * color.b);

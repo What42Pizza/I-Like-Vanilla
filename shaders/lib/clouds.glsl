@@ -1,8 +1,7 @@
 #include "/utils/screen_to_view.glsl"
 
-float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
+float sampleCloud(vec3 pos, const bool isNormal) {
 	//pos.xz = floor(pos.xz / 16.0) * 16.0;
-	#include "/import/frameTimeCounter.glsl"
 	float cloudSample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
 	pos.xz -= pos.zx * 0.2;
 	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
@@ -18,13 +17,12 @@ float sampleCloud(vec3 pos, const bool isNormal  ARGS_OUT) {
 
 
 // returns the cloud thinkness and brightness (both inverted) for this pixel
-vec2 computeClouds(vec3 playerPos  ARGS_OUT) {
+vec2 computeClouds(vec3 playerPos) {
 	
 	vec3 stepVec = playerPos;
 	stepVec.xz /= abs(stepVec.y);
 	stepVec.y = sign(stepVec.y);
 	
-	#include "/import/cameraPosition.glsl"
 	vec3 pos = cameraPosition;
 	float posStartY = clamp(pos.y, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUD_BOTTOM_Y, CLOUD_TOP_Y);
@@ -41,16 +39,15 @@ vec2 computeClouds(vec3 playerPos  ARGS_OUT) {
 	pos = endPos;
 	
 	float dither = bayer64(gl_FragCoord.xy);
-	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	pos += stepVec * (dither - 0.5);
 	
 	float invThickness = 1.0;
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
-		float density = sampleCloud(pos, false  ARGS_IN);
+		float density = sampleCloud(pos, false);
 		float invDensity = exp(-density * dist);
-		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true  ARGS_IN);
+		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true);
 		invThickness *= invDensity;
 		invBrightness = mix(invBrightness, sampleUp, 1.0 - sqrt(invDensity));
 		pos += stepVec;

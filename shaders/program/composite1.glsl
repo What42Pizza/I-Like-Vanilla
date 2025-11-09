@@ -1,25 +1,22 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-	
-	flat in_out vec3 atmoFogColor;
-	flat in_out float fogDensity;
-	flat in_out float fogMult;
-	flat in_out float fogDarken;
-	flat in_out float extraFogDist;
-	
-	#if DEPTH_SUNRAYS_ENABLED == 1
-		flat in_out vec2 lightCoord;
-		flat in_out float depthSunraysAmountMult;
-	#endif
-	#if VOL_SUNRAYS_ENABLED == 1
-		flat in_out float volSunraysAmountMult;
-		flat in_out float volSunraysAmountMax;
-	#endif
-	#if REALISTIC_CLOUDS_ENABLED == 1
-		flat in_out vec3 cloudsShadowcasterDir;
-		flat in_out float cloudsCoverage;
-	#endif
-	
+in_out vec2 texcoord;
+
+flat in_out vec3 atmoFogColor;
+flat in_out float fogDensity;
+flat in_out float fogMult;
+flat in_out float fogDarken;
+flat in_out float extraFogDist;
+
+#if DEPTH_SUNRAYS_ENABLED == 1
+	flat in_out vec2 lightCoord;
+	flat in_out float depthSunraysAmountMult;
+#endif
+#if VOL_SUNRAYS_ENABLED == 1
+	flat in_out float volSunraysAmountMult;
+	flat in_out float volSunraysAmountMax;
+#endif
+#if REALISTIC_CLOUDS_ENABLED == 1
+	flat in_out vec3 cloudsShadowcasterDir;
+	flat in_out float cloudsCoverage;
 #endif
 
 
@@ -52,20 +49,19 @@ void main() {
 	float depth;
 	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 	else depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+	vec3 viewPos = screenToView(vec3(texcoord, depth));
 	#ifdef DISTANT_HORIZONS
 		float depthDh;
 		if (isCloud) depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 		else depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
+		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#else
-		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos)  ARGS_IN);
+		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos));
 	#endif
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
@@ -80,10 +76,8 @@ void main() {
 		vec3 pos = vec3(texcoord, depth);
 		vec2 prevCoord = texcoord;
 		if (!depthIsHand(depth)) {
-			#include "/import/cameraPosition.glsl"
-			#include "/import/previousCameraPosition.glsl"
 			vec3 cameraOffset = cameraPosition - previousCameraPosition;
-			prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
+			prevCoord = reprojection(pos, cameraOffset);
 		}
 		vec2 prevNoisyRender;
 		bool prevIsValid = all(greaterThanEqual(prevCoord, vec2(0.0))) && all(lessThan(prevCoord, vec2(1.0)));
@@ -93,7 +87,6 @@ void main() {
 			prevIsValid = depthDiff < 0.00015;
 		}
 		if (prevIsValid) {
-			#include "/import/viewSize.glsl"
 			ivec2 iPrevCoord = ivec2(prevCoord * viewSize);
 			prevNoisyRender = texelFetch(NOISY_RENDERS_TEXTURE, iPrevCoord, 0).rg;
 		}
@@ -103,7 +96,6 @@ void main() {
 	
 	// ======== AUTO EXPOSURE ======== //
 	
-	#include "/import/eyeBrightnessSmooth.glsl"
 	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
 	#if AUTO_EXPOSURE_ENABLED == 1
 		vec2 normalizedBrightnesses = brightnesses;
@@ -128,19 +120,13 @@ void main() {
 	
 	vec3 atmoFogColor = atmoFogColor;
 	float fogDensity = fogDensity;
-	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		atmoFogColor = getSkyColor(normalize(viewPos)  ARGS_IN);
-		#include "/import/blindness.glsl"
+		atmoFogColor = getSkyColor(normalize(viewPos));
 		atmoFogColor *= 1.0 - blindness;
-		#include "/import/darknessFactor.glsl"
 		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
-			#include "/import/betterRainStrength.glsl"
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
-			#include "/import/dayPercent.glsl"
-			#include "/import/inPaleGarden.glsl"
 			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
 		#elif defined NETHER
 			fogDensity = NETHER_FOG_DENSITY;
@@ -163,13 +149,13 @@ void main() {
 	// ======== SUNRAYS ======== //
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
-		float depthSunraysAddition = getDepthSunraysAmount(ARG_IN) * depthSunraysAmountMult;
+		float depthSunraysAddition = getDepthSunraysAmount() * depthSunraysAmountMult;
 		depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
 	#else
 		float depthSunraysAddition = 0.0;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		float rawVolSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult  ARGS_IN);
+		float rawVolSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult);
 		rawVolSunraysAmount *= 1.0 - fogAmount;
 		float volSunraysAmount = exp(-rawVolSunraysAmount);
 		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax); // at this point, the amount is inverted (1-x)
@@ -182,7 +168,7 @@ void main() {
 	// ======== CLOUDS RENDERING ======== //
 	
 	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
-		vec2 cloudData = computeClouds(playerPos ARGS_IN);
+		vec2 cloudData = computeClouds(playerPos);
 	#else
 		vec2 cloudData = vec2(0.0);
 	#endif
@@ -276,9 +262,7 @@ void main() {
 
 	// ======== ATMOSPHERIC FOG ======== //
 	
-	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
-		#include "/import/inPaleGarden.glsl"
 		#ifdef OVERWORLD
 			fogMult = 0.75 + 0.25 * inPaleGarden;
 			fogDarken = 0.5;
@@ -307,14 +291,12 @@ void main() {
 		extraFogDist = 0.0;
 	}
 	
-	#include "/import/blindness.glsl"
 	atmoFogColor *= 1.0 - blindness;
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
 	fogMult = mix(fogMult, 1.0, blindness);
 	fogDarken = mix(fogDarken, 1.0, blindness);
 	extraFogDist *= 1.0 - blindness;
 	
-	#include "/import/darknessFactor.glsl"
 	atmoFogColor *= 1.0 - darknessFactor;
 	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
 	fogMult = mix(fogMult, 1.0, darknessFactor);
@@ -323,34 +305,14 @@ void main() {
 	
 	
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
-		#include "/import/ambientSunPercent.glsl"
-		#include "/import/ambientMoonPercent.glsl"
-		#include "/import/ambientSunrisePercent.glsl"
-		#include "/import/ambientSunsetPercent.glsl"
-		#include "/import/inPaleGarden.glsl"
-	#endif
-	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
-		#include "/import/rainStrength.glsl"
-	#endif
-	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
-		#include "/import/shadowLightPosition.glsl"
-	#endif
-	
-	
-	
 	// ======== SUNRAYS ======== //
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
 		
-		#include "/import/gbufferProjection.glsl"
 		vec3 lightPos = shadowLightPosition * mat3(gbufferProjection);
 		lightPos /= lightPos.z;
 		lightCoord = lightPos.xy * 0.5 + 0.5;
 		
-		#include "/import/isSun.glsl"
 		if (isSun) {
 			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.8;
 			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
@@ -363,9 +325,6 @@ void main() {
 	#endif
 	
 	#if VOL_SUNRAYS_ENABLED == 1
-		#include "/import/sunLightBrightness.glsl"
-		#include "/import/moonLightBrightness.glsl"
-		#include "/import/sunAngle.glsl"
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.2;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
@@ -380,7 +339,6 @@ void main() {
 	// ======== CLOUDS ======== //
 	
 	#if REALISTIC_CLOUDS_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		cloudsShadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition) * 10.0;
 		cloudsCoverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
 	#endif

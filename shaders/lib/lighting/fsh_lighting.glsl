@@ -2,15 +2,11 @@
 
 
 
-vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
-	#include "/import/gbufferModelViewInverse.glsl"
+vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal) {
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
-	#include "/import/cameraPosition.glsl"
 	playerPos += cameraPosition;
 	playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
 	playerPos -= cameraPosition;
-	#include "/import/shadowProjection.glsl"
-	#include "/import/shadowModelView.glsl"
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
@@ -19,12 +15,9 @@ vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
 	return shadowPos;
 }
 
-vec3 getShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
+vec3 getShadowPos(vec3 viewPos, vec3 normal) {
 	viewPos += normal * 0.001 * (25.0 + length(viewPos));
-	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-	#include "/import/shadowProjection.glsl"
-	#include "/import/shadowModelView.glsl"
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
@@ -34,13 +27,13 @@ vec3 getShadowPos(vec3 viewPos, vec3 normal  ARGS_OUT) {
 
 
 
-float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
+float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	if (lightDot < 0.0) return 0.0; // surface is facing away from shadowLightPosition
 	
 	#if PIXELATED_SHADOWS > 0
 		
 		// no filtering, world-aligned pixelated
-		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal  ARGS_IN);
+		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
 		float shadowSample = 0.0;
 		const float offset = PIXELATED_SHADOWS_SOFTNESS / shadowMapResolution;
 		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2( offset,  offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
@@ -52,13 +45,13 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal);
 		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
-		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal);
 		return float(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
 		
 	#else
@@ -119,10 +112,9 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 			);
 		#endif
 		
-		vec3 shadowPos = getShadowPos(viewPos, normal  ARGS_IN);
+		vec3 shadowPos = getShadowPos(viewPos, normal);
 		
 		float dither = bayer64(gl_FragCoord.xy);
-		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		float randomAngle = dither * 2.0 * PI;
 		float noiseMult = SHADOWS_NOISE / shadowMapResolution * 3.0 * (1.0 + 2.0 * length(shadowPos.xy - 0.5));
@@ -145,11 +137,10 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal  ARGS_OUT) {
 
 
 
-float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  ARGS_OUT) {
+float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness) {
 	
 	// get normal dot sun/moon pos
 	#if defined OVERWORLD || defined END
-		#include "/import/shadowLightPosition.glsl"
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 	#else
 		float lightDot = 1.0;
@@ -157,9 +148,8 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  AR
 	
 	// sample shadow
 	#if SHADOWS_ENABLED == 1
-		float shadowBrightness = sampleShadow(viewPos, lightDot, normal  ARGS_IN);
+		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
 		#ifdef DISTANT_HORIZONS
-			#include "/import/invFar.glsl"
 			float len = max(length(viewPos) * invFar, 0.8);
 			shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
 		#endif
@@ -178,7 +168,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness  AR
 
 
 
-void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal  ARGS_OUT) {
+void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal) {
 	
 	ambientBrightness = (ambientBrightness * ambientBrightness + ambientBrightness) * 0.5; // kinda like squaring but not as intense
 	
@@ -197,14 +187,12 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		float viewPosLen = length(viewPos);
 		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
 			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
-			#include "/import/heldBlockLightValue.glsl"
 			handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
 			blockBrightness = max(blockBrightness, handLightBrightness);
 		}
 	#endif
 	
 	// night saturation decrease
-	#include "/import/dayPercent.glsl"
 	float nightPercent = 1.0 - dayPercent;
 	nightPercent *= ambientBrightness * (1.0 - blockBrightness);
 	nightPercent *= nightPercent;
@@ -216,9 +204,8 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		ambientBrightness = 1.0;
 	#endif
 	
-	vec3 ambientLight = getAmbientLight(ambientBrightness  ARGS_IN);
+	vec3 ambientLight = getAmbientLight(ambientBrightness);
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
 	worldNormal.xz = abs(worldNormal.xz);
 	float sideShading = dot(worldNormal, vec3(-0.5, 0.3, -0.15));
@@ -227,7 +214,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	blockBrightness *= 1.0 + sideShading;
 	
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
-		#include "/import/blockFlickerAmount.glsl"
 		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT;
 	#endif
 	#if BLOCK_BRIGHTNESS_CURVE == 2
@@ -239,17 +225,13 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	#elif BLOCK_BRIGHTNESS_CURVE == 5
 		blockBrightness = pow5(blockBrightness);
 	#endif
-	#include "/import/moonLightBrightness.glsl"
 	#ifdef OVERWORLD
-		#include "/import/eyeBrightness.glsl"
 		blockBrightness *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	
-	#include "/import/sunLightBrightness.glsl"
-	float shadowBrightness = getShadowBrightness(viewPos, normal, ambientBrightness  ARGS_IN);
+	float shadowBrightness = getShadowBrightness(viewPos, normal, ambientBrightness);
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness;
-	#include "/import/rainStrength.glsl"
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
 	shadowBrightness *= 1.0 - rainDecrease;
 	
@@ -259,7 +241,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 lighting = ambientLight + skyLighting;
 	
-	#include "/import/nightVision.glsl"
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {
 		betterNightVision = 0.6 + 0.2 * betterNightVision;
@@ -271,7 +252,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));
-		#include "/import/shadowLightPosition.glsl"
 		vec3 lightDir = normalize(shadowLightPosition);
 		float specular = max(dot(reflectedDir, lightDir), 0.0);
 		specular *= specular;
@@ -279,10 +259,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular *= specular;
 		specular *= specular;
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
-		#include "/import/betterRainStrength.glsl"
 		specular *= 1.0 - betterRainStrength;
-		#include "/import/sunAngle.glsl"
-		#include "/import/ambientMoonPercent.glsl"
 		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15;
 		specular_amount *= 1.0 - getSaturation(color);
 		lighting += specularColor * specular * (0.25 + 0.75 * specular_amount) * shadowBrightness;

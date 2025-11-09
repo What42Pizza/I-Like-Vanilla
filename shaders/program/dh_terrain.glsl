@@ -1,14 +1,8 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
-	flat in_out vec2 normal;
-	in_out vec3 playerPos;
-	flat in_out int dhBlock;
-	
-#endif
-
-
+in_out vec2 lmcoord;
+in_out vec3 glcolor;
+flat in_out vec2 normal;
+in_out vec3 playerPos;
+flat in_out int dhBlock;
 
 
 
@@ -17,7 +11,6 @@
 void main() {
 	
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-	#include "/import/far.glsl"
 	if (lengthCylinder < far - 20.0) discard;
 	
 	vec3 color = glcolor;
@@ -25,7 +18,6 @@ void main() {
 	
 	// add noise for fake texture
 	float worldScale = 300.0 / length(playerPos);
-	#include "/import/cameraPosition.glsl"
 	uvec3 noisePos = uvec3(ivec3((playerPos + cameraPosition) * ceil(worldScale) + 0.5));
 	uint noise = randomizeUint(noisePos.x) ^ randomizeUint(noisePos.y) ^ randomizeUint(noisePos.z);
 	color += 0.03 * randomFloat(noise);
@@ -65,7 +57,6 @@ void main() {
 	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
-	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	dhBlock = dhMaterialId;
 	
@@ -81,15 +72,14 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
-		#include "/import/gbufferModelView.glsl"
 		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
@@ -100,7 +90,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(length(playerPos));
 	
 }
 

@@ -1,4 +1,4 @@
-void doNeighborClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
+void doNeighborClamping(vec3 color, inout vec3 prevColor) {
 	vec3 minColor = color * 0.5;
 	vec3 maxColor = color * 0.5;
 	
@@ -20,7 +20,7 @@ void doNeighborClamping(vec3 color, inout vec3 prevColor  ARGS_OUT) {
 	prevColor = clamp(prevColor, minColor, maxColor);
 }
 
-void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoord  ARGS_OUT) {
+void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoord) {
 	
 	#ifdef END
 		#ifdef DISTANT_HORIZONS
@@ -36,7 +36,7 @@ void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoo
 	
 	vec3 prevColor = texture2D(PREV_TEXTURE, prevCoord).rgb * 2.0;
 	
-	doNeighborClamping(color, prevColor  ARGS_IN);
+	doNeighborClamping(color, prevColor);
 	
 	const float blendMin = 0.3;
 	const float blendMax = 0.98;
@@ -44,12 +44,10 @@ void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoo
 	const float blendConstant = 0.72;
 	const float depthFactor = 0.012;
 	
-	#include "/import/viewSize.glsl"
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;
 	float velocityAmount = dot(velocity, velocity) * 10.0;
 	
-	#include "/import/far.glsl"
-	float linearDepth = toLinearDepth(depth  ARGS_IN);
+	float linearDepth = toLinearDepth(depth);
 	float blendAmount = blendConstant + exp(-velocityAmount) * (blendVariable + sqrt(linearDepth * far) * depthFactor);
 	blendAmount = clamp(blendAmount, blendMin, blendMax);
 	

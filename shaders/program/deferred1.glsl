@@ -1,9 +1,5 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-	flat in_out vec3 shadowcasterLight;
-#endif
-
-
+in_out vec2 texcoord;
+flat in_out vec3 shadowcasterLight;
 
 
 
@@ -33,20 +29,19 @@
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0))  ARGS_IN);
+	vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0)));
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
+		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth));
 		if (dhViewPos.z > viewPos.z) viewPos = dhViewPos;
 	#endif
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#ifdef DISTANT_HORIZONS
 		float skyAmount = float(depth == 1.0 && dhDepth == 1.0);
 	#else
 		#if BORDER_FOG_ENABLED == 1
-			float skyAmount = getBorderFogAmount(playerPos  ARGS_IN);
+			float skyAmount = getBorderFogAmount(playerPos);
 		#else
 			float skyAmount = float(depth == 1.0);
 		#endif
@@ -54,7 +49,7 @@ void main() {
 	
 	
 	#if OUTLINES_ENABLED == 1
-		color *= 1.0 - getOutlineAmount(ARG_IN);
+		color *= 1.0 - getOutlineAmount();
 	#endif
 	
 	
@@ -63,8 +58,8 @@ void main() {
 		#ifdef END
 			skyColor = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
 		#else
-			vec3 viewPos = screenToView(vec3(texcoord, 1.0)  ARGS_IN);
-			skyColor = getSkyColor(normalize(viewPos)  ARGS_IN);
+			vec3 viewPos = screenToView(vec3(texcoord, 1.0));
+			skyColor = getSkyColor(normalize(viewPos));
 			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor);
 		#endif
 	}
@@ -78,7 +73,7 @@ void main() {
 		vec2 lmcoord = unpack_2x8(data.x);
 		float specular_amount = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
-		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
+		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal);
 		
 		#if BORDER_FOG_ENABLED == 1
 			color = mix(color, skyColor, skyAmount);
@@ -86,7 +81,7 @@ void main() {
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
-				float aoFactor = getAoFactor(depth, length(viewPos)  ARGS_IN);
+				float aoFactor = getAoFactor(depth, length(viewPos));
 				aoFactor *= 1.0 - 0.7 * getLum(color);
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
@@ -113,7 +108,7 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
-	shadowcasterLight = getShadowcasterLight(ARG_IN);
+	shadowcasterLight = getShadowcasterLight();
 }
 
 #endif

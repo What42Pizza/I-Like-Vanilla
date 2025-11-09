@@ -1,12 +1,6 @@
-// transfers
-
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	flat in_out vec3 colorMult;
-	in_out vec3 playerPos;
-	
-#endif
+in_out vec2 texcoord;
+flat in_out vec3 colorMult;
+in_out vec3 playerPos;
 
 
 
@@ -22,7 +16,7 @@ void main() {
 	
 	#ifdef DISTANT_HORIZONS
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float blockDepthDh = toBlockDepthDh(depthDh  ARGS_IN);
+		float blockDepthDh = toBlockDepthDh(depthDh);
 		if (blockDepthDh < length(playerPos)) discard;
 	#endif
 	
@@ -70,21 +64,20 @@ void main() {
 		return;
 	#endif
 	
-	colorMult = getCloudColor(0.25 + 0.75 * gl_Color.r  ARGS_IN);
+	colorMult = getCloudColor(0.25 + 0.75 * gl_Color.r);
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 }

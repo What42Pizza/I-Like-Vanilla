@@ -1,16 +1,13 @@
-#ifdef FIRST_PASS
-	const float[16] notch_dither = float[16] (
-		0.9, 0.9, 0.4, 0.4,
-		0.9, 0.9, 0.4, 0.4,
-		0.1, 0.1, 0.6, 0.6,
-		0.1, 0.1, 0.6, 0.6
-	);
-#endif
+const float[16] notch_dither = float[16] (
+	0.9, 0.9, 0.4, 0.4,
+	0.9, 0.9, 0.4, 0.4,
+	0.1, 0.1, 0.6, 0.6,
+	0.1, 0.1, 0.6, 0.6
+);
 
 
 
-void sss_notch(inout vec3 color  ARGS_OUT) {
-	#include "/import/viewSize.glsl"
+void sss_notch(inout vec3 color) {
 	vec2 halfSize = viewSize * 0.5;
 	
 	vec2 steppedCoord = floor(texcoord * halfSize) / halfSize;

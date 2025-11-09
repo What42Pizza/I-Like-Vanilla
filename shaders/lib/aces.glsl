@@ -35,8 +35,6 @@
 
 
 
-#ifdef FIRST_PASS
-
 const mat3 ACES_INPUT_MATRIX = mat3(
 	vec3(0.59719, 0.07600, 0.02840),
 	vec3(0.35458, 0.90834, 0.13383),
@@ -63,5 +61,3 @@ vec3 acesFitted(vec3 v) {
 	v *= 1.3;
 	return v;
 }
-
-#endif

@@ -1,20 +1,14 @@
 #undef SHADOWS_ENABLED
 #define SHADOWS_ENABLED 0
 
-#ifdef FIRST_PASS
-	
-	in_out vec4 glcolor;
-	in_out vec2 lmcoord;
-	in_out vec3 viewPos;
-	in_out vec3 playerPos;
-	flat in_out vec3 normal;
-	flat in_out int dhBlock;
-	
-	flat in_out vec3 shadowcasterLight;
-	
-#endif
+in_out vec4 glcolor;
+in_out vec2 lmcoord;
+in_out vec3 viewPos;
+in_out vec3 playerPos;
+flat in_out vec3 normal;
+flat in_out int dhBlock;
 
-
+flat in_out vec3 shadowcasterLight;
 
 
 
@@ -32,16 +26,13 @@ void main() {
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#if TEMPORAL_FILTER_ENABLED == 1
-		#include "/import/frameCounter.glsl"
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-	#include "/import/far.glsl"
 	if (lengthCylinder < far - 10.0 - 8.0 * dither) discard;
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	#include "/import/far.glsl"
-	if (depth < 1.0 && length(playerPos) > toLinearDepth(depth  ARGS_IN) * far) discard;
+	if (depth < 1.0 && length(playerPos) > toLinearDepth(depth) * far) discard;
 	
 	
 	vec4 color = glcolor;
@@ -62,8 +53,6 @@ void main() {
 		// waving water normals
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			float fresnel = -dot(normal, normalize(viewPos));
-			#include "/import/cameraPosition.glsl"
-			#include "/import/frameTimeCounter.glsl"
 			vec3 noisePos = vec3(playerPos.xz + cameraPosition.xz, frameTimeCounter * WAVING_WATER_SPEED);
 			noisePos.xy /= WAVING_WATER_SCALE * 2.0;
 			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.02;
@@ -76,7 +65,6 @@ void main() {
 				normal = cross(dirZ, dirX);
 				normal = normalize(normal);
 				//normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> world
-				#include "/import/gbufferModelView.glsl"
 				normal = mat3(gbufferModelView) * normal;
 				float newFresnel = dot(normal, normalize(viewPos)); // should be inverted but it would be inverted again in the next step anyways
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND, WAVING_WATER_FRESNEL_SURFACE, lmcoord.y);
@@ -102,7 +90,7 @@ void main() {
 	
 	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal);
 	
 	
 	/* DRAWBUFFERS:03 */
@@ -143,25 +131,23 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	dhBlock = dhMaterialId;
 	
-	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	if (dhBlock == DH_BLOCK_WATER) {
 		playerPos.y -= 0.11213;
 	}
 	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
-	shadowcasterLight = getShadowcasterLight(ARG_IN);
+	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
-		#include "/import/gbufferModelView.glsl"
 		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
@@ -172,7 +158,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(length(playerPos));
 	
 }
 

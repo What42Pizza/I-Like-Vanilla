@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -22,8 +20,6 @@ void main() {
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
 		vec2 noisyRendersData      = texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).rg;
-		#include "/import/viewWidth.glsl"
-		#include "/import/viewHeight.glsl"
 		vec2 noisyRendersDataUp    = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0,  1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 		vec2 noisyRendersDataDown  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0, -1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 		vec2 noisyRendersDataLeft  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2(-1,  0), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
@@ -38,12 +34,10 @@ void main() {
 		sunraysDatas *= 0.2;
 	#endif
 	#if DEPTH_SUNRAYS_ENABLED == 1
-		#include "/import/isSun.glsl"
 		vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
 		color += sunraysDatas.x * depthSunraysColor;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		#include "/import/sunAngle.glsl"
 		vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
 		color *= 1.0 + (1.0 - sunraysDatas.y) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
 		color = mix(volSunraysColor, color, sunraysDatas.y);
@@ -57,7 +51,7 @@ void main() {
 		cloudsData *= 0.2;
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		vec3 cloudColor = getCloudColor(0.6 + 0.4 * brightness  ARGS_IN);
+		vec3 cloudColor = getCloudColor(0.6 + 0.4 * brightness);
 		color = mix(color, cloudColor, thickness);
 	#endif
 
@@ -66,7 +60,7 @@ void main() {
 	// ======== BLOOM CALCULATIONS ======== //
 	
 	#if BLOOM_ENABLED == 1
-		addBloom(color  ARGS_IN);
+		addBloom(color);
 	#endif
 	
 	

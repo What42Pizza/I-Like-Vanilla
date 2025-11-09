@@ -1,4 +1,4 @@
-void doSharpening(inout vec3 color, float depth  ARGS_OUT) {
+void doSharpening(inout vec3 color, float depth) {
 	
 	#ifdef END
 		if (depth == 1.0) return;
@@ -98,11 +98,8 @@ void doSharpening(inout vec3 color, float depth  ARGS_OUT) {
 		const float alteredSharpenDepthAddition = SHARPEN_DEPTH_ADDITION;
 	#endif
 	
-	float linearDepth = toLinearDepth(depth  ARGS_IN);
-	#include "/import/far.glsl"
+	float linearDepth = toLinearDepth(depth);
 	float blockDepth = clamp(linearDepth * far - 8.0, 0.0, 64.0);
-	#include "/import/cameraPosition.glsl"
-	#include "/import/previousCameraPosition.glsl"
 	float velocityFactor = float(cameraPosition != previousCameraPosition) * alteredSharpenVelocityAddition;
 	float depthAddition = alteredSharpenDepthAddition * 0.025 + velocityFactor * 0.018;
 	float sharpenAmount = alteredSharpenAmount * 0.35 + (sqrt(blockDepth * 0.5 + 1.0) - 1.0) * depthAddition + velocityFactor * 0.35;

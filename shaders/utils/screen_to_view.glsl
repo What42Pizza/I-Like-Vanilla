@@ -1,25 +1,12 @@
-#undef INCLUDE_SCREEN_TO_VIEW
-
-#if defined FIRST_PASS && !defined SCREEN_TO_VIEW_FIRST_FINISHED
-	#define INCLUDE_SCREEN_TO_VIEW
-	#define SCREEN_TO_VIEW_FIRST_FINISHED
-#endif
-#if defined SECOND_PASS && !defined SCREEN_TO_VIEW_SECOND_FINISHED
-	#define INCLUDE_SCREEN_TO_VIEW
-	#define SCREEN_TO_VIEW_SECOND_FINISHED
-#endif
-
-
-
-#ifdef INCLUDE_SCREEN_TO_VIEW
+#ifndef INCLUDE_SCREEN_TO_VIEW
+#define INCLUDE_SCREEN_TO_VIEW
 
 
 
 #if ISOMETRIC_RENDERING_ENABLED == 0
 	
 	// CODE FROM COMPLEMENTARY REIMAGINED:
-	vec3 screenToView(vec3 pos  ARGS_OUT) {
-		#include "/import/gbufferProjectionInverse.glsl"
+	vec3 screenToView(vec3 pos) {
 		vec4 iProjDiag = vec4(
 			gbufferProjectionInverse[0].x,
 			gbufferProjectionInverse[1].y,
@@ -31,8 +18,7 @@
 	}
 	// END OF COMPLEMENTARY REIMAGINED'S CODE
 	
-	vec3 screenToViewDh(vec3 pos  ARGS_OUT) {
-		#include "/import/dhProjectionInverse.glsl"
+	vec3 screenToViewDh(vec3 pos) {
 		vec4 iProjDiag = vec4(
 			dhProjectionInverse[0].x,
 			dhProjectionInverse[1].y,
@@ -47,17 +33,17 @@
 	
 	#include "/lib/isometric.glsl"
 	
-	vec3 screenToView(vec3 pos  ARGS_OUT) {
+	vec3 screenToView(vec3 pos) {
 		pos = pos * 2.0 - 1.0;
-		pos.z += getIsometricOffset(ARG_IN);
-		pos /= getIsometricScale(ARG_IN);
+		pos.z += getIsometricOffset();
+		pos /= getIsometricScale();
 		return pos;
 	}
 	
-	vec3 screenToViewDh(vec3 pos  ARGS_OUT) {
+	vec3 screenToViewDh(vec3 pos) {
 		pos = pos * 2.0 - 1.0;
-		pos.z += getIsometricOffset(ARG_IN);
-		pos /= getIsometricScale(ARG_IN);
+		pos.z += getIsometricOffset();
+		pos /= getIsometricScale();
 		return pos;
 	}
 	

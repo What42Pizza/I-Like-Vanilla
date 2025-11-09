@@ -2,10 +2,10 @@
 
 
 
-void addBloom(inout vec3 color  ARGS_OUT) {
+void addBloom(inout vec3 color) {
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	float blockDepth = toBlockDepth(depth  ARGS_IN);
+	float blockDepth = toBlockDepth(depth);
 	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.2;
 	
 	#ifdef GRADIENT_NOISE_SPEED
@@ -16,7 +16,6 @@ void addBloom(inout vec3 color  ARGS_OUT) {
 	
 	float randomAngle = (noise - 0.5) * 2.0 * PI;
 	mat2 rotationMatrix;
-	#include "/import/invAspectRatio.glsl"
 	rotationMatrix[0] = vec2(cos(randomAngle), -sin(randomAngle)) * invAspectRatio;
 	rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle));
 	

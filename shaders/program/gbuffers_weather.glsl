@@ -1,11 +1,7 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec4 glcolor;
-	
-	flat in_out vec3 normal;
-	
-#endif
+in_out vec2 texcoord;
+in_out vec4 glcolor;
+
+flat in_out vec3 normal;
 
 
 
@@ -46,15 +42,14 @@ void main() {
 	pos.z += horizontalAmount;
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * pos));
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * pos;
 	#endif
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	glcolor = gl_Color;

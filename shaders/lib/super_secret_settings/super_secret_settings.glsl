@@ -13,19 +13,19 @@
 
 
 
-void doSuperSecretSettings(inout vec3 color  ARGS_OUT) {
+void doSuperSecretSettings(inout vec3 color) {
 	
 	#if SSS_POSTERIZE == 1
-		sss_posterize(color  ARGS_IN);
+		sss_posterize(color);
 	#endif
 	#if SSS_NOTCH == 1
-		sss_notch(color  ARGS_IN);
+		sss_notch(color);
 	#endif
 	#if SSS_BUMPY == 1
-		sss_bumpy(color  ARGS_IN);
+		sss_bumpy(color);
 	#endif
 	#if SSS_SCANLINES == 1
-		sss_scanlines(color  ARGS_IN);
+		sss_scanlines(color);
 	#endif
 	
 }

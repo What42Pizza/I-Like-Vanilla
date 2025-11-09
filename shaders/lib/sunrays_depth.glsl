@@ -1,6 +1,6 @@
 #include "/utils/depth.glsl"
 
-float getDepthSunraysAmount(ARG_OUT) {
+float getDepthSunraysAmount() {
 	
 	#ifdef GRADIENT_NOISE_SPEED
 		#undef GRADIENT_NOISE_SPEED
@@ -29,7 +29,6 @@ float getDepthSunraysAmount(ARG_OUT) {
 				break;
 			}
 		#endif
-		#include "/import/viewSize.glsl"
 		bool isSky = texelFetch(DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r == 1.0;
 		#ifdef DISTANT_HORIZONS
 			isSky = isSky && texelFetch(DH_DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r == 1.0;

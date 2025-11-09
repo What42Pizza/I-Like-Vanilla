@@ -13,31 +13,9 @@ pub fn create_file_contents(world_name: &str, shader_name: &str, shader_type: &s
 #define {shader_type}
 
 #include "/settings.glsl"
+#include "/uniforms.glsl"
 #include "/common.glsl"
 
-
-
-#define FIRST_PASS
-#define ARGS_IN , false
-#define ARGS_OUT , bool dummy
-#define ARG_IN false
-#define ARG_OUT bool dummy
-#define main dummy_main
-#include "/program/{shader_name}.glsl"
-#undef main
-#undef FIRST_PASS
-#undef ARGS_IN
-#undef ARGS_OUT
-#undef ARG_IN
-#undef ARG_OUT
-
-#include "/import/switchboard.glsl"
-
-#define SECOND_PASS
-#define ARGS_IN
-#define ARGS_OUT
-#define ARG_IN
-#define ARG_OUT
 #include "/program/{shader_name}.glsl"
 "##)[1..].to_string()
 }

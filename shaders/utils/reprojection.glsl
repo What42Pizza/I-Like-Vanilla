@@ -1,31 +1,15 @@
-#undef INCLUDE_REPROJECTION
-
-#if defined FIRST_PASS && !defined REPROJECTION_FIRST_FINISHED
-	#define INCLUDE_REPROJECTION
-	#define REPROJECTION_FIRST_FINISHED
-#endif
-#if defined SECOND_PASS && !defined REPROJECTION_SECOND_FINISHED
-	#define INCLUDE_REPROJECTION
-	#define REPROJECTION_SECOND_FINISHED
-#endif
-
-
-
-#ifdef INCLUDE_REPROJECTION
+#ifndef INCLUDE_REPROJECTION
+#define INCLUDE_REPROJECTION
 
 
 
 #if ISOMETRIC_RENDERING_ENABLED == 0
 	
-	vec2 reprojection(vec3 screenPos, vec3 cameraOffset  ARGS_OUT) {
+	vec2 reprojection(vec3 screenPos, vec3 cameraOffset) {
 		screenPos = screenPos * 2.0 - 1.0;
-		#include "/import/gbufferProjectionInverse.glsl"
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec4 viewPos = gbufferProjectionInverse * vec4(screenPos, 1.0);
 		vec3 playerPos = mat3(gbufferModelViewInverse) * (viewPos.xyz / viewPos.w);
 		
-		#include "/import/gbufferPreviousProjection.glsl"
-		#include "/import/gbufferPreviousModelView.glsl"
 		vec3 prevPlayerPos = playerPos + cameraOffset;
 		vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
 		vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
@@ -36,19 +20,17 @@
 	
 	#include "/lib/isometric.glsl"
 	
-	vec2 reprojection(vec3 screenPos, vec3 cameraOffset  ARGS_OUT) {
+	vec2 reprojection(vec3 screenPos, vec3 cameraOffset) {
 		
 		vec3 playerPos = screenPos * 2.0 - 1.0;
-		playerPos.z += getIsometricOffset(ARG_IN);
-		playerPos /= getIsometricScale(ARG_IN);
-		#include "/import/gbufferModelViewInverse.glsl"
+		playerPos.z += getIsometricOffset();
+		playerPos /= getIsometricScale();
 		playerPos = mat3(gbufferModelViewInverse) * playerPos;
 		
 		vec3 prevPlayerPos = playerPos + cameraOffset;
 		
-		#include "/import/gbufferPreviousModelView.glsl"
 		vec2 prevCoord = (mat3(gbufferPreviousModelView) * prevPlayerPos).xy;
-		prevCoord.xy *= getIsometricScale(ARG_IN).xy;
+		prevCoord.xy *= getIsometricScale().xy;
 		return prevCoord.xy * 0.5 + 0.5;
 	}
 	

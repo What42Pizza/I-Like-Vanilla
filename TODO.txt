@@ -21,26 +21,26 @@ auto exposure
 atmospheric fog
 
 composite pass 2: (half res)
-bloom filtering
-sunrays processing (writes to "noisies" buffer)
-clouds processing (writes to "noisies" buffer)
+bloom filtering (writes to the intermediates texture)
+sunrays processing (writes to the intermediates texture w/ temporal filtering)
+clouds processing (writes to the intermediates texture w/ temporal filtering)
 
-composite pass 3:
-sunrays and clouds addition (samples and blurs the "noisies" buffer)
-bloom processing (writes to "noisies" buffer)
+composite pass 3: (half res)
+bloom processing (writes to the intermediates2 texture w/ temportal filtering)
 
 composite pass 4:
-bloom addition (samples and blurs the "noisies" buffer)
-reflections
+add sunrays, clouds, and bloom (all sampling from the intermediates and intermediates2 textures)
 
 composite pass 5:
+reflections
+
+composite pass 6:
 TAA
 DOF
 motion blur
 
-composite pass 6:
+composite pass 7:
 final post-processing (color correction, etc)
-
 
 
 

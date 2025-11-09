@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -30,7 +28,6 @@ void main() {
 	// super secret settings
 	ivec2 sampleCoord = texelcoord;
 	#if SSS_PIXELS != 0
-		#include "/import/viewSize.glsl"
 		int texelSize = int(viewSize.y) / SSS_PIXELS;
 		sampleCoord /= texelSize;
 		sampleCoord *= texelSize;
@@ -43,18 +40,17 @@ void main() {
 	// super secret settings
 	
 	#if SSS_PHOSPHOR == 1
-		sss_phosphor(color  ARGS_IN);
+		sss_phosphor(color);
 	#endif
 	
 	
 	
 	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 	#ifdef DISTANT_HORIZONS
-		vec3 realBlockViewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+		vec3 realBlockViewPos = screenToView(vec3(texcoord, depth));
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, depthDh)  ARGS_IN);
+		vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (dot(realBlockViewPosDh, realBlockViewPosDh) < dot(realBlockViewPos, realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
-		#include "/import/gbufferProjection.glsl"
 		vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 	#else
@@ -64,22 +60,20 @@ void main() {
 	vec3 pos = vec3(texcoord, depth);
 	vec2 prevCoord = texcoord;
 	if (!depthIsHand(depth)) {
-		#include "/import/cameraPosition.glsl"
-		#include "/import/previousCameraPosition.glsl"
 		vec3 cameraOffset = cameraPosition - previousCameraPosition;
-		prevCoord = reprojection(pos, cameraOffset  ARGS_IN);
+		prevCoord = reprojection(pos, cameraOffset);
 	}
 	
 	
 	
 	// ======== FXAA ======== //
 	#if FXAA_ENABLED == 1
-		doFxaa(color, MAIN_TEXTURE  ARGS_IN);
+		doFxaa(color, MAIN_TEXTURE);
 	#endif
 	
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
-		doTemporalFilter(color, depth, depthDh, prevCoord  ARGS_IN);
+		doTemporalFilter(color, depth, depthDh, prevCoord);
 	#endif
 	
 	
@@ -89,7 +83,7 @@ void main() {
 	#if MOTION_BLUR_ENABLED == 1
 		vec3 prevColor = color;
 		if (length(texcoord - prevCoord) > 0.00001) {
-			doMotionBlur(color, prevCoord, depth  ARGS_IN);
+			doMotionBlur(color, prevCoord, depth);
 		}
 	#endif
 	

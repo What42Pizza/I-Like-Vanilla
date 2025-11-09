@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -19,7 +17,7 @@
 
 
 #if REFLECTIONS_ENABLED == 1
-	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, vec2 lmcoord, float reflectionStrength  ARGS_OUT) {
+	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, vec2 lmcoord, float reflectionStrength) {
 		
 		if (depthIsHand(depth)) return;
 		#ifdef DISTANT_HORIZONS
@@ -28,12 +26,12 @@
 			if (depth == 1.0) return;
 		#endif
 		
-		vec3 viewPos = screenToView(vec3(texcoord, depth)  ARGS_IN);
+		vec3 viewPos = screenToView(vec3(texcoord, depth));
 		#ifdef DISTANT_HORIZONS
-			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth)  ARGS_IN);
+			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth));
 		#endif
 		
-		addReflection(color, viewPos, normal, lmcoord, MAIN_TEXTURE, reflectionStrength  ARGS_IN);
+		addReflection(color, viewPos, normal, lmcoord, MAIN_TEXTURE, reflectionStrength);
 		
 	}
 #endif
@@ -46,7 +44,7 @@ void main() {
 	// ======== DEPTH OF FIELD ======== //
 	
 	#if DOF_ENABLED == 1
-		doDOF(color  ARGS_IN);
+		doDOF(color);
 	#endif
 	
 	
@@ -79,9 +77,9 @@ void main() {
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS
-				doReflections(color, depth0, dhDepth0, normal, lmcoord, reflectionStrength  ARGS_IN);
+				doReflections(color, depth0, dhDepth0, normal, lmcoord, reflectionStrength);
 			#else
-				doReflections(color, depth0, 0.0, normal, lmcoord, reflectionStrength  ARGS_IN);
+				doReflections(color, depth0, 0.0, normal, lmcoord, reflectionStrength);
 			#endif
 		}
 		

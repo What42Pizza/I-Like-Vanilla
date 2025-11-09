@@ -1,4 +1,4 @@
-void sss_phosphor(inout vec3 color  ARGS_OUT) {
+void sss_phosphor(inout vec3 color) {
 	vec3 prev = texelFetch(PREV_TEXTURE, texelcoord, 0).rgb * 2.0;
 	
 	vec3 curvedColor = pow(color, vec3(SSS_PHOSPHOR_CURVE));

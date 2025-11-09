@@ -1,9 +1,5 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-	in_out vec4 glcolor;
-#endif
-
-
+in_out vec2 texcoord;
+in_out vec4 glcolor;
 
 
 
@@ -20,8 +16,6 @@ void main() {
 }
 
 #endif
-
-
 
 
 
@@ -42,9 +36,8 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
@@ -55,7 +48,7 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	

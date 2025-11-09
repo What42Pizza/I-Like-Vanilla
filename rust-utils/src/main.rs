@@ -66,10 +66,6 @@ pub const EXPORT_FILES: &[FileCopyData] = &[
 
 
 
-pub const ALL_UNIFORMS_PATH: &str = include_str!("all_uniforms.txt");
-
-
-
 pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic"];//, "cartoon"
 
 
@@ -84,7 +80,6 @@ const COMMANDS: &[data::Command] = &[
 	data::Command::new("help", "help", "Shows the help screen", commands::help::function),
 	data::Command::new("count_sloc", "count_sloc", "Counts the significant lines of code", commands::count_sloc::function),
 	data::Command::new("build_world_files", "build_world_files", "Generates the '/world_' files using hard-coded data", commands::build_world_files::function),
-	data::Command::new("build_uniform_imports", "build_uniform_imports", "Generates the '/import' files using hard-coded data", commands::build_uniform_imports::function),
 	data::Command::new("build_property_ids", "build_property_ids", "Converts the data in .property files (currently, just block.properties) from `block = num` to `num = block, ...`", commands::build_property_ids::function),
 	data::Command::new("check_settings", "check_settings", "Detects all shader settings and ensures they are consistent across all files", commands::check_settings::function),
 	data::Command::new("export", "export", "Exports the shader with only shader files included", commands::export::function),

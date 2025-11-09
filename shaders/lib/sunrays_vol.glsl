@@ -1,4 +1,4 @@
-vec3 getDistortedShadowPos(vec3 shadowPos  ARGS_OUT) {
+vec3 getDistortedShadowPos(vec3 shadowPos) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
@@ -7,18 +7,15 @@ vec3 getDistortedShadowPos(vec3 shadowPos  ARGS_OUT) {
 
 
 
-float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
+float getVolSunraysAmount(vec3 playerPos, float distMult) {
 	
 	float blockDepth = length(playerPos);
 	vec3 playerPosStep = normalize(playerPos) * (blockDepth / SUNRAYS_QUALITY);
-	#include "/import/shadowProjection.glsl"
-	#include "/import/shadowModelView.glsl"
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, vec3(0.0)));
 	vec3 nextShadowPos = transform(shadowProjection, transform(shadowModelView, playerPosStep));
 	vec3 shadowPosStep = nextShadowPos - shadowPos;
 	
 	float dither = bayer64(gl_FragCoord.xy);
-	#include "/import/frameCounter.glsl"
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	
 	// good values: 21.0015, 22.001, 0.02
@@ -32,7 +29,7 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	
 	float total = 0.0;
 	for (int i = 0; i < SUNRAYS_QUALITY; i ++) {
-		vec3 distortedShadowPos = getDistortedShadowPos(shadowPos  ARGS_IN);
+		vec3 distortedShadowPos = getDistortedShadowPos(shadowPos);
 		float diff = texelFetch(shadowtex0, ivec2(distortedShadowPos.xy * shadowMapResolution), 0).r - distortedShadowPos.z;
 		if (diff > 0.0) {
 			total += 1.0;
@@ -45,7 +42,6 @@ float getVolSunraysAmount(vec3 playerPos, float distMult  ARGS_OUT) {
 	
 	sunraysAmount *= volSunraysAmountMult;
 	
-	#include "/import/eyeBrightnessSmooth.glsl"
 	float skyBrightness = eyeBrightnessSmooth.y / 240.0;
 	float amountMin = mix(SUNRAYS_MIN_UNDERGROUND, SUNRAYS_MIN_SURFACE, skyBrightness * skyBrightness);
 	vec2 blockLmCoords = unpack_2x8(texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).x);

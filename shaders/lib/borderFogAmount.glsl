@@ -1,12 +1,10 @@
-float getBorderFogAmount(vec3 playerPos  ARGS_OUT) {
+float getBorderFogAmount(vec3 playerPos) {
 	
 	float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
-	#include "/import/invFar.glsl"
 	fogDistance *= invFar;
 	float fogAmount = (fogDistance - BORDER_FOG_START) / (BORDER_FOG_END - BORDER_FOG_START);
 	fogAmount = clamp(fogAmount, 0.0, 1.0);
 	
-	#include "/import/isEyeInWater.glsl"
 	if (isEyeInWater == 0) {
 		#if BORDER_FOG_CURVE == 2
 			fogAmount = pow2(fogAmount);

@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -29,7 +27,7 @@ void main() {
 	#endif
 	
 	#if SSS_DECONVERGE == 1
-		vec3 color = sss_deconverge(MAIN_TEXTURE, texcoord  ARGS_IN);
+		vec3 color = sss_deconverge(MAIN_TEXTURE, texcoord);
 	#else
 		vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
 	#endif

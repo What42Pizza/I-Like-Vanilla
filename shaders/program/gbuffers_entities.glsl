@@ -1,13 +1,7 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec2 lmcoord;
-	in_out vec4 glcolor;
-	flat in_out vec2 normal;
-	
-#endif
-
-
+in_out vec2 texcoord;
+in_out vec2 lmcoord;
+in_out vec4 glcolor;
+flat in_out vec2 normal;
 
 
 
@@ -23,7 +17,6 @@ void main() {
 	
 	
 	// hurt flash, creeper flash, etc
-	#include "/import/entityColor.glsl"
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
 	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
@@ -40,8 +33,6 @@ void main() {
 }
 
 #endif
-
-
 
 
 
@@ -67,9 +58,8 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
@@ -81,11 +71,11 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
-	doVshLighting(length(viewPos)  ARGS_IN);
+	doVshLighting(length(viewPos));
 	
 }
 

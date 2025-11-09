@@ -3,31 +3,25 @@
 	#define SHADOWS_ENABLED 0
 #endif
 
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
-	in_out vec3 viewPos;
-	in_out vec3 playerPos;
-	flat in_out vec3 normal;
-	flat in_out int materialId;
-	
-	flat in_out vec2 midTexCoord;
-	flat in_out vec2 midCoordOffset;
-	
-	flat in_out vec3 shadowcasterLight;
-	
-	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
-		in_out mat3 tbn;
-	#endif
-	#if BORDER_FOG_ENABLED == 1
-		in_out float fogAmount;
-	#endif
-	
+in_out vec2 texcoord;
+in_out vec2 lmcoord;
+in_out vec3 glcolor;
+in_out vec3 viewPos;
+in_out vec3 playerPos;
+flat in_out vec3 normal;
+flat in_out int materialId;
+
+flat in_out vec2 midTexCoord;
+flat in_out vec2 midCoordOffset;
+
+flat in_out vec3 shadowcasterLight;
+
+#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
+	in_out mat3 tbn;
 #endif
-
-
+#if BORDER_FOG_ENABLED == 1
+	in_out float fogAmount;
+#endif
 
 
 
@@ -45,15 +39,12 @@ void main() {
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
 		#if TEMPORAL_FILTER_ENABLED == 1
-			#include "/import/frameCounter.glsl"
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.99;
-		#include "/import/far.glsl"
 		if (lengthCylinder >= far - 10 - 8 * dither) discard;
 	#else
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
-		#include "/import/invFar.glsl"
 		fogDistance *= invFar;
 		if (fogDistance >= 0.95) {discard; return;}
 	#endif
@@ -81,8 +72,6 @@ void main() {
 		// waving water normals
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			float fresnel = -dot(normal, normalize(viewPos));
-			#include "/import/cameraPosition.glsl"
-			#include "/import/frameTimeCounter.glsl"
 			vec3 noisePos = vec3(playerPos.xz + cameraPosition.xz, frameTimeCounter * WAVING_WATER_SPEED);
 			noisePos.xy /= WAVING_WATER_SCALE * 2.0;
 			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.02;
@@ -103,12 +92,11 @@ void main() {
 		
 		
 		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-			#include "/import/isEyeInWater.glsl"
 			if (isEyeInWater == 1) {
 				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 			} else {
-				float blockDepth = toBlockDepth(gl_FragCoord.z  ARGS_IN);
-				float opaqueBlockDepth = toBlockDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r  ARGS_IN);
+				float blockDepth = toBlockDepth(gl_FragCoord.z);
+				float opaqueBlockDepth = toBlockDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r);
 				float waterDepth = opaqueBlockDepth - blockDepth;
 				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
 			}
@@ -125,7 +113,6 @@ void main() {
 			vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
 			tangentViewDir.x *= -1.0;
 			
-			#include "/import/atlasSize.glsl"
 			vec2 texcoordInt = texcoord * atlasSize;
 			vec2 distToNext = fract(texcoordInt);
 			
@@ -161,7 +148,7 @@ void main() {
 	
 	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal  ARGS_IN);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal);
 	
 	
 	// fog
@@ -182,8 +169,6 @@ void main() {
 }
 
 #endif
-
-
 
 
 
@@ -208,24 +193,20 @@ void main() {
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
 	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
-	#include "/import/gbufferModelViewInverse.glsl"
 	playerPos = endMat(gbufferModelViewInverse * vec4(viewPos, 1.0));
 	normal = gl_NormalMatrix * gl_Normal;
 	
-	#include "/import/mc_Entity.glsl"
 	materialId = int(mc_Entity.x);
 	if (materialId < 1000) materialId = 0;
 	materialId %= 100000;
 	
-	#include "/import/mc_midTexCoord.glsl"
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);
 	
-	shadowcasterLight = getShadowcasterLight(ARG_IN);
+	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
-		#include "/import/at_tangent.glsl"
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
@@ -237,12 +218,9 @@ void main() {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-				#include "/import/far.glsl"
 				wavingAmount *= smoothstep(far * 0.95 - 10, far * 0.9 - 10, lengthCylinder);
 			#endif
-			#include "/import/cameraPosition.glsl"
 			playerPos += cameraPosition;
-			#include "/import/frameTimeCounter.glsl"
 			playerPos.y += (sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.5 - 0.5) * 0.03 * wavingAmount;
 			playerPos.y += (sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.5 - 0.5) * 0.02 * wavingAmount;
 			playerPos -= cameraPosition;
@@ -251,9 +229,8 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
-		#include "/import/gbufferModelView.glsl"
 		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
 	
@@ -264,12 +241,12 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
 	#if BORDER_FOG_ENABLED == 1
-		fogAmount = getBorderFogAmount(playerPos  ARGS_IN);
+		fogAmount = getBorderFogAmount(playerPos);
 	#endif
 	
 	
@@ -280,7 +257,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(playerPos)  ARGS_IN);
+	doVshLighting(length(playerPos));
 	
 }
 

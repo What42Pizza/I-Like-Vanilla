@@ -2,8 +2,7 @@
 
 
 
-vec3 getBlurredColor(vec2 coord, float size  ARGS_OUT) {
-	#include "/import/pixelSize.glsl"
+vec3 getBlurredColor(vec2 coord, float size) {
 	vec3 colorTotal = vec3(0.0);
 	colorTotal += texture2D(MAIN_TEXTURE, coord + vec2(-1, -2) * pixelSize * size, 0).rgb * 0.574;
 	colorTotal += texture2D(MAIN_TEXTURE, coord + vec2( 0, -2) * pixelSize * size, 0).rgb * 0.641;
@@ -32,23 +31,20 @@ vec3 getBlurredColor(vec2 coord, float size  ARGS_OUT) {
 
 
 
-void doDOF(inout vec3 color  ARGS_OUT) {
+void doDOF(inout vec3 color) {
 	
 	#if DOF_LOCKED_FOCAL_PLANE == 1
-		#include "/import/invFar.glsl"
 		float focusDepth = DOF_FOCAL_PLANE_DISTANCE * invFar;
 	#else
 		#ifdef IS_IRIS
-			#include "/import/viewSize.glsl"
 			float depth = texelFetch(DEPTH_BUFFER_ALL, ivec2(viewSize) / 2, 0).r;
-			float focusDepth = toLinearDepth(depth  ARGS_IN);
+			float focusDepth = toLinearDepth(depth);
 		#else
-			#include "/import/centerLinearDepthSmooth.glsl"
 			float focusDepth = centerLinearDepthSmooth;
 		#endif
 	#endif
 	
-	float linearDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r  ARGS_IN);
+	float linearDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);
 	float depthChange = linearDepth - focusDepth;
 	#if DOF_SLOPE_TYPE == 1
 		depthChange /= 15.0 * focusDepth;
@@ -59,10 +55,9 @@ void doDOF(inout vec3 color  ARGS_OUT) {
 	float farBlurAmount = depthChange * (1.0 / DOF_FAR_BLUR_SLOPE) - (DOF_FAR_BLUR_START / DOF_FAR_BLUR_SLOPE);
 	farBlurAmount = clamp(farBlurAmount, 0.0, 1.0) * DOF_FAR_BLUR_STRENGTH;
 	
-	#include "/import/far.glsl"
 	float blurSizeMult = 1.0 / (linearDepth * far * 0.01 + 1.0);
-	vec3 nearBlur = getBlurredColor(texcoord, nearBlurAmount * blurSizeMult * DOF_NEAR_BLUR_SIZE  ARGS_IN);
-	vec3 farBlur = getBlurredColor(texcoord, farBlurAmount * blurSizeMult * DOF_FAR_BLUR_SIZE  ARGS_IN);
+	vec3 nearBlur = getBlurredColor(texcoord, nearBlurAmount * blurSizeMult * DOF_NEAR_BLUR_SIZE);
+	vec3 farBlur = getBlurredColor(texcoord, farBlurAmount * blurSizeMult * DOF_FAR_BLUR_SIZE);
 	color = mix(color, farBlur, min(farBlurAmount, 1.0));
 	color = mix(color, nearBlur, min(nearBlurAmount, 1.0));
 	

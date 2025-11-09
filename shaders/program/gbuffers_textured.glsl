@@ -1,17 +1,11 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec2 lmcoord;
-	in_out vec4 glcolor;
-	flat in_out vec3 normal;
-	in_out vec3 viewPos;
-	in_out float blockDepth;
-	
-	flat in_out vec3 shadowcasterLight;
-	
-#endif
+in_out vec2 texcoord;
+in_out vec2 lmcoord;
+in_out vec4 glcolor;
+flat in_out vec3 normal;
+in_out vec3 viewPos;
+in_out float blockDepth;
 
-
+flat in_out vec3 shadowcasterLight;
 
 
 
@@ -19,11 +13,9 @@
 
 #include "/lib/lighting/simple_fsh_lighting.glsl"
 
-#ifdef FIRST_PASS
-	float percentThrough(float v, float low, float high) {
-		return clamp((v - low) / (high - low), 0.0, 1.0);
-	}
-#endif
+float percentThrough(float v, float low, float high) {
+	return clamp((v - low) / (high - low), 0.0, 1.0);
+}
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
@@ -37,7 +29,7 @@ void main() {
 	
 	
 	// main lighting
-	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal  ARGS_IN);
+	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -52,8 +44,6 @@ void main() {
 }
 
 #endif
-
-
 
 
 
@@ -81,13 +71,12 @@ void main() {
 	viewPos = mat3(gl_ModelViewMatrix) * gl_Vertex.xyz;
 	blockDepth = length(viewPos.xyz);
 	
-	shadowcasterLight = getShadowcasterLight(ARG_IN);
+	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
@@ -98,11 +87,11 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
-	doVshLighting(blockDepth  ARGS_IN);
+	doVshLighting(blockDepth);
 	
 }
 

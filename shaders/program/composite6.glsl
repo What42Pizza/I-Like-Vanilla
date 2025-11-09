@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -32,7 +30,7 @@ void main() {
 	
 	#if KUWAHARA_ENABLED == 1
 		vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-		color = doKuwaharaEffect(color, MAIN_TEXTURE, depth  ARGS_IN) * 2.0;
+		color = doKuwaharaEffect(color, MAIN_TEXTURE, depth) * 2.0;
 	#else
 		vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	#endif
@@ -42,30 +40,30 @@ void main() {
 	// ======== SHARPENING ======== //
 	
 	#if SHARPENING_ENABLED == 1
-		doSharpening(color, depth  ARGS_IN);
+		doSharpening(color, depth);
 	#endif
 	
 	
 	
 	// ======== COLOR CORRECTION & TONE MAPPING ======== //
 	
-	doColorCorrection(color  ARGS_IN);
+	doColorCorrection(color);
 	#if COLORBLIND_MODE != 0
-		applyColorblindnessCorrection(color  ARGS_IN);
+		applyColorblindnessCorrection(color);
 	#endif
 	
 	
 	
 	// ======== SUPER SECRET SETTINGS ======== //
 	
-	doSuperSecretSettings(color  ARGS_IN);
+	doSuperSecretSettings(color);
 	
 	
 	
 	// ======== HSV POSTERIZE ======== //
 	
 	#if HSV_POSTERIZE_ENABLED == 1
-		doHsvPosterize(color, depth  ARGS_IN);
+		doHsvPosterize(color, depth);
 	#endif
 	
 	
@@ -78,12 +76,10 @@ void main() {
 			#include "/utils/var_rng.glsl"
 			vignetteAmount += randomFloat(rng) * 0.02;
 		#endif
-		#include "/import/eyeBrightnessSmooth.glsl"
 		#if VIGNETTE_ENABLED == 1 && !defined END
 			color *= 1.0 - vignetteAmount * mix(VIGNETTE_AMOUNT_UNDERGROUND, VIGNETTE_AMOUNT_SURFACE, eyeBrightnessSmooth.y / 240.0);
 		#endif
 		#if HEALTH_EFFECT_ENABLED == 1
-			#include "/import/smoothPlayerHealth.glsl"
 			float healthEffectAmount = 1.0 - smoothPlayerHealth;
 			healthEffectAmount *= healthEffectAmount;
 			healthEffectAmount *= vignetteAmount * HEALTH_EFFECT_STRENGTH * 0.7;
@@ -91,7 +87,6 @@ void main() {
 			color.r += healthEffectAmount * 0.4;
 		#endif
 		#if DAMAGE_EFFECT_ENABLED == 1
-			#include "/import/damageAmount.glsl"
 			float damageEffectAmount = damageAmount;
 			damageEffectAmount *= vignetteAmount * DAMAGE_EFFECT_STRENGTH * 0.5;
 			color.gb *= 1.0 - damageEffectAmount;
@@ -108,7 +103,6 @@ void main() {
 	
 	
 	
-	#include "/import/frameCounter.glsl"
 	color += (fract(52.9829189 * fract(0.06711056 * gl_FragCoord.x + 0.00583715 * gl_FragCoord.y + 0.0003181 * frameCounter)) - 0.5) / 255.0;
 	
 	/* DRAWBUFFERS:07 */

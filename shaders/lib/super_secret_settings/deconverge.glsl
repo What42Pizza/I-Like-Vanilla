@@ -1,13 +1,10 @@
-#ifdef FIRST_PASS
-	const vec3 ConvergeX = vec3(-4, 0, 2);
-	const vec3 ConvergeY = vec3(0, -4, 2);
-#endif
+const vec3 ConvergeX = vec3(-4, 0, 2);
+const vec3 ConvergeY = vec3(0, -4, 2);
 
 
 
-vec3 sss_deconverge(sampler2D tex, vec2 texcoord  ARGS_OUT) {
+vec3 sss_deconverge(sampler2D tex, vec2 texcoord) {
 	
-	#include "/import/pixelSize.glsl"
 	vec3 convergeX = ConvergeX * pixelSize.x / SSS_DECONVERGE_QUALITY * SSS_DECONVERGE_AMOUNT;
 	vec3 convergeY = ConvergeY * pixelSize.y / SSS_DECONVERGE_QUALITY * SSS_DECONVERGE_AMOUNT;
 	

@@ -1,6 +1,4 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-#endif
+in_out vec2 texcoord;
 
 
 
@@ -18,10 +16,8 @@ void main() {
 	
 	#if UNDERWATER_WAVINESS_ENABLED == 1
 		vec2 texcoord = texcoord;
-		#include "/import/isEyeInWater.glsl"
 		if (isEyeInWater == 1) {
 			texcoord = (texcoord - 0.5) * 0.95 + 0.5;
-			#include "/import/frameTimeCounter.glsl"
 			vec3 simplexInput = vec3(
 				texcoord * 32.0 * UNDERWATER_WAVINESS_SCALE,
 				frameTimeCounter * 0.5 * UNDERWATER_WAVINESS_SPEED

@@ -1,11 +1,8 @@
-#ifdef FIRST_PASS
-	const int SAMPLE_COUNT = MOTION_BLUR_QUALITY * MOTION_BLUR_QUALITY;
-#endif
+const int SAMPLE_COUNT = MOTION_BLUR_QUALITY * MOTION_BLUR_QUALITY;
 
-void doMotionBlur(inout vec3 color, vec2 prevCoord, float centerDepth  ARGS_OUT) {
+void doMotionBlur(inout vec3 color, vec2 prevCoord, float centerDepth) {
 	color *= color;
 	
-	#include "/import/invFrameTime.glsl"
 	vec2 coordStep = (prevCoord - texcoord) * invFrameTime;
 	coordStep *= MOTION_BLUR_AMOUNT * 0.01;
 	coordStep /= SAMPLE_COUNT;

@@ -1,13 +1,7 @@
-#ifdef FIRST_PASS
-	
-	in_out vec2 texcoord;
-	in_out vec2 lmcoord;
-	in_out vec3 glcolor;
-	flat in_out vec2 normal;
-	
-#endif
-
-
+in_out vec2 texcoord;
+in_out vec2 lmcoord;
+in_out vec3 glcolor;
+flat in_out vec2 normal;
 
 
 
@@ -37,8 +31,6 @@ void main() {
 
 
 
-
-
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
@@ -59,7 +51,6 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 		gl_Position = projectIsometric(playerPos);
 	#else
@@ -68,11 +59,11 @@ void main() {
 	
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	
-	doVshLighting(0.0  ARGS_IN);
+	doVshLighting(0.0);
 	
 }
 

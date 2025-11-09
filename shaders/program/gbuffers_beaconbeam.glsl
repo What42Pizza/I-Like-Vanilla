@@ -1,8 +1,6 @@
-#ifdef FIRST_PASS
-	in_out vec2 texcoord;
-	flat in_out float glcolor_alpha;
-	flat in_out vec2 normal;
-#endif
+in_out vec2 texcoord;
+flat in_out float glcolor_alpha;
+flat in_out vec2 normal;
 
 
 
@@ -42,15 +40,14 @@ void main() {
 	normal = encodeNormal(gl_NormalMatrix * vec3(0, -1, 0)); // probably bad way to disable shadows
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		#include "/import/gbufferModelViewInverse.glsl"
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-		gl_Position = projectIsometric(playerPos  ARGS_IN);
+		gl_Position = projectIsometric(playerPos);
 	#else
 		gl_Position = ftransform();
 	#endif
 	
 	#if TAA_ENABLED == 1
-		doTaaJitter(gl_Position.xy  ARGS_IN);
+		doTaaJitter(gl_Position.xy);
 	#endif
 	
 	glcolor_alpha = gl_Color.a;
