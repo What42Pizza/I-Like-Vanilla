@@ -5,7 +5,7 @@
 float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness) {
 	
 	// get normal dot sun/moon pos
-	#ifdef OVERWORLD
+	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 	#else
 		float lightDot = 1.0;
@@ -25,6 +25,8 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness) {
 
 
 void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal) {
+	
+	ambientBrightness = (ambientBrightness * ambientBrightness + ambientBrightness) * 0.5; // kinda like squaring but not as intense
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -90,6 +92,7 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	shadowBrightness *= 1.0 - rainDecrease;
 	
 	vec3 skyLighting = shadowcasterLight * shadowBrightness;
+	skyLighting *= 1.0 + 0.5 * sideShading;
 	ambientLight *= 1.0 - shadowBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;
@@ -109,13 +112,11 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		float specular = max(dot(reflectedDir, lightDir), 0.0);
 		specular *= specular;
 		specular *= specular;
-		specular *= specular;
-		specular *= specular;
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
 		specular *= 1.0 - betterRainStrength;
-		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9);
+		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15;
 		specular_amount *= 1.0 - getSaturation(color);
-		lighting += specularColor * specular * (0.25 + 0.75 * specular_amount) * shadowBrightness * (1.0 - 0.8 * ambientMoonPercent);
+		lighting += specularColor * specular * (0.25 + 0.75 * specular_amount) * shadowBrightness;
 	#endif
 	
 	float lightingBrightness = min(getLum(lighting), 1.0);

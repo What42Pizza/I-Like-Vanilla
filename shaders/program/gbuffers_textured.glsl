@@ -13,10 +13,6 @@ flat in_out vec3 shadowcasterLight;
 
 #include "/lib/lighting/simple_fsh_lighting.glsl"
 
-float percentThrough(float v, float low, float high) {
-	return clamp((v - low) / (high - low), 0.0, 1.0);
-}
-
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	

@@ -256,8 +256,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		float specular = max(dot(reflectedDir, lightDir), 0.0);
 		specular *= specular;
 		specular *= specular;
-		specular *= specular;
-		specular *= specular;
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
 		specular *= 1.0 - betterRainStrength;
 		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15;

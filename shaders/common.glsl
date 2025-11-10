@@ -132,6 +132,10 @@ vec3 smoothMax(vec3 v1, vec3 v2, float a) {
 	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 
+float percentThrough(float v, float low, float high) {
+	return clamp((v - low) / (high - low), 0.0, 1.0);
+}
+
 float cubicInterpolate(float edge0, float edge1, float edge2, float edge3, float value) {
 	float value2 = value * value;
 	float a0 = edge3 - edge2 - edge0 + edge1;
