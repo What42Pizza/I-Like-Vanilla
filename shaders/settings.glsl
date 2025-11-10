@@ -18,12 +18,14 @@ const int   colortex7Format       = R16;
 const bool  colortex7Clear        = false;
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Clear       = false;
-const float wetnessHalflife       = 50.0f;
-const float drynessHalflife       = 50.0f;
-const float centerDepthHalflife   = 2.5f;
+const float wetnessHalflife       = 30.0f;
+const float drynessHalflife       = 30.0f;
 const float eyeBrightnessHalflife = 4.0f;
 const float ambientOcclusionLevel = 1.0;
 const float shadowIntervalSize    = 2.0;
+#if COLORED_LIGHTING_ENABLED == 1
+	const float voxelDistance = 32.0;
+#endif
 */
 
 

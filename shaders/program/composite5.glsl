@@ -83,7 +83,7 @@ void main() {
 	#if MOTION_BLUR_ENABLED == 1
 		vec3 prevColor = color;
 		if (length(texcoord - prevCoord) > 0.00001) {
-			doMotionBlur(color, prevCoord, depth);
+			doMotionBlur(color, prevCoord);
 		}
 	#endif
 	

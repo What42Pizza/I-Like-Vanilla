@@ -36,12 +36,8 @@ void doDOF(inout vec3 color) {
 	#if DOF_LOCKED_FOCAL_PLANE == 1
 		float focusDepth = DOF_FOCAL_PLANE_DISTANCE * invFar;
 	#else
-		#ifdef IS_IRIS
-			float depth = texelFetch(DEPTH_BUFFER_ALL, ivec2(viewSize) / 2, 0).r;
-			float focusDepth = toLinearDepth(depth);
-		#else
-			float focusDepth = centerLinearDepthSmooth;
-		#endif
+		float depth = texelFetch(DEPTH_BUFFER_ALL, ivec2(viewSize) / 2, 0).r;
+		float focusDepth = toLinearDepth(depth);
 	#endif
 	
 	float linearDepth = toLinearDepth(texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);

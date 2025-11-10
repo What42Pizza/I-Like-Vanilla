@@ -3,6 +3,7 @@
 
 
 vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal) {
+	viewPos += normal * 0.001 * (25.0 + length(viewPos));
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
 	playerPos += cameraPosition;
 	playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;

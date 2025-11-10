@@ -23,10 +23,6 @@ uniform sampler2D shadowtex0;
 	uniform sampler2D dhDepthTex0;
 	uniform sampler2D dhDepthTex1;
 #endif
-//uniform sampler2D noisetex;
-
-//uniform float centerDepth;
-//uniform float centerDepthSmooth;
 
 
 

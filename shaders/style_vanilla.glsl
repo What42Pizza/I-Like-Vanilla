@@ -92,6 +92,10 @@
 #undef FOLIAGE_TINT_BLUE
 										#define FOLIAGE_TINT_BLUE 0.98
 #endif
+#if SNOWY_TWEAKS_ENABLED == -1
+#undef SNOWY_TWEAKS_ENABLED
+										#define SNOWY_TWEAKS_ENABLED 1
+#endif
 
 
 

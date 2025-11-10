@@ -1,6 +1,6 @@
 const int SAMPLE_COUNT = MOTION_BLUR_QUALITY * MOTION_BLUR_QUALITY;
 
-void doMotionBlur(inout vec3 color, vec2 prevCoord, float centerDepth) {
+void doMotionBlur(inout vec3 color, vec2 prevCoord) {
 	color *= color;
 	
 	vec2 coordStep = (prevCoord - texcoord) * invFrameTime;

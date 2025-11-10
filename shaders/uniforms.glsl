@@ -46,8 +46,6 @@ uniform float betterRainStrength;
 uniform float horizonAltitudeAddend;
 uniform bool isSun;
 uniform bool isOtherLightSource;
-uniform float centerDepthSmooth;
-uniform float centerLinearDepthSmooth;
 uniform vec2 taaOffset;
 uniform float invAspectRatio;
 uniform float invFar;
@@ -82,6 +80,9 @@ uniform float blindness;
 uniform float darknessFactor;
 uniform float darknessLightFactor;
 uniform ivec2 atlasSize;
+uniform float temperature;
+uniform int biome_precipitation;
+uniform float inSnowyBiome;
 
 #ifdef VSH
 	attribute vec3 mc_Entity;

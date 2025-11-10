@@ -101,9 +101,20 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	glcolor = mix(vec3(getLum(gl_Color.rgb)), gl_Color.rgb, FOLIAGE_SATURATION);
-	if (glcolor != vec3(1.0)) glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
-	glcolor *= 1.0 - (1.0 - gl_Color.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
+	
+	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	
+	vec4 glcolor4 = gl_Color;
+	glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
+	if (glcolor4.rgb != vec3(1.0)) glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+	if (inSnowyBiome > 0.0) {
+		float snowyness = (0.6 + 0.4 * wetness) * inSnowyBiome / (1.0 + 0.003 * length(playerPos)) * max(lmcoord.y * 2.0 - 1.0, 0.3);
+		glcolor4.rgb = mix(glcolor4.rgb, vec3(1.5, 1.5, 1.55), snowyness * float(glcolor4.rgb != vec3(1.0)));
+		glcolor4.a = mix(glcolor4.a, 1.0, snowyness * 0.5);
+	}
+	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
+	glcolor = glcolor4.rgb * ao;
+	
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	materialId = int(mc_Entity.x);
@@ -121,9 +132,6 @@ void main() {
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = float(gl_Normal.y > 0.9 && lmcoord.x < 0.5);
 	#endif
-	
-	
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 	
 	
 	//#define WORLD_TEXTURE_SCALING 2

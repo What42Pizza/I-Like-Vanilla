@@ -201,6 +201,16 @@ value.BLOCKLIGHT_CEL_AMOUNT.100=1.0
 
 
 
+option.COLORED_LIGHTING_ENABLED=Colored Lighting
+option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
+
+option.COLORED_LIGHTING_DIST=Colored Lighting Distance
+option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
+
+
+
+
+
 screen.COLORS_AND_LIGHTING_MENU=Colors and Lighting
 
 option.NIGHT_VISION_BRIGHTNESS=Night Vision Brightness
@@ -229,6 +239,12 @@ value.FOLIAGE_TINT_GREEN.-1=Use Style
 option.FOLIAGE_TINT_BLUE=Foliage Tint Blue
 option.FOLIAGE_TINT_BLUE.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
 value.FOLIAGE_TINT_BLUE.-1=Use Style
+
+option.SNOWY_TWEAKS_ENABLED=Snowy Tweaks
+option.SNOWY_TWEAKS_ENABLED.comment=Changes the foliage in snowy biomes to be snowy
+value.SNOWY_TWEAKS_ENABLED.-1=Use Style
+value.SNOWY_TWEAKS_ENABLED.0=Off
+value.SNOWY_TWEAKS_ENABLED.1=On
 
 
 
