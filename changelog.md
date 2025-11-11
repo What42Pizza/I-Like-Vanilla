@@ -1,4 +1,4 @@
-- **v1.1.0**
+- **v1.1.0** (25/11/10)
   - Enabled pixelated shadows on the vanilla style
   - Added 'Fancy Nether Portals' setting (enabled by default)
   - Added 'Snowy Tweaks' setting (eanbled by default)
@@ -7,7 +7,7 @@
   - Removed setting 'Cloud Transparency (Realistic)'
   - Improved performance and effects quality
     - Added separate temporal filtering for sunrays and realistic clouds
-	- Improved noise/dithering patterns
+    - Improved noise/dithering patterns
   - Tweaked settings and effects
 
 <br>

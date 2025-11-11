@@ -7,7 +7,7 @@ in_out vec3 playerPos;
 in_out float specularMult;
 
 #if SHOW_DANGEROUS_LIGHT == 1
-	in_out float isDangerousLight;
+	flat in_out float isDangerousLight;
 #endif
 
 
@@ -41,9 +41,12 @@ void main() {
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
-		vec3 blockPos = fract(playerPos + cameraPosition);
-		float centerDist = length(blockPos - 0.5);
-		color.rgb = mix(color.rgb, vec3(1.0, 0.0, 0.0), isDangerousLight * 0.35 * float(centerDist < 0.65));
+		if (isDangerousLight > 0.0) {
+			vec3 blockPos = fract(playerPos + cameraPosition);
+			float centerDist = length(blockPos.xz - 0.5);
+			vec3 indicatorColor = isDangerousLight > 0.75 ? vec3(1.0, 0.0, 0.0) : vec3(1.0, 1.0, 0.0);
+			color.rgb = mix(color.rgb, indicatorColor, 0.35 * float(centerDist < 0.45));
+		}
 	#endif
 	
 	
@@ -135,7 +138,16 @@ void main() {
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
-		isDangerousLight = float(gl_Normal.y > 0.9 && lmcoord.x < 0.5);
+		isDangerousLight = 0.0;
+		if (gl_Normal.y > 0.9) {
+			if (lmcoord.x < 0.5) {
+				if (abs(lmcoord.x - 0.05) < 0.02) {
+					isDangerousLight = 0.5;
+				} else {
+					isDangerousLight = 1.0;
+				}
+			}
+		}
 	#endif
 	
 	

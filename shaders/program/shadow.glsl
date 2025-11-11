@@ -61,7 +61,7 @@ void main() {
 			playerPos.y += (sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.5 - 0.5) * 0.03 * wavingAmount;
 			playerPos.y += (sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.5 - 0.5) * 0.02 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y += 0.065 + 0.003 * length(playerPos.xz); // offset shadow bias
+			playerPos.y += 0.0025;// + 0.003 * length(playerPos.xz); // offset shadow bias
 		}
 	#endif
 	

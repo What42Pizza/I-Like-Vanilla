@@ -101,6 +101,7 @@ value.PIXELATED_SHADOWS.128=128x
 
 option.PIXELATED_SHADOWS_SOFTNESS=Pixelated Shadows Softness
 option.PIXELATED_SHADOWS_SOFTNESS.comment=How soft the transition from in-shadow to in-brightness should be when Pixelated Shadows is turned on
+value.PIXELATED_SHADOWS_SOFTNESS.-1=Use Style
 
 option.EXCLUDE_FOLIAGE=Exclude Foliage
 option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Performance cost: Low)
@@ -1597,7 +1598,7 @@ option.HAND_DEPTH=Hand Depth
 option.HAND_DEPTH.comment=Depth test value for the hand and hand items\nIf this is too low, the hand won't be detected and will be shaded incorrectly\nIf this is too high, close-up objects will be treated as hand items and will be shaded incorrectly
 
 option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
-option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, also works at night)
+option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, and the yellow blocks are where you should place torches for best torch usage)
 value.SHOW_DANGEROUS_LIGHT.0=Off
 value.SHOW_DANGEROUS_LIGHT.1=On
 

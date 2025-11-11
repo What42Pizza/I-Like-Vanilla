@@ -8,7 +8,7 @@
 #endif
 #if PIXELATED_SHADOWS_SOFTNESS == -1
 #undef PIXELATED_SHADOWS_SOFTNESS
-										#define PIXELATED_SHADOWS_SOFTNESS 0.3
+										#define PIXELATED_SHADOWS_SOFTNESS 0.5
 #endif
 #if EXCLUDE_FOLIAGE == -1
 #undef EXCLUDE_FOLIAGE
@@ -82,7 +82,7 @@
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
-										#define FOLIAGE_TINT_RED 0.98
+										#define FOLIAGE_TINT_RED 0.97
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
@@ -90,7 +90,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 0.98
+										#define FOLIAGE_TINT_BLUE 0.97
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED

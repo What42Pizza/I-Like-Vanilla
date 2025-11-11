@@ -3,8 +3,7 @@
 
 
 vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal) {
-	viewPos += normal * 0.001 * (25.0 + length(viewPos));
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos + normal * 0.05);
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	playerPos += cameraPosition;
 	playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
 	playerPos -= cameraPosition;
@@ -12,7 +11,6 @@ vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal) {
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
 	shadowPos = shadowPos * 0.5 + 0.5;
-	shadowPos.z -= 0.00025 + length(viewPos) * 0.02 / shadowMapResolution;
 	return shadowPos;
 }
 
@@ -33,14 +31,33 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	
 	#if PIXELATED_SHADOWS > 0
 		
+		vec3 viewStepX = normalize(dFdx(viewPos));
+		vec3 viewStepY = normalize(dFdy(viewPos));
+		vec3 actualNormal = cross(viewStepX, viewStepY);
+		bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
+		normal = maybeGrass ? actualNormal : normal;
+		viewPos += normal * 0.0015 * (25.0 + length(viewPos));
+		
 		// no filtering, world-aligned pixelated
+		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
+		if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
+			tangent = cross(normal, gbufferModelView[0].xyz);
+		}
+		tangent = normalize(tangent);
+		vec3 bitangent = cross(tangent, normal);
+		
 		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
+		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
+		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
+		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
+		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
+		
 		float shadowSample = 0.0;
-		const float offset = PIXELATED_SHADOWS_SOFTNESS / shadowMapResolution;
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2( offset,  offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2( offset, -offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2(-offset,  offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + vec2(-offset, -offset) + 1.0 / shadowMapResolution).r >= shadowPos.z);
+		float bias = 0.0002 + length(viewPos) * 0.025 / shadowMapResolution;
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
 		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
