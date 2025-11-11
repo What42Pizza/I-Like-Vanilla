@@ -8,6 +8,10 @@ void addBloom(inout vec3 color) {
 	float blockDepth = toBlockDepth(depth);
 	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.2;
 	
+	#if BSL_MODE == 1
+		sizeMult *= 3.0;
+	#endif
+	
 	#ifdef GRADIENT_NOISE_SPEED
 		#undef GRADIENT_NOISE_SPEED
 	#endif

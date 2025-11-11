@@ -1613,6 +1613,11 @@ value.REFLECTIVE_EVERYTHING.-1=Use Style
 value.REFLECTIVE_EVERYTHING.0=Off
 value.REFLECTIVE_EVERYTHING.1=On
 
+option.BSL_MODE=BSL Mode
+option.BSL_MODE.comment=Makes this shader look like BSL (as a joke)
+value.BSL_MODE.0=Off
+value.BSL_MODE.1=On
+
 
 
 

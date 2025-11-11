@@ -448,6 +448,7 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 #define SHOW_DANGEROUS_LIGHT 0 // [0 1]
 #define USE_SIMPLE_LIGHT -1 // [-1 0 1]
 #define REFLECTIVE_EVERYTHING -1 // [-1 0 1]
+#define BSL_MODE 0 // [0 1]
 
 
 

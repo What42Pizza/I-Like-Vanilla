@@ -103,6 +103,13 @@ void main() {
 	
 	
 	
+	#if BSL_MODE == 1
+		color = pow(color, vec3(1.1));
+		color = mix(vec3(0.11), vec3(0.9), color);
+	#endif
+	
+	
+	
 	color += (fract(52.9829189 * fract(0.06711056 * gl_FragCoord.x + 0.00583715 * gl_FragCoord.y + 0.0003181 * frameCounter)) - 0.5) / 255.0;
 	
 	/* DRAWBUFFERS:07 */

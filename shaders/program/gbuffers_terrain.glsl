@@ -106,11 +106,16 @@ void main() {
 	
 	vec4 glcolor4 = gl_Color;
 	glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
-	if (glcolor4.rgb != vec3(1.0)) glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
-	if (inSnowyBiome > 0.0) {
-		float snowyness = (0.6 + 0.4 * wetness) * inSnowyBiome / (1.0 + 0.003 * length(playerPos)) * max(lmcoord.y * 2.0 - 1.0, 0.3);
-		glcolor4.rgb = mix(glcolor4.rgb, vec3(1.5, 1.5, 1.55), snowyness * float(glcolor4.rgb != vec3(1.0)));
-		glcolor4.a = mix(glcolor4.a, 1.0, snowyness * 0.5);
+	if (glcolor4.rgb != vec3(1.0)) {
+		glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+		#if SNOWY_TWEAKS_ENABLED == 1
+			if (inSnowyBiome > 0.0) {
+				float snowyness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.003 * length(playerPos)) * lmcoord.y * lmcoord.y;
+				glcolor4.rgb = mix(glcolor4.rgb, vec3(1.0, 1.02, 1.03), snowyness);
+				glcolor4.rgb *= 1.0 + 0.4 * wetness;
+				glcolor4.a = mix(glcolor4.a, 1.0, snowyness * 0.5);
+			}
+		#endif
 	}
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;

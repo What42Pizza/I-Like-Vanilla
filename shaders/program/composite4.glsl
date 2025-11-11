@@ -26,7 +26,9 @@ in_out vec2 texcoord;
 			if (depth == 1.0) return;
 		#endif
 		
-		vec3 viewPos = screenToView(vec3(texcoord, depth));
+		vec3 screenPos = vec3(texcoord, depth);
+		//screenPos.xy = floor(screenPos.xy * 256 * vec2(aspectRatio, 1)) / 256 * vec2(invAspectRatio, 1);
+		vec3 viewPos = screenToView(screenPos);
 		#ifdef DISTANT_HORIZONS
 			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth));
 		#endif

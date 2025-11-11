@@ -35,6 +35,9 @@ void main() {
 	#endif
 	#if DEPTH_SUNRAYS_ENABLED == 1
 		vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+		#if BSL_MODE == 1
+			depthSunraysColor = vec3(getLum(depthSunraysColor)) * 2.0;
+		#endif
 		color += sunraysDatas.x * depthSunraysColor;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1

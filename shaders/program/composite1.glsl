@@ -205,6 +205,7 @@ void main() {
 		float bloomMult = dot(color, vec3(1.0, 0.8, 0.0) * 0.5);
 		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
 		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
+		bloomMult *= 0.75 + 0.25 * getSaturation(color);
 		bloomMult *= bloomMult;
 		vec3 bloomColor = color * bloomMult;
 	#endif

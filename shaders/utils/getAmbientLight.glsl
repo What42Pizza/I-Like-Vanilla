@@ -25,6 +25,10 @@ vec3 getAmbientLight(float ambientBrightness) {
 		ambientLight *= 0.8 + 0.4 * screenBrightness;
 	#endif
 	
+	#if BSL_MODE == 1
+		ambientLight *= 0.75;
+	#endif
+	
 	return ambientLight;
 }
 

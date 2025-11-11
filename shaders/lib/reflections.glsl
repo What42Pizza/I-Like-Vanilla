@@ -70,7 +70,8 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	fresnel *= fresnel;
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
 	vec3 skyColor = getSkyColor(reflectionDirection);
-	skyColor *= max(lmcoord.x * 0.5, lmcoord.y);
+	float maxBrightness = max(lmcoord.x * 0.75, lmcoord.y);
+	skyColor *= maxBrightness * maxBrightness;
 	if (isEyeInWater == 1) {
 		skyColor = 0.08 + 0.125 * skyColor;
 		skyColor += vec3(0.0, 0.03, 0.3);
