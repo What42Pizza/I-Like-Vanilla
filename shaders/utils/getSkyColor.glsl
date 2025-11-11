@@ -50,10 +50,11 @@ vec3 getSkyColor(vec3 viewDir) {
 		
 	#elif defined NETHER
 		vec3 skyColor = fogColor;
-		skyColor += 0.15;
+		skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.9);
+		skyColor = mix(vec3(0.1), vec3(0.75), skyColor);
 		return skyColor;
 	#elif defined END
-		return vec3(0.0);
+		return vec3(1.0);
 	#endif
 }
 

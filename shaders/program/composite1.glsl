@@ -66,9 +66,15 @@ void main() {
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	vec3 playerPosForFog = playerPos;
-	playerPos.y *= 0.02;
+	#ifndef NETHER
+		const float yMult = 0.02;
+	#endif
+	#ifdef NETHER
+		const float yMult = 0.05;
+	#endif
+	playerPos.y *= yMult;
 	float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
-	playerPos.y /= 0.02;
+	playerPos.y /= yMult;
 	
 	
 	

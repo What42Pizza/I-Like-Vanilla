@@ -313,11 +313,11 @@
 #endif
 #if NETHER_AMBIENT_GREEN == -1
 #undef NETHER_AMBIENT_GREEN
-										#define NETHER_AMBIENT_GREEN 0.65
+										#define NETHER_AMBIENT_GREEN 0.7
 #endif
 #if NETHER_AMBIENT_BLUE == -1
 #undef NETHER_AMBIENT_BLUE
-										#define NETHER_AMBIENT_BLUE 0.5
+										#define NETHER_AMBIENT_BLUE 0.6
 #endif
 #if NETHER_AMBIENT_BRIGHTNESS == -1
 #undef NETHER_AMBIENT_BRIGHTNESS
@@ -337,7 +337,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
-										#define NETHER_BLOCKLIGHT_BRIGHTNESS_MULT 1.3
+										#define NETHER_BLOCKLIGHT_BRIGHTNESS_MULT 1.4
 #endif
 
 
@@ -350,7 +350,7 @@
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 0.9
+										#define END_SKYLIGHT_GREEN 0.8
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
@@ -366,7 +366,7 @@
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.9
+										#define END_AMBIENT_GREEN 0.8
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
@@ -413,11 +413,11 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 1.3
+										#define BLOOM_NETHER_AMOUNT 1.2
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 1.0
+										#define BLOOM_END_AMOUNT 0.8
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -1217,11 +1217,11 @@
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
-										#define NETHER_FOG_DENSITY 2.0
+										#define NETHER_FOG_DENSITY 1.6
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 0.0
+										#define END_FOG_DENSITY 0.1
 #endif
 
 

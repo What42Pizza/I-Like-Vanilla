@@ -1221,7 +1221,7 @@
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 1.0
+										#define END_FOG_DENSITY 0.2
 #endif
 
 

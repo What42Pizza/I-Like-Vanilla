@@ -1,7 +1,7 @@
 - **v1.1.0**
   - Enabled pixelated shadows on the vanilla style
-  - Added 'Fancy Nether Portals' option (enabled by default)
-  - Added 'Snowy Tweaks' option (eanbled by default)
+  - Added 'Fancy Nether Portals' setting (enabled by default)
+  - Added 'Snowy Tweaks' setting (eanbled by default)
   - Added 'Foliage Tint Red/Green/Blue' settings
   - Split setting 'Contrast' into surface and underground values
   - Removed setting 'Cloud Transparency (Realistic)'

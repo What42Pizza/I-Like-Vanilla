@@ -1217,11 +1217,11 @@
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
-										#define NETHER_FOG_DENSITY 10.0
+										#define NETHER_FOG_DENSITY 3.5
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 1.0
+										#define END_FOG_DENSITY 0.3
 #endif
 
 
