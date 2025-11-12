@@ -25,9 +25,9 @@ vec3 getSkyColor(vec3 viewDir) {
 		
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
 		sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
-		sunDot *= 1.0 - upDot;
+		sunDot *= 1.0 - 0.95 * upDot;
 		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
-		sunDot *= sunriseSunsetPercent * sunriseSunsetPercent * (3.0 - 2.0 * sunriseSunsetPercent);
+		sunDot *= 1.0 - (1.0 - sunriseSunsetPercent) * (1.0 - sunriseSunsetPercent);
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		
@@ -41,8 +41,9 @@ vec3 getSkyColor(vec3 viewDir) {
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
 		#ifdef OVERWORLD
-			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightnessSmooth.y / 240.0); // don't darken sky when there's sky light
-			float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
+			vec2 brightnesses = eyeBrightnessSmooth / 240.0;
+			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * brightnesses.y); // don't darken sky when there's sky light
+			float darkenMult = clamp((upDot + brightnesses.y - 1.0) * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
 			skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		#endif
 		

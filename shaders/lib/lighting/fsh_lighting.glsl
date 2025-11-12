@@ -30,6 +30,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	if (lightDot < 0.0) return 0.0; // surface is facing away from shadowLightPosition
 	
 	#if PIXELATED_SHADOWS > 0
+		// no filtering, world-aligned pixelated
 		
 		vec3 viewStepX = normalize(dFdx(viewPos));
 		vec3 viewStepY = normalize(dFdy(viewPos));
@@ -38,7 +39,6 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		normal = maybeGrass ? actualNormal : normal;
 		viewPos += normal * 0.0015 * (25.0 + length(viewPos));
 		
-		// no filtering, world-aligned pixelated
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
 		if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
 			tangent = cross(normal, gbufferModelView[0].xyz);
@@ -51,6 +51,39 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
 		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
 		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
+		
+		//vec3 viewStepX = normalize(dFdx(viewPos));
+		//vec3 viewStepY = normalize(dFdy(viewPos));
+		//vec3 actualNormal = cross(viewStepX, viewStepY);
+		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.0001;
+		////normal = maybeGrass ? actualNormal : normal;
+		
+		//normal = mat3(gbufferModelViewInverse) * normal;
+		//vec3 tangent = cross(normal, vec3(0.0, 1.0, 0.0));//gbufferModelView[1].xyz);
+		//if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
+		//	tangent = cross(normal, vec3(1.0, 0.0, 0.0));//gbufferModelView[0].xyz);
+		//}
+		//tangent = normalize(tangent);
+		//vec3 bitangent = cross(normal, tangent);
+		//mat3 tbn = mat3(tangent, bitangent, normal);
+		
+		//vec3 worldPos = transform(gbufferModelViewInverse, viewPos) + cameraPosition;
+		
+		//vec3 normalPos = transpose(tbn) * worldPos;
+		////normalPos += transpose(tbn) * (mat3(gbufferModelView) * cameraPosition);
+		//normalPos = floor(normalPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
+		////normalPos -= transpose(tbn) * (mat3(gbufferModelView) * cameraPosition);
+		//worldPos = tbn * normalPos;
+		
+		//viewPos = transform(gbufferModelView, worldPos - cameraPosition);
+		//normal = mat3(gbufferModelView) * normal;
+		//viewPos += normal * 0.0015 * (25.0 + length(viewPos));
+		
+		//vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
+		//vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * tangent);
+		//vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * bitangent);
+		//shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
+		//shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
 		
 		float shadowSample = 0.0;
 		float bias = 0.0002 + length(viewPos) * 0.025 / shadowMapResolution;
@@ -276,7 +309,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular *= specular;
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
 		specular *= 1.0 - betterRainStrength;
-		vec3 specularColor = sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15;
+		vec3 specularColor = shadowcasterLight * (sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15);
 		specular_amount *= 1.0 - getSaturation(color);
 		lighting += specularColor * specular * (0.25 + 0.75 * specular_amount) * shadowBrightness;
 	#endif

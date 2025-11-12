@@ -123,7 +123,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.96
+										#define AMBIENT_DAY_GREEN 0.97
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -152,7 +152,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.37
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.35
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -168,7 +168,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.31
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.29
 #endif
 
 
@@ -177,7 +177,7 @@
 
 #if SKYLIGHT_SUNRISE_RED == -1
 #undef SKYLIGHT_SUNRISE_RED
-										#define SKYLIGHT_SUNRISE_RED 1.05
+										#define SKYLIGHT_SUNRISE_RED 1.15
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
@@ -185,27 +185,27 @@
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.55
+										#define SKYLIGHT_SUNRISE_BLUE 0.45
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.2
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.15
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
-										#define AMBIENT_SUNRISE_RED 1.0
+										#define AMBIENT_SUNRISE_RED 1.2
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
-										#define AMBIENT_SUNRISE_GREEN 0.98
+										#define AMBIENT_SUNRISE_GREEN 0.95
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.95
+										#define AMBIENT_SUNRISE_BLUE 0.8
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
-										#define AMBIENT_SUNRISE_BRIGHTNESS 0.8
+										#define AMBIENT_SUNRISE_BRIGHTNESS 0.85
 #endif
 
 
@@ -214,19 +214,19 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.15
+										#define SKYLIGHT_SUNSET_RED 1.2
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
-										#define SKYLIGHT_SUNSET_GREEN 0.75
+										#define SKYLIGHT_SUNSET_GREEN 0.7
 #endif
 #if SKYLIGHT_SUNSET_BLUE == -1
 #undef SKYLIGHT_SUNSET_BLUE
-										#define SKYLIGHT_SUNSET_BLUE 0.55
+										#define SKYLIGHT_SUNSET_BLUE 0.5
 #endif
 #if SKYLIGHT_SUNSET_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNSET_BRIGHTNESS
-										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.2
+										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.1
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
@@ -234,11 +234,11 @@
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
-										#define AMBIENT_SUNSET_GREEN 0.9
+										#define AMBIENT_SUNSET_GREEN 0.7
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
-										#define AMBIENT_SUNSET_BLUE 0.85
+										#define AMBIENT_SUNSET_BLUE 0.8
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
@@ -255,11 +255,11 @@
 #endif
 #if BLOCK_GREEN == -1
 #undef BLOCK_GREEN
-										#define BLOCK_GREEN 0.9
+										#define BLOCK_GREEN 0.85
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.7
+										#define BLOCK_BLUE 0.6
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -296,11 +296,11 @@
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.8
+										#define CAVE_AMBIENT_BLUE 0.85
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.21
+										#define CAVE_AMBIENT_BRIGHTNESS 0.2
 #endif
 
 
@@ -964,7 +964,7 @@
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.3
+										#define WATER_COLOR_BLUE 0.4
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
@@ -1201,7 +1201,7 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 3.5
+										#define PALE_GARDEN_FOG_DENSITY 3.0
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY
@@ -1291,7 +1291,7 @@
 #endif
 #if SKY_NIGHT_BLUE == -1
 #undef SKY_NIGHT_BLUE
-										#define SKY_NIGHT_BLUE 0.3
+										#define SKY_NIGHT_BLUE 0.25
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
@@ -1307,15 +1307,15 @@
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
-										#define SKY_HORIZON_NIGHT_RED 0.2
+										#define SKY_HORIZON_NIGHT_RED 0.1
 #endif
 #if SKY_HORIZON_NIGHT_GREEN == -1
 #undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 0.3
+										#define SKY_HORIZON_NIGHT_GREEN 0.15
 #endif
 #if SKY_HORIZON_NIGHT_BLUE == -1
 #undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 0.45
+										#define SKY_HORIZON_NIGHT_BLUE 0.3
 #endif
 #if SKY_HORIZON_SUNRISE_RED == -1
 #undef SKY_HORIZON_SUNRISE_RED
