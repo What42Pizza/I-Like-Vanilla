@@ -1,6 +1,6 @@
 <iframe style="text-align: center;" width="853" height="480" src="https://www.youtube.com/embed/yaY3NHZZ7c0?si=PIp_R834NMNwrSfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<p style="text-align: center;">Note: I am currently looking for a job</p>
+<p style="text-align: center;">Also, I'm currently looking for a job</p>
 
 <h3 style="text-align: center;"><a href="https://discord.com/invite/h99ZBex9nZ">Discord</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla">Source Code</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/issues">Bug Reports</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/blob/main/LICENSE">License</a></h3>
 

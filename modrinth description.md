@@ -2,7 +2,7 @@
 
 <center>
 
-Note: I am currently looking for a job
+Also, I'm currently looking for a job
 
 <h3 style="text-align: center;"><a href="https://discord.com/invite/h99ZBex9nZ">Discord</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla">Source Code</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/issues">Bug Reports</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/blob/main/LICENSE">License</a></h3>
 

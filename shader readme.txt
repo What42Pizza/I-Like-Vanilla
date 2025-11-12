@@ -15,4 +15,4 @@ Thank you for using my shader! Below is a list of helpful links, and if you're l
 - Official Download (CurseForge):
   - https://www.curseforge.com/minecraft/shaders/i-like-vanilla
 
-- License is bundled with shader files (newer/older licenses only apply to newer/older releases)
+- License is bundled with shader files (any newer/older licenses you find only apply to newer/older releases)

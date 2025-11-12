@@ -82,7 +82,7 @@
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
-										#define FOLIAGE_TINT_RED 0.97
+										#define FOLIAGE_TINT_RED 0.96
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
@@ -90,7 +90,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 0.97
+										#define FOLIAGE_TINT_BLUE 0.96
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -177,23 +177,23 @@
 
 #if SKYLIGHT_SUNRISE_RED == -1
 #undef SKYLIGHT_SUNRISE_RED
-										#define SKYLIGHT_SUNRISE_RED 1.15
+										#define SKYLIGHT_SUNRISE_RED 1.1
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
-										#define SKYLIGHT_SUNRISE_GREEN 0.85
+										#define SKYLIGHT_SUNRISE_GREEN 0.91
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
-										#define SKYLIGHT_SUNRISE_BLUE 0.45
+										#define SKYLIGHT_SUNRISE_BLUE 0.55
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.15
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.2
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
-										#define AMBIENT_SUNRISE_RED 1.2
+										#define AMBIENT_SUNRISE_RED 1.03
 #endif
 #if AMBIENT_SUNRISE_GREEN == -1
 #undef AMBIENT_SUNRISE_GREEN
@@ -201,7 +201,7 @@
 #endif
 #if AMBIENT_SUNRISE_BLUE == -1
 #undef AMBIENT_SUNRISE_BLUE
-										#define AMBIENT_SUNRISE_BLUE 0.8
+										#define AMBIENT_SUNRISE_BLUE 0.9
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
@@ -214,35 +214,35 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.2
+										#define SKYLIGHT_SUNSET_RED 1.15
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
-										#define SKYLIGHT_SUNSET_GREEN 0.7
+										#define SKYLIGHT_SUNSET_GREEN 0.8
 #endif
 #if SKYLIGHT_SUNSET_BLUE == -1
 #undef SKYLIGHT_SUNSET_BLUE
-										#define SKYLIGHT_SUNSET_BLUE 0.5
+										#define SKYLIGHT_SUNSET_BLUE 0.55
 #endif
 #if SKYLIGHT_SUNSET_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNSET_BRIGHTNESS
-										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.1
+										#define SKYLIGHT_SUNSET_BRIGHTNESS 1.15
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
-										#define AMBIENT_SUNSET_RED 1.0
+										#define AMBIENT_SUNSET_RED 1.05
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
-										#define AMBIENT_SUNSET_GREEN 0.7
+										#define AMBIENT_SUNSET_GREEN 0.9
 #endif
 #if AMBIENT_SUNSET_BLUE == -1
 #undef AMBIENT_SUNSET_BLUE
-										#define AMBIENT_SUNSET_BLUE 0.8
+										#define AMBIENT_SUNSET_BLUE 0.95
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
-										#define AMBIENT_SUNSET_BRIGHTNESS 0.8
+										#define AMBIENT_SUNSET_BRIGHTNESS 0.85
 #endif
 
 
@@ -251,7 +251,7 @@
 
 #if BLOCK_RED == -1
 #undef BLOCK_RED
-										#define BLOCK_RED 1.05
+										#define BLOCK_RED 1.0
 #endif
 #if BLOCK_GREEN == -1
 #undef BLOCK_GREEN
@@ -259,7 +259,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.6
+										#define BLOCK_BLUE 0.65
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -292,11 +292,11 @@
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.85
+										#define CAVE_AMBIENT_GREEN 0.8
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.85
+										#define CAVE_AMBIENT_BLUE 0.8
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
@@ -960,7 +960,7 @@
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.15
+										#define WATER_COLOR_GREEN 0.1
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
