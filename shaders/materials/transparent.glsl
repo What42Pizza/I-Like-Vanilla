@@ -1,0 +1,3 @@
+void processTansparentMaterials(uint materialId) {
+	
+}

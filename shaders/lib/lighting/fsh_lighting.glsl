@@ -219,9 +219,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float ambientBrightness) {
 
 
 
-void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specular_amount, vec3 viewPos, vec3 normal) {
-	
-	ambientBrightness = (ambientBrightness * ambientBrightness + ambientBrightness) * 0.5; // kinda like squaring but not as intense
+void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal) {
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -239,17 +237,22 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
 			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
 			handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
+			#if BLOCKLIGHT_FLICKERING_ENABLED == 1
+				handLightBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
+			#endif
 			blockBrightness = max(blockBrightness, handLightBrightness);
 		}
 	#endif
 	
 	// night saturation decrease
-	float nightPercent = 1.0 - dayPercent;
-	nightPercent *= ambientBrightness * (1.0 - blockBrightness);
-	nightPercent *= nightPercent;
-	nightPercent *= NIGHT_SATURATION_DECREASE;
-	color = mix(vec3(getLum(color)), color, 1.0 - nightPercent * 0.1);
-	color += nightPercent * 0.06;
+	#ifdef OVERWORLD
+		float nightPercent = 1.0 - dayPercent;
+		nightPercent *= ambientBrightness * (1.0 - blockBrightness);
+		nightPercent *= nightPercent;
+		nightPercent *= NIGHT_SATURATION_DECREASE;
+		color = mix(vec3(getLum(color)), color, 1.0 - nightPercent * 0.1);
+		color += nightPercent * 0.06;
+	#endif
 	
 	#ifdef END
 		ambientBrightness = 1.0;
@@ -264,9 +267,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	ambientLight *= 1.0 + sideShading;
 	blockBrightness *= 1.0 + sideShading;
 	
-	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
-		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT;
-	#endif
 	#if BLOCK_BRIGHTNESS_CURVE == 2
 		blockBrightness = pow2(blockBrightness);
 	#elif BLOCK_BRIGHTNESS_CURVE == 3
@@ -275,9 +275,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockBrightness = pow4(blockBrightness);
 	#elif BLOCK_BRIGHTNESS_CURVE == 5
 		blockBrightness = pow5(blockBrightness);
-	#endif
-	#ifdef OVERWORLD
-		blockBrightness *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	
 	float shadowBrightness = getShadowBrightness(viewPos, normal, ambientBrightness);
@@ -310,8 +307,8 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
 		specular *= 1.0 - betterRainStrength;
 		vec3 specularColor = shadowcasterLight * (sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.15);
-		specular_amount *= 1.0 - getSaturation(color);
-		lighting += specularColor * specular * (0.25 + 0.75 * specular_amount) * shadowBrightness;
+		specularness *= 1.0 - getSaturation(color);
+		lighting += specularColor * specular * (0.25 + 0.75 * specularness) * shadowBrightness;
 	#endif
 	
 	float lightingBrightness = min(getLum(lighting), 1.0);

@@ -75,7 +75,7 @@ void main() {
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectionStrength = 1.0;
 		#else
-			float reflectionStrength = unpack_2x8(data.y).x * 2.0;
+			float reflectionStrength = unpack_2x8(data.y).x;
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS

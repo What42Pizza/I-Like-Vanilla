@@ -32,26 +32,27 @@ void main() {
 		}
 	#endif
 	
-	#if EXCLUDE_FOLIAGE == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
-		int materialId = int(mc_Entity.x);
+	#if EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
+		uint materialId = uint(mc_Entity.x);
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
-		if (materialId >= 1000) {
-			int shadowData = (materialId % 100 - materialId % 10) / 10;
-			if (shadowData > 0) {
-				gl_Position = vec4(1.0);
-				return;
-			}
+		uint encodedData = materialId >> 10u;
+		if (
+			((encodedData & 1u) == 1u && encodedData > 1u)
+			|| (materialId >= 1900u && materialId < 2000u)
+		) {
+			gl_Position = vec4(1.0);
+			return;
 		}
 	#endif
 	
 	#if WAVING_ENABLED == 1
-		applyWaving(playerPos.xyz);
+		applyWaving(playerPos.xyz, materialId);
 	#endif
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId % 100000 == 9000) {
+		if (materialId == 1500u) {
 			float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
@@ -61,7 +62,7 @@ void main() {
 			playerPos.y += (sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.5 - 0.5) * 0.03 * wavingAmount;
 			playerPos.y += (sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.5 - 0.5) * 0.02 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y += 0.0025;// + 0.003 * length(playerPos.xz); // offset shadow bias
+			playerPos.y += 0.0025; // offset shadow bias
 		}
 	#endif
 	

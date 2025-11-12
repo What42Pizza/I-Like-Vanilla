@@ -1,4 +1,3 @@
-const float[4] wavingScales = float[4] (0.0, WAVING_AMOUNT_1, WAVING_AMOUNT_2, WAVING_AMOUNT_3);
 const vec3 windDirection = vec3(1.0, 0.1, 0.3); // another way to think of it: weights for timePos influence
 
 
@@ -12,7 +11,7 @@ vec3 getWavingAddition(vec3 playerPos) {
 	vec3 pos2 = randomVec3FromRValue(timePosFloor + 1u);
 	vec3 pos3 = randomVec3FromRValue(timePosFloor + 2u);
 	vec3 pos4 = randomVec3FromRValue(timePosFloor + 3u);
-	vec3 wavingAmount = cubicInterpolate(pos1, pos2, pos3, pos4, mod(timePos, 1.0)) * vec3(1.0, 0.2, 1.0) * 0.075;
+	vec3 wavingAmount = cubicInterpolate(pos1, pos2, pos3, pos4, fract(timePos)) * vec3(1.0, 0.2, 1.0) * 0.075;
 	//timePos *= WAVING_SPEED * 0.4;
 	//float x = simplexNoise(vec2(timePos, 0));
 	//float y = simplexNoise(vec2(timePos, 10)) * 0.5;
@@ -30,13 +29,18 @@ vec3 getWavingAddition(vec3 playerPos) {
 
 
 
-void applyWaving(inout vec3 position) {
-	int materialId = int(mc_Entity.x);
-	if (materialId < 1000) return;
-	int wavingData = materialId % 10;
-	if (wavingData < 2 || wavingData > 7) return;
-	if (wavingData % 2 == 0 && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
-	float wavingScale = wavingScales[wavingData / 2];
+void applyWaving(inout vec3 position, uint materialId) {
+	uint encodedData = materialId >> 10u;
+	uint wavingScaleIndex = (encodedData & 7u) >> 1u;
+	float wavingScale;
+	if (wavingScaleIndex < 2u) {
+		if (wavingScaleIndex == 0u) return;
+		wavingScale = WAVING_AMOUNT_1;
+	} else {
+		if (wavingScaleIndex == 2u) wavingScale = WAVING_AMOUNT_2;
+		else wavingScale = WAVING_AMOUNT_3;
+	}
+	if (encodedData > 7u && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
 	#ifndef SHADER_SHADOW
 		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
 		if (wavingScale == 0.0) return;

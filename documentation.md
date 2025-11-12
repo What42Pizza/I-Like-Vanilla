@@ -182,7 +182,7 @@ This describes which /main_files-s handle different effects
 - **colortex1:  Prev Texture** (stored with 0.5 multiplier)
 - **colortex2:  Opaque Data**
 - - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
-- - y: reflectiveness (8-bit) & specular amount (8-bit)
+- - y: reflectiveness (8-bit) & specularness (8-bit)
 - - zw: normal
 - **colortex3:  Transparent Data**
 - - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)

@@ -1,3 +1,8 @@
+- v1.1.1
+  - Fixed and improved blocklight flickering
+
+<br>
+
 - **v1.1.0** (25/11/10)
   - Enabled pixelated shadows on the vanilla style
   - Added 'Fancy Nether Portals' setting (enabled by default)

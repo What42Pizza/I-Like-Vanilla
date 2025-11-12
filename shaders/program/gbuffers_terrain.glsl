@@ -2,9 +2,9 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
 flat in_out vec2 normal;
-flat in_out int materialId;
 in_out vec3 playerPos;
-in_out float specularMult;
+flat in_out float reflectiveness;
+flat in_out float specularness;
 
 #if SHOW_DANGEROUS_LIGHT == 1
 	flat in_out float isDangerousLight;
@@ -32,8 +32,8 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.01) discard;
-	float reflectiveness = getLum(color.rgb) * 1.5;
-	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
+	float reflectiveness = reflectiveness;
+	reflectiveness *= clamp(0.5 + 3.0 * (getLum(color.rgb) * 1.5 - 0.5), 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
@@ -50,16 +50,12 @@ void main() {
 	#endif
 	
 	
-	reflectiveness *= ((materialId % 1000 - materialId % 100) / 100) * 0.15 * mix(BLOCK_REFLECTION_AMOUNT_UNDERGROUND, BLOCK_REFLECTION_AMOUNT_SURFACE, lmcoord.y);
-	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11 * specularMult;
-	
-	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness * 0.5, specular_amount),
+		pack_2x8(reflectiveness, specularness),
 		normal
 	);
 	
@@ -71,6 +67,7 @@ void main() {
 
 #ifdef VSH
 
+#include "/materials/opaque.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 #if WAVING_ENABLED == 1
@@ -125,17 +122,8 @@ void main() {
 	
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
-	materialId = int(mc_Entity.x);
-	if (materialId < 1000) materialId = 0;
-	materialId %= 100000;
-	
-	if ((materialId % 100) - (materialId % 10) == 10) {
-		normal = encodeNormal(gl_NormalMatrix * vec3(0.0, 1.0, 0.0));
-		specularMult = 0.25;
-	} else {
-		specularMult = 1.0;
-	}
-	
+	uint materialId = uint(mc_Entity.x);
+	processOpaqueMaterials(materialId);
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = 0.0;
@@ -179,7 +167,7 @@ void main() {
 	
 	
 	#if WAVING_ENABLED == 1
-		applyWaving(playerPos);
+		applyWaving(playerPos, materialId);
 	#endif
 	
 	

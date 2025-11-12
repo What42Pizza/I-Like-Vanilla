@@ -71,9 +71,9 @@ void main() {
 		
 		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		vec2 lmcoord = unpack_2x8(data.x);
-		float specular_amount = unpack_2x8(data.y).y;
+		float specularness = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
-		doFshLighting(color, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal);
+		doFshLighting(color, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
 		
 		#if BORDER_FOG_ENABLED == 1
 			color = mix(color, skyColor, skyAmount);

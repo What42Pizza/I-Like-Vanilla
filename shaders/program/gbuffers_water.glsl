@@ -9,7 +9,9 @@ in_out vec3 glcolor;
 in_out vec3 viewPos;
 in_out vec3 playerPos;
 flat in_out vec3 normal;
-flat in_out int materialId;
+flat in_out uint materialId;
+flat in_out float reflectiveness;
+flat in_out float specularness;
 
 flat in_out vec2 midTexCoord;
 flat in_out vec2 midCoordOffset;
@@ -51,8 +53,8 @@ void main() {
 	
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	float reflectiveness = getLum(color.rgb) * 1.5;
-	reflectiveness = clamp(0.5 + (reflectiveness - 0.5) * 3.0, 0.0, 1.0);
+	float reflectiveness = reflectiveness;
+	reflectiveness *= clamp(0.5 + 3.0 * (getLum(color.rgb) * 1.5 - 0.5), 0.0, 1.0);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
@@ -63,7 +65,7 @@ void main() {
 	#endif
 	
 	
-	if (materialId == 9000) {
+	if (materialId == 1500u) {
 		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
@@ -109,7 +111,7 @@ void main() {
 	
 	// nether portal
 	#if FANCY_NETHER_PORTAL_ENABLED == 1
-		if (materialId == 10020) {
+		if (materialId == 1901u) {
 			vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
 			tangentViewDir.x *= -1.0;
 			
@@ -139,16 +141,8 @@ void main() {
 	#endif
 	
 	
-	if (materialId == 9000) {
-		reflectiveness = mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y) * max(color.a * 1.3, 1.0);
-	} else {
-		reflectiveness *= ((materialId % 1000 - materialId % 100) / 100) * 0.15;
-	}
-	float specular_amount = ((materialId % 10000 - materialId % 1000) / 1000) * 0.11;
-	
-	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specular_amount, viewPos, normal);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
 	
 	
 	// fog
@@ -162,7 +156,7 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness * 0.5, 0.0),
+		pack_2x8(reflectiveness, 0.0),
 		encodeNormal(normal)
 	);
 	
@@ -174,6 +168,7 @@ void main() {
 
 #ifdef VSH
 
+#include "/materials/transparent.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
@@ -196,9 +191,8 @@ void main() {
 	playerPos = endMat(gbufferModelViewInverse * vec4(viewPos, 1.0));
 	normal = gl_NormalMatrix * gl_Normal;
 	
-	materialId = int(mc_Entity.x);
-	if (materialId < 1000) materialId = 0;
-	materialId %= 100000;
+	materialId = uint(mc_Entity.x);
+	processTansparentMaterials(materialId);
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);
@@ -214,7 +208,7 @@ void main() {
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 9000) {
+		if (materialId == 1500u) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
