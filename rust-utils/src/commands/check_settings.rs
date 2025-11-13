@@ -1,5 +1,4 @@
-use crate::prelude::*;
-use std::{collections::HashSet, fs};
+use crate::*;
 
 
 
@@ -49,6 +48,7 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 		if line.contains(".columns") {continue;}
 		let Some(equal_position) = line.find('=') else {
 			println!("WARNING: invalid settings screen found in shaders.properties line {}, could not find equals sign", i + 1);
+			*found_problems = true;
 			continue;
 		};
 		let line = line[equal_position + 1 ..].trim_start();
@@ -65,15 +65,17 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 	if let Some(sliders_line) = sliders_line {
 		let mut sliders_iter = sliders_line.split_ascii_whitespace();
 		let first_part = sliders_iter.next();
-		if first_part != Some("sliders") {println!("WARNING: found unexpected first value (\"{first_part:?}\") for sliders definition in shaders.properties");}
+		if first_part != Some("sliders") { println!("WARNING: found unexpected first value (\"{first_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
 		let second_part = sliders_iter.next();
-		if second_part != Some("=") {println!("WARNING: found unexpected second value (\"{first_part:?}\") for sliders definition in shaders.properties");}
+		if second_part != Some("=") { println!("WARNING: found unexpected second value (\"{first_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
 		for part in sliders_iter {
 			if settings_set.contains(part) {continue;}
 			println!("WARNING: found settings in sliders (in shaders.properties) that is not listed in the settings menu: {part}");
+			*found_problems = true;
 		}
 	} else {
 		println!("WARNING: could not find sliders definition in shaders.properties");
+		*found_problems = true;
 	}
 	Ok((settings_set, settings_list))
 }
@@ -91,6 +93,7 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 			let mut define_iter = define.split_ascii_whitespace();
 			let Some(setting_name) = define_iter.next() else {
 				println!("WARNING: invalid settings screen found in setting_defines.glsl line {}, could not get setting name", i + 1);
+				*found_problems = true;
 				continue;
 			};
 			if define_iter.next() == Some("-1") {
@@ -102,6 +105,7 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 			parts_iter.next();
 			let Some(setting_name) = parts_iter.next() else {
 				println!("WARNING: could not find setting name in setting_defines.glsl line {}", i + 1);
+				*found_problems = true;
 				continue;
 			};
 			setting_name
@@ -110,10 +114,11 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 		};
 		if !prop_settings_set.contains(setting_name) {
 			println!("WARNING: found setting in define_settings which is not present in shaders.properties: {setting_name}");
+			*found_problems = true;
 		}
 		defines.push(setting_name);
 	}
-	check_settings_order(&defines, prop_settings_list, None, "setting_defines.glsl");
+	check_settings_order(&defines, prop_settings_list, None, "setting_defines.glsl", found_problems);
 	Ok(style_settings_set)
 }
 
@@ -130,15 +135,17 @@ pub fn check_lang_file(shaders_path: &Path, prop_settings_set: &HashSet<String>,
 		if entry.contains(".comment=") {continue;}
 		let Some(equal_position) = entry.find('=') else {
 			println!("WARNING: invalid settings screen found in lang/en_US.lang line {}, could not find equals sign", i + 1);
+			*found_problems = true;
 			continue;
 		};
 		let setting_name = &entry[..equal_position];
 		if !prop_settings_set.contains(setting_name) {
 			println!("WARNING: found setting in lang/en_US.lang which is not present in shaders.properties: {setting_name}");
+			*found_problems = true;
 		}
 		settings.push(setting_name);
 	}
-	check_settings_order(&settings, prop_settings_list, None, "lang/en_US.lang");
+	check_settings_order(&settings, prop_settings_list, None, "lang/en_US.lang", found_problems);
 	Ok(())
 }
 
@@ -160,30 +167,34 @@ pub fn check_style_file(
 		if setting_parts.next() != Some("#define") {continue;}
 		let Some(setting_name) = setting_parts.next() else {
 			println!("WARNING: found invalid setting with no name in style_{style_name}.glsl line {}", i + 1);
+			*found_problems = true;
 			continue;
 		};
 		if !prop_settings_set.contains(setting_name) {
 			println!("WARNING: found setting in style {style_name} which is not present in shaders.properties: {setting_name}");
+			*found_problems = true;
 		}
 		settings.push(setting_name);
 	}
-	check_settings_order(&settings, prop_settings_list, Some(style_settings_set), style_name);
+	check_settings_order(&settings, prop_settings_list, Some(style_settings_set), style_name, found_problems);
 	Ok(())
 }
 
 
 
-pub fn check_settings_order(settings_list: &[&str], prop_settings_list: &[String], style_settings_set: Option<&HashSet<String>>, file_name: &'static str) {
+pub fn check_settings_order(settings_list: &[&str], prop_settings_list: &[String], style_settings_set: Option<&HashSet<String>>, file_name: &'static str, found_problems: &mut bool) {
 	let mut prev_i = 0;
-	for (i, setting) in prop_settings_list.iter().enumerate() {
+	for setting in prop_settings_list.iter() {
 		if let Some(style_settings_set) = style_settings_set && !style_settings_set.contains(setting) {continue;}
 		let Some((mut defines_i, _)) = settings_list.iter().enumerate().find(|(_, define)| *define == setting) else {
 			println!("WARNING: found setting in shaders.properties that is not present in {file_name}: {setting}");
+			*found_problems = true;
 			continue;
 		};
 		defines_i += 1;
 		if defines_i != prev_i + 1 {
 			println!("WARNING: found setting in {file_name} with incorrect ordering: {setting}");
+			*found_problems = true;
 		}
 		prev_i = defines_i;
 	}

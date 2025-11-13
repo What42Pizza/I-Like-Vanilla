@@ -32,18 +32,15 @@ This is the full list of outside code that is used within this shader:
 <br>
 <br>
 
-# Differences from other shaders (ESSENTIAL KNOWLEDGE)
-
-<br>
-
 ## Custom Tooling:
 
 Because of the extensive and tedious usage of `#define`s, this repo contains a rust program (named rust-utils) that automates many tasks. Using it isn't necessary for developing this shader, but you'll probably still want to use it. There's a (very simple) readme in the /rust-utils folder which can get you stated.
 
 Here's a list of the commands and why they exist:
 
-- **'export':** This takes the shader code, license, changelog, and shader readme and packages it into (broken?) zip files. It also automatically creates the OptiFine version, where it splices 'style_vanilla.glsl' with 'setting_defines.glsl' (plus other fixes) to remove the styles feature, which causes the massive log file and horrendous loading time on OptiFine.
-- **build world files':** This generates all the files in the /shaders/world_ folders, using data that is hard-coded into src/main.rs. Even if you don't know Rust, you should still be able to edit the values if needed
+- **export:** This takes the shader code, license, changelog, and shader readme and packages it into (broken?) zip files. It also automatically creates the OptiFine version, where it splices 'style_vanilla.glsl' with 'setting_defines.glsl' (plus other fixes) to remove the styles feature, which causes the massive log file and horrendous loading time on OptiFine.
+- **build_world_files':** This generates all the files in the /shaders/world_ folders, using data that is hard-coded into src/main.rs. Even if you don't know Rust, you should still be able to edit the values if needed
+- **check_settings:** Detects all settings in all setting-related files to check for missing settings, broken settings, mis-ordered settings, etc
 - **count_sloc:** Counts the significant lines of code. May not be accurate, idk. It only counts .glsl files, since the .vsh and .fsh files don't contain anything meaningful.
 
 As always, you can edit your repo's rust-utils to add more commands and/or tweak existing commands. If you find something you consider a bug, you can contact me and I'll try to fix it
@@ -60,9 +57,9 @@ OptiFine is somewhat supported by this shader, but just barely. I'll sometimes m
 <br>
 <br>
 
-## Settings:
+## Settings System:
 
-In the settings menu, users can define which base style they use, then override any settings they want to change. This requires some kinda complex and really tedious code (for example, style_vanilla.glsl is over 1400 lines long), but I think it's worth it.
+In the settings menu, users can define which base style they use, then override any settings they want to change. This requires some kinda complex and really tedious code (for example, style_vanilla.glsl is over 1300 lines long), but I think it's worth it.
 
 ### Basics:
 
@@ -108,12 +105,12 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 ## File Structure:
 
-- **/program**: Main shader code
-- **/lib**: More complex, standalone code
+- **/program**: The main shader code
+- **/lib**: The more complex, standalone code
 - **/world\***: The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
-- **/utils**: Holds common functions that use uniforms (see 'Uniforms System' above for why)
-- **/lang**: Holds shown names of setting options and setting values
-- **setting_defines.glsl**: Holds the definition for every setting
+- **/utils**: Functionality a bit too complex for common.glsl
+- **/lang**: The displayed names of settings and setting values
+- **setting_defines.glsl**: Holds the `#define` for every setting
 - **settings.glsl**: Miscellaneous settings loading stuff
 - **common.glsl**: Holds commonly used code and macros for easier programming (cannot use uniforms, see 'Uniforms System' above for why)
 - **shaders.properties**: Defines the settings menu plus many other details about the shader internals

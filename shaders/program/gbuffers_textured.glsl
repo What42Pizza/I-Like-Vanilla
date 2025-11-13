@@ -49,7 +49,7 @@ void main() {
 #include "/utils/getShadowcasterLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/lib/isometric.glsl"
+	#include "/utils/isometric.glsl"
 #endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"

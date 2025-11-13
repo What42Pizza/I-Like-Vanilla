@@ -1,6 +1,4 @@
-use crate::prelude::*;
-use std::ffi::OsStr;
-use walkdir::WalkDir;
+use crate::*;
 
 
 
@@ -106,7 +104,7 @@ pub fn find_within_loc(line: &str, pattern: &str, start_i: usize) -> Option<usiz
 		// skip string literals
 		if c == '"' {
 			'skip_string: loop {
-				let Some((_, mut next)) = chars.next() else {break};
+				let Some((_, next)) = chars.next() else {break};
 				if next == '\\' {
 					chars.next();
 					continue 'skip_string;
@@ -126,7 +124,7 @@ pub fn find_within_loc(line: &str, pattern: &str, start_i: usize) -> Option<usiz
 			if pattern_i == pattern.len() {
 				return Some(char_i);
 			}
-			let Some((line_i, next_c)) = chars.next() else {break 'match_pattern};
+			let Some((_line_i, next_c)) = chars.next() else {break 'match_pattern};
 			c = next_c;
 		}
 		

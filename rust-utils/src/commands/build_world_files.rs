@@ -1,5 +1,4 @@
-use crate::prelude::*;
-use std::fs;
+use crate::*;
 
 
 
@@ -40,7 +39,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		for shader_name in SHADERS_LIST {
 			build_shader_files(world_name, shader_name, &world_path)?;
 		}
-		build_final_shader_files(world_name, &world_path)?;
+		build_final_shader_files(&world_path)?;
 	}
 	
 	println!("Done");
@@ -59,7 +58,7 @@ pub fn build_shader_files(world_name: &str, shader_name: &str, world_path: &Path
 
 
 
-pub fn build_final_shader_files(world_name: &str, world_path: &Path) -> Result<()> {
+pub fn build_final_shader_files(world_path: &Path) -> Result<()> {
 	
 	// fsh
 	let fsh_contents = &r##"

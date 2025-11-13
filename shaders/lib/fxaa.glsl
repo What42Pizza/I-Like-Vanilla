@@ -53,7 +53,7 @@ void doFxaa(inout vec3 color, sampler2D tex) {
 		bool is1Steepest = abs(gradient1) >= abs(gradient2);
 		float gradientScaled = 0.25 * max(abs(gradient1), abs(gradient2));
 		
-		float stepLength = isHorizontal ? invViewSize.y : invViewSize.x;
+		float stepLength = isHorizontal ? pixelSize.y : pixelSize.x;
 		
 		float lumaLocalAverage = 0.0;
 		
@@ -71,7 +71,7 @@ void doFxaa(inout vec3 color, sampler2D tex) {
 			currentUv.x += stepLength * 0.5;
 		}
 		
-		vec2 offset = isHorizontal ? vec2(invViewSize.x, 0.0) : vec2(0.0, invViewSize.y);
+		vec2 offset = isHorizontal ? vec2(pixelSize.x, 0.0) : vec2(0.0, pixelSize.y);
 		
 		vec2 uv1 = currentUv - offset;
 		vec2 uv2 = currentUv + offset;

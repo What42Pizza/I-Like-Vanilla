@@ -35,7 +35,7 @@ vec4 quadrant(sampler2D tex, int xDir, int yDir, vec2 sizeMult) {
 
 vec3 doKuwaharaEffect(vec3 color, sampler2D tex, float depth) {
 	
-	vec2 sizeMult = KUWAHARA_SIZE * invViewSize;
+	vec2 sizeMult = KUWAHARA_SIZE * pixelSize;
 	float blockDepth = toBlockDepth(depth);
 	sizeMult *= 6.0 / pow(blockDepth, 0.4);
 	

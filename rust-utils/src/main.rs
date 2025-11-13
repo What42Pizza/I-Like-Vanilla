@@ -1,18 +1,3 @@
-#![allow(unused)]
-#![warn(unused_must_use)]
-
-#![feature(iter_advance_by)]
-#![feature(map_try_insert)]
-
-
-
-use crate::prelude::*;
-use std::env;
-
-
-
-
-
 // ======== SETTINGS ======== //
 
 
@@ -80,29 +65,24 @@ const COMMANDS: &[data::Command] = &[
 	data::Command::new("help", "help", "Shows the help screen", commands::help::function),
 	data::Command::new("count_sloc", "count_sloc", "Counts the significant lines of code", commands::count_sloc::function),
 	data::Command::new("build_world_files", "build_world_files", "Generates the '/world_' files using hard-coded data", commands::build_world_files::function),
-	data::Command::new("build_property_ids", "build_property_ids", "Converts the data in .property files (currently, just block.properties) from `block = num` to `num = block, ...`", commands::build_property_ids::function),
 	data::Command::new("check_settings", "check_settings", "Detects all shader settings and ensures they are consistent across all files", commands::check_settings::function),
 	data::Command::new("export", "export", "Exports the shader with only shader files included", commands::export::function),
-	data::Command::new("preprocess_file", "preprocess_file [file_path] [input_path]", "Preprocesses `#include`s of a shader file. The input_path is assumed to be in /shaders", commands::preprocess_file::function),
-	data::Command::new("compile_file", "compile_file [file_path] [input_path]", "Compiles a shader file. The input_path is assumed to be in /shaders, and only .fsh and .vsh can be compiled", commands::compile_file::function),
 ];
 
 
 
 
 
-pub mod prelude {
-	pub use crate::{*, data::*, utils::*, custom_impls::*};
-	pub use std::{path::{PathBuf, Path}, result::Result as StdResult, process::Output as ProcessOutput, collections::HashMap};
-	pub use anyhow::*;
-}
+pub use crate::{data::*, utils::*, custom_impls::*};
+pub use std::{fs, path::{PathBuf, Path}, result::Result as StdResult, process::Output as ProcessOutput, collections::{HashMap, HashSet}, ffi::OsStr, io::{self, Write}};
+pub use zip::{write::{FileOptionExtension, FileOptions}, ZipWriter};
+pub use walkdir::WalkDir;
+pub use anyhow::*;
 
 
 
 pub mod commands;
-
 pub mod data;
-#[macro_use]
 pub mod utils;
 pub mod custom_impls;
 
@@ -110,7 +90,7 @@ pub mod custom_impls;
 
 fn main() -> Result<()> {
 	print!("\n\n\n");
-	let mut args = env::args();
+	let mut args = std::env::args();
 	
 	args.next().expect("could not get program");
 	

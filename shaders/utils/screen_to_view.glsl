@@ -31,7 +31,7 @@
 	
 #else
 	
-	#include "/lib/isometric.glsl"
+	#include "/utils/isometric.glsl"
 	
 	vec3 screenToView(vec3 pos) {
 		pos = pos * 2.0 - 1.0;

@@ -18,7 +18,7 @@
 	
 #else
 	
-	#include "/lib/isometric.glsl"
+	#include "/utils/isometric.glsl"
 	
 	vec2 reprojection(vec3 screenPos, vec3 cameraOffset) {
 		

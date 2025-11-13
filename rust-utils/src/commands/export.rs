@@ -1,7 +1,4 @@
-use crate::prelude::*;
-use std::{fs, io::{self, Write}, ffi::OsStr, collections::HashMap};
-use walkdir::WalkDir;
-use zip::{write::{FileOptionExtension, FileOptions}, ZipWriter};
+use crate::*;
 
 
 
@@ -42,9 +39,6 @@ pub fn function(args: &[String]) -> Result<()> {
 		println!("Done");
 	}
 	
-	println!();
-	println!("======== WARNING: ========");
-	println!("The .zip output of this doesn't seem to work, and you have to unzip then re-zip to make it work with OptiFine / Iris");
 	Ok(())
 }
 
