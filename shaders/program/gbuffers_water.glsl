@@ -111,7 +111,7 @@ void main() {
 	
 	// nether portal
 	#if FANCY_NETHER_PORTAL_ENABLED == 1
-		if (materialId == 1901u) {
+		if (materialId == 1910u) {
 			vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
 			tangentViewDir.x *= -1.0;
 			
@@ -168,7 +168,6 @@ void main() {
 
 #ifdef VSH
 
-#include "/materials/transparent.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
@@ -192,7 +191,9 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	materialId = uint(mc_Entity.x);
-	processTansparentMaterials(materialId);
+	#define SET_REFLECTIVENESS
+	#define SET_SPECULARNESS
+	#include "/blockDatas.glsl"
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);

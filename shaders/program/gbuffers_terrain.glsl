@@ -67,7 +67,6 @@ void main() {
 
 #ifdef VSH
 
-#include "/materials/opaque.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 #if WAVING_ENABLED == 1
@@ -123,7 +122,12 @@ void main() {
 	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
 	
 	uint materialId = uint(mc_Entity.x);
-	processOpaqueMaterials(materialId);
+	uint encodedData = materialId >> 10u;
+	// foliage normals
+	if ((encodedData & 1u) == 1u && encodedData > 1u) normal = encodeNormal(gl_NormalMatrix * vec3(0.0, 1.0, 0.0));
+	#define SET_REFLECTIVENESS
+	#define SET_SPECULARNESS
+	#include "/blockDatas.glsl"
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = 0.0;

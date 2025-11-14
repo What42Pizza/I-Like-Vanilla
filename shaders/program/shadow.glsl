@@ -15,6 +15,9 @@ void main() {
 
 #ifdef VSH
 
+#if COLORED_LIGHTING_ENABLED == 1
+	#include "/lib/colored_lighting/toVoxelImage.glsl"
+#endif
 #if WAVING_ENABLED == 1
 	#include "/lib/waving.glsl"
 #endif
@@ -26,14 +29,14 @@ void main() {
 		vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	#endif
 	
-	#if COLORED_LIGHTING_ENABLED == 1
-		if (gl_VertexID % 4 == 0) {
-			vec3 blockPos = playerPos + at_midBlock / 64.0;
-		}
+	#if COLORED_LIGHTING_ENABLED == 1 || EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
+		uint materialId = uint(mc_Entity.x);
 	#endif
 	
-	#if EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
-		uint materialId = uint(mc_Entity.x);
+	#if COLORED_LIGHTING_ENABLED == 1
+		if (gl_VertexID % 4 == 0) {
+			toVoxelImage(playerPos, materialId);
+		}
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
