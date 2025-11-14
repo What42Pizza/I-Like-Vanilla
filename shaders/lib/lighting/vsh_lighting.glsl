@@ -12,8 +12,4 @@ void doVshLighting(float depth) {
 		lmcoord.x *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	
-	#ifdef SHADER_DH_TERRAIN
-		if (dhMaterialId == DH_BLOCK_SAND) glcolor.rgb *= 1.0 - 9.0 * 0.017 * BRIGHT_BLOCK_DECREASE;
-	#endif
-	
 }

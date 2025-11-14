@@ -54,7 +54,7 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	float reflectiveness = reflectiveness;
-	reflectiveness *= clamp(0.5 + 3.0 * (getLum(color.rgb) * 1.5 - 0.5), 0.0, 1.0);
+	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
@@ -191,9 +191,12 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	materialId = uint(mc_Entity.x);
-	#define SET_REFLECTIVENESS
-	#define SET_SPECULARNESS
+	#define GET_REFLECTIVENESS
+	#define GET_SPECULARNESS
+	#define GET_BRIGHTNESS_DECREASE
+	float brightnessDecrease;
 	#include "/blockDatas.glsl"
+	glcolor *= 1.0 - 0.5 * brightnessDecrease;
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);

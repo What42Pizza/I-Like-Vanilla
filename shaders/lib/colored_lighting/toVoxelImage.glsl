@@ -1,8 +1,8 @@
 void toVoxelImage(vec3 playerPos, uint materialId) {
-	int voxelId = 1;
-	#define SET_VOXEL_ID
+	uint voxelId = 1u;
+	#define GET_VOXEL_ID
 	#include "/blockDatas.glsl"
-	if (voxelId == 0) return;
+	if (voxelId == 0u) return;
 	vec3 blockPos = playerPos + cameraPosition + at_midBlock / 64.0;
 	
 }
