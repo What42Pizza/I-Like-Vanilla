@@ -65,7 +65,7 @@ void main() {
 	#endif
 	
 	
-	if (materialId == 1500u) {
+	if (materialId == 1570u) {
 		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
@@ -193,10 +193,8 @@ void main() {
 	materialId = uint(mc_Entity.x);
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
-	#define GET_BRIGHTNESS_DECREASE
-	float brightnessDecrease;
+	#define DO_BRIGHTNESS_TWEAKS
 	#include "/blockDatas.glsl"
-	glcolor *= 1.0 - 0.5 * brightnessDecrease;
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);
@@ -212,7 +210,7 @@ void main() {
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 1500u) {
+		if (materialId == 1570u) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));

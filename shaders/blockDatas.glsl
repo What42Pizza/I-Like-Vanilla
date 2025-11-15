@@ -1,5 +1,7 @@
 /*
 
+if I ever want to switch to a huffman-like tree encoding, I'd probably structure the data like like this and auto-generate the if-tree and block.properties
+
 oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves:
 	mult: 3000
 	specular: 1.0
@@ -351,11 +353,10 @@ light:level=15:
 #else
 	#define SET_SPECULARNESS(v)
 #endif
-#ifdef GET_BRIGHTNESS_DECREASE
-	brightnessDecrease = 0.0;
-	#define SET_BRIGHTNESET_BRIGHTNESS_DECREASE(v) brightnessDecrease = v;
+#ifdef DO_BRIGHTNESS_TWEAKS
+	#define TWEAK_GLCOLOR_BRIGHTNESS(v) glcolor.rgb *= v;
 #else
-	#define SET_BRIGHTNESET_BRIGHTNESS_DECREASE(v)
+	#define TWEAK_GLCOLOR_BRIGHTNESS(v)
 #endif
 #ifdef GET_VOXEL_ID
 	voxelId = 0u;
@@ -365,15 +366,19 @@ light:level=15:
 #endif
 
 // Note: these comments use `..` like Rust does, where the range is [min..max)
-if (materialId < 1570u) { // 1500..1570
-	SET_VOXEL_ID(materialId - 1500u + 2u);
-	if (materialId < 1532u) { // 1500..1532
-		// glass
-		SET_REFLECTIVENESS(0.3);
-		SET_SPECULARNESS(1.0);
-	} else { // 1532..1570
-		// candles
-		SET_SPECULARNESS(1.0);
+if (materialId < 1570u) { // 0..1570
+	if (materialId < 1500u) { // 0..1500 (unused)
+		
+	} else { // 1500..1570
+		SET_VOXEL_ID(materialId - 1500u + 2u);
+		if (materialId < 1532u) { // 1500..1532
+			// glass
+			SET_REFLECTIVENESS(0.3);
+			SET_SPECULARNESS(1.0);
+		} else { // 1532..1570
+			// candles
+			SET_SPECULARNESS(1.0);
+		}
 	}
 } else { // 1570..15503
 	if (materialId < 1620u) { // 1570..1620
@@ -383,7 +388,7 @@ if (materialId < 1570u) { // 1500..1570
 					if (materialId == 1570u) {
 						// water
 						SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
-						SET_SPECULARNESS(1.0);
+						SET_SPECULARNESS(4.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
 						SET_VOXEL_ID(100u);
 					} else if (materialId == 1571u) {
 						// lava
@@ -484,13 +489,13 @@ if (materialId < 1570u) { // 1500..1570
 					if (materialId < 1597u) { // 1594..1597
 						if (materialId == 1594u) {
 							// ochre froglight
-							
+							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 						} else if (materialId == 1595u) {
 							// verdant froglight
-							
+							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 						} else {
 							// pearlescent froglight
-							
+							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 						}
 					} else { // 1597..1600
 						if (materialId == 1597u) {
@@ -504,16 +509,113 @@ if (materialId < 1570u) { // 1500..1570
 				}
 			} else { // 1600..1620
 				if (materialId < 1610u) { // 1600..1610
-					
+					if (materialId < 1602u) { // 1600..1602
+						if (materialId == 1600u) {
+							// small amethyst bud
+							SET_REFLECTIVENESS(0.4);
+							SET_SPECULARNESS(0.5);
+						} else {
+							// medium amethyst bud
+							SET_REFLECTIVENESS(0.4);
+							SET_SPECULARNESS(0.5);
+						}
+					} else { // 1602..1610
+						if (materialId == 1602u) {
+							// large amethyst bud
+							SET_REFLECTIVENESS(0.4);
+							SET_SPECULARNESS(0.5);
+						} else {
+							// amethyst cluster
+							SET_REFLECTIVENESS(0.4);
+							SET_SPECULARNESS(0.5);
+						}
+					}
 				} else { // 1610..1620
-					
+					if (materialId < 1613u) { // 1600..1613
+						if (materialId == 1610u) {
+							// glowstone
+							SET_REFLECTIVENESS(0.4);
+						} else if (materialId == 1611u) {
+							// shroomlight
+							
+						} else {
+							// magma_block
+							
+						}
+					} else { // 1613..1610
+						if (materialId == 1613u) {
+							// end rod
+							
+						} else {
+							// end crystal
+							
+						}
+					}
 				}
 			}
 		}
 	} else { // 1620..15503
 		if (materialId < 1900u) { // 1620..1900
-			
-		} else { // 1900.15503
+			if (materialId < 1640u) { // 1620..1640
+				if (materialId < 1630u) { // 1620..1630
+					if (materialId < 1623u) { // 1620..1623
+						if (materialId == 1620u) {
+							// amethyst block, etc
+							SET_REFLECTIVENESS(0.4);
+							SET_SPECULARNESS(0.5);
+						} else if (materialId == 1621u) {
+							// quartz, etc
+							SET_REFLECTIVENESS(0.2);
+							SET_SPECULARNESS(0.5);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+						} else {
+							// smooth quartz, etc
+							SET_REFLECTIVENESS(0.2);
+							SET_SPECULARNESS(0.5);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+						}
+					} else { // 1623..1640
+						if (materialId == 1623u) {
+							// terracotta
+							SET_SPECULARNESS(0.25);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+						} else if (materialId == 1624u) {
+							// packed ice, etc
+							SET_REFLECTIVENESS(0.45);
+							SET_SPECULARNESS(0.5);
+						} else {
+							// raw iron block, etc
+							SET_SPECULARNESS(0.5);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+						}
+					}
+				} else { // 1630..1640
+					if (materialId < 1632u) { // 1630..1632
+						if (materialId == 1630u) {
+							// sand
+							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+							SET_SPECULARNESS(0.2);
+						} else {
+							// diorite, etc
+							TWEAK_GLCOLOR_BRIGHTNESS(0.95);
+							SET_SPECULARNESS(0.25);
+						}
+					} else { // 1632..1640
+						if (materialId == 1632u) {
+							// polished granite, etc
+							SET_REFLECTIVENESS(0.3);
+							SET_SPECULARNESS(0.35);
+						} else {
+							// prismarine bricks, etc
+							SET_REFLECTIVENESS(0.3);
+							SET_SPECULARNESS(0.4);
+						}
+					}
+				}
+			} else { // 1640..1900
+				
+			}
+		} else { // 1900..15503
 			
 		}
 	}

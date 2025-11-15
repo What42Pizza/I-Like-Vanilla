@@ -41,11 +41,13 @@ void main() {
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
+		vec2 lmcoord = lmcoord;
 		if (isDangerousLight > 0.0) {
 			vec3 blockPos = fract(playerPos + cameraPosition);
 			float centerDist = length(blockPos.xz - 0.5);
 			vec3 indicatorColor = isDangerousLight > 0.75 ? vec3(1.0, 0.0, 0.0) : vec3(1.0, 1.0, 0.0);
 			color.rgb = mix(color.rgb, indicatorColor, 0.35 * float(centerDist < 0.45));
+			lmcoord.x = max(lmcoord.x, 0.1 * float(centerDist < 0.45));
 		}
 	#endif
 	
@@ -128,10 +130,8 @@ void main() {
 	
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
-	#define GET_BRIGHTNESS_DECREASE
-	float brightnessDecrease;
+	#define DO_BRIGHTNESS_TWEAKS
 	#include "/blockDatas.glsl"
-	glcolor *= 1.0 - 0.5 * brightnessDecrease;
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = 0.0;

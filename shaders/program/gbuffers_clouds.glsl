@@ -59,11 +59,6 @@ void main() {
 
 void main() {
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
-		gl_Position = vec4(1.0);
-		return;
-	#endif
-	
 	colorMult = getCloudColor(0.25 + 0.75 * gl_Color.r);
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
