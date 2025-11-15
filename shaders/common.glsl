@@ -19,6 +19,7 @@ uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D depthtex2;
 uniform sampler2D shadowtex0;
+uniform sampler2D noisetex;
 #ifdef DISTANT_HORIZONS
 	uniform sampler2D dhDepthTex0;
 	uniform sampler2D dhDepthTex1;

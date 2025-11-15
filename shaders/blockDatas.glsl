@@ -354,7 +354,7 @@ light:level=15:
 	#define SET_SPECULARNESS(v)
 #endif
 #ifdef DO_BRIGHTNESS_TWEAKS
-	#define TWEAK_GLCOLOR_BRIGHTNESS(v) glcolor.rgb *= v;
+	#define TWEAK_GLCOLOR_BRIGHTNESS(v) glcolor.rgb *= (v - 1.0) * BRIGHT_BLOCK_DECREASE + 1.0;
 #else
 	#define TWEAK_GLCOLOR_BRIGHTNESS(v)
 #endif
@@ -460,7 +460,7 @@ if (materialId < 1570u) { // 0..1570
 						} else {
 							// command blocks
 							SET_SPECULARNESS(0.75);
-							SET_VOXEL_ID(125u); // same voxel id as lava
+							SET_VOXEL_ID(125u);
 						}
 					}
 				}
@@ -473,7 +473,7 @@ if (materialId < 1570u) { // 0..1570
 							// glow lichen
 							
 						} else {
-							// cave_vines + berries
+							// cave vines + berries
 							
 						}
 					} else { // 1592..1594

@@ -10,7 +10,6 @@ Fix far-away reflections
 Make sure all vanilla effects work
 Separate depth sunrays and vol sunrays settings
 Add settings for temporal filter
-Make data buffers store ints
 
 
 
