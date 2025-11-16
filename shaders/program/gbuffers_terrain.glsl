@@ -6,6 +6,12 @@ in_out vec3 playerPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
+#define GLOWING_ORES_ENABLED 1
+
+#if GLOWING_ORES_ENABLED == 1
+	varying vec3 glowingColorMin;
+	varying vec3 glowingColorMax;
+#endif
 #if SHOW_DANGEROUS_LIGHT == 1
 	flat in_out float isDangerousLight;
 #endif
@@ -15,6 +21,9 @@ flat in_out float specularness;
 #ifdef FSH
 
 void main() {
+	#if GLOWING_ORES_ENABLED == 1 || SHOW_DANGEROUS_LIGHT == 1
+		vec2 lmcoord = lmcoord;
+	#endif
 	
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
@@ -32,6 +41,14 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.01) discard;
+	
+	#if GLOWING_ORES_ENABLED == 1
+		vec3 hsv = rgbToHsv(color.rgb);
+		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
+			lmcoord.x = GLOWING_ORES_STRENGTH + (1.0 - GLOWING_ORES_STRENGTH) * lmcoord.x;
+		}
+	#endif
+	
 	float reflectiveness = reflectiveness;
 	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
@@ -41,7 +58,6 @@ void main() {
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
-		vec2 lmcoord = lmcoord;
 		if (isDangerousLight > 0.0) {
 			vec3 blockPos = fract(playerPos + cameraPosition);
 			float centerDist = length(blockPos.xz - 0.5);
@@ -131,6 +147,9 @@ void main() {
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS
+	#if GLOWING_ORES_ENABLED == 1
+		#define GET_GLOWING_COLOR
+	#endif
 	#include "/blockDatas.glsl"
 	
 	#if SHOW_DANGEROUS_LIGHT == 1

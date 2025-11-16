@@ -358,6 +358,13 @@ light:level=15:
 #else
 	#define TWEAK_GLCOLOR_BRIGHTNESS(v)
 #endif
+#ifdef GET_GLOWING_COLOR
+	glowingColorMin = vec3(-1.0);
+	glowingColorMax = vec3(-1.0);
+	#define SET_GLOWING_COLOR(v1, v2) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0;
+#else
+	#define SET_GLOWING_COLOR(v1, v2)
+#endif
 #ifdef GET_VOXEL_ID
 	voxelId = 0u;
 	#define SET_VOXEL_ID(v) voxelId = v;
@@ -388,7 +395,7 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId == 1570u) {
 						// water
 						SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
-						SET_SPECULARNESS(4.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
+						SET_SPECULARNESS(3.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
 						SET_VOXEL_ID(100u);
 					} else if (materialId == 1571u) {
 						// lava
@@ -613,7 +620,132 @@ if (materialId < 1570u) { // 0..1570
 					}
 				}
 			} else { // 1640..1900
-				
+				if (materialId < 1660u) { // 1640..1660
+					if (materialId < 1650u) { // 1640..1650
+						if (materialId < 1642u) { // 1640..1642
+							if (materialId == 1640u) {
+								// iron block, etc
+								SET_REFLECTIVENESS(0.2);
+								SET_SPECULARNESS(0.3);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+							} else {
+								// valuable blocks
+								
+							}
+						} else { // 1642..1650
+							if (materialId == 1642u) {
+								// copper block, etc
+								
+							} else {
+								// oxidized copper, etc
+								
+							}
+						}
+					} else { // 1650..1660
+						if (materialId < 1652u) { // 1650..1652
+							if (materialId == 1650u) {
+								// chest
+								
+							} else {
+								// birch door
+								
+							}
+						} else { // 1652..1660
+							if (materialId == 1652u) {
+								// stripped pale oak log, etc
+								
+							} else {
+								// white wool, etc
+								
+							}
+						}
+					}
+				} else { // 1660..1900
+					if (materialId < 1700u) { // 1660..1700
+						if (materialId < 1662u) { // 1660..1662
+							if (materialId == 1660u) {
+								// netherrack
+								
+							} else {
+								// bone block
+								
+							}
+						} else { // 1662..1700
+							if (materialId == 1662u) {
+								// end stone, etc
+								
+							} else {
+								// purpur block, etc
+								
+							}
+						}
+					} else { // 1700..1900
+						if (materialId < 1704u) { // 1700..1704
+							if (materialId < 1702u) { // 1700..1702
+								if (materialId == 1700u) {
+									// coal ore
+									
+								} else {
+									// iron ore
+									SET_GLOWING_COLOR(
+										vec3( 5.0, 24.8, 53.3),
+										vec3(15.0, 37.5, 88.6)
+									);
+								}
+							} else { // 1702..1704
+								if (materialId == 1702u) {
+									// copper ore
+									SET_GLOWING_COLOR(
+										vec3( 0.0, 31.8, 46.3),
+										vec3(45.0, 65.6, 87.8)
+									);
+								} else {
+									// gold ore
+									SET_GLOWING_COLOR(
+										vec3(10.0, 29.0,  92.2),
+										vec3(20.0, 94.0, 100.0)
+									);
+								}
+							}
+						} else { // 1704..1900
+							if (materialId < 1707u) { // 1704..1707
+								if (materialId == 1704u) {
+									// redstone ore
+									SET_GLOWING_COLOR(
+										vec3(0.0, 62.8, 59.2),
+										vec3(5.0, 98.0, 99.2)
+									);
+								} else if (materialId == 1705u) {
+									// emerald ore
+									SET_GLOWING_COLOR(
+										vec3(35.0,  14.9,  48.2),
+										vec3(45.0, 100.0, 100.0)
+									);
+								} else {
+									// lapis ore
+									SET_GLOWING_COLOR(
+										vec3(55.0, 57.0, 54.5),
+										vec3(65.0, 91.5, 95.7)
+									);
+								}
+							} else { // 1707..1900
+								if (materialId == 1707u) {
+									// diamond ore
+									SET_GLOWING_COLOR(
+										vec3(45.0, 16.5,  57.3),
+										vec3(51.0, 86.3, 100.0)
+									);
+								} else if (materialId == 1708u) {
+									// nether gold ore
+									
+								} else {
+									// nether quartz ore
+									
+								}
+							}
+						}
+					}
+				}
 			}
 		} else { // 1900..15503
 			

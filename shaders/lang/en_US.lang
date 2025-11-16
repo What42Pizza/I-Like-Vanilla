@@ -1026,6 +1026,14 @@ value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
 value.FANCY_NETHER_PORTAL_ENABLED.0=Off
 value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
+option.GLOWING_ORES_ENABLED=Glowing Ores Enabled
+option.GLOWING_ORES_ENABLED.comment=Causes ore to glow underground. (this effect is fragile, so if some pixels are/aren't lit when they shouldn't/should, please submit a bug report and I'll try to fix it)
+value.GLOWING_ORES_ENABLED.-1=Use Style
+
+option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
+option.GLOWING_ORES_STRENGTH.comment=The strength of the glowing ores effect
+value.GLOWING_ORES_STRENGTH.-1=Use Style
+
 
 
 

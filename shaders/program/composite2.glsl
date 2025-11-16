@@ -1,5 +1,13 @@
 in_out vec2 texcoord;
 
+#if DEPTH_SUNRAYS_ENABLED == 1
+	flat in_out float depthSunraysAmountMult;
+#endif
+#if VOL_SUNRAYS_ENABLED == 1
+	flat in_out float volSunraysAmountMult;
+	flat in_out float volSunraysAmountMax;
+#endif
+
 
 
 #ifdef FSH
@@ -38,12 +46,16 @@ void main() {
 		#if BSL_MODE == 1
 			depthSunraysColor = vec3(getLum(depthSunraysColor)) * 2.0;
 		#endif
-		color += sunraysDatas.x * depthSunraysColor;
+		sunraysDatas.x = 1.0 - (1.0 - sunraysDatas.x) * (1.0 - sunraysDatas.x);
+		color += sunraysDatas.x * depthSunraysColor * depthSunraysAmountMult;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
 		vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
-		color *= 1.0 + (1.0 - sunraysDatas.y) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
-		color = mix(volSunraysColor, color, sunraysDatas.y);
+		float volSunraysAmount = sunraysDatas.y;
+		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
+		volSunraysAmount = 1.0 - (1.0 - volSunraysAmount) * volSunraysAmountMult;
+		color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+		color = mix(volSunraysColor, color, volSunraysAmount);
 	#endif
 	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
 		vec2 cloudsData = unpack_2x8(noisyRendersData.y);
@@ -83,6 +95,34 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
+	
+	
+	
+	// ======== SUNRAYS ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		if (isSun) {
+			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.8;
+			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		} else {
+			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.8;
+		}
+		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
+	#endif
+	
+	#if VOL_SUNRAYS_ENABLED == 1
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.75 : SUNRAYS_AMOUNT_NIGHT * 0.75;
+		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
+		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
+		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
+		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
+	#endif
+	
+	
+	
 }
 
 #endif

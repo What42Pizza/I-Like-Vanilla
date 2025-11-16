@@ -8,11 +8,6 @@ flat in_out float extraFogDist;
 
 #if DEPTH_SUNRAYS_ENABLED == 1
 	flat in_out vec2 lightCoord;
-	flat in_out float depthSunraysAmountMult;
-#endif
-#if VOL_SUNRAYS_ENABLED == 1
-	flat in_out float volSunraysAmountMult;
-	flat in_out float volSunraysAmountMax;
 #endif
 #if REALISTIC_CLOUDS_ENABLED == 1
 	flat in_out vec3 cloudsShadowcasterDir;
@@ -155,7 +150,7 @@ void main() {
 	// ======== SUNRAYS ======== //
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
-		float depthSunraysAddition = getDepthSunraysAmount() * depthSunraysAmountMult;
+		float depthSunraysAddition = getDepthSunraysAmount();
 		depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
 	#else
 		float depthSunraysAddition = 0.0;
@@ -164,7 +159,6 @@ void main() {
 		float rawVolSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult);
 		rawVolSunraysAmount *= 1.0 - fogAmount;
 		float volSunraysAmount = exp(-rawVolSunraysAmount);
-		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax); // at this point, the amount is inverted (1-x)
 	#else
 		float volSunraysAmount = 1.0;
 	#endif
@@ -315,30 +309,9 @@ void main() {
 	// ======== SUNRAYS ======== //
 	
 	#if DEPTH_SUNRAYS_ENABLED == 1
-		
 		vec3 lightPos = shadowLightPosition * mat3(gbufferProjection);
 		lightPos /= lightPos.z;
 		lightCoord = lightPos.xy * 0.5 + 0.5;
-		
-		if (isSun) {
-			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.8;
-			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
-		} else {
-			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.8;
-		}
-		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
-		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
-		
-	#endif
-	
-	#if VOL_SUNRAYS_ENABLED == 1
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.2;
-		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
-		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
-		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
-		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
-		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
-		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
 	
 	

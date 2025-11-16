@@ -2,22 +2,23 @@
 
 float getDepthSunraysAmount() {
 	
-	#ifdef GRADIENT_NOISE_SPEED
-		#undef GRADIENT_NOISE_SPEED
-	#endif
-	#define GRADIENT_NOISE_SPEED 21.001
-	#include "/utils/var_gradient_noise.glsl"
+	//#ifdef GRADIENT_NOISE_SPEED
+	//	#undef GRADIENT_NOISE_SPEED
+	//#endif
+	//#define GRADIENT_NOISE_SPEED 21.001
+	//#include "/utils/var_gradient_noise.glsl"
+	
+	float noise = texelFetch(noisetex, (texelcoord + frameCounter * 19) & 127, 0).b;
 	
 	#if DEPTH_SUNRAYS_STYLE == 1
 		vec2 pos = texcoord;
-		noise = 1.0 - 0.9 * noise;
+		noise = 1.0 - noise;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY * noise;
 		
 	#elif DEPTH_SUNRAYS_STYLE == 2
 		vec2 pos = texcoord;
 		vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY;
-		noise = (noise * 2.0 - 1.0) * 0.75;
-		pos += coordStep * noise;
+		pos += coordStep * (noise - 0.5);
 		
 	#endif
 	
@@ -45,6 +46,9 @@ float getDepthSunraysAmount() {
 	float sunraysAmount = (total);
 	sunraysAmount *= sunraysAmount;
 	sunraysAmount *= max(1.0 - length(lightCoord - 0.5) * 1.2, 0.0);
+	#if DEPTH_SUNRAYS_STYLE == 2
+		sunraysAmount *= 1.0 / (1.0 + length(lightCoord - texcoord) * 2.0);
+	#endif
 	
-	return sunraysAmount * 0.5;
+	return sunraysAmount * 0.4;
 }
