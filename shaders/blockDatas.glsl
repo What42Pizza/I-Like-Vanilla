@@ -737,10 +737,16 @@ if (materialId < 1570u) { // 0..1570
 									);
 								} else if (materialId == 1708u) {
 									// nether gold ore
-									
+									SET_GLOWING_COLOR(
+										vec3( 7.0, 29.0,  78.0),
+										vec3(20.0, 85.4, 100.0)
+									);
 								} else {
 									// nether quartz ore
-									
+									SET_GLOWING_COLOR(
+										vec3(  0.0,  6.5, 72.5),
+										vec3(100.0, 30.3, 90.6)
+									);
 								}
 							}
 						}

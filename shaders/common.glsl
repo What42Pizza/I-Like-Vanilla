@@ -108,8 +108,7 @@ float maxAbs(vec3 v) {
 }
 
 float getLum(vec3 color) {
-	return dot(color, vec3(0.2125, 0.7154, 0.0721));
-    //return dot(color, vec3(0.299, 0.587, 0.114)); // maybe switch to this?
+	return dot(color, vec3(0.299, 0.587, 0.114));
 }
 
 float getSaturation(vec3 v) {

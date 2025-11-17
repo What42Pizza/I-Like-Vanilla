@@ -6,8 +6,6 @@ in_out vec3 playerPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
-#define GLOWING_ORES_ENABLED 1
-
 #if GLOWING_ORES_ENABLED == 1
 	varying vec3 glowingColorMin;
 	varying vec3 glowingColorMax;

@@ -90,7 +90,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 0.96
+										#define FOLIAGE_TINT_BLUE 0.95
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -409,7 +409,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.9
+										#define BLOOM_AMOUNT 1.0
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -425,7 +425,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.4
+										#define BLOOM_LOW_CUTOFF 0.25
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -831,7 +831,7 @@
 #endif
 #if GLOWING_ORES_ENABLED == -1
 #undef GLOWING_ORES_ENABLED
-										#define GLOWING_ORES_ENABLED 0
+										#define GLOWING_ORES_ENABLED 1
 #endif
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
