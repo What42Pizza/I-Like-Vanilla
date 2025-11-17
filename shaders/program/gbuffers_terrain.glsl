@@ -1,7 +1,7 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
-flat in_out vec2 normal;
+flat in_out vec2 encodedNormal;
 in_out vec3 playerPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
@@ -72,7 +72,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(reflectiveness, specularness),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -117,7 +117,8 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	vec4 glcolor4 = gl_Color;
 	glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
@@ -135,12 +136,16 @@ void main() {
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
 	
-	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
+	vec3 normal = gl_NormalMatrix * gl_Normal;
 	
 	uint materialId = uint(mc_Entity.x);
 	uint encodedData = materialId >> 10u;
 	// foliage normals
-	if ((encodedData & 1u) == 1u && encodedData > 1u) normal = encodeNormal(gl_NormalMatrix * vec3(0.0, 1.0, 0.0));
+	if ((encodedData & 1u) == 1u && encodedData > 1u) {
+		normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
+	}
+	
+	encodedNormal = encodeNormal(normal);
 	
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
@@ -213,14 +218,7 @@ void main() {
 	#endif
 	
 	
-	#if USE_SIMPLE_LIGHT == 1
-		if (glcolor.r == glcolor.g && glcolor.g == glcolor.b) {
-			glcolor = vec3(1.0);
-		}
-	#endif
-	
-	
-	doVshLighting(length(playerPos));
+	doVshLighting(viewPos, normal);
 	
 }
 

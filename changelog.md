@@ -1,6 +1,8 @@
 - v1.1.1
   - Added glowing ores (configurable)
+  - Reworked shader options menus
   - Removed rain reflection settings because they are currently unused
+  - Removed 'Use Simple Lighting' setting
   - Fixed and improved blocklight flickering
 
 <br>

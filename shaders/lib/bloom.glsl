@@ -6,7 +6,7 @@ void addBloom(inout vec3 color) {
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	float blockDepth = toBlockDepth(depth);
-	float sizeMult = inversesqrt(blockDepth) * BLOOM_SIZE * 0.25;
+	float sizeMult = inversesqrt(blockDepth + 1.0) * BLOOM_SIZE * 0.25;
 	
 	#if BSL_MODE == 1
 		sizeMult *= 3.0;

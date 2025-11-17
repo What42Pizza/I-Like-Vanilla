@@ -17,7 +17,7 @@ value.STYLE.3=Cartoon
 
 
 
-screen.SHADING_MENU=Shading
+screen.SHADOWS_MENU=Shadows
 
 option.SHADOWS_ENABLED=Shadows Enabled
 value.SHADOWS_ENABLED.0=Off
@@ -109,6 +109,12 @@ value.EXCLUDE_FOLIAGE.-1=Use Style
 value.EXCLUDE_FOLIAGE.0=Off
 value.EXCLUDE_FOLIAGE.1=On
 
+
+
+
+
+screen.SHADING_MENU=Shading
+
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
 option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.VANILLA_AO_BRIGHT.-1=Use Style
@@ -125,10 +131,6 @@ option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.SIDE_SHADING_DARK.-1=Use Style
 
-option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
-option.BRIGHT_BLOCK_DECREASE.comment=How much to darken blocks like sand that would otherwise be too bright
-value.BRIGHT_BLOCK_DECREASE.-1=Use Style
-
 option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
 value.NIGHT_SATURATION_DECREASE.-1=Use Style 
@@ -136,6 +138,10 @@ value.NIGHT_SATURATION_DECREASE.-1=Use Style
 option.WEATHER_BRIGHTNESS_MULT=Weather Brightness Multiplier
 option.WEATHER_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing
 value.WEATHER_BRIGHTNESS_MULT.-1=Use Style
+
+option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
+option.BRIGHT_BLOCK_DECREASE.comment=How much to darken blocks like sand that would otherwise be too bright
+value.BRIGHT_BLOCK_DECREASE.-1=Use Style
 
 
 
@@ -212,40 +218,7 @@ option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
 
 
 
-screen.COLORS_AND_LIGHTING_MENU=Colors and Lighting
-
-option.NIGHT_VISION_BRIGHTNESS=Night Vision Brightness
-value.NIGHT_VISION_BRIGHTNESS.-1=Use Style
-
-option.NIGHT_VISION_GREEN_AMOUNT=Night Vision Green Amount
-option.NIGHT_VISION_GREEN_AMOUNT.comment=How much of a green tint to apply when night vision is active. 0.0 means no green tint, and 1.0 means only green light
-value.NIGHT_VISION_GREEN_AMOUNT.-1=Use Style
-
-option.TEXTURE_CONTRAST=Texture Contrast
-option.TEXTURE_CONTRAST.comment=Directly alters the contrast of textures (and is offset with saturation)
-value.TEXTURE_CONTRAST.-1=Use Style
-
-option.FOLIAGE_SATURATION=Foliage Saturation
-option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_SATURATION.-1=Use Style
-
-option.FOLIAGE_TINT_RED=Foliage Tint Red
-option.FOLIAGE_TINT_RED.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_RED.-1=Use Style
-
-option.FOLIAGE_TINT_GREEN=Foliage Tint Green
-option.FOLIAGE_TINT_GREEN.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_GREEN.-1=Use Style
-
-option.FOLIAGE_TINT_BLUE=Foliage Tint Blue
-option.FOLIAGE_TINT_BLUE.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_BLUE.-1=Use Style
-
-option.SNOWY_TWEAKS_ENABLED=Snowy Tweaks
-option.SNOWY_TWEAKS_ENABLED.comment=Changes the foliage in snowy biomes to be snowy
-value.SNOWY_TWEAKS_ENABLED.-1=Use Style
-value.SNOWY_TWEAKS_ENABLED.0=Off
-value.SNOWY_TWEAKS_ENABLED.1=On
+screen.LIGHT_COLORS_MENU=Light Colors
 
 
 
@@ -503,6 +476,49 @@ value.HANDHELD_LIGHT_DISTANCE.-1=Use Style
 option.HANDHELD_LIGHT_BRIGHTNESS=Handheld Light Brightness
 value.HANDHELD_LIGHT_BRIGHTNESS.-1=Use Style
 
+option.HANDHELD_LIGHT_REALISM=Handheld Light Realism
+option.HANDHELD_LIGHT_REALISM.comment=Decreases the brightness of handheld lighting depending on the angle of the lit surface
+value.HANDHELD_LIGHT_REALISM.-1=Use Style
+
+
+
+
+
+screen.OTHER_COLORS_MENU=Other Colors
+
+option.NIGHT_VISION_BRIGHTNESS=Night Vision Brightness
+value.NIGHT_VISION_BRIGHTNESS.-1=Use Style
+
+option.NIGHT_VISION_GREEN_AMOUNT=Night Vision Green Amount
+option.NIGHT_VISION_GREEN_AMOUNT.comment=How much of a green tint to apply when night vision is active. 0.0 means no green tint, and 1.0 means only green light
+value.NIGHT_VISION_GREEN_AMOUNT.-1=Use Style
+
+option.TEXTURE_CONTRAST=Texture Contrast
+option.TEXTURE_CONTRAST.comment=Directly alters the contrast of textures (and is offset with saturation)
+value.TEXTURE_CONTRAST.-1=Use Style
+
+option.FOLIAGE_SATURATION=Foliage Saturation
+option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_SATURATION.-1=Use Style
+
+option.FOLIAGE_TINT_RED=Foliage Tint Red
+option.FOLIAGE_TINT_RED.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_RED.-1=Use Style
+
+option.FOLIAGE_TINT_GREEN=Foliage Tint Green
+option.FOLIAGE_TINT_GREEN.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_GREEN.-1=Use Style
+
+option.FOLIAGE_TINT_BLUE=Foliage Tint Blue
+option.FOLIAGE_TINT_BLUE.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
+value.FOLIAGE_TINT_BLUE.-1=Use Style
+
+option.SNOWY_TWEAKS_ENABLED=Snowy Tweaks
+option.SNOWY_TWEAKS_ENABLED.comment=Changes the foliage in snowy biomes to be snowy
+value.SNOWY_TWEAKS_ENABLED.-1=Use Style
+value.SNOWY_TWEAKS_ENABLED.0=Off
+value.SNOWY_TWEAKS_ENABLED.1=On
+
 
 
 
@@ -627,21 +643,21 @@ option.WATER_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Water Reflection Streng
 option.WATER_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for water not in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
 value.WATER_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
-option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
-option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
-value.RAIN_REFLECTION_AMOUNT.-1=Use Style
+#option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
+#option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
+#value.RAIN_REFLECTION_AMOUNT.-1=Use Style
 
-option.RAIN_REFLECTION_COVERAGE=Rain Reflection Coverage
-option.RAIN_REFLECTION_COVERAGE.comment=How much terrain is at full reflection strength
-value.RAIN_REFLECTION_COVERAGE.-1=Use Style
+#option.RAIN_REFLECTION_COVERAGE=Rain Reflection Coverage
+#option.RAIN_REFLECTION_COVERAGE.comment=How much terrain is at full reflection strength
+#value.RAIN_REFLECTION_COVERAGE.-1=Use Style
 
-option.RAIN_REFLECTION_MIN=Rain Reflection Min
-option.RAIN_REFLECTION_MIN.comment=Minimum amount for reflection strength
-value.RAIN_REFLECTION_MIN.-1=Use Style
+#option.RAIN_REFLECTION_MIN=Rain Reflection Min
+#option.RAIN_REFLECTION_MIN.comment=Minimum amount for reflection strength
+#value.RAIN_REFLECTION_MIN.-1=Use Style
 
-option.RAIN_REFLECTION_SLOPE=Rain Reflection Slope
-option.RAIN_REFLECTION_SLOPE.comment=How quickly the reflection strength drops off
-value.RAIN_REFLECTION_SLOPE.-1=Use Style
+#option.RAIN_REFLECTION_SLOPE=Rain Reflection Slope
+#option.RAIN_REFLECTION_SLOPE.comment=How quickly the reflection strength drops off
+#value.RAIN_REFLECTION_SLOPE.-1=Use Style
 
 
 
@@ -708,8 +724,10 @@ screen.DEPTH_SUNRAYS_MENU=Depth Sunrays
 screen.DEPTH_SUNRAYS_MENU.comment=Settings specific to depth-based sunrays
 
 option.DEPTH_SUNRAYS_STYLE=Sunrays Style
-option.DEPTH_SUNRAYS_STYLE.comment=Alters how the sunrays are calculated. Option 1 is more natural, option 2 is more impressive looking
+option.DEPTH_SUNRAYS_STYLE.comment=Alters how the depth sunrays are calculated
 value.DEPTH_SUNRAYS_STYLE.-1=Use Style
+value.DEPTH_SUNRAYS_STYLE.1=Natural
+value.DEPTH_SUNRAYS_STYLE.2=Impressive
 
 option.SUNRAYS_FLICKERING_FIX=Sunrays Flickering Fix
 option.SUNRAYS_FLICKERING_FIX.comment=Fixes a subtle bug where sunrays flicker when the sun is off-screen
@@ -1033,6 +1051,10 @@ value.GLOWING_ORES_ENABLED.-1=Use Style
 option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
 option.GLOWING_ORES_STRENGTH.comment=The strength of the glowing ores effect
 value.GLOWING_ORES_STRENGTH.-1=Use Style
+
+option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
+option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
+value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
 
 
 
@@ -1598,10 +1620,6 @@ screen.PERFORMANCE_MENU.comment=The settings that have the biggest impact on per
 
 screen.DEBUG_MENU=Debug
 
-option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
-option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
-value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
-
 option.HAND_DEPTH=Hand Depth
 option.HAND_DEPTH.comment=Depth test value for the hand and hand items\nIf this is too low, the hand won't be detected and will be shaded incorrectly\nIf this is too high, close-up objects will be treated as hand items and will be shaded incorrectly
 
@@ -1609,12 +1627,6 @@ option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
 option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, and the yellow blocks are where you should place torches for best torch usage)
 value.SHOW_DANGEROUS_LIGHT.0=Off
 value.SHOW_DANGEROUS_LIGHT.1=On
-
-option.USE_SIMPLE_LIGHT=Use Simple Light
-option.USE_SIMPLE_LIGHT.comment=Breaks the lighting in a strangely artistic way
-value.USE_SIMPLE_LIGHT.-1=Use Style
-value.USE_SIMPLE_LIGHT.0=Off
-value.USE_SIMPLE_LIGHT.1=On
 
 option.REFLECTIVE_EVERYTHING=Reflective Everything
 option.REFLECTIVE_EVERYTHING.comment=Make EVERYTHING reflective

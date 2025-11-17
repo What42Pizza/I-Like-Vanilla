@@ -1,5 +1,7 @@
 #undef SHADOWS_ENABLED
 #define SHADOWS_ENABLED 0
+#undef HANDHELD_LIGHT_ENABLED
+#define HANDHELD_LIGHT_ENABLED 0
 
 in_out vec4 glcolor;
 in_out vec2 lmcoord;
@@ -140,11 +142,11 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	dhBlock = dhMaterialId;
 	
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	playerPos = transform(gbufferModelViewInverse, viewPos);
 	if (dhBlock == DH_BLOCK_WATER) {
 		playerPos.y -= 0.11213;
 	}
-	viewPos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	shadowcasterLight = getShadowcasterLight();
 	
 	
@@ -160,14 +162,7 @@ void main() {
 	#endif
 	
 	
-	#if USE_SIMPLE_LIGHT == 1
-		if (glcolor.r == glcolor.g && glcolor.g == glcolor.b) {
-			glcolor = vec3(1.0);
-		}
-	#endif
-	
-	
-	doVshLighting(length(playerPos));
+	doVshLighting(viewPos, normal);
 	
 }
 

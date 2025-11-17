@@ -64,8 +64,8 @@ void main() {
 	glcolor.a = sqrt(glcolor.a);
 	normal = gl_NormalMatrix * gl_Normal;
 	
-	viewPos = mat3(gl_ModelViewMatrix) * gl_Vertex.xyz;
-	blockDepth = length(viewPos.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	blockDepth = length(viewPos);
 	
 	shadowcasterLight = getShadowcasterLight();
 	
@@ -87,7 +87,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(blockDepth);
+	doVshLighting(viewPos, normal);
 	
 }
 

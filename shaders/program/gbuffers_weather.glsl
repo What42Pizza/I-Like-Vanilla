@@ -1,8 +1,6 @@
 in_out vec2 texcoord;
 in_out vec4 glcolor;
 
-flat in_out vec3 normal;
-
 
 
 #ifdef FSH
@@ -53,8 +51,6 @@ void main() {
 	#endif
 	
 	glcolor = gl_Color;
-	
-	normal = gl_NormalMatrix * gl_Normal;
 	
 }
 

@@ -1,6 +1,9 @@
+#undef HANDHELD_LIGHT_ENABLED
+#define HANDHELD_LIGHT_ENABLED 0
+
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
-flat in_out vec2 normal;
+flat in_out vec2 encodedNormal;
 in_out vec3 playerPos;
 flat in_out int dhBlock;
 
@@ -30,7 +33,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(0.0, 0.3),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -56,8 +59,10 @@ void main() {
 	glcolor = gl_Color.rgb;
 	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	vec3 normal = gl_NormalMatrix * gl_Normal;
+	encodedNormal = encodeNormal(normal);
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	playerPos = transform(gbufferModelViewInverse, viewPos);
 	dhBlock = dhMaterialId;
 	
 	
@@ -83,14 +88,7 @@ void main() {
 	#endif
 	
 	
-	#if USE_SIMPLE_LIGHT == 1
-		if (glcolor.r == glcolor.g && glcolor.g == glcolor.b) {
-			glcolor = vec3(1.0);
-		}
-	#endif
-	
-	
-	doVshLighting(length(playerPos));
+	doVshLighting(viewPos, normal);
 	
 }
 

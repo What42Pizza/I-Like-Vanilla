@@ -1,7 +1,7 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
-flat in_out vec2 normal;
+flat in_out vec2 encodedNormal;
 
 
 
@@ -27,7 +27,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(0.0, 0.3),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -52,9 +52,10 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color;
-	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
+	vec3 normal = gl_NormalMatrix * gl_Normal;
+	encodedNormal = encodeNormal(normal);
 	
-	vec3 viewPos = mat3(gl_ModelViewMatrix) * gl_Vertex.xyz;
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
@@ -75,7 +76,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(length(viewPos));
+	doVshLighting(viewPos, normal);
 	
 }
 

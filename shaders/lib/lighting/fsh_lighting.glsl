@@ -232,18 +232,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockBrightness *= blockBrightness;
 	#endif
 	
-	#if HANDHELD_LIGHT_ENABLED == 1
-		float viewPosLen = length(viewPos);
-		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
-			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
-			handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
-			#if BLOCKLIGHT_FLICKERING_ENABLED == 1
-				handLightBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
-			#endif
-			blockBrightness = max(blockBrightness, handLightBrightness);
-		}
-	#endif
-	
 	// night saturation decrease
 	#ifdef OVERWORLD
 		float nightPercent = 1.0 - dayPercent;
@@ -262,7 +250,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
 	worldNormal.xz = abs(worldNormal.xz);
-	float sideShading = dot(worldNormal, vec3(-0.5, 0.3, -0.15));
+	float sideShading = dot(worldNormal, vec3(-0.5, 0.3, -0.3));
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, max(blockBrightness, ambientBrightness)) * 0.85;
 	ambientLight *= 1.0 + sideShading;
 	blockBrightness *= 1.0 + sideShading;

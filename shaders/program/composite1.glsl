@@ -291,6 +291,7 @@ void main() {
 		fogDarken = 0.5;
 		extraFogDist = 0.0;
 	}
+	extraFogDist += betterRainStrength * 8.0;
 	
 	atmoFogColor *= 1.0 - blindness;
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);

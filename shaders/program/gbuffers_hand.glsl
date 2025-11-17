@@ -1,7 +1,8 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
-flat in_out vec2 normal;
+in_out vec3 viewPos;
+flat in_out vec2 encodedNormal;
 
 
 
@@ -22,7 +23,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(0.0, 0.3),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -33,6 +34,7 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/screen_to_view.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
@@ -47,7 +49,8 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
-	normal = encodeNormal(gl_NormalMatrix * gl_Normal);
+	vec3 normal = gl_NormalMatrix * gl_Normal;
+	encodedNormal = encodeNormal(normal);
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
@@ -63,7 +66,9 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(0.0);
+	vec3 screenPos = vec3((gl_Position.xy / gl_Position.w) * 0.5 + 0.5, HAND_DEPTH);
+	viewPos = screenToView(screenPos);
+	doVshLighting(viewPos, normal);
 	
 }
 
