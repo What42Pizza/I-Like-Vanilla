@@ -1,8 +1,11 @@
 - v1.1.1
   - Added glowing ores (configurable)
+  - Added setting 'Sunrays Underground Mult'
   - Reworked shader options menus
-  - Removed rain reflection settings because they are currently unused
-  - Removed 'Use Simple Lighting' setting
+  - Removed settings:
+    - 'Sunrays Min Surface' and 'Sunrays Min Underground'
+	- Rain reflection settings (currently unused)
+	- 'Use Simple Lighting'
   - Fixed and improved blocklight flickering
 
 <br>

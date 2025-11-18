@@ -9,13 +9,13 @@ flat in_out vec2 normal;
 void main() {
 	vec4 color = vec4(texture2D(MAIN_TEXTURE, texcoord).rgb, glcolor_alpha);
 	
-	color.rgb *= 1.1;
+	color.rgb *= 1.5;
 	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		pack_2x8(1.0, 1.0),
+		pack_2x8(0.5, 1.0),
 		pack_2x8(0.0, 0.0),
 		normal
 	);

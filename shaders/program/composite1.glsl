@@ -156,9 +156,9 @@ void main() {
 		float depthSunraysAddition = 0.0;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		float rawVolSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult);
-		rawVolSunraysAmount *= 1.0 - fogAmount;
-		float volSunraysAmount = exp(-rawVolSunraysAmount);
+		float volSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult);
+		volSunraysAmount *= 1.0 - fogAmount;
+		volSunraysAmount = 1.0 / (1.0 + volSunraysAmount * 0.01); // compress data to [0-1] (the *0.01 is pretty important for preventing quantization, if the strength needs to be changed, do so elsewhere)
 	#else
 		float volSunraysAmount = 1.0;
 	#endif
@@ -184,11 +184,11 @@ void main() {
 			#endif
 			#if DEPTH_SUNRAYS_ENABLED == 1
 				if (abs(prevSunraysDatas.x - depthSunraysAddition) > 0.02)
-					depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.2);
+					depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.25);
 			#endif
 			#if VOL_SUNRAYS_ENABLED == 1
 				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
-					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.2);
+					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.25);
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);

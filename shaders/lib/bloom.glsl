@@ -12,7 +12,17 @@ void addBloom(inout vec3 color) {
 		sizeMult *= 3.0;
 	#endif
 	
-	float noise = texelFetch(noisetex, (texelcoord + frameCounter * 17) & 127, 0).b;
+	//// good values: 21.0015, 22.001, 0.02
+	//#ifdef GRADIENT_NOISE_SPEED
+	//	#undef GRADIENT_NOISE_SPEED
+	//#endif
+	//#define GRADIENT_NOISE_SPEED 21.002
+	//#include "/utils/var_gradient_noise.glsl"
+	
+	//float dither = bayer64(gl_FragCoord.xy);
+	//dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	
+	float noise = texelFetch(noisetex, (texelcoord + frameCounter * 17) & 127, 0).r;
 	
 	float randomAngle = (noise - 0.5) * 2.0 * PI;
 	mat2 rotationMatrix;
@@ -126,6 +136,9 @@ void addBloom(inout vec3 color) {
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + rotationMatrix * vec2( 0.883,  0.470)).rgb * (2.0 * 0.427 / 26.110);
 	#endif
 	
+	//bloomAddition += 0.25 * dFdx(bloomAddition) * (1 - ((int(gl_FragCoord.x) & 1) << 1));
+	//bloomAddition += 0.25 * dFdy(bloomAddition) * (1 - ((int(gl_FragCoord.y) & 1) << 1));
+	
 	#ifdef OVERWORLD
 		const float bloomAmount = BLOOM_AMOUNT;
 	#endif
@@ -136,7 +149,9 @@ void addBloom(inout vec3 color) {
 		const float bloomAmount = BLOOM_END_AMOUNT;
 	#endif
 	
-	bloomAddition *= 1.0 - 0.75 * getLum(color);
+	float lum = getLum(color);
+	bloomAddition *= 1.0 - 0.75 * lum;
+	bloomAddition *= 0.5 + 0.5 * lum;
 	color += bloomAddition * bloomAmount * 0.5;
 	
 }

@@ -742,13 +742,9 @@ value.SUNRAYS_FLICKERING_FIX.1=On
 screen.VOL_SUNRAYS_MENU=Volumetric Sunrays
 screen.VOL_SUNRAYS_MENU.comment=Settings specific to volumetric sunrays
 
-option.SUNRAYS_MIN_SURFACE=Sunrays Min Surface
-option.SUNRAYS_MIN_SURFACE.comment=How much is added to the detected sunrays amount while on the surface, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
-value.SUNRAYS_MIN_SURFACE.-1=Use Style
-
-option.SUNRAYS_MIN_UNDERGROUND=Sunrays Min Underground
-option.SUNRAYS_MIN_UNDERGROUND.comment=How much is added to the detected sunrays amount while underground, measured in 'blocks in sun' (adds nothing to pixels with no sunrays)
-value.SUNRAYS_MIN_UNDERGROUND.-1=Use Style
+option.SUNRAYS_UNDERGROUND_MULT=Sunrays Underground Mult
+option.SUNRAYS_UNDERGROUND_MULT.comment=Increases/decreases volumetric sunrays while underground
+value.SUNRAYS_UNDERGROUND_MULT.-1=Use Style
 
 option.SUNRAYS_AMOUNT_MAX_DAY=Sunrays Amount Max Day
 option.SUNRAYS_AMOUNT_MAX_DAY.comment=Clamp for how much the sunrays color can be mixed into the main color (during the day)
@@ -1047,6 +1043,8 @@ value.FANCY_NETHER_PORTAL_ENABLED.1=On
 option.GLOWING_ORES_ENABLED=Glowing Ores Enabled
 option.GLOWING_ORES_ENABLED.comment=Causes ore to glow underground. (this effect is fragile, so if some pixels are/aren't lit when they shouldn't/should, please submit a bug report and I'll try to fix it)
 value.GLOWING_ORES_ENABLED.-1=Use Style
+value.GLOWING_ORES_ENABLED.0=Off
+value.GLOWING_ORES_ENABLED.1=On
 
 option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
 option.GLOWING_ORES_STRENGTH.comment=The strength of the glowing ores effect

@@ -33,6 +33,7 @@ void main() {
 		vec2 noisyRendersDataLeft  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2(-1,  0), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 		vec2 noisyRendersDataRight = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 1,  0), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 	#endif
+	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		vec2 sunraysDatas = unpack_2x8(noisyRendersData.x);
 		sunraysDatas += unpack_2x8(noisyRendersDataUp.x   );
@@ -41,6 +42,7 @@ void main() {
 		sunraysDatas += unpack_2x8(noisyRendersDataRight.x);
 		sunraysDatas *= 0.2;
 	#endif
+	
 	#if DEPTH_SUNRAYS_ENABLED == 1
 		vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
 		#if BSL_MODE == 1
@@ -49,14 +51,18 @@ void main() {
 		sunraysDatas.x = 1.0 - (1.0 - sunraysDatas.x) * (1.0 - sunraysDatas.x);
 		color += sunraysDatas.x * depthSunraysColor * depthSunraysAmountMult;
 	#endif
+	
 	#if VOL_SUNRAYS_ENABLED == 1
 		vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
 		float volSunraysAmount = sunraysDatas.y;
+		volSunraysAmount = 1.0 / volSunraysAmount - 1.0;
+		volSunraysAmount *= volSunraysAmountMult;
+		volSunraysAmount = exp(-volSunraysAmount); // after this, volSunraysAmount is inverted (1-x)
 		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
-		volSunraysAmount = 1.0 - (1.0 - volSunraysAmount) * volSunraysAmountMult;
 		color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
 		color = mix(volSunraysColor, color, volSunraysAmount);
 	#endif
+	
 	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
 		vec2 cloudsData = unpack_2x8(noisyRendersData.y);
 		cloudsData += unpack_2x8(noisyRendersDataUp.y   );
@@ -112,8 +118,10 @@ void main() {
 	#endif
 	
 	#if VOL_SUNRAYS_ENABLED == 1
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.75 : SUNRAYS_AMOUNT_NIGHT * 0.75;
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.5 : SUNRAYS_AMOUNT_NIGHT * 0.5;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
+		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
+		volSunraysAmountMult *= mix(SUNRAYS_UNDERGROUND_MULT, 1.0, eyeSkylightSmooth * eyeSkylightSmooth);
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 

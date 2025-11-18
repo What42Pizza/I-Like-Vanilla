@@ -251,7 +251,7 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 0.97
+										#define CAVE_AMBIENT_RED 0.96
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
@@ -263,7 +263,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.16
+										#define CAVE_AMBIENT_BRIGHTNESS 0.2
 #endif
 
 
@@ -413,7 +413,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.25
+										#define BLOOM_AMOUNT 1.2
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -568,17 +568,13 @@
 
 
 
-#if SUNRAYS_MIN_SURFACE == -1
-#undef SUNRAYS_MIN_SURFACE
-										#define SUNRAYS_MIN_SURFACE 3
-#endif
-#if SUNRAYS_MIN_UNDERGROUND == -1
-#undef SUNRAYS_MIN_UNDERGROUND
-										#define SUNRAYS_MIN_UNDERGROUND 15
+#if SUNRAYS_UNDERGROUND_MULT == -1
+#undef SUNRAYS_UNDERGROUND_MULT
+										#define SUNRAYS_UNDERGROUND_MULT 3.0
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.4
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.5
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -839,7 +835,7 @@
 #endif
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
-										#define GLOWING_ORES_STRENGTH 0.75
+										#define GLOWING_ORES_STRENGTH 1.0
 #endif
 #if NEARBY_PARTICLE_TRANSPARENCY == -1
 #undef NEARBY_PARTICLE_TRANSPARENCY
@@ -976,7 +972,7 @@
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.45
+										#define WATER_COLOR_GREEN 0.35
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
@@ -984,7 +980,7 @@
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT
-										#define WATER_COLOR_AMOUNT 0.7
+										#define WATER_COLOR_AMOUNT 0.75
 #endif
 
 
@@ -1217,7 +1213,7 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 12.0
+										#define PALE_GARDEN_FOG_DENSITY 9.0
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY

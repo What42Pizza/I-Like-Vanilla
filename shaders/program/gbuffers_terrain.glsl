@@ -44,6 +44,7 @@ void main() {
 		vec3 hsv = rgbToHsv(color.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			lmcoord.x = GLOWING_ORES_STRENGTH + (1.0 - GLOWING_ORES_STRENGTH) * lmcoord.x;
+			lmcoord.y = GLOWING_ORES_STRENGTH * 0.25 + (1.0 - GLOWING_ORES_STRENGTH * 0.25) * lmcoord.y;
 		}
 	#endif
 	
