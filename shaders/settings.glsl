@@ -55,7 +55,15 @@ const float shadowIntervalSize    = 2.0;
 
 // post-processed definitions
 
+#ifndef OVERWORLD
+	#undef REALISTIC_CLOUDS_ENABLED
+	#define REALISTIC_CLOUDS_ENABLED 0
+#endif
 
+#ifndef NETHER
+	#undef NETHER_CLOUDS_ENABLED
+	#define NETHER_CLOUDS_ENABLED 0
+#endif
 
 #ifdef NETHER
 	#undef SHADOWS_ENABLED

@@ -26,7 +26,7 @@ void main() {
 	
 	// ======== NOISY RENDERS ADDITION ======== //
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || (REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD)
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
 		vec2 noisyRendersData      = texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).rg;
 		vec2 noisyRendersDataUp    = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0,  1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 		vec2 noisyRendersDataDown  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0, -1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
@@ -63,19 +63,28 @@ void main() {
 		color = mix(volSunraysColor, color, volSunraysAmount);
 	#endif
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1 && defined OVERWORLD
+	#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
 		vec2 cloudsData = unpack_2x8(noisyRendersData.y);
 		cloudsData += unpack_2x8(noisyRendersDataUp.y   );
 		cloudsData += unpack_2x8(noisyRendersDataDown.y );
 		cloudsData += unpack_2x8(noisyRendersDataLeft.y );
 		cloudsData += unpack_2x8(noisyRendersDataRight.y);
 		cloudsData *= 0.2;
+	#endif
+	#if REALISTIC_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
 		vec3 cloudColor = getCloudColor(0.6 + 0.4 * brightness);
 		color = mix(color, cloudColor, thickness);
 	#endif
-
+	#if NETHER_CLOUDS_ENABLED == 1
+		float thickness = 1.0 - cloudsData.x;
+		float brightness = 1.0 - cloudsData.y;
+		vec3 cloudsColor = 0.33 + 2.5 * (fogColor - getLum(fogColor));
+		cloudsColor *= 0.6 + 0.4 * brightness;
+		color = mix(color, cloudsColor, thickness * (1.0 - NETHER_CLOUDS_TRANSPARENCY) * 0.5);
+	#endif
+	
 	
 	
 	// ======== BLOOM CALCULATIONS ======== //

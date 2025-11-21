@@ -1,7 +1,6 @@
 Planned for next major version:
 Add situational effects:
 	reflective rain puddles
-	nether clouds
 	water foam
 	end and nether portal effects
 Make most (all that can) settings be relative to style value

@@ -77,6 +77,10 @@ void main() {
 		#else
 			float reflectionStrength = unpack_2x8(data.y).x;
 		#endif
+		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
+			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
+			reflectionStrength *= sqrt(invCloudsThickness);
+		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS
 				doReflections(color, depth0, dhDepth0, normal, lmcoord, reflectionStrength);

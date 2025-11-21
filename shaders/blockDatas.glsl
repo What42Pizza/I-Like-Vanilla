@@ -1,346 +1,3 @@
-/*
-
-if I ever want to switch to a huffman-like tree encoding, I'd probably structure the data like like this and auto-generate the if-tree and block.properties
-
-oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves:
-	mult: 3000
-	specular: 1.0
-	voxel_mult: vec3(0.5, 0.7, 0.5)
-
-water, flowing_water:
-	mult: 1000
-	specular: 1.0
-	reflective: mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y)
-	voxel_mult: vec3(0.6, 0.85, 0.95)
-
-white_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-white_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-light_gray_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-light_gray_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-gray_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-gray_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-black_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-black_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-brown_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-brown_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-red_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-red_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-orange_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-orange_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-yellow_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-yellow_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-lime_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-lime_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-green_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-green_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-cyan_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-cyan_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-light_blue_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-light_blue_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-blue_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-blue_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-purple_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-purple_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-magenta_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-magenta_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-pink_stained_glass:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-pink_stained_glass_pane:
-	mult: 25
-	specular: 1.0,
-	reflective: 0.3
-	voxel_mult: vec3(0.5)
-
-white_candle:
-	mult: 1
-	specular: 0.8
-light_gray_candle:
-	mult: 1
-	specular: 0.8
-gray_candle:
-	mult: 1
-	specular: 0.8
-black_candle:
-	mult: 1
-	specular: 0.8
-brown_candle:
-	mult: 1
-	specular: 0.8
-red_candle:
-	mult: 1
-	specular: 0.8
-orange_candle:
-	mult: 1
-	specular: 0.8
-yellow_candle:
-	mult: 1
-	specular: 0.8
-lime_candle:
-	mult: 1
-	specular: 0.8
-green_candle:
-	mult: 1
-	specular: 0.8
-cyan_candle:
-	mult: 1
-	specular: 0.8
-light_blue_candle:
-	mult: 1
-	specular: 0.8
-blue_candle:
-	mult: 1
-	specular: 0.8
-purple_candle:
-	mult: 1
-	specular: 0.8
-magenta_candle:
-	mult: 1
-	specular: 0.8
-pink_candle:
-	mult: 1
-	specular: 0.8
-
-white_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-light_gray_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-gray_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-black_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-brown_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-red_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-orange_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-yellow_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-lime_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-green_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-cyan_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-light_blue_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-blue_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-purple_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-magenta_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-pink_candle:lit=true:
-	mult: 1
-	specular: 0.8
-	voxel_add: vec3(0.5)
-
-light:level=0:
-	mult: 1
-	voxel_add: vec3(0/15)
-light:level=1:
-	mult: 1
-	voxel_add: vec3(1/15)
-light:level=2:
-	mult: 1
-	voxel_add: vec3(2/15)
-light:level=3:
-	mult: 1
-	voxel_add: vec3(3/15)
-light:level=4:
-	mult: 1
-	voxel_add: vec3(4/15)
-light:level=5:
-	mult: 1
-	voxel_add: vec3(5/15)
-light:level=6:
-	mult: 1
-	voxel_add: vec3(6/15)
-light:level=7:
-	mult: 1
-	voxel_add: vec3(7/15)
-light:level=8:
-	mult: 1
-	voxel_add: vec3(8/15)
-light:level=9:
-	mult: 1
-	voxel_add: vec3(9/15)
-light:level=10:
-	mult: 1
-	voxel_add: vec3(10/15)
-light:level=11:
-	mult: 1
-	voxel_add: vec3(11/15)
-light:level=12:
-	mult: 1
-	voxel_add: vec3(12/15)
-light:level=13:
-	mult: 1
-	voxel_add: vec3(13/15)
-light:level=14:
-	mult: 1
-	voxel_add: vec3(14/15)
-light:level=15:
-	mult: 1
-	voxel_add: vec3(15/15)
-
-*/
-
-
-
 #ifdef GET_REFLECTIVENESS
 	reflectiveness = 0.0;
 	#define SET_REFLECTIVENESS(v) reflectiveness = v;
@@ -361,9 +18,15 @@ light:level=15:
 #ifdef GET_GLOWING_COLOR
 	glowingColorMin = vec3(-1.0);
 	glowingColorMax = vec3(-1.0);
-	#define SET_GLOWING_COLOR(v1, v2) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0;
+	#if GLOWING_ORES_ENABLED == 1
+		#define SET_GLOWING_ORE_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3;
+	#else
+		#define SET_GLOWING_ORE_COLOR(v1, v2, v3)
+	#endif
+	#define SET_GLOWING_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3;
 #else
-	#define SET_GLOWING_COLOR(v1, v2)
+	#define SET_GLOWING_ORE_COLOR(v1, v2, v3)
+	#define SET_GLOWING_COLOR(v1, v2, v3)
 #endif
 #ifdef GET_VOXEL_ID
 	voxelId = 0u;
@@ -372,9 +35,10 @@ light:level=15:
 	#define SET_VOXEL_ID(v)
 #endif
 
-// Note: these comments use `..` like Rust does, where the range is [min..max)
+// Note: these comments use `..` like Rust does, where the range is [min-max)
 if (materialId < 1570u) { // 0..1570
-	if (materialId < 1500u) { // 0..1500 (unused)
+	if (materialId < 1500u) { // 0..1500
+		// unused
 		
 	} else { // 1500..1570
 		SET_VOXEL_ID(materialId - 1500u + 2u);
@@ -387,7 +51,7 @@ if (materialId < 1570u) { // 0..1570
 			SET_SPECULARNESS(1.0);
 		}
 	}
-} else { // 1570..15503
+} else { // 1570..
 	if (materialId < 1620u) { // 1570..1620
 		if (materialId < 1590u) { // 1570..1590
 			if (materialId < 1580u) { // 1570..1580
@@ -542,9 +206,10 @@ if (materialId < 1570u) { // 0..1570
 						if (materialId == 1610u) {
 							// glowstone
 							SET_REFLECTIVENESS(0.4);
+							TWEAK_GLCOLOR_BRIGHTNESS(1.25);
 						} else if (materialId == 1611u) {
 							// shroomlight
-							
+							TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 						} else {
 							// magma_block
 							
@@ -561,7 +226,7 @@ if (materialId < 1570u) { // 0..1570
 				}
 			}
 		}
-	} else { // 1620..15503
+	} else { // 1620..
 		if (materialId < 1900u) { // 1620..1900
 			if (materialId < 1640u) { // 1620..1640
 				if (materialId < 1630u) { // 1620..1630
@@ -630,7 +295,8 @@ if (materialId < 1570u) { // 0..1570
 								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 							} else {
 								// valuable blocks
-								
+								SET_REFLECTIVENESS(0.2);
+								SET_SPECULARNESS(0.3);
 							}
 						} else { // 1642..1650
 							if (materialId == 1642u) {
@@ -656,27 +322,44 @@ if (materialId < 1570u) { // 0..1570
 								
 							} else {
 								// white wool, etc
-								
+								TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 							}
 						}
 					}
 				} else { // 1660..1900
 					if (materialId < 1700u) { // 1660..1700
-						if (materialId < 1662u) { // 1660..1662
-							if (materialId == 1660u) {
-								// netherrack
-								
-							} else {
-								// bone block
-								
+						if (materialId < 1670u) { // 1660..1670
+							if (materialId < 1662u) { // 1660..1662
+								if (materialId == 1660u) {
+									// netherrak
+								SET_REFLECTIVENESS(0.15);
+								} else {
+									// bone block
+									
+								}
+							} else { // 1662..1670
+								if (materialId == 1662u) {
+									// warped stem
+									SET_GLOWING_COLOR(
+										vec3(  0.0, 77.3, 38.0),
+										vec3(100.0, 86.6, 58.4),
+										1.0
+									);
+								} else {
+									// crimson stem
+									SET_GLOWING_COLOR(
+										vec3(  0.0,  78.0, 48.2),
+										vec3(100.0, 100.0, 69.4),
+										1.0
+									);
+								}
 							}
-						} else { // 1662..1700
-							if (materialId == 1662u) {
+						} else { // 1670..1700
+							if (materialId == 1670u) {
 								// end stone, etc
 								
 							} else {
 								// purpur block, etc
-								
 							}
 						}
 					} else { // 1700..1900
@@ -687,23 +370,26 @@ if (materialId < 1570u) { // 0..1570
 									
 								} else {
 									// iron ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3( 5.0, 24.8, 53.3),
-										vec3(15.0, 37.5, 88.6)
+										vec3(15.0, 37.5, 88.6),
+										GLOWING_ORES_STRENGTH
 									);
 								}
 							} else { // 1702..1704
 								if (materialId == 1702u) {
 									// copper ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3( 0.0, 31.8, 46.3),
-										vec3(45.0, 65.6, 87.8)
+										vec3(45.0, 65.6, 87.8),
+										GLOWING_ORES_STRENGTH
 									);
 								} else {
 									// gold ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3(10.0, 29.0,  92.2),
-										vec3(20.0, 94.0, 100.0)
+										vec3(20.0, 94.0, 100.0),
+										GLOWING_ORES_STRENGTH
 									);
 								}
 							}
@@ -711,41 +397,49 @@ if (materialId < 1570u) { // 0..1570
 							if (materialId < 1707u) { // 1704..1707
 								if (materialId == 1704u) {
 									// redstone ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3(0.0, 62.8, 59.2),
-										vec3(5.0, 98.0, 99.2)
+										vec3(5.0, 98.0, 99.2),
+										GLOWING_ORES_STRENGTH
 									);
 								} else if (materialId == 1705u) {
 									// emerald ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3(35.0,  14.9,  48.2),
-										vec3(45.0, 100.0, 100.0)
+										vec3(45.0, 100.0, 100.0),
+										GLOWING_ORES_STRENGTH
 									);
 								} else {
 									// lapis ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3(55.0, 57.0, 54.5),
-										vec3(65.0, 91.5, 95.7)
+										vec3(65.0, 91.5, 95.7),
+										GLOWING_ORES_STRENGTH
 									);
 								}
 							} else { // 1707..1900
 								if (materialId == 1707u) {
 									// diamond ore
-									SET_GLOWING_COLOR(
+									SET_GLOWING_ORE_COLOR(
 										vec3(45.0, 16.5,  57.3),
-										vec3(51.0, 86.3, 100.0)
+										vec3(51.0, 86.3, 100.0),
+										GLOWING_ORES_STRENGTH
 									);
 								} else if (materialId == 1708u) {
 									// nether gold ore
-									SET_GLOWING_COLOR(
+									SET_REFLECTIVENESS(0.15);
+									SET_GLOWING_ORE_COLOR(
 										vec3( 7.0, 29.0,  78.0),
-										vec3(20.0, 85.4, 100.0)
+										vec3(20.0, 85.4, 100.0),
+										GLOWING_ORES_STRENGTH
 									);
 								} else {
 									// nether quartz ore
-									SET_GLOWING_COLOR(
+									SET_REFLECTIVENESS(0.15);
+									SET_GLOWING_ORE_COLOR(
 										vec3(  0.0,  6.5, 72.5),
-										vec3(100.0, 30.3, 90.6)
+										vec3(100.0, 30.3, 90.6),
+										GLOWING_ORES_STRENGTH
 									);
 								}
 							}
@@ -753,8 +447,120 @@ if (materialId < 1570u) { // 0..1570
 					}
 				}
 			}
-		} else { // 1900..15503
-			
+		} else { // 1900..
+			if (materialId < 9500u) { // 1900..9500
+				if (materialId < 6500u) { // 1900..6500
+					if (materialId < 3500u) { // 1900..3500
+						if (materialId < 1910u) { // 1900..1910
+							if (materialId == 1900u) {
+								// fire
+								
+							} else {
+								// soul fire
+								
+							}
+						} else {
+							if (materialId == 1910u) {
+								// nether portal
+								
+							} else if (materialId == 1920u) {
+								// end portal
+								
+							} else if (materialId == 1930u) {
+								// end gateway
+								
+							}
+						}
+					} else { // 3500..6500
+						// sugar cane
+						
+					}
+				} else { // 6500..9500
+					if (materialId < 7500u) { // 6500..7500
+						if (materialId < 6502u) { // 6500..6502
+							if (materialId == 6500u) {
+								// oak leaves, etc
+								SET_SPECULARNESS(1.0);
+							} else {
+								// pale oak leaves
+								SET_SPECULARNESS(1.0);
+							}
+						} else { // 6502..7500
+							if (materialId == 6502u) {
+								// pale hanging moss
+								SET_SPECULARNESS(0.5);
+							} else {
+								// vine
+								SET_SPECULARNESS(0.75);
+							}
+						}
+					} else { // 7500..9500
+						if (materialId == 7500u) {
+							// tall grass: upper, etc
+							SET_SPECULARNESS(0.5);
+						} else {
+							// rose bush: upper, etc
+							
+						}
+					}
+				}
+			} else { // 9500..
+				if (materialId < 13500u) { // 9500..13500
+					if (materialId < 11500u) { // 9500..11500
+						// pointed dripstone
+						
+					} else { // 11500..13500
+						if (materialId == 11500u) {
+							// red mushrooms, etc
+							
+						} else if (materialId == 11501u) {
+							// cobweb
+							
+						} else {
+							// wither rose
+							
+						}
+					}
+				} else { // 13500..
+					if (materialId < 15500u) { // 13500..15500
+						if (materialId < 13502u) { // 13500..13502
+							if (materialId == 13500u) {
+								// dead bush
+								
+							} else {
+								// oak sapling, etc
+								
+							}
+						} else { // 13502..15500
+							if (materialId == 13502u) {
+								// dandelion, etc
+								
+							} else {
+								// potatoes, etc
+								
+							}
+						}
+					} else { // 15500..
+						if (materialId < 15502u) { // 15500..15502
+							if (materialId == 15500u) {
+								// short grass, etc
+								SET_SPECULARNESS(0.5);
+							} else {
+								// firefly bush
+								
+							}
+						} else { // 15500..
+							if (materialId == 15502u) {
+								// wheat
+								
+							} else {
+								// rose bush: lower, etc
+								
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

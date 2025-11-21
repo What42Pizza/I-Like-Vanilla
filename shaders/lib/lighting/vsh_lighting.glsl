@@ -18,8 +18,5 @@ void doVshLighting(vec3 viewPos, vec3 normal) {
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
 		lmcoord.x *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
 	#endif
-	#ifdef OVERWORLD
-		lmcoord.x *= 1.0 + (eyeBrightness.y / 240.0) * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
-	#endif
 	
 }

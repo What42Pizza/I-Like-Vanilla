@@ -1419,6 +1419,22 @@ value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 
+option.NETHER_CLOUDS_ENABLED=Nether Clouds Enabled
+option.NETHER_CLOUDS_ENABLED.comment=Enables smoke-like volumetric clouds in the nether
+value.NETHER_CLOUDS_ENABLED.-1=Use Style
+value.NETHER_CLOUDS_ENABLED.0=Off
+value.NETHER_CLOUDS_ENABLED.1=On
+
+option.NETHER_CLOUDS_CONVERAGE=Nether Clouds Coverage
+value.NETHER_CLOUDS_CONVERAGE.-1=Use Style
+
+option.NETHER_CLOUDS_TRANSPARENCY=Nether Clouds Transparency
+value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
+
+
+
+
+
 screen.FOG_MENU=Fog
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled

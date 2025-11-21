@@ -6,10 +6,10 @@ in_out vec3 playerPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
-#if GLOWING_ORES_ENABLED == 1
-	varying vec3 glowingColorMin;
-	varying vec3 glowingColorMax;
-#endif
+in_out vec3 glowingColorMin;
+in_out vec3 glowingColorMax;
+in_out float glowingAmount;
+
 #if SHOW_DANGEROUS_LIGHT == 1
 	flat in_out float isDangerousLight;
 #endif
@@ -40,13 +40,11 @@ void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.01) discard;
 	
-	#if GLOWING_ORES_ENABLED == 1
-		vec3 hsv = rgbToHsv(color.rgb);
-		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
-			lmcoord.x = GLOWING_ORES_STRENGTH + (1.0 - GLOWING_ORES_STRENGTH) * lmcoord.x;
-			lmcoord.y = GLOWING_ORES_STRENGTH * 0.25 + (1.0 - GLOWING_ORES_STRENGTH * 0.25) * lmcoord.y;
-		}
-	#endif
+	vec3 hsv = rgbToHsv(color.rgb);
+	if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
+		lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
+		lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
+	}
 	
 	float reflectiveness = reflectiveness;
 	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
@@ -151,9 +149,7 @@ void main() {
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS
-	#if GLOWING_ORES_ENABLED == 1
-		#define GET_GLOWING_COLOR
-	#endif
+	#define GET_GLOWING_COLOR
 	#include "/blockDatas.glsl"
 	
 	#if SHOW_DANGEROUS_LIGHT == 1

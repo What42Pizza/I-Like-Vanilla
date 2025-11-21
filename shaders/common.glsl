@@ -269,7 +269,7 @@ float valueHash(vec3 p) {
 	return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
 }
 
-float valueNoise(vec3 v) {
+float valueNoise3(vec3 v) {
 	vec3 i = floor(v);
 	vec3 f = fract(v);
 	
@@ -290,14 +290,6 @@ float valueNoise(vec3 v) {
 	float l = mix(ll, lh, u.y);
 	float h = mix(hl, hh, u.y);
 	return mix(l, h, u.x);
-}
-
-vec3 valueNoise3(vec3 v) {
-	return vec3(
-		valueNoise(v + vec3(31.416, 0.0, 0.0)),
-		valueNoise(v + vec3(0.0, 47.853, 0.0)),
-		valueNoise(v + vec3(0.0, 0.0, 12.793))
-	);
 }
 
 vec2 projectOntoPlane(vec3 p, vec3 normal) {

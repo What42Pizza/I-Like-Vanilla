@@ -299,8 +299,10 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		lighting += specularColor * specular * (0.15 + 0.85 * specularness) * shadowBrightness;
 	#endif
 	
-	float lightingBrightness = min(getLum(lighting), 1.0);
-	blockBrightness *= 1.2 - lightingBrightness;
+	blockBrightness *= 1.2 - min(getLum(lighting), 1.0);
+	#ifdef OVERWORLD
+		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
+	#endif
 	vec3 blockLight = blockBrightness * BLOCK_COLOR;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
