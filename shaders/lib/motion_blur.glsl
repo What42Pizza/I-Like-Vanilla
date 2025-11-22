@@ -10,7 +10,7 @@ void doMotionBlur(inout vec3 color, vec2 prevCoord) {
 	#include "/utils/var_rng.glsl"
 	pos += coordStep * randomFloat(rng) * 0.25;
 	
-	for (int i = 0; i < SAMPLE_COUNT; i ++) {
+	for (int i = 0; i < SAMPLE_COUNT; i++) {
 		pos += coordStep;
 		float sampleDepth = texture2DLod(DEPTH_BUFFER_WO_TRANS, pos, 0).x;
 		vec3 sample = texture2D(PREV_TEXTURE, pos).rgb * 2.0;

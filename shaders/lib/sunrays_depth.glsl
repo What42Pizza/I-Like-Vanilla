@@ -23,7 +23,7 @@ float getDepthSunraysAmount() {
 	#endif
 	
 	float total = 0.0;
-	for (int i = 1; i < SUNRAYS_QUALITY; i ++) {
+	for (int i = 1; i < SUNRAYS_QUALITY; i++) {
 		#if SUNRAYS_FLICKERING_FIX == 1
 			if (pos.x < 0.0 || pos.x > 1.0 || pos.y < 0.0 || pos.y > 1.0) {
 				total *= float(SUNRAYS_QUALITY) / i;

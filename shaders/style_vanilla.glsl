@@ -388,7 +388,7 @@
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
-										#define FOLIAGE_TINT_RED 0.92
+										#define FOLIAGE_TINT_RED 0.93
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
@@ -451,7 +451,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.75
+										#define AO_AMOUNT 0.65
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
