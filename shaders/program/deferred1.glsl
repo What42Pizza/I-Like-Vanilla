@@ -81,8 +81,8 @@ void main() {
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
-				float aoFactor = getAoFactor(depth, length(viewPos));
-				aoFactor *= 1.0 - 0.7 * getLum(color);
+				float aoFactor = getAoFactor(depth);
+				aoFactor *= 1.0 - 0.5 * getLum(color);
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
 			}

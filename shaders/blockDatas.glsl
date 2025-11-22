@@ -59,7 +59,7 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId == 1570u) {
 						// water
 						SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
-						SET_SPECULARNESS(3.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
+						SET_SPECULARNESS(2.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
 						SET_VOXEL_ID(100u);
 					} else if (materialId == 1571u) {
 						// lava
@@ -480,10 +480,10 @@ if (materialId < 1570u) { // 0..1570
 						if (materialId < 6502u) { // 6500..6502
 							if (materialId == 6500u) {
 								// oak leaves, etc
-								SET_SPECULARNESS(1.0);
+								SET_SPECULARNESS(0.8);
 							} else {
 								// pale oak leaves
-								SET_SPECULARNESS(1.0);
+								SET_SPECULARNESS(0.8);
 							}
 						} else { // 6502..7500
 							if (materialId == 6502u) {

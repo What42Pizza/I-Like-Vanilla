@@ -6,45 +6,38 @@ float getAoInfluence(float centerDepth, vec2 offset) {
 	
 	float depth1 = toBlockDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + offset).r);
 	float depth2 = toBlockDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord - offset).r);
-	//#ifdef DISTANT_HORIZONS
-	//	depth1 = max(depth1, toBlockDepthDh(texture2D(DH_DEPTH_BUFFER_WO_TRANS, texcoord + offset).r));
-	//	depth2 = max(depth2, toBlockDepthDh(texture2D(DH_DEPTH_BUFFER_WO_TRANS, texcoord - offset).r));
-	//#endif
+	
 	float diff1 = centerDepth - depth1;
 	float diff2 = centerDepth - depth2;
 	
 	float diffTotal = max(diff1 + diff2, 0.0);
-	return float(diffTotal > 0.01);
-	//diffTotal *= 4.0;
-	//return (diffTotal * diffTotal) / pow(2.0, diffTotal);
+	return float(diffTotal > 0.001 && diffTotal < 1.0);
+	
 }
 
 
 
-float getAoFactor(float depth, float trueBlockDepth) {
+float getAoFactor(float depth) {
 	
 	float blockDepth = toBlockDepth(depth);
-	//#ifdef DISTANT_HORIZONS
-	//	blockDepth = max(blockDepth, toBlockDepthDh(texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r));
-	//#endif
 	float dither = bayer64(gl_FragCoord.xy);
 	float noise = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * PI * 2.0;
-	float scale = AO_SIZE * 0.08 / blockDepth;
+	float scale = AO_SIZE * 0.5 / blockDepth;
 	
 	float total = 0.0;
 	const int SAMPLE_COUNT = AO_QUALITY * AO_QUALITY;
 	for (int i = 1; i <= SAMPLE_COUNT; i ++) {
 		
-		float len = (float(i) / SAMPLE_COUNT + 0.75) * scale;
+		float len = (float(i) / SAMPLE_COUNT + 0.0);
+		len *= len;
+		len *= scale;
 		vec2 offset = vec2(cos(i + noise) * len * invAspectRatio, sin(i + noise) * len);
 		
 		total += getAoInfluence(blockDepth, offset);
 		
 	}
 	total /= SAMPLE_COUNT;
-	total *= smoothstep(0.9, 0.8, trueBlockDepth * invFar);
+	total *= clamp(blockDepth * invFar * -10.0 + 9.0, 0.0, 1.0);
 	
-	total *= total;
-	total *= total;
-	return total * 0.27;
+	return total * 0.5;
 }
