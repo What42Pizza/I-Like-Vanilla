@@ -1,11 +1,13 @@
 - v1.1.1
   - Added glowing ores (configurable)
   - Added nether clouds (configurable)
+  - Overhauled water surface rendering (again)
   - Reworked shader options menus
   - Settings changes:
     - Replaced 'Sunrays Min Surface' and 'Sunrays Min Underground' with 'Sunrays Underground Mult'
 	- Removed rain reflection settings (currently unused)
 	- Removed 'Use Simple Lighting' setting
+  - Improved sunrays and ambient occlusion
   - Fixed and improved blocklight flickering
 
 <br>

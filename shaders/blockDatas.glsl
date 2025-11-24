@@ -35,6 +35,8 @@
 	#define SET_VOXEL_ID(v)
 #endif
 
+
+
 // Note: these comments use `..` like Rust does, where the range is [min-max)
 if (materialId < 1570u) { // 0..1570
 	if (materialId < 1500u) { // 0..1500

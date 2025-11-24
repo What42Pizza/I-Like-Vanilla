@@ -75,21 +75,23 @@ void main() {
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			vec3 viewDir = normalize(viewPos);
 			float fresnel = -dot(normal, viewDir);
-			vec3 noisePos = vec3(playerPos.xz + cameraPosition.xz, frameTimeCounter * WAVING_WATER_SPEED);
-			noisePos.xy /= WAVING_WATER_SCALE * 2.0;
-			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.02;
+			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.35;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.125;
 			if (wavingSurfaceAmount > 0.00001) {
-				float height = 1.0 - abs(simplexNoise(noisePos));
-				float heightX = 1.0 - abs(simplexNoise(noisePos + vec3(0.01, 0.0, 0.0)));
-				float heightZ = 1.0 - abs(simplexNoise(noisePos + vec3(0.0, 0.01, 0.0)));
-				vec3 dirX = vec3(0.01, (height - heightX) * wavingSurfaceAmount, 0.0);
-				vec3 dirZ = vec3(0.0, (height - heightZ) * wavingSurfaceAmount, 0.01);
-				normal = cross(dirZ, dirX);
-				normal = normalize(normal);
-				normal = tbn * vec3(-normal.x, normal.z, normal.y); // y = up -> z = up & tangent -> view
-				float newFresnel = dot(normal, viewDir); // should be inverted but it would be inverted again in the next step anyways
-				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND, WAVING_WATER_FRESNEL_SURFACE, lmcoord.y);
-				color.rgb *= clamp(1.0 + fresnelMult / wavingSurfaceAmount * 0.07 * (fresnel + newFresnel), 0.0, 1.5); // basically `color *= 1+(fresnel-newFresnel)` but it's weird because of settings and wavingSurfaceAmount
+				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND, WAVING_WATER_FRESNEL_SURFACE, lmcoord.y) * 0.8;
+				vec2 sample;
+				sample = texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).rb * 2.0 - 1.0; noisePos += sample * 0.25 * 0.35;
+				sample = texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).rb * 2.0 - 1.0; noisePos += sample * 0.25 * 0.35;
+				sample = texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).rb * 2.0 - 1.0; noisePos += sample * 0.25 * 0.35;
+				normal = vec3(0.0, 0.0, 1.0);
+				sample = texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).rb * 2.0 - 1.0; normal.xy += sample * 0.25;
+				sample = texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).rb * 2.0 - 1.0; normal.xy += sample * 0.25;
+				sample = texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).rb * 2.0 - 1.0; normal.xy += sample * 0.25;
+				vec3 normalWithoutMult = tbn * normalize(normal);
+				normal.xy *= wavingSurfaceAmount;
+				normal = tbn * normalize(normal);
+				float newFresnel = dot(normalWithoutMult, viewDir); // note: there should be made negative, but instead the next line does 1+fresnel instead of 1-fresnel
+				color.rgb *= 1.0 + (newFresnel + 0.5) * fresnelMult;
 			}
 		#endif
 		
