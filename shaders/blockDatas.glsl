@@ -213,8 +213,13 @@ if (materialId < 1570u) { // 0..1570
 							// shroomlight
 							TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 						} else {
-							// magma_block
-							
+							// magma block
+							TWEAK_GLCOLOR_BRIGHTNESS(0.75);
+							SET_GLOWING_COLOR(
+								vec3(  0.0, 64.5, 79.2),
+								vec3(100.0, 97.0, 98.4),
+								1.0
+							);
 						}
 					} else { // 1613..1610
 						if (materialId == 1613u) {

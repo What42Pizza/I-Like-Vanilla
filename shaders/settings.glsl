@@ -72,6 +72,8 @@ const float shadowIntervalSize    = 2.0;
 	#define DEPTH_SUNRAYS_ENABLED 0
 	#undef VOL_SUNRAYS_ENABLED
 	#define VOL_SUNRAYS_ENABLED 0
+	#undef HEIGHT_BASED_WAVING_ENABLED
+	#define HEIGHT_BASED_WAVING_ENABLED 0
 #endif
 
 #ifdef END

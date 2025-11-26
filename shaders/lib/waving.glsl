@@ -41,7 +41,7 @@ void applyWaving(inout vec3 position, uint materialId) {
 		else wavingScale = WAVING_AMOUNT_3;
 	}
 	if (encodedData > 7u && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
-	#ifndef SHADER_SHADOW
+	#if !defined SHADER_SHADOW && !defined NETHER
 		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
 		if (wavingScale == 0.0) return;
 	#endif
