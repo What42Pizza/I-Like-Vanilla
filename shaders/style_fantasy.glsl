@@ -417,7 +417,7 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 2.2
+										#define BLOOM_NETHER_AMOUNT 2.0
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
@@ -446,7 +446,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 1.0
+										#define AO_AMOUNT 0.9
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -1182,6 +1182,10 @@
 #if NETHER_CLOUDS_ENABLED == -1
 #undef NETHER_CLOUDS_ENABLED
 										#define NETHER_CLOUDS_ENABLED 1
+#endif
+#if NETHER_CLOUDS_SCALE == -1
+#undef NETHER_CLOUDS_SCALE
+										#define NETHER_CLOUDS_SCALE 1.0
 #endif
 #if NETHER_CLOUDS_CONVERAGE == -1
 #undef NETHER_CLOUDS_CONVERAGE

@@ -334,7 +334,7 @@ if (materialId < 1570u) { // 0..1570
 							if (materialId < 1662u) { // 1660..1662
 								if (materialId == 1660u) {
 									// netherrak
-								SET_REFLECTIVENESS(0.15);
+									SET_REFLECTIVENESS(0.125);
 								} else {
 									// bone block
 									
@@ -429,7 +429,7 @@ if (materialId < 1570u) { // 0..1570
 									);
 								} else if (materialId == 1708u) {
 									// nether gold ore
-									SET_REFLECTIVENESS(0.15);
+									SET_REFLECTIVENESS(0.125);
 									SET_GLOWING_ORE_COLOR(
 										vec3( 7.0, 29.0,  78.0),
 										vec3(20.0, 85.4, 100.0),
@@ -437,7 +437,7 @@ if (materialId < 1570u) { // 0..1570
 									);
 								} else {
 									// nether quartz ore
-									SET_REFLECTIVENESS(0.15);
+									SET_REFLECTIVENESS(0.125);
 									SET_GLOWING_ORE_COLOR(
 										vec3(  0.0,  6.5, 72.5),
 										vec3(100.0, 30.3, 90.6),

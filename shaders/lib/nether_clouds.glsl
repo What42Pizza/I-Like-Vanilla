@@ -1,13 +1,13 @@
 #include "/utils/screen_to_view.glsl"
 
 float sampleNetherCloud(vec3 pos) {
-	pos *= 0.333;
-	pos.y *= 0.25;
+	pos *= 0.25 / NETHER_CLOUDS_SCALE;
+	pos.y *= 0.5;
 	float cloudSample = valueNoise3((pos + frameTimeCounter * 0.125)) * 1.0;
 	cloudSample += valueNoise3((pos + frameTimeCounter * 0.0625) * 0.5) * 0.5;
 	cloudSample += valueNoise3((pos + frameTimeCounter * 0.03125) * 0.25) * 0.25;
 	cloudSample = cloudSample / (1.0 + 0.5 + 0.25);
-	return clamp((cloudSample - (1.0 - NETHER_CLOUDS_CONVERAGE)) * 6.0, 0.0, 1.0);
+	return clamp((cloudSample - (1.0 - NETHER_CLOUDS_CONVERAGE)), 0.0, 1.0);
 }
 
 
@@ -28,11 +28,13 @@ vec2 computeNetherClouds(vec3 playerPos) {
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float density = sampleNetherCloud(pos);
+		//density = 1.0 - (1.0 - density) * (1.0 - density);
 		float invDensity = exp(density * desnityMult);
 		invThickness *= invDensity;
 		invBrightness = mix(invBrightness, density, 1.0 - invDensity);
 		pos += stepVec;
 	}
+	invThickness *= invThickness;
 	
 	return vec2(invThickness, invBrightness);
 }

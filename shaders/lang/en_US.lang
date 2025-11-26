@@ -1419,11 +1419,16 @@ value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 
+screen.NETHER_CLOUDS_MENU=Nether Clouds
+
 option.NETHER_CLOUDS_ENABLED=Nether Clouds Enabled
 option.NETHER_CLOUDS_ENABLED.comment=Enables smoke-like volumetric clouds in the nether
 value.NETHER_CLOUDS_ENABLED.-1=Use Style
 value.NETHER_CLOUDS_ENABLED.0=Off
 value.NETHER_CLOUDS_ENABLED.1=On
+
+option.NETHER_CLOUDS_SCALE=Nether Clouds Scale
+value.NETHER_CLOUDS_SCALE.-1=Use Style
 
 option.NETHER_CLOUDS_CONVERAGE=Nether Clouds Coverage
 value.NETHER_CLOUDS_CONVERAGE.-1=Use Style

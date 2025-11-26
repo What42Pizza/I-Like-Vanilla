@@ -7,6 +7,9 @@ in_out vec2 texcoord;
 	flat in_out float volSunraysAmountMult;
 	flat in_out float volSunraysAmountMax;
 #endif
+#if NETHER_CLOUDS_ENABLED == 1
+	flat in_out vec3 cloudsColor;
+#endif
 
 
 
@@ -80,9 +83,8 @@ void main() {
 	#if NETHER_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		vec3 cloudsColor = 0.33 + 2.5 * (fogColor - getLum(fogColor));
-		cloudsColor *= 0.6 + 0.4 * brightness;
-		color = mix(color, cloudsColor, thickness * (1.0 - NETHER_CLOUDS_TRANSPARENCY) * 0.5);
+		vec3 cloudsColor = cloudsColor * brightness;
+		color = mix(color, cloudsColor, thickness * (1.0 - NETHER_CLOUDS_TRANSPARENCY) * 0.25);
 	#endif
 	
 	
@@ -136,6 +138,9 @@ void main() {
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
 		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
+	#endif
+	#if NETHER_CLOUDS_ENABLED == 1
+		cloudsColor = normalize(fogColor) * 0.85;
 	#endif
 	
 	
