@@ -3,7 +3,7 @@
 
 
 
-vec3 getAmbientLight(float ambientBrightness) {
+vec3 getAmbientLight(float ambientBrightness, float lightDot) {
 	
 	#ifdef OVERWORLD
 		
@@ -15,6 +15,7 @@ vec3 getAmbientLight(float ambientBrightness) {
 		
 		ambientLight *= SHADOWS_BRIGHTNESS;
 		ambientLight *= 1.0 - 0.1 * inPaleGarden;
+		ambientLight *= 1.0 + 0.0625 * clamp(1.0 - lightDot * 10.0, 0.0, 1.0);
 		ambientBrightness *= 0.9 + 0.2 * screenBrightness;
 		ambientLight = mix(CAVE_AMBIENT_COLOR * (0.6 + 0.8 * screenBrightness) * 0.6, ambientLight, ambientBrightness);
 		

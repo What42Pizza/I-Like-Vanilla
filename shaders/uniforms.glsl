@@ -50,6 +50,7 @@ uniform int isEyeInWater;
 uniform int heldBlockLightValue;
 
 uniform vec4 entityColor;
+uniform int entityId;
 uniform float nightVision;
 uniform float blindness;
 uniform float darknessFactor;

@@ -52,6 +52,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color;
+	if (floor(entityId + 0.5) == 1001.0) glcolor*=0;//lmcoord = vec2(0.0, 1.0);
 	vec3 normal = gl_NormalMatrix * gl_Normal;
 	encodedNormal = encodeNormal(normal);
 	

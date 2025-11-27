@@ -317,19 +317,19 @@ if (materialId < 1570u) { // 0..1570
 					} else { // 1650..1660
 						if (materialId < 1652u) { // 1650..1652
 							if (materialId == 1650u) {
-								// chest
+								// birch door
 								
 							} else {
-								// birch door
+								// stripped pale oak log, etc
 								
 							}
 						} else { // 1652..1660
 							if (materialId == 1652u) {
-								// stripped pale oak log, etc
-								
-							} else {
 								// white wool, etc
 								TWEAK_GLCOLOR_BRIGHTNESS(0.9);
+							} else {
+								// snow block, etc
+								TWEAK_GLCOLOR_BRIGHTNESS(0.92);
 							}
 						}
 					}

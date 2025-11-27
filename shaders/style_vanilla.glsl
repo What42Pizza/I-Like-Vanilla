@@ -21,7 +21,7 @@
 
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.1
+										#define VANILLA_AO_BRIGHT 0.9
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -33,7 +33,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.8
+										#define SIDE_SHADING_DARK 1.0
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -91,7 +91,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.97
+										#define AMBIENT_DAY_GREEN 0.95
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -268,7 +268,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.21
+										#define CAVE_AMBIENT_BRIGHTNESS 0.22
 #endif
 
 
@@ -388,7 +388,7 @@
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
-										#define FOLIAGE_TINT_RED 0.93
+										#define FOLIAGE_TINT_RED 0.95
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
@@ -396,7 +396,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 1.0
+										#define FOLIAGE_TINT_BLUE 0.99
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -517,7 +517,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.7
+										#define SUNRAYS_AMOUNT_DAY 0.6
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -724,7 +724,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.05
+										#define SATURATION 0.03
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -861,7 +861,7 @@
 #endif
 #if WAVING_WORLD_SCALE == -1
 #undef WAVING_WORLD_SCALE
-										#define WAVING_WORLD_SCALE 0.25
+										#define WAVING_WORLD_SCALE 0.3
 #endif
 #if WAVING_AMOUNT_1 == -1
 #undef WAVING_AMOUNT_1

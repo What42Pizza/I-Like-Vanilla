@@ -861,7 +861,7 @@
 #endif
 #if WAVING_WORLD_SCALE == -1
 #undef WAVING_WORLD_SCALE
-										#define WAVING_WORLD_SCALE 0.15
+										#define WAVING_WORLD_SCALE 0.3
 #endif
 #if WAVING_AMOUNT_1 == -1
 #undef WAVING_AMOUNT_1
