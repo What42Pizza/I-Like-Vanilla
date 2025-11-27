@@ -83,10 +83,9 @@ void main() {
 	#if NETHER_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		color *= 1.0 - thickness * 0.15;
-		color += cloudsColor * brightness * thickness * 0.15;
-		//vec3 cloudsColor = cloudsColor * brightness;
-		//color = mix(color, cloudsColor, thickness * (1.0 - NETHER_CLOUDS_TRANSPARENCY) * 0.25);
+		thickness *= 1.0 - NETHER_CLOUDS_TRANSPARENCY;
+		color *= 1.0 - thickness;
+		color += cloudsColor * brightness * thickness;
 	#endif
 	
 	
@@ -142,7 +141,7 @@ void main() {
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
 	#if NETHER_CLOUDS_ENABLED == 1
-		cloudsColor = normalize(fogColor) * 0.8;
+		cloudsColor = normalize(fogColor) * 0.75 + vec3(0.2, 0.2, 0.0);
 	#endif
 	
 	

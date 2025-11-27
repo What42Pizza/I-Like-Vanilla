@@ -3,21 +3,22 @@
 float sampleNetherCloud(vec3 pos) {
 	pos *= 0.25 / NETHER_CLOUDS_SCALE;
 	pos.y *= 0.5;
-	float cloudSample = valueNoise3((pos + frameTimeCounter * 0.125)) * 1.0;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.0625) * 0.5) * 0.5;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.03125) * 0.25) * 0.25;
-	cloudSample = cloudSample / (1.0 + 0.5 + 0.25);
-	return clamp((cloudSample - (1.0 - NETHER_CLOUDS_CONVERAGE)), 0.0, 1.0);
+	float cloudSample = 0.0;
+	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125  ) * 1.0 ) * 1.0 ;
+	cloudSample += valueNoise3((pos + frameTimeCounter * 0.0625 ) * 0.5 ) * 0.75;
+	cloudSample += valueNoise3((pos + frameTimeCounter * 0.03125) * 0.25) * 0.5 ;
+	cloudSample /= 1.0 + 0.75 + 0.5;
+	return clamp(cloudSample - (1.0 - NETHER_CLOUDS_CONVERAGE * 0.5), 0.0, 1.0);
 }
 
 
 
 // returns the cloud thinkness and brightness (both inverted) for this pixel
 vec2 computeNetherClouds(vec3 playerPos) {
-	vec3 endPos = playerPos + cameraPosition;
-	vec3 pos = cameraPosition;
-	vec3 stepVec = (endPos - pos);
-	float desnityMult = length(stepVec) * -0.25;
+	vec3 pos = cameraPosition + playerPos; // start at the block and move towards the camera
+	vec3 endPos = cameraPosition;
+	vec3 stepVec = endPos - pos;
+	float desnityMult = length(stepVec) * -0.2;
 	stepVec /= CLOUDS_QUALITY;
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -28,13 +29,12 @@ vec2 computeNetherClouds(vec3 playerPos) {
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float density = sampleNetherCloud(pos);
-		//density = 1.0 - (1.0 - density) * (1.0 - density);
 		float invDensity = exp(density * desnityMult);
 		invThickness *= invDensity;
 		invBrightness = mix(invBrightness, density, 1.0 - invDensity);
 		pos += stepVec;
 	}
-	invThickness *= invThickness;
+	invThickness = 1.0 - (1.0 - invThickness) * (1.0 - invThickness);
 	
 	return vec2(invThickness, invBrightness);
 }

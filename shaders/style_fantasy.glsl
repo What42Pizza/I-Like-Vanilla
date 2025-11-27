@@ -417,7 +417,7 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 2.0
+										#define BLOOM_NETHER_AMOUNT 1.5
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
@@ -450,7 +450,7 @@
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.0
+										#define AO_SIZE 1.1
 #endif
 
 
@@ -1185,15 +1185,15 @@
 #endif
 #if NETHER_CLOUDS_SCALE == -1
 #undef NETHER_CLOUDS_SCALE
-										#define NETHER_CLOUDS_SCALE 1.0
+										#define NETHER_CLOUDS_SCALE 0.9
 #endif
 #if NETHER_CLOUDS_CONVERAGE == -1
 #undef NETHER_CLOUDS_CONVERAGE
-										#define NETHER_CLOUDS_CONVERAGE 0.5
+										#define NETHER_CLOUDS_CONVERAGE 1.05
 #endif
 #if NETHER_CLOUDS_TRANSPARENCY == -1
 #undef NETHER_CLOUDS_TRANSPARENCY
-										#define NETHER_CLOUDS_TRANSPARENCY 0.4
+										#define NETHER_CLOUDS_TRANSPARENCY 0.65
 #endif
 
 
@@ -1250,7 +1250,7 @@
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
-										#define NETHER_FOG_DENSITY 3.5
+										#define NETHER_FOG_DENSITY 0.5
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY

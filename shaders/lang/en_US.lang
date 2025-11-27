@@ -208,6 +208,8 @@ value.BLOCKLIGHT_CEL_AMOUNT.100=1.0
 
 
 
+screen.COLORED_LIGHTING_MENU=Colored Blocklights
+
 option.COLORED_LIGHTING_ENABLED=Colored Lighting
 option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
 
