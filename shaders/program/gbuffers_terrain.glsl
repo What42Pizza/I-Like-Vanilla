@@ -19,9 +19,7 @@ in_out float glowingAmount;
 #ifdef FSH
 
 void main() {
-	#if GLOWING_ORES_ENABLED == 1 || SHOW_DANGEROUS_LIGHT == 1
-		vec2 lmcoord = lmcoord;
-	#endif
+	vec2 lmcoord = lmcoord;
 	
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);

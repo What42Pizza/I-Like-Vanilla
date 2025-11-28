@@ -5,8 +5,8 @@
   - Reworked some shader options menus
   - Settings changes:
     - Replaced 'Sunrays Min Surface' and 'Sunrays Min Underground' with 'Sunrays Underground Mult'
-	- Removed rain reflection settings (currently unused)
-	- Removed 'Use Simple Lighting' setting
+    - Removed rain reflection settings (currently unused)
+    - Removed 'Use Simple Lighting' setting
   - Improved sunrays and ambient occlusion
   - Fixed and improved blocklight flickering
 
