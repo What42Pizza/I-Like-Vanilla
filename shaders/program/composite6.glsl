@@ -24,9 +24,7 @@ in_out vec2 texcoord;
 
 void main() {
 	
-	//#if SHARPENING_ENABLED == 1 || HSV_POSTERIZE_ENABLED == 1 || KUWAHARA_ENABLED == 1
-		float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	//#endif
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	
 	#if KUWAHARA_ENABLED == 1
 		vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
