@@ -446,7 +446,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.9
+										#define AO_AMOUNT 0.85
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -512,19 +512,19 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.75
+										#define SUNRAYS_AMOUNT_DAY 0.5
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.15
+										#define SUNRAYS_AMOUNT_NIGHT 0.25
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
-										#define SUNRAYS_INCREASE_SUNRISE 2.2
+										#define SUNRAYS_INCREASE_SUNRISE 3.0
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 2.2
+										#define SUNRAYS_INCREASE_SUNSET 3.0
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -540,11 +540,11 @@
 #endif
 #if SUNRAYS_MOON_RED == -1
 #undef SUNRAYS_MOON_RED
-										#define SUNRAYS_MOON_RED 0.15
+										#define SUNRAYS_MOON_RED 0.0
 #endif
 #if SUNRAYS_MOON_GREEN == -1
 #undef SUNRAYS_MOON_GREEN
-										#define SUNRAYS_MOON_GREEN 0.45
+										#define SUNRAYS_MOON_GREEN 0.35
 #endif
 #if SUNRAYS_MOON_BLUE == -1
 #undef SUNRAYS_MOON_BLUE
@@ -574,7 +574,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.5
+										#define SUNRAYS_AMOUNT_MAX_DAY 1.0
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -835,7 +835,7 @@
 #endif
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
-										#define GLOWING_ORES_STRENGTH 1.0
+										#define GLOWING_ORES_STRENGTH 0.8
 #endif
 #if NEARBY_PARTICLE_TRANSPARENCY == -1
 #undef NEARBY_PARTICLE_TRANSPARENCY
@@ -1218,7 +1218,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.75
+										#define ATMOSPHERIC_FOG_DENSITY 0.6
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
@@ -1234,7 +1234,7 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 9.0
+										#define PALE_GARDEN_FOG_DENSITY 8.0
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY

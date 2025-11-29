@@ -193,7 +193,7 @@ void main() {
 			#endif
 			#if VOL_SUNRAYS_ENABLED == 1
 				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
-					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.25);
+					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.5);
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);

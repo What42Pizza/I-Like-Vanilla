@@ -133,7 +133,7 @@ void main() {
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.5 : SUNRAYS_AMOUNT_NIGHT * 0.5;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
-		volSunraysAmountMult *= mix(SUNRAYS_UNDERGROUND_MULT, 1.0, eyeSkylightSmooth * eyeSkylightSmooth);
+		volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * float(sunAngle < 0.5));
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
