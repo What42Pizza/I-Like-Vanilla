@@ -21,11 +21,11 @@
 
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 0.9
+										#define VANILLA_AO_BRIGHT 0.95
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 0.95
+										#define VANILLA_AO_DARK 0.8
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -33,7 +33,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 1.0
+										#define SIDE_SHADING_DARK 0.95
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -724,7 +724,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.03
+										#define SATURATION 0.02
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -973,11 +973,11 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.0
+										#define WATER_COLOR_RED 0.05
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.1
+										#define WATER_COLOR_GREEN 0.15
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE

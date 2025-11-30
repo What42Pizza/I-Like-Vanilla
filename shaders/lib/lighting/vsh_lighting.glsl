@@ -3,7 +3,7 @@ void doVshLighting(vec3 viewPos, vec3 normal) {
 	lmcoord *= 1.0 - 0.2 * darknessFactor;
 	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);
 	
-	lmcoord.y = (lmcoord.y * lmcoord.y + lmcoord.y * 2.0) * 0.333; // kinda like squaring but not as intense
+	lmcoord.y = (lmcoord.y * lmcoord.y + lmcoord.y) * 0.5; // kinda like squaring but not as intense
 	
 	#if HANDHELD_LIGHT_ENABLED == 1
 		float viewPosLen = length(viewPos);
