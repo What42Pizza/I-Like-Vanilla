@@ -1737,3 +1737,6 @@ value.SSS_BARREL.1=On
 
 option.SSS_BARREL_AMOUNT=Barrel Amount
 option.SSS_BARREL_AMOUNT.comment=How strong the distortion is
+
+option.SSS_NTSC=NTSC Encode/Decode
+option.SSS_NTSC.comment=Encoded then decodes the image as an NTSC signal

@@ -2,7 +2,7 @@
 
 
 
-pub const SHADERS_LIST: [&str; 24] = [
+pub const SHADERS_LIST: &[&str] = &[
 	"composite1",
 	"composite2",
 	"composite3",
@@ -10,6 +10,8 @@ pub const SHADERS_LIST: [&str; 24] = [
 	"composite5",
 	"composite6",
 	"composite7",
+	"composite8",
+	"composite9",
 	"deferred1",
 	"gbuffers_armor_glint",
 	"gbuffers_basic",
