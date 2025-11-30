@@ -626,6 +626,10 @@
 #undef DOF_FAR_BLUR_STRENGTH
 										#define DOF_FAR_BLUR_STRENGTH 0.4
 #endif
+#if DOF_MIN_BLUR_STRENGTH == -1
+#undef DOF_MIN_BLUR_STRENGTH
+										#define DOF_MIN_BLUR_STRENGTH 0.12
+#endif
 #if DOF_NEAR_BLUR_SIZE == -1
 #undef DOF_NEAR_BLUR_SIZE
 										#define DOF_NEAR_BLUR_SIZE 2.0
@@ -675,11 +679,11 @@
 
 #if SHARPEN_AMOUNT == -1
 #undef SHARPEN_AMOUNT
-										#define SHARPEN_AMOUNT 0.6
+										#define SHARPEN_AMOUNT 0.5
 #endif
 #if SHARPEN_VEL_ADDITION == -1
 #undef SHARPEN_VEL_ADDITION
-										#define SHARPEN_VEL_ADDITION 0.8
+										#define SHARPEN_VEL_ADDITION 1.0
 #endif
 #if SHARPEN_DEPTH_ADDITION == -1
 #undef SHARPEN_DEPTH_ADDITION
@@ -704,7 +708,7 @@
 #endif
 #if BRIGHTNESS == -1
 #undef BRIGHTNESS
-										#define BRIGHTNESS 1.4
+										#define BRIGHTNESS 1.5
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED

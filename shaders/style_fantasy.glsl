@@ -621,6 +621,10 @@
 #undef DOF_FAR_BLUR_STRENGTH
 										#define DOF_FAR_BLUR_STRENGTH 0.9
 #endif
+#if DOF_MIN_BLUR_STRENGTH == -1
+#undef DOF_MIN_BLUR_STRENGTH
+										#define DOF_MIN_BLUR_STRENGTH 0.0
+#endif
 #if DOF_NEAR_BLUR_SIZE == -1
 #undef DOF_NEAR_BLUR_SIZE
 										#define DOF_NEAR_BLUR_SIZE 2.0

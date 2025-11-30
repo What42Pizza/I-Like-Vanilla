@@ -1,3 +1,8 @@
+- v1.1.2
+  - Added setting 'DOF Min Blur Strength'
+
+<br>
+
 - v1.1.1 (25/11/27)
   - Added glowing ores (configurable)
   - Added nether clouds (configurable)

@@ -47,9 +47,9 @@ void doDOF(inout vec3 color) {
 	#endif
 	
 	float nearBlurAmount = depthChange * (-1.0 / DOF_NEAR_BLUR_SLOPE) - (DOF_NEAR_BLUR_START / DOF_NEAR_BLUR_SLOPE);
-	nearBlurAmount = clamp(nearBlurAmount, 0.0, 1.0) * DOF_NEAR_BLUR_STRENGTH;
+	nearBlurAmount = clamp(nearBlurAmount, DOF_MIN_BLUR_STRENGTH * 2.0 / DOF_NEAR_BLUR_STRENGTH, 1.0) * DOF_NEAR_BLUR_STRENGTH;
 	float farBlurAmount = depthChange * (1.0 / DOF_FAR_BLUR_SLOPE) - (DOF_FAR_BLUR_START / DOF_FAR_BLUR_SLOPE);
-	farBlurAmount = clamp(farBlurAmount, 0.0, 1.0) * DOF_FAR_BLUR_STRENGTH;
+	farBlurAmount = clamp(farBlurAmount, DOF_MIN_BLUR_STRENGTH * 2.0 / DOF_FAR_BLUR_STRENGTH, 1.0) * DOF_FAR_BLUR_STRENGTH;
 	
 	float blurSizeMult = 1.0 / (linearDepth * far * 0.01 + 1.0);
 	vec3 nearBlur = getBlurredColor(texcoord, nearBlurAmount * blurSizeMult * DOF_NEAR_BLUR_SIZE);
