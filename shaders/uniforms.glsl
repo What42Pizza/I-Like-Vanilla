@@ -18,7 +18,6 @@ uniform float farMinusNear;
 uniform float twoTimesNear;
 uniform float invFar;
 uniform float invFarMinusNear;
-uniform float invFrameTime;
 uniform float dhNearPlane;
 uniform float dhFarPlane;
 
@@ -29,6 +28,7 @@ uniform float viewWidth;
 uniform float aspectRatio;
 uniform float invAspectRatio;
 uniform int frameCounter;
+uniform float frameTime;
 uniform float frameTimeCounter;
 uniform float screenBrightness;
 

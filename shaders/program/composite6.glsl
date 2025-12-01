@@ -1,8 +1,17 @@
 in_out vec2 texcoord;
 
+#if AUTO_EXPOSURE_ENABLED == 1
+	flat in_out float autoExposureMult;
+	flat in_out float autoExposureBrightness;
+#endif
+
 
 
 #ifdef FSH
+
+#if AUTO_EXPOSURE_ENABLED == 1
+	const bool colortex0MipmapEnabled = true;
+#endif
 
 #if SHARPENING_ENABLED == 1 || KUWAHARA_ENABLED == 1
 	#include "/utils/depth.glsl"
@@ -45,6 +54,14 @@ void main() {
 	
 	// ======== COLOR CORRECTION & TONE MAPPING ======== //
 	
+	#if AUTO_EXPOSURE_ENABLED == 1
+		float exposureSkyMix = step(1.0, depth);
+		#ifdef DISTANT_HORIZONS
+			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+			exposureSkyMix *= step(1.0, dhDepth);
+		#endif
+		color *= mix(autoExposureMult, 1.0 - 0.25 * (1.0 - autoExposureMult), exposureSkyMix);
+	#endif
 	doColorCorrection(color);
 	#if COLORBLIND_MODE != 0
 		applyColorblindnessCorrection(color);
@@ -108,6 +125,12 @@ void main() {
 	
 	
 	
+	#if AUTO_EXPOSURE_ENABLED == 1
+		if (gl_FragCoord.x + gl_FragCoord.y < 1.1) depth = autoExposureBrightness;
+	#endif
+	
+	
+	
 	color += (fract(52.9829189 * fract(0.06711056 * gl_FragCoord.x + 0.00583715 * gl_FragCoord.y + 0.0003181 * frameCounter)) - 0.5) / 255.0;
 	
 	/* DRAWBUFFERS:07 */
@@ -125,6 +148,19 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	
+	
+	
+	#if AUTO_EXPOSURE_ENABLED == 1
+		vec3 screenAverage = texture2DLod(MAIN_TEXTURE, vec2(0.0), 10000.0).rgb * 2.0;
+		float screenBrightness = getLum(screenAverage) * 1.35;
+		float prevBrightness = texelFetch(PREV_DEPTH_TEXTURE, ivec2(0), 0).r;
+		autoExposureBrightness = mix(prevBrightness, screenBrightness, 1.0 - pow(1.0 - 0.6, frameTime));
+		autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureBrightness);
+	#endif
+	
+	
+	
 }
 
 #endif

@@ -628,7 +628,7 @@
 #endif
 #if DOF_MIN_BLUR_STRENGTH == -1
 #undef DOF_MIN_BLUR_STRENGTH
-										#define DOF_MIN_BLUR_STRENGTH 0.12
+										#define DOF_MIN_BLUR_STRENGTH 0.1
 #endif
 #if DOF_NEAR_BLUR_SIZE == -1
 #undef DOF_NEAR_BLUR_SIZE

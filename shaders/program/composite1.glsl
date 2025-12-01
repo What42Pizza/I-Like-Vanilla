@@ -98,27 +98,9 @@ void main() {
 	
 	
 	
-	// ======== AUTO EXPOSURE ======== //
-	
-	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
-	#if AUTO_EXPOSURE_ENABLED == 1
-		vec2 normalizedBrightnesses = brightnesses;
-		#ifdef NETHER
-			normalizedBrightnesses.y = 0.5;
-		#elif defined END
-			normalizedBrightnesses.y = 1.0;
-		#endif
-		normalizedBrightnesses *= vec2(0.5, 1.0); // weights
-		float autoExposureAmount = max(normalizedBrightnesses.x, normalizedBrightnesses.y);
-		float autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureAmount);
-		autoExposureMult = mix(autoExposureMult, 1.0, fogAmount);
-		color *= autoExposureMult;
-	#endif
-	
-	
-	
 	// ======== ATMOSPHERIC FOG ======== //
 	
+	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
 	float fogDist = length(playerPosForFog);
 	fogDist *= distMult;
 	
