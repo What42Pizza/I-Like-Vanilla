@@ -15,6 +15,9 @@ in_out vec2 texcoord;
 
 #ifdef FSH
 
+#if VOL_SUNRAYS_ENABLED == 1
+	#include "/utils/screen_to_view.glsl"
+#endif
 #if REALISTIC_CLOUDS_ENABLED == 1
 	#include "/utils/getCloudColor.glsl"
 #endif
@@ -60,6 +63,18 @@ void main() {
 		float volSunraysAmount = sunraysDatas.y;
 		volSunraysAmount = 1.0 / volSunraysAmount - 1.0;
 		volSunraysAmount *= volSunraysAmountMult;
+		
+		vec3 screenPos = vec3(texcoord, texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);
+		vec3 viewPos = screenToView(screenPos);
+		#ifdef DISTANT_HORIZONS
+			vec3 screenPosDh = vec3(texcoord, texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r);
+			vec3 viewPosDh = screenToViewDh(screenPosDh);
+			if (viewPosDh.b > viewPos.b) viewPos = viewPosDh;
+		#endif
+		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+		float altitude = playerPos.y + cameraPosition.y;
+		volSunraysAmount *= 1.0 - percentThrough(altitude, 64.0, 32.0);
+		
 		volSunraysAmount = exp(-volSunraysAmount); // after this, volSunraysAmount is inverted (1-x)
 		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
 		color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;

@@ -1,5 +1,6 @@
 - v1.1.2
   - Added setting 'DOF Min Blur Strength'
+  - Improved auto exposure
 
 <br>
 

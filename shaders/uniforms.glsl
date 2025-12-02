@@ -29,11 +29,13 @@ uniform float aspectRatio;
 uniform float invAspectRatio;
 uniform int frameCounter;
 uniform float frameTime;
+uniform float invFrameTime;
 uniform float frameTimeCounter;
 uniform float screenBrightness;
 
 uniform vec3 cameraPosition;
 uniform vec3 previousCameraPosition;
+uniform float eyeAltitude;
 uniform ivec2 atlasSize;
 
 uniform vec3 sunPosition;

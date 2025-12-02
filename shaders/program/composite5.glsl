@@ -47,11 +47,11 @@ void main() {
 	
 	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 	#ifdef DISTANT_HORIZONS
-		vec3 realBlockViewPos = screenToView(vec3(texcoord, depth));
+		vec3 viewPos = screenToView(vec3(texcoord, depth));
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		vec3 realBlockViewPosDh = screenToViewDh(vec3(texcoord, depthDh));
-		if (dot(realBlockViewPosDh, realBlockViewPosDh) < dot(realBlockViewPos, realBlockViewPos)) realBlockViewPos = realBlockViewPosDh;
-		vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
+		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
+		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
+		vec4 sampleScreenPos = gbufferProjection * vec4(viewPos, 1.0);
 		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 	#else
 		float depthDh = 1.0;

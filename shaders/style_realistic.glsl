@@ -21,11 +21,11 @@
 
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 0.1
+										#define VANILLA_AO_BRIGHT 0.35
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 0.2
+										#define VANILLA_AO_DARK 0.35
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -79,11 +79,11 @@
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.7
+										#define SKYLIGHT_DAY_BLUE 0.6
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.5
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -120,7 +120,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.27
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.15
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -136,7 +136,7 @@
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.25
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.14
 #endif
 
 
@@ -380,7 +380,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.0
+										#define TEXTURE_CONTRAST -0.1
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
@@ -451,7 +451,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.6
+										#define AO_AMOUNT 0.5
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -517,11 +517,11 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.1
+										#define SUNRAYS_AMOUNT_DAY 0.12
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.05
+										#define SUNRAYS_AMOUNT_NIGHT 0.03
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
@@ -716,11 +716,11 @@
 #endif
 #if AUTO_EXPOSURE_BRIGHT_MULT == -1
 #undef AUTO_EXPOSURE_BRIGHT_MULT
-										#define AUTO_EXPOSURE_BRIGHT_MULT 0.7
+										#define AUTO_EXPOSURE_BRIGHT_MULT 0.65
 #endif
 #if AUTO_EXPOSURE_DARK_MULT == -1
 #undef AUTO_EXPOSURE_DARK_MULT
-										#define AUTO_EXPOSURE_DARK_MULT 2.3
+										#define AUTO_EXPOSURE_DARK_MULT 2.5
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
@@ -728,7 +728,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.2
+										#define SATURATION -0.15
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -740,11 +740,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST -0.1
+										#define SURFACE_CONTRAST 0.05
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST -0.1
+										#define UNDERGROUND_CONTRAST 0.05
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -977,11 +977,11 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.35
+										#define WATER_COLOR_RED 0.25
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.55
+										#define WATER_COLOR_GREEN 0.5
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
@@ -1243,11 +1243,11 @@
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 3.4
+										#define PALE_GARDEN_FOG_DENSITY 1.2
 #endif
 #if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
 #undef PALE_GARDEN_FOG_NIGHT_DENSITY
-										#define PALE_GARDEN_FOG_NIGHT_DENSITY 30.0
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 5.0
 #endif
 #if BLINDNESS_EFFECT_FOG_DENSITY == -1
 #undef BLINDNESS_EFFECT_FOG_DENSITY
