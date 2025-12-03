@@ -1745,3 +1745,8 @@ option.SSS_NTSC=NTSC Encode/Decode
 option.SSS_NTSC.comment=Encoded then decodes the image as an NTSC signal
 value.SSS_NTSC.0=Off
 value.SSS_NTSC.1=On
+
+option.LIGHTNING_FLASH_ENABLED=Lightning Flash
+option.LIGHTNING_FLASH_ENABLED.comment=Enables flashes in the sky during thunderstorms when lightning strikes. This uses the Iris-exclusive lightningBoltPosition uniform, and won't work with OptiFine.
+value.LIGHTNING_FLASH_ENABLED.0=Off
+value.LIGHTNING_FLASH_ENABLED.1=On
