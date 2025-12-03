@@ -48,6 +48,7 @@ uniform ivec2 eyeBrightness;
 uniform ivec2 eyeBrightnessSmooth;
 uniform float rainStrength;
 uniform float wetness;
+uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
 

@@ -61,6 +61,11 @@ void main() {
 			vec3 viewPos = screenToView(vec3(texcoord, 1.0));
 			skyColor = getSkyColor(normalize(viewPos));
 			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor);
+
+			#if LIGHTNING_FLASH_ENABLED == 1
+				float lightning = 0.225 * float(lightningBoltPosition.w > 0.001) * float(fract(frameTimeCounter * 20.0) < 0.15);
+				skyColor += vec3(lightning);
+			#endif
 		#endif
 	}
 	
