@@ -87,10 +87,6 @@ void main() {
 	
 	#if (VIGNETTE_ENABLED == 1 && !defined END) || HEALTH_EFFECT_ENABLED == 1 || DAMAGE_EFFECT_ENABLED == 1
 		float vignetteAmount = length(texcoord - 0.5) * VIGNETTE_SCALE;
-		#if VIGNETTE_NOISE_ENABLED == 1
-			#include "/utils/var_rng.glsl"
-			vignetteAmount += randomFloat(rng) * 0.02;
-		#endif
 		#if VIGNETTE_ENABLED == 1 && !defined END
 			color *= 1.0 - vignetteAmount * mix(VIGNETTE_AMOUNT_UNDERGROUND, VIGNETTE_AMOUNT_SURFACE, eyeBrightnessSmooth.y / 240.0);
 		#endif

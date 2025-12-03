@@ -36,7 +36,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(0.0, 0.25),
 		pack_2x8(0.0, 0.99),
-		0.0, 0.0
+		0.0, 1.0
 	);
 	
 }
@@ -59,7 +59,8 @@ void main() {
 
 void main() {
 	
-	colorMult = getCloudColor(0.25 + 0.75 * gl_Color.r);
+	float normalFactor = mix(0.2, 0.1, betterRainStrength);
+	colorMult = getCloudColor((1.0 - normalFactor) + normalFactor * dot(gl_Normal, normalize(vec3(0.5, 1.0, 0.0))));
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	

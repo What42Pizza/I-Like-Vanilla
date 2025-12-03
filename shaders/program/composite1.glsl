@@ -55,14 +55,14 @@ void main() {
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#else
-		float fogAmount = getBorderFogAmount(transform(gbufferModelViewInverse, viewPos));
+		float fogAmount = getBorderFogAmount(playerPos);
 	#endif
 	
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	vec3 playerPosForFog = playerPos;
 	#ifndef NETHER
 		const float yMult = 0.02;
@@ -70,9 +70,8 @@ void main() {
 	#ifdef NETHER
 		const float yMult = 0.05;
 	#endif
-	playerPos.y *= yMult;
-	float distMult = playerPos.y < 0.0 ? sqrt(1.0 - playerPos.y) : 1.0 / (playerPos.y * 0.5 + 1.0);
-	playerPos.y /= yMult;
+	float distMult= playerPos.y * yMult;
+	distMult = distMult < 0.0 ? sqrt(1.0 - distMult) : 1.0 / (distMult * 0.5 + 1.0);
 	
 	
 	
@@ -101,13 +100,13 @@ void main() {
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
-	float fogDist = length(playerPosForFog);
+	float fogDist = length(playerPos);
 	fogDist *= distMult;
 	
 	vec3 atmoFogColor = atmoFogColor;
 	float fogDensity = fogDensity;
 	if (isEyeInWater == 0) {
-		atmoFogColor = getSkyColor(normalize(viewPos));
+		atmoFogColor = getSkyColor(normalize(viewPos), false);
 		atmoFogColor *= 1.0 - blindness;
 		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
@@ -141,7 +140,7 @@ void main() {
 		float depthSunraysAddition = 0.0;
 	#endif
 	#if VOL_SUNRAYS_ENABLED == 1
-		float volSunraysAmount = getVolSunraysAmount(playerPosForFog, distMult);
+		float volSunraysAmount = getVolSunraysAmount(playerPos, distMult);
 		volSunraysAmount *= 1.0 - fogAmount;
 		volSunraysAmount = 1.0 / (1.0 + volSunraysAmount * 0.01); // compress data to [0-1] (the *0.01 is pretty important for preventing quantization, if the strength needs to be changed, do so elsewhere)
 	#else

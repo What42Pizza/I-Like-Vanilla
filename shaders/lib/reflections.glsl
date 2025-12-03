@@ -69,7 +69,7 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	fresnel *= fresnel;
 	fresnel *= fresnel;
 	reflectionStrength *= 1.0 - REFLECTION_FRESNEL * (1.0 - fresnel);
-	vec3 skyColor = getSkyColor(reflectionDirection);
+	vec3 skyColor = getSkyColor(reflectionDirection, true);
 	float maxBrightness = max(lmcoord.x * 0.75, lmcoord.y);
 	#ifdef END
 		maxBrightness = 0.5 + 0.5 * lmcoord.x;

@@ -1,6 +1,6 @@
 vec3 getCloudColor(float brightness) {
 	brightness += 0.2 * dayPercent;
-	brightness *= 1.0 - 0.6 * CLOUD_WEATHER_DARKEN * rainStrength;
+	brightness *= 1.0 - 0.7 * CLOUD_WEATHER_DARKEN * rainStrength;
 	vec3 cloudColor =
 		CLOUD_DAY_COLOR * ambientSunPercent
 		+ CLOUD_NIGHT_COLOR * 0.5 * ambientMoonPercent

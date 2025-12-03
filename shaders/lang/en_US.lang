@@ -222,6 +222,10 @@ option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
 
 screen.LIGHT_COLORS_MENU=Light Colors
 
+option.LIGHTNING_BRIGHTNESS=Lightning Brightness
+option.LIGHTNING_BRIGHTNESS.comment=How much the sky brightens when lightning strikes
+value.LIGHTNING_BRIGHTNESS.-1=Use Style
+
 
 
 
@@ -981,12 +985,6 @@ value.VIGNETTE_AMOUNT_SURFACE.-1=Use Style
 option.VIGNETTE_AMOUNT_UNDERGROUND=Vignette Amount Underground
 option.VIGNETTE_AMOUNT_UNDERGROUND.comment=The amount of vignette when not exposed to sunlight
 value.VIGNETTE_AMOUNT_UNDERGROUND.-1=Use Style
-
-option.VIGNETTE_NOISE_ENABLED=Vignette Noise Enabled
-option.VIGNETTE_NOISE_ENABLED.comment=Adds a slight amount of noise to the Vignette to prevent banding
-value.VIGNETTE_NOISE_ENABLED.-1=Use Style
-value.VIGNETTE_NOISE_ENABLED.0=Off
-value.VIGNETTE_NOISE_ENABLED.1=On
 
 
 

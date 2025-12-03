@@ -1,5 +1,7 @@
 - v1.1.2
+  - Added setting 'Lightning Brightness'
   - Added setting 'DOF Min Blur Strength'
+  - Removed setting 'Vignette Noise Enabled'
   - Improved auto exposure
 
 <br>

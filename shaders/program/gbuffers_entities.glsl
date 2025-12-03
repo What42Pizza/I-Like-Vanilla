@@ -17,7 +17,7 @@ void main() {
 	
 	
 	// hurt flash, creeper flash, etc
-	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.2, 1.0));
+	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.5, 1.0));
 	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
