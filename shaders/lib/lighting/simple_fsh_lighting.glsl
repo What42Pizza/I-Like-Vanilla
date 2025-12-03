@@ -60,14 +60,11 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	vec3 skyLighting = shadowcasterLight * shadowBrightness;
 	ambientLight *= 1.0 - shadowBrightness;
 	
-	#ifdef OVERWORLD
-		uint lightningTime = uint(frameTimeCounter * 8.0);
-		float lightningAmount = float(sin(lightningTime * 4u) > 0.0);
-		float lightningBrightness = LIGHTNING_BRIGHTNESS * 0.25 * float(lightningBoltPosition.w > 0.001) * (0.5 + 0.5 * dayPercent) * lightningAmount;
-		skyLighting += lightningBrightness * ambientBrightness * ambientBrightness;
-	#endif
-	
 	vec3 lighting = ambientLight + skyLighting;
+	
+	#ifdef OVERWORLD
+		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
+	#endif
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

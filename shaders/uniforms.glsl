@@ -77,6 +77,7 @@ uniform float blockFlickerAmount;
 uniform float rainReflectionStrength;
 uniform float inPaleGarden;
 uniform float inSnowyBiome;
+uniform float lightningFlashAmount;
 uniform float betterRainStrength;
 uniform float smoothPlayerHealth;
 uniform float damageAmount;

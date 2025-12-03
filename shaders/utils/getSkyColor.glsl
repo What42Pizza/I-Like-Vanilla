@@ -40,11 +40,11 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor *= 1.2;
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
-		if (includeLightning) {
-			uint time = uint(frameTimeCounter * 8.0);
-			float amount = float(sin(time * 4u) > 0.0);
-			skyColor += LIGHTNING_BRIGHTNESS * 0.25 * float(lightningBoltPosition.w > 0.001) * amount;
-		}
+		#ifdef OVERWORLD
+			if (includeLightning) {
+				skyColor += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25;
+			}
+		#endif
 		
 		#ifdef OVERWORLD
 			float eyeBrightness = eyeBrightnessSmooth.y / 240.0;
