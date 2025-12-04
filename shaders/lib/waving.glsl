@@ -4,7 +4,7 @@ const vec3 windDirection = vec3(1.0, 0.1, 0.3); // another way to think of it: w
 
 vec3 getWavingAddition(vec3 playerPos) {
 	vec3 worldPos = playerPos + cameraPosition;
-	float timePos = frameTimeCounter + dot(worldPos, windDirection) * WAVING_WORLD_SCALE * 0.25;
+	float timePos = frameTimeCounter + dot(worldPos, windDirection) * WAVING_WORLD_SCALE * 0.2;
 	timePos *= WAVING_SPEED * 1.75;
 	uint timePosFloor = uint(int(timePos));
 	vec3 pos1 = randomVec3FromRValue(timePosFloor);

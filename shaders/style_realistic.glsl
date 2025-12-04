@@ -1289,11 +1289,11 @@
 #endif
 #if IN_LAVA_RED == -1
 #undef IN_LAVA_RED
-										#define IN_LAVA_RED 0.85
+										#define IN_LAVA_RED 0.8
 #endif
 #if IN_LAVA_GREEN == -1
 #undef IN_LAVA_GREEN
-										#define IN_LAVA_GREEN 0.15
+										#define IN_LAVA_GREEN 0.1
 #endif
 #if IN_LAVA_BLUE == -1
 #undef IN_LAVA_BLUE
@@ -1305,7 +1305,7 @@
 #endif
 #if IN_SNOW_GREEN == -1
 #undef IN_SNOW_GREEN
-										#define IN_SNOW_GREEN 0.9
+										#define IN_SNOW_GREEN 0.95
 #endif
 #if IN_SNOW_BLUE == -1
 #undef IN_SNOW_BLUE

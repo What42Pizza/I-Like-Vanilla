@@ -33,7 +33,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.95
+										#define SIDE_SHADING_DARK 0.9
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -265,7 +265,7 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.0
+										#define CAVE_AMBIENT_RED 1.01
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
@@ -393,7 +393,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.92
+										#define FOLIAGE_SATURATION 0.91
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
@@ -717,7 +717,7 @@
 #endif
 #if BRIGHTNESS == -1
 #undef BRIGHTNESS
-										#define BRIGHTNESS 0.99
+										#define BRIGHTNESS 1.0
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED
@@ -1101,15 +1101,15 @@
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
-										#define CLOUD_NIGHT_RED 0.3
+										#define CLOUD_NIGHT_RED 0.2
 #endif
 #if CLOUD_NIGHT_GREEN == -1
 #undef CLOUD_NIGHT_GREEN
-										#define CLOUD_NIGHT_GREEN 0.4
+										#define CLOUD_NIGHT_GREEN 0.3
 #endif
 #if CLOUD_NIGHT_BLUE == -1
 #undef CLOUD_NIGHT_BLUE
-										#define CLOUD_NIGHT_BLUE 0.6
+										#define CLOUD_NIGHT_BLUE 0.5
 #endif
 #if CLOUD_SUNRISE_RED == -1
 #undef CLOUD_SUNRISE_RED
@@ -1289,15 +1289,15 @@
 #endif
 #if IN_LAVA_RED == -1
 #undef IN_LAVA_RED
-										#define IN_LAVA_RED 0.85
+										#define IN_LAVA_RED 1.5
 #endif
 #if IN_LAVA_GREEN == -1
 #undef IN_LAVA_GREEN
-										#define IN_LAVA_GREEN 0.15
+										#define IN_LAVA_GREEN 0.4
 #endif
 #if IN_LAVA_BLUE == -1
 #undef IN_LAVA_BLUE
-										#define IN_LAVA_BLUE 0.0
+										#define IN_LAVA_BLUE 0.15
 #endif
 #if IN_SNOW_RED == -1
 #undef IN_SNOW_RED

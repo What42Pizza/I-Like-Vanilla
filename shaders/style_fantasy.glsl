@@ -844,7 +844,7 @@
 #endif
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
-										#define GLOWING_ORES_STRENGTH 0.7
+										#define GLOWING_ORES_STRENGTH 1.0
 #endif
 #if NEARBY_PARTICLE_TRANSPARENCY == -1
 #undef NEARBY_PARTICLE_TRANSPARENCY
@@ -1284,7 +1284,7 @@
 #endif
 #if IN_LAVA_RED == -1
 #undef IN_LAVA_RED
-										#define IN_LAVA_RED 0.85
+										#define IN_LAVA_RED 0.9
 #endif
 #if IN_LAVA_GREEN == -1
 #undef IN_LAVA_GREEN
@@ -1296,11 +1296,11 @@
 #endif
 #if IN_SNOW_RED == -1
 #undef IN_SNOW_RED
-										#define IN_SNOW_RED 0.6
+										#define IN_SNOW_RED 0.8
 #endif
 #if IN_SNOW_GREEN == -1
 #undef IN_SNOW_GREEN
-										#define IN_SNOW_GREEN 0.9
+										#define IN_SNOW_GREEN 1.0
 #endif
 #if IN_SNOW_BLUE == -1
 #undef IN_SNOW_BLUE

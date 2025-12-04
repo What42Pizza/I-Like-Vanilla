@@ -258,6 +258,7 @@ void main() {
 			fogDarken = 1.0;
 		#endif
 		extraFogDist = 1.0 * inPaleGarden;
+		extraFogDist += betterRainStrength * 8.0;
 	} else if (isEyeInWater == 1) {
 		atmoFogColor = IN_WATER_COLOR;
 		fogDensity = 0.03;
@@ -266,18 +267,17 @@ void main() {
 		extraFogDist = 16.0;
 	} else if (isEyeInWater == 2) {
 		atmoFogColor = IN_LAVA_COLOR;
-		fogDensity = 10.0;
-		fogMult = 0.75;
-		fogDarken = 0.5;
-		extraFogDist = 0.0;
+		fogDensity = 1.0;
+		fogMult = 1.0;
+		fogDarken = 1.0;
+		extraFogDist = 1.5;
 	} else if (isEyeInWater == 3) {
 		atmoFogColor = IN_POWDERED_SNOW_COLOR;
-		fogDensity = 10.0;
-		fogMult = 0.75;
-		fogDarken = 0.5;
-		extraFogDist = 0.0;
+		fogDensity = 1.0;
+		fogMult = 1.0;
+		fogDarken = 1.0;
+		extraFogDist = 1.0;
 	}
-	extraFogDist += betterRainStrength * 8.0;
 	
 	atmoFogColor *= 1.0 - blindness;
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);

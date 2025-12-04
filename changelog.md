@@ -3,6 +3,7 @@
   - Added setting 'DOF Min Blur Strength'
   - Removed setting 'Vignette Noise Enabled'
   - Improved auto exposure
+  - Fixed in-lava and in-powdered-snow fogs
 
 <br>
 

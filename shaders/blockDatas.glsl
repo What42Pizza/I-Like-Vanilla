@@ -19,7 +19,7 @@
 	glowingColorMin = vec3(-1.0);
 	glowingColorMax = vec3(-1.0);
 	#if GLOWING_ORES_ENABLED == 1
-		#define SET_GLOWING_ORE_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3;
+		#define SET_GLOWING_ORE_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3 * 0.75;
 	#else
 		#define SET_GLOWING_ORE_COLOR(v1, v2, v3)
 	#endif
