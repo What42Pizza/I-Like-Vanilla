@@ -1275,41 +1275,53 @@
 
 
 
-#if IN_WATER_RED == -1
-#undef IN_WATER_RED
-										#define IN_WATER_RED 0.0
+#if WATER_FOG_RED == -1
+#undef WATER_FOG_RED
+										#define WATER_FOG_RED 0.0
 #endif
-#if IN_WATER_GREEN == -1
-#undef IN_WATER_GREEN
-										#define IN_WATER_GREEN 0.1
+#if WATER_FOG_GREEN == -1
+#undef WATER_FOG_GREEN
+										#define WATER_FOG_GREEN 0.1
 #endif
-#if IN_WATER_BLUE == -1
-#undef IN_WATER_BLUE
-										#define IN_WATER_BLUE 0.6
+#if WATER_FOG_BLUE == -1
+#undef WATER_FOG_BLUE
+										#define WATER_FOG_BLUE 0.6
 #endif
-#if IN_LAVA_RED == -1
-#undef IN_LAVA_RED
-										#define IN_LAVA_RED 0.85
+#if WATER_FOG_DENSITY == -1
+#undef WATER_FOG_DENSITY
+										#define WATER_FOG_DENSITY 0.1
 #endif
-#if IN_LAVA_GREEN == -1
-#undef IN_LAVA_GREEN
-										#define IN_LAVA_GREEN 0.15
+#if LAVA_FOG_RED == -1
+#undef LAVA_FOG_RED
+										#define LAVA_FOG_RED 0.85
 #endif
-#if IN_LAVA_BLUE == -1
-#undef IN_LAVA_BLUE
-										#define IN_LAVA_BLUE 0.0
+#if LAVA_FOG_GREEN == -1
+#undef LAVA_FOG_GREEN
+										#define LAVA_FOG_GREEN 0.15
 #endif
-#if IN_SNOW_RED == -1
-#undef IN_SNOW_RED
-										#define IN_SNOW_RED 0.6
+#if LAVA_FOG_BLUE == -1
+#undef LAVA_FOG_BLUE
+										#define LAVA_FOG_BLUE 0.0
 #endif
-#if IN_SNOW_GREEN == -1
-#undef IN_SNOW_GREEN
-										#define IN_SNOW_GREEN 0.9
+#if LAVA_FOG_DENSITY == -1
+#undef LAVA_FOG_DENSITY
+										#define LAVA_FOG_DENSITY 4.0
 #endif
-#if IN_SNOW_BLUE == -1
-#undef IN_SNOW_BLUE
-										#define IN_SNOW_BLUE 1.0
+#if POWDERED_SNOW_FOG_RED == -1
+#undef POWDERED_SNOW_FOG_RED
+										#define POWDERED_SNOW_FOG_RED 0.6
+#endif
+#if POWDERED_SNOW_FOG_GREEN == -1
+#undef POWDERED_SNOW_FOG_GREEN
+										#define POWDERED_SNOW_FOG_GREEN 0.9
+#endif
+#if POWDERED_SNOW_FOG_BLUE == -1
+#undef POWDERED_SNOW_FOG_BLUE
+										#define POWDERED_SNOW_FOG_BLUE 1.0
+#endif
+#if POWDERED_SNOW_FOG_DENSITY == -1
+#undef POWDERED_SNOW_FOG_DENSITY
+										#define POWDERED_SNOW_FOG_DENSITY 4.0
 #endif
 
 

@@ -260,20 +260,20 @@ void main() {
 		extraFogDist = 1.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 8.0;
 	} else if (isEyeInWater == 1) {
-		atmoFogColor = IN_WATER_COLOR;
-		fogDensity = 0.03;
+		atmoFogColor = WATER_FOG_COLOR;
+		fogDensity = WATER_FOG_DENSITY * 0.25;
 		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 16.0;
 	} else if (isEyeInWater == 2) {
-		atmoFogColor = IN_LAVA_COLOR;
-		fogDensity = 1.0;
+		atmoFogColor = LAVA_FOG_COLOR;
+		fogDensity = LAVA_FOG_DENSITY * 0.25;
 		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 1.5;
 	} else if (isEyeInWater == 3) {
-		atmoFogColor = IN_POWDERED_SNOW_COLOR;
-		fogDensity = 1.0;
+		atmoFogColor = POWDERED_SNOW_FOG_COLOR;
+		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.25;
 		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 1.0;

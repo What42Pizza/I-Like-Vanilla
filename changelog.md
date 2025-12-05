@@ -1,6 +1,7 @@
 - v1.1.2
-  - Added setting 'Lightning Brightness'
+  - Added lightning flashes (configurable)
   - Added setting 'DOF Min Blur Strength'
+  - Added settings for in-liquid fog densities
   - Removed setting 'Vignette Noise Enabled'
   - Improved auto exposure
   - Fixed in-lava and in-powdered-snow fogs
