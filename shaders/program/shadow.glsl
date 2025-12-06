@@ -23,6 +23,12 @@ void main() {
 #endif
 
 void main() {
+	
+	if (entityId == 10000) {
+		gl_Position = vec4(1.0);
+		return;
+	}
+	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1 || COLORED_LIGHTING_ENABLED == 1

@@ -258,7 +258,7 @@ void main() {
 			fogDarken = 1.0;
 		#endif
 		extraFogDist = 1.0 * inPaleGarden;
-		extraFogDist += betterRainStrength * 8.0;
+		extraFogDist += betterRainStrength * 6.0;
 	} else if (isEyeInWater == 1) {
 		atmoFogColor = WATER_FOG_COLOR;
 		fogDensity = WATER_FOG_DENSITY * 0.25;

@@ -1,4 +1,4 @@
-- v1.1.2
+- v1.1.2 (25/12/06)
   - Added lightning flashes (configurable)
   - Added setting 'DOF Min Blur Strength'
   - Added settings for in-liquid fog densities
