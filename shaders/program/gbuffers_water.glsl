@@ -199,7 +199,7 @@ void main() {
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	normal = gl_NormalMatrix * gl_Normal;
 	
-	materialId = uint(mc_Entity.x);
+	materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS

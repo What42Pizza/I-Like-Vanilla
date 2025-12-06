@@ -30,7 +30,7 @@ void main() {
 	#endif
 	
 	#if COLORED_LIGHTING_ENABLED == 1 || EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
-		uint materialId = uint(mc_Entity.x);
+		uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	#endif
 	
 	#if COLORED_LIGHTING_ENABLED == 1

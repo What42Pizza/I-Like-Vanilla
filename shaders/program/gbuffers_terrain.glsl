@@ -136,7 +136,7 @@ void main() {
 	
 	vec3 normal = gl_NormalMatrix * gl_Normal;
 	
-	uint materialId = uint(mc_Entity.x);
+	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	uint encodedData = materialId >> 10u;
 	// foliage normals
 	if ((encodedData & 1u) == 1u && encodedData > 1u) {

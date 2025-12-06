@@ -5,6 +5,7 @@
   - Removed setting 'Vignette Noise Enabled'
   - Improved auto exposure
   - Fixed in-lava and in-powdered-snow fogs
+  - Fixed blocks sometimes being registered incorrectly
 
 <br>
 
