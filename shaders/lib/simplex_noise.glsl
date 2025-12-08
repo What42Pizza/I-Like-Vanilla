@@ -230,13 +230,6 @@ float snoise(vec4 v) {
 	return 49.0 * (dot(m0 * m0, vec3(dot(p0, x0), dot(p1, x1), dot(p2, x2))) + dot(m1 * m1, vec2(dot(p3, x3), dot(p4, x4))));
 }
 
-vec3 simplexNoise3From4(vec4 x){
-	float s = simplexNoise(vec4(x));
-	float s1 = simplexNoise(vec4(x.y - 19.1 * 10, x.z + 33.4 * 10, x.x + 47.2 * 10, x.w + 65.4 * 10));
-	float s2 = simplexNoise(vec4(x.z + 74.2 * 10, x.x - 124.5 * 10, x.y + 99.4 * 10, x.w + 113.4 * 10));
-	return vec3(s, s1, s2);
-}
-
 vec2 simplexNoise2From3(vec3 x){
 	float s = simplexNoise(vec3(x));
 	float s1 = simplexNoise(vec3(x.y - 19.1 * 10, x.z + 33.4 * 10, x.x + 47.2 * 10));
