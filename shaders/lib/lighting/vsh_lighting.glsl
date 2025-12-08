@@ -1,4 +1,4 @@
-void doVshLighting(vec3 viewPos, vec3 normal) {
+void doVshLighting(inout vec2 lmcoord, vec3 viewPos, vec3 normal) {
 	
 	lmcoord *= 1.0 - 0.2 * darknessFactor;
 	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);

@@ -254,7 +254,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(viewPos, normal);
+	doVshLighting(lmcoord, viewPos, normal);
 	
 }
 

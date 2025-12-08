@@ -60,7 +60,9 @@ if (materialId < 1570u) { // 0..1570
 				if (materialId < 1573u) { // 1570..1573
 					if (materialId == 1570u) {
 						// water
-						SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
+						#ifdef SHADER_GBUFFERS_WATER
+							SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
+						#endif
 						SET_SPECULARNESS(2.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
 						SET_VOXEL_ID(100u);
 					} else if (materialId == 1571u) {

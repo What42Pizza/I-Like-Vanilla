@@ -23,9 +23,6 @@ void main() {
 #if COLORED_LIGHTING_ENABLED == 1
 	#include "/lib/colored_lighting/toVoxelImage.glsl"
 #endif
-#if WAVING_ENABLED == 1
-	#include "/lib/waving.glsl"
-#endif
 
 void main() {
 	

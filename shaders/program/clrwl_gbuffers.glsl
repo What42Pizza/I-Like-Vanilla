@@ -1,16 +1,21 @@
 in_out vec2 texcoord;
+in_out vec3 glcolor;
+flat in_out vec3 normal;
 flat in_out vec2 encodedNormal;
-in_out vec3 playerPos;
+in_out vec3 viewPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
 #if SHOW_DANGEROUS_LIGHT == 1
+	in_out vec3 playerPos;
 	flat in_out float isDangerousLight;
 #endif
 
 
 
 #ifdef FSH
+
+#include "/lib/lighting/vsh_lighting.glsl"
 
 void main() {
 	
@@ -20,6 +25,7 @@ void main() {
 	vec4 overlayColor;
 	clrwl_computeFragment(color, color, lmcoord, ao, overlayColor);
 	color.rgb /= ao;
+	adjustLmcoord(lmcoord);
 	
 	float reflectiveness = reflectiveness;
 	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
@@ -31,6 +37,9 @@ void main() {
 	ao = (ao * ao + ao * 2.0) * 0.3333; // kinda like squaring but not as intense
 	ao = 1.0 - (1.0 - ao) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	color.rgb *= ao;
+	color.rgb *= glcolor;
+	
+	doVshLighting(lmcoord, viewPos, normal);
 	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
@@ -61,8 +70,6 @@ void main() {
 
 #ifdef VSH
 
-#include "/lib/lighting/vsh_lighting.glsl"
-
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
 #endif
@@ -72,19 +79,23 @@ void main() {
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	glcolor = vec3(1.0);
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	#if SHOW_DANGEROUS_LIGHT == 0
+		vec3 playerPos;
+	#endif
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	normal = gl_NormalMatrix * gl_Normal;
 	encodedNormal = encodeNormal(normal);
 	
 	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	
-	#define GET_REFLECTIVENESS
-	#define GET_SPECULARNESS
-	#define DO_BRIGHTNESS_TWEAKS
-	#include "/blockDatas.glsl"
+	//#define GET_REFLECTIVENESS
+	//#define GET_SPECULARNESS
+	//#define DO_BRIGHTNESS_TWEAKS
+	//#include "/blockDatas.glsl"
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

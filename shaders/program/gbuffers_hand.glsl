@@ -68,7 +68,7 @@ void main() {
 	
 	vec3 screenPos = vec3((gl_Position.xy / gl_Position.w) * 0.5 + 0.5, HAND_DEPTH);
 	viewPos = screenToView(screenPos);
-	doVshLighting(viewPos, normal);
+	doVshLighting(lmcoord, viewPos, normal);
 	
 }
 
