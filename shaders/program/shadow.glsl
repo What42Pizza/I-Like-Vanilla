@@ -61,17 +61,17 @@ void main() {
 	#endif
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 1500u) {
+		if (materialId == 1570u) {
 			float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 				wavingAmount *= smoothstep(far * 0.95 - 10, far * 0.9 - 10, lengthCylinder);
 			#endif
 			playerPos += cameraPosition;
-			playerPos.y += (sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.5 - 0.5) * 0.03 * wavingAmount;
-			playerPos.y += (sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.5 - 0.5) * 0.02 * wavingAmount;
+			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.015 * wavingAmount;
+			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y += 0.0025; // offset shadow bias
+			playerPos.y += 0.07; // offset shadow bias
 		}
 	#endif
 	
