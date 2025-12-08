@@ -1,10 +1,15 @@
 in_out vec2 texcoord;
-flat in_out vec3 colorMult;
 in_out vec3 playerPos;
+in_out vec4 posXMin;
+in_out vec4 posXMax;
+in_out vec4 posYMin;
+in_out vec4 posYMax;
 
 
 
 #ifdef FSH
+
+#include "/utils/getCloudColor.glsl"
 
 #ifdef DISTANT_HORIZONS
 	#include "/utils/depth.glsl"
@@ -24,7 +29,18 @@ void main() {
 	color.a = 1.0 - mix(NEARBY_CLOUD_TRANSPARENCY, VANILLA_CLOUD_TRANSPARENCY, clamp(playerPosDist / NEARBY_CLOUD_DIST, 0.0, 1.0));
 	
 	
-	color.rgb *= colorMult;
+	vec3 posXMin = posXMin.xyz / posXMin.w;
+	vec3 posXMax = posXMax.xyz / posXMax.w;
+	vec3 posYMin = posYMin.xyz / posYMin.w;
+	vec3 posYMax = posYMax.xyz / posYMax.w;
+	vec3 xDir = posXMax - posXMin;
+	vec3 yDir = posYMax - posYMin;
+	vec3 normal = normalize(cross(yDir, xDir));
+	normal.xz = abs(normal.xz);
+	float normalFactor = mix(0.2, 0.1, betterRainStrength);
+	color.rgb *= getCloudColor((1.0 - normalFactor) + normalFactor * dot(normal, normalize(vec3(0.5, 1.0, 0.0))));
+	
+	
 	float dist = max(max(abs(playerPos.x), abs(playerPos.y)), abs(playerPos.z));
 	float mult = clamp(1.6 * (1.0 - dist / 1700.0), 0.0, 1.0);
 	color.a *= mult * mult;
@@ -47,9 +63,6 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getShadowcasterLight.glsl"
-#include "/utils/getCloudColor.glsl"
-
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
 #endif
@@ -59,12 +72,17 @@ void main() {
 
 void main() {
 	
-	float normalFactor = mix(0.2, 0.1, betterRainStrength);
-	colorMult = getCloudColor((1.0 - normalFactor) + normalFactor * dot(gl_Normal, normalize(vec3(0.5, 1.0, 0.0))));
-	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	posXMin = vec4(0.0);
+	posXMax = vec4(0.0);
+	posYMin = vec4(0.0);
+	posYMax = vec4(0.0);
+	if (gl_VertexID % 4 == 0) { posXMin = vec4(playerPos, 1.0); posYMin = vec4(playerPos, 1.0); }
+	if (gl_VertexID % 4 == 1) { posXMin = vec4(playerPos, 1.0); posYMax = vec4(playerPos, 1.0); }
+	if (gl_VertexID % 4 == 2) { posXMax = vec4(playerPos, 1.0); posYMax = vec4(playerPos, 1.0); }
+	if (gl_VertexID % 4 == 3) { posXMax = vec4(playerPos, 1.0); posYMin = vec4(playerPos, 1.0); }
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);

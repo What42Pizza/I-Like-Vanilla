@@ -1,3 +1,9 @@
+- v1.1.3
+  - Added colorwheel support
+  - Fixed misc bugs
+
+<br>
+
 - v1.1.2 (25/12/06)
   - Added lightning flashes (configurable)
   - Added setting 'DOF Min Blur Strength'
