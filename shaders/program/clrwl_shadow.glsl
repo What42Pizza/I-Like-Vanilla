@@ -11,6 +11,7 @@ void main() {
 	vec4 overlayColor;
 	clrwl_computeFragment(color, color, lmcoord, ao, overlayColor);
 	
+	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = color;
 }
 

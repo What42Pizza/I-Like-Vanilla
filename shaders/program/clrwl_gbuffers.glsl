@@ -92,10 +92,10 @@ void main() {
 	
 	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	
-	//#define GET_REFLECTIVENESS
-	//#define GET_SPECULARNESS
-	//#define DO_BRIGHTNESS_TWEAKS
-	//#include "/blockDatas.glsl"
+	#define GET_REFLECTIVENESS
+	#define GET_SPECULARNESS
+	#define DO_BRIGHTNESS_TWEAKS
+	#include "/blockDatas.glsl"
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
