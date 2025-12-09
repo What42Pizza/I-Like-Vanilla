@@ -30,6 +30,7 @@ pub const SHADERS_LIST: &[&str] = &[
 	"dh_terrain",
 	"dh_water",
 	"clrwl_gbuffers",
+	"clrwl_gbuffers_translucent",
 	"clrwl_shadow",
 ];
 
