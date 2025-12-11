@@ -323,31 +323,31 @@
 
 #if END_SKYLIGHT_RED == -1
 #undef END_SKYLIGHT_RED
-										#define END_SKYLIGHT_RED 1.0
+										#define END_SKYLIGHT_RED 0.95
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 1.0
+										#define END_SKYLIGHT_GREEN 0.8
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
-										#define END_SKYLIGHT_BLUE 1.05
+										#define END_SKYLIGHT_BLUE 1.15
 #endif
 #if END_SKYLIGHT_BRIGHTNESS == -1
 #undef END_SKYLIGHT_BRIGHTNESS
-										#define END_SKYLIGHT_BRIGHTNESS 0.35
+										#define END_SKYLIGHT_BRIGHTNESS 0.2
 #endif
 #if END_AMBIENT_RED == -1
 #undef END_AMBIENT_RED
-										#define END_AMBIENT_RED 0.9
+										#define END_AMBIENT_RED 0.95
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.9
+										#define END_AMBIENT_GREEN 0.75
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.0
+										#define END_AMBIENT_BLUE 1.2
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
@@ -435,7 +435,7 @@
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 2.5
+										#define BLOOM_END_AMOUNT 2.0
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -733,7 +733,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.0
+										#define VIBRANCE -0.25
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -1214,6 +1214,27 @@
 
 
 
+#if END_CLOUDS_ENABLED == -1
+#undef END_CLOUDS_ENABLED
+										#define END_CLOUDS_ENABLED 1
+#endif
+#if END_CLOUDS_SCALE == -1
+#undef END_CLOUDS_SCALE
+										#define END_CLOUDS_SCALE 1.8
+#endif
+#if END_CLOUDS_CONVERAGE == -1
+#undef END_CLOUDS_CONVERAGE
+										#define END_CLOUDS_CONVERAGE 0.75
+#endif
+#if END_CLOUDS_TRANSPARENCY == -1
+#undef END_CLOUDS_TRANSPARENCY
+										#define END_CLOUDS_TRANSPARENCY 0.8
+#endif
+
+
+
+
+
 #if BORDER_FOG_ENABLED == -1
 #undef BORDER_FOG_ENABLED
 										#define BORDER_FOG_ENABLED 1
@@ -1330,11 +1351,11 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.2
+										#define SKY_DAY_RED 0.15
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.3
+										#define SKY_DAY_GREEN 0.2
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE

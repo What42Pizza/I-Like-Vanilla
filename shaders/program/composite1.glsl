@@ -175,15 +175,20 @@ void main() {
 			#endif
 			#if DEPTH_SUNRAYS_ENABLED == 1
 				if (abs(prevSunraysDatas.x - depthSunraysAddition) > 0.02)
-					depthSunraysAddition = mix(prevSunraysDatas.x, depthSunraysAddition, 0.25);
+					depthSunraysAddition = mix(depthSunraysAddition, prevSunraysDatas.x, 0.75);
 			#endif
 			#if VOL_SUNRAYS_ENABLED == 1
 				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
-					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.5);
+					volSunraysAmount = mix(volSunraysAmount, prevSunraysDatas.y, 0.5);
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);
-				cloudData = mix(prevCloudsData, cloudData, 0.5);
+				#ifdef END
+					float mixAmount = 0.65 + 0.25 * fogAmount;
+				#else
+					const float mixAmount = 0.5;
+				#endif
+				cloudData = mix(cloudData, prevCloudsData, mixAmount);
 			#endif
 		}
 	#endif

@@ -1443,6 +1443,27 @@ value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
 
 
 
+screen.END_CLOUDS_MENU=End Clouds
+
+option.END_CLOUDS_ENABLED=End Clouds Enabled
+option.END_CLOUDS_ENABLED.comment=Enables volumetric clouds in the end
+value.END_CLOUDS_ENABLED.-1=Use Style
+value.END_CLOUDS_ENABLED.0=Off
+value.END_CLOUDS_ENABLED.1=On
+
+option.END_CLOUDS_SCALE=End Clouds Scale
+value.END_CLOUDS_SCALE.-1=Use Style
+
+option.END_CLOUDS_CONVERAGE=End Clouds Coverage
+value.END_CLOUDS_CONVERAGE.-1=Use Style
+
+option.END_CLOUDS_TRANSPARENCY=End Clouds Transparency
+value.END_CLOUDS_TRANSPARENCY.-1=Use Style
+
+
+
+
+
 screen.FOG_MENU=Fog
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled

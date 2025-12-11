@@ -1,4 +1,5 @@
 - v1.1.3
+  - Added end clouds (configurable)
   - Added colorwheel support
   - Fixed misc bugs
 
