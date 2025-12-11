@@ -17,12 +17,12 @@ float sampleEndCloud(vec3 pos) {
 
 
 
-// returns the cloud thinkness and brightness (both inverted) for this pixel
+// returns the cloud thinkness (inverted) and brightness for this pixel
 vec2 computeEndClouds(vec3 playerPos) {
-	vec3 pos = cameraPosition + playerPos; // start at the block and move towards the camera
+	vec3 pos = cameraPosition + playerPos * 0.75; // start at the block and move towards the camera
 	vec3 endPos = cameraPosition;
 	vec3 stepVec = endPos - pos;
-	float densityMult = length(stepVec) * -0.1;
+	float densityMult = length(stepVec) * -0.03125;
 	stepVec /= CLOUDS_QUALITY;
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -39,7 +39,6 @@ vec2 computeEndClouds(vec3 playerPos) {
 		brightness *= invDensity;
 		brightness += density * density;
 		pos += stepVec;
-		//pos += vec3(densityMult / 64.0);
 	}
 	invThickness = 1.0 - (1.0 - invThickness) * (1.0 - invThickness);
 	brightness = min(brightness, 1.0);

@@ -323,7 +323,7 @@
 
 #if END_SKYLIGHT_RED == -1
 #undef END_SKYLIGHT_RED
-										#define END_SKYLIGHT_RED 1.1
+										#define END_SKYLIGHT_RED 1.15
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
@@ -331,7 +331,7 @@
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
-										#define END_SKYLIGHT_BLUE 1.15
+										#define END_SKYLIGHT_BLUE 1.2
 #endif
 #if END_SKYLIGHT_BRIGHTNESS == -1
 #undef END_SKYLIGHT_BRIGHTNESS
@@ -339,7 +339,7 @@
 #endif
 #if END_AMBIENT_RED == -1
 #undef END_AMBIENT_RED
-										#define END_AMBIENT_RED 1.1
+										#define END_AMBIENT_RED 1.15
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
@@ -347,7 +347,7 @@
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.1
+										#define END_AMBIENT_BLUE 1.15
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
@@ -1228,7 +1228,7 @@
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
-										#define END_CLOUDS_TRANSPARENCY 0.75
+										#define END_CLOUDS_TRANSPARENCY 0.6
 #endif
 
 

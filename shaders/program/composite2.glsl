@@ -108,8 +108,8 @@ void main() {
 		thickness *= 1.0 - END_CLOUDS_TRANSPARENCY;
 		color *= 1.0 - thickness;
 		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
-		color += mix(vec3(0.2, 0.0, 0.2), vec3(1.0, 0.5, 0.9), brightness) * thickness;
-		//color += vec3(0.2, 0.0, 0.2) * thickness;
+		color += mix(vec3(0.15, 0.0, 0.2), vec3(1.25, 0.7, 1.0), brightness) * thickness;
+		//color += vec3(1.25, 0.7, 1.0) * thickness;
 	#endif
 	
 	
