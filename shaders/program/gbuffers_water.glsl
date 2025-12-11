@@ -228,6 +228,7 @@ void main() {
 			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.015 * wavingAmount;
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
+			playerPos.y += 0.015625 / (1.0 + length(playerPos.xz));
 		}
 	#endif
 	

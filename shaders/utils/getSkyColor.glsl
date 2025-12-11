@@ -4,6 +4,7 @@
 
 
 vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
+	vec3 skyColor;
 	
 	#ifdef OVERWORLD
 		
@@ -16,7 +17,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 		float skyMixFactor = dayPercent;
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
-		vec3 skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
+		skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
 		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.35), inPaleGarden);
 		upDot = clamp(upDot, 0.0, 1.0);
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
@@ -53,16 +54,28 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 			skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		#endif
 		
-		return skyColor;
-		
 	#elif defined NETHER
-		vec3 skyColor = fogColor;
+	
+		skyColor = fogColor;
 		skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.9);
 		skyColor = mix(vec3(0.1), vec3(0.75), skyColor);
-		return skyColor;
+		
 	#elif defined END
-		return vec3(1.0);
+	
+		skyColor = vec3(1.0);
+		
 	#endif
+	
+	if (isEyeInWater == 1) {
+		skyColor = mix(skyColor, WATER_FOG_COLOR, 0.5);
+	} else if (isEyeInWater == 2) {
+		skyColor = mix(skyColor, LAVA_FOG_COLOR, 0.5);
+	} else if (isEyeInWater == 3) {
+		skyColor = mix(skyColor, POWDERED_SNOW_FOG_COLOR, 0.5);
+	}
+	
+	return skyColor;
+	
 }
 
 
