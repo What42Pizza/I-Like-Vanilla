@@ -6,15 +6,21 @@ in_out vec3 viewPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
+flat in_out vec3 shadowcasterLight;
+
 #if SHOW_DANGEROUS_LIGHT == 1
 	in_out vec3 playerPos;
 	flat in_out float isDangerousLight;
+#endif
+#if BORDER_FOG_ENABLED == 1
+	in_out float fogAmount;
 #endif
 
 
 
 #ifdef FSH
 
+#include "/lib/lighting/fsh_lighting.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 void main() {
@@ -53,13 +59,23 @@ void main() {
 	#endif
 	
 	
-	/* DRAWBUFFERS:02 */
+	// main lighting
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	
+	
+	// fog
+	#if BORDER_FOG_ENABLED == 1
+		color.a *= 1.0 - fogAmount;
+	#endif
+	
+	
+	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
-	gl_FragData[0] = vec4(color);
+	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
-		encodedNormal
+		pack_2x8(reflectiveness, 0.0),
+		encodeNormal(normal)
 	);
 	
 }
@@ -70,11 +86,16 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/getShadowcasterLight.glsl"
+
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
 #endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
+#endif
+#if BORDER_FOG_ENABLED == 1
+	#include "/lib/borderFogAmount.glsl"
 #endif
 
 void main() {
@@ -97,6 +118,8 @@ void main() {
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/blockDatas.glsl"
 	
+	shadowcasterLight = getShadowcasterLight();
+	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);
@@ -112,6 +135,11 @@ void main() {
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
+	#endif
+	
+	
+	#if BORDER_FOG_ENABLED == 1
+		fogAmount = getBorderFogAmount(playerPos);
 	#endif
 	
 	
