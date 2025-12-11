@@ -1,13 +1,16 @@
 #include "/utils/screen_to_view.glsl"
 
 float sampleEndCloud(vec3 pos) {
+	pos.x += pos.y * pos.y * (1.0 / 128.0);
+	pos.y += pos.z * pos.z * (1.0 / 128.0);
+	pos.z += pos.x * pos.x * (1.0 / 128.0);
 	pos *= 0.25 / END_CLOUDS_SCALE;
 	pos.y *= 2.0;
 	float cloudSample = 0.0;
 	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.125  ) * 1.0 ) * 1.0 ;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.0625 ) * 0.5 ) * 0.75;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.03125) * 0.25) * 0.5 ;
-	cloudSample /= 1.0 + 0.75 + 0.5;
+	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.0625 ) * 0.5 ) * 0.5 ;
+	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.03125) * 0.25) * 0.25;
+	cloudSample /= 1.0 + 0.5 + 0.25;
 	cloudSample = (cloudSample - (1.0 - END_CLOUDS_CONVERAGE * 0.75)) / END_CLOUDS_CONVERAGE * 0.75;
 	return clamp(cloudSample, 0.0, 1.0);
 }
@@ -36,6 +39,7 @@ vec2 computeEndClouds(vec3 playerPos) {
 		brightness *= invDensity;
 		brightness += density * density;
 		pos += stepVec;
+		//pos += vec3(densityMult / 64.0);
 	}
 	invThickness = 1.0 - (1.0 - invThickness) * (1.0 - invThickness);
 	brightness = min(brightness, 1.0);
