@@ -55,12 +55,7 @@ void main() {
 	// ======== COLOR CORRECTION & TONE MAPPING ======== //
 	
 	#if AUTO_EXPOSURE_ENABLED == 1
-		float exposureSkyMix = step(1.0, depth);
-		#ifdef DISTANT_HORIZONS
-			float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-			exposureSkyMix *= step(1.0, dhDepth);
-		#endif
-		color *= mix(autoExposureMult, 1.0 - 0.25 * (1.0 - autoExposureMult), exposureSkyMix);
+		color *= autoExposureMult;
 	#endif
 	doColorCorrection(color);
 	#if COLORBLIND_MODE != 0
@@ -149,7 +144,7 @@ void main() {
 	
 	#if AUTO_EXPOSURE_ENABLED == 1
 		vec3 screenAverage = texture2DLod(MAIN_TEXTURE, vec2(0.0), 10000.0).rgb * 2.0;
-		float screenBrightness = getLum(screenAverage) * 1.4;
+		float screenBrightness = getLum(screenAverage) * 1.7;
 		float prevBrightness = texelFetch(PREV_DEPTH_TEXTURE, ivec2(0), 0).r;
 		autoExposureBrightness = mix(prevBrightness, screenBrightness, 1.0 - pow(1.0 - 0.6, frameTime));
 		autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureBrightness);

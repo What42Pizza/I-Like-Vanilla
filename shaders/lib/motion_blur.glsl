@@ -8,7 +8,7 @@ void doMotionBlur(inout vec3 color, vec2 prevCoord) {
 	coordStep /= SAMPLE_COUNT;
 	vec2 pos = texcoord;
 	#include "/utils/var_rng.glsl"
-	pos += coordStep * randomFloat(rng) * 0.25;
+	pos += coordStep * randomFloat(rng);
 	
 	for (int i = 0; i < SAMPLE_COUNT; i++) {
 		pos += coordStep;

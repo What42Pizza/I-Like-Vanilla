@@ -1228,7 +1228,7 @@
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
-										#define END_CLOUDS_TRANSPARENCY 0.8
+										#define END_CLOUDS_TRANSPARENCY 0.9
 #endif
 
 
