@@ -10,6 +10,7 @@ flat in_out vec3 shadowcasterLight;
 #include "/lib/lighting/fsh_lighting.glsl"
 #include "/utils/depth.glsl"
 #include "/utils/screen_to_view.glsl"
+#include "/utils/getSkyColor.glsl"
 
 #if OUTLINES_ENABLED == 1
 	#include "/lib/outlines.glsl"
@@ -19,9 +20,6 @@ flat in_out vec3 shadowcasterLight;
 #endif
 #if BORDER_FOG_ENABLED == 1
 	#include "/lib/borderFogAmount.glsl"
-#endif
-#ifndef END
-	#include "/utils/getSkyColor.glsl"
 #endif
 
 
@@ -55,11 +53,9 @@ void main() {
 	
 	vec3 skyColor = vec3(0.0);
 	if (skyAmount > 0.0) {
-		#ifdef END
-			skyColor = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
-		#else
-			vec3 viewPos = screenToView(vec3(texcoord, 1.0));
-			skyColor = getSkyColor(normalize(viewPos), true);
+		vec3 viewPos = screenToView(vec3(texcoord, 1.0));
+		skyColor = getSkyColor(normalize(viewPos), true);
+		#ifdef OVERWORLD
 			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor);
 		#endif
 	}

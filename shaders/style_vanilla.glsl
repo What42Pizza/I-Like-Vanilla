@@ -1214,6 +1214,27 @@
 
 
 
+#if END_CLOUDS_ENABLED == -1
+#undef END_CLOUDS_ENABLED
+										#define END_CLOUDS_ENABLED 1
+#endif
+#if END_CLOUDS_SCALE == -1
+#undef END_CLOUDS_SCALE
+										#define END_CLOUDS_SCALE 1.8
+#endif
+#if END_CLOUDS_CONVERAGE == -1
+#undef END_CLOUDS_CONVERAGE
+										#define END_CLOUDS_CONVERAGE 0.75
+#endif
+#if END_CLOUDS_TRANSPARENCY == -1
+#undef END_CLOUDS_TRANSPARENCY
+										#define END_CLOUDS_TRANSPARENCY 0.7
+#endif
+
+
+
+
+
 #if BORDER_FOG_ENABLED == -1
 #undef BORDER_FOG_ENABLED
 										#define BORDER_FOG_ENABLED 1

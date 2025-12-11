@@ -65,6 +65,11 @@ const float shadowIntervalSize    = 2.0;
 	#define NETHER_CLOUDS_ENABLED 0
 #endif
 
+#ifndef END
+	#undef END_CLOUDS_ENABLED
+	#define END_CLOUDS_ENABLED 0
+#endif
+
 #ifdef NETHER
 	#undef SHADOWS_ENABLED
 	#define SHADOWS_ENABLED 0

@@ -35,8 +35,11 @@ flat in_out float extraFogDist;
 #if NETHER_CLOUDS_ENABLED == 1
 	#include "/lib/nether_clouds.glsl"
 #endif
+#if END_CLOUDS_ENABLED == 1
+	#include "/lib/end_clouds.glsl"
+#endif
 
-#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
+#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 	#define NOISY_RENDERS_ACTIVE
 #endif
 
@@ -155,6 +158,8 @@ void main() {
 		vec2 cloudData = computeClouds(playerPos);
 	#elif NETHER_CLOUDS_ENABLED == 1
 		vec2 cloudData = computeNetherClouds(playerPos);
+	#elif END_CLOUDS_ENABLED == 1
+		vec2 cloudData = computeEndClouds(playerPos);
 	#else
 		vec2 cloudData = vec2(0.0);
 	#endif
@@ -176,7 +181,7 @@ void main() {
 				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
 					volSunraysAmount = mix(prevSunraysDatas.y, volSunraysAmount, 0.5);
 			#endif
-			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
+			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);
 				cloudData = mix(prevCloudsData, cloudData, 0.5);
 			#endif

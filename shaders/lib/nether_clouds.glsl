@@ -18,7 +18,7 @@ vec2 computeNetherClouds(vec3 playerPos) {
 	vec3 pos = cameraPosition + playerPos; // start at the block and move towards the camera
 	vec3 endPos = cameraPosition;
 	vec3 stepVec = endPos - pos;
-	float desnityMult = length(stepVec) * -0.2;
+	float densityMult = length(stepVec) * -0.2;
 	stepVec /= CLOUDS_QUALITY;
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -29,7 +29,7 @@ vec2 computeNetherClouds(vec3 playerPos) {
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float density = sampleNetherCloud(pos);
-		float invDensity = exp(density * desnityMult);
+		float invDensity = exp(density * densityMult);
 		invThickness *= invDensity;
 		invBrightness = mix(invBrightness, density, 1.0 - invDensity);
 		pos += stepVec;

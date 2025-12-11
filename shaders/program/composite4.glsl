@@ -77,7 +77,7 @@ void main() {
 		#else
 			float reflectionStrength = unpack_2x8(data.y).x;
 		#endif
-		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1
+		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
 			reflectionStrength *= sqrt(invCloudsThickness);
 		#endif

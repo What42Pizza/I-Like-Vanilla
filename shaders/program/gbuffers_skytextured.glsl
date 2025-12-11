@@ -28,7 +28,7 @@ void main() {
 	
 	
 	#ifdef END
-		color *= 0.25;
+		discard;
 	#endif
 	
 	
