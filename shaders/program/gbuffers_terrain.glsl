@@ -40,8 +40,8 @@ void main() {
 	
 	vec3 hsv = rgbToHsv(color.rgb);
 	if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
-		//lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
-		//lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
+		lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
+		lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
 	}
 	
 	float reflectiveness = reflectiveness;
@@ -118,12 +118,12 @@ void main() {
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	vec4 glcolor4 = gl_Color;
-	glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
 	if (glcolor4.rgb != vec3(1.0)) {
+		glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
 		glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
-				float snowyness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.003 * length(playerPos)) * lmcoord.y * lmcoord.y;
+				float snowyness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
 				glcolor4.rgb = mix(glcolor4.rgb, vec3(1.0, 1.02, 1.03), snowyness);
 				glcolor4.rgb *= 1.0 + 0.4 * wetness;
 				glcolor4.a = mix(glcolor4.a, 1.0, snowyness * 0.5);

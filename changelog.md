@@ -1,6 +1,7 @@
 - v1.1.3
-  - Added end clouds (configurable)
+  - Added end clouds (configurable) and replaced end sky
   - Added colorwheel support
+  - Fixed motion blur
   - Fixed misc bugs
 
 <br>

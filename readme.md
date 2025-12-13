@@ -20,11 +20,10 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - **Isometric Rendering**
 - **Volumetric Clouds** (optional, disabled in default config)
 - **Distant Horizons Support**
+- **Colorwheel support**
 - **Shadows**
 - **Reflections**
-- **Anti-Aliasing** (TAA and FXAA)
-- **Sharpening** (velocity based)
-- **Sunrays** (both basic and volumetric)
+- **Sunrays** (both screen-space and volumetric)
 - **Depth of Field**
 - **World-Pixelated Shadows**
 - **SSAO**

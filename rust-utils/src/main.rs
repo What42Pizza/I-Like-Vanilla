@@ -16,6 +16,7 @@ pub const SHADERS_LIST: &[&str] = &[
 	"gbuffers_armor_glint",
 	"gbuffers_basic",
 	"gbuffers_beaconbeam",
+	"gbuffers_block",
 	"gbuffers_clouds",
 	"gbuffers_damagedblock",
 	"gbuffers_entities",
