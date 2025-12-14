@@ -1,0 +1,3 @@
+#define OVERWORLD
+
+#include "/program/voxy.json"

@@ -60,7 +60,7 @@ if (materialId < 1570u) { // 0..1570
 				if (materialId < 1573u) { // 1570..1573
 					if (materialId == 1570u) {
 						// water
-						#ifdef SHADER_GBUFFERS_WATER
+						#if defined SHADER_GBUFFERS_WATER || defined SHADER_VOXY_TRANSLUCENT
 							SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
 						#endif
 						SET_SPECULARNESS(2.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
@@ -482,7 +482,7 @@ if (materialId < 1570u) { // 0..1570
 						}
 					} else { // 3500..6500
 						// sugar cane
-						
+						TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 					}
 				} else { // 6500..9500
 					if (materialId < 7500u) { // 6500..7500

@@ -5,7 +5,9 @@ const bool  colortex0Clear        = false;
 const int   colortex1Format       = RGB10_A2;
 const bool  colortex1Clear        = false;
 const int   colortex2Format       = RGBA16;
-const bool  colortex2Clear        = false;
+#ifndef VOXY
+	const bool  colortex2Clear    = true;
+#endif
 const int   colortex3Format       = RGBA16;
 const bool  colortex3Clear        = true;
 const int   colortex4Format       = RGB10_A2;
@@ -106,7 +108,7 @@ const float shadowIntervalSize    = 2.0;
 	#define SHARPENING_ENABLED 0
 #endif
 
-#ifdef DISTANT_HORIZONS
+#if defined DISTANT_HORIZONS || defined VOXY
 	#undef BORDER_FOG_ENABLED
 	#define BORDER_FOG_ENABLED 0
 #endif

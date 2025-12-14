@@ -2,41 +2,6 @@
 
 
 
-pub const SHADERS_LIST: &[&str] = &[
-	"composite1",
-	"composite2",
-	"composite3",
-	"composite4",
-	"composite5",
-	"composite6",
-	"composite7",
-	"composite8",
-	"composite9",
-	"deferred1",
-	"gbuffers_armor_glint",
-	"gbuffers_basic",
-	"gbuffers_beaconbeam",
-	"gbuffers_block",
-	"gbuffers_clouds",
-	"gbuffers_damagedblock",
-	"gbuffers_entities",
-	"gbuffers_hand",
-	"gbuffers_skybasic",
-	"gbuffers_skytextured",
-	"gbuffers_terrain",
-	"gbuffers_textured",
-	"gbuffers_water",
-	"gbuffers_weather",
-	"shadow",
-	"dh_terrain",
-	"dh_water",
-	"clrwl_gbuffers",
-	"clrwl_gbuffers_translucent",
-	"clrwl_shadow",
-];
-
-
-
 pub const WORLDS_LIST: &[(&str, &str)] = &[
 	("world-1", "NETHER"),
 	("world0", "OVERWORLD"),
@@ -70,7 +35,6 @@ pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic"];//, "cartoon"
 const COMMANDS: &[data::Command] = &[
 	data::Command::new("help", "help", "Shows the help screen", commands::help::function),
 	data::Command::new("count_sloc", "count_sloc", "Counts the significant lines of code", commands::count_sloc::function),
-	data::Command::new("build_world_files", "build_world_files", "Generates the '/world_' files using hard-coded data", commands::build_world_files::function),
 	data::Command::new("check_settings", "check_settings", "Detects all shader settings and ensures they are consistent across all files", commands::check_settings::function),
 	data::Command::new("export", "export", "Exports the shader with only shader files included", commands::export::function),
 ];

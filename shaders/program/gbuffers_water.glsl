@@ -35,6 +35,9 @@ flat in_out vec3 shadowcasterLight;
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
+#if WATER_DEPTH_BASED_TRANSPARENCY == 1
+	#include "/utils/screen_to_view.glsl"
+#endif
 
 void main() {
 	
@@ -45,6 +48,8 @@ void main() {
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.99;
 		if (lengthCylinder >= far - 10 - 8 * dither) discard;
+	#elif defined VOXY
+		
 	#else
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance *= invFar;
@@ -103,16 +108,15 @@ void main() {
 			if (isEyeInWater == 1) {
 				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 			} else {
-				float blockDepth = toBlockDepth(gl_FragCoord.z);
-				float opaqueBlockDepth = toBlockDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r);
+				float blockDepth = length(viewPos);
+				float opaqueBlockDepth = length(screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r)));
 				float waterDepth = opaqueBlockDepth - blockDepth;
-				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 4.0 / (4.0 + waterDepth));
+				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
 			}
 		#else
 			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
 		#endif
 		color.a *= 1.0 + fresnel * 0.125;
-		//color.rgb = vec3(-fresnel);
 		
 	}
 	

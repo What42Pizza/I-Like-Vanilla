@@ -58,13 +58,18 @@ void main() {
 		vec4 data;
 		float depth0 = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		float depth1 = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		bool shouldUseTransparent = depth0 < depth1; // if transparents depth is less than non-transparents depth then use transparents data tex
+		bool useTransparentData = depth0 < depth1; // if transparents depth is less than non-transparents depth then use transparents data tex
 		#ifdef DISTANT_HORIZONS
 			float dhDepth0 = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 			float dhDepth1 = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-			shouldUseTransparent = shouldUseTransparent || dhDepth0 < dhDepth1;
+			useTransparentData = useTransparentData || dhDepth0 < dhDepth1;
 		#endif
-		if (shouldUseTransparent) {
+		#ifdef VOXY
+			float vxDepth0 = texelFetch(vxDepthTexTrans, texelcoord, 0).r;
+			float vxDepth1 = texelFetch(vxDepthTexOpaque, texelcoord, 0).r;
+			useTransparentData = useTransparentData || vxDepth0 < vxDepth1;
+		#endif
+		if (useTransparentData) {
 			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
 		} else {
 			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);

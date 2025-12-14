@@ -37,7 +37,7 @@ void main() {
 			const float starsBrightness = STARS_BRIGHTNESS;
 		#endif
 		float nightPercent = ambientMoonPercent + max(ambientSunrisePercent + ambientSunsetPercent, 0.0);
-		color = vec3(gl_Color.rgb * starsBrightness * float(isStar) * nightPercent);
+		color = vec3(gl_Color.rgb * starsBrightness * uint(isStar) * nightPercent);
 	#endif
 	
 	

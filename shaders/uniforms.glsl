@@ -82,7 +82,7 @@ uniform float lightningFlashAmount;
 uniform float betterRainStrength;
 uniform float smoothPlayerHealth;
 uniform float damageAmount;
-uniform vec2 taaOffset;
+uniform vec2 taaOffsetUniform;
 
 #ifdef VSH
 	attribute vec3 mc_Entity;

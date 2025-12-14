@@ -61,7 +61,7 @@ void main() {
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	#ifdef DISTANT_HORIZONS
-		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
+		float fogAmount = uint(depth == 1.0 && depthDh == 1.0);
 	#else
 		float fogAmount = getBorderFogAmount(playerPos);
 	#endif

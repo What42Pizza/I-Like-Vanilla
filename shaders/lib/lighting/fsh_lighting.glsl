@@ -87,23 +87,23 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 		float shadowSample = 0.0;
 		float bias = 0.0002 + length(viewPos) * 0.025 / shadowMapResolution;
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
 		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
-		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
+		return uint(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
-		return float(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
+		return uint(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
 		
 	#else
 		

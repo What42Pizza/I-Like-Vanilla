@@ -986,11 +986,11 @@
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.15
+										#define WATER_COLOR_GREEN 0.2
 #endif
 #if WATER_COLOR_BLUE == -1
 #undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.45
+										#define WATER_COLOR_BLUE 0.5
 #endif
 #if WATER_COLOR_AMOUNT == -1
 #undef WATER_COLOR_AMOUNT

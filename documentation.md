@@ -190,6 +190,9 @@ This describes which /main_files-s handle different effects
 - **colortex6:  Noisy Renders Texture**
 - - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit, value = 1/stored-1)
 - - y: clouds transparency (8-bit, value = 1-stored) & clouds brightness (8-bit, value = 1-stored)
+- **colortex7:  Prev Depth Texture**
+- - r: depth (16-bit)
+- **colortex8:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
 
 <br>
 <br>

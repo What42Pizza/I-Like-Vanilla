@@ -53,8 +53,8 @@ void main() {
 			vec3 blockPos = fract(playerPos + cameraPosition);
 			float centerDist = length(blockPos.xz - 0.5);
 			vec3 indicatorColor = isDangerousLight > 0.75 ? vec3(1.0, 0.0, 0.0) : vec3(1.0, 1.0, 0.0);
-			color.rgb = mix(color.rgb, indicatorColor, 0.35 * float(centerDist < 0.45));
-			lmcoord.x = max(lmcoord.x, 0.1 * float(centerDist < 0.45));
+			color.rgb = mix(color.rgb, indicatorColor, 0.35 * uint(centerDist < 0.45));
+			lmcoord.x = max(lmcoord.x, 0.1 * uint(centerDist < 0.45));
 		}
 	#endif
 	

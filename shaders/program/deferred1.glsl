@@ -27,7 +27,7 @@ flat in_out vec3 shadowcasterLight;
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-	vec3 viewPos = screenToView(vec3(texcoord, depth + (depthIsHand(depth) ? 0.38 : 0.0)));
+	vec3 viewPos = screenToView(vec3(texcoord, depth + 0.38 * uint(depthIsHand(depth))));
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth));
@@ -36,12 +36,12 @@ void main() {
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#ifdef DISTANT_HORIZONS
-		float skyAmount = float(depth == 1.0 && dhDepth == 1.0);
+		float skyAmount = uint(depth == 1.0 && dhDepth == 1.0);
 	#else
 		#if BORDER_FOG_ENABLED == 1
 			float skyAmount = getBorderFogAmount(playerPos);
 		#else
-			float skyAmount = float(depth == 1.0);
+			float skyAmount = uint(depth == 1.0);
 		#endif
 	#endif
 	
@@ -85,6 +85,14 @@ void main() {
 		#endif
 		
 	}
+	
+	
+	#ifdef VOXY
+		vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENCTS_TEXTURE, texelcoord, 0);
+		voxyTransparents.rgb *= 2.0;
+		voxyTransparents.a *= uint(!depthIsHand(depth));
+		color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
+	#endif
 	
 	
 	/* DRAWBUFFERS:0 */
