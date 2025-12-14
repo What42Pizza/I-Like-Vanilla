@@ -56,7 +56,7 @@ void main() {
 		vec3 viewPos = screenToView(vec3(texcoord, 1.0));
 		skyColor = getSkyColor(normalize(viewPos), true);
 		#ifdef OVERWORLD
-			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor);
+			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor) * max(1.0 - 6.0 * (1.0 - skyAmount), 0.0);
 		#endif
 	}
 	
@@ -71,10 +71,6 @@ void main() {
 		vec3 normal = decodeNormal(data.zw);
 		doFshLighting(color, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
 		
-		#if BORDER_FOG_ENABLED == 1
-			color = mix(color, skyColor, skyAmount);
-		#endif
-		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
 				float aoFactor = getAoFactor(depth);
@@ -82,6 +78,10 @@ void main() {
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
 			}
+		#endif
+		
+		#if BORDER_FOG_ENABLED == 1
+			color = mix(color, skyColor, skyAmount);
 		#endif
 		
 	}

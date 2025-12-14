@@ -20,6 +20,7 @@ uniform float invFar;
 uniform float invFarMinusNear;
 uniform float dhNearPlane;
 uniform float dhFarPlane;
+uniform int dhRenderDistance;
 
 uniform vec2 viewSize;
 uniform vec2 pixelSize;

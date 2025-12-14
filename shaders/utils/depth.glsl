@@ -11,6 +11,7 @@ float fromLinearDepth(float depth) {
 	return (farPlusNear - twoTimesNear / depth) * invFarMinusNear;
 }
 
+// Note: this is not exact
 float toBlockDepth(float depth) {
 	return mix(near, far, toLinearDepth(depth));
 }
@@ -23,8 +24,9 @@ float toBlockDepth(float depth) {
 		return 2.0 * dhNearPlane / (dhFarPlane + dhNearPlane - depth * (dhFarPlane - dhNearPlane));
 	}
 	
+	// Note: this is not exact
 	float toBlockDepthDh(float depth) {
-		return mix(dhNearPlane, dhFarPlane, toLinearDepthDh(depth));
+		return mix(dhRenderDistance * (dhNearPlane / dhFarPlane), dhRenderDistance, toLinearDepthDh(depth));
 	}
 	
 #endif

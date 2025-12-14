@@ -132,6 +132,10 @@ void main() {
 	color *= 1.0 - atmoFogAmount * fogDarken;
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
+	float desaturationAmount = max(1.0 - 600.0 / (playerPos.y + cameraPosition.y - 64.0 + 600.0), 0.0);
+	desaturationAmount *= 1.0 - fogAmount;
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - desaturationAmount);
+	
 	
 	
 	// ======== SUNRAYS ======== //
