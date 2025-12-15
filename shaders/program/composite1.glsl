@@ -58,22 +58,30 @@ void main() {
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
+	#ifdef VOXY
+		float depthVx;
+		if (isCloud) depthVx = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
+		else depthVx = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+		vec3 viewPosVx = screenToViewVx(vec3(texcoord, depthVx));
+		if (viewPosVx.z > viewPos.z) viewPos = viewPosVx;
+	#endif
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = uint(depth == 1.0 && depthDh == 1.0);
+	#elif defined VOXY
+		float fogAmount = uint(depth == 1.0 && depthVx == 1.0);
 	#else
 		float fogAmount = getBorderFogAmount(playerPos);
 	#endif
 	
-	vec3 playerPosForFog = playerPos;
 	#ifndef NETHER
-		const float yMult = 0.02;
+		const float yMult = 0.125;
 	#endif
 	#ifdef NETHER
 		const float yMult = 0.05;
 	#endif
-	float distMult= playerPos.y * yMult;
+	float distMult = (playerPos.y + cameraPosition.y - 88.0) * yMult;
 	distMult = distMult < 0.0 ? sqrt(1.0 - distMult) : 1.0 / (distMult * 0.5 + 1.0);
 	
 	
@@ -129,10 +137,11 @@ void main() {
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	atmoFogAmount *= 1.0 - fogAmount;
 	atmoFogAmount *= fogMult;
+	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - atmoFogAmount * fogDarken;
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
-	float desaturationAmount = max(1.0 - 600.0 / (playerPos.y + cameraPosition.y - 64.0 + 600.0), 0.0);
+	float desaturationAmount = max(1.0 - 700.0 / (playerPos.y + cameraPosition.y - 64.0 + 700.0), 0.0);
 	desaturationAmount *= 1.0 - fogAmount;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - desaturationAmount);
 	
@@ -266,7 +275,7 @@ void main() {
 	if (isEyeInWater == 0) {
 		#ifdef OVERWORLD
 			fogMult = 0.75 + 0.25 * inPaleGarden;
-			fogDarken = 0.5;
+			fogDarken = 0.75;
 		#else
 			fogMult = 1.0;
 			fogDarken = 1.0;

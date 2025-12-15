@@ -227,6 +227,9 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
+		#if SHADOWS_ENABLED == 0
+			lightDot = 0.5 + 0.5 * lightDot; // reminder: still kinda in -1 to 1 range, just want to make the lighting less intense when shadows are off
+		#endif
 	#else
 		float lightDot = 1.0;
 	#endif

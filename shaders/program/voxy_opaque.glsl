@@ -68,7 +68,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb *= glcolor;
-	color.rgb *= 0.85 + 0.1 * worldNormal.y;
+	color.rgb *= 0.85 + 0.15 * worldNormal.y;
 	
 	
 	color.rgb *= 0.5;

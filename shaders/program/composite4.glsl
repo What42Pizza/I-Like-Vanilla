@@ -65,8 +65,8 @@ void main() {
 			useTransparentData = useTransparentData || dhDepth0 < dhDepth1;
 		#endif
 		#ifdef VOXY
-			float vxDepth0 = texelFetch(vxDepthTexTrans, texelcoord, 0).r;
-			float vxDepth1 = texelFetch(vxDepthTexOpaque, texelcoord, 0).r;
+			float vxDepth0 = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+			float vxDepth1 = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
 			useTransparentData = useTransparentData || vxDepth0 < vxDepth1;
 		#endif
 		if (useTransparentData) {

@@ -65,6 +65,10 @@ const float HALF_PI = PI / 2.0;
 	#define DH_DEPTH_BUFFER_ALL       dhDepthTex0
 	#define DH_DEPTH_BUFFER_WO_TRANS  dhDepthTex1
 #endif
+#ifdef VOXY
+	#define VX_DEPTH_BUFFER_OPAQUE  vxDepthTexOpaque
+	#define VX_DEPTH_BUFFER_TRANS   vxDepthTexTrans
+#endif
 
 
 

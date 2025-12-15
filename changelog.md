@@ -1,4 +1,5 @@
 - v1.1.3
+  - Added Voxy compatibility
   - Added end clouds (configurable) and replaced end sky
   - Added colorwheel support
   - Fixed motion blur
