@@ -193,7 +193,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 	// sample shadow
 	#if SHADOWS_ENABLED == 1
 		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
-		#ifdef DISTANT_HORIZONS
+		#if defined DISTANT_HORIZONS || defined VOXY
 			float len = max(length(viewPos) * invFar, 0.8);
 			shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
 		#endif

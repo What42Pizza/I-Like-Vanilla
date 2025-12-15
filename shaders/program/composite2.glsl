@@ -98,7 +98,7 @@ void main() {
 	#if NETHER_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		thickness *= 1.0 - NETHER_CLOUDS_TRANSPARENCY;
+		thickness *= 1.0 - (0.25 + 0.75 * NETHER_CLOUDS_TRANSPARENCY);
 		color *= 1.0 - thickness;
 		color += cloudsColor * brightness * thickness;
 	#endif
@@ -109,7 +109,6 @@ void main() {
 		color *= 1.0 - thickness;
 		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
 		color += mix(vec3(0.15, 0.0, 0.2), vec3(1.25, 0.7, 1.0), brightness) * thickness;
-		//color += vec3(1.25, 0.7, 1.0) * thickness;
 	#endif
 	
 	

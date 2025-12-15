@@ -70,6 +70,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb *= glcolor;
 	color.rgb *= 0.85 + 0.15 * worldNormal.y;
 	
+	if (parameters.customId == 11571u) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
+	
 	
 	color.rgb *= 0.5;
 	albedoOut = color;

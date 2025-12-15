@@ -341,7 +341,7 @@ if (materialId < 1570u) { // 0..1570
 							if (materialId < 1662u) { // 1660..1662
 								if (materialId == 1660u) {
 									// netherrak
-									SET_REFLECTIVENESS(0.1);
+									SET_REFLECTIVENESS(0.08);
 								} else {
 									// bone block
 									
@@ -352,14 +352,14 @@ if (materialId < 1570u) { // 0..1570
 									SET_GLOWING_COLOR(
 										vec3(  0.0, 77.3, 38.0),
 										vec3(100.0, 86.6, 58.4),
-										1.0
+										0.75
 									);
 								} else {
 									// crimson stem
 									SET_GLOWING_COLOR(
 										vec3(  0.0,  78.0, 48.2),
 										vec3(100.0, 100.0, 69.4),
-										1.0
+										0.75
 									);
 								}
 							}

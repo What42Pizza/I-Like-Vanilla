@@ -2,7 +2,6 @@ in_out vec2 texcoord;
 
 flat in_out vec3 atmoFogColor;
 flat in_out float fogDensity;
-flat in_out float fogMult;
 flat in_out float fogDarken;
 flat in_out float extraFogDist;
 
@@ -45,7 +44,11 @@ flat in_out float extraFogDist;
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).y > 0.5;
+	#ifdef OVERWORLD
+		bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).y > 0.5;
+	#else
+		const bool isCloud = false;
+	#endif
 	
 	float depth;
 	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
@@ -75,14 +78,15 @@ void main() {
 		float fogAmount = getBorderFogAmount(playerPos);
 	#endif
 	
-	#ifndef NETHER
-		const float yMult = 0.125;
+	#ifdef OVERWORLD
+		float distMult = max(playerPos.y + cameraPosition.y - 64.0, 0.0);
+		distMult = 16.0 / (distMult + 16.0);
+	#elif defined NETHER
+		float distMult = max(playerPos.y + cameraPosition.y - 30.0, 0.0);
+		distMult = 24.0 / (distMult + 6.0);
+	#elif defined END
+		distMult = 1.0;
 	#endif
-	#ifdef NETHER
-		const float yMult = 0.05;
-	#endif
-	float distMult = (playerPos.y + cameraPosition.y - 88.0) * yMult;
-	distMult = distMult < 0.0 ? sqrt(1.0 - distMult) : 1.0 / (distMult * 0.5 + 1.0);
 	
 	
 	
@@ -123,7 +127,7 @@ void main() {
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
-			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
+			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY * 1.0, PALE_GARDEN_FOG_DENSITY * 1.0, dayPercent), inPaleGarden);
 		#elif defined NETHER
 			fogDensity = NETHER_FOG_DENSITY;
 		#elif defined END
@@ -131,14 +135,14 @@ void main() {
 		#endif
 		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
 		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
-		fogDensity /= 300.0;
+		fogDensity /= 256.0;
 	}
 	
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	atmoFogAmount *= 1.0 - fogAmount;
-	atmoFogAmount *= fogMult;
+	atmoFogAmount *= 1.0 - 0.25 * float(uint(isEyeInWater == 0));
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
-	color *= 1.0 - atmoFogAmount * fogDarken;
+	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
 	float desaturationAmount = max(1.0 - 700.0 / (playerPos.y + cameraPosition.y - 64.0 + 700.0), 0.0);
@@ -269,48 +273,43 @@ void main() {
 	texcoord = gl_MultiTexCoord0.xy;
 	
 	
-
+	
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	if (isEyeInWater == 0) {
 		#ifdef OVERWORLD
-			fogMult = 0.75 + 0.25 * inPaleGarden;
-			fogDarken = 0.75;
+			fogDarken = 1.5;
+		#elif defined NETHER
+			fogDarken = 0.5;
 		#else
-			fogMult = 1.0;
 			fogDarken = 1.0;
 		#endif
-		extraFogDist = 1.0 * inPaleGarden;
+		extraFogDist = 8.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 6.0;
 	} else if (isEyeInWater == 1) {
 		atmoFogColor = WATER_FOG_COLOR;
 		fogDensity = WATER_FOG_DENSITY * 0.25;
-		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 16.0;
 	} else if (isEyeInWater == 2) {
 		atmoFogColor = LAVA_FOG_COLOR;
 		fogDensity = LAVA_FOG_DENSITY * 0.25;
-		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 1.5;
 	} else if (isEyeInWater == 3) {
 		atmoFogColor = POWDERED_SNOW_FOG_COLOR;
 		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.25;
-		fogMult = 1.0;
 		fogDarken = 1.0;
 		extraFogDist = 1.0;
 	}
 	
 	atmoFogColor *= 1.0 - blindness;
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
-	fogMult = mix(fogMult, 1.0, blindness);
 	fogDarken = mix(fogDarken, 1.0, blindness);
 	extraFogDist *= 1.0 - blindness;
 	
 	atmoFogColor *= 1.0 - darknessFactor;
 	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
-	fogMult = mix(fogMult, 1.0, darknessFactor);
 	fogDarken = mix(fogDarken, 1.0, darknessFactor);
 	extraFogDist = mix(extraFogDist, 4.0, darknessFactor);
 	

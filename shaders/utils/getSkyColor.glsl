@@ -18,10 +18,10 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		float skyMixFactor = dayPercent;
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
 		skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
-		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.35), inPaleGarden);
+		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.4), inPaleGarden);
 		upDot = clamp(upDot, 0.0, 1.0);
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
-		horizonColor = mix(horizonColor, vec3(0.1 + 0.2 * dayPercent), inPaleGarden);
+		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 		
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
@@ -54,11 +54,15 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 			skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		#endif
 		
+		#if AUTO_EXPOSURE_ENABLED == 1
+			skyColor *= 0.9;
+		#endif
+		
 	#elif defined NETHER
 		
 		skyColor = fogColor;
 		skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.9);
-		skyColor = mix(vec3(0.1), vec3(0.75), skyColor);
+		skyColor = 0.15 + 0.9 * skyColor;
 		
 	#elif defined END
 		
