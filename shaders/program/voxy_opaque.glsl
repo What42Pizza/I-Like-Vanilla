@@ -47,7 +47,6 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	// foliage normals
 	if ((encodedData & 1u) == 1u && encodedData > 1u) {
 		worldNormal = vec3(0.0, 1.0, 0.0);
-		tintColor *= 1.125;
 	}
 	
 	vec3 normal = mat3(gbufferModelView) * worldNormal;
@@ -63,8 +62,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// main color
 	vec4 color = parameters.sampledColour;
-	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.35);
+	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.6) + 0.5;
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.3);
 	color.rgb *= tintColor;
 	color.rgb *= glcolor;
 	color.rgb *= 0.95 + 0.05 * worldNormal.y;
