@@ -17,7 +17,7 @@ float getAoInfluence(float centerDepth, vec2 offset) {
 
 
 
-float getAoFactor(float depth) {
+float getAoAmount(float depth) {
 	
 	float blockDepth = toBlockDepth(depth);
 	vec3 noise3 = texelFetch(noisetex, (texelcoord + frameCounter * 17) & 127, 0).rgb;

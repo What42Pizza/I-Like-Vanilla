@@ -21,6 +21,8 @@ uniform float invFarMinusNear;
 uniform float dhNearPlane;
 uniform float dhFarPlane;
 uniform int dhRenderDistance;
+uniform mat4 vxModelViewInv;
+uniform mat4 vxProj;
 uniform mat4 vxProjInv;
 
 uniform vec2 viewSize;

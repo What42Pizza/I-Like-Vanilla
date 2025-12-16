@@ -51,7 +51,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec3 tintColor = parameters.tinting.rgb;
 	if (tintColor != vec3(1.0)) {
 		tintColor = mix(vec3(getLum(tintColor)), tintColor, FOLIAGE_SATURATION);
-		tintColor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+		tintColor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE) * 1.1;
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
 				float snowyness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(viewPos)) * lmcoord.y * lmcoord.y;
@@ -64,11 +64,11 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// main color
 	vec4 color = parameters.sampledColour;
-	color.rgb *= tintColor;
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.35);
+	color.rgb *= tintColor;
 	color.rgb *= glcolor;
-	color.rgb *= 0.85 + 0.15 * worldNormal.y;
+	color.rgb *= 0.95 + 0.05 * worldNormal.y;
 	
 	if (parameters.customId == 11571u) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
 	

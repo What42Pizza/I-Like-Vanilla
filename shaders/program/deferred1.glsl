@@ -18,6 +18,9 @@ flat in_out vec3 shadowcasterLight;
 #if SSAO_ENABLED == 1
 	#include "/lib/ssao.glsl"
 #endif
+#ifdef VOXY
+	#include "/lib/voxy_ssao.glsl"
+#endif
 #if BORDER_FOG_ENABLED == 1
 	#include "/lib/borderFogAmount.glsl"
 #endif
@@ -73,11 +76,25 @@ void main() {
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
-				float aoFactor = getAoFactor(depth);
+				float aoFactor = getAoAmount(depth);
 				aoFactor *= 1.0 - 0.5 * getLum(color);
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
 			}
+		#endif
+		
+		#ifdef VOXY
+			
+			if (texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r < 0.995 && !depthIsHand(depth)) {
+				float vxAo = getVoxyAoAmount(normal);
+				color *= 1.0 - vxAo;
+			}
+			
+			vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENCTS_TEXTURE, texelcoord, 0);
+			voxyTransparents.rgb *= 2.0;
+			voxyTransparents.a *= uint(!depthIsHand(depth));
+			color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
+			
 		#endif
 		
 		#if BORDER_FOG_ENABLED == 1
@@ -85,14 +102,6 @@ void main() {
 		#endif
 		
 	}
-	
-	
-	#ifdef VOXY
-		vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENCTS_TEXTURE, texelcoord, 0);
-		voxyTransparents.rgb *= 2.0;
-		voxyTransparents.a *= uint(!depthIsHand(depth));
-		color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
-	#endif
 	
 	
 	/* DRAWBUFFERS:0 */

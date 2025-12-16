@@ -393,7 +393,7 @@
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
-										#define FOLIAGE_SATURATION 0.91
+										#define FOLIAGE_SATURATION 0.9
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
@@ -733,7 +733,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.15
+										#define VIBRANCE 0.16
 #endif
 #if SATURATION == -1
 #undef SATURATION

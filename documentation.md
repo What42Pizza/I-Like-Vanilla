@@ -137,7 +137,7 @@ This describes which /main_files-s handle different effects
 - **Isometric Rendering**
 - - Main Processing:  /main_files/*  (via projectIsometric())
 - **SSAO**
-- - Main Processing: /main_files/deferred.glsl  (via getAoFactor())
+- - Main Processing: /main_files/deferred.glsl  (via getAoAmount())
 - **Sunrays:**
 - - Main Processing:  /main_files/composite1.glsl  (via getDepthSunraysAmount() and getVolSunraysAmount())
 - - Application:  /main_files/composite2.glsl  (calculations are written to a mip-mapped buffer that is sampled with higher lod so that the noise is reduced)
