@@ -87,7 +87,7 @@ void main() {
 			
 			if (texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r < 0.995 && !depthIsHand(depth)) {
 				float vxAo = getVoxyAoAmount(normal);
-				color *= 1.0 - vxAo;
+				color *= 1.03 - vxAo * 0.75;
 			}
 			
 			vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENCTS_TEXTURE, texelcoord, 0);

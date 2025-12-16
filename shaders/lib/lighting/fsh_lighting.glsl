@@ -86,7 +86,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		//shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
 		
 		float shadowSample = 0.0;
-		float bias = 0.0002 + length(viewPos) * 0.025 / shadowMapResolution;
+		float bias = 0.0002 + length(viewPos) * 0.035 / shadowMapResolution;
 		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
 		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
 		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
