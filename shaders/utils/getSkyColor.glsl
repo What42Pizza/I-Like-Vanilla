@@ -41,18 +41,14 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor *= 1.2;
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
-		#ifdef OVERWORLD
-			if (includeLightning) {
-				skyColor += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25;
-			}
-		#endif
+		if (includeLightning) {
+			skyColor += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25;
+		}
 		
-		#ifdef OVERWORLD
-			float eyeBrightness = eyeBrightnessSmooth.y / 240.0;
-			float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightness);
-			float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
-			skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
-		#endif
+		float eyeBrightness = eyeBrightnessSmooth.y / 240.0;
+		float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightness);
+		float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
+		skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		
 		#if AUTO_EXPOSURE_ENABLED == 1
 			skyColor *= 0.9;
@@ -67,7 +63,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#elif defined END
 		
 		vec3 worldDir = mat3(gbufferModelViewInverse) * viewDir;
-		float brightness = valueNoise3(worldDir * 650.0);
+		float brightness = valueNoise3(worldDir * 700.0);
 		skyColor = mix(vec3(0.2, 0.1, 0.35), vec3(1.25, 0.7, 0.9), brightness * 0.4);
 		
 	#endif

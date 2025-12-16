@@ -7,7 +7,15 @@
 void doColorCorrection(inout vec3 color) {
 	
 	// brightness
-	color *= (BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#ifdef OVERWORLD
+		color *= (OVERWORLD_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
+	#ifdef NETHER
+		color *= (NETHER_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
+	#ifdef END
+		color *= (END_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
 	
 	// tonemapper
 	color = max(color, 0.0);

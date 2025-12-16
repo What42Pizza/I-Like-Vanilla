@@ -105,7 +105,7 @@ void main() {
 	#if END_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = cloudsData.y;
-		thickness *= 1.0 - END_CLOUDS_TRANSPARENCY;
+		thickness *= 0.6 - 0.5 * END_CLOUDS_TRANSPARENCY;
 		color *= 1.0 - thickness;
 		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
 		color += mix(vec3(0.15, 0.0, 0.2), vec3(1.25, 0.7, 1.0), brightness) * thickness;

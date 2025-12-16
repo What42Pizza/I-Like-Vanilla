@@ -113,7 +113,7 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 			continue;
 		};
 		if !prop_settings_set.contains(setting_name) {
-			println!("WARNING: found setting in define_settings which is not present in shaders.properties: {setting_name}");
+			println!("WARNING: found setting in setting_defines which is not present in shaders.properties: {setting_name}");
 			*found_problems = true;
 		}
 		defines.push(setting_name);
@@ -159,7 +159,7 @@ pub fn check_style_file(
 	style_name: &'static str,
 	found_problems: &mut bool
 ) -> Result<()> {
-	let setting_strings = fs::read_to_string(shaders_path.join(format!("style_{style_name}.glsl")))?;
+	let setting_strings = fs::read_to_string(shaders_path.join(format!("style_{}.glsl", style_name.to_lowercase())))?;
 	let mut settings = vec!();
 	for (i, mut setting) in setting_strings.lines().enumerate() {
 		setting = setting.trim();

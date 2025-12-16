@@ -322,31 +322,31 @@
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 0.7
+										#define END_SKYLIGHT_GREEN 0.55
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
-										#define END_SKYLIGHT_BLUE 1.2
+										#define END_SKYLIGHT_BLUE 1.15
 #endif
 #if END_SKYLIGHT_BRIGHTNESS == -1
 #undef END_SKYLIGHT_BRIGHTNESS
-										#define END_SKYLIGHT_BRIGHTNESS 0.4
+										#define END_SKYLIGHT_BRIGHTNESS 0.5
 #endif
 #if END_AMBIENT_RED == -1
 #undef END_AMBIENT_RED
-										#define END_AMBIENT_RED 0.9
+										#define END_AMBIENT_RED 0.85
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.7
+										#define END_AMBIENT_GREEN 0.55
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
-										#define END_AMBIENT_BLUE 1.25
+										#define END_AMBIENT_BLUE 1.15
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
-										#define END_AMBIENT_BRIGHTNESS 0.3
+										#define END_AMBIENT_BRIGHTNESS 0.4
 #endif
 
 
@@ -710,9 +710,17 @@
 #undef GAMMA
 										#define GAMMA 0
 #endif
-#if BRIGHTNESS == -1
-#undef BRIGHTNESS
-										#define BRIGHTNESS 1.1
+#if OVERWORLD_BRIGHTNESS == -1
+#undef OVERWORLD_BRIGHTNESS
+										#define OVERWORLD_BRIGHTNESS 1.1
+#endif
+#if NETHER_BRIGHTNESS == -1
+#undef NETHER_BRIGHTNESS
+										#define NETHER_BRIGHTNESS 0.95
+#endif
+#if END_BRIGHTNESS == -1
+#undef END_BRIGHTNESS
+										#define END_BRIGHTNESS 1.1
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED
@@ -1219,11 +1227,11 @@
 #endif
 #if END_CLOUDS_CONVERAGE == -1
 #undef END_CLOUDS_CONVERAGE
-										#define END_CLOUDS_CONVERAGE 0.75
+										#define END_CLOUDS_CONVERAGE 0.7
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
-										#define END_CLOUDS_TRANSPARENCY 0.7
+										#define END_CLOUDS_TRANSPARENCY 0.2
 #endif
 
 

@@ -1,7 +1,8 @@
-- v1.1.3
+- v1.1.3 (25/12/16)
   - Added Voxy compatibility
   - Added end clouds (configurable) and replaced end sky
   - Added colorwheel support
+  - Split setting 'Brightness' into overworld, nether, and end variants
   - Fixed motion blur
   - Fixed misc bugs
 
@@ -37,7 +38,7 @@
   - Added 'Fancy Nether Portals' setting (enabled by default)
   - Added 'Snowy Tweaks' setting (eanbled by default)
   - Added 'Foliage Tint Red/Green/Blue' settings
-  - Split setting 'Contrast' into surface and underground values
+  - Split setting 'Contrast' into surface and underground variants
   - Removed setting 'Cloud Transparency (Realistic)'
   - Improved performance and effects quality
     - Added separate temporal filtering for sunrays and realistic clouds

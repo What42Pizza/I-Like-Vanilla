@@ -302,7 +302,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_RED_MULT == -1
 #undef NETHER_BLOCKLIGHT_RED_MULT
-										#define NETHER_BLOCKLIGHT_RED_MULT 1.05
+										#define NETHER_BLOCKLIGHT_RED_MULT 1.0
 #endif
 #if NETHER_BLOCKLIGHT_GREEN_MULT == -1
 #undef NETHER_BLOCKLIGHT_GREEN_MULT
@@ -310,7 +310,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BLUE_MULT == -1
 #undef NETHER_BLOCKLIGHT_BLUE_MULT
-										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.6
+										#define NETHER_BLOCKLIGHT_BLUE_MULT 0.65
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
@@ -431,7 +431,7 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 0.85
+										#define BLOOM_NETHER_AMOUNT 0.9
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
@@ -715,9 +715,17 @@
 #undef GAMMA
 										#define GAMMA 0
 #endif
-#if BRIGHTNESS == -1
-#undef BRIGHTNESS
-										#define BRIGHTNESS 1.0
+#if OVERWORLD_BRIGHTNESS == -1
+#undef OVERWORLD_BRIGHTNESS
+										#define OVERWORLD_BRIGHTNESS 1.0
+#endif
+#if NETHER_BRIGHTNESS == -1
+#undef NETHER_BRIGHTNESS
+										#define NETHER_BRIGHTNESS 1.0
+#endif
+#if END_BRIGHTNESS == -1
+#undef END_BRIGHTNESS
+										#define END_BRIGHTNESS 1.1
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED
@@ -1207,7 +1215,7 @@
 #endif
 #if NETHER_CLOUDS_TRANSPARENCY == -1
 #undef NETHER_CLOUDS_TRANSPARENCY
-										#define NETHER_CLOUDS_TRANSPARENCY 0.85
+										#define NETHER_CLOUDS_TRANSPARENCY 0.8
 #endif
 
 
@@ -1228,7 +1236,7 @@
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
-										#define END_CLOUDS_TRANSPARENCY 0.6
+										#define END_CLOUDS_TRANSPARENCY 0.35
 #endif
 
 
@@ -1289,7 +1297,7 @@
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 0.1
+										#define END_FOG_DENSITY 0.2
 #endif
 
 

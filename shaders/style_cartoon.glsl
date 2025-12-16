@@ -715,9 +715,17 @@
 #undef GAMMA
 										#define GAMMA 0
 #endif
-#if BRIGHTNESS == -1
-#undef BRIGHTNESS
-										#define BRIGHTNESS 1.05
+#if OVERWORLD_BRIGHTNESS == -1
+#undef OVERWORLD_BRIGHTNESS
+										#define OVERWORLD_BRIGHTNESS 1.05
+#endif
+#if NETHER_BRIGHTNESS == -1
+#undef NETHER_BRIGHTNESS
+										#define NETHER_BRIGHTNESS 1.05
+#endif
+#if END_BRIGHTNESS == -1
+#undef END_BRIGHTNESS
+										#define END_BRIGHTNESS 1.05
 #endif
 #if AUTO_EXPOSURE_ENABLED == -1
 #undef AUTO_EXPOSURE_ENABLED

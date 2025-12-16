@@ -85,7 +85,7 @@ void main() {
 		float distMult = max(playerPos.y + cameraPosition.y - 30.0, 0.0);
 		distMult = 24.0 / (distMult + 6.0);
 	#elif defined END
-		distMult = 1.0;
+		const float distMult = 1.0;
 	#endif
 	
 	
@@ -121,7 +121,11 @@ void main() {
 	vec3 atmoFogColor = atmoFogColor;
 	float fogDensity = fogDensity;
 	if (isEyeInWater == 0) {
-		atmoFogColor = getSkyColor(normalize(viewPos), false);
+		#ifdef END
+			atmoFogColor = vec3(0.4, 0.2, 0.5);
+		#else
+			atmoFogColor = getSkyColor(normalize(viewPos), false);
+		#endif
 		atmoFogColor *= 1.0 - blindness;
 		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
@@ -145,9 +149,11 @@ void main() {
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
-	float desaturationAmount = max(1.0 - 700.0 / (playerPos.y + cameraPosition.y - 64.0 + 700.0), 0.0);
-	desaturationAmount *= 1.0 - fogAmount;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - desaturationAmount);
+	#ifdef OVERWORLD
+		float desaturationAmount = max(1.0 - 700.0 / (playerPos.y + cameraPosition.y - 64.0 + 700.0), 0.0);
+		desaturationAmount *= 1.0 - fogAmount;
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - desaturationAmount);
+	#endif
 	
 	
 	

@@ -34,7 +34,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	export_shader(&project_path, &export_path, &version, false, "", options)?;
 	println!("Done");
 	for style in STYLES {
-		println!("Exporting for OptiFine... ({style} style)");
+		println!("Exporting for OptiFine... ({style} Style)");
 		export_shader(&project_path, &export_path, &version, true, style, options)?;
 		println!("Done");
 	}
@@ -49,7 +49,7 @@ pub fn function(args: &[String]) -> Result<()> {
 pub fn export_shader<T: FileOptionExtension + Clone>(project_path: &Path, export_path: &Path, version: &str, is_optifine: bool, style_name: &str, zip_options: FileOptions<T>) -> Result<()> {
 	
 	let output_file_name = if is_optifine {
-		format!("I Like Vanilla {version} (Optifine, {style_name} style).zip")
+		format!("I Like Vanilla {version} (Optifine, {style_name} Style).zip")
 	} else {
 		format!("I Like Vanilla {version}.zip")
 	};

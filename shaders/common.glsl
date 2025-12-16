@@ -36,12 +36,10 @@ const float HALF_PI = PI / 2.0;
 
 // misc defines
 
-#ifndef SHADER_VOXY
-	#ifdef FSH
-		#define in_out in
-	#else
-		#define in_out out
-	#endif
+#ifdef FSH
+	#define in_out in
+#else
+	#define in_out out
 #endif
 
 
@@ -108,19 +106,6 @@ vec3 pow3(vec3 v) {
 	return v * v * v;
 }
 
-float maxAbs(vec2 v) {
-	float r = abs(v.r);
-	float g = abs(v.g);
-	return max(r, g);
-}
-
-float maxAbs(vec3 v) {
-	float r = abs(v.r);
-	float g = abs(v.g);
-	float b = abs(v.b);
-	return max(max(r, g), b);
-}
-
 float getLum(vec3 color) {
 	return dot(color, vec3(0.299, 0.587, 0.114));
 }
@@ -146,17 +131,17 @@ vec3 hsvToRgb(vec3 c) {
 	return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
-vec3 smoothMin(vec3 v1, vec3 v2, float a) {
-	float v1Lum = getLum(v1);
-	float v2Lum = getLum(v2);
-	return (v1 + v2 - sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
-}
+//vec3 smoothMin(vec3 v1, vec3 v2, float a) {
+//	float v1Lum = getLum(v1);
+//	float v2Lum = getLum(v2);
+//	return (v1 + v2 - sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
+//}
 
-vec3 smoothMax(vec3 v1, vec3 v2, float a) {
-	float v1Lum = getLum(v1);
-	float v2Lum = getLum(v2);
-	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
-}
+//vec3 smoothMax(vec3 v1, vec3 v2, float a) {
+//	float v1Lum = getLum(v1);
+//	float v2Lum = getLum(v2);
+//	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
+//}
 
 float percentThrough(float v, float low, float high) {
 	return clamp((v - low) / (high - low), 0.0, 1.0);
@@ -304,16 +289,6 @@ float valueNoise3(vec3 v) {
 	float l = mix(ll, lh, u.y);
 	float h = mix(hl, hh, u.y);
 	return mix(l, h, u.x);
-}
-
-vec2 projectOntoPlane(vec3 p, vec3 normal) {
-	// Create two vectors perpendicular to the normal (tangent space basis)
-	vec3 tangent = normalize(abs(normal.x) > 0.5 ? cross(normal, vec3(0.0, 1.0, 0.0)) 
-												 : cross(normal, vec3(1.0, 0.0, 0.0)));
-	vec3 bitangent = cross(normal, tangent);
-
-	// Project point onto the 2D plane basis
-	return vec2(dot(p, tangent), dot(p, bitangent));
 }
 
 

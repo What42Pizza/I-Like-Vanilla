@@ -22,7 +22,7 @@ pub const EXPORT_FILES: &[FileCopyData] = &[
 
 
 
-pub const STYLES: &[&str] = &["vanilla", "fantasy", "realistic"];//, "cartoon"
+pub const STYLES: &[&str] = &["Vanilla", "Fantasy", "Realistic"];//, "cartoon"
 
 
 

@@ -895,9 +895,17 @@ option.GAMMA=Gamma
 option.GAMMA.comment=Gamma applied to the final image, roughly equivalent to the inverse of saturation
 value.GAMMA.-1=Use Style
 
-option.BRIGHTNESS=Brightness
-option.BRIGHTNESS.comment=Brightness applied to the final image
-value.BRIGHTNESS.-1=Use Style
+option.OVERWORLD_BRIGHTNESS=Brightness (Overworld)
+option.OVERWORLD_BRIGHTNESS.comment=Brightness applied to the final image (when in the overworld)
+value.OVERWORLD_BRIGHTNESS.-1=Use Style
+
+option.NETHER_BRIGHTNESS=Brightness (Nether)
+option.NETHER_BRIGHTNESS.comment=Brightness applied to the final image (when in the nether)
+value.NETHER_BRIGHTNESS.-1=Use Style
+
+option.END_BRIGHTNESS=Brightness (End)
+option.END_BRIGHTNESS.comment=Brightness applied to the final image (when in the end)
+value.END_BRIGHTNESS.-1=Use Style
 
 option.AUTO_EXPOSURE_ENABLED=Auto Exposure Enabled
 option.AUTO_EXPOSURE_ENABLED.comment=Changes brightness based on blocklight and skylight

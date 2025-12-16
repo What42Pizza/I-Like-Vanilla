@@ -19,7 +19,7 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - **Colorblindness Correction**
 - **Isometric Rendering**
 - **Volumetric Clouds** (optional, disabled in default config)
-- **Distant Horizons Support**
+- **Voxy and Distant Horizons Support**
 - **Colorwheel support**
 - **Shadows**
 - **Reflections**

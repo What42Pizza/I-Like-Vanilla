@@ -17,6 +17,8 @@ Shaders typically fall into one of two camps: completely overhauling minecraft's
 - Interesting and Exciting
 - Performant
 
+### Now supports Voxy and Colorwheel!
+
 <br>
 
 ## Installation:
