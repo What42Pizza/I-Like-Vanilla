@@ -5,7 +5,6 @@ Add situational effects:
 	end portal (& gateway) effects
 Make most (all that can) settings be relative to style value
 Update documentation
-Fix far-away reflections
 Make sure all vanilla effects work
 Separate depth sunrays and vol sunrays settings
 Add settings for temporal filter

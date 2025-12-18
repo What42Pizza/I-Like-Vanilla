@@ -131,7 +131,7 @@ pub fn export_shader<T: FileOptionExtension + Clone>(project_path: &Path, export
 pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_name: &str) -> Result<Vec<u8>> {
 	
 	// get setting values
-	let style_file_path = project_path.join("shaders").join(format!("style_{style_name}.glsl"));
+	let style_file_path = project_path.join("shaders").join(format!("style_{}.glsl", style_name.to_lowercase()));
 	let default_settings_contents = fs::read_to_string(&style_file_path)?;
 	let mut default_settings = HashMap::new();
 	for (i, line) in default_settings_contents.lines().enumerate() {
