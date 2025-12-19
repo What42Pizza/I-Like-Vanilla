@@ -80,10 +80,14 @@ void main() {
 	
 	#ifdef OVERWORLD
 		float distMult = max(playerPos.y + cameraPosition.y - 64.0, 0.0);
-		distMult = 16.0 / (distMult + 16.0);
+		const float distMultAmplitude = 1.5;
+		const float distMultSlope = 20.0;
+		distMult = distMultAmplitude * distMultSlope / (distMult + distMultSlope);
 	#elif defined NETHER
 		float distMult = max(playerPos.y + cameraPosition.y - 30.0, 0.0);
-		distMult = 24.0 / (distMult + 6.0);
+		const float distMultAmplitude = 3.0;
+		const float distMultSlope = 6.0;
+		distMult = distMultAmplitude * distMultSlope / (distMult + distMultSlope);
 	#elif defined END
 		const float distMult = 1.0;
 	#endif
