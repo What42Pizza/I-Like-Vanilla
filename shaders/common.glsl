@@ -54,7 +54,7 @@ const float HALF_PI = PI / 2.0;
 #define SKY_OBJECTS_TEXTURE         colortex5
 #define NOISY_RENDERS_TEXTURE       colortex6
 #define PREV_DEPTH_TEXTURE          colortex7
-#define VOXY_TRANSPARENCTS_TEXTURE  colortex8
+#define VOXY_TRANSPARENTS_TEXTURE  colortex8
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1

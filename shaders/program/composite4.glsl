@@ -17,7 +17,7 @@ in_out vec2 texcoord;
 
 
 #if REFLECTIONS_ENABLED == 1
-	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, vec2 lmcoord, float reflectionStrength) {
+	void doReflections(inout vec3 color, float depth, float dhDepth, vec3 normal, vec3 viewPos, vec2 lmcoord, float reflectionStrength) {
 		
 		if (depthIsHand(depth)) return;
 		#ifdef DISTANT_HORIZONS
@@ -26,9 +26,6 @@ in_out vec2 texcoord;
 			if (depth == 1.0) return;
 		#endif
 		
-		vec3 screenPos = vec3(texcoord, depth);
-		//screenPos.xy = floor(screenPos.xy * 256 * vec2(aspectRatio, 1)) / 256 * vec2(invAspectRatio, 1);
-		vec3 viewPos = screenToView(screenPos);
 		#ifdef DISTANT_HORIZONS
 			if (depth == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth));
 		#endif
@@ -64,10 +61,13 @@ void main() {
 			float dhDepth1 = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 			useTransparentData = useTransparentData || dhDepth0 < dhDepth1;
 		#endif
+		vec3 screenPos = vec3(texcoord, depth0);
+		vec3 viewPos = screenToView(screenPos);
 		#ifdef VOXY
 			float vxDepth0 = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
 			float vxDepth1 = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
-			useTransparentData = useTransparentData || vxDepth0 < vxDepth1;
+			vec3 viewPosVx = screenToViewVx(vec3(texcoord, vxDepth0));
+			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - 0.5);
 		#endif
 		if (useTransparentData) {
 			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
@@ -88,9 +88,9 @@ void main() {
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS
-				doReflections(color, depth0, dhDepth0, normal, lmcoord, reflectionStrength);
+				doReflections(color, depth0, dhDepth0, normal, viewPos, lmcoord, reflectionStrength);
 			#else
-				doReflections(color, depth0, 0.0, normal, lmcoord, reflectionStrength);
+				doReflections(color, depth0, 0.0, normal, viewPos, lmcoord, reflectionStrength);
 			#endif
 		}
 		

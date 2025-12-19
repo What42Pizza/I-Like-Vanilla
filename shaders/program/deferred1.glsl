@@ -85,15 +85,21 @@ void main() {
 		
 		#ifdef VOXY
 			
-			if (texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r < 0.995 && !depthIsHand(depth)) {
+			float voxyOpaqueDepth = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
+			vec3 voxyOpaqueViewPos = screenToViewVx(vec3(texcoord, voxyOpaqueDepth));
+			if (voxyOpaqueViewPos.z > viewPos.z - 0.5) {
 				float vxAo = getVoxyAoAmount(normal);
 				color *= 1.03 - vxAo * 0.45;
 			}
 			
-			vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENCTS_TEXTURE, texelcoord, 0);
-			voxyTransparents.rgb *= 2.0;
-			voxyTransparents.a *= uint(!depthIsHand(depth));
-			color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
+			float voxyTransparentDepth = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+			vec3 voxyTransparentViewPos = screenToViewVx(vec3(texcoord, voxyTransparentDepth));
+			if (voxyTransparentViewPos.z > viewPos.z - 0.5) {
+				vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENTS_TEXTURE, texelcoord, 0);
+				voxyTransparents.rgb *= 2.0;
+				voxyTransparents.a *= uint(!depthIsHand(depth));
+				color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
+			}
 			
 		#endif
 		
