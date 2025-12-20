@@ -49,8 +49,9 @@ void main() {
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
-		float reflectiveness = 0.0;
-		float specularness = 0.0;
+		vec2 specularAndReflectiveness = texture(specular, texcoord).rg;
+		float reflectiveness = specularAndReflectiveness.g;
+		float specularness = sqrt(specularAndReflectiveness.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
         normal.xy -= 0.5;
 		normal.xy *= PBR_NORMALS_AMOUNT;
@@ -59,6 +60,7 @@ void main() {
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
+	reflectiveness *= mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
 	
 	
 	// get texture color

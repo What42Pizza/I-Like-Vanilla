@@ -304,7 +304,9 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
 		specular *= 1.0 - betterRainStrength;
 		vec3 specularColor = shadowcasterLight * (sunAngle < 0.5 ? vec3(1.0, 1.0, 0.5) : vec3(0.5, 0.7, 0.9) * 0.75);
-		specularness *= 1.0 - getSaturation(color);
+		#if PBR_TYPE == 0
+			specularness *= 1.0 - getSaturation(color);
+		#endif
 		lighting += specularColor * specular * (0.1 + 0.9 * specularness) * shadowBrightness;
 	#endif
 	

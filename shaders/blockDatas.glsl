@@ -39,8 +39,8 @@ if (materialId < 1570u) { // 0..1570
 	} else { // 1500..1570
 		SET_VOXEL_ID(materialId - 1500u + 2u);
 		if (materialId < 1532u) { // 1500..1532
-			// glass
-			SET_REFLECTIVENESS(0.3);
+			// glass panes
+			SET_REFLECTIVENESS(0.4);
 			SET_SPECULARNESS(1.0);
 		} else { // 1532..1570
 			// candles
@@ -64,7 +64,7 @@ if (materialId < 1570u) { // 0..1570
 						SET_VOXEL_ID(101u);
 					} else {
 						// ice
-						SET_REFLECTIVENESS(0.4);
+						SET_REFLECTIVENESS(1.0);
 						SET_SPECULARNESS(0.5);
 						SET_VOXEL_ID(110u);
 					}
@@ -72,7 +72,7 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId < 1575u) { // 1573..1575
 						if (materialId == 1573u) {
 							// tinted glass
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(0.5);
 							SET_SPECULARNESS(0.5);
 							SET_VOXEL_ID(111u);
 						} else {
@@ -83,11 +83,12 @@ if (materialId < 1570u) { // 0..1570
 					} else { // 1575..1580
 						if (materialId == 1575u) {
 							// slime block
-							SET_REFLECTIVENESS(0.2);
+							SET_REFLECTIVENESS(0.6);
 							SET_SPECULARNESS(0.3);
 							SET_VOXEL_ID(112u);
 						} else {
-							SET_REFLECTIVENESS(0.25);
+							// honey block
+							SET_REFLECTIVENESS(0.75);
 							SET_SPECULARNESS(0.3);
 							SET_VOXEL_ID(113u);
 						}
@@ -181,21 +182,21 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId < 1602u) { // 1600..1602
 						if (materialId == 1600u) {
 							// small amethyst bud
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						} else {
 							// medium amethyst bud
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						}
 					} else { // 1602..1610
 						if (materialId == 1602u) {
 							// large amethyst bud
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						} else {
 							// amethyst cluster
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						}
 					}
@@ -203,7 +204,7 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId < 1613u) { // 1600..1613
 						if (materialId == 1610u) {
 							// glowstone
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							TWEAK_GLCOLOR_BRIGHTNESS(1.25);
 						} else if (materialId == 1611u) {
 							// shroomlight
@@ -236,16 +237,16 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId < 1623u) { // 1620..1623
 						if (materialId == 1620u) {
 							// amethyst block, etc
-							SET_REFLECTIVENESS(0.4);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						} else if (materialId == 1621u) {
 							// quartz, etc
-							SET_REFLECTIVENESS(0.2);
+							SET_REFLECTIVENESS(0.6);
 							SET_SPECULARNESS(0.5);
 							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 						} else {
 							// smooth quartz, etc
-							SET_REFLECTIVENESS(0.2);
+							SET_REFLECTIVENESS(0.6);
 							SET_SPECULARNESS(0.5);
 							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 						}
@@ -256,7 +257,7 @@ if (materialId < 1570u) { // 0..1570
 							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 						} else if (materialId == 1624u) {
 							// packed ice, etc
-							SET_REFLECTIVENESS(0.45);
+							SET_REFLECTIVENESS(1.0);
 							SET_SPECULARNESS(0.5);
 						} else {
 							// raw iron block, etc
@@ -278,11 +279,11 @@ if (materialId < 1570u) { // 0..1570
 					} else { // 1632..1640
 						if (materialId == 1632u) {
 							// polished granite, etc
-							SET_REFLECTIVENESS(0.3);
+							SET_REFLECTIVENESS(0.9);
 							SET_SPECULARNESS(0.35);
 						} else {
 							// prismarine bricks, etc
-							SET_REFLECTIVENESS(0.3);
+							SET_REFLECTIVENESS(0.9);
 							SET_SPECULARNESS(0.4);
 						}
 					}
@@ -293,12 +294,12 @@ if (materialId < 1570u) { // 0..1570
 						if (materialId < 1642u) { // 1640..1642
 							if (materialId == 1640u) {
 								// iron block, etc
-								SET_REFLECTIVENESS(0.2);
+								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.3);
 								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 							} else {
 								// valuable blocks
-								SET_REFLECTIVENESS(0.2);
+								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.3);
 							}
 						} else { // 1642..1650
@@ -335,7 +336,7 @@ if (materialId < 1570u) { // 0..1570
 							if (materialId < 1662u) { // 1660..1662
 								if (materialId == 1660u) {
 									// netherrak
-									SET_REFLECTIVENESS(0.08);
+									SET_REFLECTIVENESS(0.25);
 								} else {
 									// bone block
 									
@@ -430,7 +431,7 @@ if (materialId < 1570u) { // 0..1570
 									);
 								} else if (materialId == 1708u) {
 									// nether gold ore
-									SET_REFLECTIVENESS(0.1);
+									SET_REFLECTIVENESS(0.3);
 									SET_GLOWING_COLOR(
 										vec3( 7.0, 29.0,  78.0),
 										vec3(20.0, 85.4, 100.0),
@@ -438,7 +439,7 @@ if (materialId < 1570u) { // 0..1570
 									);
 								} else {
 									// nether quartz ore
-									SET_REFLECTIVENESS(0.1);
+									SET_REFLECTIVENESS(0.3);
 									SET_GLOWING_COLOR(
 										vec3(  0.0,  6.5, 72.5),
 										vec3(100.0, 30.3, 90.6),
