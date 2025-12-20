@@ -35,10 +35,16 @@ value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
 
 screen.PBR_MATERIALS_MENU=PBR Materials
+screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when PBR Type is not set to Internal
 
 option.PBR_NORMALS_AMOUNT=PBR Normals Amount
 option.PBR_NORMALS_AMOUNT.comment=How much effect the pbr normals have
 value.PBR_NORMALS_AMOUNT.-1=Use Style
+
+option.POM_ENABLED=POM Enabled
+option.POM_ENABLED.comment=Adds fake depth to textures (with compatible pbr packs)
+value.POM_ENABLED.0=Off
+value.POM_ENABLED.1=On
 
 
 
@@ -49,6 +55,8 @@ screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when PBR Type is s
 
 option.EMESSIVE_TEXTURES_ENABLED=Emissive Textues Enabled
 option.EMESSIVE_TEXTURES_ENABLED.comment=Enabled glowing ores, glowing stems, etc
+value.EMESSIVE_TEXTURES_ENABLED.0=Off
+value.EMESSIVE_TEXTURES_ENABLED.1=On
 
 option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
 option.GLOWING_ORES_STRENGTH.comment=The strength of the glowing ores effect

@@ -8,6 +8,8 @@ flat in_out vec2 encodedNormal;
 
 void main() {
 	vec4 color = glcolor;
+	color.a = 0.5 + 0.5 * color.a;
+	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);

@@ -1,4 +1,5 @@
 - v1.1.4
+  - Added support for basic PBR data
   - Fixed misc bugs
 
 <br>
