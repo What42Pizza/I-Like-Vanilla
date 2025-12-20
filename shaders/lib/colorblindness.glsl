@@ -18,13 +18,13 @@ void applyColorblindnessCorrection(inout vec3 color) {
 	#elif COLORBLIND_MODE == 2
 		// Deuteranopia
 		l = 1.0 * L + 0.0 * M + 0.0 * S;
-    	m = 0.494207 * L + 0.0 * M + 1.24827 * S;
-    	s = 0.0 * L + 0.0 * M + 1.0 * S;
+		m = 0.494207 * L + 0.0 * M + 1.24827 * S;
+		s = 0.0 * L + 0.0 * M + 1.0 * S;
 	#elif COLORBLIND_MODE == 3
 		// Tritanopia
 		l = 1.0 * L + 0.0 * M + 0.0 * S;
-    	m = 0.0 * L + 1.0 * M + 0.0 * S;
-    	s = -0.395913 * L + 0.801109 * M + 0.0 * S;
+		m = 0.0 * L + 1.0 * M + 0.0 * S;
+		s = -0.395913 * L + 0.801109 * M + 0.0 * S;
 	#endif
 	
 	vec3 error;

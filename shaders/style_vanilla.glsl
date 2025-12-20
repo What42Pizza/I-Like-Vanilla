@@ -9,7 +9,7 @@
 
 #if PBR_NORMALS_AMOUNT == -1
 #undef PBR_NORMALS_AMOUNT
-										#define PBR_NORMALS_AMOUNT 0.4
+										#define PBR_NORMALS_AMOUNT 0.5
 #endif
 
 

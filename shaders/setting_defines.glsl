@@ -2,7 +2,7 @@
 
 
 
-#define PBR_TYPE 1 // [0 1]
+#define PBR_TYPE 0 // [0 1]
 #define FANCY_NETHER_PORTAL_ENABLED -1 // [-1 0 1]
 
 

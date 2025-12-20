@@ -23,9 +23,9 @@ void main() {
 	
 	#if PBR_TYPE == 1
 		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal.xy += 0.5;
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);

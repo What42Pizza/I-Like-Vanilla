@@ -49,13 +49,13 @@ void main() {
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
-		vec2 specularAndReflectiveness = texture(specular, texcoord).rg;
-		float reflectiveness = specularAndReflectiveness.g;
-		float specularness = sqrt(specularAndReflectiveness.r);
+		vec2 pbrData = texture(specular, texcoord).rg;
+		float reflectiveness = pbrData.g;
+		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal.xy += 0.5;
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
@@ -201,6 +201,14 @@ void main() {
 		if ((encodedData & 1u) == 1u && encodedData > 1u) {
 			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 		}
+        //eastVec.x, northVec.x, normal.x,
+        //eastVec.y, northVec.y, normal.y,
+        //eastVec.z, northVec.z, normal.z
+		//tbn = mat3(
+		//	tbn[0].x, tbn[1].x, tbn[2].x,
+		//	tbn[0].y, tbn[1].y, tbn[2].y,
+		//	tbn[0].z, tbn[1].z, tbn[2].z
+		//);
 	#endif
 	
 	

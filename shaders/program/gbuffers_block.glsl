@@ -18,32 +18,39 @@ void main() {
 	vec2 lmcoord = lmcoord;
 	
 	
+	// get pbr data
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
-		float reflectiveness = 0.0;
-		float specularness = 0.0;
+		vec2 pbrData = texture(specular, texcoord).rg;
+		float reflectiveness = pbrData.g;
+		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal.xy += 0.5;
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
+	reflectiveness *= mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
 	
 	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	if (color.a < 0.01) discard;
-	
-	
-	#if PBR_TYPE == 0
-		reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
-	#endif
+	// get texture color
+	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
+	if (rawColor.a < 0.01) discard;
+	vec4 color = rawColor;
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
+	
+	
+	// misc
+	
+	#if PBR_TYPE == 0
+		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
+	#endif
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -75,24 +82,8 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 
-//vec2 Project3DPointTo2D(vec3 point, vec3 planeOrigin, vec3 planeNormal) {
-//	// Step 1: Project the point onto the plane
-//	vec3 toPoint = point - planeOrigin;
-//	vec3 normal = normalize(planeNormal);
-//	vec3 projected = point - dot(toPoint, normal) * normal;
-
-//	// Step 2: Create 2D basis vectors (u and v) on the plane
-//	vec3 x = cross(normal, vec3(0.0, 1.0, 0.0));
-//	if (dot(x, x) < 0.001) x = cross(normal, vec3(1.0, 0.0, 0.0));
-//	x = normalize(x);
-//	vec3 y = cross(normal, x);
-
-//	// Step 3: Get 2D coordinates
-//	vec3 relative = projected - planeOrigin;
-//	return vec2(dot(relative, x), dot(relative, y));
-//}
-
 void main() {
+	// get basics
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
@@ -100,6 +91,8 @@ void main() {
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
+	
+	// process gl_Color (foliage tint, vanilla ao)
 	vec4 glcolor4 = gl_Color;
 	#if SHADOWS_ENABLED == 1
 		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a * 2.0) * 0.3333; // kinda like squaring but not as intense
@@ -107,10 +100,14 @@ void main() {
 		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a) * 0.5; // kinda like squaring but not as intense
 	#endif
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
-	lmcoord.x *= 0.95;
 	glcolor = glcolor4.rgb * ao;
 	
+	
+	// block id stuff
 	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
+	
+	
+	// process normals
 	
 	vec3 normal = gl_NormalMatrix * gl_Normal;
 	
@@ -125,6 +122,7 @@ void main() {
 	#endif
 	
 	
+	// get block data
 	#if PBR_TYPE == 0
 		#define GET_REFLECTIVENESS
 		#define GET_SPECULARNESS
@@ -136,7 +134,7 @@ void main() {
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);
 	#else
-		gl_Position = gl_ProjectionMatrix * startMat(viewPos);
+		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
 	#endif
 	
 	

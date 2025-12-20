@@ -12,8 +12,10 @@ in_out vec3 playerPos;
 	flat in_out vec3 normal;
 #endif
 flat in_out uint materialId;
-flat in_out float reflectiveness;
-flat in_out float specularness;
+#if PBR_TYPE == 0
+	flat in_out float reflectiveness;
+	flat in_out float specularness;
+#endif
 
 flat in_out vec2 midTexCoord;
 flat in_out vec2 midCoordOffset;
@@ -43,6 +45,8 @@ flat in_out vec3 shadowcasterLight;
 
 void main() {
 	
+	
+	// fade distant terrain
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
 		#if TEMPORAL_FILTER_ENABLED == 1
@@ -59,29 +63,51 @@ void main() {
 	#endif
 	
 	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	float reflectiveness = reflectiveness;
-	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
+	// get pbr data
+	#if PBR_TYPE == 0
+		float reflectiveness = reflectiveness;
+	#elif PBR_TYPE == 1
+		vec2 pbrData = texture(specular, texcoord).rg;
+		float reflectiveness = pbrData.g;
+		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), uint(materialId == 1570u));
+		float specularness = sqrt(pbrData.r);
+		vec3 normal = texture2D(normals, texcoord).rgb;
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy += 0.5;
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = tbn * normal;
+		vec2 encodedNormal = encodeNormal(normal);
+	#endif
+	float reflectivenessMult = mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
+	reflectiveness *= 1.0 - uint(materialId != 1570u) * (1.0 - reflectivenessMult);
+	
+	
+	// get texture color
+	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
+	if (rawColor.a < 0.01) discard;
+	vec4 color = rawColor;
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color *= glcolor;
 	
 	
+	// misc
+	
+	#if PBR_TYPE == 0
+		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
+	#endif
+	
 	#if WAVING_WATER_SURFACE_ENABLED == 1 && PBR_TYPE == 0
 		vec3 normal = normal;
 	#endif
 	
-	#if PBR_TYPE == 1
-		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal.xy += 0.5;
-		normal = normalize(normal * 2.0 - 1.0);
-		normal = tbn * normal;
-	#endif
+	
+	// block-specific effects
 	
 	
+	// water
 	if (materialId == 1570u) {
 		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
@@ -218,8 +244,10 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	materialId = uint(max(int(mc_Entity.x) - 10000, 0));
-	#define GET_REFLECTIVENESS
-	#define GET_SPECULARNESS
+	#if PBR_TYPE == 0
+		#define GET_REFLECTIVENESS
+		#define GET_SPECULARNESS
+	#endif
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/blockDatas.glsl"
 	

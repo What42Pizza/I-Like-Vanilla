@@ -28,13 +28,20 @@ void main() {
 	}
 	
 	
-	#if PBR_TYPE == 1
+	#if PBR_TYPE == 0
+		float reflectiveness = 0.0;
+		float specularness = 0.3;
+	#elif PBR_TYPE == 1
+		vec2 pbrData = texture(specular, texcoord).rg;
+		float reflectiveness = pbrData.g;
+		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal.xy += 0.5;
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
+		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	
 	
@@ -47,7 +54,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(0.0, 0.3),
+		pack_2x8(reflectiveness, specularness),
 		normal
 	);
 	
