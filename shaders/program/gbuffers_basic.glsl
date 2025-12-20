@@ -1,4 +1,6 @@
+in_out vec2 lmcoord;
 flat in_out vec4 glcolor;
+flat in_out vec2 encodedNormal;
 
 
 
@@ -6,9 +8,14 @@ flat in_out vec4 glcolor;
 
 void main() {
 	vec4 color = glcolor;
-	/* DRAWBUFFERS:0 */
+	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
+	gl_FragData[1] = vec4(
+		pack_2x8(lmcoord),
+		pack_2x8(0.0, 0.3),
+		encodedNormal
+	);
 }
 
 #endif
@@ -25,7 +32,10 @@ void main() {
 #endif
 
 void main() {
+	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
+	adjustLmcoord(lmcoord);
 	glcolor = gl_Color;
+	encodedNormal = encodeNormal(gbufferModelView[1].xyz);
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);

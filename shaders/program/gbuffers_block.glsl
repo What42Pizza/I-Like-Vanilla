@@ -1,7 +1,9 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
-flat in_out vec2 encodedNormal;
+#if PBR_TYPE == 0
+	flat in_out vec2 encodedNormal;
+#endif
 in_out vec3 playerPos;
 #if PBR_TYPE == 0
 	flat in_out float reflectiveness;
