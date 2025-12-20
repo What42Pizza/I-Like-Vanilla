@@ -1398,15 +1398,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.35
+										#define SKY_HORIZON_DAY_RED 0.45
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.55
+										#define SKY_HORIZON_DAY_GREEN 0.6
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 0.8
+										#define SKY_HORIZON_DAY_BLUE 0.85
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED

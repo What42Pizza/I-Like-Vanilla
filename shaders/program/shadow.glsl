@@ -60,8 +60,8 @@ void main() {
 		applyWaving(playerPos.xyz, materialId);
 	#endif
 	
-	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 1570u) {
+	if (materialId == 1570u) {
+		#if PHYSICALLY_WAVING_WATER_ENABLED == 1
 			float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
@@ -71,9 +71,11 @@ void main() {
 			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.015 * wavingAmount;
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y += 0.07; // offset shadow bias
-		}
-	#endif
+			playerPos.y -= 0.125 / (1.0 + length(playerPos.xz));
+		#endif
+		//playerPos += (mat3(gbufferModelViewInverse) * shadowLightPosition) * (0.0025 + 0.0001 * length(playerPos)); // offset shadow bias
+		playerPos.y += 0.075; // offset shadow bias
+	}
 	
 	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1 || COLORED_LIGHTING_ENABLED == 1
 		gl_Position = shadowProjection * shadowModelView * vec4(playerPos, 1.0);

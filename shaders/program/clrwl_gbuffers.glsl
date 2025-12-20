@@ -101,7 +101,7 @@ void main() {
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);
 	#else
-		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
+		gl_Position = gl_ProjectionMatrix * startMat(viewPos);
 	#endif
 	
 	

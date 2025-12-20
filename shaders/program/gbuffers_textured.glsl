@@ -1,7 +1,11 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
-flat in_out vec3 normal;
+#if PBR_TYPE == 0
+	flat in_out vec3 normal;
+#elif PBR_TYPE == 1
+	flat in_out mat3 tbn;
+#endif
 in_out vec3 viewPos;
 in_out float blockDepth;
 
@@ -22,6 +26,16 @@ void main() {
 		float transparency = percentThrough(blockDepth, 0.5, 1.2);
 		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	}
+	
+	
+	#if PBR_TYPE == 1
+		vec3 normal = texture2D(normals, texcoord).rgb;
+        normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT;
+        normal.xy += 0.5;
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = tbn * normal;
+	#endif
 	
 	
 	// main lighting
@@ -62,7 +76,15 @@ void main() {
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
 	glcolor.a = sqrt(glcolor.a);
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
 	normal = gl_NormalMatrix * gl_Normal;
+	#if PBR_TYPE == 1
+		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
+		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
+		tbn = mat3(tangent, bitangent, normal);
+	#endif
 	
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	blockDepth = length(viewPos);

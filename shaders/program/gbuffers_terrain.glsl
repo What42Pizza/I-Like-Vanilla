@@ -27,6 +27,8 @@ in_out vec3 playerPos;
 void main() {
 	vec2 lmcoord = lmcoord;
 	
+	
+	// fade distant terrain
 	#ifdef DISTANT_HORIZONS
 		float dither = bayer64(gl_FragCoord.xy);
 		#if TEMPORAL_FILTER_ENABLED == 1
@@ -43,26 +45,36 @@ void main() {
 	#endif
 	
 	
+	// get pbr data
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
 		float reflectiveness = 0.0;
 		float specularness = 0.0;
 		vec3 normal = texture2D(normals, texcoord).rgb;
-        normal -= vec3(0.5, 0.5, 0.0);
+        normal.xy -= 0.5;
 		normal.xy *= PBR_NORMALS_AMOUNT;
-        normal += vec3(0.5, 0.5, 0.0);
+        normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	
 	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	if (color.a < 0.01) discard;
+	// get texture color
+	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
+	if (rawColor.a < 0.01) discard;
+	vec4 color = rawColor;
+	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
+	color.rgb = clamp(color.rgb, 0.0, 1.0);
+	color.rgb *= glcolor;
+	
+	
+	// misc
 	
 	#if EMISSIVE_TEXTURED_ENABLED == 1
-		vec3 hsv = rgbToHsv(color.rgb);
+		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
 			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
@@ -70,13 +82,8 @@ void main() {
 	#endif
 	
 	#if PBR_TYPE == 0
-		reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
+		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
 	#endif
-	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
-	color.rgb = clamp(color.rgb, 0.0, 1.0);
-	color.rgb *= glcolor;
-	
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		if (isDangerousLight > 0.0) {
@@ -136,6 +143,7 @@ void main() {
 //}
 
 void main() {
+	// get basics
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
@@ -143,6 +151,8 @@ void main() {
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
+	
+	// process gl_Color (foliage tint, vanilla ao)
 	vec4 glcolor4 = gl_Color;
 	if (glcolor4.rgb != vec3(1.0)) {
 		glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
@@ -164,8 +174,13 @@ void main() {
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
 	
+	
+	// block id stuff
 	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	uint encodedData = materialId >> 10u;
+	
+	
+	// process normals
 	
 	vec3 normal = gl_NormalMatrix * gl_Normal;
 	
@@ -187,6 +202,7 @@ void main() {
 	#endif
 	
 	
+	// get block data
 	#if PBR_TYPE == 0
 		#define GET_REFLECTIVENESS
 		#define GET_SPECULARNESS
@@ -196,6 +212,9 @@ void main() {
 		#define GET_GLOWING_COLOR
 	#endif
 	#include "/blockDatas.glsl"
+	
+	
+	// misc
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = 0.0;
@@ -211,6 +230,8 @@ void main() {
 	#endif
 	
 	
+	// experiments
+	
 	//#define WORLD_TEXTURE_SCALING 2
 	//#define TEXTURE_SIZE 16
 	//vec2 scale = textureSize(MAIN_TEXTURE, 0) / TEXTURE_SIZE;
@@ -222,7 +243,6 @@ void main() {
 	//texcoordFract /= WORLD_TEXTURE_SCALING;
 	////texcoord = floor(texcoord) + texcoordFract;
 	////texcoord /= scale;
-	
 	
 	// fun way to screw up the textures:
 	//#define WORLD_TEXTURE_SCALING 2

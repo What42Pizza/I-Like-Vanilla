@@ -8,7 +8,9 @@ in_out vec2 lmcoord;
 in_out vec4 glcolor;
 in_out vec3 viewPos;
 in_out vec3 playerPos;
-flat in_out vec3 normal;
+#if PBR_TYPE == 0
+	flat in_out vec3 normal;
+#endif
 flat in_out uint materialId;
 flat in_out float reflectiveness;
 flat in_out float specularness;
@@ -18,7 +20,7 @@ flat in_out vec2 midCoordOffset;
 
 flat in_out vec3 shadowcasterLight;
 
-#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
+#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1 || PBR_TYPE == 1
 	in_out mat3 tbn;
 #endif
 #if BORDER_FOG_ENABLED == 1
@@ -65,8 +67,18 @@ void main() {
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color *= glcolor;
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1
+	
+	#if WAVING_WATER_SURFACE_ENABLED == 1 && PBR_TYPE == 0
 		vec3 normal = normal;
+	#endif
+	
+	#if PBR_TYPE == 1
+		vec3 normal = texture2D(normals, texcoord).rgb;
+        normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT;
+        normal.xy += 0.5;
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = tbn * normal;
 	#endif
 	
 	
@@ -91,7 +103,7 @@ void main() {
 				noisePos += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4 * 0.18;
 				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
 				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
-				normal = vec3(0.0, 0.0, 1.0);
+				normal = normalize(transpose(tbn) * normal);
 				normal.xy += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
@@ -200,6 +212,9 @@ void main() {
 	glcolor = gl_Color;
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	materialId = uint(max(int(mc_Entity.x) - 10000, 0));
@@ -214,7 +229,7 @@ void main() {
 	shadowcasterLight = getShadowcasterLight();
 	
 	
-	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1
+	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1 || PBR_TYPE == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);

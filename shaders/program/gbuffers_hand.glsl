@@ -2,7 +2,11 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
 in_out vec3 viewPos;
-flat in_out vec2 encodedNormal;
+#if PBR_TYPE == 0
+	flat in_out vec2 encodedNormal;
+#elif PBR_TYPE == 1
+	flat in_out mat3 tbn;
+#endif
 
 
 
@@ -15,6 +19,17 @@ void main() {
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
+	
+	
+	#if PBR_TYPE == 1
+		vec3 normal = texture2D(normals, texcoord).rgb;
+        normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT;
+        normal.xy += 0.5;
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = tbn * normal;
+		vec2 encodedNormal = encodeNormal(normal);
+	#endif
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -50,7 +65,14 @@ void main() {
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
 	vec3 normal = gl_NormalMatrix * gl_Normal;
-	encodedNormal = encodeNormal(normal);
+	#if PBR_TYPE == 0
+		encodedNormal = encodeNormal(normal);
+	#endif
+	#if PBR_TYPE == 1
+		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
+		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
+		tbn = mat3(tangent, bitangent, normal);
+	#endif
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
