@@ -29,7 +29,7 @@ void main() {
 		float reflectiveness = 0.0;
 		float specularness = 0.3;
 	#elif PBR_TYPE == 1
-		vec2 pbrData = texture(specular, texcoord).rg;
+		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
 		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;

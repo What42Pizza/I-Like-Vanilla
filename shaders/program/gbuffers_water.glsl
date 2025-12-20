@@ -67,7 +67,7 @@ void main() {
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
-		vec2 pbrData = texture(specular, texcoord).rg;
+		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
 		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), uint(materialId == 1570u));
 		float specularness = sqrt(pbrData.r);

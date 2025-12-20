@@ -19,7 +19,7 @@ flat in_out float specularness;
 
 void main() {
 	
-	vec4 color = texture(gtexture, texcoord);
+	vec4 color = texture2D(gtexture, texcoord);
 	vec2 lmcoord;
 	float ao;
 	vec4 overlayColor;

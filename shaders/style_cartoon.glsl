@@ -1,3 +1,16 @@
+#if POM_DEPTH == -1
+#undef POM_DEPTH
+										#define POM_DEPTH 1.0
+#endif
+#if FANCY_NETHER_PORTAL_ENABLED == -1
+#undef FANCY_NETHER_PORTAL_ENABLED
+										#define FANCY_NETHER_PORTAL_ENABLED 1
+#endif
+
+
+
+
+
 #if PBR_NORMALS_AMOUNT == -1
 #undef PBR_NORMALS_AMOUNT
 										#define PBR_NORMALS_AMOUNT 0.8
@@ -7,13 +20,13 @@
 
 
 
-#if FANCY_NETHER_PORTAL_ENABLED == -1
-#undef FANCY_NETHER_PORTAL_ENABLED
-										#define FANCY_NETHER_PORTAL_ENABLED 1
-#endif
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
 										#define GLOWING_ORES_STRENGTH 0.5
+#endif
+#if GLOWING_STEMS_STRENGTH == -1
+#undef GLOWING_STEMS_STRENGTH
+										#define GLOWING_STEMS_STRENGTH 0.75
 #endif
 
 

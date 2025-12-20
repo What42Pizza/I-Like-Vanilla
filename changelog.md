@@ -1,5 +1,12 @@
 - v1.1.4
-  - Added support for basic PBR data
+  - Added PBR support
+  - Added settings:
+    - 'PBR Type'
+	- 'POM Enabled'
+	- 'PBR Normals Amount'
+	- 'Emissive Textures Enabled'
+	- 'Glowing Stems Strength'
+  - Removed setting 'Glowing Ores Enabled'
   - Fixed misc bugs
 
 <br>

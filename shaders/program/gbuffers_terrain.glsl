@@ -5,6 +5,12 @@ in_out vec3 glcolor;
 	flat in_out vec2 encodedNormal;
 #endif
 in_out vec3 playerPos;
+#if POM_ENABLED == 1
+	in_out vec3 viewPos;
+	in_out mat3 rawTbn;
+	flat in_out vec2 midTexCoord;
+	flat in_out vec2 midCoordOffset;
+#endif
 #if PBR_TYPE == 0
 	flat in_out float reflectiveness;
 	flat in_out float specularness;
@@ -48,16 +54,42 @@ void main() {
 	
 	
 	// get pbr data
+	
+	#if POM_ENABLED == 1
+		vec2 texStart = midTexCoord - midCoordOffset;
+		vec2 texEnd = midTexCoord + midCoordOffset;
+		vec2 texcoord = percentThrough(texcoord, texStart, texEnd * 1.0001);
+		vec3 tangentViewDir = normalize(transpose(rawTbn) * viewPos);
+		tangentViewDir.y *= -1.0;
+		tangentViewDir /= 256 / 32.0 * POM_QUALITY;
+		tangentViewDir.z *= 10.0 / POM_DEPTH;
+		float pomDepth = 0.0;
+		vec4 normalAndDepth;
+		float prevDepth;
+		for (int i = 0; i < POM_QUALITY; i++) {
+			prevDepth = normalAndDepth.a;
+			normalAndDepth = texture2D(normals, mix(texStart, texEnd, fract(texcoord)));
+			if (1.0 - normalAndDepth.a <= pomDepth) break;
+			texcoord += tangentViewDir.xy;
+			pomDepth -= tangentViewDir.z;
+		}
+		vec3 normal = normalAndDepth.xyz;
+		texcoord = mix(texStart, texEnd, fract(texcoord));
+	#endif
+	
 	#if PBR_TYPE == 0
 		float reflectiveness = reflectiveness;
 	#elif PBR_TYPE == 1
-		vec2 pbrData = texture(specular, texcoord).rg;
+		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
 		float specularness = sqrt(pbrData.r);
-		vec3 normal = texture2D(normals, texcoord).rgb;
+		#if POM_ENABLED == 0
+			vec3 normal = texture2D(normals, texcoord).rgb;
+		#endif
 		normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT * 0.75;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.5;
 		normal.xy += 0.5;
+		normal.z = sqrt(1.0 - dot(normal.xy, normal.xy));
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
@@ -73,6 +105,11 @@ void main() {
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
+	
+	#if POM_ENABLED == 1
+		color.rgb *= 1.0 - 0.1 * uint(prevDepth != normalAndDepth.a);
+		color.rgb *= 1.0 - pomDepth;
+	#endif
 	
 	
 	// misc
@@ -152,8 +189,16 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	#if POM_ENABLED == 0
+		vec3 viewPos;
+	#endif
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
+	
+	#if POM_ENABLED == 1
+		midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
+		midCoordOffset = abs(texcoord - midTexCoord);
+	#endif
 	
 	
 	// process gl_Color (foliage tint, vanilla ao)
@@ -196,21 +241,19 @@ void main() {
 		encodedNormal = encodeNormal(normal);
 	#endif
 	
-	#if PBR_TYPE == 1
+	#if PBR_TYPE == 1 || POM_ENABLED == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
+		#if PBR_TYPE == 0
+			mat3 tbn;
+		#endif
 		tbn = mat3(tangent, bitangent, normal);
+		#if POM_ENABLED == 1
+			rawTbn = tbn;
+		#endif
 		if ((encodedData & 1u) == 1u && encodedData > 1u) {
 			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 		}
-        //eastVec.x, northVec.x, normal.x,
-        //eastVec.y, northVec.y, normal.y,
-        //eastVec.z, northVec.z, normal.z
-		//tbn = mat3(
-		//	tbn[0].x, tbn[1].x, tbn[2].x,
-		//	tbn[0].y, tbn[1].y, tbn[2].y,
-		//	tbn[0].z, tbn[1].z, tbn[2].z
-		//);
 	#endif
 	
 	

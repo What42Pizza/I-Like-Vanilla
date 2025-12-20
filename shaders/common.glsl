@@ -149,6 +149,10 @@ float percentThrough(float v, float low, float high) {
 	return clamp((v - low) / (high - low), 0.0, 1.0);
 }
 
+vec2 percentThrough(vec2 v, vec2 low, vec2 high) {
+	return clamp((v - low) / (high - low), 0.0, 1.0);
+}
+
 vec3 percentThrough(vec3 v, vec3 low, vec3 high) {
 	return clamp((v - low) / (high - low), 0.0, 1.0);
 }

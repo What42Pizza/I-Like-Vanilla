@@ -347,14 +347,14 @@ if (materialId < 1570u) { // 0..1570
 									SET_GLOWING_COLOR(
 										vec3(  0.0, 77.3, 38.0),
 										vec3(100.0, 86.6, 58.4),
-										0.75
+										GLOWING_STEMS_STRENGTH
 									);
 								} else {
 									// crimson stem
 									SET_GLOWING_COLOR(
 										vec3(  0.0,  78.0, 48.2),
 										vec3(100.0, 100.0, 69.4),
-										0.75
+										GLOWING_STEMS_STRENGTH
 									);
 								}
 							}
