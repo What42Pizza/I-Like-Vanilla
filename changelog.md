@@ -1,3 +1,8 @@
+- v1.1.4
+  - Fixed misc bugs
+
+<br>
+
 - v1.1.3 (25/12/16)
   - Added Voxy compatibility
   - Added end clouds (configurable) and replaced end sky

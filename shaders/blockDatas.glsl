@@ -18,14 +18,8 @@
 #ifdef GET_GLOWING_COLOR
 	glowingColorMin = vec3(-1.0);
 	glowingColorMax = vec3(-1.0);
-	#if GLOWING_ORES_ENABLED == 1
-		#define SET_GLOWING_ORE_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3 * 0.75;
-	#else
-		#define SET_GLOWING_ORE_COLOR(v1, v2, v3)
-	#endif
 	#define SET_GLOWING_COLOR(v1, v2, v3) glowingColorMin = (v1 - 0.5) / 100.0; glowingColorMax = (v2 + 0.5) / 100.0; glowingAmount = v3;
 #else
-	#define SET_GLOWING_ORE_COLOR(v1, v2, v3)
 	#define SET_GLOWING_COLOR(v1, v2, v3)
 #endif
 #ifdef GET_VOXEL_ID
@@ -379,7 +373,7 @@ if (materialId < 1570u) { // 0..1570
 									
 								} else {
 									// iron ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3( 5.0, 24.8, 53.3),
 										vec3(15.0, 37.5, 88.6),
 										GLOWING_ORES_STRENGTH
@@ -388,14 +382,14 @@ if (materialId < 1570u) { // 0..1570
 							} else { // 1702..1704
 								if (materialId == 1702u) {
 									// copper ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3( 0.0, 31.8, 46.3),
 										vec3(45.0, 65.6, 87.8),
 										GLOWING_ORES_STRENGTH
 									);
 								} else {
 									// gold ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(10.0, 29.0,  92.2),
 										vec3(20.0, 94.0, 100.0),
 										GLOWING_ORES_STRENGTH
@@ -406,21 +400,21 @@ if (materialId < 1570u) { // 0..1570
 							if (materialId < 1707u) { // 1704..1707
 								if (materialId == 1704u) {
 									// redstone ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(0.0, 62.8, 59.2),
 										vec3(5.0, 98.0, 99.2),
 										GLOWING_ORES_STRENGTH
 									);
 								} else if (materialId == 1705u) {
 									// emerald ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(35.0,  14.9,  48.2),
 										vec3(45.0, 100.0, 100.0),
 										GLOWING_ORES_STRENGTH
 									);
 								} else {
 									// lapis ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(55.0, 57.0, 54.5),
 										vec3(65.0, 91.5, 95.7),
 										GLOWING_ORES_STRENGTH
@@ -429,7 +423,7 @@ if (materialId < 1570u) { // 0..1570
 							} else { // 1707..1900
 								if (materialId == 1707u) {
 									// diamond ore
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(45.0, 16.5,  57.3),
 										vec3(51.0, 86.3, 100.0),
 										GLOWING_ORES_STRENGTH
@@ -437,7 +431,7 @@ if (materialId < 1570u) { // 0..1570
 								} else if (materialId == 1708u) {
 									// nether gold ore
 									SET_REFLECTIVENESS(0.1);
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3( 7.0, 29.0,  78.0),
 										vec3(20.0, 85.4, 100.0),
 										GLOWING_ORES_STRENGTH
@@ -445,7 +439,7 @@ if (materialId < 1570u) { // 0..1570
 								} else {
 									// nether quartz ore
 									SET_REFLECTIVENESS(0.1);
-									SET_GLOWING_ORE_COLOR(
+									SET_GLOWING_COLOR(
 										vec3(  0.0,  6.5, 72.5),
 										vec3(100.0, 30.3, 90.6),
 										GLOWING_ORES_STRENGTH

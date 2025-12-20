@@ -137,6 +137,13 @@ const float shadowIntervalSize    = 2.0;
 
 
 
+#if PBR_TYPE == 1
+	#undef EMESSIVE_TEXTURES_ENABLED
+	#define EMESSIVE_TEXTURES_ENABLED 0
+#endif
+
+
+
 // How on earth can optifine be THIS bad???
 #if TEMPORAL_FILTER_ENABLED == 1
 	#undef TEMPORAL_FILTER_ENABLED

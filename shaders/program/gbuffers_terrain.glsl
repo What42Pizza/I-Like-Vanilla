@@ -3,12 +3,18 @@ in_out vec2 lmcoord;
 in_out vec3 glcolor;
 flat in_out vec2 encodedNormal;
 in_out vec3 playerPos;
-flat in_out float reflectiveness;
-flat in_out float specularness;
+#if PBR_TYPE == 0
+	flat in_out float reflectiveness;
+	flat in_out float specularness;
+#elif PBR_TYPE == 1
+	flat in_out mat3 tbn;
+#endif
 
-in_out vec3 glowingColorMin;
-in_out vec3 glowingColorMax;
-in_out float glowingAmount;
+#if EMISSIVE_TEXTURED_ENABLED == 1
+	in_out vec3 glowingColorMin;
+	in_out vec3 glowingColorMax;
+	in_out float glowingAmount;
+#endif
 
 #if SHOW_DANGEROUS_LIGHT == 1
 	flat in_out float isDangerousLight;
@@ -37,17 +43,35 @@ void main() {
 	#endif
 	
 	
+	#if PBR_TYPE == 0
+		float reflectiveness = reflectiveness;
+	#elif PBR_TYPE == 1
+		float reflectiveness = 0.0;
+		float specularness = 0.0;
+		vec3 normal = texture2D(normals, texcoord).rgb;
+        normal -= vec3(0.5, 0.5, 0.0);
+		normal.xy *= PBR_NORMALS_AMOUNT;
+        normal += vec3(0.5, 0.5, 0.0);
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = tbn * normal;
+		vec2 encodedNormal = encodeNormal(normal);
+	#endif
+	
+	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
 	if (color.a < 0.01) discard;
 	
-	vec3 hsv = rgbToHsv(color.rgb);
-	if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
-		lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
-		lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
-	}
+	#if EMISSIVE_TEXTURED_ENABLED == 1
+		vec3 hsv = rgbToHsv(color.rgb);
+		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
+			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
+			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
+		}
+	#endif
 	
-	float reflectiveness = reflectiveness;
-	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
+	#if PBR_TYPE == 0
+		reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
+	#endif
 	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
@@ -140,21 +164,37 @@ void main() {
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
-	
 	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	uint encodedData = materialId >> 10u;
-	// foliage normals
-	if ((encodedData & 1u) == 1u && encodedData > 1u) {
-		normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
-	}
 	
-	encodedNormal = encodeNormal(normal);
+	vec3 normal = gl_NormalMatrix * gl_Normal;
 	
-	#define GET_REFLECTIVENESS
-	#define GET_SPECULARNESS
+	#if PBR_TYPE == 0
+		// foliage normals
+		if ((encodedData & 1u) == 1u && encodedData > 1u) {
+			normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
+		}
+		encodedNormal = encodeNormal(normal);
+	#endif
+	
+	#if PBR_TYPE == 1
+		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
+		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
+		tbn = mat3(tangent, bitangent, normal);
+		if ((encodedData & 1u) == 1u && encodedData > 1u) {
+			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
+		}
+	#endif
+	
+	
+	#if PBR_TYPE == 0
+		#define GET_REFLECTIVENESS
+		#define GET_SPECULARNESS
+	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#define GET_GLOWING_COLOR
+	#if EMISSIVE_TEXTURED_ENABLED == 1
+		#define GET_GLOWING_COLOR
+	#endif
 	#include "/blockDatas.glsl"
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
