@@ -58,7 +58,8 @@ void main() {
 	#if POM_ENABLED == 1
 		vec2 texStart = midTexCoord - midCoordOffset;
 		vec2 texEnd = midTexCoord + midCoordOffset;
-		vec2 texcoord = percentThrough(texcoord, texStart, texEnd * 1.0001);
+		vec2 inBlockCoord = percentThrough(texcoord, texStart, texEnd * 1.0001);
+		vec2 texcoord = texcoord;
 		vec3 tangentViewDir = normalize(transpose(rawTbn) * viewPos);
 		tangentViewDir.y *= -1.0;
 		tangentViewDir /= 256 / 32.0 * POM_QUALITY;
@@ -68,13 +69,13 @@ void main() {
 		float prevDepth;
 		for (int i = 0; i < POM_QUALITY; i++) {
 			prevDepth = normalAndDepth.a;
-			normalAndDepth = texture2D(normals, mix(texStart, texEnd, fract(texcoord)));
+			normalAndDepth = texture2D(normals, texcoord);
 			if (1.0 - normalAndDepth.a <= pomDepth) break;
-			texcoord += tangentViewDir.xy;
+			inBlockCoord += tangentViewDir.xy;
 			pomDepth -= tangentViewDir.z;
+			texcoord = mix(texStart, texEnd, fract(inBlockCoord));
 		}
 		vec3 normal = normalAndDepth.xyz;
-		texcoord = mix(texStart, texEnd, fract(texcoord));
 	#endif
 	
 	#if PBR_TYPE == 0

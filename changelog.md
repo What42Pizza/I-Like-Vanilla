@@ -1,4 +1,4 @@
-- v1.1.4
+- **v1.2.0**
   - Added PBR support
   - Added settings:
     - 'PBR Type'
@@ -9,6 +9,8 @@
   - Removed setting 'Glowing Ores Enabled'
   - Fixed misc bugs
 
+<br>
+<br>
 <br>
 
 - v1.1.3 (25/12/16)

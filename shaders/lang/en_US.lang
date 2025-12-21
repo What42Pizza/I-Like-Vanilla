@@ -20,12 +20,12 @@ value.STYLE.3=Cartoon
 screen.MATERIALS_MENU=Materials
 
 option.PBR_TYPE=PBR Type
-option.PBR_TYPE.comment=Specifies which type of PBR to use. Right now, only LabPBR 1.3 is supported (because it's the only one Iris supports)
+option.PBR_TYPE.comment=Specifies which type of PBR to use (note: POM has to be enabled separately)\n\nRight now, only internal pbr data and LabPBR 1.3 are supported
 value.PBR_TYPE.0=Internal
 value.PBR_TYPE.1=LabPBR 1.3
 
 option.POM_ENABLED=POM Enabled
-option.POM_ENABLED.comment=Adds fake depth to textures (with compatible pbr packs, can be enabled even if 'PBR Type' is 'Internal')
+option.POM_ENABLED.comment=Adds fake depth to textures (only with compatible pbr packs, can be enabled even if 'PBR Type' is 'Internal')
 value.POM_ENABLED.0=Off
 value.POM_ENABLED.1=On
 
@@ -46,7 +46,7 @@ value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
 
 
-screen.PBR_MATERIALS_MENU=PBR Materials
+screen.LABPBR_MATERIALS_MENU=LabPBR Materials
 screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when 'PBR Type' is not set to 'Internal'
 
 option.PBR_NORMALS_AMOUNT=PBR Normals Amount
