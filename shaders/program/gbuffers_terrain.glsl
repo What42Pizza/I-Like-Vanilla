@@ -1,21 +1,22 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
-#if PBR_TYPE == 0
+#if PBR_TYPE == 0 && POM_ENABLED == 0
 	flat in_out vec2 encodedNormal;
+#endif
+#if PBR_TYPE == 1 || POM_ENABLED == 1
+	flat in_out mat3 tbn;
+	in_out mat3 rawTbn;
 #endif
 in_out vec3 playerPos;
 #if POM_ENABLED == 1
 	in_out vec3 viewPos;
-	in_out mat3 rawTbn;
 	flat in_out vec2 midTexCoord;
 	flat in_out vec2 midCoordOffset;
 #endif
 #if PBR_TYPE == 0
 	flat in_out float reflectiveness;
 	flat in_out float specularness;
-#elif PBR_TYPE == 1
-	flat in_out mat3 tbn;
 #endif
 
 #if EMISSIVE_TEXTURED_ENABLED == 1
@@ -56,6 +57,9 @@ void main() {
 	// get pbr data
 	
 	#if POM_ENABLED == 1
+		float pomDither = bayer64(gl_FragCoord.xy);
+		pomDither = fract(pomDither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		// setup
 		vec2 texStart = midTexCoord - midCoordOffset;
 		vec2 texEnd = midTexCoord + midCoordOffset;
 		vec2 inBlockCoord = percentThrough(texcoord, texStart, texEnd * 1.0001);
@@ -64,9 +68,12 @@ void main() {
 		tangentViewDir.y *= -1.0;
 		tangentViewDir /= 256 / 32.0 * POM_QUALITY;
 		tangentViewDir.z *= 10.0 / POM_DEPTH;
+		// step through texture & search for hit
 		float pomDepth = 0.0;
-		vec4 normalAndDepth;
+		vec4 normalAndDepth = vec4(1.0);
 		float prevDepth;
+		inBlockCoord += tangentViewDir.xy * pomDither;
+		pomDepth -= tangentViewDir.z * pomDither;
 		for (int i = 0; i < POM_QUALITY; i++) {
 			prevDepth = normalAndDepth.a;
 			normalAndDepth = texture2D(normals, texcoord);
@@ -75,7 +82,22 @@ void main() {
 			pomDepth -= tangentViewDir.z;
 			texcoord = mix(texStart, texEnd, fract(inBlockCoord));
 		}
-		vec3 normal = normalAndDepth.xyz;
+		// final processing
+		vec3 normal = vec3(normalAndDepth.xy, 0.0);
+		normal.xy -= 0.5;
+		normal.xy *= PBR_NORMALS_AMOUNT * 0.5;
+		normal.xy += 0.5;
+		normal.z = sqrt(1.0 - dot(normal.xy, normal.xy));
+		normal = normalize(normal * 2.0 - 1.0);
+		//if (prevDepth != normalAndDepth.a) { // if hit edge instead of surface
+		//	ivec2 currPixelCoord = ivec2(mix(texStart, texEnd, inBlockCoord) * textureSize(normals, 0));
+		//	ivec2 prevPixelCoord = ivec2(mix(texStart, texEnd, inBlockCoord - tangentViewDir.xy) * textureSize(normals, 0));
+		//	if (currPixelCoord.x != prevPixelCoord.x) {
+		//		normal = vec3(currPixelCoord.x - prevPixelCoord.x, 0.0, 0.0);
+		//	} else if (currPixelCoord.y != prevPixelCoord.y) {
+		//		normal = vec3(0.0, currPixelCoord.y - prevPixelCoord.y, 0.0);
+		//	}
+		//}
 	#endif
 	
 	#if PBR_TYPE == 0
@@ -85,16 +107,20 @@ void main() {
 		float reflectiveness = pbrData.g;
 		float specularness = sqrt(pbrData.r);
 		#if POM_ENABLED == 0
-			vec3 normal = texture2D(normals, texcoord).rgb;
+			vec3 normal = vec3(texture2D(normals, texcoord).rg, 0.0);
+			normal.xy -= 0.5;
+			normal.xy *= PBR_NORMALS_AMOUNT * 0.5;
+			normal.xy += 0.5;
+			normal.z = sqrt(1.0 - dot(normal.xy, normal.xy));
+			normal = normalize(normal * 2.0 - 1.0);
 		#endif
-		normal.xy -= 0.5;
-		normal.xy *= PBR_NORMALS_AMOUNT * 0.5;
-		normal.xy += 0.5;
-		normal.z = sqrt(1.0 - dot(normal.xy, normal.xy));
-		normal = normalize(normal * 2.0 - 1.0);
+	#endif
+	
+	#if PBR_TYPE == 1 || POM_ENABLED == 1
 		normal = tbn * normal;
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
+	
 	reflectiveness *= mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
 	
 	
@@ -239,19 +265,17 @@ void main() {
 		if ((encodedData & 1u) == 1u && encodedData > 1u) {
 			normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
 		}
+	#endif
+	
+	#if PBR_TYPE == 0 && POM_ENABLED == 0
 		encodedNormal = encodeNormal(normal);
 	#endif
 	
 	#if PBR_TYPE == 1 || POM_ENABLED == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
-		#if PBR_TYPE == 0
-			mat3 tbn;
-		#endif
 		tbn = mat3(tangent, bitangent, normal);
-		#if POM_ENABLED == 1
-			rawTbn = tbn;
-		#endif
+		rawTbn = tbn;
 		if ((encodedData & 1u) == 1u && encodedData > 1u) {
 			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 		}

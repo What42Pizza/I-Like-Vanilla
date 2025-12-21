@@ -24,18 +24,6 @@ option.PBR_TYPE.comment=Specifies which type of PBR to use (note: POM has to be 
 value.PBR_TYPE.0=Internal
 value.PBR_TYPE.1=LabPBR 1.3
 
-option.POM_ENABLED=POM Enabled
-option.POM_ENABLED.comment=Adds fake depth to textures (only with compatible pbr packs, can be enabled even if 'PBR Type' is 'Internal')
-value.POM_ENABLED.0=Off
-value.POM_ENABLED.1=On
-
-option.POM_DEPTH=POM Depth
-option.POM_DEPTH.comment=How much to scale the faked POM depth
-value.POM_DEPTH.-1=Use Style
-
-option.POM_QUALITY=POM Quality
-option.POM_QUALITY.comment=Controls the quality of the POM (lower values may not be obviously bad at first, but it does have a big impact when looking at blocks from the side)
-
 option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
 option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals
 value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
@@ -50,7 +38,7 @@ screen.LABPBR_MATERIALS_MENU=LabPBR Materials
 screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when 'PBR Type' is not set to 'Internal'
 
 option.PBR_NORMALS_AMOUNT=PBR Normals Amount
-option.PBR_NORMALS_AMOUNT.comment=How much effect the pbr normals have
+option.PBR_NORMALS_AMOUNT.comment=How much effect the pbr normals have (this impacts both PBR normals and POM normals)
 value.PBR_NORMALS_AMOUNT.-1=Use Style
 
 
@@ -72,6 +60,25 @@ value.GLOWING_ORES_STRENGTH.-1=Use Style
 option.GLOWING_STEMS_STRENGTH=Glowing Stems Strength
 option.GLOWING_STEMS_STRENGTH.comment=The emissive strength of Crimson Stems and Warped Stems
 value.GLOWING_STEMS_STRENGTH.-1=Use Style
+
+
+
+
+
+screen.POM_MENU=POM
+screen.POM_MENU.comment=Parallax Occlusion Mapping, adds fake depth to textures
+
+option.POM_ENABLED=POM Enabled
+option.POM_ENABLED.comment=Adds fake depth to textures (only with compatible pbr packs, can be enabled even if 'PBR Type' is 'Internal')
+value.POM_ENABLED.0=Off
+value.POM_ENABLED.1=On
+
+option.POM_DEPTH=POM Depth
+option.POM_DEPTH.comment=How much to scale the faked POM depth
+value.POM_DEPTH.-1=Use Style
+
+option.POM_QUALITY=POM Quality
+option.POM_QUALITY.comment=Controls the quality of the POM (lower values may not be obviously bad at first, but it does have a big impact when looking at blocks from the side)
 
 
 
