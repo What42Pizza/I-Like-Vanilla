@@ -1,11 +1,11 @@
-- **v1.2.0**
+- **v1.2.0** (25/12/22)
   - Added PBR support
   - Added settings:
     - 'PBR Type'
-	- 'POM Enabled'
-	- 'PBR Normals Amount'
-	- 'Emissive Textures Enabled'
-	- 'Glowing Stems Strength'
+    - 'POM Enabled'
+    - 'PBR Normals Amount'
+    - 'Emissive Textures Enabled'
+    - 'Glowing Stems Strength'
   - Removed setting 'Glowing Ores Enabled'
   - Fixed misc bugs
 
@@ -80,8 +80,8 @@
 - v1.0.7 (25/10/09)
   - Settings changes:
     - Added setting 'Sky Weather Brightness'
-	- Added setting 'Underground Fog Brightness'
-	- Removed setting 'Darken Sky Underground'
+    - Added setting 'Underground Fog Brightness'
+    - Removed setting 'Darken Sky Underground'
   - Tweaked lighting
   - Fixed bugs
 
@@ -119,7 +119,7 @@
 - v1.0.3 (25/07/30)
   - Setting changes:
     - Added settings 'Pale Garden Fog Density' and 'Pale Garden Fog Night Density'
-	- Removed setting 'Advanced Terrain-Sky Blending' (is now always on)
+    - Removed setting 'Advanced Terrain-Sky Blending' (is now always on)
   - Added effects for the pale garden biome
   - Significantly improved terrain-sky blending
   - Made far-away clouds fade into sky

@@ -9,7 +9,7 @@
 
 #if PBR_NORMALS_AMOUNT == -1
 #undef PBR_NORMALS_AMOUNT
-										#define PBR_NORMALS_AMOUNT 1.0
+										#define PBR_NORMALS_AMOUNT 0.9
 #endif
 
 
@@ -31,7 +31,7 @@
 
 #if POM_DEPTH == -1
 #undef POM_DEPTH
-										#define POM_DEPTH 1.0
+										#define POM_DEPTH 1.1
 #endif
 
 

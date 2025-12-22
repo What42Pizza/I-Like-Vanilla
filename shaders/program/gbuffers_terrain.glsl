@@ -6,7 +6,7 @@ in_out vec3 glcolor;
 #endif
 #if PBR_TYPE == 1 || POM_ENABLED == 1
 	flat in_out mat3 tbn;
-	in_out mat3 rawTbn;
+	flat in_out mat3 rawTbn;
 #endif
 in_out vec3 playerPos;
 #if POM_ENABLED == 1
@@ -58,11 +58,11 @@ void main() {
 	
 	#if POM_ENABLED == 1
 		float pomDither = bayer64(gl_FragCoord.xy);
-		pomDither = fract(pomDither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		pomDither = fract(pomDither + 1.61803398875 * mod(float(frameCounter), 3600.0)) * 0.25;
 		// setup
 		vec2 texStart = midTexCoord - midCoordOffset;
 		vec2 texEnd = midTexCoord + midCoordOffset;
-		vec2 inBlockCoord = percentThrough(texcoord, texStart, texEnd * 1.0001);
+		vec2 inBlockCoord = percentThrough(texcoord, texStart, texEnd);
 		vec2 texcoord = texcoord;
 		vec3 tangentViewDir = normalize(transpose(rawTbn) * viewPos);
 		tangentViewDir.y *= -1.0;
