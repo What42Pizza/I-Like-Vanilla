@@ -561,7 +561,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.35
+										#define SUNRAYS_AMOUNT_DAY 0.4
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -623,7 +623,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 1.0
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.7
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
