@@ -1,3 +1,8 @@
+- v1.2.0b (25/12/27)
+  - Fixed many bugs
+
+<br>
+
 - **v1.2.0** (25/12/22)
   - Added PBR support
   - Added settings:

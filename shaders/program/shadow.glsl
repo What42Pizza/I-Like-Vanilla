@@ -31,9 +31,7 @@ void main() {
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1 || COLORED_LIGHTING_ENABLED == 1
-		vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
-	#endif
+	vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	
 	#if COLORED_LIGHTING_ENABLED == 1 || EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
 		uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
@@ -73,7 +71,6 @@ void main() {
 			playerPos -= cameraPosition;
 			playerPos.y -= 0.125 / (1.0 + length(playerPos.xz));
 		#endif
-		//playerPos += (mat3(gbufferModelViewInverse) * shadowLightPosition) * (0.0025 + 0.0001 * length(playerPos)); // offset shadow bias
 		playerPos.y += 0.075; // offset shadow bias
 	}
 	

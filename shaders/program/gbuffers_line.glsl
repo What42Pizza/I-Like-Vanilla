@@ -9,13 +9,13 @@ flat in_out vec2 encodedNormal;
 void main() {
 	vec4 color = glcolor;
 	if (color.a < 0.01) discard;
-	color.a = 0.6 + 0.4 * color.a;
+	color.a = 0.5 + 0.5 * color.a;
 	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
-	gl_FragData[0] = vec4(color);
+	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		pack_2x8(lmcoord),
+		pack_2x8(eyeBrightness * (0.75 / 240.0)),
 		pack_2x8(0.0, 0.3),
 		encodedNormal
 	);
