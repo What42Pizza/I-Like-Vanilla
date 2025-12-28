@@ -72,7 +72,7 @@ void main() {
 		vec2 lmcoord = unpack_2x8(data.x);
 		float specularness = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
-		doFshLighting(color, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+		doFshLighting(color, lmcoord.x, lmcoord.y, specularness, viewPos, normal, depth);
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {

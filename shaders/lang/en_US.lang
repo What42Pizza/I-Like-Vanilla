@@ -95,6 +95,21 @@ option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, s
 value.SHADOWS_ON_TRANSPARENTS.0=Off
 value.SHADOWS_ON_TRANSPARENTS.1=On
 
+option.PLAYER_SHADOWS_ENABLED=Player Shadows
+option.PLAYER_SHADOWS_ENABLED.comment=Enabled shadow casting for players (NOTE: this is forced on if Entity Shadows are on)
+value.PLAYER_SHADOWS_ENABLED.0=Off
+value.PLAYER_SHADOWS_ENABLED.1=On
+
+option.ENTITY_SHADOWS_ENABLED=Entity Shadows
+option.ENTITY_SHADOWS_ENABLED.comment=Enabled shadow casting for entites (also enabled player shadows when on)
+value.ENTITY_SHADOWS_ENABLED.0=Off
+value.ENTITY_SHADOWS_ENABLED.1=On
+
+option.BLOCK_ENTITY_SHADOWS_ENABLED=Block Entity Shadows
+option.BLOCK_ENTITY_SHADOWS_ENABLED.comment=Enabled shadow casting for chests and other such blocks
+value.BLOCK_ENTITY_SHADOWS_ENABLED.0=Off
+value.BLOCK_ENTITY_SHADOWS_ENABLED.1=On
+
 option.SHADOWS_BRIGHTNESS=Shadows Brightness
 option.SHADOWS_BRIGHTNESS.comment=A multiplier for the brightness of shadows (also slightly inversely affects the non-shadow brightness)
 value.SHADOWS_BRIGHTNESS.0.0=x0.0
@@ -1705,7 +1720,6 @@ screen.ISOMETRIC_MENU=Isometric Rendering
 
 option.ISOMETRIC_RENDERING_ENABLED=Isometric Rendering Enabled
 option.ISOMETRIC_RENDERING_ENABLED.comment=Changes the projection to Isometric
-value.ISOMETRIC_RENDERING_ENABLED.-1=Use Style
 value.ISOMETRIC_RENDERING_ENABLED.0=Off
 value.ISOMETRIC_RENDERING_ENABLED.1=On
 

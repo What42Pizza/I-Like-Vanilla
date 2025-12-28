@@ -192,7 +192,7 @@ void main() {
 	
 	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
 	
 	
 	// fog

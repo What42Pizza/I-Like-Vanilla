@@ -188,15 +188,18 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 
-float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambientBrightness) {
+float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambientBrightness, float depth) {
 	
 	// sample shadow
 	#if SHADOWS_ENABLED == 1
 		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
-		#if defined DISTANT_HORIZONS || defined VOXY
-			float len = max(length(viewPos) * invFar, 0.8);
-			shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
+		#if PIXELATED_SHADOWS > 0
+			shadowBrightness = mix(shadowBrightness, ambientBrightness, uint(depthIsHand(depth)));
 		#endif
+		//#if defined DISTANT_HORIZONS || defined VOXY
+		//	float len = max(length(viewPos) * invFar, 0.8);
+		//	shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
+		//#endif
 	#else
 		float shadowBrightness = ambientBrightness;
 	#endif
@@ -212,7 +215,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 
 
 
-void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal) {
+void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal, float depth) {
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -270,7 +273,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	float shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness);
+	float shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness, depth);
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness;
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);

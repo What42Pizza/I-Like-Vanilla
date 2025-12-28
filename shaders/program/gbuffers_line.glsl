@@ -15,7 +15,7 @@ void main() {
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		pack_2x8(eyeBrightness * (0.75 / 240.0)),
+		pack_2x8(eyeBrightness / 240.0),
 		pack_2x8(0.0, 0.3),
 		encodedNormal
 	);
