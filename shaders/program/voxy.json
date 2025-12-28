@@ -1,6 +1,6 @@
 {
 	"unusedString": "
-		#include "/settings.glsl"
+		#include "/common/settings.glsl"
 	",
 	"version": 1,
 	"excludeLodsFromVanillaDepth": false,

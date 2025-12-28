@@ -50,7 +50,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	#define GET_REFLECTIVENESS
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/blockDatas.glsl"
+	#include "/common/blockDatas.glsl"
 	
 	
 	// main color

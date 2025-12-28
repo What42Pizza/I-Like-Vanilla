@@ -3,7 +3,7 @@
 #define NETHER
 #define FSH
 
-#include "/settings.glsl"
-#include "/common.glsl"
+#include "/common/settings.glsl"
+#include "/common/common.glsl"
 
 #include "/program/voxy_opaque.glsl"

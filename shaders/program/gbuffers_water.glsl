@@ -249,7 +249,7 @@ void main() {
 		#define GET_SPECULARNESS
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/blockDatas.glsl"
+	#include "/common/blockDatas.glsl"
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);

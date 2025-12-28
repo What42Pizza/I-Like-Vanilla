@@ -4,8 +4,8 @@
 #define NETHER
 #define VSH
 
-#include "/settings.glsl"
-#include "/uniforms.glsl"
-#include "/common.glsl"
+#include "/common/settings.glsl"
+#include "/common/uniforms.glsl"
+#include "/common/common.glsl"
 
 #include "/program/composite1.glsl"

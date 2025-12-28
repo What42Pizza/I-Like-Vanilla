@@ -130,7 +130,7 @@ void main() {
 		#define GET_SPECULARNESS
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/blockDatas.glsl"
+	#include "/common/blockDatas.glsl"
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

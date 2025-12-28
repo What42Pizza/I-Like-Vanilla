@@ -291,7 +291,7 @@ void main() {
 	#if EMISSIVE_TEXTURED_ENABLED == 1
 		#define GET_GLOWING_COLOR
 	#endif
-	#include "/blockDatas.glsl"
+	#include "/common/blockDatas.glsl"
 	
 	
 	// misc
