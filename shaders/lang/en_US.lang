@@ -48,10 +48,10 @@ value.PBR_NORMALS_AMOUNT.-1=Use Style
 screen.INTERNAL_MATERIALS_MENU=Internal Materials
 screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when 'PBR Type' is set to 'Internal'
 
-option.EMESSIVE_TEXTURES_ENABLED=Emissive Textues Enabled
-option.EMESSIVE_TEXTURES_ENABLED.comment=Enabled glowing ores, glowing stems, etc
-value.EMESSIVE_TEXTURES_ENABLED.0=Off
-value.EMESSIVE_TEXTURES_ENABLED.1=On
+option.EMISSIVE_TEXTURES_ENABLED=Emissive Textues Enabled
+option.EMISSIVE_TEXTURES_ENABLED.comment=Enabled glowing ores, glowing stems, etc
+value.EMISSIVE_TEXTURES_ENABLED.0=Off
+value.EMISSIVE_TEXTURES_ENABLED.1=On
 
 option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
 option.GLOWING_ORES_STRENGTH.comment=The emissive strength for glowing ores

@@ -19,7 +19,7 @@ in_out vec3 playerPos;
 	flat in_out float specularness;
 #endif
 
-#if EMISSIVE_TEXTURED_ENABLED == 1
+#if EMISSIVE_TEXTURES_ENABLED == 1
 	in_out vec3 glowingColorMin;
 	in_out vec3 glowingColorMax;
 	in_out float glowingAmount;
@@ -141,7 +141,7 @@ void main() {
 	
 	// misc
 	
-	#if EMISSIVE_TEXTURED_ENABLED == 1
+	#if EMISSIVE_TEXTURES_ENABLED == 1
 		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
@@ -288,7 +288,7 @@ void main() {
 		#define GET_SPECULARNESS
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#if EMISSIVE_TEXTURED_ENABLED == 1
+	#if EMISSIVE_TEXTURES_ENABLED == 1
 		#define GET_GLOWING_COLOR
 	#endif
 	#include "/common/blockDatas.glsl"

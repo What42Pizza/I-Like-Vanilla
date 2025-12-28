@@ -138,8 +138,8 @@ const float shadowIntervalSize    = 2.0;
 
 
 #if PBR_TYPE == 1
-	#undef EMESSIVE_TEXTURES_ENABLED
-	#define EMESSIVE_TEXTURES_ENABLED 0
+	#undef EMISSIVE_TEXTURES_ENABLED
+	#define EMISSIVE_TEXTURES_ENABLED 0
 #endif
 
 
