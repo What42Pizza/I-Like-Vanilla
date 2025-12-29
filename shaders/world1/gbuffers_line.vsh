@@ -1,4 +1,4 @@
-#version 330 compatibility
+#version 140
 
 #define SHADER_GBUFFERS_LINE
 #define END
