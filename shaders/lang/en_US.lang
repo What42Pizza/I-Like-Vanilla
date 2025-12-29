@@ -65,7 +65,7 @@ value.GLOWING_STEMS_STRENGTH.-1=Use Style
 
 
 
-screen.POM_MENU=POM
+screen.POM_MENU=POM (Experimental)
 screen.POM_MENU.comment=Parallax Occlusion Mapping, adds fake depth to textures
 
 option.POM_ENABLED=POM Enabled
