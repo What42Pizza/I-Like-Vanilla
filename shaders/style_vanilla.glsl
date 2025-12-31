@@ -500,7 +500,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.65
+										#define AO_AMOUNT 0.6
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
