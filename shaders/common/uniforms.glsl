@@ -41,11 +41,14 @@ uniform vec3 cameraPosition;
 uniform vec3 previousCameraPosition;
 #ifdef IS_IRIS
 	uniform vec3 cameraPositionFract;
+	uniform ivec3 cameraPositionInt;
 #else
 	vec3 cameraPositionFract = fract(cameraPosition);
+	ivec3 cameraPositionFract = ivec3(floor(cameraPosition));
 #endif
 uniform float eyeAltitude;
 uniform ivec2 atlasSize;
+uniform int renderStage;
 
 uniform vec3 sunPosition;
 uniform vec3 moonPosition;

@@ -22,7 +22,7 @@ void main() {
 #ifdef VSH
 
 #if COLORED_LIGHTING_ENABLED == 1
-	#include "/lib/colored_lighting/updateVoxelImage.glsl"
+	#include "/lib/colored_lighting/updateVoxelIds.glsl"
 #endif
 
 void main() {
@@ -35,7 +35,7 @@ void main() {
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		if (gl_VertexID % 4 == 0) {
-			updateVoxelImage(playerPos, materialId);
+			updateVoxelIds(playerPos, materialId);
 		}
 	#endif
 	

@@ -141,18 +141,18 @@ if (materialId < 1570u) { // 0..1570
 					if (materialId < 1592u) { // 1590..1592
 						if (materialId == 1590u) {
 							// glow lichen
-							
+							SET_VOXEL_ID(130u);
 						} else {
 							// cave vines + berries
-							
+							SET_VOXEL_ID(131u);
 						}
 					} else { // 1592..1594
 						if (materialId == 1592u) {
 							// sea pickle
-							
+							SET_VOXEL_ID(132u);
 						} else {
 							// redstone ore
-							
+							SET_VOXEL_ID(133u);
 						}
 					}
 				} else { // 1594..1600

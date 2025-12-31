@@ -83,7 +83,7 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 
 
 pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<String>, prop_settings_list: &[String], found_problems: &mut bool) -> Result<HashSet<String>> {
-	let define_strings = fs::read_to_string(shaders_path.join("setting_defines.glsl"))?;
+	let define_strings = fs::read_to_string(shaders_path.join("common/setting_defines.glsl"))?;
 	let mut defines = vec!();
 	let mut style_settings_set = HashSet::new();
 	for (i, mut line) in define_strings.lines().enumerate() {
