@@ -39,6 +39,11 @@ uniform float screenBrightness;
 
 uniform vec3 cameraPosition;
 uniform vec3 previousCameraPosition;
+#ifdef IS_IRIS
+	uniform vec3 cameraPositionFract;
+#else
+	vec3 cameraPositionFract = fract(cameraPosition);
+#endif
 uniform float eyeAltitude;
 uniform ivec2 atlasSize;
 
