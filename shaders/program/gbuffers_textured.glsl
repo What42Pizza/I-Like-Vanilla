@@ -45,10 +45,6 @@ void main() {
 	#endif
 	
 	
-	// main lighting
-	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
-	
-	
 	/* DRAWBUFFERS:02 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
@@ -82,6 +78,7 @@ void main() {
 	adjustLmcoord(lmcoord);
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
+	glcolor.rgb *= 1.25;
 	glcolor.a = sqrt(glcolor.a);
 	#if PBR_TYPE != 0
 		vec3 normal;

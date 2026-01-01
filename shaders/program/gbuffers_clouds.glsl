@@ -16,6 +16,7 @@ void main() {
 	//if (color.a == 0.0) discard;
 	vec4 color = vec4(1.0);
 	
+	
 	#ifdef DISTANT_HORIZONS
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		float blockDepthDh = toBlockDepthDh(depthDh);
@@ -35,7 +36,7 @@ void main() {
 	
 	
 	float dist = max(max(abs(playerPos.x), abs(playerPos.y)), abs(playerPos.z));
-	float mult = clamp(1.6 * (1.0 - dist / 1700.0), 0.0, 1.0);
+	float mult = clamp(1.6 * (1.0 - dist / 1900.0), 0.0, 1.0);
 	color.a *= mult * mult;
 	
 	
@@ -67,7 +68,7 @@ void main() {
 	
 	//texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
+	playerPos = (gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex).xyz;
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);

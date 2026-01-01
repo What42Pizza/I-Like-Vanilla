@@ -40,16 +40,6 @@ Note: OptiFine is considered a second-class platform and the majority of develop
 - Many, many more
 
 <br>
-
-### Try out the latest build:
-
-To use the latest build (which is likely the latest published), just:
-
-- 1: Download the latest build [here](https://github.com/What42Pizza/I-Like-Vanilla/archive/refs/heads/main.zip)
-- 2: Unzip the downloaded 'I-Like-Vanilla-main.zip' file
-- 3: Move the unzipped 'I-Like-Vanilla-main' folder into your shaderpacks folder (which can be opened from the in-game shaderpacks menu)
-
-<br>
 <br>
 
 ![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)

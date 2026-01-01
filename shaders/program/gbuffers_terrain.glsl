@@ -146,6 +146,7 @@ void main() {
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
 			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
+			color.rgb *= 1.0 + glowingAmount * 0.25;
 		}
 	#endif
 	

@@ -46,7 +46,7 @@ void main() {
 	#else
 		float lineWidth = 0.002;
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(vaPosition, 1.0);
-		vec4 offsetPos = projectionMatrix * modelViewMatrix * vec4(vaPosition + vaNormal * 0.25, 1.0);
+		vec4 offsetPos = projectionMatrix * modelViewMatrix * vec4(vaPosition + vaNormal, 1.0);
 		vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
 		screenDir = normalize(screenDir) * lineWidth;
 		screenDir.xy = screenDir.yx;

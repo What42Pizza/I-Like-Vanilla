@@ -1,3 +1,9 @@
+- v1.2.0c
+  - Added more emissives
+  - Fixed bugs
+
+<br>
+
 - v1.2.0b (25/12/28)
   - Fixed many bugs
 

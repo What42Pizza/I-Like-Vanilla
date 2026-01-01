@@ -156,6 +156,12 @@ void main() {
 		#endif
 		color.a *= 1.0 + fresnel * 0.125;
 		
+		// as water becomes darker, it should become more opaque
+		float alphaLift = max(lmcoord.x, lmcoord.y);
+		alphaLift = sqrt(alphaLift);
+		alphaLift = (1.0 - alphaLift) * 0.5 * (1.2 - screenBrightness);
+		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
+		
 	}
 	
 	
