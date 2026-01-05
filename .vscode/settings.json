@@ -25,6 +25,7 @@
 		"Shaderpack",
 		"Shaderpacks",
 		"Sildurs",
+		"specularness",
 		"stegu",
 		"tallgrass",
 		"textureless",
@@ -32,6 +33,7 @@
 		"torchflower",
 		"transparents",
 		"Vildravn",
-		"volumetrics"
+		"volumetrics",
+		"voxy"
 	]
 }

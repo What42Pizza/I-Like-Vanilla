@@ -1507,8 +1507,8 @@ value.NETHER_CLOUDS_ENABLED.1=On
 option.NETHER_CLOUDS_SCALE=Nether Clouds Scale
 value.NETHER_CLOUDS_SCALE.-1=Use Style
 
-option.NETHER_CLOUDS_CONVERAGE=Nether Clouds Coverage
-value.NETHER_CLOUDS_CONVERAGE.-1=Use Style
+option.NETHER_CLOUDS_COVERAGE=Nether Clouds Coverage
+value.NETHER_CLOUDS_COVERAGE.-1=Use Style
 
 option.NETHER_CLOUDS_TRANSPARENCY=Nether Clouds Transparency
 value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
@@ -1528,8 +1528,8 @@ value.END_CLOUDS_ENABLED.1=On
 option.END_CLOUDS_SCALE=End Clouds Scale
 value.END_CLOUDS_SCALE.-1=Use Style
 
-option.END_CLOUDS_CONVERAGE=End Clouds Coverage
-value.END_CLOUDS_CONVERAGE.-1=Use Style
+option.END_CLOUDS_COVERAGE=End Clouds Coverage
+value.END_CLOUDS_COVERAGE.-1=Use Style
 
 option.END_CLOUDS_TRANSPARENCY=End Clouds Transparency
 value.END_CLOUDS_TRANSPARENCY.-1=Use Style
@@ -1755,6 +1755,11 @@ option.SHOW_DANGEROUS_LIGHT=Show Dangerous Light
 option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (you must disable smooth lighting in video settings for this to be accurate, and the yellow blocks are where you should place torches for best torch usage)
 value.SHOW_DANGEROUS_LIGHT.0=Off
 value.SHOW_DANGEROUS_LIGHT.1=On
+
+option.CLOUD_COMPATIBILITY=Cloud Compatibility
+option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
+value.CLOUD_COMPATIBILITY.0=Off
+value.CLOUD_COMPATIBILITY.1=On
 
 option.REFLECTIVE_EVERYTHING=Reflective Everything
 option.REFLECTIVE_EVERYTHING.comment=Make EVERYTHING reflective
