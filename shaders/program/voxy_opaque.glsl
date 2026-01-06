@@ -15,7 +15,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec3 viewPos = screenToViewVx(screenPos);
 	
 	
-	// lmcoords
+	// lmcoord
 	vec2 lmcoord = parameters.lightMap;
 	adjustLmcoord(lmcoord);
 	
@@ -27,8 +27,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		tintColor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
-				float snowyness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(viewPos)) * lmcoord.y * lmcoord.y;
-				tintColor = mix(tintColor, vec3(1.0, 1.02, 1.03), snowyness);
+				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(viewPos)) * lmcoord.y * lmcoord.y;
+				tintColor = mix(tintColor, vec3(1.0, 1.02, 1.03), snowiness);
 				tintColor *= 1.0 + 0.4 * wetness;
 			}
 		#endif

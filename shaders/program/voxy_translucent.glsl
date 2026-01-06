@@ -36,7 +36,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec3 normal = mat3(gbufferModelView) * worldNormal;
 	
 	
-	// lmcoords
+	// lmcoord
 	vec2 lmcoord = parameters.lightMap;
 	adjustLmcoord(lmcoord);
 	
