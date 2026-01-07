@@ -22,13 +22,15 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	bool isStar = gl_Color.r == gl_Color.g && gl_Color.g == gl_Color.b && gl_Color.r > 0.0 && gl_Color.r < 0.51 && gl_Color.a < 0.8; // vanilla Star Detection by Builderb0y (edited by What42)
-	if (!isStar) {
-		gl_Position = vec4(1.0);
-		return;
-	}
+	#if CUSTOM_OVERWORLD_SKYBOX == 0
+		if (!isStar) {
+			gl_Position = vec4(1.0);
+			return;
+		}
+	#endif
 	
 	
-	#ifdef OVERWORLD
+	#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 0
 		#if DARKEN_STARS_NEAR_BLOCKLIGHT == 1
 			float blockBrightness = eyeBrightnessSmooth.x / 240.0;
 			blockBrightness = min(blockBrightness * 8.0, 1.0);

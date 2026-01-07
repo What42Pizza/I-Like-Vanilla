@@ -58,7 +58,7 @@ void main() {
 	if (skyAmount > 0.0) {
 		vec3 viewPos = screenToView(vec3(texcoord, 1.0));
 		skyColor = getSkyColor(normalize(viewPos), true);
-		#ifdef OVERWORLD
+		#if defined OVERWORLD || defined CUSTOM_SKYBOX
 			skyColor += texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor) * max(1.0 - 6.0 * (1.0 - skyAmount), 0.0);
 		#endif
 	}

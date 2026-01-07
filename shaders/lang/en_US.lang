@@ -290,7 +290,7 @@ value.BLOCKLIGHT_CEL_AMOUNT.100=1.0
 
 
 
-screen.COLORED_LIGHTING_MENU=Colored Blocklights
+screen.COLORED_LIGHTING_MENU=Colored Blocklight
 
 option.COLORED_LIGHTING_ENABLED=Colored Lighting
 option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
@@ -1309,6 +1309,22 @@ value.WATER_COLOR_AMOUNT.-1=Use Style
 
 
 screen.SKY_MENU=Sky
+
+
+option.CUSTOM_OVERWORLD_SKYBOX=Custom Overworld Skybox
+option.CUSTOM_OVERWORLD_SKYBOX.comment=Enables custom skybox rendering for the overworld
+value.CUSTOM_OVERWORLD_SKYBOX.0=Off
+value.CUSTOM_OVERWORLD_SKYBOX.1=On
+
+option.CUSTOM_NETHER_SKYBOX=Custom Nether Skybox
+option.CUSTOM_NETHER_SKYBOX.comment=Enables custom skybox rendering for the nether
+value.CUSTOM_NETHER_SKYBOX.0=Off
+value.CUSTOM_NETHER_SKYBOX.1=On
+
+option.CUSTOM_END_SKYBOX=Custom End Skybox
+option.CUSTOM_END_SKYBOX.comment=Enables custom skybox rendering for the end
+value.CUSTOM_END_SKYBOX.0=Off
+value.CUSTOM_END_SKYBOX.1=On
 
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style

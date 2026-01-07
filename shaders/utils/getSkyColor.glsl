@@ -8,12 +8,23 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	
 	#ifdef OVERWORLD
 		
-		const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.1;
-		const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.25;
-		const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.1;
-		const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
-		const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
-		const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
+		#if CUSTOM_OVERWORLD_SKYBOX == 0
+			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.1;
+			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.25;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.1;
+			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
+			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
+			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
+		#elif CUSTOM_OVERWORLD_SKYBOX == 1
+			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.05;
+			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.3;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.05;
+			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
+			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * 0.75;
+			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * 0.75;
+		#endif
+		
+		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
 		
 		float skyMixFactor = dayPercent;
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
@@ -21,13 +32,18 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.4), inPaleGarden);
 		upDot = clamp(upDot, 0.0, 1.0);
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
+		#if CUSTOM_OVERWORLD_SKYBOX == 1
+			horizonColor *= 1.0 - 0.4 * sunriseSunsetPercent;
+			skyColor *= 1.0 - 0.4 * sunriseSunsetPercent;
+		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
 		
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
-		sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
+		#if CUSTOM_OVERWORLD_SKYBOX == 0
+			sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
+		#endif
 		sunDot *= 1.0 - 0.95 * upDot;
-		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
 		sunDot *= 1.0 - (1.0 - sunriseSunsetPercent) * (1.0 - sunriseSunsetPercent);
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
@@ -50,6 +66,10 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
 		skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		
+		#if CUSTOM_OVERWORLD_SKYBOX == 1
+			skyColor *= 0.8;
+		#endif
+		
 		#if AUTO_EXPOSURE_ENABLED == 1
 			skyColor *= 0.9;
 		#endif
@@ -62,9 +82,13 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 	#elif defined END
 		
-		vec3 worldDir = mat3(gbufferModelViewInverse) * viewDir;
-		float brightness = valueNoise3(worldDir * 700.0);
-		skyColor = mix(vec3(0.2, 0.1, 0.35) * END_SKY_BRIGHTNESS * 2.0, vec3(1.25, 0.7, 0.9), brightness * 0.35 * END_STATIC_BRIGHTNESS);
+		#if CUSTOM_END_SKYBOX == 0
+			vec3 worldDir = mat3(gbufferModelViewInverse) * viewDir;
+			float brightness = valueNoise3(worldDir * 700.0);
+			skyColor = mix(vec3(0.2, 0.1, 0.35) * END_SKY_BRIGHTNESS * 2.0, vec3(1.25, 0.7, 0.9), brightness * 0.35 * END_STATIC_BRIGHTNESS);
+		#elif CUSTOM_END_SKYBOX == 1
+			skyColor = vec3(0.0);
+		#endif
 		
 	#endif
 	

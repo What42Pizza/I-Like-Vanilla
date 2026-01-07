@@ -11,7 +11,8 @@ void main() {
 	
 	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
 	
-	#ifdef OVERWORLD
+	
+	#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 0
 		
 		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
 		color = 1.0 - color;
@@ -27,7 +28,7 @@ void main() {
 	#endif
 	
 	
-	#ifdef END
+	#if defined END && CUSTOM_END_SKYBOX == 0
 		discard;
 	#endif
 	

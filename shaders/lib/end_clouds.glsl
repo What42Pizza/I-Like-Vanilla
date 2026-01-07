@@ -17,7 +17,7 @@ float sampleEndCloud(vec3 pos) {
 
 
 
-// returns the cloud thinkness (inverted) and brightness for this pixel
+// returns the cloud thickness (inverted) and brightness for this pixel
 vec2 computeEndClouds(vec3 playerPos) {
 	vec3 pos = cameraPosition + playerPos * 0.75; // start at the block and move towards the camera
 	vec3 endPos = cameraPosition;
