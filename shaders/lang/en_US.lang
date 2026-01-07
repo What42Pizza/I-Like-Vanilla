@@ -547,6 +547,14 @@ value.END_AMBIENT_BLUE.-1=Use Style
 option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
 value.END_AMBIENT_BRIGHTNESS.-1=Use Style
 
+option.END_SKY_BRIGHTNESS=End Sky Brightness
+option.END_SKY_BRIGHTNESS.comment=Changes the brightness of the end sky
+value.END_SKY_BRIGHTNESS.-1=Use Style
+
+option.END_STATIC_BRIGHTNESS=End Static Brightness
+option.END_STATIC_BRIGHTNESS.comment=Changes the amount / brightness of the end sky static
+value.END_STATIC_BRIGHTNESS.-1=Use Style
+
 
 
 

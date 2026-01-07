@@ -393,6 +393,14 @@
 #undef END_AMBIENT_BRIGHTNESS
 										#define END_AMBIENT_BRIGHTNESS 0.65
 #endif
+#if END_SKY_BRIGHTNESS == -1
+#undef END_SKY_BRIGHTNESS
+										#define END_SKY_BRIGHTNESS 0.5
+#endif
+#if END_STATIC_BRIGHTNESS == -1
+#undef END_STATIC_BRIGHTNESS
+										#define END_STATIC_BRIGHTNESS 1.0
+#endif
 
 
 
