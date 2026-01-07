@@ -59,19 +59,25 @@ void main() {
 	#endif
 	
 	if (materialId == 1570u) {
+		float horizontalDist = length(playerPos.xz);
 		#if PHYSICALLY_WAVING_WATER_ENABLED == 1
 			float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;
 			#ifdef DISTANT_HORIZONS
-				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+				float lengthCylinder = max(horizontalDist, abs(playerPos.y));
 				wavingAmount *= smoothstep(far * 0.95 - 10, far * 0.9 - 10, lengthCylinder);
 			#endif
 			playerPos += cameraPosition;
 			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.015 * wavingAmount;
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y -= 0.125 / (1.0 + length(playerPos.xz));
+			playerPos.y -= 0.125 / (1.0 + horizontalDist);
 		#endif
-		playerPos.y += 0.075; // offset shadow bias
+		playerPos.y += 0.1 / (1.0 + horizontalDist) * sign(isEyeInWater - 0.5);
+		#if PIXELATED_SHADOWS == 0
+			playerPos.y += 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
+		#else
+			playerPos.y += 0.1 + 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
+		#endif
 	}
 	
 	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1 || COLORED_LIGHTING_ENABLED == 1

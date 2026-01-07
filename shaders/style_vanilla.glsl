@@ -500,7 +500,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.6
+										#define AO_AMOUNT 0.75
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -785,7 +785,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.02
+										#define SATURATION 0.01
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -1011,6 +1011,14 @@
 #undef WATER_TRANSPARENCY_DEEP
 										#define WATER_TRANSPARENCY_DEEP 0.15
 #endif
+#if WATER_FOAM_ENABLED == -1
+#undef WATER_FOAM_ENABLED
+										#define WATER_FOAM_ENABLED 1
+#endif
+#if WATER_FOAM_AMOUNT == -1
+#undef WATER_FOAM_AMOUNT
+										#define WATER_FOAM_AMOUNT 0.5
+#endif 
 
 
 

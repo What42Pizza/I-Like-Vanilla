@@ -1006,6 +1006,14 @@
 #undef WATER_TRANSPARENCY_DEEP
 										#define WATER_TRANSPARENCY_DEEP 0.2
 #endif
+#if WATER_FOAM_ENABLED == -1
+#undef WATER_FOAM_ENABLED
+										#define WATER_FOAM_ENABLED 1
+#endif
+#if WATER_FOAM_AMOUNT == -1
+#undef WATER_FOAM_AMOUNT
+										#define WATER_FOAM_AMOUNT 0.75
+#endif 
 
 
 

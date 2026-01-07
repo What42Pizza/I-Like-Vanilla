@@ -20,7 +20,7 @@ sunrays processing (writes to the intermediates texture rg w/ temporal filtering
 clouds processing (writes to the intermediates texture ba w/ temporal filtering)
 
 composite pass 2: (half res)
-bloom processing (writes to the intermediates2 texture w/ temportal filtering)
+bloom processing (writes to the intermediates2 texture w/ temporal filtering)
 
 composite pass 3:
 add sunrays, clouds, and bloom (all sampling from the intermediates and intermediates2 textures)

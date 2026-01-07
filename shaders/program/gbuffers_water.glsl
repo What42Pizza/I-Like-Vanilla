@@ -35,12 +35,10 @@ flat in_out vec3 shadowcasterLight;
 
 #include "/lib/lighting/fsh_lighting.glsl"
 #include "/utils/depth.glsl"
+#include "/utils/screen_to_view.glsl"
 
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
-#endif
-#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-	#include "/utils/screen_to_view.glsl"
 #endif
 
 void main() {
@@ -119,7 +117,8 @@ void main() {
 		
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.25;
-			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.125;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.25;
+			vec2 rawNormalNoise;
 			if (wavingSurfaceAmount > 0.00001) {
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND * 0.55, WAVING_WATER_FRESNEL_SURFACE * 0.55, lmcoord.y);
 				float frameTimeCounter = frameTimeCounter * WAVING_WATER_SPEED;
@@ -133,6 +132,7 @@ void main() {
 				normal.xy += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
+				normal.xy *= 0.5;
 				vec3 normalWithoutMult = tbn * normalize(normal);
 				normal.xy *= wavingSurfaceAmount;
 				normal = tbn * normalize(normal);
@@ -142,21 +142,29 @@ void main() {
 		#endif
 		
 		
-		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-			if (isEyeInWater == 1) {
-				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
-			} else {
-				float blockDepth = length(viewPos);
-				float opaqueBlockDepth = length(screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r)));
-				float waterDepth = opaqueBlockDepth - blockDepth;
-				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
-			}
-		#else
-			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
-		#endif
 		color.a *= 1.0 + fresnel * 0.125;
 		
-		// as water becomes darker, it should become more opaque
+		float blockDepth = length(viewPos);
+		float opaqueBlockDepth = length(screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r)));
+		float waterDepth = opaqueBlockDepth - blockDepth;
+		if (isEyeInWater == 1) {
+			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		} else {
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
+		}
+		
+		#if WATER_FOAM_ENABLED == 1
+			float foamAmount = percentThrough(waterDepth, 1.2, 0.0);
+			foamAmount *= foamAmount;
+			foamAmount *= 1.0 + 0.25 * fresnel;
+			foamAmount *= 0.5 + 0.5 * lmcoord.y;
+			#if WAVING_WATER_SURFACE_ENABLED == 1
+				foamAmount *= 0.3 + 0.7 * length(rawNormalNoise);
+			#endif
+			color.rgb = mix(color.rgb, vec3(1.0), foamAmount * WATER_FOAM_AMOUNT * 3.0);
+		#endif
+		
+		// water needs to be more opaque in dark areas
 		float alphaLift = max(lmcoord.x, lmcoord.y);
 		alphaLift = sqrt(alphaLift);
 		alphaLift = (1.0 - alphaLift) * 0.5 * (1.2 - screenBrightness);
@@ -281,7 +289,7 @@ void main() {
 			playerPos.y += sin(playerPos.x * 0.6 + playerPos.z * 1.4 + frameTimeCounter * 3.0) * 0.015 * wavingAmount;
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
-			playerPos.y += 0.015625 / (1.0 + length(playerPos.xz));
+			playerPos.y += 0.1 / (1.0 + length(playerPos.xz)) * sign(isEyeInWater - 0.5);
 		}
 	#endif
 	

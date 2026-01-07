@@ -97,18 +97,15 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		#endif
 		
 		
-		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-			if (isEyeInWater == 1) {
-				color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
-			} else {
-				float blockDepth = length(viewPos);
-				float opaqueBlockDepth = length(screenToViewVx(vec3(gl_FragCoord.xy * pixelSize, texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r)));
-				float waterDepth = opaqueBlockDepth - blockDepth;
-				color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
-			}
-		#else
-			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
-		#endif
+		if (isEyeInWater == 1) {
+			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		} else {
+			float blockDepth = length(viewPos);
+			float opaqueBlockDepth = length(screenToViewVx(vec3(gl_FragCoord.xy * pixelSize, texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r)));
+			float waterDepth = opaqueBlockDepth - blockDepth;
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
+		}
+		
 		color.a *= 1.0 + fresnel * 0.125;
 		
 	}

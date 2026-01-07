@@ -1258,16 +1258,21 @@ value.UNDERWATER_WAVINESS_SPEED.-1=Use Style
 
 screen.WATER_MENU=Water
 
-option.WATER_DEPTH_BASED_TRANSPARENCY=Depth-Based Transparency
-option.WATER_DEPTH_BASED_TRANSPARENCY.comment=Changes the transparency of water based on how deep it is. This might slightly impact performance, which is why disabling it is an option. If it is disabled, the transparency for water is set to always be the average of the shallow and deep transparency values
-value.WATER_DEPTH_BASED_TRANSPARENCY.0=Off
-value.WATER_DEPTH_BASED_TRANSPARENCY.1=On
-
 option.WATER_TRANSPARENCY_SHALLOW=Water Transparency (Shallow)
 value.WATER_TRANSPARENCY_SHALLOW.-1=Use Style
 
 option.WATER_TRANSPARENCY_DEEP=Water Transparency (Deep)
 value.WATER_TRANSPARENCY_DEEP.-1=Use Style
+
+option.WATER_FOAM_ENABLED=Water Foam Enabled
+option.WATER_FOAM_ENABLED.comment=Makes the edges of water more white
+value.WATER_FOAM_ENABLED.-1=Use Style
+value.WATER_FOAM_ENABLED.0=Off
+value.WATER_FOAM_ENABLED.1=On
+
+option.WATER_FOAM_AMOUNT=Water Foam Amount
+option.WATER_FOAM_AMOUNT.comment=Makes the edges of water more white
+value.WATER_FOAM_AMOUNT.-1=Use Style
 
 
 

@@ -60,11 +60,7 @@ void main() {
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
 		
-		#if WATER_DEPTH_BASED_TRANSPARENCY == 1
-			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
-		#else
-			color.a = 1.0 - (WATER_TRANSPARENCY_DEEP + WATER_TRANSPARENCY_SHALLOW) / 2.0;
-		#endif
+		color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 		
 	}
 	

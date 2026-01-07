@@ -1,4 +1,10 @@
-- v1.2.0c
+- v1.2.1
+  - Added water foam (configurable)
+  - Removed setting 'Depth-Based Transparency' (for water)
+
+<br>
+
+- v1.2.0c (26/01/05)
   - Added more emissives
   - Fixed bugs
 

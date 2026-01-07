@@ -31,7 +31,8 @@ float getAoAmount(float depth) {
 	for (int i = 1; i <= SAMPLE_COUNT; i++) {
 		
 		float len = float(i) / SAMPLE_COUNT;
-		vec2 offset = vec2(cos(i + noise3.b), sin(i + noise3.b)) * len;
+		float angle = (len + noise3.b) * PI * 2.0;
+		vec2 offset = vec2(cos(angle), sin(angle)) * len;
 		offset *= offsetMult;
 		offset += offsetOffset;
 		
