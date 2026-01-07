@@ -627,7 +627,7 @@ value.TEMPORAL_FILTER_ENABLED.0=Off
 value.TEMPORAL_FILTER_ENABLED.1=On
 
 option.TAA_ENABLED=TAA
-option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), required Temporal Filter to be enabled
+option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), requires Temporal Filter to be enabled\n\nNote: You can configure this using the Temporal Filter Settings menu
 value.TAA_ENABLED.0=Off
 value.TAA_ENABLED.1=On
 
@@ -641,6 +641,24 @@ option.OUTLINES_ENABLED.comment=Adds black outlines over everything
 value.OUTLINES_ENABLED.-1=Use Style
 value.OUTLINES_ENABLED.0=Off
 value.OUTLINES_ENABLED.1=On
+
+
+
+
+
+screen.TEMPORAL_FILTER_SETTINGS_MENU=Temporal Filter Settings
+
+option.TEMPORAL_FILTER_STILL=Blending Constant Still
+option.TEMPORAL_FILTER_STILL.comment=The amount of image blending when still
+prefix.TEMPORAL_FILTER_STILL=x
+
+option.TEMPORAL_FILTER_MOVING=Blending Moving Amount
+option.TEMPORAL_FILTER_MOVING.comment=The amount of image blending when moving
+prefix.TEMPORAL_FILTER_MOVING=x
+
+option.TEMPORAL_FILTER_DEPTH=Blending Depth Amount
+option.TEMPORAL_FILTER_DEPTH.comment=Increases the blending amount for distant objects
+prefix.TEMPORAL_FILTER_DEPTH=x
 
 
 

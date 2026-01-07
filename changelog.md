@@ -2,6 +2,7 @@
   - Added water foam (configurable)
   - Added custom skybox support
   - Added settings 'End Sky Brightness' and 'End Static Brightness'
+  - Added settings for the temporal filter
   - Removed setting 'Depth-Based Transparency' (for water)
 
 <br>

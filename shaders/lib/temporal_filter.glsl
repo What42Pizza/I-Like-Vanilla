@@ -38,11 +38,14 @@ void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoo
 	
 	doNeighborClamping(color, prevColor);
 	
+	const float blendStill = 0.8 * TEMPORAL_FILTER_STILL;
+	const float blendMoving = 0.72 * TEMPORAL_FILTER_MOVING;
+	
 	const float blendMin = 0.3;
 	const float blendMax = 0.98;
-	const float blendVariable = 0.08;
-	const float blendConstant = 0.72;
-	const float depthFactor = 0.012;
+	const float blendVariable = blendStill - blendMoving;
+	const float blendConstant = blendMoving;
+	const float depthFactor = 0.012 * TEMPORAL_FILTER_DEPTH;
 	
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;
 	float velocityAmount = dot(velocity, velocity) * 10.0;
