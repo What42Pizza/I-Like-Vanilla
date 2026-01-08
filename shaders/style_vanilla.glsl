@@ -194,11 +194,11 @@
 
 #if SKYLIGHT_SUNRISE_RED == -1
 #undef SKYLIGHT_SUNRISE_RED
-										#define SKYLIGHT_SUNRISE_RED 1.1
+										#define SKYLIGHT_SUNRISE_RED 1.2
 #endif
 #if SKYLIGHT_SUNRISE_GREEN == -1
 #undef SKYLIGHT_SUNRISE_GREEN
-										#define SKYLIGHT_SUNRISE_GREEN 0.91
+										#define SKYLIGHT_SUNRISE_GREEN 0.93
 #endif
 #if SKYLIGHT_SUNRISE_BLUE == -1
 #undef SKYLIGHT_SUNRISE_BLUE
@@ -231,7 +231,7 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.15
+										#define SKYLIGHT_SUNSET_RED 1.2
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
@@ -313,7 +313,7 @@
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.8
+										#define CAVE_AMBIENT_BLUE 0.75
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
@@ -449,7 +449,7 @@
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
-										#define FOLIAGE_TINT_GREEN 1.03
+										#define FOLIAGE_TINT_GREEN 1.04
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
@@ -508,7 +508,7 @@
 #endif
 #if AO_AMOUNT == -1
 #undef AO_AMOUNT
-										#define AO_AMOUNT 0.75
+										#define AO_AMOUNT 0.7
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -525,7 +525,7 @@
 #endif
 #if BLOCK_REFLECTION_AMOUNT_SURFACE == -1
 #undef BLOCK_REFLECTION_AMOUNT_SURFACE
-										#define BLOCK_REFLECTION_AMOUNT_SURFACE 0.3
+										#define BLOCK_REFLECTION_AMOUNT_SURFACE 0.35
 #endif
 #if BLOCK_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef BLOCK_REFLECTION_AMOUNT_UNDERGROUND
@@ -1411,7 +1411,7 @@
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
+										#define SKY_DAY_BLUE 1.05
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -1435,7 +1435,7 @@
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 0.85
+										#define SKY_HORIZON_DAY_BLUE 0.8
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED

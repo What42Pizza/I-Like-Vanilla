@@ -18,7 +18,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#elif CUSTOM_OVERWORLD_SKYBOX == 1
 			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.05;
 			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.3;
-			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.05;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.1;
 			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
 			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * 0.75;
 			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * 0.75;
@@ -30,20 +30,26 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
 		skyColor = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
 		skyColor = mix(skyColor, vec3(0.05 + dayPercent * 0.4), inPaleGarden);
-		upDot = clamp(upDot, 0.0, 1.0);
+		upDot = max(upDot, 0.0);
 		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
 			horizonColor *= 1.0 - 0.4 * sunriseSunsetPercent;
 			skyColor *= 1.0 - 0.4 * sunriseSunsetPercent;
 		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
-		skyColor = mix(horizonColor, skyColor, sqrt(upDot));
+		float horizonAmount = 1.0 - upDot;
+		horizonAmount *= horizonAmount;
+		horizonAmount *= horizonAmount;
+		horizonAmount = 1.0 - horizonAmount;
+		skyColor = mix(horizonColor, skyColor, horizonAmount);
 		
 		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
 		#if CUSTOM_OVERWORLD_SKYBOX == 0
 			sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
+		#elif CUSTOM_OVERWORLD_SKYBOX == 1
+			sunDot *= sunDot;
 		#endif
-		sunDot *= 1.0 - 0.95 * upDot;
+		sunDot *= 1.0 - upDot;
 		sunDot *= 1.0 - (1.0 - sunriseSunsetPercent) * (1.0 - sunriseSunsetPercent);
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
@@ -67,7 +73,8 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
-			skyColor *= 0.8;
+			skyColor *= 0.75;
+			skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.75);
 		#endif
 		
 		#if AUTO_EXPOSURE_ENABLED == 1

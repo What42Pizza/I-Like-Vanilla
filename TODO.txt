@@ -1,8 +1,7 @@
 Planned for next major version:
 Add situational effects:
-	reflective rain puddles
-	water foam
 	end portal (& gateway) effects
+	reflective rain puddles
 Make most (all that can) settings be relative to style value
 Update documentation
 Make sure all vanilla effects work

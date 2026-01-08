@@ -117,7 +117,7 @@ void main() {
 		
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.25;
-			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.25;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.125;
 			vec2 rawNormalNoise;
 			if (wavingSurfaceAmount > 0.00001) {
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND * 0.55, WAVING_WATER_FRESNEL_SURFACE * 0.55, lmcoord.y);
@@ -132,7 +132,7 @@ void main() {
 				normal.xy += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
 				normal.xy += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
-				normal.xy *= 0.5;
+				rawNormalNoise = normal.xy;
 				vec3 normalWithoutMult = tbn * normalize(normal);
 				normal.xy *= wavingSurfaceAmount;
 				normal = tbn * normalize(normal);
@@ -142,8 +142,6 @@ void main() {
 		#endif
 		
 		
-		color.a *= 1.0 + fresnel * 0.125;
-		
 		float blockDepth = length(viewPos);
 		float opaqueBlockDepth = length(screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r)));
 		float waterDepth = opaqueBlockDepth - blockDepth;
@@ -152,16 +150,18 @@ void main() {
 		} else {
 			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
 		}
+		color.a *= 1.0 + fresnel * 0.125;
 		
 		#if WATER_FOAM_ENABLED == 1
 			float foamAmount = percentThrough(waterDepth, 1.2, 0.0);
+			reflectiveness *= 1.0 - foamAmount;
 			foamAmount *= foamAmount;
 			foamAmount *= 1.0 + 0.25 * fresnel;
 			foamAmount *= 0.5 + 0.5 * lmcoord.y;
 			#if WAVING_WATER_SURFACE_ENABLED == 1
-				foamAmount *= 0.3 + 0.7 * length(rawNormalNoise);
+				foamAmount *= 0.4 + 0.6 * length(rawNormalNoise);
 			#endif
-			color.rgb = mix(color.rgb, vec3(1.0), foamAmount * WATER_FOAM_AMOUNT * 3.0);
+			color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.5);
 		#endif
 		
 		// water needs to be more opaque in dark areas
