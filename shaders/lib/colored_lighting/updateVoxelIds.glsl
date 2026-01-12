@@ -1,7 +1,7 @@
 #include "/lib/colored_lighting/coloredLightingUtils.glsl"
 
 #extension GL_ARB_shader_image_load_store : enable
-writeonly uniform image3D voxelIds;
+layout(r8ui) uniform writeonly uimage3D voxelIds;
 
 
 

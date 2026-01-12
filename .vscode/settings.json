@@ -20,6 +20,7 @@
 		"kuwahara",
 		"LABPBR",
 		"Lastmod",
+		"MIPPED",
 		"modpack",
 		"nametags",
 		"netherite",
@@ -37,6 +38,7 @@
 		"Reinhard",
 		"Shaderpack",
 		"Shaderpacks",
+		"shadowcomp",
 		"shroomlight",
 		"Sildurs",
 		"skybasic",
@@ -49,9 +51,12 @@
 		"tonemap",
 		"torchflower",
 		"transparents",
+		"uimage",
+		"usampler",
 		"Vildravn",
 		"volumetrics",
 		"voxy",
+		"workgroups",
 		"xyzz"
 	]
 }

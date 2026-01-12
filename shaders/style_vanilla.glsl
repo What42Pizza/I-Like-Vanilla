@@ -789,7 +789,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.16
+										#define VIBRANCE 0.13
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -1305,7 +1305,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.1
+										#define ATMOSPHERIC_FOG_DENSITY 0.09
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY

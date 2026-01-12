@@ -32,11 +32,11 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	#if PIXELATED_SHADOWS > 0
 		// no filtering, world-aligned pixelated
 		
-		vec3 viewStepX = normalize(dFdx(viewPos));
-		vec3 viewStepY = normalize(dFdy(viewPos));
-		vec3 actualNormal = cross(viewStepX, viewStepY);
-		bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
-		normal = maybeGrass ? actualNormal : normal;
+		//vec3 viewStepX = normalize(dFdx(viewPos));
+		//vec3 viewStepY = normalize(dFdy(viewPos));
+		//vec3 actualNormal = cross(viewStepX, viewStepY);
+		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
+		//normal = maybeGrass ? actualNormal : normal;
 		viewPos += normal * 0.0015 * (25.0 + length(viewPos));
 		
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);

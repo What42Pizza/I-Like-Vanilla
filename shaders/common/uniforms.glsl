@@ -44,7 +44,7 @@ uniform vec3 previousCameraPosition;
 	uniform ivec3 cameraPositionInt;
 #else
 	vec3 cameraPositionFract = fract(cameraPosition);
-	ivec3 cameraPositionFract = ivec3(floor(cameraPosition));
+	ivec3 cameraPositionInt = ivec3(floor(cameraPosition));
 #endif
 uniform float eyeAltitude;
 uniform ivec2 atlasSize;

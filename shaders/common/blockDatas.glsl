@@ -23,7 +23,7 @@
 	#define SET_GLOWING_COLOR(v1, v2, v3)
 #endif
 #ifdef GET_VOXEL_ID
-	voxelId = 0u;
+	voxelId = uint(abs(gl_Normal.x + gl_Normal.y + gl_Normal.z) == 1.0); // assume solid if normal is non-diagonal
 	#define SET_VOXEL_ID(v) voxelId = v;
 #else
 	#define SET_VOXEL_ID(v)

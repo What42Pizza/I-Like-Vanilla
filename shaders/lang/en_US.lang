@@ -627,7 +627,7 @@ value.TEMPORAL_FILTER_ENABLED.0=Off
 value.TEMPORAL_FILTER_ENABLED.1=On
 
 option.TAA_ENABLED=TAA
-option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), requires Temporal Filter to be enabled\n\nNote: You can configure this using the Temporal Filter Settings menu
+option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), requires Temporal Filter to be enabled\n\nNote: You can configure this using the Temporal Filter Settings menu, and this is disabled if Temporal Filtering is disabled
 value.TAA_ENABLED.0=Off
 value.TAA_ENABLED.1=On
 
