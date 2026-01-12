@@ -1,5 +1,10 @@
 in_out vec2 texcoord;
 
+#if SSS_LIDAR == 1
+	const int lidarSampleCount = 24;
+	in_out vec2 lidarSampleCoords[lidarSampleCount];
+#endif
+
 
 
 #ifdef FSH
@@ -59,7 +64,11 @@ void main() {
 	
 	vec3 pos = vec3(texcoord, depth);
 	vec2 prevCoord = texcoord;
-	if (!depthIsHand(depth)) {
+	bool doReprojection = !depthIsHand(depth);
+	#if SSS_LIDAR == 1
+		doReprojection = true;
+	#endif
+	if (doReprojection) {
 		vec3 cameraOffset = cameraPosition - previousCameraPosition;
 		prevCoord = reprojection(pos, cameraOffset);
 	}
@@ -74,6 +83,26 @@ void main() {
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
 		doTemporalFilter(color, depth, depthDh, prevCoord);
+	#endif
+	
+	
+	
+	// ======== SSS LIDAR ======== //
+	
+	#if SSS_LIDAR == 1
+		color = vec3(0.0);
+		for (int i = 0; i < lidarSampleCount; i++) {
+			float sampleDist = length((texcoord - lidarSampleCoords[i]) * vec2(aspectRatio, 1.0));
+			if (sampleDist < 0.005) {
+				color = texture2D(MAIN_TEXTURE, lidarSampleCoords[i]).rgb * 2.0;
+			}
+		}
+		float linearDepth = toLinearDepth(depth); 
+		float prevLinearDepth = toLinearDepth(texture2D(PREV_DEPTH_TEXTURE, prevCoord).r);
+		float depthDiff = (linearDepth - prevLinearDepth) * far;
+		if (depthDiff < 1.0 && clamp(prevCoord, 0.0, 1.0) == prevCoord) {
+			color = max(color, texelFetch(PREV_TEXTURE, ivec2(prevCoord * viewSize), 0).rgb * 2.0) - 1.0 / 255.0;
+		}
 	#endif
 	
 	
@@ -113,6 +142,15 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	
+	#if SSS_LIDAR == 1
+		uint rng = uint(frameCounter * lidarSampleCount);
+		for (int i = 0; i < lidarSampleCount; i++) {
+			lidarSampleCoords[i].x = randomFloat(rng) * 0.5 + 0.5;
+			lidarSampleCoords[i].y = randomFloat(rng) * 0.5 + 0.5;
+		}
+	#endif
+	
 }
 
 #endif

@@ -1901,3 +1901,8 @@ option.SSS_NTSC=NTSC Encode/Decode
 option.SSS_NTSC.comment=Encoded then decodes the image as an NTSC signal
 value.SSS_NTSC.0=Off
 value.SSS_NTSC.1=On
+
+option.SSS_LIDAR=Lidar
+option.SSS_LIDAR.comment=Enabled a lidar-like effect
+value.SSS_LIDAR.0=Off
+value.SSS_LIDAR.1=On
