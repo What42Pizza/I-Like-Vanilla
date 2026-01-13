@@ -2,27 +2,30 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
 #if PBR_TYPE == 0
-	flat in_out vec2 encodedNormal;
-#elif PBR_TYPE == 1
+	flat in_out vec3 normal;
+#if PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
+in_out vec3 viewPos;
+in_out float blockDepth;
+
+flat in_out vec3 shadowcasterLight;
 
 
 
 #ifdef FSH
 
+#include "/lib/lighting/simple_fsh_lighting.glsl"
+
 void main() {
-	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	color.rgb = (color.rgb - 0.5) * (1.0 + TEXTURE_CONTRAST * 0.5) + 0.5;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - TEXTURE_CONTRAST * 0.45);
-	color.rgb = clamp(color.rgb, 0.0, 1.0);
-	color *= glcolor;
+	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	
 	
-	// hurt flash, creeper flash, etc
-	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.5, 1.0));
-	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
+	// hide nearby particles
+	if (color.a > 0.99) {
+		float transparency = percentThrough(blockDepth, 0.5, 1.2);
+		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
+	}
 	
 	
 	#if PBR_TYPE == 0
@@ -42,13 +45,16 @@ void main() {
 	#endif
 	
 	
-	/* DRAWBUFFERS:02 */
+	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	
+	
+	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
-		encodedNormal
+		pack_2x8(reflectiveness, 0.0),
+		normal
 	);
 	
 }
@@ -60,6 +66,7 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
@@ -72,25 +79,24 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
+	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
-	#ifdef NETHER
-		// remove entity shadows, may cause other problems
-		if (glcolor.a < 1.0) {
-			gl_Position = vec4(1.0);
-			return;
-		}
+	glcolor.rgb *= 1.25;
+	glcolor.a = sqrt(glcolor.a);
+	#if PBR_TYPE != 0
+		vec3 normal;
 	#endif
-	vec3 normal = gl_NormalMatrix * gl_Normal;
-	#if PBR_TYPE == 0
-		encodedNormal = encodeNormal(normal);
-	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	blockDepth = length(viewPos);
+	
+	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
@@ -100,9 +106,8 @@ void main() {
 		gl_Position = ftransform();
 	#endif
 	
-	
 	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -5.0) return; // simple but effective(?) optimization
+		if (gl_Position.z < -1.0) return; // simple but effective optimization
 	#endif
 	
 	

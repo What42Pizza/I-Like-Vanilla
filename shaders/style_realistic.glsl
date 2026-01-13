@@ -367,7 +367,7 @@
 #endif
 #if END_SKYLIGHT_GREEN == -1
 #undef END_SKYLIGHT_GREEN
-										#define END_SKYLIGHT_GREEN 0.65
+										#define END_SKYLIGHT_GREEN 0.6
 #endif
 #if END_SKYLIGHT_BLUE == -1
 #undef END_SKYLIGHT_BLUE
@@ -383,7 +383,7 @@
 #endif
 #if END_AMBIENT_GREEN == -1
 #undef END_AMBIENT_GREEN
-										#define END_AMBIENT_GREEN 0.6
+										#define END_AMBIENT_GREEN 0.55
 #endif
 #if END_AMBIENT_BLUE == -1
 #undef END_AMBIENT_BLUE
@@ -391,7 +391,7 @@
 #endif
 #if END_AMBIENT_BRIGHTNESS == -1
 #undef END_AMBIENT_BRIGHTNESS
-										#define END_AMBIENT_BRIGHTNESS 0.45
+										#define END_AMBIENT_BRIGHTNESS 0.4
 #endif
 #if END_SKY_BRIGHTNESS == -1
 #undef END_SKY_BRIGHTNESS

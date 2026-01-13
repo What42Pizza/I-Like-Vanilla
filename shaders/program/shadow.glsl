@@ -33,9 +33,7 @@ void main() {
 	
 	vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	
-	#if COLORED_LIGHTING_ENABLED == 1 || EXCLUDE_FOLIAGE == 1 || WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
-		uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
-	#endif
+	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		if (gl_VertexID % 4 == 0) {

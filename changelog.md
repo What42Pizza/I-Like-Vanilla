@@ -1,9 +1,10 @@
-- v1.2.1
+- v1.2.1 (26/01/13)
   - Added water foam (configurable)
   - Added custom skybox support
   - Added settings 'End Sky Brightness' and 'End Static Brightness'
   - Added settings for the temporal filter
   - Removed setting 'Depth-Based Transparency' (for water)
+  - Fixed bugs, tweaked setting and effects, etc
 
 <br>
 

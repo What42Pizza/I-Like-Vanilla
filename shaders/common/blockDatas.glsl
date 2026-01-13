@@ -456,8 +456,8 @@ if (materialId < 1570u) { // 0..1570
 									// nether quartz ore
 									SET_REFLECTIVENESS(0.3);
 									SET_GLOWING_COLOR(
-										vec3(  0.0,  6.5, 72.5),
-										vec3(360.0, 30.3, 90.6),
+										vec3(  0.0,  0.0, 70.0),
+										vec3(360.0, 30.3, 99.0),
 										GLOWING_ORES_STRENGTH
 									);
 								}

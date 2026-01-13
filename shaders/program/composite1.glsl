@@ -148,7 +148,9 @@ void main() {
 	
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	atmoFogAmount *= 1.0 - fogAmount;
-	atmoFogAmount *= 1.0 - 0.25 * float(uint(isEyeInWater == 0));
+	#ifndef NETHER
+		atmoFogAmount *= 1.0 - 0.25 * float(uint(isEyeInWater == 0));
+	#endif
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
