@@ -40,7 +40,7 @@ shared vec4 cachedFloodfillDatas[10 * 10 * 10];
 
 
 vec4 getCachedFloodfill(ivec3 offset) {
-	ivec3 cachePos = offset + 1; // +1 is for padding
+	ivec3 cachePos = ivec3(gl_LocalInvocationID) + offset + 1; // +1 b/c padding
 	return cachedFloodfillDatas[cachePos.x + cachePos.y * 10 + cachePos.z * 100];
 }
 
@@ -54,7 +54,7 @@ void main() {
 		cacheI *= 2;
 		ivec3 cachePos = (cacheI / ivec3(1, 10, 100)) % 10;
 		cachePos.z *= 2;
-		cachePos += ivec3(gl_WorkGroupID * gl_WorkGroupSize) - 1; // -1 is for padding
+		cachePos += ivec3(gl_WorkGroupID * gl_WorkGroupSize) - 1; // -1 b/c padding
 		cachePos = clamp(cachePos, ivec3(0), coloredLightingSize - 1);
 		cachedFloodfillDatas[cacheI] = imageLoad(lightFloodfill1, cachePos);
 		cachePos.z = min(cachePos.z + 1, coloredLightingSize.z - 1);

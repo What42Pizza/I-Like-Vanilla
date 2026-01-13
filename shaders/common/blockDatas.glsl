@@ -57,7 +57,7 @@ if (materialId < 1570u) { // 0..1570
 						#if defined SHADER_GBUFFERS_WATER || defined SHADER_VOXY_TRANSLUCENT
 							SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
 						#endif
-						SET_SPECULARNESS(2.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately unsed instead of stored
+						SET_SPECULARNESS(2.0); // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately used instead of stored
 						SET_VOXEL_ID(100u);
 					} else if (materialId == 1571u) {
 						// lava
@@ -129,7 +129,7 @@ if (materialId < 1570u) { // 0..1570
 						}
 					} else { // 1586..1590
 						if (materialId == 1586u) {
-							// lava couldron
+							// lava cauldron
 							SET_SPECULARNESS(0.5);
 							SET_VOXEL_ID(101u); // same voxel id as lava
 						} else {
@@ -350,7 +350,7 @@ if (materialId < 1570u) { // 0..1570
 						if (materialId < 1670u) { // 1660..1670
 							if (materialId < 1662u) { // 1660..1662
 								if (materialId == 1660u) {
-									// netherrak
+									// netherrack
 									SET_REFLECTIVENESS(0.25);
 								} else {
 									// bone block

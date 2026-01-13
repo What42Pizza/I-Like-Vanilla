@@ -31,6 +31,8 @@ brightness: 0.456
 
 
 
+// translucents:
+
 block water, flowing_water:
 alias: BLOCK_WATER
 mult: 1000
@@ -144,6 +146,8 @@ translucency: (0.9, 0.9, 0.9)
 
 
 
+// candles
+
 block white_candle:lit=true:
 mult: 1
 voxelize: true
@@ -225,6 +229,8 @@ voxelize: true
 emission: (0.25, 0.25, 0.25)
 
 
+
+// light blocks
 
 block light:level=0:
 mult: 1
@@ -308,6 +314,8 @@ emission: 15.0 / 15.0
 
 
 
+// classic blocklights
+
 block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, jack_o_lantern, candle, campfire:
 mult: 10
 glow detect min: (21.0,  31.3, 69.4)
@@ -357,6 +365,8 @@ emission: (1.0, 0.9, 0.8)
 
 
 
+// cave blocklights
+
 block glow_lichen:
 mult: 5
 glow detect min: (60.0, 19.0, 67.6)
@@ -400,6 +410,8 @@ specularness: 0.5
 
 
 
+// nature blocklights
+
 block sea_pickle:
 mult: 1
 voxelize: true
@@ -435,6 +447,8 @@ emission: (0.3, 0.3, 0.3)
 
 
 
+// nether/end blocklights
+
 block glowstone:
 mult: 25
 reflectiveness: 1.0
@@ -462,10 +476,69 @@ emission: (1.0, 1.0, 1.0)
 
 
 
+// ores
+
+block iron_ore, deepslate_iron_ore:
+mult: 1
+glow detect min: (18.0, 24.8, 53.3)
+glow detect max: (56.0, 37.5, 88.6)
+glow amount: GLOWING_ORES_STRENGTH
+
+block copper_ore, deepslate_copper_ore:
+mult: 1
+glow detect min: (  0.0, 31.8, 46.3)
+glow detect max: (162.0, 65.6, 87.8)
+glow amount: GLOWING_ORES_STRENGTH
+
+block gold_ore, deepslate_gold_ore:
+mult: 1
+glow detect min: (36.0, 29.0,  92.2)
+glow detect max: (72.0, 94.0, 100.0)
+glow amount: GLOWING_ORES_STRENGTH
+
+block redstone_ore:lit=false, deepslate_redstone_ore:lit=false:
+mult: 1
+glow detect min: ( 0.0, 62.8, 59.2)
+glow detect max: (18.0, 98.0, 99.2)
+glow amount: GLOWING_ORES_STRENGTH
+
 block redstone_ore:lit=true, deepslate_redstone_ore:lit=true:
 mult: 1
+glow detect min: ( 0.0, 62.8, 59.2)
+glow detect max: (18.0, 98.0, 99.2)
+glow amount: GLOWING_ORES_STRENGTH
 voxelize: true
 emission: (0.1, 0.0, 0.0)
+
+block emerald_ore, deepslate_emerald_ore:
+mult: 1
+glow detect min: (126.0,  14.9,  48.2)
+glow detect max: (162.0, 100.0, 100.0)
+glow amount: GLOWING_ORES_STRENGTH
+
+block lapis_ore, deepslate_lapis_ore:
+mult: 1
+glow detect min: (198.0, 57.0, 54.5)
+glow detect max: (234.0, 91.5, 95.7)
+glow amount: GLOWING_ORES_STRENGTH
+
+block diamond_ore, deepslate_diamond_ore:
+mult: 1
+glow detect min: (162.0, 16.5,  57.3)
+glow detect max: (184.0, 86.3, 100.0)
+glow amount: GLOWING_ORES_STRENGTH
+
+block nether_gold_ore, deepslate_nether_gold_ore:
+mult: 1
+glow detect min: (25.0, 29.0,  78.0)
+glow detect max: (72.0, 85.4, 100.0)
+glow amount: GLOWING_ORES_STRENGTH
+
+block nether_quartz_ore, deepslate_nether_quartz_ore:
+mult: 1
+glow detect min: (  0.0,  6.5, 72.5)
+glow detect max: (360.0, 30.3, 90.6)
+glow amount: GLOWING_ORES_STRENGTH
 
 block raw_iron_block, raw_copper_block, raw_gold_block:
 mult: 1
@@ -473,6 +546,36 @@ specularness: 0.5
 brightness: 0.8
 
 
+
+// natural blocks
+
+block sugar_cane:
+mult: 1
+brightness: 0.85
+
+block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves:
+mult: 2000
+specularness: 0.8
+
+block pale_oak_leaves:
+mult: 100
+specularness: 0.8
+
+block pale_hanging_moss:
+mult: 1
+specularness: 0.5
+
+block vine:
+mult: 2
+specularness: 0.75
+
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, tall_dry_grass, large_fern:half=lower:
+mult: 50
+specularness: 0.5
+
+block tall_grass:half=upper, large_fern:half=upper:
+mult: 10
+specularness: 0.5
 
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 mult: 100
@@ -494,6 +597,26 @@ mult: 2
 reflectiveness: 0.9
 specularness: 0.4
 
+block netherrack:
+mult: 1000
+reflectiveness: 0.25
+
+block warped_stem:
+mult: 3
+glow detect min: (  0.0, 77.3, 38.0)
+glow detect max: (360.0, 86.6, 58.4)
+glow amount: GLOWING_STEMS_STRENGTH
+
+block crimson_stem:
+mult: 3
+glow detect min: (  0.0,  78.0, 48.2)
+glow detect max: (360.0, 100.0, 69.4)
+glow amount: GLOWING_STEMS_STRENGTH
+
+
+
+// valuables:
+
 block iron_block, iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
 mult: 1
 reflectiveness: 0.4
@@ -511,6 +634,8 @@ reflectiveness: 0.5
 specularness: 0.3
 
 
+
+// misc
 
 block ice:
 mult: 200
@@ -542,7 +667,25 @@ block command_block, chain_command_block, repeating_command_block:
 mult: 1
 specularness: 0.75
 
+block white_wool, white_carpet:
+mult: 2
+brightness: 0.9
 
+block snow_block, snow, powder_snow, grass_block:snowy=true:
+mult: 50
+brightness: 0.92
+
+block nether_portal:
+mult: 1
+alias: BLOCK_NETHER_PORTAL
+
+block end_portal, end_gateway:
+mult: 1
+alias: BLOCK_NETHER_PORTAL
+
+
+
+// building blocks
 
 block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_bricks, quartz_pillar:
 mult: 10
