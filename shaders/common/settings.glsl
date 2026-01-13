@@ -10,7 +10,7 @@ const int   colortex2Format       = RGBA16;
 #endif
 const int   colortex3Format       = RGBA16;
 const bool  colortex3Clear        = true;
-const int   colortex4Format       = RGB10_A2;
+const int   colortex4Format       = RGB8;
 const bool  colortex4Clear        = false;
 const int   colortex5Format       = RGB10_A2;
 const bool  colortex5Clear        = true;
