@@ -1,3 +1,8 @@
+- v1.2.2
+  - Added settings for end sky colors, end clouds colors, and nether clouds colors
+
+<br>
+
 - v1.2.1 (26/01/13)
   - Added water foam (configurable)
   - Added custom skybox support

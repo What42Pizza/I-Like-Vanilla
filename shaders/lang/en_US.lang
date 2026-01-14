@@ -547,14 +547,6 @@ value.END_AMBIENT_BLUE.-1=Use Style
 option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
 value.END_AMBIENT_BRIGHTNESS.-1=Use Style
 
-option.END_SKY_BRIGHTNESS=End Sky Brightness
-option.END_SKY_BRIGHTNESS.comment=Changes the brightness of the end sky
-value.END_SKY_BRIGHTNESS.-1=Use Style
-
-option.END_STATIC_BRIGHTNESS=End Static Brightness
-option.END_STATIC_BRIGHTNESS.comment=Changes the amount / brightness of the end sky static
-value.END_STATIC_BRIGHTNESS.-1=Use Style
-
 
 
 
@@ -1560,6 +1552,22 @@ value.NETHER_CLOUDS_COVERAGE.-1=Use Style
 option.NETHER_CLOUDS_TRANSPARENCY=Nether Clouds Transparency
 value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
 
+option.NETHER_CLOUDS_BASE_RED=Nether Clouds Base Color Red
+option.NETHER_CLOUDS_BASE_RED.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
+value.NETHER_CLOUDS_BASE_RED.-1=Use Style
+
+option.NETHER_CLOUDS_BASE_GREEN=Nether Clouds Base Color Green
+option.NETHER_CLOUDS_BASE_GREEN.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
+value.NETHER_CLOUDS_BASE_GREEN.-1=Use Style
+
+option.NETHER_CLOUDS_BASE_BLUE=Nether Clouds Base Color Blue
+option.NETHER_CLOUDS_BASE_BLUE.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
+value.NETHER_CLOUDS_BASE_BLUE.-1=Use Style
+
+option.NETHER_CLOUDS_FOG_INFLUENCE=Nether Clouds Fog Influence
+option.NETHER_CLOUDS_FOG_INFLUENCE.comment=How much the nether fog color influences the color of the nether clouds (this value is simply added to the value from the Nether Clouds Base Color)
+value.NETHER_CLOUDS_FOG_INFLUENCE.-1=Use Style
+
 
 
 
@@ -1580,6 +1588,30 @@ value.END_CLOUDS_COVERAGE.-1=Use Style
 
 option.END_CLOUDS_TRANSPARENCY=End Clouds Transparency
 value.END_CLOUDS_TRANSPARENCY.-1=Use Style
+
+option.END_CLOUDS_RED_DARK=End Clouds Red Dark
+option.END_CLOUDS_RED_DARK.comment=Changes the darker color of the end clouds
+value.END_CLOUDS_RED_DARK.-1=Use Style
+
+option.END_CLOUDS_GREEN_DARK=End Clouds Green Dark
+option.END_CLOUDS_GREEN_DARK.comment=Changes the darker color of the end clouds
+value.END_CLOUDS_GREEN_DARK.-1=Use Style
+
+option.END_CLOUDS_BLUE_DARK=End Clouds Blue Dark
+option.END_CLOUDS_BLUE_DARK.comment=Changes the darker color of the end clouds
+value.END_CLOUDS_BLUE_DARK.-1=Use Style
+
+option.END_CLOUDS_RED_BRIGHT=End Clouds Red Bright
+option.END_CLOUDS_RED_BRIGHT.comment=Changes the brighter color of the end clouds
+value.END_CLOUDS_RED_BRIGHT.-1=Use Style
+
+option.END_CLOUDS_GREEN_BRIGHT=End Clouds Green Bright
+option.END_CLOUDS_GREEN_BRIGHT.comment=Changes the brighter color of the end clouds
+value.END_CLOUDS_GREEN_BRIGHT.-1=Use Style
+
+option.END_CLOUDS_BLUE_BRIGHT=End Clouds Blue Bright
+option.END_CLOUDS_BLUE_BRIGHT.comment=Changes the brighter color of the end clouds
+value.END_CLOUDS_BLUE_BRIGHT.-1=Use Style
 
 
 
@@ -1758,6 +1790,36 @@ value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
 
 option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
 value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
+
+
+
+
+
+screen.END_SKY_COLORS_MENU=End Sky Colors
+
+option.END_SKY_RED=End Sky Red
+option.END_SKY_RED.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Red)
+value.END_SKY_RED.-1=Use Style
+
+option.END_SKY_GREEN=End Sky Green
+option.END_SKY_GREEN.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Green)
+value.END_SKY_GREEN.-1=Use Style
+
+option.END_SKY_BLUE=End Sky Blue
+option.END_SKY_BLUE.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Blue)
+value.END_SKY_BLUE.-1=Use Style
+
+option.END_STATIC_RED=End Static Red
+option.END_STATIC_RED.comment=Color for the end sky static (the brighter half of the static)
+value.END_STATIC_RED.-1=Use Style
+
+option.END_STATIC_GREEN=End Static Green
+option.END_STATIC_GREEN.comment=Color for the end sky static (the brighter half of the static)
+value.END_STATIC_GREEN.-1=Use Style
+
+option.END_STATIC_BLUE=End Static Blue
+option.END_STATIC_BLUE.comment=Color for the end sky static (the brighter half of the static)
+value.END_STATIC_BLUE.-1=Use Style
 
 
 

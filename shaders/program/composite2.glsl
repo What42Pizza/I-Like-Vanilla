@@ -108,7 +108,7 @@ void main() {
 		thickness *= 0.6 - 0.5 * END_CLOUDS_TRANSPARENCY;
 		color *= 1.0 - thickness;
 		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
-		color += mix(vec3(0.15, 0.0, 0.2), vec3(1.25, 0.7, 1.0), brightness) * thickness;
+		color += mix(END_CLOUDS_DARK_COLOR, END_CLOUDS_BRIGHT_COLOR, brightness) * thickness;
 	#endif
 	
 	
@@ -164,7 +164,7 @@ void main() {
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
 	#if NETHER_CLOUDS_ENABLED == 1
-		cloudsColor = normalize(fogColor) * 0.75 + vec3(0.2, 0.2, 0.0);
+		cloudsColor = normalize(fogColor) * NETHER_CLOUDS_FOG_INFLUENCE + NETHER_CLOUDS_BASE_COLOR;
 	#endif
 	
 	
