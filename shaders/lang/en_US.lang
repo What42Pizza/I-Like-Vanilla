@@ -611,6 +611,24 @@ value.SNOWY_TWEAKS_ENABLED.1=On
 
 
 
+screen.HEIGHT_BASED_DESATURATION_MENU=Height-Based Desaturation
+
+option.HBS_ENABLED=HBD Enabled
+option.HBS_ENABLED.comment=Enabled or disables height-based desaturation
+value.HBS_ENABLED.-1=Use Style
+
+option.HBD_STRENGTH=HBD Strength
+option.HBD_STRENGTH.comment=Sets the strength of the height-based desaturation
+value.HBD_STRENGTH.-1=Use Style
+
+option.HBD_SCALE=HBD Scale
+option.HBD_SCALE.comment=Determines how quickly everything is desaturated
+value.HBD_SCALE.-1=Use Style
+
+
+
+
+
 screen.POST_PROCESSING_MENU=Post Processing
 
 option.TEMPORAL_FILTER_ENABLED=Temporal Filter

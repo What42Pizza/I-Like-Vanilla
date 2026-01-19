@@ -155,9 +155,10 @@ void main() {
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
 	
-	#ifdef OVERWORLD
-		float desaturationAmount = max(1.0 - 700.0 / (playerPos.y + cameraPosition.y - 64.0 + 700.0), 0.0);
+	#if defined OVERWORLD && HBD_ENABLED == 1
+		float desaturationAmount = max(1.0 - HBD_SCALE / (playerPos.y + cameraPosition.y - 64.0 + HBD_SCALE), 0.0);
 		desaturationAmount *= 1.0 - fogAmount;
+		desaturationAmount *= HBD_STRENGTH;
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 - desaturationAmount);
 	#endif
 	

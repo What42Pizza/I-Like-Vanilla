@@ -456,6 +456,23 @@
 
 
 
+#if HBS_ENABLED == -1
+#undef HBS_ENABLED
+										#define HBS_ENABLED 1
+#endif
+#if HBD_STRENGTH == -1
+#undef HBD_STRENGTH
+										#define HBD_STRENGTH 0.2
+#endif
+#if HBD_SCALE == -1
+#undef HBD_SCALE
+										#define HBD_SCALE 160
+#endif
+
+
+
+
+
 #if OUTLINES_ENABLED == -1
 #undef OUTLINES_ENABLED
 										#define OUTLINES_ENABLED 1

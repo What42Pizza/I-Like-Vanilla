@@ -3,29 +3,36 @@
 
 
 
-example:
-// defines the block ids that use this data, must be without '`' chars to activate
-`block block_id_1, block_id_2, etc:`
-// specifies how frequently this block is expected (everything is defined relative to the multiplier for water, which is set at 1000)
-mult: 123
-// creates a glsl macro so the code can detect when mc_Entity.x is this block (default: disabled)
-alias: EXAMPLE_CONST_NAME
-// sets the reflectiveness of this block (default: 0.0, is inserted into `SET_REFLECTIVENESS({});`)
-reflectiveness: 0.1234
-// sets the specularness of this block (default: 0.0, is inserted into `SET_SPECULARNESS({});`)
-specularness: 0.1234
-// registers this block for voxelization
-voxelize: true
-// gives this voxel an emission value (default: (0.0, 0.0, 0.0))
-emission: (0.1, 0.2, 0.3)
-// gives this voxel a translucency value (default: (1.0, 1.0, 1.0), defines how much (extra) light this voxel absorbs)
-translucency: (0.4, 0.5, 0.6)
-// for emissive textures (the channels are hue (0-360), saturation (0-100), and brightness (0-100))
-glow detect min: (10.0, 20.0, 30.0)
-glow detect max: (40.0, 50.0, 60.0)
-glow amount: 0.123
-// increases / decreased the entire texture brightness
-brightness: 0.456
+// ==== example ==== //
+
+//    // defines the block ids that use this data
+//    block block_id_1, block_id_2, etc:
+//    // specifies how frequently this block is expected (everything is defined relative to the weight for water, which is set at 1000)
+//    weight: 123
+//    // creates a glsl macro so the code can detect when mc_Entity.x is this block (default: disabled)
+//    alias: EXAMPLE_CONST_NAME
+//    // allows you to add custom code to the expanded tree
+//    code: ##
+//    if (true) {
+//    	doThing();
+//    }
+//    ##
+//    // sets the reflectiveness of this block (default: 0.0, is inserted into `SET_REFLECTIVENESS({});`)
+//    reflectiveness: 0.1234
+//    // sets the specularness of this block (default: 0.0, is inserted into `SET_SPECULARNESS({});`)
+//    specularness: 0.1234
+//    // registers this block for voxelization, giving it a voxel id and a node in the voxel datas tree
+//    voxelize: true
+//    // gives this voxel an emission value (default: (0.0, 0.0, 0.0))
+//    emission: vec3(0.1, 0.2, 0.3)
+//    // gives this voxel a translucency value (default: (1.0, 1.0, 1.0), defines how much (extra) light this voxel absorbs)
+//    translucency: vec3(0.4, 0.5, 0.6)
+//    // for emissive textures (the channels are hue (0-360), saturation (0-100), and brightness (0-100))
+//    glow detect min: vec3(10.0, 20.0, 30.0)
+//    glow detect max: vec3(40.0, 50.0, 60.0)
+//    glow amount: 0.123
+//    // increases / decreased the entire texture brightness
+//    brightness: 0.456
 
 
 
@@ -35,7 +42,7 @@ brightness: 0.456
 
 block water, flowing_water:
 alias: BLOCK_WATER
-mult: 1000
+weight: 1000
 custom code: ##
 #if defined SHADER_GBUFFERS_WATER || defined SHADER_VOXY_TRANSLUCENT
 	SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
@@ -43,368 +50,368 @@ custom code: ##
 ##
 specularness: 2.0
 voxelize: true
-translucency: (0.5, 0.5, 1.0)
+translucency: vec3(0.5, 0.5, 1.0)
 
 
 block lava, flowing_lava:
-mult: 100
+weight: 100
 voxelize: true
-emission: (1.0, 0.5, 0.0)
-translucency: (0.0, 0.0, 0.0)
+emission: vec3(1.0, 0.5, 0.0)
+translucency: vec3(0.0, 0.0, 0.0)
 
 
-block glass glass_pane:
-mult: 100
+block glass, glass_pane:
+weight: 100
 reflectiveness: 0.4
 specularness: 1.0
 
 block tinted_glass:
-mult: 1
+weight: 1
 specularness: 0.5
 voxelize: true
-translucency: (0.0, 0.0, 0.0)
+translucency: vec3(0.0, 0.0, 0.0)
 
 block white_stained_glass, white_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block light_gray_stained_glass, light_gray_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block gray_stained_glass, gray_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block black_stained_glass, black_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block brown_stained_glass, brown_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block red_stained_glass, red_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block orange_stained_glass, orange_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block yellow_stained_glass, yellow_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block lime_stained_glass, lime_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block green_stained_glass, green_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block cyan_stained_glass, cyan_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block light_blue_stained_glass, light_blue_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block blue_stained_glass, blue_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block purple_stained_glass, purple_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block magenta_stained_glass, magenta_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 block pink_stained_glass, pink_stained_glass_pane:
-mult: 10
+weight: 10
 voxelize: true
-translucency: (0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.9, 0.9)
 
 
 
 // candles
 
 block white_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block light_gray_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block gray_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block black_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block brown_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block red_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block orange_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block yellow_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block lime_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block green_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block cyan_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block light_blue_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block blue_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block purple_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block magenta_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 block pink_candle:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.25, 0.25, 0.25)
+emission: vec3(0.25, 0.25, 0.25)
 
 
 
 // light blocks
 
 block light:level=0:
-mult: 1
+weight: 1
 voxelize: true
-emission: 0.0 / 15.0
+emission: vec30.0 / 15.0
 
 block light:level=1:
-mult: 1
+weight: 1
 voxelize: true
-emission: 1.0 / 15.0
+emission: vec31.0 / 15.0
 
 block light:level=2:
-mult: 1
+weight: 1
 voxelize: true
-emission: 2.0 / 15.0
+emission: vec32.0 / 15.0
 
 block light:level=3:
-mult: 1
+weight: 1
 voxelize: true
-emission: 3.0 / 15.0
+emission: vec33.0 / 15.0
 
 block light:level=4:
-mult: 1
+weight: 1
 voxelize: true
-emission: 4.0 / 15.0
+emission: vec34.0 / 15.0
 
 block light:level=5:
-mult: 1
+weight: 1
 voxelize: true
-emission: 5.0 / 15.0
+emission: vec35.0 / 15.0
 
 block light:level=6:
-mult: 1
+weight: 1
 voxelize: true
-emission: 6.0 / 15.0
+emission: vec36.0 / 15.0
 
 block light:level=7:
-mult: 1
+weight: 1
 voxelize: true
-emission: 7.0 / 15.0
+emission: vec37.0 / 15.0
 
 block light:level=8:
-mult: 1
+weight: 1
 voxelize: true
-emission: 8.0 / 15.0
+emission: vec38.0 / 15.0
 
 block light:level=9:
-mult: 1
+weight: 1
 voxelize: true
-emission: 9.0 / 15.0
+emission: vec39.0 / 15.0
 
 block light:level=10:
-mult: 1
+weight: 1
 voxelize: true
-emission: 10.0 / 15.0
+emission: vec310.0 / 15.0
 
 block light:level=11:
-mult: 1
+weight: 1
 voxelize: true
-emission: 11.0 / 15.0
+emission: vec311.0 / 15.0
 
 block light:level=12:
-mult: 1
+weight: 1
 voxelize: true
-emission: 12.0 / 15.0
+emission: vec312.0 / 15.0
 
 block light:level=13:
-mult: 1
+weight: 1
 voxelize: true
-emission: 13.0 / 15.0
+emission: vec313.0 / 15.0
 
 block light:level=14:
-mult: 1
+weight: 1
 voxelize: true
-emission: 14.0 / 15.0
+emission: vec314.0 / 15.0
 
 block light:level=15:
-mult: 1
+weight: 1
 voxelize: true
-emission: 15.0 / 15.0
+emission: vec315.0 / 15.0
 
 
 
 // classic blocklights
 
 block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, jack_o_lantern, candle, campfire:
-mult: 10
-glow detect min: (21.0,  31.3, 69.4)
-glow detect max: (60.0, 100.0, 97.6)
+weight: 10
+glow detect min: vec3(21.0,  31.3, 69.4)
+glow detect max: vec3(60.0, 100.0, 97.6)
 glow amount: 1.0
 voxelize: true
-emission: (1.0, 1.0, 0.9)
+emission: vec3(1.0, 1.0, 0.9)
 
 block soul_torch, soul_wall_torch, soul_lantern, soul_campfire:
-mult: 3
+weight: 3
 voxelize: true
-emission: (0.0, 0.15, 0.75)
+emission: vec3(0.0, 0.15, 0.75)
 
 block redstone_torch, redstone_wall_torch:
-mult: 5
+weight: 5
 voxelize: true
-emission: (0.0, 0.5, 0.0)
+emission: vec3(0.0, 0.5, 0.0)
 
 block furnace:lit=true:
-mult: 2
-glow detect min: (21.0,  31.3, 69.4)
-glow detect max: (60.0, 100.0, 97.6)
+weight: 2
+glow detect min: vec3(21.0,  31.3, 69.4)
+glow detect max: vec3(60.0, 100.0, 97.6)
 glow amount: 1.0
 voxelize: true
-emission: (1.0, 1.0, 0.9)
+emission: vec3(1.0, 1.0, 0.9)
 
 block sea_lantern:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.9, 1.0, 1.0)
+emission: vec3(0.9, 1.0, 1.0)
 
 block beacon:
-mult: 1
+weight: 1
 reflectiveness: 0.4
 voxelize: true
-emission: (1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.0, 1.0)
 
 block redstone_lamp:lit=true, copper_bulb:lit=true, exposed_copper_bulb:lit=true, weathered_copper_bulb:lit=true, oxidized_copper_bulb:lit=true, waxed_copper_bulb:lit=true, waxed_exposed_copper_bulb:lit=true, waxed_weathered_copper_bulb:lit=true, waxed_oxidized_copper_bulb:lit=true:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 1.0, 0.9)
+emission: vec3(1.0, 1.0, 0.9)
 
 block lava_cauldron:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 0.9, 0.8)
+emission: vec3(1.0, 0.9, 0.8)
 
 
 
 // cave blocklights
 
 block glow_lichen:
-mult: 5
-glow detect min: (60.0, 19.0, 67.6)
-glow detect max: (63.0, 21.0, 69.6)
+weight: 5
+glow detect min: vec3(60.0, 19.0, 67.6)
+glow detect max: vec3(63.0, 21.0, 69.6)
 glow amount: 0.5
 voxelize: true
-emission: (0.3, 0.5, 0.4)
+emission: vec3(0.3, 0.5, 0.4)
 
 block cave_vines_plant:berries=true, cave_vines:berries=true:
-mult: 5
-glow detect min: (28.0, 56.7, 64.3)
-glow detect max: (51.0, 79.3, 96.9)
+weight: 5
+glow detect min: vec3(28.0, 56.7, 64.3)
+glow detect max: vec3(51.0, 79.3, 96.9)
 glow amount: 0.7
 voxelize: true
-emission: (0.7, 0.5, 0.3)
+emission: vec3(0.7, 0.5, 0.3)
 
 block small_amethyst_bud:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.1, 0.1, 0.1)
+emission: vec3(0.1, 0.1, 0.1)
 
 block medium_amethyst_bud:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.2, 0.2, 0.2)
+emission: vec3(0.2, 0.2, 0.2)
 
 block large_amethyst_bud:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.3, 0.3, 0.3)
+emission: vec3(0.3, 0.3, 0.3)
 
 block amethyst_cluster:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.4, 0.4, 0.4)
+emission: vec3(0.4, 0.4, 0.4)
 
 block amethyst_block, budding_amethyst:
-mult: 5
+weight: 5
 reflectiveness: 1.0
 specularness: 0.5
 
@@ -413,135 +420,135 @@ specularness: 0.5
 // nature blocklights
 
 block sea_pickle:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.2, 0.4, 0.3)
+emission: vec3(0.2, 0.4, 0.3)
 
 block ochre_froglight:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.0, 1.0)
 brightness: 0.85
 
 block verdant_froglight:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.0, 1.0)
 brightness: 0.85
 
 block pearlescent_froglight:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.0, 1.0)
 brightness: 0.85
 
 block conduit:
-mult: 1
+weight: 1
 voxelize: true
-emission: (0.4, 0.5, 0.5)
+emission: vec3(0.4, 0.5, 0.5)
 
 block sculk_sensor:sculk_sensor_phase=active, calibrated_sculk_sensor:sculk_sensor_phase=active, sculk_catalyst:
-mult: 2
+weight: 2
 voxelize: true
-emission: (0.3, 0.3, 0.3)
+emission: vec3(0.3, 0.3, 0.3)
 
 
 
 // nether/end blocklights
 
 block glowstone:
-mult: 25
+weight: 25
 reflectiveness: 1.0
 brightness: 1.25
 voxelize: true
-emission: (1.0, 0.9, 0.3)
+emission: vec3(1.0, 0.9, 0.3)
 
 block shroomlight:
-mult: 10
+weight: 10
 brightness: 0.9
 voxelize: true
-emission: (1.0, 0.9, 0.5)
+emission: vec3(1.0, 0.9, 0.5)
 
 block magma_block:
-mult: 20
+weight: 20
 brightness: 0.75
-glow detect min: (  0.0, 64.5, 79.2)
-glow detect max: (360.0, 97.0, 98.4)
+glow detect min: vec3(  0.0, 64.5, 79.2)
+glow detect max: vec3(360.0, 97.0, 98.4)
 glow amount: 1.0
 
 block end_rod, end_crystal:
-mult: 1
+weight: 1
 voxelize: true
-emission: (1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.0, 1.0)
 
 
 
 // ores
 
 block iron_ore, deepslate_iron_ore:
-mult: 1
-glow detect min: (18.0, 24.8, 53.3)
-glow detect max: (56.0, 37.5, 88.6)
+weight: 1
+glow detect min: vec3(18.0, 24.8, 53.3)
+glow detect max: vec3(56.0, 37.5, 88.6)
 glow amount: GLOWING_ORES_STRENGTH
 
 block copper_ore, deepslate_copper_ore:
-mult: 1
-glow detect min: (  0.0, 31.8, 46.3)
-glow detect max: (162.0, 65.6, 87.8)
+weight: 1
+glow detect min: vec3(  0.0, 31.8, 46.3)
+glow detect max: vec3(162.0, 65.6, 87.8)
 glow amount: GLOWING_ORES_STRENGTH
 
 block gold_ore, deepslate_gold_ore:
-mult: 1
-glow detect min: (36.0, 29.0,  92.2)
-glow detect max: (72.0, 94.0, 100.0)
+weight: 1
+glow detect min: vec3(36.0, 29.0,  92.2)
+glow detect max: vec3(72.0, 94.0, 100.0)
 glow amount: GLOWING_ORES_STRENGTH
 
 block redstone_ore:lit=false, deepslate_redstone_ore:lit=false:
-mult: 1
-glow detect min: ( 0.0, 62.8, 59.2)
-glow detect max: (18.0, 98.0, 99.2)
+weight: 1
+glow detect min: vec3( 0.0, 62.8, 59.2)
+glow detect max: vec3(18.0, 98.0, 99.2)
 glow amount: GLOWING_ORES_STRENGTH
 
 block redstone_ore:lit=true, deepslate_redstone_ore:lit=true:
-mult: 1
-glow detect min: ( 0.0, 62.8, 59.2)
-glow detect max: (18.0, 98.0, 99.2)
+weight: 1
+glow detect min: vec3( 0.0, 62.8, 59.2)
+glow detect max: vec3(18.0, 98.0, 99.2)
 glow amount: GLOWING_ORES_STRENGTH
 voxelize: true
-emission: (0.1, 0.0, 0.0)
+emission: vec3(0.1, 0.0, 0.0)
 
 block emerald_ore, deepslate_emerald_ore:
-mult: 1
-glow detect min: (126.0,  14.9,  48.2)
-glow detect max: (162.0, 100.0, 100.0)
+weight: 1
+glow detect min: vec3(126.0,  14.9,  48.2)
+glow detect max: vec3(162.0, 100.0, 100.0)
 glow amount: GLOWING_ORES_STRENGTH
 
 block lapis_ore, deepslate_lapis_ore:
-mult: 1
-glow detect min: (198.0, 57.0, 54.5)
-glow detect max: (234.0, 91.5, 95.7)
+weight: 1
+glow detect min: vec3(198.0, 57.0, 54.5)
+glow detect max: vec3(234.0, 91.5, 95.7)
 glow amount: GLOWING_ORES_STRENGTH
 
 block diamond_ore, deepslate_diamond_ore:
-mult: 1
-glow detect min: (162.0, 16.5,  57.3)
-glow detect max: (184.0, 86.3, 100.0)
+weight: 1
+glow detect min: vec3(162.0, 16.5,  57.3)
+glow detect max: vec3(184.0, 86.3, 100.0)
 glow amount: GLOWING_ORES_STRENGTH
 
 block nether_gold_ore, deepslate_nether_gold_ore:
-mult: 1
-glow detect min: (25.0, 29.0,  78.0)
-glow detect max: (72.0, 85.4, 100.0)
+weight: 1
+glow detect min: vec3(25.0, 29.0,  78.0)
+glow detect max: vec3(72.0, 85.4, 100.0)
 glow amount: GLOWING_ORES_STRENGTH
 
 block nether_quartz_ore, deepslate_nether_quartz_ore:
-mult: 1
-glow detect min: (  0.0,  6.5, 72.5)
-glow detect max: (360.0, 30.3, 90.6)
+weight: 1
+glow detect min: vec3(  0.0,  6.5, 72.5)
+glow detect max: vec3(360.0, 30.3, 90.6)
 glow amount: GLOWING_ORES_STRENGTH
 
 block raw_iron_block, raw_copper_block, raw_gold_block:
-mult: 1
+weight: 1
 specularness: 0.5
 brightness: 0.8
 
@@ -550,67 +557,67 @@ brightness: 0.8
 // natural blocks
 
 block sugar_cane:
-mult: 1
+weight: 1
 brightness: 0.85
 
 block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves:
-mult: 2000
+weight: 2000
 specularness: 0.8
 
 block pale_oak_leaves:
-mult: 100
+weight: 100
 specularness: 0.8
 
 block pale_hanging_moss:
-mult: 1
+weight: 1
 specularness: 0.5
 
 block vine:
-mult: 2
+weight: 2
 specularness: 0.75
 
 block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, tall_dry_grass, large_fern:half=lower:
-mult: 50
+weight: 50
 specularness: 0.5
 
 block tall_grass:half=upper, large_fern:half=upper:
-mult: 10
+weight: 10
 specularness: 0.5
 
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
-mult: 100
+weight: 100
 specularness: 0.2
 brightness: 0.8
 
 block diorite, diorite_stairs, diorite_slab, diorite_wall:
-mult: 2
+weight: 2
 specularness: 0.25
 brightness: 0.95
 
 block polished_granite, polished_granite_stairs, polished_granite_slab, polished_diorite, polished_diorite_stairs, polished_diorite_slab, polished_andesite, polished_andesite_stairs, polished_andesite_slab, polished_deepslate, polished_deepslate_stairs, polished_deepslate_slab:
-mult: 3
+weight: 3
 reflectiveness: 0.9
 specularness: 0.35
 
 block prismarine_bricks, prismarine_brick_stairs, prismarine_brick_slab:
-mult: 2
+weight: 2
 reflectiveness: 0.9
 specularness: 0.4
 
 block netherrack:
-mult: 1000
+weight: 1000
 reflectiveness: 0.25
 
 block warped_stem:
-mult: 3
-glow detect min: (  0.0, 77.3, 38.0)
-glow detect max: (360.0, 86.6, 58.4)
+weight: 3
+glow detect min: vec3(  0.0, 77.3, 38.0)
+glow detect max: vec3(360.0, 86.6, 58.4)
 glow amount: GLOWING_STEMS_STRENGTH
 
 block crimson_stem:
-mult: 3
-glow detect min: (  0.0,  78.0, 48.2)
-glow detect max: (360.0, 100.0, 69.4)
+weight: 3
+glow detect min: vec3(  0.0,  78.0, 48.2)
+glow detect max: vec3(360.0, 100.0, 69.4)
 glow amount: GLOWING_STEMS_STRENGTH
 
 
@@ -618,18 +625,18 @@ glow amount: GLOWING_STEMS_STRENGTH
 // valuables:
 
 block iron_block, iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
-mult: 1
+weight: 1
 reflectiveness: 0.4
 specularness: 0.3
 brightness: 0.85
 
 block gold_block, light_weighted_pressure_plate, redstone_block, emerald_block, lapis_block, diamond_block, netherite_block:
-mult: 1
+weight: 1
 reflectiveness: 0.4
 specularness: 0.3
 
 block copper_block, cut_copper, cut_copper_stairs, cut_copper_slab, waxed_copper_block, waxed_cut_copper, waxed_cut_copper_stairs, waxed_cut_copper_slab:
-mult: 10
+weight: 10
 reflectiveness: 0.5
 specularness: 0.3
 
@@ -638,49 +645,49 @@ specularness: 0.3
 // misc
 
 block ice:
-mult: 200
+weight: 200
 reflectiveness: 1.0
 specularness: 1.0
 voxelize: true
-translucency: (0.5, 0.75, 1.0)
+translucency: vec3(0.5, 0.75, 1.0)
 
 block pack_ice, blue_ice:
-mult: 5
+weight: 5
 reflectiveness: 1.0
 specularness: 0.5
 
 block slime_block:
-mult: 1
+weight: 1
 reflectiveness: 0.5
 specularness: 0.3
 voxelize: true
-translucency: (0.5, 1.0, 0.6)
+translucency: vec3(0.5, 1.0, 0.6)
 
 block honey_block:
-mult: 1
+weight: 1
 reflectiveness: 0.75
 specularness: 0.3
 voxelize: true
-translucency: (0.7, 0.8, 0.5)
+translucency: vec3(0.7, 0.8, 0.5)
 
 block command_block, chain_command_block, repeating_command_block:
-mult: 1
+weight: 1
 specularness: 0.75
 
 block white_wool, white_carpet:
-mult: 2
+weight: 2
 brightness: 0.9
 
 block snow_block, snow, powder_snow, grass_block:snowy=true:
-mult: 50
+weight: 50
 brightness: 0.92
 
 block nether_portal:
-mult: 1
+weight: 1
 alias: BLOCK_NETHER_PORTAL
 
 block end_portal, end_gateway:
-mult: 1
+weight: 1
 alias: BLOCK_NETHER_PORTAL
 
 
@@ -688,18 +695,18 @@ alias: BLOCK_NETHER_PORTAL
 // building blocks
 
 block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_bricks, quartz_pillar:
-mult: 10
+weight: 10
 reflectiveness: 0.6
 specularness: 0.5
 brightness: 0.8
 
 block smooth_quartz, smooth_quartz_stairs, smooth_quartz_slab:
-mult: 10
+weight: 10
 reflectiveness: 0.6
 specularness: 0.5
 brightness: 0.8
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
-mult: 10
+weight: 10
 specularness: 0.25
 brightness: 0.85

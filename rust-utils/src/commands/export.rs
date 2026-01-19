@@ -137,7 +137,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 	for (i, line) in default_settings_contents.lines().enumerate() {
 		let line = line.trim();
 		if !line.starts_with("#define ") {continue;}
-		let line_parts = line.split(" ").collect::<Vec<&str>>();
+		let line_parts = line.split(' ').collect::<Vec<&str>>();
 		if line_parts.len() != 3 {return error!("Invalid line in default style file: file {style_file_path:?} line {}: Expected 3 space-separated-values, but found {}", i + 1, line_parts.len());}
 		let setting_name = line_parts[1].to_string();
 		let setting_value = line_parts[2].to_string();
@@ -153,7 +153,7 @@ pub fn process_setting_defines(file_contents: &[u8], project_path: &Path, style_
 		output.push(b'\n');
 		if !line.starts_with("#define ") {output.extend_from_slice(line.as_bytes()); continue;}
 		
-		let line_parts = line.split(" ").filter(|line| !line.is_empty()).collect::<Vec<&str>>();
+		let line_parts = line.split(' ').filter(|line| !line.is_empty()).collect::<Vec<&str>>();
 		if line_parts.len() < 6 {return error!("Invalid line in setting_defines line {}: Expected at least 6 space-separated-tokens, but found {}", line_num, line_parts.len());}
 		
 		let mut output_line = String::from("#define ");
