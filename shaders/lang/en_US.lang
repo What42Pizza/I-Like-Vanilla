@@ -48,7 +48,7 @@ value.PBR_NORMALS_AMOUNT.-1=Use Style
 screen.INTERNAL_MATERIALS_MENU=Internal Materials
 screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when 'PBR Type' is set to 'Internal'
 
-option.EMISSIVE_TEXTURES_ENABLED=Emissive Textues Enabled
+option.EMISSIVE_TEXTURES_ENABLED=Emissive Textures Enabled
 option.EMISSIVE_TEXTURES_ENABLED.comment=Enabled glowing ores, glowing stems, etc
 value.EMISSIVE_TEXTURES_ENABLED.0=Off
 value.EMISSIVE_TEXTURES_ENABLED.1=On
@@ -101,7 +101,7 @@ value.PLAYER_SHADOWS_ENABLED.0=Off
 value.PLAYER_SHADOWS_ENABLED.1=On
 
 option.ENTITY_SHADOWS_ENABLED=Entity Shadows
-option.ENTITY_SHADOWS_ENABLED.comment=Enabled shadow casting for entites (also enabled player shadows when on)
+option.ENTITY_SHADOWS_ENABLED.comment=Enabled shadow casting for entities (also enabled player shadows when on)
 value.ENTITY_SHADOWS_ENABLED.0=Off
 value.ENTITY_SHADOWS_ENABLED.1=On
 
@@ -613,9 +613,9 @@ value.SNOWY_TWEAKS_ENABLED.1=On
 
 screen.HEIGHT_BASED_DESATURATION_MENU=Height-Based Desaturation
 
-option.HBS_ENABLED=HBD Enabled
-option.HBS_ENABLED.comment=Enabled or disables height-based desaturation
-value.HBS_ENABLED.-1=Use Style
+option.HBD_ENABLED=HBD Enabled
+option.HBD_ENABLED.comment=Enabled or disables height-based desaturation
+value.HBD_ENABLED.-1=Use Style
 
 option.HBD_STRENGTH=HBD Strength
 option.HBD_STRENGTH.comment=Sets the strength of the height-based desaturation

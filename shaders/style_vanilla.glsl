@@ -456,9 +456,9 @@
 
 
 
-#if HBS_ENABLED == -1
-#undef HBS_ENABLED
-										#define HBS_ENABLED 1
+#if HBD_ENABLED == -1
+#undef HBD_ENABLED
+										#define HBD_ENABLED 1
 #endif
 #if HBD_STRENGTH == -1
 #undef HBD_STRENGTH
@@ -466,7 +466,7 @@
 #endif
 #if HBD_SCALE == -1
 #undef HBD_SCALE
-										#define HBD_SCALE 160
+										#define HBD_SCALE 50
 #endif
 
 
@@ -1022,7 +1022,7 @@
 
 #if WATER_TRANSPARENCY_SHALLOW == -1
 #undef WATER_TRANSPARENCY_SHALLOW
-										#define WATER_TRANSPARENCY_SHALLOW 0.55
+										#define WATER_TRANSPARENCY_SHALLOW 0.5
 #endif
 #if WATER_TRANSPARENCY_DEEP == -1
 #undef WATER_TRANSPARENCY_DEEP

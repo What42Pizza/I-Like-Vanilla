@@ -456,17 +456,17 @@
 
 
 
-#if HBS_ENABLED == -1
-#undef HBS_ENABLED
-										#define HBS_ENABLED 1
+#if HBD_ENABLED == -1
+#undef HBD_ENABLED
+										#define HBD_ENABLED 1
 #endif
 #if HBD_STRENGTH == -1
 #undef HBD_STRENGTH
-										#define HBD_STRENGTH 0.2
+										#define HBD_STRENGTH 0.25
 #endif
 #if HBD_SCALE == -1
 #undef HBD_SCALE
-										#define HBD_SCALE 160
+										#define HBD_SCALE 50
 #endif
 
 
