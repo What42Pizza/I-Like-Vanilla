@@ -66,15 +66,6 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
 	#endif
 	
-	float betterNightVision = nightVision;
-	if (betterNightVision > 0.0) {
-		betterNightVision = 0.6 + 0.2 * betterNightVision;
-		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
-	}
-	vec3 betterNightVisionChannels = vec3(betterNightVision);
-	betterNightVisionChannels.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
-	lighting = betterNightVisionChannels + (1.0 - betterNightVisionChannels) * lighting;
-	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));
 		vec3 lightDir = normalize(shadowLightPosition);
@@ -97,6 +88,15 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
 	lighting += blockLight;
+	
+	float betterNightVision = nightVision;
+	if (betterNightVision > 0.0) {
+		betterNightVision = 0.6 + 0.2 * betterNightVision;
+		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
+	}
+	vec3 nightVisionMin = vec3(betterNightVision);
+	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
+	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
 	
 	color *= lighting;
 	

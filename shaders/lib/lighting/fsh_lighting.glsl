@@ -253,9 +253,14 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	
 	vec3 ambientLight = getAmbientLight(ambientBrightness, lightDot);
 	
-	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
-	worldNormal.xz = abs(worldNormal.xz);
-	float sideShading = dot(worldNormal, vec3(-0.5, 0.3, -0.3));
+	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
+	// +-1.0x: -0.5
+	// +-1.0z: -0.3
+	// +1.0y: +0.4
+	// -1.0y: -0.8
+	normalForSS.xz = abs(normalForSS.xz);
+	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
+	float sideShading = dot(normalForSS, vec3(-0.5, 0.8, -0.3));
 	float brightForSS = max(blockBrightness, ambientBrightness);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.75;
 	ambientLight *= 1.0 + sideShading;
@@ -289,15 +294,6 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
 	#endif
 	
-	float betterNightVision = nightVision;
-	if (betterNightVision > 0.0) {
-		betterNightVision = 0.6 + 0.2 * betterNightVision;
-		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
-	}
-	vec3 betterNightVisionChannels = vec3(betterNightVision);
-	betterNightVisionChannels.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
-	lighting = betterNightVisionChannels + (1.0 - betterNightVisionChannels) * lighting;
-	
 	#ifdef OVERWORLD
 		vec3 reflectedDir = normalize(reflect(viewPos, normal));
 		vec3 lightDir = normalize(shadowLightPosition);
@@ -322,6 +318,16 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
 	lighting += blockLight;
+	
+	float betterNightVision = nightVision;
+	if (betterNightVision > 0.0) {
+		betterNightVision = 0.6 + 0.2 * betterNightVision;
+		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
+	}
+	vec3 nightVisionMin = vec3(betterNightVision);
+	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
+	nightVisionMin *= 1.0 + 0.5 * sideShading;
+	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
 	
 	color *= lighting;
 	

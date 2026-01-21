@@ -82,6 +82,7 @@ void main() {
 			if (!depthIsHand(depth)) {
 				float aoFactor = getAoAmount(depth);
 				aoFactor *= 1.0 - 0.5 * getLum(color);
+				aoFactor *= 1.0 - 0.4 * nightVision;
 				color *= 1.0 - aoFactor * AO_AMOUNT;
 				//color = vec3(aoFactor);
 			}

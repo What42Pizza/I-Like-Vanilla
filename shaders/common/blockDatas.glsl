@@ -469,7 +469,7 @@ if (materialId < 1570u) { // 0..1570
 		} else { // 1900..
 			if (materialId < 9500u) { // 1900..9500
 				if (materialId < 6500u) { // 1900..6500
-					if (materialId < 3500u) { // 1900..3500
+					if (materialId < 2500u) { // 1900..2500
 						if (materialId < 1910u) { // 1900..1910
 							if (materialId == 1900u) {
 								// fire
@@ -478,7 +478,7 @@ if (materialId < 1570u) { // 0..1570
 								// soul fire
 								
 							}
-						} else {
+						} else { // 1910..2500
 							if (materialId == 1910u) {
 								// nether portal
 								
@@ -490,9 +490,14 @@ if (materialId < 1570u) { // 0..1570
 								
 							}
 						}
-					} else { // 3500..6500
-						// sugar cane
-						TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+					} else { // 2500..6500
+						if (materialId == 2500u) {
+							// bamboo, etc
+							TWEAK_GLCOLOR_BRIGHTNESS(1.15);
+						} else {
+							// sugar cane
+							TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+						}
 					}
 				} else { // 6500..9500
 					if (materialId < 7500u) { // 6500..7500
