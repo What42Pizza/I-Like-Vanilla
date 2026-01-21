@@ -37,7 +37,7 @@ void main() {
 		if (dhViewPos.z > viewPos.z) viewPos = dhViewPos;
 	#endif
 	
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 	#ifdef DISTANT_HORIZONS
 		float skyAmount = uint(depth == 1.0 && dhDepth == 1.0);
 	#else

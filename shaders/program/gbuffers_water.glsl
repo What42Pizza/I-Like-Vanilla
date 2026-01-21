@@ -40,6 +40,9 @@ flat in_out vec3 shadowcasterLight;
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
+#if BORDER_FOG_ENABLED == 1
+	#include "/lib/borderFogAmount.glsl"
+#endif
 
 void main() {
 	
@@ -142,8 +145,13 @@ void main() {
 		#endif
 		
 		
+		vec3 opaqueViewPos = screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r));
 		float blockDepth = length(viewPos);
-		float opaqueBlockDepth = length(screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r)));
+		float opaqueBlockDepth = length(opaqueViewPos);
+		#if BORDER_FOG_ENABLED == 1
+			vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;
+			opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
+		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
 		if (isEyeInWater == 1) {
 			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
@@ -302,7 +310,7 @@ void main() {
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -1.5) return; // simple but effective optimization
+		if (gl_Position.z < -1.5) return; // simple but effective(?) optimization
 	#endif
 	
 	

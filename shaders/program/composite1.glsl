@@ -1,6 +1,5 @@
 in_out vec2 texcoord;
 
-flat in_out vec3 atmoFogColor;
 flat in_out float fogDensity;
 flat in_out float fogDarken;
 flat in_out float extraFogDist;
@@ -122,16 +121,15 @@ void main() {
 	float fogDist = length(playerPos);
 	fogDist *= distMult;
 	
-	vec3 atmoFogColor = atmoFogColor;
 	float fogDensity = fogDensity;
+	#ifdef END
+		vec3 atmoFogColor = vec3(0.4, 0.2, 0.5);
+	#else
+		vec3 atmoFogColor = getSkyColor(normalize(viewPos), false);
+	#endif
+	atmoFogColor *= 1.0 - blindness;
+	atmoFogColor *= 1.0 - darknessFactor;
 	if (isEyeInWater == 0) {
-		#ifdef END
-			atmoFogColor = vec3(0.4, 0.2, 0.5);
-		#else
-			atmoFogColor = getSkyColor(normalize(viewPos), false);
-		#endif
-		atmoFogColor *= 1.0 - blindness;
-		atmoFogColor *= 1.0 - darknessFactor;
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
@@ -146,8 +144,8 @@ void main() {
 		fogDensity /= 256.0;
 	}
 	
+	fogDist = mix(fogDist, 0, fogAmount);
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
-	atmoFogAmount *= 1.0 - fogAmount;
 	#ifndef NETHER
 		atmoFogAmount *= 1.0 - 0.25 * float(uint(isEyeInWater == 0));
 	#endif
@@ -300,28 +298,23 @@ void main() {
 		extraFogDist = 8.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 6.0;
 	} else if (isEyeInWater == 1) {
-		atmoFogColor = WATER_FOG_COLOR;
 		fogDensity = WATER_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;
 		extraFogDist = 16.0;
 	} else if (isEyeInWater == 2) {
-		atmoFogColor = LAVA_FOG_COLOR;
 		fogDensity = LAVA_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;
 		extraFogDist = 1.5;
 	} else if (isEyeInWater == 3) {
-		atmoFogColor = POWDERED_SNOW_FOG_COLOR;
 		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;
 		extraFogDist = 1.0;
 	}
 	
-	atmoFogColor *= 1.0 - blindness;
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
 	fogDarken = mix(fogDarken, 1.0, blindness);
 	extraFogDist *= 1.0 - blindness;
 	
-	atmoFogColor *= 1.0 - darknessFactor;
 	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
 	fogDarken = mix(fogDarken, 1.0, darknessFactor);
 	extraFogDist = mix(extraFogDist, 4.0, darknessFactor);
