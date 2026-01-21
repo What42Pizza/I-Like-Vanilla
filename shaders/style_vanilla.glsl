@@ -1066,9 +1066,17 @@
 #undef SUN_BRIGHTNESS
 										#define SUN_BRIGHTNESS 1.05
 #endif
+#if SUN_OPACITY == -1
+#undef SUN_OPACITY
+										#define SUN_OPACITY 3.0
+#endif
 #if MOON_BRIGHTNESS == -1
 #undef MOON_BRIGHTNESS
 										#define MOON_BRIGHTNESS 1.0
+#endif
+#if MOON_OPACITY == -1
+#undef MOON_OPACITY
+										#define MOON_OPACITY 1.0
 #endif
 #if STARS_BRIGHTNESS == -1
 #undef STARS_BRIGHTNESS

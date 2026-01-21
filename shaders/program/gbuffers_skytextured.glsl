@@ -16,9 +16,10 @@ void main() {
 		
 		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
 		color = 1.0 - color;
-		color *= color;
 		if (sunPosition.z < 0.0) {
-			color *= color; // apply extra brightness to sun
+			color = pow(color, vec3((SUN_OPACITY - 1.0) * 0.5 + 1.0));
+		} else {
+			color = pow(color, vec3((MOON_OPACITY - 1.0) * 0.5 + 1.0));
 		}
 		color = 1.0 - color;
 		

@@ -256,11 +256,11 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
 	// +-1.0x: -0.5
 	// +-1.0z: -0.3
-	// +1.0y: +0.4
-	// -1.0y: -0.8
+	// +1.0y: +0.35
+	// -1.0y: -0.7
 	normalForSS.xz = abs(normalForSS.xz);
 	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
-	float sideShading = dot(normalForSS, vec3(-0.5, 0.8, -0.3));
+	float sideShading = dot(normalForSS, vec3(-0.5, 0.7, -0.3));
 	float brightForSS = max(blockBrightness, ambientBrightness);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.75;
 	ambientLight *= 1.0 + sideShading;

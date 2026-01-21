@@ -1357,8 +1357,14 @@ value.CUSTOM_END_SKYBOX.1=On
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style
 
+option.SUN_OPACITY=Sun Opacity
+value.SUN_OPACITY.-1=Use Style
+
 option.MOON_BRIGHTNESS=Moon Brightness
 value.MOON_BRIGHTNESS.-1=Use Style
+
+option.MOON_OPACITY=Moon Opacity
+value.MOON_OPACITY.-1=Use Style
 
 option.STARS_BRIGHTNESS=Stars Brightness
 value.STARS_BRIGHTNESS.-1=Use Style
