@@ -1645,7 +1645,6 @@ screen.FOG_MENU=Fog
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled
 option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
-value.BORDER_FOG_ENABLED.-1=Use Style
 value.BORDER_FOG_ENABLED.0=Off
 value.BORDER_FOG_ENABLED.1=On
 
@@ -1660,6 +1659,11 @@ value.BORDER_FOG_END.-1=Use Style
 option.BORDER_FOG_CURVE=Border Fog Curve
 option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
 value.BORDER_FOG_CURVE.-1=Use Style
+
+option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
+option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered
+value.CYLINDRICAL_CLIPPING.0=Off
+value.CYLINDRICAL_CLIPPING.1=On
 
 option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
@@ -1814,6 +1818,32 @@ value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
 
 option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
 value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
+
+
+
+
+
+screen.NETHER_SKY_COLORS_MENU=Nether Sky Colors
+
+option.NETHER_SKY_BASE_RED=Base Red
+option.NETHER_SKY_BASE_RED.comment=The base red value for the nether sky color (this is simply added to the fog influence to get the final sky color)
+value.NETHER_SKY_BASE_RED.-1=Use Style
+
+option.NETHER_SKY_BASE_GREEN=Base Green
+option.NETHER_SKY_BASE_GREEN.comment=The base green value for the nether sky color (this is simply added to the fog influence to get the final sky color)
+value.NETHER_SKY_BASE_GREEN.-1=Use Style
+
+option.NETHER_SKY_BASE_BLUE=Base Blue
+option.NETHER_SKY_BASE_BLUE.comment=The base blue value for the nether sky color (this is simply added to the fog influence to get the final sky color)
+value.NETHER_SKY_BASE_BLUE.-1=Use Style
+
+option.NETHER_SKY_FOG_INFLUENCE=Fog Influence
+option.NETHER_SKY_FOG_INFLUENCE.comment=How much of the vanilla fog to add to the sky color (this is simply added to the base value to get the final sky color)
+value.NETHER_SKY_FOG_INFLUENCE.-1=Use Style
+
+option.NETHER_SKY_FOG_SATURATION=Fog Saturation
+option.NETHER_SKY_FOG_SATURATION.comment=How much to increase/decrease the vanilla fog saturation before adding to the sky color
+value.NETHER_SKY_FOG_SATURATION.-1=Use Style
 
 
 

@@ -1339,10 +1339,6 @@
 
 
 
-#if BORDER_FOG_ENABLED == -1
-#undef BORDER_FOG_ENABLED
-										#define BORDER_FOG_ENABLED 1
-#endif
 #if BORDER_FOG_START == -1
 #undef BORDER_FOG_START
 										#define BORDER_FOG_START 0.7
@@ -1524,6 +1520,31 @@
 #if SKY_HORIZON_SUNSET_BLUE == -1
 #undef SKY_HORIZON_SUNSET_BLUE
 										#define SKY_HORIZON_SUNSET_BLUE 0.1
+#endif
+
+
+
+
+
+#if NETHER_SKY_BASE_RED == -1
+#undef NETHER_SKY_BASE_RED
+										#define NETHER_SKY_BASE_RED 0.15
+#endif
+#if NETHER_SKY_BASE_GREEN == -1
+#undef NETHER_SKY_BASE_GREEN
+										#define NETHER_SKY_BASE_GREEN 0.15
+#endif
+#if NETHER_SKY_BASE_BLUE == -1
+#undef NETHER_SKY_BASE_BLUE
+										#define NETHER_SKY_BASE_BLUE 0.15
+#endif
+#if NETHER_SKY_FOG_INFLUENCE == -1
+#undef NETHER_SKY_FOG_INFLUENCE
+										#define NETHER_SKY_FOG_INFLUENCE 0.9
+#endif
+#if NETHER_SKY_FOG_SATURATION == -1
+#undef NETHER_SKY_FOG_SATURATION
+										#define NETHER_SKY_FOG_SATURATION 0.9
 #endif
 
 

@@ -57,7 +57,7 @@ void main() {
 		if (lengthCylinder >= far - 10 - 8 * dither) discard;
 	#elif defined VOXY
 		
-	#else
+	#elif CYLINDRICAL_CLIPPING == 1
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance *= invFar;
 		if (fogDistance >= 0.95) {discard; return;}
@@ -145,7 +145,8 @@ void main() {
 		#endif
 		
 		
-		vec3 opaqueViewPos = screenToView(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r));
+		float opaqueDepth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		vec3 opaqueViewPos = screenToView(vec3(texelcoord * pixelSize, opaqueDepth));
 		float blockDepth = length(viewPos);
 		float opaqueBlockDepth = length(opaqueViewPos);
 		#if BORDER_FOG_ENABLED == 1

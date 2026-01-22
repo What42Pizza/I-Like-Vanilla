@@ -48,7 +48,7 @@ void main() {
 		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
 	#elif defined VOXY
 		
-	#else
+	#elif CYLINDRICAL_CLIPPING == 1
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance *= invFar;
 		if (fogDistance >= 0.95) {discard; return;}

@@ -86,8 +86,8 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#elif defined NETHER
 		
 		skyColor = fogColor;
-		skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.9);
-		skyColor = 0.15 + 0.9 * skyColor;
+		skyColor = mix(vec3(getLum(skyColor)), skyColor, NETHER_SKY_FOG_SATURATION);
+		skyColor = NETHER_SKY_BASE_COLOR + NETHER_SKY_FOG_INFLUENCE * skyColor;
 		
 	#elif defined END
 		

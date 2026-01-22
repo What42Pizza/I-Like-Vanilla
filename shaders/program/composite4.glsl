@@ -13,6 +13,9 @@ in_out vec2 texcoord;
 	#include "/utils/getSkyColor.glsl"
 	#include "/lib/reflections.glsl"
 #endif
+#if BORDER_FOG_ENABLED == 1
+	#include "/lib/borderFogAmount.glsl"
+#endif
 
 
 
@@ -85,6 +88,11 @@ void main() {
 		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
 			reflectionStrength *= sqrt(invCloudsThickness);
+		#endif
+		#if BORDER_FOG_ENABLED == 1
+			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+			float fogAmount = getBorderFogAmount(playerPos);
+			reflectionStrength *= 1.0 - fogAmount;
 		#endif
 		if (reflectionStrength > 0.01) {
 			#ifdef DISTANT_HORIZONS
