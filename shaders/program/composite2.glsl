@@ -149,6 +149,7 @@ void main() {
 			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.8;
 		}
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		depthSunraysAmountMult *= 0.5 + 0.5 * uint(isEyeInWater == 0);
 		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 	#endif
 	

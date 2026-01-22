@@ -1357,7 +1357,7 @@
 #endif
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.35
+										#define ATMOSPHERIC_FOG_DENSITY 0.4
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
@@ -1406,11 +1406,11 @@
 #endif
 #if WATER_FOG_GREEN == -1
 #undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.2
+										#define WATER_FOG_GREEN 0.1
 #endif
 #if WATER_FOG_BLUE == -1
 #undef WATER_FOG_BLUE
-										#define WATER_FOG_BLUE 0.4
+										#define WATER_FOG_BLUE 0.7
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY

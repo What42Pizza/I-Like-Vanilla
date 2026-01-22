@@ -70,7 +70,9 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		float eyeBrightness = eyeBrightnessSmooth.y / 240.0;
 		float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightness);
 		float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
-		skyColor = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS), skyColor, darkenMult);
+		darkenMult = 1.0 - darkenMult;
+		darkenMult *= uint(isEyeInWater == 0);
+		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenMult);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
 			skyColor *= 0.75;
@@ -100,11 +102,11 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#endif
 	
 	if (isEyeInWater == 1) {
-		skyColor = WATER_FOG_COLOR;
+		skyColor = mix(skyColor, WATER_FOG_COLOR, 0.75);
 	} else if (isEyeInWater == 2) {
-		skyColor = LAVA_FOG_COLOR;
+		skyColor = mix(skyColor, LAVA_FOG_COLOR, 0.75);
 	} else if (isEyeInWater == 3) {
-		skyColor = POWDERED_SNOW_FOG_COLOR;
+		skyColor = mix(skyColor, POWDERED_SNOW_FOG_COLOR, 0.75);
 	}
 	
 	return skyColor;

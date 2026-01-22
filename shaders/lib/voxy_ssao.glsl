@@ -11,8 +11,8 @@ float getVoxyAoAmount(vec3 normal) {
 	if (dot(xDir, xDir) < 0.001) xDir = cross(normal, gbufferModelView[2].xyz);
 	xDir = normalize(xDir);
 	vec3 yDir = normalize(cross(normal, xDir));
-	xDir *= 0.8;
-	yDir *= 0.8;
+	xDir *= 0.7;
+	yDir *= 0.7;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));

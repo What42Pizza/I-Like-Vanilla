@@ -79,7 +79,7 @@ void main() {
 	
 	#ifdef OVERWORLD
 		float distMult = max(playerPos.y + cameraPosition.y - 64.0, 0.0);
-		const float distMultAmplitude = 1.5;
+		const float distMultAmplitude = 1.2;
 		const float distMultSlope = 16.0;
 		distMult = distMultAmplitude * distMultSlope / (distMult + distMultSlope);
 	#elif defined NETHER
@@ -119,7 +119,7 @@ void main() {
 	
 	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
 	float fogDist = length(playerPos);
-	fogDist *= distMult;
+	fogDist *= 1.0 + distMult;
 	
 	float fogDensity = fogDensity;
 	#ifdef END
@@ -130,6 +130,7 @@ void main() {
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
 	if (isEyeInWater == 0) {
+		atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
@@ -151,7 +152,7 @@ void main() {
 	#endif
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
-	color += atmoFogColor * atmoFogAmount * (0.5 + 0.5 * brightnesses.y);
+	color += atmoFogColor * atmoFogAmount;
 	
 	#if defined OVERWORLD && HBD_ENABLED == 1
 		float desaturationAmount = 1.0 - HBD_SCALE / (max(playerPos.y + cameraPosition.y - 64.0, 0) + HBD_SCALE);
@@ -300,7 +301,7 @@ void main() {
 	} else if (isEyeInWater == 1) {
 		fogDensity = WATER_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;
-		extraFogDist = 16.0;
+		extraFogDist = 20.0;
 	} else if (isEyeInWater == 2) {
 		fogDensity = LAVA_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;

@@ -156,7 +156,7 @@ void main() {
 		if (isEyeInWater == 1) {
 			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 		} else {
-			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 16.0 / (16.0 + waterDepth));
 		}
 		color.a *= 1.0 + fresnel * 0.125;
 		
