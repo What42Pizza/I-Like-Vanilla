@@ -150,8 +150,9 @@ void main() {
 		float blockDepth = length(viewPos);
 		float opaqueBlockDepth = length(opaqueViewPos);
 		#if BORDER_FOG_ENABLED == 1
-			vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;
-			opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
+			// this tries to fix underwater border fog but it breaks more stuff than it fixes
+			//vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;
+			//opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
 		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
 		if (isEyeInWater == 1) {
