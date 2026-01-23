@@ -2,7 +2,7 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
 #if PBR_TYPE == 0
-	flat in_out vec3 normal;
+	flat in_out vec2 encodedNormal;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
@@ -21,6 +21,9 @@ void main() {
 	if (color.a > 0.99) {
 		float transparency = percentThrough(blockDepth, 0.5, 1.2);
 		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
+		float dither = bayer64(gl_FragCoord.xy);
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		if (color.a < dither) {discard; return;}
 	}
 	
 	
@@ -47,7 +50,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(reflectiveness, specularness),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -73,12 +76,11 @@ void main() {
 	adjustLmcoord(lmcoord);
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
-	glcolor.rgb *= 1.25;
 	glcolor.a = sqrt(glcolor.a);
-	#if PBR_TYPE != 0
-		vec3 normal;
+	vec3 normal = gl_NormalMatrix * vec3(0.5, 0.5, 0.0);
+	#if PBR_TYPE == 0
+		encodedNormal = encodeNormal(normal);
 	#endif
-	normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
