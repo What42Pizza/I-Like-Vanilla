@@ -9,9 +9,9 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#ifdef OVERWORLD
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 0
-			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.1;
+			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.75 + 0.1;
 			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.25;
-			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.1;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.75 + 0.1;
 			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
 			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
 			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
@@ -43,7 +43,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		horizonAmount = 1.0 - horizonAmount;
 		skyColor = mix(horizonColor, skyColor, horizonAmount);
 		
-		float sunDot = dot(viewDir, normalize(sunPosition)) * 0.5 + 0.5;
+		float sunDot = dot(viewDir, sunPosition * 0.01) * 0.5 + 0.5;
 		#if CUSTOM_OVERWORLD_SKYBOX == 0
 			sunDot = 1.0 - (1.0 - sunDot) * (1.0 - sunDot);
 		#elif CUSTOM_OVERWORLD_SKYBOX == 1
@@ -58,9 +58,10 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		rainAmount *= 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
 		skyColor = mix(skyColor, vec3(0.8, 0.9, 1.0) * SKY_WEATHER_BRIGHTNESS * dayPercent, rainAmount);
 		
+		skyColor *= 2.0/3.0;
 		skyColor = min(skyColor, 1.0);
 		skyColor = 1.0 - (skyColor - 1.0) * (skyColor - 1.0);
-		skyColor *= 1.2;
+		skyColor *= 3.0/2.0 * 1.2;
 		skyColor *= 0.3 + 0.7 * dayPercent;
 		
 		if (includeLightning) {

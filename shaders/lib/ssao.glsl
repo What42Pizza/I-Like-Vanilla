@@ -40,7 +40,7 @@ float getAoAmount(float depth) {
 		
 	}
 	total /= SAMPLE_COUNT;
-	total *= clamp(blockDepth * invFar * -10.0 + 9.0, 0.0, 1.0);
+	total *= 1.0 - clamp(blockDepth * invFar, 0.0, 1.0);
 	
 	return total;
 }

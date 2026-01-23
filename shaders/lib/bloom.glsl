@@ -152,8 +152,7 @@ void addBloom(inout vec3 color) {
 	#endif
 	
 	float lum = getLum(color);
-	bloomAddition *= 1.0 - 0.75 * lum;
-	bloomAddition *= 0.5 + 0.5 * lum;
+	bloomAddition *= 1.0 - lum;
 	color += bloomAddition * bloomAmount * 0.5;
 	
 }

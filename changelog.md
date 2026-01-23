@@ -1,8 +1,8 @@
-- v1.2.2
+- v1.2.2 (26/01/23)
   - Added settings for end sky colors, end clouds colors, nether sky colors, and nether clouds colors
   - Added settings for height-based desaturation
   - Added settings for sun and moon opacity
-  - Fixed bugs
+  - Many tweaks and bug fixes
 
 <br>
 

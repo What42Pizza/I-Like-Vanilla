@@ -1415,7 +1415,7 @@
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.08
+										#define WATER_FOG_DENSITY 0.07
 #endif
 #if LAVA_FOG_RED == -1
 #undef LAVA_FOG_RED
@@ -1464,7 +1464,7 @@
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.05
+										#define SKY_DAY_BLUE 1.0
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -1484,7 +1484,7 @@
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.6
+										#define SKY_HORIZON_DAY_GREEN 0.55
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
