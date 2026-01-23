@@ -1370,7 +1370,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 2.4
+										#define WEATHER_FOG_DENSITY 1.8
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY

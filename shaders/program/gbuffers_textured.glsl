@@ -9,13 +9,9 @@ in_out vec4 glcolor;
 in_out vec3 viewPos;
 in_out float blockDepth;
 
-flat in_out vec3 shadowcasterLight;
-
 
 
 #ifdef FSH
-
-#include "/lib/lighting/simple_fsh_lighting.glsl"
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
@@ -63,7 +59,6 @@ void main() {
 #ifdef VSH
 
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
@@ -92,8 +87,6 @@ void main() {
 	
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	blockDepth = length(viewPos);
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

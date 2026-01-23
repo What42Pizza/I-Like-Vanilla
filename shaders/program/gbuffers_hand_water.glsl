@@ -73,6 +73,9 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color.rgb;
+	#if PBR_TYPE == 1
+		vec3 normal;
+	#endif
 	normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);

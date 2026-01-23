@@ -3,7 +3,7 @@ in_out vec2 lmcoord;
 in_out vec4 glcolor;
 #if PBR_TYPE == 0
 	flat in_out vec3 normal;
-#if PBR_TYPE == 1
+#elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
 in_out vec3 viewPos;

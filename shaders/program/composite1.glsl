@@ -122,6 +122,7 @@ void main() {
 	fogDist *= 1.0 + distMult;
 	
 	float fogDensity = fogDensity;
+	float fogDarken = fogDarken;
 	#ifdef END
 		vec3 atmoFogColor = vec3(0.4, 0.2, 0.5);
 	#else
@@ -134,6 +135,7 @@ void main() {
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
+			fogDarken = mix(fogDarken, 0.85, betterRainStrength);
 			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY * 1.0, PALE_GARDEN_FOG_DENSITY * 1.0, dayPercent), inPaleGarden);
 		#elif defined NETHER
 			fogDensity = NETHER_FOG_DENSITY;
