@@ -74,7 +74,7 @@ void main() {
 		#if PIXELATED_SHADOWS == 0
 			playerPos.y += 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
 		#else
-			playerPos.y += 0.1 + 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
+			playerPos.y += 0.05 + 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
 		#endif
 	}
 	

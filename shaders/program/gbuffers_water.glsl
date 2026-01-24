@@ -177,7 +177,7 @@ void main() {
 		// water needs to be more opaque in dark areas
 		float alphaLift = max(lmcoord.x, lmcoord.y);
 		alphaLift = sqrt(alphaLift);
-		alphaLift = (1.0 - alphaLift) * 0.5 * (1.2 - screenBrightness);
+		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
 		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
 		
 	}
@@ -216,7 +216,8 @@ void main() {
 	
 	
 	// main lighting
-	doFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
+	float shadowBrightness;
+	doFshLighting(color.rgb, shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
 	
 	
 	// fog

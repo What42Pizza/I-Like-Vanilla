@@ -159,7 +159,7 @@ void main() {
 	#if defined OVERWORLD && HBD_ENABLED == 1
 		float desaturationAmount = 1.0 - HBD_SCALE / (max(playerPos.y + cameraPosition.y - 64.0, 0) + HBD_SCALE);
 		desaturationAmount *= 1.0 - fogAmount;
-		desaturationAmount *= HBD_STRENGTH * 0.85;
+		desaturationAmount *= HBD_STRENGTH * 0.75;
 		color.rgb = mix(color.rgb, vec3(getLum(color.rgb) + 0.1), desaturationAmount);
 	#endif
 	

@@ -215,7 +215,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 
 
 
-void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal, float depth) {
+void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal, float depth) {
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -278,7 +278,7 @@ void doFshLighting(inout vec3 color, float blockBrightness, float ambientBrightn
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	float shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness, depth);
+	shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness, depth);
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness * ambientBrightness;
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);

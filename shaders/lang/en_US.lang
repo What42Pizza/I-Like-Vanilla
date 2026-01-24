@@ -719,9 +719,13 @@ value.SSAO_ENABLED.-1=Use Style
 value.SSAO_ENABLED.0=Off
 value.SSAO_ENABLED.1=On
 
-option.AO_AMOUNT=SSAO Amount
-option.AO_AMOUNT.comment=How much to darken corners / crevasses
-value.AO_AMOUNT.-1=Use Style
+option.AO_AMOUNT_LIT=SSAO Amount (Lit)
+option.AO_AMOUNT_LIT.comment=How much to darken corners / crevasses for areas that are lit (in sunlight/moonlight/blocklight)
+value.AO_AMOUNT_LIT.-1=Use Style
+
+option.AO_AMOUNT_UNLIT=SSAO Amount (Shaded)
+option.AO_AMOUNT_UNLIT.comment=How much to darken corners / crevasses for areas that are unlit (not in sunlight/moonlight/blocklight)
+value.AO_AMOUNT_UNLIT.-1=Use Style
 
 option.AO_SIZE=SSAO Size
 option.AO_SIZE.comment=How much the SSAO should spread

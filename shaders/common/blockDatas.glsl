@@ -515,6 +515,7 @@ if (materialId < 1570u) { // 0..1570
 								SET_SPECULARNESS(0.5);
 							} else {
 								// vine
+								TWEAK_GLCOLOR_BRIGHTNESS(1.25);
 								SET_SPECULARNESS(0.75);
 							}
 						}

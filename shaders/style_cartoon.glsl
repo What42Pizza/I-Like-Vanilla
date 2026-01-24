@@ -515,9 +515,13 @@
 #undef SSAO_ENABLED
 										#define SSAO_ENABLED 0
 #endif
-#if AO_AMOUNT == -1
-#undef AO_AMOUNT
-										#define AO_AMOUNT 1.0
+#if AO_AMOUNT_LIT == -1
+#undef AO_AMOUNT_LIT
+										#define AO_AMOUNT_LIT 1.0
+#endif
+#if AO_AMOUNT_UNLIT == -1
+#undef AO_AMOUNT_UNLIT
+										#define AO_AMOUNT_UNLIT 1.0
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

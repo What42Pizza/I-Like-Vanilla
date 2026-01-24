@@ -18,7 +18,7 @@
 
 #if GLOWING_ORES_STRENGTH == -1
 #undef GLOWING_ORES_STRENGTH
-										#define GLOWING_ORES_STRENGTH 1.0
+										#define GLOWING_ORES_STRENGTH 0.8
 #endif
 #if GLOWING_STEMS_STRENGTH == -1
 #undef GLOWING_STEMS_STRENGTH
@@ -457,7 +457,7 @@
 #endif
 #if HBD_STRENGTH == -1
 #undef HBD_STRENGTH
-										#define HBD_STRENGTH 0.3
+										#define HBD_STRENGTH 0.25
 #endif
 #if HBD_SCALE == -1
 #undef HBD_SCALE
@@ -510,9 +510,13 @@
 #undef SSAO_ENABLED
 										#define SSAO_ENABLED 1
 #endif
-#if AO_AMOUNT == -1
-#undef AO_AMOUNT
-										#define AO_AMOUNT 0.85
+#if AO_AMOUNT_LIT == -1
+#undef AO_AMOUNT_LIT
+										#define AO_AMOUNT_LIT 0.75
+#endif
+#if AO_AMOUNT_UNLIT == -1
+#undef AO_AMOUNT_UNLIT
+										#define AO_AMOUNT_UNLIT 0.85
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -640,7 +644,7 @@
 #endif
 #if SUNRAYS_AMOUNT_MAX_DAY == -1
 #undef SUNRAYS_AMOUNT_MAX_DAY
-										#define SUNRAYS_AMOUNT_MAX_DAY 0.7
+										#define SUNRAYS_AMOUNT_MAX_DAY 0.5
 #endif
 #if SUNRAYS_AMOUNT_MAX_NIGHT == -1
 #undef SUNRAYS_AMOUNT_MAX_NIGHT
@@ -1357,7 +1361,7 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 1.7
+										#define UNDERGROUND_FOG_DENSITY 1.1
 #endif
 #if UNDERGROUND_FOG_BRIGHTNESS == -1
 #undef UNDERGROUND_FOG_BRIGHTNESS

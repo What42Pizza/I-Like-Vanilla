@@ -441,7 +441,7 @@
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
-										#define FOLIAGE_TINT_GREEN 1.04
+										#define FOLIAGE_TINT_GREEN 1.05
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
@@ -462,7 +462,7 @@
 #endif
 #if HBD_STRENGTH == -1
 #undef HBD_STRENGTH
-										#define HBD_STRENGTH 0.2
+										#define HBD_STRENGTH 0.15
 #endif
 #if HBD_SCALE == -1
 #undef HBD_SCALE
@@ -515,9 +515,13 @@
 #undef SSAO_ENABLED
 										#define SSAO_ENABLED 1
 #endif
-#if AO_AMOUNT == -1
-#undef AO_AMOUNT
-										#define AO_AMOUNT 0.7
+#if AO_AMOUNT_LIT == -1
+#undef AO_AMOUNT_LIT
+										#define AO_AMOUNT_LIT 0.7
+#endif
+#if AO_AMOUNT_UNLIT == -1
+#undef AO_AMOUNT_UNLIT
+										#define AO_AMOUNT_UNLIT 0.7
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

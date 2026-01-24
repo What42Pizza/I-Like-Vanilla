@@ -76,14 +76,15 @@ void main() {
 		vec2 lmcoord = unpack_2x8(data.x);
 		float specularness = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
-		doFshLighting(color, lmcoord.x, lmcoord.y, specularness, viewPos, normal, depth);
+		float shadowBrightness;
+		doFshLighting(color, shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, depth);
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
 				float aoFactor = getAoAmount(depth);
 				aoFactor *= 1.0 - 0.5 * getLum(color);
 				aoFactor *= 1.0 - 0.4 * nightVision;
-				color *= 1.0 - aoFactor * AO_AMOUNT;
+				color *= 1.0 - aoFactor * mix(AO_AMOUNT_UNLIT, AO_AMOUNT_LIT, max(shadowBrightness, lmcoord.x));
 				//color = vec3(aoFactor);
 			}
 		#endif

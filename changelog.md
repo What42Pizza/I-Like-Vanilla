@@ -1,3 +1,8 @@
+- v1.2.3
+  - Split setting 'AO Amount' into 'AO Amount (Lit)' and 'AO Amount (Shaded)'
+
+<br>
+
 - v1.2.2 (26/01/23)
   - Added settings for end sky colors, end clouds colors, nether sky colors, and nether clouds colors
   - Added settings for height-based desaturation
