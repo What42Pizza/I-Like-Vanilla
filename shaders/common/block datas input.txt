@@ -17,6 +17,12 @@
 //    	doThing();
 //    }
 //    ##
+//    // sets how this block casts shadows
+//    shadows casting: foliage
+//    // set the waviness amount (0-3)
+//    waviness: 3
+//    // set whether the bottom half waves
+//    do bottom waving: false
 //    // sets the reflectiveness of this block (default: 0.0, is inserted into `SET_REFLECTIVENESS({});`)
 //    reflectiveness: 0.1234
 //    // sets the specularness of this block (default: 0.0, is inserted into `SET_SPECULARNESS({});`)
@@ -242,88 +248,88 @@ emission: vec3(0.25, 0.25, 0.25)
 block light:level=0:
 weight: 1
 voxelize: true
-emission: vec30.0 / 15.0
+emission: vec3(0.0 / 15.0)
 
 block light:level=1:
 weight: 1
 voxelize: true
-emission: vec31.0 / 15.0
+emission: vec3(1.0 / 15.0)
 
 block light:level=2:
 weight: 1
 voxelize: true
-emission: vec32.0 / 15.0
+emission: vec3(2.0 / 15.0)
 
 block light:level=3:
 weight: 1
 voxelize: true
-emission: vec33.0 / 15.0
+emission: vec3(3.0 / 15.0)
 
 block light:level=4:
 weight: 1
 voxelize: true
-emission: vec34.0 / 15.0
+emission: vec3(4.0 / 15.0)
 
 block light:level=5:
 weight: 1
 voxelize: true
-emission: vec35.0 / 15.0
+emission: vec3(5.0 / 15.0)
 
 block light:level=6:
 weight: 1
 voxelize: true
-emission: vec36.0 / 15.0
+emission: vec3(6.0 / 15.0)
 
 block light:level=7:
 weight: 1
 voxelize: true
-emission: vec37.0 / 15.0
+emission: vec3(7.0 / 15.0)
 
 block light:level=8:
 weight: 1
 voxelize: true
-emission: vec38.0 / 15.0
+emission: vec3(8.0 / 15.0)
 
 block light:level=9:
 weight: 1
 voxelize: true
-emission: vec39.0 / 15.0
+emission: vec3(9.0 / 15.0)
 
 block light:level=10:
 weight: 1
 voxelize: true
-emission: vec310.0 / 15.0
+emission: vec3(10.0 / 15.0)
 
 block light:level=11:
 weight: 1
 voxelize: true
-emission: vec311.0 / 15.0
+emission: vec3(11.0 / 15.0)
 
 block light:level=12:
 weight: 1
 voxelize: true
-emission: vec312.0 / 15.0
+emission: vec3(12.0 / 15.0)
 
 block light:level=13:
 weight: 1
 voxelize: true
-emission: vec313.0 / 15.0
+emission: vec3(13.0 / 15.0)
 
 block light:level=14:
 weight: 1
 voxelize: true
-emission: vec314.0 / 15.0
+emission: vec3(14.0 / 15.0)
 
 block light:level=15:
 weight: 1
 voxelize: true
-emission: vec315.0 / 15.0
+emission: vec3(15.0 / 15.0)
 
 
 
 // classic blocklights
 
-block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, jack_o_lantern, candle, campfire:
+block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, jack_o_lantern, candle, campfire, furnace:lit=true:
 weight: 10
 glow detect min: vec3(21.0,  31.3, 69.4)
 glow detect max: vec3(60.0, 100.0, 97.6)
@@ -340,14 +346,6 @@ block redstone_torch, redstone_wall_torch:
 weight: 5
 voxelize: true
 emission: vec3(0.0, 0.5, 0.0)
-
-block furnace:lit=true:
-weight: 2
-glow detect min: vec3(21.0,  31.3, 69.4)
-glow detect max: vec3(60.0, 100.0, 97.6)
-glow amount: 1.0
-voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
 
 block sea_lantern:
 weight: 1
@@ -559,29 +557,43 @@ brightness: 0.8
 block sugar_cane:
 weight: 1
 brightness: 0.85
+waviness: 1
+shadow casting: foliage
 
-block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves:
+block bamboo, bamboo_sapling:
+weight: 10
+brightness: 1.25
+waviness: 1
+
+block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves:
 weight: 2000
+waviness: 3
 specularness: 0.8
-
-block pale_oak_leaves:
-weight: 100
-specularness: 0.8
-
-block pale_hanging_moss:
-weight: 1
-specularness: 0.5
 
 block vine:
 weight: 2
+waviness: 3
+brightness: 1.25
 specularness: 0.75
+
+block weeping_vines, twisted_vines, weeping_vines_plant, twisted_vines_plant:
+weight: 2
+waviness: 3
+specularness: 0.75
+
+block pale_hanging_moss:
+weight: 1
+waviness: 3
+specularness: 0.5
 
 block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, tall_dry_grass, large_fern:half=lower:
 weight: 50
+waviness: 3
 specularness: 0.5
 
 block tall_grass:half=upper, large_fern:half=upper:
 weight: 10
+waviness: 3
 specularness: 0.5
 
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:

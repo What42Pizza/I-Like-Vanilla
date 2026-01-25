@@ -64,7 +64,7 @@ void main() {
 	// get voxel id and datas
 	ivec3 voxelPos = ivec3(gl_GlobalInvocationID);
 	uint voxelId = texelFetch(voxelIdsSampler, voxelPos, 0).r;
-	#include "/common/voxelDatas.glsl"
+	#include "/generated/voxelDatas.glsl"
 	
 	// synchronize threads, ensure cache is full
 	barrier();

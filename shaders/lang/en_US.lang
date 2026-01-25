@@ -614,15 +614,15 @@ value.SNOWY_TWEAKS_ENABLED.1=On
 screen.HEIGHT_BASED_DESATURATION_MENU=Height-Based Desaturation
 
 option.HBD_ENABLED=HBD Enabled
-option.HBD_ENABLED.comment=Enabled or disables height-based desaturation
+option.HBD_ENABLED.comment=Enabled or disables height-based desaturation (only applies in the overworld)
 value.HBD_ENABLED.-1=Use Style
 
 option.HBD_STRENGTH=HBD Strength
-option.HBD_STRENGTH.comment=Sets the strength of the height-based desaturation
+option.HBD_STRENGTH.comment=Sets the maximum strength of the height-based desaturation
 value.HBD_STRENGTH.-1=Use Style
 
 option.HBD_SCALE=HBD Scale
-option.HBD_SCALE.comment=Determines how quickly everything is desaturated
+option.HBD_SCALE.comment=Determines how quickly everything becomes desaturated as you go upwards (starting from sea level (y=64), the inverted strength is halved every X blocks. So if this is set to 100, it will be 0% strength at y=64, then 50% strength at y=164, then 75% strength at y=264, etc)
 value.HBD_SCALE.-1=Use Style
 
 

@@ -4,7 +4,7 @@
 
 [![Watch the Trailer](https://img.youtube.com/vi/yaY3NHZZ7c0/0.jpg)](https://www.youtube.com/watch?v=yaY3NHZZ7c0)
 
-Note: OptiFine is considered a second-class platform and the majority of development and support is for Iris 1.21+
+Note: OptiFine support is now discontinued. It might still somewhat work on OptiFine, but I won't fix any problems reported for it
 
 <br>
 

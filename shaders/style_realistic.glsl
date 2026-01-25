@@ -466,7 +466,7 @@
 #endif
 #if HBD_SCALE == -1
 #undef HBD_SCALE
-										#define HBD_SCALE 50
+										#define HBD_SCALE 70
 #endif
 
 

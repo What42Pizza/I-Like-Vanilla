@@ -19,6 +19,8 @@ Shaders typically fall into one of two camps: completely overhauling minecraft's
 
 ### Now supports Voxy and Colorwheel!
 
+## Note: Optifine support will be dropped in the next update
+
 <br>
 
 ## Installation:

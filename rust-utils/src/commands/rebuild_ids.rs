@@ -42,6 +42,35 @@ const BLOCK_DATAS_START: &str = r#"
 
 
 
+const VOXEL_DATAS_START: &str = r#"
+// THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
+// To edit the voxel datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
+
+#ifdef GET_EMISSION
+	emission = 0.0;
+	#define SET_EMISSION(v) emission = v;
+#else
+	#define SET_EMISSION(v)
+#endif
+#ifdef GET_TRANSLUCENCY
+	translucency = 0.0;
+	#define SET_TRANSLUCENCY(v) translucency = v;
+#else
+	#define SET_TRANSLUCENCY(v)
+#endif
+
+"#;
+
+
+
+const BLOCK_PROPERTIES_START: &str = r#"
+# THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
+# To edit the block-related datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
+
+"#;
+
+
+
 pub fn function(args: &[String]) -> Result<()> {
 	if !args.is_empty() {
 		println!("Note: 'rebuild_ids' does not currently take arguments");
@@ -107,6 +136,23 @@ pub fn function(args: &[String]) -> Result<()> {
 				curr_block_data.custom_code = Some(code);
 			}
 			
+			"shadow casting" => {
+				curr_block_data.shadow_casting = match value {
+					"always" => 0,
+					"foliage" => 1,
+					"never" => 2,
+					_ => return Err(Error::msg(format!("Invalid value for 'shadow casting': '{value}'"))),
+				};
+			}
+			
+			"waviness" => {
+				curr_block_data.waviness = value.parse()?;
+			}
+			
+			"do bottom waving" => {
+				curr_block_data.do_bottom_waving = value.parse()?;
+			}
+			
 			"reflectiveness" => {
 				curr_block_data.reflectiveness = Some(value);
 			}
@@ -152,19 +198,19 @@ pub fn function(args: &[String]) -> Result<()> {
 	if curr_block_data.weight.is_none() {return Err(Error::msg(format!("Input file 'block datas input.txt' is invalid: block datas for {:?} does not contain a weight field", curr_block_data.block_ids)));}
 	block_datas.push(curr_block_data);
 	
-	// // step 3: extract voxel datas for later
-	// let mut voxel_datas =
-	// 	block_datas
-	// 	.iter()
-	// 	.filter_map(|data| {
-	// 		if !data.voxelize {return None;}
-	// 		Some(VoxelData {
-	// 			weight: data.weight.unwrap(),
-	// 			emission: data.emission,
-	// 			translucency: data.translucency,
-	// 		})
-	// 	})
-	// 	.collect::<Vec<_>>();
+	//// step 3: extract voxel datas for later
+	//let mut voxel_datas =
+	//	block_datas
+	//	.iter()
+	//	.filter_map(|data| {
+	//		if !data.voxelize {return None;}
+	//		Some(VoxelData {
+	//			weight: data.weight.unwrap(),
+	//			emission: data.emission,
+	//			translucency: data.translucency,
+	//		})
+	//	})
+	//	.collect::<Vec<_>>();
 	
 	// step 3: turn big list of block datas into tree
 	block_datas.sort_by(|a, b| {
@@ -197,7 +243,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	
 	// step 4: give block datas int ids and extract voxel datas
-	fn postprocess_tree_data<'a, 'b: 'a>(node: &'a mut TreeNode<'b>, curr_id: &mut u32, voxel_datas: &mut Vec<VoxelData<'a>>) {
+	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u32, voxel_datas: &mut Vec<VoxelData<'a>>) {
 		if let Some(branches) = &mut node.branches {
 			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas);
 			node.branch_split = *curr_id;
@@ -212,7 +258,7 @@ pub fn function(args: &[String]) -> Result<()> {
 					voxel_id: 0,
 					emission: leaf.emission,
 					translucency: leaf.translucency,
-					block_data: node.leaf.as_ref().unwrap(),
+					block_data: unsafe { &*(node.leaf.as_ref().unwrap() as *const _ as *const BlockData<'a>) }, // not using unsafe here causes bad lifetime issues
 				});
 			}
 		}
@@ -221,25 +267,25 @@ pub fn function(args: &[String]) -> Result<()> {
 	let mut voxel_datas = vec!();
 	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas);
 	
-	// static mut HIGHEST_DEPTH: usize = 0;
-	// fn print_tree<'a>(node: &TreeNode<'a>, depth: usize) {
-	// 	unsafe {
-	// 		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
-	// 	}
-	// 	let indent = "  ".repeat(depth);
-	// 	println!("{indent}weight: {}", node.weight);
-	// 	if let Some(branches) = &node.branches {
-	// 		print_tree(&branches.0, depth + 1);
-	// 		print_tree(&branches.1, depth + 1);
-	// 	}
-	// 	if let Some(leaf) = &node.leaf {
-	// 		println!("{indent}block ids: {:?}", leaf.block_ids);
-	// 	}
-	// }
-	// print_tree(&tree_nodes[0], 0);
-	// unsafe {
-	// 	println!("{}", HIGHEST_DEPTH + 0);
-	// }
+	//static mut HIGHEST_DEPTH: usize = 0;
+	//fn print_tree<'a>(node: &TreeNode<'a>, depth: usize) {
+	//	unsafe {
+	//		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
+	//	}
+	//	let indent = "  ".repeat(depth);
+	//	println!("{indent}weight: {}", node.weight);
+	//	if let Some(branches) = &node.branches {
+	//		print_tree(&branches.0, depth + 1);
+	//		print_tree(&branches.1, depth + 1);
+	//	}
+	//	if let Some(leaf) = &node.leaf {
+	//		println!("{indent}block ids: {:?}", leaf.block_ids);
+	//	}
+	//}
+	//print_tree(&tree_nodes[0], 0);
+	//unsafe {
+	//	println!("{}", HIGHEST_DEPTH + 0);
+	//}
 	
 	// step 5: turn big list of voxel datas into tree
 	voxel_datas.sort_by(|a, b| {
@@ -271,25 +317,25 @@ pub fn function(args: &[String]) -> Result<()> {
 		voxel_tree_nodes.insert(new_index, new_node);
 	}
 	
-	// static mut HIGHEST_DEPTH: usize = 0;
-	// fn print_voxel_tree<'a>(node: &VoxelTreeNode<'a>, depth: usize) {
-	// 	unsafe {
-	// 		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
-	// 	}
-	// 	let indent = "  ".repeat(depth);
-	// 	println!("{indent}weight: {}", node.weight);
-	// 	if let Some(branches) = &node.branches {
-	// 		print_voxel_tree(&branches.0, depth + 1);
-	// 		print_voxel_tree(&branches.1, depth + 1);
-	// 	}
-	// 	if let Some(leaf) = &node.leaf {
-	// 		println!("{indent}block ids: {:?}", leaf.voxel_id);
-	// 	}
-	// }
-	// print_voxel_tree(&tree_nodes[0], 0);
-	// unsafe {
-	// 	println!("{}", HIGHEST_DEPTH + 0);
-	// }
+	//static mut HIGHEST_DEPTH: usize = 0;
+	//fn print_voxel_tree<'a>(node: &VoxelTreeNode<'a>, depth: usize) {
+	//	unsafe {
+	//		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
+	//	}
+	//	let indent = "  ".repeat(depth);
+	//	println!("{indent}weight: {}", node.weight);
+	//	if let Some(branches) = &node.branches {
+	//		print_voxel_tree(&branches.0, depth + 1);
+	//		print_voxel_tree(&branches.1, depth + 1);
+	//	}
+	//	if let Some(leaf) = &node.leaf {
+	//		println!("{indent}block ids: {:?}", leaf.voxel_id);
+	//	}
+	//}
+	//print_voxel_tree(&tree_nodes[0], 0);
+	//unsafe {
+	//	println!("{}", HIGHEST_DEPTH + 0);
+	//}
 	
 	// step 6: give voxel datas (and block datas) voxel ids
 	fn postprocess_voxel_tree_data(node: &mut VoxelTreeNode, curr_voxel_id: &mut u8) {
@@ -307,7 +353,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			}
 		}
 	}
-	let mut curr_voxel_id = 0;
+	let mut curr_voxel_id = 2;
 	postprocess_voxel_tree_data(&mut voxel_tree_nodes[0], &mut curr_voxel_id);
 	
 	// step 7: generate 'blockDatas.glsl' file
@@ -322,7 +368,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			*block_datas_file += &format!("{indent}}}\n");
 		}
 		if let Some(leaf) = &node.leaf {
-			// *block_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_ids);
+			//*block_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_ids);
 			if let Some(reflectiveness) = &leaf.reflectiveness {
 				*block_datas_file += &format!("{indent}SET_REFLECTIVENESS({reflectiveness});\n");
 			}
@@ -345,12 +391,55 @@ pub fn function(args: &[String]) -> Result<()> {
 				*block_datas_file += custom_code;
 			}
 			if leaf.voxelize {
-				*block_datas_file += &format!("{indent}SET_VOXEL_ID({});\n", unsafe {*leaf.voxel_id.get()});
+				*block_datas_file += &format!("{indent}SET_VOXEL_ID({}u);\n", unsafe {*leaf.voxel_id.get()});
 			}
 		}
 	}
 	gen_block_datas_code(&mut block_datas_file, &tree_nodes[0], 0);
-	fs::write(shaders_path.join("common/blockDatasNew.glsl"), block_datas_file)?;
+	fs::write(shaders_path.join("generated/blockDatas.glsl"), block_datas_file)?;
+	
+	// step 8: generate 'voxelDatas.glsl' file
+	let mut voxel_datas_file = VOXEL_DATAS_START[1..].to_string();
+	fn gen_voxel_datas_code(voxel_datas_file: &mut String, node: &VoxelTreeNode, depth: usize) {
+		let indent = "\t".repeat(depth);
+		if let Some(branches) = &node.branches {
+			*voxel_datas_file += &format!("{indent}if (voxelId < {}u) {{\n", node.branch_split);
+			gen_voxel_datas_code(voxel_datas_file, &branches.0, depth + 1);
+			*voxel_datas_file += &format!("{indent}}} else {{\n");
+			gen_voxel_datas_code(voxel_datas_file, &branches.1, depth + 1);
+			*voxel_datas_file += &format!("{indent}}}\n");
+		}
+		if let Some(leaf) = &node.leaf {
+			//*voxel_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_data.block_ids);
+			if let Some(emission) = &leaf.emission {
+				*voxel_datas_file += &format!("{indent}SET_EMISSION({emission});\n");
+			}
+			if let Some(translucency) = &leaf.translucency {
+				*voxel_datas_file += &format!("{indent}SET_TRANSLUCENCY({translucency});\n");
+			}
+		}
+	}
+	gen_voxel_datas_code(&mut voxel_datas_file, &voxel_tree_nodes[0], 0);
+	fs::write(shaders_path.join("generated/voxelDatas.glsl"), voxel_datas_file)?;
+	
+	// step 9: generate 'block.properties' file
+	let mut block_properties_file = BLOCK_PROPERTIES_START[1..].to_string();
+	fn gen_block_properties_code(block_properties_file: &mut String, node: &TreeNode) {
+		if let Some(branches) = &node.branches {
+			gen_block_properties_code(block_properties_file, &branches.0);
+			gen_block_properties_code(block_properties_file, &branches.1);
+		}
+		if let Some(leaf) = &node.leaf {
+			*block_properties_file += &format!("blocks.{} =", leaf.int_id);
+			for id in &leaf.block_ids {
+				block_properties_file.push(' ');
+				*block_properties_file += id;
+			}
+			block_properties_file.push('\n');
+		}
+	}
+	gen_block_properties_code(&mut block_properties_file, &tree_nodes[0]);
+	fs::write(shaders_path.join("generated/block.properties"), block_properties_file)?;
 	
 	Ok(())
 }
@@ -374,6 +463,9 @@ struct BlockData<'a> {
 	weight: Option<f32>,
 	alias: Option<&'a str>,
 	custom_code: Option<String>,
+	shadow_casting: u8,
+	waviness: u8,
+	do_bottom_waving: bool,
 	reflectiveness: Option<&'a str>,
 	specularness: Option<&'a str>,
 	glow_detect_min: Option<&'a str>,
@@ -394,6 +486,9 @@ impl<'a> BlockData<'a> {
 			weight: None,
 			alias: None,
 			custom_code: None,
+			shadow_casting: 0,
+			waviness: 0,
+			do_bottom_waving: false,
 			reflectiveness: None,
 			specularness: None,
 			glow_detect_min: None,
