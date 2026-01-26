@@ -131,6 +131,11 @@ const float shadowIntervalSize    = 2.0;
 	#define TAA_ENABLED 0
 #endif
 
+#if ISOMETRIC_RENDERING_ENABLED == 1
+	#undef BORDER_FOG_ENABLED
+	#define BORDER_FOG_ENABLED 0
+#endif
+
 #if PBR_TYPE == 1
 	#undef EMISSIVE_TEXTURES_ENABLED
 	#define EMISSIVE_TEXTURES_ENABLED 0

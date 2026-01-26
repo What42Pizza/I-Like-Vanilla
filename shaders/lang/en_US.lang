@@ -1934,15 +1934,12 @@ value.ISOMETRIC_RENDERING_ENABLED.1=On
 
 option.ISOMETRIC_WORLD_SCALE=Isometric World Scale
 option.ISOMETRIC_WORLD_SCALE.comment=This controls how "zoomed-out" the camera is
-value.ISOMETRIC_WORLD_SCALE.-1=Use Style
 
 option.ISOMETRIC_BACKWARD_VISIBILITY=Isometric Backwards Visibility
 option.ISOMETRIC_BACKWARD_VISIBILITY.comment=This controls how close the clipping plane is behind you
-value.ISOMETRIC_BACKWARD_VISIBILITY.-1=Use Style
 
 option.ISOMETRIC_FORWARD_VISIBILITY=Isometric Forward Visibility
 option.ISOMETRIC_FORWARD_VISIBILITY.comment=This controls how close the clipping plane is in front of you
-value.ISOMETRIC_FORWARD_VISIBILITY.-1=Use Style
 
 
 
