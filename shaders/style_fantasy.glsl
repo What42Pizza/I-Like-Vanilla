@@ -1343,116 +1343,6 @@
 
 
 
-#if BORDER_FOG_START == -1
-#undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.7
-#endif
-#if BORDER_FOG_END == -1
-#undef BORDER_FOG_END
-										#define BORDER_FOG_END 0.95
-#endif
-#if BORDER_FOG_CURVE == -1
-#undef BORDER_FOG_CURVE
-										#define BORDER_FOG_CURVE 2
-#endif
-#if ATMOSPHERIC_FOG_DENSITY == -1
-#undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.4
-#endif
-#if UNDERGROUND_FOG_DENSITY == -1
-#undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 1.1
-#endif
-#if UNDERGROUND_FOG_BRIGHTNESS == -1
-#undef UNDERGROUND_FOG_BRIGHTNESS
-										#define UNDERGROUND_FOG_BRIGHTNESS 0.6
-#endif
-#if WEATHER_FOG_DENSITY == -1
-#undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 15.0
-#endif
-#if PALE_GARDEN_FOG_DENSITY == -1
-#undef PALE_GARDEN_FOG_DENSITY
-										#define PALE_GARDEN_FOG_DENSITY 6.0
-#endif
-#if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
-#undef PALE_GARDEN_FOG_NIGHT_DENSITY
-										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
-#endif
-#if BLINDNESS_EFFECT_FOG_DENSITY == -1
-#undef BLINDNESS_EFFECT_FOG_DENSITY
-										#define BLINDNESS_EFFECT_FOG_DENSITY 80.0
-#endif
-#if DARKNESS_EFFECT_FOG_DENSITY == -1
-#undef DARKNESS_EFFECT_FOG_DENSITY
-										#define DARKNESS_EFFECT_FOG_DENSITY 40.0
-#endif
-#if NETHER_FOG_DENSITY == -1
-#undef NETHER_FOG_DENSITY
-										#define NETHER_FOG_DENSITY 5.0
-#endif
-#if END_FOG_DENSITY == -1
-#undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 0.3
-#endif
-
-
-
-
-
-#if WATER_FOG_RED == -1
-#undef WATER_FOG_RED
-										#define WATER_FOG_RED 0.1
-#endif
-#if WATER_FOG_GREEN == -1
-#undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.1
-#endif
-#if WATER_FOG_BLUE == -1
-#undef WATER_FOG_BLUE
-										#define WATER_FOG_BLUE 0.7
-#endif
-#if WATER_FOG_DENSITY == -1
-#undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.1
-#endif
-#if LAVA_FOG_RED == -1
-#undef LAVA_FOG_RED
-										#define LAVA_FOG_RED 0.9
-#endif
-#if LAVA_FOG_GREEN == -1
-#undef LAVA_FOG_GREEN
-										#define LAVA_FOG_GREEN 0.15
-#endif
-#if LAVA_FOG_BLUE == -1
-#undef LAVA_FOG_BLUE
-										#define LAVA_FOG_BLUE 0.0
-#endif
-#if LAVA_FOG_DENSITY == -1
-#undef LAVA_FOG_DENSITY
-										#define LAVA_FOG_DENSITY 4.0
-#endif
-#if POWDERED_SNOW_FOG_RED == -1
-#undef POWDERED_SNOW_FOG_RED
-										#define POWDERED_SNOW_FOG_RED 0.8
-#endif
-#if POWDERED_SNOW_FOG_GREEN == -1
-#undef POWDERED_SNOW_FOG_GREEN
-										#define POWDERED_SNOW_FOG_GREEN 1.0
-#endif
-#if POWDERED_SNOW_FOG_BLUE == -1
-#undef POWDERED_SNOW_FOG_BLUE
-										#define POWDERED_SNOW_FOG_BLUE 1.0
-#endif
-#if POWDERED_SNOW_FOG_DENSITY == -1
-#undef POWDERED_SNOW_FOG_DENSITY
-										#define POWDERED_SNOW_FOG_DENSITY 4.0
-#endif
-
-
-
-
-
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
 										#define SKY_DAY_RED 0.3
@@ -1578,6 +1468,121 @@
 #if END_STATIC_BLUE == -1
 #undef END_STATIC_BLUE
 										#define END_STATIC_BLUE 0.9
+#endif
+
+
+
+
+
+#if BORDER_FOG_START == -1
+#undef BORDER_FOG_START
+										#define BORDER_FOG_START 0.7
+#endif
+#if BORDER_FOG_END == -1
+#undef BORDER_FOG_END
+										#define BORDER_FOG_END 0.95
+#endif
+#if BORDER_FOG_CURVE == -1
+#undef BORDER_FOG_CURVE
+										#define BORDER_FOG_CURVE 2
+#endif
+
+
+
+
+
+#if ATMOSPHERIC_FOG_DENSITY == -1
+#undef ATMOSPHERIC_FOG_DENSITY
+										#define ATMOSPHERIC_FOG_DENSITY 0.4
+#endif
+#if UNDERGROUND_FOG_DENSITY == -1
+#undef UNDERGROUND_FOG_DENSITY
+										#define UNDERGROUND_FOG_DENSITY 1.1
+#endif
+#if UNDERGROUND_FOG_BRIGHTNESS == -1
+#undef UNDERGROUND_FOG_BRIGHTNESS
+										#define UNDERGROUND_FOG_BRIGHTNESS 0.6
+#endif
+#if WEATHER_FOG_DENSITY == -1
+#undef WEATHER_FOG_DENSITY
+										#define WEATHER_FOG_DENSITY 15.0
+#endif
+#if PALE_GARDEN_FOG_DENSITY == -1
+#undef PALE_GARDEN_FOG_DENSITY
+										#define PALE_GARDEN_FOG_DENSITY 6.0
+#endif
+#if PALE_GARDEN_FOG_NIGHT_DENSITY == -1
+#undef PALE_GARDEN_FOG_NIGHT_DENSITY
+										#define PALE_GARDEN_FOG_NIGHT_DENSITY 100.0
+#endif
+#if BLINDNESS_EFFECT_FOG_DENSITY == -1
+#undef BLINDNESS_EFFECT_FOG_DENSITY
+										#define BLINDNESS_EFFECT_FOG_DENSITY 80.0
+#endif
+#if DARKNESS_EFFECT_FOG_DENSITY == -1
+#undef DARKNESS_EFFECT_FOG_DENSITY
+										#define DARKNESS_EFFECT_FOG_DENSITY 40.0
+#endif
+#if NETHER_FOG_DENSITY == -1
+#undef NETHER_FOG_DENSITY
+										#define NETHER_FOG_DENSITY 5.0
+#endif
+#if END_FOG_DENSITY == -1
+#undef END_FOG_DENSITY
+										#define END_FOG_DENSITY 0.3
+#endif
+
+
+
+
+
+#if WATER_FOG_RED == -1
+#undef WATER_FOG_RED
+										#define WATER_FOG_RED 0.1
+#endif
+#if WATER_FOG_GREEN == -1
+#undef WATER_FOG_GREEN
+										#define WATER_FOG_GREEN 0.1
+#endif
+#if WATER_FOG_BLUE == -1
+#undef WATER_FOG_BLUE
+										#define WATER_FOG_BLUE 0.7
+#endif
+#if WATER_FOG_DENSITY == -1
+#undef WATER_FOG_DENSITY
+										#define WATER_FOG_DENSITY 0.1
+#endif
+#if LAVA_FOG_RED == -1
+#undef LAVA_FOG_RED
+										#define LAVA_FOG_RED 0.9
+#endif
+#if LAVA_FOG_GREEN == -1
+#undef LAVA_FOG_GREEN
+										#define LAVA_FOG_GREEN 0.15
+#endif
+#if LAVA_FOG_BLUE == -1
+#undef LAVA_FOG_BLUE
+										#define LAVA_FOG_BLUE 0.0
+#endif
+#if LAVA_FOG_DENSITY == -1
+#undef LAVA_FOG_DENSITY
+										#define LAVA_FOG_DENSITY 4.0
+#endif
+#if POWDERED_SNOW_FOG_RED == -1
+#undef POWDERED_SNOW_FOG_RED
+										#define POWDERED_SNOW_FOG_RED 0.8
+#endif
+#if POWDERED_SNOW_FOG_GREEN == -1
+#undef POWDERED_SNOW_FOG_GREEN
+										#define POWDERED_SNOW_FOG_GREEN 1.0
+#endif
+#if POWDERED_SNOW_FOG_BLUE == -1
+#undef POWDERED_SNOW_FOG_BLUE
+										#define POWDERED_SNOW_FOG_BLUE 1.0
+#endif
+#if POWDERED_SNOW_FOG_DENSITY == -1
+#undef POWDERED_SNOW_FOG_DENSITY
+										#define POWDERED_SNOW_FOG_DENSITY 4.0
 #endif
 
 

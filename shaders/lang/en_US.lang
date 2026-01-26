@@ -1629,128 +1629,6 @@ value.END_CLOUDS_BLUE_BRIGHT.-1=Use Style
 
 
 
-screen.FOG_MENU=Fog
-
-option.BORDER_FOG_ENABLED=Border Fog Enabled
-option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
-value.BORDER_FOG_ENABLED.0=Off
-value.BORDER_FOG_ENABLED.1=On
-
-option.BORDER_FOG_START=Border Fog Start
-option.BORDER_FOG_START.comment=Where fog starts during normal conditions
-value.BORDER_FOG_START.-1=Use Style
-
-option.BORDER_FOG_END=Border Fog End
-option.BORDER_FOG_END.comment=Where fog ends during normal conditions
-value.BORDER_FOG_END.-1=Use Style
-
-option.BORDER_FOG_CURVE=Border Fog Curve
-option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
-value.BORDER_FOG_CURVE.-1=Use Style
-
-option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
-option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered
-value.CYLINDRICAL_CLIPPING.0=Off
-value.CYLINDRICAL_CLIPPING.1=On
-
-option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
-option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
-value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
-
-option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
-option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground
-value.UNDERGROUND_FOG_DENSITY.-1=Use Style
-
-option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
-option.UNDERGROUND_FOG_BRIGHTNESS.comment=Defines the brightness of underground fog (and the brightness of the sky while underground)
-value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
-
-option.WEATHER_FOG_DENSITY=Rain Fog Density
-option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
-value.WEATHER_FOG_DENSITY.-1=Use Style
-
-option.PALE_GARDEN_FOG_DENSITY=Pale Garden Fog Density
-option.PALE_GARDEN_FOG_DENSITY.comment=Atmospheric fog density when in the pale garden
-value.PALE_GARDEN_FOG_DENSITY.-1=Use Style
-
-option.PALE_GARDEN_FOG_NIGHT_DENSITY=Pale Garden Fog Night Density
-option.PALE_GARDEN_FOG_NIGHT_DENSITY.comment=Atmospheric fog density when in the pale garden at night
-value.PALE_GARDEN_FOG_NIGHT_DENSITY.-1=Use Style
-
-option.BLINDNESS_EFFECT_FOG_DENSITY=Blindness Effect Fog Density
-option.BLINDNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Blindness effect
-value.BLINDNESS_EFFECT_FOG_DENSITY.-1=Use Style
-
-option.DARKNESS_EFFECT_FOG_DENSITY=Darkness Effect Fog Density
-option.DARKNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Darkness effect
-value.DARKNESS_EFFECT_FOG_DENSITY.-1=Use Style
-
-option.NETHER_FOG_DENSITY=Nether Fog Density
-option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether
-value.NETHER_FOG_DENSITY.-1=Use Style
-
-option.END_FOG_DENSITY=End Fog Density
-option.END_FOG_DENSITY.comment=Atmospheric fog density for the end
-value.END_FOG_DENSITY.-1=Use Style
-
-
-
-
-
-screen.IN_LIQUID_FOG_MENU=In-Liquid Fog
-
-option.WATER_FOG_RED=Water Fog Red
-option.WATER_FOG_RED.comment=Fog color when underwater
-value.WATER_FOG_RED.-1=Use Style
-
-option.WATER_FOG_GREEN=Water Fog Green
-option.WATER_FOG_GREEN.comment=Fog color when underwater
-value.WATER_FOG_GREEN.-1=Use Style
-
-option.WATER_FOG_BLUE=Water Fog Blue
-option.WATER_FOG_BLUE.comment=Fog color when underwater
-value.WATER_FOG_BLUE.-1=Use Style
-
-option.WATER_FOG_DENSITY=Water Fog Density
-option.WATER_FOG_DENSITY.comment=Density of fog when underwater
-value.WATER_FOG_DENSITY.-1=Use Style
-
-option.LAVA_FOG_RED=Lava Fog Red
-option.LAVA_FOG_RED.comment=Fog color when in lava
-value.LAVA_FOG_RED.-1=Use Style
-
-option.LAVA_FOG_GREEN=Lava Fog Green
-option.LAVA_FOG_GREEN.comment=Fog color when in lava
-value.LAVA_FOG_GREEN.-1=Use Style
-
-option.LAVA_FOG_BLUE=Lava Fog Blue
-option.LAVA_FOG_BLUE.comment=Fog color when in lava
-value.LAVA_FOG_BLUE.-1=Use Style
-
-option.LAVA_FOG_DENSITY=Lava Fog Density
-option.LAVA_FOG_DENSITY.comment=Density of fog when in lava
-value.LAVA_FOG_DENSITY.-1=Use Style
-
-option.POWDERED_SNOW_FOG_RED=Snow Fog Red
-option.POWDERED_SNOW_FOG_RED.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_RED.-1=Use Style
-
-option.POWDERED_SNOW_FOG_GREEN=Snow Fog Green
-option.POWDERED_SNOW_FOG_GREEN.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_GREEN.-1=Use Style
-
-option.POWDERED_SNOW_FOG_BLUE=Snow Fog Blue
-option.POWDERED_SNOW_FOG_BLUE.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_BLUE.-1=Use Style
-
-option.POWDERED_SNOW_FOG_DENSITY=Snow Fog Density
-option.POWDERED_SNOW_FOG_DENSITY.comment=Density of fog when in powdered snow
-value.POWDERED_SNOW_FOG_DENSITY.-1=Use Style
-
-
-
-
-
 screen.SKY_COLORS_MENU=Sky Colors
 
 option.SKY_DAY_RED=Sky Day Red
@@ -1898,6 +1776,142 @@ value.CUSTOM_END_SKYBOX.1=On
 
 option.END_SKYBOX_BRIGHTNESS=End Skybox Brightness
 option.END_SKYBOX_BRIGHTNESS.comment=Tweaks the brightness of sky objects when custom skies are enabled for the end
+
+
+
+
+
+screen.FOG_MENU=Fog
+
+
+
+
+
+screen.BORDER_FOG_MENU=Border Fog
+screen.BORDER_FOG_MENU.comment=Fog that appears at the edge of the rendered chunks
+
+option.BORDER_FOG_ENABLED=Border Fog Enabled
+option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
+value.BORDER_FOG_ENABLED.0=Off
+value.BORDER_FOG_ENABLED.1=On
+
+option.BORDER_FOG_START=Border Fog Start
+option.BORDER_FOG_START.comment=Where fog starts during normal conditions
+value.BORDER_FOG_START.-1=Use Style
+
+option.BORDER_FOG_END=Border Fog End
+option.BORDER_FOG_END.comment=Where fog ends during normal conditions
+value.BORDER_FOG_END.-1=Use Style
+
+option.BORDER_FOG_CURVE=Border Fog Curve
+option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
+value.BORDER_FOG_CURVE.-1=Use Style
+
+option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
+option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered
+value.CYLINDRICAL_CLIPPING.0=Off
+value.CYLINDRICAL_CLIPPING.1=On
+
+
+
+
+
+screen.ATMOSPHERIC_FOG_MENU=Atmospheric Fog
+screen.ATMOSPHERIC_FOG_MENU.comment=Fog that gives the world more depth, atmosphere, and color
+
+option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
+option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
+value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
+option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground
+value.UNDERGROUND_FOG_DENSITY.-1=Use Style
+
+option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
+option.UNDERGROUND_FOG_BRIGHTNESS.comment=Defines the brightness of underground fog (and the brightness of the sky while underground)
+value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
+
+option.WEATHER_FOG_DENSITY=Rain Fog Density
+option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
+value.WEATHER_FOG_DENSITY.-1=Use Style
+
+option.PALE_GARDEN_FOG_DENSITY=Pale Garden Fog Density
+option.PALE_GARDEN_FOG_DENSITY.comment=Atmospheric fog density when in the pale garden
+value.PALE_GARDEN_FOG_DENSITY.-1=Use Style
+
+option.PALE_GARDEN_FOG_NIGHT_DENSITY=Pale Garden Fog Night Density
+option.PALE_GARDEN_FOG_NIGHT_DENSITY.comment=Atmospheric fog density when in the pale garden at night
+value.PALE_GARDEN_FOG_NIGHT_DENSITY.-1=Use Style
+
+option.BLINDNESS_EFFECT_FOG_DENSITY=Blindness Effect Fog Density
+option.BLINDNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Blindness effect
+value.BLINDNESS_EFFECT_FOG_DENSITY.-1=Use Style
+
+option.DARKNESS_EFFECT_FOG_DENSITY=Darkness Effect Fog Density
+option.DARKNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Darkness effect
+value.DARKNESS_EFFECT_FOG_DENSITY.-1=Use Style
+
+option.NETHER_FOG_DENSITY=Nether Fog Density
+option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether
+value.NETHER_FOG_DENSITY.-1=Use Style
+
+option.END_FOG_DENSITY=End Fog Density
+option.END_FOG_DENSITY.comment=Atmospheric fog density for the end
+value.END_FOG_DENSITY.-1=Use Style
+
+
+
+
+
+screen.IN_LIQUID_FOG_MENU=In-Liquid Fog
+
+option.WATER_FOG_RED=Water Fog Red
+option.WATER_FOG_RED.comment=Fog color when underwater
+value.WATER_FOG_RED.-1=Use Style
+
+option.WATER_FOG_GREEN=Water Fog Green
+option.WATER_FOG_GREEN.comment=Fog color when underwater
+value.WATER_FOG_GREEN.-1=Use Style
+
+option.WATER_FOG_BLUE=Water Fog Blue
+option.WATER_FOG_BLUE.comment=Fog color when underwater
+value.WATER_FOG_BLUE.-1=Use Style
+
+option.WATER_FOG_DENSITY=Water Fog Density
+option.WATER_FOG_DENSITY.comment=Density of fog when underwater
+value.WATER_FOG_DENSITY.-1=Use Style
+
+option.LAVA_FOG_RED=Lava Fog Red
+option.LAVA_FOG_RED.comment=Fog color when in lava
+value.LAVA_FOG_RED.-1=Use Style
+
+option.LAVA_FOG_GREEN=Lava Fog Green
+option.LAVA_FOG_GREEN.comment=Fog color when in lava
+value.LAVA_FOG_GREEN.-1=Use Style
+
+option.LAVA_FOG_BLUE=Lava Fog Blue
+option.LAVA_FOG_BLUE.comment=Fog color when in lava
+value.LAVA_FOG_BLUE.-1=Use Style
+
+option.LAVA_FOG_DENSITY=Lava Fog Density
+option.LAVA_FOG_DENSITY.comment=Density of fog when in lava
+value.LAVA_FOG_DENSITY.-1=Use Style
+
+option.POWDERED_SNOW_FOG_RED=Snow Fog Red
+option.POWDERED_SNOW_FOG_RED.comment=Fog color when in powdered snow
+value.POWDERED_SNOW_FOG_RED.-1=Use Style
+
+option.POWDERED_SNOW_FOG_GREEN=Snow Fog Green
+option.POWDERED_SNOW_FOG_GREEN.comment=Fog color when in powdered snow
+value.POWDERED_SNOW_FOG_GREEN.-1=Use Style
+
+option.POWDERED_SNOW_FOG_BLUE=Snow Fog Blue
+option.POWDERED_SNOW_FOG_BLUE.comment=Fog color when in powdered snow
+value.POWDERED_SNOW_FOG_BLUE.-1=Use Style
+
+option.POWDERED_SNOW_FOG_DENSITY=Snow Fog Density
+option.POWDERED_SNOW_FOG_DENSITY.comment=Density of fog when in powdered snow
+value.POWDERED_SNOW_FOG_DENSITY.-1=Use Style
 
 
 

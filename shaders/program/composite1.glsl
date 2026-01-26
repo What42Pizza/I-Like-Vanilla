@@ -20,7 +20,7 @@ flat in_out float extraFogDist;
 #include "/lib/borderFogAmount.glsl"
 #include "/utils/reprojection.glsl"
 
-#include "/utils/getSkyColor.glsl"
+#include "/utils/getFogColor.glsl"
 #if DEPTH_SUNRAYS_ENABLED == 1
 	#include "/lib/sunrays_depth.glsl"
 #endif
@@ -123,11 +123,7 @@ void main() {
 	
 	float fogDensity = fogDensity;
 	float fogDarken = fogDarken;
-	#ifdef END
-		vec3 atmoFogColor = vec3(0.4, 0.2, 0.5);
-	#else
-		vec3 atmoFogColor = getSkyColor(normalize(viewPos), false);
-	#endif
+	vec3 atmoFogColor = getFogColor(viewPos, playerPos, brightnesses.y);
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
 	if (isEyeInWater == 0) {

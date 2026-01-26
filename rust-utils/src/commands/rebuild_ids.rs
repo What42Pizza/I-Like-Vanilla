@@ -67,6 +67,14 @@ const BLOCK_PROPERTIES_START: &str = r#"
 # THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
 # To edit the block-related datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
 
+# How the block ids work:
+# 
+# 1: There is a basic int value automatically given to each block group using the rust-utils rebuild_ids command which is used to traverse the tree structure in blockDatas.glsl
+# 2: Bits 14-15 are set according to the block group's shadow casting value and no bottom waving value (0 is always, 1 is never, 2 is foliage, 3 is foliage + no bottom waving)
+# 3: Bits 12-13 are set depending on the block group's waviness value (which is 0-3)
+# 4: Bit 11 is always set to ensure that no auto-generated ids can be mistaken for custom ids
+# 5: The other 10 bits are used for the generated int value
+
 "#;
 
 

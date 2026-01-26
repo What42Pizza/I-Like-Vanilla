@@ -2,9 +2,9 @@
 
 <center>
 
-Also, I'm currently looking for a job
+I'm currently looking for a job, if your company is looking for experienced programmers then please let me know!
 
-<h3 style="text-align: center;"><a href="https://discord.com/invite/h99ZBex9nZ">Discord</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla">Source Code</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/issues">Bug Reports</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/blob/main/LICENSE">License</a></h3>
+<h3 style="text-align: center;"><a href="https://github.com/What42Pizza/I-Like-Vanilla/issues">Report Bugs</a> &nbsp; &nbsp; <a href="https://discord.com/invite/h99ZBex9nZ">Discord</a> &nbsp; &nbsp; <a href="https://github.com/What42Pizza/I-Like-Vanilla/blob/main/LICENSE">License</a></h3>
 
 </center>
 
@@ -12,35 +12,16 @@ Also, I'm currently looking for a job
 
 ## About:
 
-Shaders typically fall into one of two camps: completely overhauling minecraft's style or completely copying it. This shader aims to overhaul the graphics while making it feel like nothing has changed. I've built this shader according to my own shader preferences, which are:
+Shaders typically fall into one of two camps: completely overhauling minecraft's style or completely copying it. This shader aims to overhaul the graphics while making it feel like nothing has changed. It's the same style as vanilla minecraft but built for my own preferences, which are:
 
-- Beautiful / Pleasant
+- Beautiful and Pleasant
 - Unobtrusive
 - Sharp AA
 - Gameplay-Oriented
 - Interesting and Exciting
 - Performant
 
-### Now supports Voxy and Colorwheel!
-
-## Note: Optifine support will be dropped in the next update
-
-<br>
-
-## Installation:
-
-- **Step 1: Choose a version**
-- - If using OptiFine **or** if you want to see the default settings, choose an optifine version
-- - Otherwise, choose the latest Iris version
-- - You can also download the latest development version [here](https://github.com/What42Pizza/I-Like-Vanilla/archive/refs/heads/main.zip)
-- **Step 2: Download and install either [OptiFine](https://optifine.net/downloads) or [Iris](https://modrinth.com/mod/iris)**
-- **Step 3: From the in-game shaders menu, open the shaders folder and put the downloaded zip file in it** (then select it within the shaders menu)
-
-Note: OptiFine is considered a second-class platform and the majority of development and support is for Iris 1.21+
-
-<br>
-
-![Multiple Styles Banner](https://cdn.modrinth.com/data/DoODk4HD/images/33349c8badfcd600d81ef94d2330888df625e8bc.png)
+### Supports [Voxy](https://modrinth.com/mod/voxy), [Distant Horizons](https://modrinth.com/mod/distanthorizons), [Colorwheel](https://modrinth.com/mod/colorwheel), and more!
 
 <br>
 

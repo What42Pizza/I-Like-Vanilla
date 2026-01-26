@@ -68,12 +68,11 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 			skyColor += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25;
 		}
 		
-		float eyeBrightness = eyeBrightnessSmooth.y / 240.0;
-		float altitudeAddend = min(horizonAltitudeAddend, 1.0 - 2.0 * eyeBrightness);
-		float darkenMult = clamp(upDot * 5.0 - altitudeAddend * 8.0, 0.0, 1.0);
-		darkenMult = 1.0 - darkenMult;
-		darkenMult *= uint(isEyeInWater == 0);
-		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenMult);
+		vec3 playerDir = mat3(gbufferModelViewInverse) * viewDir;
+		float edgeAltitude = playerDir.y * far + eyeAltitude;
+		float darkenAmount = percentThrough(edgeAltitude, 64, 64 - far * 0.25);
+		darkenAmount *= uint(isEyeInWater == 0);
+		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenAmount);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
 			skyColor *= CUSTOM_OVERWORLD_SKY_BRIGHTNESS;
@@ -86,6 +85,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 	#elif defined NETHER
 		
+		// must stay the same as in /utils/getFogColor.glsl
 		skyColor = fogColor;
 		skyColor = mix(vec3(getLum(skyColor)), skyColor, NETHER_SKY_FOG_SATURATION);
 		skyColor = NETHER_SKY_BASE_COLOR + NETHER_SKY_FOG_INFLUENCE * skyColor;
