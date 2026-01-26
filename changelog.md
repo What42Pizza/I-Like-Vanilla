@@ -1,5 +1,6 @@
 - v1.2.3
   - Split setting 'AO Amount' into 'AO Amount (Lit)' and 'AO Amount (Shaded)'
+  - Improved custom skybox support
 
 <br>
 

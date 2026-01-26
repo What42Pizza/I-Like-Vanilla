@@ -1,7 +1,4 @@
 in_out vec2 texcoord;
-#ifdef END
-	in_out vec3 glcolor;
-#endif
 
 
 
@@ -9,22 +6,25 @@ in_out vec2 texcoord;
 
 void main() {
 	
-	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
+	vec4 color = texture2D(texture, texcoord);
+	#ifdef CUSTOM_SKYBOX
+		color.rgb *= color.rgb;
+	#endif
 	
 	
 	#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 0
 		
 		// increase opacity (the color is literally just added to the buffer, not mixed, so you have to increase the brightness for "more opacity")
-		color = 1.0 - color;
+		color.rgb = 1.0 - color.rgb;
 		if (sunPosition.z < 0.0) {
-			color = pow(color, vec3((SUN_OPACITY - 1.0) * 0.5 + 1.0));
+			color.rgb = pow(color.rgb, vec3((SUN_OPACITY - 1.0) * 0.5 + 1.0));
 		} else {
-			color = pow(color, vec3((MOON_OPACITY - 1.0) * 0.5 + 1.0));
+			color.rgb = pow(color.rgb, vec3((MOON_OPACITY - 1.0) * 0.5 + 1.0));
 		}
-		color = 1.0 - color;
+		color.rgb = 1.0 - color.rgb;
 		
-		color *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
-		color *= 1.0 - 0.6 * rainStrength;
+		color.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
+		color.rgb *= 1.0 - 0.6 * rainStrength;
 		
 	#endif
 	
@@ -35,7 +35,7 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:5 */
-	gl_FragData[0] = vec4(color, 1.0);
+	gl_FragData[0] = color;
 	
 }
 
@@ -44,9 +44,6 @@ void main() {
 
 
 #ifdef VSH
-
-#define SKIP_SKY_NOISE
-#include "/utils/getSkyColor.glsl"
 
 #if ISOMETRIC_RENDERING_ENABLED == 1
 	#include "/utils/isometric.glsl"
@@ -57,9 +54,6 @@ void main() {
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
-	#ifdef END
-		glcolor = gl_Color.rgb;
-	#endif
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

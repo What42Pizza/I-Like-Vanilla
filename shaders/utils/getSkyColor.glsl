@@ -76,8 +76,8 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenMult);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
-			skyColor *= 0.75;
-			skyColor = mix(vec3(getLum(skyColor)), skyColor, 0.75);
+			skyColor *= CUSTOM_OVERWORLD_SKY_BRIGHTNESS;
+			skyColor = mix(vec3(getLum(skyColor)), skyColor, CUSTOM_OVERWORLD_SKY_SATURATION);
 		#endif
 		
 		#if AUTO_EXPOSURE_ENABLED == 1

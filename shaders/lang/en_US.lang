@@ -1342,22 +1342,6 @@ value.WATER_COLOR_AMOUNT.-1=Use Style
 
 screen.SKY_MENU=Sky
 
-
-option.CUSTOM_OVERWORLD_SKYBOX=Custom Overworld Skybox
-option.CUSTOM_OVERWORLD_SKYBOX.comment=Enables custom skybox rendering for the overworld
-value.CUSTOM_OVERWORLD_SKYBOX.0=Off
-value.CUSTOM_OVERWORLD_SKYBOX.1=On
-
-option.CUSTOM_NETHER_SKYBOX=Custom Nether Skybox
-option.CUSTOM_NETHER_SKYBOX.comment=Enables custom skybox rendering for the nether
-value.CUSTOM_NETHER_SKYBOX.0=Off
-value.CUSTOM_NETHER_SKYBOX.1=On
-
-option.CUSTOM_END_SKYBOX=Custom End Skybox
-option.CUSTOM_END_SKYBOX.comment=Enables custom skybox rendering for the end
-value.CUSTOM_END_SKYBOX.0=Off
-value.CUSTOM_END_SKYBOX.1=On
-
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style
 
@@ -1878,6 +1862,42 @@ value.END_STATIC_GREEN.-1=Use Style
 option.END_STATIC_BLUE=End Static Blue
 option.END_STATIC_BLUE.comment=Color for the end sky static (the brighter half of the static)
 value.END_STATIC_BLUE.-1=Use Style
+
+
+
+
+
+screen.CUSTOM_SKYBOXES_MENU=Custom Skyboxes
+
+option.CUSTOM_OVERWORLD_SKYBOX=Custom Overworld Skybox
+option.CUSTOM_OVERWORLD_SKYBOX.comment=Enables custom skybox rendering for the overworld
+value.CUSTOM_OVERWORLD_SKYBOX.0=Off
+value.CUSTOM_OVERWORLD_SKYBOX.1=On
+
+option.OVERWORLD_SKYBOX_BRIGHTNESS=Overworld Skybox Brightness
+option.OVERWORLD_SKYBOX_BRIGHTNESS.comment=Tweaks the brightness of sky objects when custom skies are enabled for the overworld
+
+option.CUSTOM_OVERWORLD_SKY_BRIGHTNESS=Overworld Sky Brightness
+option.CUSTOM_OVERWORLD_SKY_BRIGHTNESS.comment=Tweaks the brightness of the base sky color when custom skies are enabled for the overworld (note: this does not affect the custom skybox, only the regular sky color!)
+
+option.CUSTOM_OVERWORLD_SKY_SATURATION=Overworld Sky Saturation
+option.CUSTOM_OVERWORLD_SKY_SATURATION.comment=Tweaks the saturation of the base sky color when custom skies are enabled for the overworld (note: this does not affect the custom skybox, only the regular sky color!)
+
+option.CUSTOM_NETHER_SKYBOX=Custom Nether Skybox
+option.CUSTOM_NETHER_SKYBOX.comment=Enables custom skybox rendering for the nether
+value.CUSTOM_NETHER_SKYBOX.0=Off
+value.CUSTOM_NETHER_SKYBOX.1=On
+
+option.NETHER_SKYBOX_BRIGHTNESS=Nether Skybox Brightness
+option.NETHER_SKYBOX_BRIGHTNESS.comment=Tweaks the brightness of sky objects when custom skies are enabled for the nether
+
+option.CUSTOM_END_SKYBOX=Custom End Skybox
+option.CUSTOM_END_SKYBOX.comment=Enables custom skybox rendering for the end
+value.CUSTOM_END_SKYBOX.0=Off
+value.CUSTOM_END_SKYBOX.1=On
+
+option.END_SKYBOX_BRIGHTNESS=End Skybox Brightness
+option.END_SKYBOX_BRIGHTNESS.comment=Tweaks the brightness of sky objects when custom skies are enabled for the end
 
 
 

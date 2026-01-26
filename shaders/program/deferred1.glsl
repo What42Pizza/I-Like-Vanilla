@@ -60,8 +60,14 @@ void main() {
 		skyColor = getSkyColor(normalize(viewPos), true);
 		#if defined OVERWORLD || defined CUSTOM_SKYBOX
 			vec3 skyObjects = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor) * max(1.0 - 6.0 * (1.0 - skyAmount), 0.0);
-			#ifdef CUSTOM_SKYBOX
-				skyObjects *= 1.25;
+			#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1
+				skyObjects *= OVERWORLD_SKYBOX_BRIGHTNESS;
+			#endif
+			#if defined NETHER && CUSTOM_NETHER_SKYBOX == 1
+				skyObjects *= NETHER_SKYBOX_BRIGHTNESS;
+			#endif
+			#if defined END && CUSTOM_END_SKYBOX == 1
+				skyObjects *= END_SKYBOX_BRIGHTNESS;
 			#endif
 			skyColor += skyObjects;
 		#endif
