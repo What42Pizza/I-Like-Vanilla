@@ -1808,9 +1808,17 @@ option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (hi
 value.BORDER_FOG_CURVE.-1=Use Style
 
 option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
-option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered
+option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered (should always be on when border fog is enabled)
 value.CYLINDRICAL_CLIPPING.0=Off
 value.CYLINDRICAL_CLIPPING.1=On
+
+option.FOG_BUG_RECREATION=Fog Bug Recreation
+option.FOG_BUG_RECREATION.comment=Partially recreates the vanilla bug of fully in-fog chunks not matching the sky color (requires Border Fog to be enabled and Cylindrical Clipping to be disabled)
+value.FOG_BUG_RECREATION.0=Off
+value.FOG_BUG_RECREATION.1=On
+
+option.FOG_BUG_AMOUNT=Fog Bug Amount
+option.FOG_BUG_AMOUNT.comment=How much brighter in-fog chunks are compared to the sky
 
 
 

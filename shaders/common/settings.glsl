@@ -126,14 +126,10 @@ const float shadowIntervalSize    = 2.0;
 	#defined SHARPENING_ENABLED 0
 #endif
 
-
-
 #if TEMPORAL_FILTER_ENABLED == 0
 	#undef TAA_ENABLED
 	#define TAA_ENABLED 0
 #endif
-
-
 
 #if PBR_TYPE == 1
 	#undef EMISSIVE_TEXTURES_ENABLED

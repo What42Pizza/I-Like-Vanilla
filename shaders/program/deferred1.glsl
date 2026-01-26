@@ -43,6 +43,9 @@ void main() {
 	#else
 		#if BORDER_FOG_ENABLED == 1
 			float skyAmount = getBorderFogAmount(playerPos);
+			#if FOG_BUG_RECREATION == 1
+				skyAmount *= 1.0 - 0.0001 * uint(depth < 1.0);
+			#endif
 		#else
 			float skyAmount = uint(depth == 1.0);
 		#endif
@@ -116,6 +119,9 @@ void main() {
 		#endif
 		
 		#if BORDER_FOG_ENABLED == 1
+			#if FOG_BUG_RECREATION == 1
+				skyColor += FOG_BUG_AMOUNT * 0.1;
+			#endif
 			color = mix(color, skyColor, skyAmount);
 		#endif
 		

@@ -49,9 +49,14 @@ void main() {
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
+		float dither = bayer64(gl_FragCoord.xy);
+		#if TEMPORAL_FILTER_ENABLED == 1
+			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		#endif
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+		fogDistance += dither * 4.0;
 		fogDistance *= invFar;
-		if (fogDistance >= 0.95) {discard; return;}
+		if (fogDistance >= BORDER_FOG_END - 0.01) {discard; return;}
 	#endif
 	
 	
