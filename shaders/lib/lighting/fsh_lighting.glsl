@@ -191,7 +191,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambientBrightness, float depth) {
 	
 	// sample shadow
-	#if SHADOWS_ENABLED == 1
+	#ifdef SHADOWS_ENABLED
 		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
 		#if PIXELATED_SHADOWS > 0
 			shadowBrightness = mix(shadowBrightness, ambientBrightness, uint(depthIsHand(depth)));
@@ -230,7 +230,7 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
-		#if SHADOWS_ENABLED == 0
+		#ifndef SHADOWS_ENABLED
 			lightDot = 0.5 + 0.5 * lightDot; // reminder: still kinda in -1 to 1 range, just want to make the lighting less intense when shadows are off
 		#endif
 	#else
@@ -255,12 +255,12 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	
 	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
 	// +-1.0x: -0.5
-	// +-1.0z: -0.3
-	// +1.0y: +0.35
-	// -1.0y: -0.7
+	// +-1.0z: -0.2
+	// +1.0y: +0.325
+	// -1.0y: -0.65
 	normalForSS.xz = abs(normalForSS.xz);
 	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
-	float sideShading = dot(normalForSS, vec3(-0.5, 0.7, -0.3));
+	float sideShading = dot(normalForSS, vec3(-0.5, 0.65, -0.2));
 	float brightForSS = max(blockBrightness, ambientBrightness);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.75;
 	ambientLight *= 1.0 + sideShading;

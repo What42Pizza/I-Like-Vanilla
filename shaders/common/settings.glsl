@@ -62,8 +62,6 @@ const float shadowIntervalSize    = 2.0;
 // post-processed definitions
 
 #ifdef NETHER
-	#undef SHADOWS_ENABLED
-	#define SHADOWS_ENABLED 0
 	#undef DEPTH_SUNRAYS_ENABLED
 	#define DEPTH_SUNRAYS_ENABLED 0
 	#undef VOL_SUNRAYS_ENABLED
@@ -100,7 +98,16 @@ const float shadowIntervalSize    = 2.0;
 	#define END_CLOUDS_ENABLED 0
 #endif
 
-#if SHADOWS_ENABLED == 0
+#if defined OVERWORLD && OVERWORLD_SHADOWS_ENABLED == 1
+	#define SHADOWS_ENABLED
+#endif
+#if defined END && END_SHADOWS_ENABLED == 1
+	#define SHADOWS_ENABLED
+#endif
+
+
+
+#ifndef SHADOWS_ENABLED
 	#undef VOL_SUNRAYS_ENABLED
 	#define VOL_SUNRAYS_ENABLED 0
 #endif
@@ -114,8 +121,6 @@ const float shadowIntervalSize    = 2.0;
 	#undef BORDER_FOG_ENABLED
 	#define BORDER_FOG_ENABLED 0
 #endif
-
-
 
 #if SSS_PIXELS != 0
 	#undef TAA_ENABLED

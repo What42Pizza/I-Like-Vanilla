@@ -96,7 +96,7 @@ void main() {
 	
 	// process gl_Color (foliage tint, vanilla ao)
 	vec4 glcolor4 = gl_Color;
-	#if SHADOWS_ENABLED == 1
+	#ifdef SHADOWS_ENABLED
 		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a * 2.0) * 0.3333; // kinda like squaring but not as intense
 	#else
 		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a) * 0.5; // kinda like squaring but not as intense

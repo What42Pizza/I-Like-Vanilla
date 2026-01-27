@@ -108,6 +108,12 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		
 		color.a *= 1.0 + fresnel * 0.125;
 		
+		// water needs to be more opaque in dark areas
+		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
+		alphaLift = sqrt(alphaLift);
+		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
+		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
+		
 	}
 	
 	

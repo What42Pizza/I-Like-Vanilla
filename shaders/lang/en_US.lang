@@ -86,9 +86,15 @@ option.POM_QUALITY.comment=Controls the quality of the POM (lower values may not
 
 screen.SHADOWS_MENU=Shadows
 
-option.SHADOWS_ENABLED=Shadows Enabled
-value.SHADOWS_ENABLED.0=Off
-value.SHADOWS_ENABLED.1=On
+option.OVERWORLD_SHADOWS_ENABLED=Shadows Enabled (Overworld)
+option.OVERWORLD_SHADOWS_ENABLED.comment=Enables or disables shadow casting when in the overworld
+value.OVERWORLD_SHADOWS_ENABLED.0=Off
+value.OVERWORLD_SHADOWS_ENABLED.1=On
+
+option.END_SHADOWS_ENABLED=Shadows Enabled (End)
+option.END_SHADOWS_ENABLED.comment=Enables or disables shadow casting when in the end
+value.END_SHADOWS_ENABLED.0=Off
+value.END_SHADOWS_ENABLED.1=On
 
 option.SHADOWS_ON_TRANSPARENTS=Shadows On Transparents
 option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, stained glass, etc

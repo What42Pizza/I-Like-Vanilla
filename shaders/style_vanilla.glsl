@@ -73,7 +73,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.9
+										#define SIDE_SHADING_DARK 0.7
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -305,11 +305,11 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.02
+										#define CAVE_AMBIENT_RED 0.95
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.8
+										#define CAVE_AMBIENT_GREEN 0.75
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
@@ -317,7 +317,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.24
+										#define CAVE_AMBIENT_BRIGHTNESS 0.22
 #endif
 
 
@@ -408,7 +408,7 @@
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
-										#define HANDHELD_LIGHT_BRIGHTNESS 0.94
+										#define HANDHELD_LIGHT_BRIGHTNESS 0.9
 #endif
 #if HANDHELD_LIGHT_REALISM == -1
 #undef HANDHELD_LIGHT_REALISM
@@ -587,19 +587,19 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.6
+										#define SUNRAYS_AMOUNT_DAY 0.7
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
-										#define SUNRAYS_AMOUNT_NIGHT 0.15
+										#define SUNRAYS_AMOUNT_NIGHT 0.2
 #endif
 #if SUNRAYS_INCREASE_SUNRISE == -1
 #undef SUNRAYS_INCREASE_SUNRISE
-										#define SUNRAYS_INCREASE_SUNRISE 0.35
+										#define SUNRAYS_INCREASE_SUNRISE 0.3
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 0.35
+										#define SUNRAYS_INCREASE_SUNSET 0.3
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -607,11 +607,11 @@
 #endif
 #if SUNRAYS_SUN_GREEN == -1
 #undef SUNRAYS_SUN_GREEN
-										#define SUNRAYS_SUN_GREEN 0.5
+										#define SUNRAYS_SUN_GREEN 0.6
 #endif
 #if SUNRAYS_SUN_BLUE == -1
 #undef SUNRAYS_SUN_BLUE
-										#define SUNRAYS_SUN_BLUE 0.0
+										#define SUNRAYS_SUN_BLUE 0.25
 #endif
 #if SUNRAYS_MOON_RED == -1
 #undef SUNRAYS_MOON_RED
@@ -1502,11 +1502,11 @@
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
-										#define UNDERGROUND_FOG_DENSITY 1.0
+										#define UNDERGROUND_FOG_DENSITY 0.8
 #endif
 #if UNDERGROUND_FOG_BRIGHTNESS == -1
 #undef UNDERGROUND_FOG_BRIGHTNESS
-										#define UNDERGROUND_FOG_BRIGHTNESS 0.2
+										#define UNDERGROUND_FOG_BRIGHTNESS 0.1
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY

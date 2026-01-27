@@ -1,6 +1,5 @@
 #if SHADOWS_ON_TRANSPARENTS == 0
 	#undef SHADOWS_ENABLED
-	#define SHADOWS_ENABLED 0
 #endif
 
 in_out vec2 texcoord;
@@ -175,7 +174,7 @@ void main() {
 		#endif
 		
 		// water needs to be more opaque in dark areas
-		float alphaLift = max(lmcoord.x, lmcoord.y);
+		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
 		alphaLift = sqrt(alphaLift);
 		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
 		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
@@ -323,7 +322,8 @@ void main() {
 	
 	
 	#if BORDER_FOG_ENABLED == 1
-		fogAmount = getBorderFogAmount(playerPos);
+		float _fogDistance;
+		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	

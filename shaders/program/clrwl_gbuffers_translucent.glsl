@@ -140,7 +140,8 @@ void main() {
 	
 	
 	#if BORDER_FOG_ENABLED == 1
-		fogAmount = getBorderFogAmount(playerPos);
+		float _fogDistance;
+		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	

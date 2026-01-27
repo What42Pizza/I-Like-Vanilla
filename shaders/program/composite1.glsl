@@ -74,7 +74,8 @@ void main() {
 	#elif defined VOXY
 		float fogAmount = uint(depth == 1.0 && depthVx == 1.0);
 	#else
-		float fogAmount = getBorderFogAmount(playerPos);
+		float _fogDistance;
+		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	#ifdef OVERWORLD
@@ -127,7 +128,9 @@ void main() {
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
 	if (isEyeInWater == 0) {
-		atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
+		#ifndef NETHER
+			atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
+		#endif
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength);
@@ -146,7 +149,7 @@ void main() {
 	fogDist = mix(fogDist, 0, fogAmount);
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	#ifndef NETHER
-		atmoFogAmount *= 1.0 - 0.25 * float(uint(isEyeInWater == 0));
+		atmoFogAmount *= 1.0 - 0.5 * uint(isEyeInWater == 0);
 	#endif
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
@@ -290,7 +293,7 @@ void main() {
 		#ifdef OVERWORLD
 			fogDarken = 1.5;
 		#elif defined NETHER
-			fogDarken = 0.5;
+			fogDarken = 0.75;
 		#else
 			fogDarken = 1.0;
 		#endif

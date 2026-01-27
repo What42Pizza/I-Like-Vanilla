@@ -91,7 +91,8 @@ void main() {
 		#endif
 		#if BORDER_FOG_ENABLED == 1
 			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-			float fogAmount = getBorderFogAmount(playerPos);
+			float _fogDistance;
+			float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 			reflectionStrength *= 1.0 - fogAmount;
 		#endif
 		if (reflectionStrength > 0.01) {

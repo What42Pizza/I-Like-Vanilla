@@ -1,4 +1,6 @@
-//in_out vec2 texcoord;
+#if CLOUD_COMPATIBILITY == 1
+	in_out vec2 texcoord;
+#endif
 in_out vec3 playerPos;
 
 
@@ -73,8 +75,9 @@ void main() {
 #endif
 
 void main() {
-	
-	//texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	#if CLOUD_COMPATIBILITY == 1
+		texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	#endif
 	
 	playerPos = (gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex).xyz;
 	
