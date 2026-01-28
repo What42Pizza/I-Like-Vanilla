@@ -329,6 +329,9 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	nightVisionMin *= 1.0 + 0.5 * sideShading;
 	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
 	
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		lighting = vec3(1.0);
+	#endif
 	color *= lighting;
 	
 }

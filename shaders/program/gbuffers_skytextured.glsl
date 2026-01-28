@@ -35,6 +35,9 @@ void main() {
 	
 	
 	/* DRAWBUFFERS:5 */
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		color = vec4(1.0, 1.0, 0.0, 1.0);
+	#endif
 	gl_FragData[0] = color;
 	
 }

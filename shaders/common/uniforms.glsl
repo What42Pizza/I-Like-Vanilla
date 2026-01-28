@@ -58,6 +58,7 @@ uniform float wetness;
 uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
+uniform float cloudHeight;
 
 uniform vec4 entityColor;
 uniform int entityId;

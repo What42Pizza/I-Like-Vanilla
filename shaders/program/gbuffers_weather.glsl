@@ -3,6 +3,7 @@ in_out vec2 lmcoord;
 in_out vec4 glcolor;
 flat in_out vec3 normal;
 in_out vec3 viewPos;
+in_out vec3 debug;
 
 flat in_out vec3 shadowcasterLight;
 
@@ -20,8 +21,15 @@ void main() {
 	
 	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
 	
+	#if TEMPORAL_FILTER_ENABLED == 1
+		color.a = mix(1.0, color.a, 16.0 / (16.0 + length(viewPos))) * uint(color.a > 0.0);
+	#endif
+	
 	
 	/* DRAWBUFFERS:0 */
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		color = vec4(0.0, 0.5, 1.0, 1.0);
+	#endif
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	
@@ -47,21 +55,28 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	normal = gl_NormalMatrix * gl_Normal;
-	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	shadowcasterLight = getShadowcasterLight();
 	
-	vec4 pos = gl_Vertex;
-	float horizontalAmount = pos.y * WEATHER_HORIZONTAL_AMOUNT * 0.5;
-	pos.x += horizontalAmount;
-	horizontalAmount *= 0.5;
-	pos.z += horizontalAmount;
+	vec3 playerPos = gl_Vertex.xyz;
 	
+	float horizontalAmount = playerPos.y * WEATHER_HORIZONTAL_AMOUNT * 0.5;
+	playerPos.xz *= 2.0;
+	playerPos.x += horizontalAmount;
+	horizontalAmount *= 0.5;
+	playerPos.z += horizontalAmount;
+	
+	float worldY = playerPos.y + cameraPosition.y;
+	bool isBottom = (gl_VertexID % 4) > 1;
+	float maxY = cloudHeight + 1.0 - uint(isBottom) * 10.0;
+	worldY = min(worldY, maxY);
+	playerPos.y = worldY - cameraPosition.y;
+	
+	viewPos = mat3(gbufferModelView) * playerPos;
 	#if ISOMETRIC_RENDERING_ENABLED == 1
-		vec3 playerPos = endMat(gbufferModelViewInverse * (gl_ModelViewMatrix * pos));
 		gl_Position = projectIsometric(playerPos);
 	#else
-		gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * pos;
+		gl_Position = gbufferProjection * vec4(viewPos, 1.0);
 	#endif
 	
 	#if TAA_ENABLED == 1

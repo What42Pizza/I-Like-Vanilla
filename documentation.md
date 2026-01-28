@@ -38,8 +38,7 @@ Because of the extensive and tedious usage of `#define`s, this repo contains a r
 
 Here's a list of the commands and why they exist:
 
-- **export:** This takes the shader code, license, changelog, and shader readme and packages it into (broken?) zip files. It also automatically creates the OptiFine version, where it splices 'style_vanilla.glsl' with 'setting_defines.glsl' (plus other fixes) to remove the styles feature, which causes the massive log file and horrendous loading time on OptiFine.
-- **build_world_files':** This generates all the files in the /shaders/world_ folders, using data that is hard-coded into src/main.rs. Even if you don't know Rust, you should still be able to edit the values if needed
+- **export:** This creates the zip files which are uploaded to modrinth and curseforge. It takes the shader code, license, changelog, and shader readme and packages it into zip files, and it automatically splices together code to make the style-specific versions.
 - **check_settings:** Detects all settings in all setting-related files to check for missing settings, broken settings, mis-ordered settings, etc
 - **count_sloc:** Counts the significant lines of code. May not be accurate, idk. It only counts .glsl files, since the .vsh and .fsh files don't contain anything meaningful.
 
@@ -51,7 +50,7 @@ As always, you can edit your repo's rust-utils to add more commands and/or tweak
 
 ## OptiFine Support:
 
-OptiFine is somewhat supported by this shader, but just barely. I'll sometimes make sure it works with OptiFine on 1.12.2, but Iris is what I use to develop the shader. The biggest problem with using this shader on (older versions of) OptiFine is that it causes a VERY long list of warnings to be logged, which makes it take a very long time to load / reload. The OptiFine versions that are published to CurseForge and Modrinth are generated using rust-utils, which can automatically remove the styles functionality (which is what causes the endless stream of logged warnings).
+OptiFine is now discontinued
 
 <br>
 <br>
@@ -107,7 +106,7 @@ You should be able to figure this out yourself, but I'll still give some quick o
 
 - **/program**: The main shader code
 - **/lib**: The more complex, standalone code
-- **/world\***: The files that are actually loaded by OptiFine / Iris. These files just use `#include` to copy-paste other files into them
+- **/world\***: The files that are actually loaded by Iris. These files just use `#include` to copy-paste other files into them
 - **/utils**: Functionality a bit too complex for common.glsl
 - **/lang**: The displayed names of settings and setting values
 - **setting_defines.glsl**: Holds the `#define` for every setting
@@ -194,6 +193,30 @@ This describes which /main_files-s handle different effects
 - - r: depth (16-bit)
 - **colortex8:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
 - **colortex9:  Debug Output** (normally not used)
+
+<br>
+
+## Color Coded Gbuffers:
+
+- ClrwlTranslucent:     0.0, 0.25, 1.0
+- Clrwl:                1.0, 0.75, 0.0
+- Armor Glint:          1.0, 0.0, 0.5
+- Basic:                0.0, 0.0, 0.0
+- BeaconBeam:           0.5, 1.0, 1.0
+- Block:                1.0, 0.5, 0.0
+- Clouds:               0.0, 1.0, 1.0
+- DamagedBlock:         0.5, 0.0, 0.0
+- Entities:             0.5, 1.0, 0.0
+- HandWater:            1.0, 0.5, 0.5
+- Hand:                 1.0, 0.5, 0.25
+- Line:                 0.25, 0.25, 0.25
+- ParticlesTranslucent: 0.5, 0.75, 0.75
+- SkyBasic:             1.0, 1.0, 0.5
+- SkyTextured:          1.0, 1.0, 0.0
+- Terrain:              0.75, 0.75, 0.75
+- Textured:             0.5, 0.5, 0.5
+- Water:                0.0, 0.0, 1.0
+- Weather:              0.0, 0.5, 1.0
 
 <br>
 <br>

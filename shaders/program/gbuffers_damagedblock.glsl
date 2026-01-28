@@ -6,7 +6,11 @@ in_out vec2 texcoord;
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
+	
 	/* DRAWBUFFERS:0 */
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		color = vec4(0.5, 0.0, 0.0, 1.0);
+	#endif
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 }

@@ -98,6 +98,9 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
 	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
 	
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		lighting = vec3(1.0);
+	#endif
 	color *= lighting;
 	
 }

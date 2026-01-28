@@ -810,7 +810,7 @@
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK 0.1
+										#define SATURATION_DARK 0.15
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT

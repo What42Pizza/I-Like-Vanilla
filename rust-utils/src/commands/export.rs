@@ -30,12 +30,12 @@ pub fn function(args: &[String]) -> Result<()> {
 	
 	let options: FileOptions<()> = FileOptions::default();
 	
-	println!("Exporting For Iris...");
-	export_shader(&project_path, &export_path, &version, false, "", options)?;
+	println!("Exporting all styles version...");
+	export_shader(&project_path, &export_path, &version, None, options)?;
 	println!("Done");
 	for style in STYLES {
-		println!("Exporting for OptiFine... ({style} Style)");
-		export_shader(&project_path, &export_path, &version, true, style, options)?;
+		println!("Exporting style ({style} Style)...");
+		export_shader(&project_path, &export_path, &version, Some(style), options)?;
 		println!("Done");
 	}
 	
@@ -46,10 +46,10 @@ pub fn function(args: &[String]) -> Result<()> {
 
 
 
-pub fn export_shader<T: FileOptionExtension + Clone>(project_path: &Path, export_path: &Path, version: &str, is_optifine: bool, style_name: &str, zip_options: FileOptions<T>) -> Result<()> {
+pub fn export_shader<T: FileOptionExtension + Clone>(project_path: &Path, export_path: &Path, version: &str, style_name: Option<&str>, zip_options: FileOptions<T>) -> Result<()> {
 	
-	let output_file_name = if is_optifine {
-		format!("I Like Vanilla {version} (Optifine, {style_name} Style).zip")
+	let output_file_name = if let Some(style_name) = style_name {
+		format!("I Like Vanilla {version} ({style_name} Style).zip")
 	} else {
 		format!("I Like Vanilla {version}.zip")
 	};
@@ -95,7 +95,7 @@ pub fn export_shader<T: FileOptionExtension + Clone>(project_path: &Path, export
 				output_zip.start_file(entry_zip_path, zip_options.clone())?;
 				let mut file_contents = fs::read(&entry_path)?;
 				
-				if is_optifine {
+				if let Some(style_name) = style_name {
 					if let Some(Some(file_name)) = entry_path.file_name().map(OsStr::to_str) {
 						match file_name {
 							"setting_defines.glsl" => {

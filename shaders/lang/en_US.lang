@@ -7,7 +7,7 @@ profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
 
 option.STYLE=Style
-option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (This does nothing on OptiFine versions)\n\nIf you want to see the default values for each style, you can download the corresponding OptiFine version.
+option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (If this version of the shader is already locked to a style, this setting does nothing)\n\n§bIf you want to see the default values for each style, you can download the corresponding style version.
 value.STYLE.0=Vanilla
 value.STYLE.1=Fantasy
 value.STYLE.2=Realistic
@@ -1959,6 +1959,11 @@ screen.PERFORMANCE_MENU.comment=The settings that have the biggest impact on per
 
 
 screen.DEBUG_MENU=Debug
+
+option.DO_COLOR_CODED_GBUFFERS=Color Coded Gbuffers
+option.DO_COLOR_CODED_GBUFFERS.comment=Sets the colors of everything according to which shader is rendering them, useful for debugging
+value.DO_COLOR_CODED_GBUFFERS.0=Off
+value.DO_COLOR_CODED_GBUFFERS.1=On
 
 option.HAND_DEPTH=Hand Depth
 option.HAND_DEPTH.comment=Depth test value for the hand and hand items\nIf this is too low, the hand won't be detected and will be shaded incorrectly\nIf this is too high, close-up objects will be treated as hand items and will be shaded incorrectly

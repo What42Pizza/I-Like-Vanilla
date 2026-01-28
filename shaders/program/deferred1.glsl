@@ -40,6 +40,7 @@ void main() {
 	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 	#ifdef DISTANT_HORIZONS
 		float skyAmount = uint(depth == 1.0 && dhDepth == 1.0);
+		float fogDistance = skyAmount;
 	#else
 		#if BORDER_FOG_ENABLED == 1
 			float fogDistance;
@@ -49,6 +50,7 @@ void main() {
 			#endif
 		#else
 			float skyAmount = uint(depth == 1.0);
+			float fogDistance = skyAmount;
 		#endif
 	#endif
 	

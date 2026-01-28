@@ -12,6 +12,9 @@ void main() {
 	color.a = 0.5 + 0.5 * color.a;
 	
 	/* DRAWBUFFERS:02 */
+	#if DO_COLOR_CODED_GBUFFERS == 1
+		color = vec4(0.25, 0.25, 0.25, 1.0);
+	#endif
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(

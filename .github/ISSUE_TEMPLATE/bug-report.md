@@ -8,8 +8,8 @@ assignees: ''
 ---
 
 Before you report:
-1: Make sure you're using the latest Shaderpack version and the latest Iris / OptiFine.
-2: Check if the problem has already been reported here or on Iris's / OptiFine's issue trackers
+1: Make sure you're using the latest versions of Iris and this shaderpack.
+2: Check if the problem has already been reported here or on Iris's issue trackers
 3: (Bonus) Imagine I respond with something like "Dude how on earth did you forget ___?", and think to yourself, what would that blank be?. This may not be applicable to your situation, but if it does help then you'll be glad you did this
 
 
@@ -21,6 +21,6 @@ What's wrong and what's supposed to happen instead? Screenshots can be pretty he
 When does this occur?
 
 **Context**
-Must-include information: F3 screenshot, Minecraft version, Iris / OptiFine version, OS, and basic computer specs
+Must-include information: F3 screenshot, Minecraft version, Iris version, OS, and basic computer specs
 
 Keep in mind that this is a template, and you can put extra information wherever you want

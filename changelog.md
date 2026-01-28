@@ -1,5 +1,7 @@
-- v1.2.3
+- v1.3.0
+  - Discontinued OptiFine support
   - Split setting 'AO Amount' into 'AO Amount (Lit)' and 'AO Amount (Shaded)'
+  - Split setting 'Shadows Enabled' into 'Shadows Enabled (Overworld)' and 'Shadows Enabled (End)'
   - Improved custom skybox support
 
 <br>
