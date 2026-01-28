@@ -2,8 +2,12 @@
   - Discontinued OptiFine support
   - Split setting 'AO Amount' into 'AO Amount (Lit)' and 'AO Amount (Shaded)'
   - Split setting 'Shadows Enabled' into 'Shadows Enabled (Overworld)' and 'Shadows Enabled (End)'
+  - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
+  - Added setting 'TAA Jitter Strength'
   - Improved custom skybox support
 
+<br>
+<br>
 <br>
 
 - v1.2.2 (26/01/23)

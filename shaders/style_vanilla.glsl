@@ -500,7 +500,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.25
+										#define BLOOM_LOW_CUTOFF 0.35
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -806,11 +806,11 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.01
+										#define SATURATION 0.0
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK 0.15
+										#define SATURATION_DARK 0.1
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
@@ -1122,6 +1122,14 @@
 #if NEARBY_CLOUD_DIST == -1
 #undef NEARBY_CLOUD_DIST
 										#define NEARBY_CLOUD_DIST 30
+#endif
+#if CLOUD_FOG_START == -1
+#undef CLOUD_FOG_START
+										#define CLOUD_FOG_START 0.3
+#endif
+#if CLOUD_FOG_CURVE == -1
+#undef CLOUD_FOG_CURVE
+										#define CLOUD_FOG_CURVE 2
 #endif
 #if CLOUD_WEATHER_DARKEN == -1
 #undef CLOUD_WEATHER_DARKEN

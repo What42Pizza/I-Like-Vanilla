@@ -22,7 +22,9 @@ const float HALF_PI = PI / 2.0;
 	uniform sampler2D depthtex0;
 	uniform sampler2D depthtex1;
 	uniform sampler2D depthtex2;
-	uniform sampler2D shadowtex0;
+	#ifdef SHADOWS_ENABLED
+		uniform sampler2D shadowtex0;
+	#endif
 	uniform sampler2D noisetex;
 	#ifdef DISTANT_HORIZONS
 		uniform sampler2D dhDepthTex0;

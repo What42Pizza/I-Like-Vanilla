@@ -26,6 +26,7 @@ vec3 getShadowPos(vec3 viewPos, vec3 normal) {
 
 
 
+#ifdef SHADOWS_ENABLED
 float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	if (lightDot < 0.0) return 0.0; // surface is facing away from shadowLightPosition
 	
@@ -185,6 +186,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 	#endif
 }
+#endif
 
 
 

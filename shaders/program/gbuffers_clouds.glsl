@@ -45,9 +45,19 @@ void main() {
 	
 	
 	// fog transparency
-	float dist = max(max(abs(playerPos.x), abs(playerPos.y)), abs(playerPos.z));
-	float mult = clamp(1.6 * (1.0 - dist / 1900.0), 0.0, 1.0);
-	color.a *= mult * mult;
+	float dist = length(playerPos.xz);
+	dist /= 128.0 * 16.0 * 1.25;
+	float fogAmount = percentThrough(dist, 1.0, CLOUD_FOG_START);
+	#if CLOUD_FOG_CURVE == 2
+		fogAmount = pow2(fogAmount);
+	#elif CLOUD_FOG_CURVE == 3
+		fogAmount = pow3(fogAmount);
+	#elif CLOUD_FOG_CURVE == 4
+		fogAmount = pow4(fogAmount);
+	#elif CLOUD_FOG_CURVE == 5
+		fogAmount = pow5(fogAmount);
+	#endif
+	color.a *= fogAmount;
 	
 	
 	/* DRAWBUFFERS:03 */

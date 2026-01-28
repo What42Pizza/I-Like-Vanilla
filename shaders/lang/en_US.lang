@@ -647,6 +647,9 @@ option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges sm
 value.TAA_ENABLED.0=Off
 value.TAA_ENABLED.1=On
 
+option.TAA_JITTER_AMOUNT=TAA Jitter Amount
+option.TAA_JITTER_AMOUNT.comment=Controls the strength of the taa jitter (note: this has no effect on the smoothing, go to the Temporal Filter menu for that)
+
 option.FXAA_ENABLED=FXAA
 option.FXAA_ENABLED.comment=A simple form of anti-aliasing (makes jagged edges smooth)
 value.FXAA_ENABLED.0=Off
@@ -1404,6 +1407,14 @@ value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
 option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
 option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby, only works for non-realistic clouds
 value.NEARBY_CLOUD_DIST.-1=Use Style
+
+option.CLOUD_FOG_START=Cloud Fog Start
+option.CLOUD_FOG_START.comment=Set the distance at which the clouds start fading into the distance
+value.CLOUD_FOG_START.-1=Use Style
+
+option.CLOUD_FOG_CURVE=Cloud Fog Curve
+option.CLOUD_FOG_CURVE.comment=Set how quickly the clouds fade out
+value.CLOUD_FOG_CURVE.-1=Use Style
 
 option.CLOUD_WEATHER_DARKEN=Cloud Weather Darken
 option.CLOUD_WEATHER_DARKEN.comment=How much to darken clouds when raining / snowing

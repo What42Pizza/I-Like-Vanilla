@@ -1123,6 +1123,14 @@
 #undef NEARBY_CLOUD_DIST
 										#define NEARBY_CLOUD_DIST 30
 #endif
+#if CLOUD_FOG_START == -1
+#undef CLOUD_FOG_START
+										#define CLOUD_FOG_START 0.3
+#endif
+#if CLOUD_FOG_CURVE == -1
+#undef CLOUD_FOG_CURVE
+										#define CLOUD_FOG_CURVE 2
+#endif
 #if CLOUD_WEATHER_DARKEN == -1
 #undef CLOUD_WEATHER_DARKEN
 										#define CLOUD_WEATHER_DARKEN 0.75
