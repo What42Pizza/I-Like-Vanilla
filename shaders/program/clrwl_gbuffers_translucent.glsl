@@ -60,8 +60,8 @@ void main() {
 	
 	
 	// main lighting
-	float shadowBrightness;
-	doFshLighting(color.rgb, shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
+	float _shadowBrightness;
+	doFshLighting(color.rgb, _shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
 	
 	
 	// fog

@@ -520,7 +520,7 @@ option.NETHER_BLOCKLIGHT_BLUE_MULT.comment=How much to increase / decrease the b
 value.NETHER_BLOCKLIGHT_BLUE_MULT.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT=Nether Blocklight Brightness Mult
-option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.comment=How much to increase / decrease the blue channel of blocklight when in the nether
+option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of blocklight when in the nether
 value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 
 

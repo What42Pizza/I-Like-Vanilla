@@ -5,6 +5,7 @@
   - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
   - Added setting 'TAA Jitter Strength'
   - Improved custom skybox support
+  - Now well over 400 settings
 
 <br>
 <br>

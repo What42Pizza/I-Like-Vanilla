@@ -36,7 +36,7 @@ Note: OptiFine support is now discontinued. It might still somewhat work on Opti
 - - Tonemapping and Color Correction
 - **Good Code Structuring**
 - **Vanilla-Like Graphics and Style**
-- **Thorough Settings Menu** (300+ settings)
+- **Thorough Settings Menu** (400+ settings)
 - Many, many more
 
 <br>
