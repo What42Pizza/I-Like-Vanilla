@@ -256,7 +256,7 @@ if (materialId < 1570u) { // 0..1570
 							SET_SPECULARNESS(0.5);
 						} else if (materialId == 1621u) {
 							// quartz, etc
-							SET_REFLECTIVENESS(0.6);
+							SET_REFLECTIVENESS(0.5);
 							SET_SPECULARNESS(0.5);
 							TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 						} else {
@@ -294,8 +294,8 @@ if (materialId < 1570u) { // 0..1570
 					} else { // 1632..1640
 						if (materialId == 1632u) {
 							// polished granite, etc
-							SET_REFLECTIVENESS(0.9);
-							SET_SPECULARNESS(0.35);
+							SET_REFLECTIVENESS(0.3);
+							SET_SPECULARNESS(0.6);
 						} else {
 							// prismarine bricks, etc
 							SET_REFLECTIVENESS(0.9);

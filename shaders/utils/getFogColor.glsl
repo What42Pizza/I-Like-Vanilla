@@ -55,7 +55,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		fogColorOut = mix(fogColorOut, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		
-		float rainAmount = rainStrength * 0.7;
+		float rainAmount = rainStrength * SKY_WEATHER_DESATURATION;
 		rainAmount *= 1.0 - (1.0 - dayPercent) * (1.0 - dayPercent);
 		fogColorOut = mix(fogColorOut, vec3(0.8, 0.9, 1.0) * SKY_WEATHER_BRIGHTNESS * dayPercent, rainAmount);
 		

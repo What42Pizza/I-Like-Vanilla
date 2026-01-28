@@ -1,9 +1,11 @@
 - v1.3.0
   - Discontinued OptiFine support
-  - Split setting 'AO Amount' into 'AO Amount (Lit)' and 'AO Amount (Shaded)'
-  - Split setting 'Shadows Enabled' into 'Shadows Enabled (Overworld)' and 'Shadows Enabled (End)'
-  - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
+  - Split setting 'AO Amount' into lit and shaded variants
+  - Split setting 'Shadows Enabled' into overworld and end variants
   - Added setting 'TAA Jitter Strength'
+  - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
+  - Split settings 'Border Fog Start' and 'Border Fog Curve' into overworld, nether, and end variants
+  - Added setting 'Sky Weather Desaturation'
   - Improved custom skybox support
   - Now well over 400 settings
 

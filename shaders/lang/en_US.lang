@@ -1387,8 +1387,12 @@ option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
 value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
 option.SKY_WEATHER_BRIGHTNESS=Sky Weather Brightness
-option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing
+option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing (this is also dependant on the Sky Weather Brightness setting)
 value.SKY_WEATHER_BRIGHTNESS.-1=Use Style
+
+option.SKY_WEATHER_DESATURATION=Sky Weather Desaturation
+option.SKY_WEATHER_DESATURATION.comment=How much to desaturate the sky when raining/snowing
+value.SKY_WEATHER_DESATURATION.-1=Use Style
 
 
 
@@ -1812,17 +1816,33 @@ option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of lo
 value.BORDER_FOG_ENABLED.0=Off
 value.BORDER_FOG_ENABLED.1=On
 
-option.BORDER_FOG_START=Border Fog Start
-option.BORDER_FOG_START.comment=Where fog starts during normal conditions
-value.BORDER_FOG_START.-1=Use Style
+option.BORDER_FOG_START_OVERWORLD=Border Fog Start (Overworld)
+option.BORDER_FOG_START_OVERWORLD.comment=Where fog starts during normal conditions in the overworld
+value.BORDER_FOG_START_OVERWORLD.-1=Use Style
+
+option.BORDER_FOG_START_NETHER=Border Fog Start (Nether)
+option.BORDER_FOG_START_NETHER.comment=Where fog starts during normal conditions in the nether
+value.BORDER_FOG_START_NETHER.-1=Use Style
+
+option.BORDER_FOG_START_END=Border Fog Start (End)
+option.BORDER_FOG_START_END.comment=Where fog starts during normal conditions in the end
+value.BORDER_FOG_START_END.-1=Use Style
 
 option.BORDER_FOG_END=Border Fog End
 option.BORDER_FOG_END.comment=Where fog ends during normal conditions
 value.BORDER_FOG_END.-1=Use Style
 
-option.BORDER_FOG_CURVE=Border Fog Curve
-option.BORDER_FOG_CURVE.comment= How quickly fog drops off from end to start (high values mean faster drop off)
-value.BORDER_FOG_CURVE.-1=Use Style
+option.BORDER_FOG_CURVE_OVERWORLD=Border Fog Curve (Overworld)
+option.BORDER_FOG_CURVE_OVERWORLD.comment= How quickly fog drops off from end to start in the overworld (high values mean faster drop off)
+value.BORDER_FOG_CURVE_OVERWORLD.-1=Use Style
+
+option.BORDER_FOG_CURVE_NETHER=Border Fog Curve (Nether)
+option.BORDER_FOG_CURVE_NETHER.comment= How quickly fog drops off from end to start in the nether (high values mean faster drop off)
+value.BORDER_FOG_CURVE_NETHER.-1=Use Style
+
+option.BORDER_FOG_CURVE_END=Border Fog Curve (End)
+option.BORDER_FOG_CURVE_END.comment= How quickly fog drops off from end to start in the end (high values mean faster drop off)
+value.BORDER_FOG_CURVE_END.-1=Use Style
 
 option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
 option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered (should always be on when border fog is enabled)

@@ -1106,6 +1106,10 @@
 #undef SKY_WEATHER_BRIGHTNESS
 										#define SKY_WEATHER_BRIGHTNESS 0.3
 #endif
+#if SKY_WEATHER_DESATURATION == -1
+#undef SKY_WEATHER_DESATURATION
+										#define SKY_WEATHER_DESATURATION 0.7
+#endif
 
 
 
@@ -1487,17 +1491,33 @@
 
 
 
-#if BORDER_FOG_START == -1
-#undef BORDER_FOG_START
-										#define BORDER_FOG_START 0.5
+#if BORDER_FOG_START_OVERWORLD == -1
+#undef BORDER_FOG_START_OVERWORLD
+										#define BORDER_FOG_START_OVERWORLD 0.5
+#endif
+#if BORDER_FOG_START_NETHER == -1
+#undef BORDER_FOG_START_NETHER
+										#define BORDER_FOG_START_NETHER 0.5
+#endif
+#if BORDER_FOG_START_END == -1
+#undef BORDER_FOG_START_END
+										#define BORDER_FOG_START_END 0.5
 #endif
 #if BORDER_FOG_END == -1
 #undef BORDER_FOG_END
 										#define BORDER_FOG_END 1.0
 #endif
-#if BORDER_FOG_CURVE == -1
-#undef BORDER_FOG_CURVE
-										#define BORDER_FOG_CURVE 1
+#if BORDER_FOG_CURVE_OVERWORLD == -1
+#undef BORDER_FOG_CURVE_OVERWORLD
+										#define BORDER_FOG_CURVE_OVERWORLD 1
+#endif
+#if BORDER_FOG_CURVE_NETHER == -1
+#undef BORDER_FOG_CURVE_NETHER
+										#define BORDER_FOG_CURVE_NETHER 1
+#endif
+#if BORDER_FOG_CURVE_END == -1
+#undef BORDER_FOG_CURVE_END
+										#define BORDER_FOG_CURVE_END 1
 #endif
 
 

@@ -608,8 +608,8 @@ brightness: 0.95
 
 block polished_granite, polished_granite_stairs, polished_granite_slab, polished_diorite, polished_diorite_stairs, polished_diorite_slab, polished_andesite, polished_andesite_stairs, polished_andesite_slab, polished_deepslate, polished_deepslate_stairs, polished_deepslate_slab:
 weight: 3
-reflectiveness: 0.9
-specularness: 0.35
+reflectiveness: 0.3
+specularness: 0.6
 
 block prismarine_bricks, prismarine_brick_stairs, prismarine_brick_slab:
 weight: 2
@@ -708,7 +708,7 @@ alias: BLOCK_NETHER_PORTAL
 
 block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_bricks, quartz_pillar:
 weight: 10
-reflectiveness: 0.6
+reflectiveness: 0.5
 specularness: 0.5
 brightness: 0.8
 
