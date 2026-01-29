@@ -65,7 +65,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
 		fogColorOut *= 3.0/2.0 * 1.2;
 		fogColorOut *= 0.3 + 0.7 * dayPercent;
 		
-		float worldAltitude = playerPos.y + eyeAltitude;
+		float worldAltitude = playerPos.y * UNDERGROUND_FOG_ALTITUDE_IMPACT + eyeAltitude;
 		float darkenAmount = percentThrough(worldAltitude, 64, 40);
 		darkenAmount = max(darkenAmount, 1.0 - skylightBrightness * skylightBrightness);
 		darkenAmount *= uint(isEyeInWater == 0);

@@ -6,6 +6,7 @@
   - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
   - Split settings 'Border Fog Start' and 'Border Fog Curve' into overworld, nether, and end variants
   - Added setting 'Sky Weather Desaturation'
+  - Added setting 'Underground Fog Altitude Impact'
   - Improved custom skybox support
   - Now well over 400 settings
 

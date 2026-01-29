@@ -1876,6 +1876,10 @@ option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
 option.UNDERGROUND_FOG_BRIGHTNESS.comment=Defines the brightness of underground fog (and the brightness of the sky while underground)
 value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
 
+option.UNDERGROUND_FOG_ALTITUDE_IMPACT=Underground Fog Altitude Impact
+option.UNDERGROUND_FOG_ALTITUDE_IMPACT.comment=The underground fog tries to only appear for blocks below y=64 (when this setting is at 1.0), but this changes that value depending on your altitude. Higher impact values will make the underground fog start lower when you're higher, and lower values will make it appear higher when you're higher
+value.UNDERGROUND_FOG_ALTITUDE_IMPACT.-1=Use Style
+
 option.WEATHER_FOG_DENSITY=Rain Fog Density
 option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
 value.WEATHER_FOG_DENSITY.-1=Use Style
