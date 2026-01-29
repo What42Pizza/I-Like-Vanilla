@@ -270,13 +270,16 @@ void main() {
 	#endif
 	normal = gl_NormalMatrix * gl_Normal;
 	
-	materialId = uint(max(int(mc_Entity.x) - 10000, 0));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
+	
 	#if PBR_TYPE == 0
 		#define GET_REFLECTIVENESS
 		#define GET_SPECULARNESS
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/common/blockDatas.glsl"
+	#include "/generated/blockDatas.glsl"
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);

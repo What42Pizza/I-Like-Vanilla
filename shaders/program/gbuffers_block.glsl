@@ -109,7 +109,9 @@ void main() {
 	
 	
 	// block id stuff
-	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
 	
 	
 	// process normals
@@ -133,7 +135,7 @@ void main() {
 		#define GET_SPECULARNESS
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/common/blockDatas.glsl"
+	#include "/generated/blockDatas.glsl"
 	
 	
 	#if ISOMETRIC_RENDERING_ENABLED == 1

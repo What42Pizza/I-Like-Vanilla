@@ -71,9 +71,9 @@ const BLOCK_PROPERTIES_START: &str = r#"
 # 
 # 1: There is a basic int value automatically given to each block group using the rust-utils rebuild_ids command which is used to traverse the tree structure in blockDatas.glsl
 # 2: Bits 14-15 are set according to the block group's shadow casting value and no bottom waving value (0 is always, 1 is never, 2 is foliage, 3 is foliage + no bottom waving)
-# 3: Bits 12-13 are set depending on the block group's waviness value (which is 0-3)
-# 4: Bit 11 is always set to ensure that no auto-generated ids can be mistaken for custom ids
-# 5: The other 10 bits are used for the generated int value
+# 4: Bit 13 is always set to ensure that no auto-generated ids can be mistaken for custom ids
+# 3: Bits 11-12 are set depending on the block group's waviness value (which is 0-3)
+# 5: The other 11 bits are used for the generated int value
 
 "#;
 
@@ -84,6 +84,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		println!("Note: 'rebuild_ids' does not currently take arguments");
 	}
 	
+	println!("Rebuilding ids...");
 	let shaders_path = get_shaders_path()?;
 	let input = fs::read_to_string(shaders_path.join("common/block datas input.txt"))?;
 	
@@ -147,8 +148,8 @@ pub fn function(args: &[String]) -> Result<()> {
 			"shadow casting" => {
 				curr_block_data.shadow_casting = match value {
 					"always" => 0,
-					"foliage" => 1,
-					"never" => 2,
+					"foliage" => 2,
+					"never" => 1,
 					_ => return Err(Error::msg(format!("Invalid value for 'shadow casting': '{value}'"))),
 				};
 			}
@@ -251,14 +252,48 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	
 	// step 4: give block datas int ids and extract voxel datas
-	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u32, voxel_datas: &mut Vec<VoxelData<'a>>) {
+	// (but first, add another leaf for default blocks)
+	let mut curr_leaf = &tree_nodes[0];
+	loop {
+		if let Some(branches) = &curr_leaf.branches {
+			curr_leaf = &branches.0;
+			continue;
+		}
+		#[allow(invalid_reference_casting)]
+		let curr_leaf = unsafe {&mut *(curr_leaf as *const _ as *mut TreeNode)};
+		let leaf = curr_leaf.leaf.take();
+		curr_leaf.branches = Some(Box::new((TreeNode {
+			weight: 0.0,
+			branches: None,
+			branch_split: 0,
+			leaf: Some(BlockData::new(vec!("none"))),
+		}, TreeNode {
+			weight: curr_leaf.weight,
+			branches: None,
+			branch_split: 0,
+			leaf,
+		})));
+		break;
+	}
+	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u16, voxel_datas: &mut Vec<VoxelData<'a>>) -> Result<()> {
 		if let Some(branches) = &mut node.branches {
-			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas);
+			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas)?;
 			node.branch_split = *curr_id;
-			postprocess_tree_data(&mut branches.1, curr_id, voxel_datas);
+			postprocess_tree_data(&mut branches.1, curr_id, voxel_datas)?;
 		}
 		if let Some(leaf) = &mut node.leaf {
-			leaf.int_id = *curr_id;
+			let casting_plus_bottom_value = match (leaf.shadow_casting, leaf.do_bottom_waving) {
+				(0, true) => 0,
+				(1, true) => 1,
+				(2, true) => 2,
+				(2, false) => 3,
+				_ => return Err(Error::msg(format!("Group id {:?} in input file 'block datas input.txt' is invalid: combination of 'shadow casting' value {} + 'do bottom waving' value {} is not allowed", leaf.block_ids, leaf.shadow_casting, leaf.do_bottom_waving))),
+			};
+			leaf.int_id =
+				*curr_id
+				| ((leaf.waviness as u16) << 11)
+				| 1 << 13
+				| ((casting_plus_bottom_value) << 14);
 			*curr_id += 1;
 			if leaf.voxelize {
 				voxel_datas.push(VoxelData {
@@ -270,10 +305,11 @@ pub fn function(args: &[String]) -> Result<()> {
 				});
 			}
 		}
+		Ok(())
 	}
-	let mut curr_id = 10000;
+	let mut curr_id = 0;
 	let mut voxel_datas = vec!();
-	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas);
+	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas)?;
 	
 	//static mut HIGHEST_DEPTH: usize = 0;
 	//fn print_tree<'a>(node: &TreeNode<'a>, depth: usize) {
@@ -376,6 +412,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			*block_datas_file += &format!("{indent}}}\n");
 		}
 		if let Some(leaf) = &node.leaf {
+			//*block_datas_file += &format!("{indent}// id: {}\n", leaf.int_id);
 			//*block_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_ids);
 			if let Some(reflectiveness) = &leaf.reflectiveness {
 				*block_datas_file += &format!("{indent}SET_REFLECTIVENESS({reflectiveness});\n");
@@ -438,7 +475,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			gen_block_properties_code(block_properties_file, &branches.1);
 		}
 		if let Some(leaf) = &node.leaf {
-			*block_properties_file += &format!("blocks.{} =", leaf.int_id);
+			*block_properties_file += &format!("block.{} =", leaf.int_id);
 			for id in &leaf.block_ids {
 				block_properties_file.push(' ');
 				*block_properties_file += id;
@@ -447,7 +484,9 @@ pub fn function(args: &[String]) -> Result<()> {
 		}
 	}
 	gen_block_properties_code(&mut block_properties_file, &tree_nodes[0]);
-	fs::write(shaders_path.join("generated/block.properties"), block_properties_file)?;
+	fs::write(shaders_path.join("block.properties"), block_properties_file)?;
+	
+	println!("Done");
 	
 	Ok(())
 }
@@ -467,7 +506,7 @@ fn get_block_ids_from_header(header_line: &str) -> Vec<&str> {
 #[derive(Debug)]
 struct BlockData<'a> {
 	block_ids: Vec<&'a str>,
-	int_id: u32,
+	int_id: u16,
 	weight: Option<f32>,
 	alias: Option<&'a str>,
 	custom_code: Option<String>,
@@ -496,7 +535,7 @@ impl<'a> BlockData<'a> {
 			custom_code: None,
 			shadow_casting: 0,
 			waviness: 0,
-			do_bottom_waving: false,
+			do_bottom_waving: true,
 			reflectiveness: None,
 			specularness: None,
 			glow_detect_min: None,
@@ -515,7 +554,7 @@ impl<'a> BlockData<'a> {
 struct TreeNode<'a> {
 	weight: f32,
 	branches: Option<Box<(TreeNode<'a>, TreeNode<'a>)>>,
-	branch_split: u32,
+	branch_split: u16,
 	leaf: Option<BlockData<'a>>,
 }
 

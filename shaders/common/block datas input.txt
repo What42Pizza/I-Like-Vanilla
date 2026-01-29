@@ -588,6 +588,8 @@ specularness: 0.5
 
 block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, tall_dry_grass, large_fern:half=lower:
 weight: 50
+shadow casting: foliage
+do bottom waving: false
 waviness: 3
 specularness: 0.5
 

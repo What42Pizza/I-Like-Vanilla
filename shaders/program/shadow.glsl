@@ -33,7 +33,9 @@ void main() {
 	
 	vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	
-	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		if (gl_VertexID % 4 == 0) {
@@ -42,18 +44,17 @@ void main() {
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
-		uint encodedData = materialId >> 10u;
-		if (
-			((encodedData & 1u) == 1u && encodedData > 1u)
-			|| (materialId >= 1900u && materialId < 2000u)
-		) {
-			gl_Position = vec4(1.0);
-			return;
-		}
+		bool excludeFromShadows = (encodedData & (1u << 14u)) == (1u << 14u); // test if 'shadow casting' value is 1 or 3
+	#else
+		bool excludeFromShadows = (encodedData & (3u << 14u)) == (1u << 14u); // test if 'shadow casting' value is 1
 	#endif
+	if (excludeFromShadows) {
+		gl_Position = vec4(1.0);
+		return;
+	}
 	
 	#if WAVING_ENABLED == 1
-		applyWaving(playerPos.xyz, materialId);
+		applyWaving(playerPos.xyz, encodedData);
 	#endif
 	
 	if (materialId == 1570u) {

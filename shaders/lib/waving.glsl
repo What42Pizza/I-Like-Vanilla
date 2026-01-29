@@ -29,9 +29,8 @@ vec3 getWavingAddition(vec3 playerPos) {
 
 
 
-void applyWaving(inout vec3 position, uint materialId) {
-	uint encodedData = materialId >> 10u;
-	uint wavingScaleIndex = (encodedData & 7u) >> 1u;
+void applyWaving(inout vec3 position, uint encodedData) {
+	uint wavingScaleIndex = (encodedData & (3u << 11u)) >> 11u;
 	float wavingScale;
 	if (wavingScaleIndex < 2u) {
 		if (wavingScaleIndex == 0u) return;
@@ -40,7 +39,7 @@ void applyWaving(inout vec3 position, uint materialId) {
 		if (wavingScaleIndex == 2u) wavingScale = WAVING_AMOUNT_2;
 		else wavingScale = WAVING_AMOUNT_3;
 	}
-	if (encodedData > 7u && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
+	if (((encodedData & (3u << 14u)) == (3u << 14u)) && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
 	#if !defined SHADER_SHADOW && !defined NETHER
 		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
 		if (wavingScale == 0.0) return;

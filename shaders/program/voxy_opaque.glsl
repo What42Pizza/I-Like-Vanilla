@@ -57,7 +57,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec3 glcolor = vec3(1.0);
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS
-	#include "/common/blockDatas.glsl"
+	#include "/generated/blockDatas.glsl"
 	
 	
 	// main color

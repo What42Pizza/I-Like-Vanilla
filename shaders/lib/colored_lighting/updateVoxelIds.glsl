@@ -20,7 +20,7 @@ void updateVoxelIds(vec3 playerPos, uint materialId) {
 	
 	uint voxelId;
 	#define GET_VOXEL_ID
-	#include "/common/blockDatas.glsl"
+	#include "/generated/blockDatas.glsl"
 	
 	if (voxelId == 0u) return;
 	

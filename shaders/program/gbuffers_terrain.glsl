@@ -262,8 +262,9 @@ void main() {
 	
 	
 	// block id stuff
-	uint materialId = uint(max(int(mc_Entity.x) - 10000, 0));
-	uint encodedData = materialId >> 10u;
+	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
 	
 	
 	// process normals
@@ -272,7 +273,7 @@ void main() {
 	
 	#if PBR_TYPE == 0
 		// foliage normals
-		if ((encodedData & 1u) == 1u && encodedData > 1u) {
+		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
 			normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
 		}
 	#endif
@@ -286,7 +287,7 @@ void main() {
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
 		rawTbn = tbn;
-		if ((encodedData & 1u) == 1u && encodedData > 1u) {
+		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
 			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 		}
 	#endif
@@ -301,7 +302,7 @@ void main() {
 	#if EMISSIVE_TEXTURES_ENABLED == 1
 		#define GET_GLOWING_COLOR
 	#endif
-	#include "/common/blockDatas.glsl"
+	#include "/generated/blockDatas.glsl"
 	
 	
 	// misc
@@ -349,7 +350,7 @@ void main() {
 	
 	
 	#if WAVING_ENABLED == 1
-		applyWaving(playerPos, materialId);
+		applyWaving(playerPos, encodedData);
 	#endif
 	
 	
