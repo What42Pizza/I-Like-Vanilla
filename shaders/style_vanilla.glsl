@@ -317,7 +317,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.22
+										#define CAVE_AMBIENT_BRIGHTNESS 0.24
 #endif
 
 
@@ -429,7 +429,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.05
+										#define TEXTURE_CONTRAST 0.1
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION

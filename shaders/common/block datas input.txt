@@ -18,7 +18,7 @@
 //    }
 //    ##
 //    // sets how this block casts shadows
-//    shadows casting: foliage
+//    shadow casting: foliage
 //    // set the waviness amount (0-3)
 //    waviness: 3
 //    // set whether the bottom half waves
@@ -54,6 +54,7 @@ custom code: ##
 	SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
 #endif
 ##
+// values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately used instead of stored
 specularness: 2.0
 voxelize: true
 translucency: vec3(0.5, 0.5, 1.0)
@@ -73,87 +74,120 @@ specularness: 1.0
 
 block tinted_glass:
 weight: 1
+reflectiveness: 0.4
 specularness: 0.5
 voxelize: true
 translucency: vec3(0.0, 0.0, 0.0)
 
 block white_stained_glass, white_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block light_gray_stained_glass, light_gray_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block gray_stained_glass, gray_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block black_stained_glass, black_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block brown_stained_glass, brown_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block red_stained_glass, red_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block orange_stained_glass, orange_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block yellow_stained_glass, yellow_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block lime_stained_glass, lime_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block green_stained_glass, green_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block cyan_stained_glass, cyan_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block light_blue_stained_glass, light_blue_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block blue_stained_glass, blue_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block purple_stained_glass, purple_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block magenta_stained_glass, magenta_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
 block pink_stained_glass, pink_stained_glass_pane:
 weight: 10
+reflectiveness: 0.4
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.9, 0.9, 0.9)
 
@@ -163,81 +197,97 @@ translucency: vec3(0.9, 0.9, 0.9)
 
 block white_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block light_gray_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block gray_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block black_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block brown_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block red_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block orange_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block yellow_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block lime_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block green_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block cyan_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block light_blue_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block blue_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block purple_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block magenta_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
 block pink_candle:lit=true:
 weight: 1
+specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
@@ -368,6 +418,18 @@ weight: 1
 voxelize: true
 emission: vec3(1.0, 0.9, 0.8)
 
+block fire:
+weight: 5
+shadow casting: never
+voxelize: true
+emission: vec3(1.0, 1.0, 0.9)
+
+block soul_fire:
+weight: 5
+shadow casting: never
+voxelize: true
+emission: vec3(0.0, 0.7, 0.9)
+
 
 
 // cave blocklights
@@ -390,21 +452,29 @@ emission: vec3(0.7, 0.5, 0.3)
 
 block small_amethyst_bud:
 weight: 1
+reflectiveness: 1.0
+specularness: 0.5
 voxelize: true
 emission: vec3(0.1, 0.1, 0.1)
 
 block medium_amethyst_bud:
 weight: 1
+reflectiveness: 1.0
+specularness: 0.5
 voxelize: true
 emission: vec3(0.2, 0.2, 0.2)
 
 block large_amethyst_bud:
 weight: 1
+reflectiveness: 1.0
+specularness: 0.5
 voxelize: true
 emission: vec3(0.3, 0.3, 0.3)
 
 block amethyst_cluster:
 weight: 1
+reflectiveness: 1.0
+specularness: 0.5
 voxelize: true
 emission: vec3(0.4, 0.4, 0.4)
 
@@ -477,7 +547,7 @@ glow amount: 1.0
 block end_rod, end_crystal:
 weight: 1
 voxelize: true
-emission: vec3(1.0, 1.0, 1.0)
+emission: vec3(0.9, 0.95, 1.0)
 
 
 
@@ -556,14 +626,14 @@ brightness: 0.8
 
 block sugar_cane:
 weight: 1
-brightness: 0.85
-waviness: 1
 shadow casting: foliage
+waviness: 1
+brightness: 0.85
 
 block bamboo, bamboo_sapling:
 weight: 10
-brightness: 1.25
 waviness: 1
+brightness: 1.15
 
 block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves:
 weight: 2000
@@ -586,7 +656,7 @@ weight: 1
 waviness: 3
 specularness: 0.5
 
-block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, tall_dry_grass, large_fern:half=lower:
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush:
 weight: 50
 shadow casting: foliage
 do bottom waving: false
@@ -598,10 +668,52 @@ weight: 10
 waviness: 3
 specularness: 0.5
 
+block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling:
+weight: 1
+shadow casting: foliage
+do bottom waving: false
+waviness: 2
+
+block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers:
+weight: 3
+shadow casting: foliage
+do bottom waving: false
+waviness: 2
+
+block potatoes, carrots, beetroots, wheat:
+weight: 5
+shadow casting: foliage
+do bottom waving: false
+waviness: 2
+
+block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper:
+weight: 1
+shadow casting: foliage
+waviness: 3
+specularness: 0.5
+
+block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower:
+weight: 1
+shadow casting: foliage
+do bottom waving: false
+waviness: 3
+specularness: 0.5
+
+block red_mushrooms, brown_mushrooms, crimson_fungus, warped_fungus, cobweb:
+weight: 2
+shadow casting: foliage
+
+block dead_bush, tall_dry_grass:
+weight: 1
+shadow casting: foliage
+do bottom waving: false
+waviness: 2
+brightness: 0.95
+
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
-brightness: 0.8
+brightness: 0.78
 
 block diorite, diorite_stairs, diorite_slab, diorite_wall:
 weight: 2
@@ -613,6 +725,11 @@ weight: 3
 reflectiveness: 0.3
 specularness: 0.6
 
+block pointed_dripstone:
+weight: 3
+shadow casting: foliage
+brightness: 0.9
+
 block prismarine_bricks, prismarine_brick_stairs, prismarine_brick_slab:
 weight: 2
 reflectiveness: 0.9
@@ -620,7 +737,7 @@ specularness: 0.4
 
 block netherrack:
 weight: 1000
-reflectiveness: 0.25
+reflectiveness: 0.2
 
 block warped_stem:
 weight: 3
@@ -661,7 +778,7 @@ specularness: 0.3
 block ice:
 weight: 200
 reflectiveness: 1.0
-specularness: 1.0
+specularness: 0.8
 voxelize: true
 translucency: vec3(0.5, 0.75, 1.0)
 
@@ -699,10 +816,12 @@ brightness: 0.92
 block nether_portal:
 weight: 1
 alias: BLOCK_NETHER_PORTAL
+shadow casting: never
 
 block end_portal, end_gateway:
 weight: 1
 alias: BLOCK_NETHER_PORTAL
+shadow casting: never
 
 
 
@@ -722,5 +841,5 @@ brightness: 0.8
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
 weight: 10
-specularness: 0.25
+specularness: 0.3
 brightness: 0.85

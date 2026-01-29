@@ -25,6 +25,17 @@ Shaders typically fall into one of two camps: completely overhauling minecraft's
 
 <br>
 
+## How to install:
+
+- 1: Install either [Fabulously Optimized](https://modrinth.com/modpack/fabulously-optimized) (full modpack, preferred) or [Iris](https://modrinth.com/mod/iris)/[Occulus](https://modrinth.com/mod/oculus) (single mod, can be added anywhere)
+- 2: Download the latest version of this shader
+  - (If you want to see the values used by each style, you can download a style-specific version)
+- 3: Launch minecraft, go to the shaderpacks menu, and click the 'Open Shader Packs Folder' button
+- 4: Put the downloaded shader zip into the shaderpacks folder
+- 5: Select the shader within the shaderpacks menu
+
+<br>
+
 ## Performance Comparisons:
 
 I'm not sure how trustworthy these results are, but it should give you a rough idea of the performance between shaders. Also, you can compare your graphics card to mine [here](https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840). Tests:

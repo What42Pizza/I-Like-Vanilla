@@ -9,7 +9,9 @@ layout(location = 1) out vec4 auxDataOut;
 void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// basics
-	uint materialId = max(parameters.customId - 10000u, 0u);
+	uint encodedData = uint(max(parameters.customId - (1u << 13u), 0) + (1u << 13u));
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
 	
 	vec3 screenPos = vec3(gl_FragCoord.xy * pixelSize, gl_FragCoord.z);
 	vec3 viewPos = screenToViewVx(screenPos);
@@ -43,9 +45,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	);
 	worldNormal *= float(parameters.face & 1) * 2.0 - 1.0;
 	
-	uint encodedData = materialId >> 10u;
 	// foliage normals
-	if ((encodedData & 1u) == 1u && encodedData > 1u) {
+	if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
 		worldNormal = vec3(0.0, 1.0, 0.0);
 	}
 	

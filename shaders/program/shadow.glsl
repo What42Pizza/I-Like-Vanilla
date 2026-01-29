@@ -44,7 +44,7 @@ void main() {
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
-		bool excludeFromShadows = (encodedData & (1u << 14u)) == (1u << 14u); // test if 'shadow casting' value is 1 or 3
+		bool excludeFromShadows = (encodedData & (1u << 15u)) == (1u << 15u); // test if 'shadow casting' value is 1 or 3
 	#else
 		bool excludeFromShadows = (encodedData & (3u << 14u)) == (1u << 14u); // test if 'shadow casting' value is 1
 	#endif
