@@ -63,6 +63,14 @@ const VOXEL_DATAS_START: &str = r#"
 
 
 
+const GENERATED_COMMON_START: &str = r#"
+// THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
+// To edit auto-generated data, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
+
+"#;
+
+
+
 const BLOCK_PROPERTIES_START: &str = r#"
 # THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
 # To edit the block-related datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
@@ -251,7 +259,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		tree_nodes.insert(new_index, new_node);
 	}
 	
-	// step 4: give block datas int ids and extract voxel datas
+	// step 4: give block datas int ids and extract voxel and alias datas
 	// (but first, add another leaf for default blocks)
 	let mut curr_leaf = &tree_nodes[0];
 	loop {
@@ -275,11 +283,11 @@ pub fn function(args: &[String]) -> Result<()> {
 		})));
 		break;
 	}
-	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u16, voxel_datas: &mut Vec<VoxelData<'a>>) -> Result<()> {
+	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u16, voxel_datas: &mut Vec<VoxelData<'a>>, aliases: &mut Vec<(&'a str, u16)>) -> Result<()> {
 		if let Some(branches) = &mut node.branches {
-			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas)?;
+			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas, aliases)?;
 			node.branch_split = *curr_id;
-			postprocess_tree_data(&mut branches.1, curr_id, voxel_datas)?;
+			postprocess_tree_data(&mut branches.1, curr_id, voxel_datas, aliases)?;
 		}
 		if let Some(leaf) = &mut node.leaf {
 			let casting_plus_bottom_value = match (leaf.shadow_casting, leaf.do_bottom_waving) {
@@ -295,6 +303,9 @@ pub fn function(args: &[String]) -> Result<()> {
 				| 1 << 13
 				| ((casting_plus_bottom_value) << 14);
 			*curr_id += 1;
+			if let Some(alias) = leaf.alias {
+				aliases.push((alias, leaf.int_id));
+			}
 			if leaf.voxelize {
 				voxel_datas.push(VoxelData {
 					weight: leaf.weight.unwrap(),
@@ -309,7 +320,8 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	let mut curr_id = 0;
 	let mut voxel_datas = vec!();
-	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas)?;
+	let mut aliases = vec!();
+	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas, &mut aliases)?;
 	
 	//static mut HIGHEST_DEPTH: usize = 0;
 	//fn print_tree<'a>(node: &TreeNode<'a>, depth: usize) {
@@ -485,6 +497,13 @@ pub fn function(args: &[String]) -> Result<()> {
 	}
 	gen_block_properties_code(&mut block_properties_file, &tree_nodes[0]);
 	fs::write(shaders_path.join("block.properties"), block_properties_file)?;
+	
+	// step 10: generate 'generated/common.glsl'
+	let mut generated_common_file = GENERATED_COMMON_START[1..].to_string();
+	for (alias, int_id) in aliases {
+		generated_common_file += &format!("const uint {alias} = {}u;\n", int_id & ((1 << 13) - 1));
+	}
+	fs::write(shaders_path.join("generated/common.glsl"), generated_common_file)?;
 	
 	println!("Done");
 	

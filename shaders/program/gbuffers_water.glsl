@@ -69,7 +69,7 @@ void main() {
 	#elif PBR_TYPE == 1
 		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
-		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), uint(materialId == 1570u));
+		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), uint(materialId == BLOCK_ID_WATER));
 		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
 		normal.xy -= 0.5;
@@ -80,7 +80,7 @@ void main() {
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	float reflectivenessMult = mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
-	reflectiveness *= 1.0 - uint(materialId != 1570u) * (1.0 - reflectivenessMult);
+	reflectiveness *= 1.0 - uint(materialId != BLOCK_ID_WATER) * (1.0 - reflectivenessMult);
 	
 	
 	// get texture color
@@ -108,7 +108,7 @@ void main() {
 	
 	
 	// water
-	if (materialId == 1570u) {
+	if (materialId == BLOCK_ID_WATER) {
 		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
@@ -184,7 +184,7 @@ void main() {
 	
 	// nether portal
 	#if FANCY_NETHER_PORTAL_ENABLED == 1
-		if (materialId == 1910u) {
+		if (materialId == BLOCK_ID_NETHER_PORTAL) {
 			vec3 tangentViewDir = normalize(transpose(tbn) * viewPos);
 			tangentViewDir.x *= -1.0;
 			
@@ -271,7 +271,7 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
-	uint materialId = encodedData;
+	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
 	#if PBR_TYPE == 0
@@ -295,7 +295,7 @@ void main() {
 	
 	
 	#if PHYSICALLY_WAVING_WATER_ENABLED == 1
-		if (materialId == 1570u) {
+		if (materialId == BLOCK_ID_WATER) {
 			float wavingAmount = mix(PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND, PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE, lmcoord.y);
 			#ifdef DISTANT_HORIZONS
 				float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));

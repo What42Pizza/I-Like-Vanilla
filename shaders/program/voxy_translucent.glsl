@@ -62,7 +62,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb *= glcolor;
 	
 	
-	if (materialId == 1570u) {
+	if (materialId == BLOCK_ID_WATER) {
 		
 		color.rgb *= 1.125;
 		

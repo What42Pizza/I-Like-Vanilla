@@ -57,7 +57,7 @@ void main() {
 		applyWaving(playerPos.xyz, encodedData);
 	#endif
 	
-	if (materialId == 1570u) {
+	if (materialId == BLOCK_ID_WATER) {
 		float horizontalDist = length(playerPos.xz);
 		#if PHYSICALLY_WAVING_WATER_ENABLED == 1
 			float wavingAmount = PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE;

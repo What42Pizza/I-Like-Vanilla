@@ -47,7 +47,7 @@
 // translucents:
 
 block water, flowing_water:
-alias: BLOCK_WATER
+alias: BLOCK_ID_WATER
 weight: 1000
 custom code: ##
 #if defined SHADER_GBUFFERS_WATER || defined SHADER_VOXY_TRANSLUCENT
@@ -815,12 +815,12 @@ brightness: 0.92
 
 block nether_portal:
 weight: 1
-alias: BLOCK_NETHER_PORTAL
+alias: BLOCK_ID_NETHER_PORTAL
 shadow casting: never
 
 block end_portal, end_gateway:
 weight: 1
-alias: BLOCK_NETHER_PORTAL
+alias: BLOCK_ID_END_PORTAL
 shadow casting: never
 
 
