@@ -40,7 +40,7 @@ flat in_out vec3 shadowcasterLight;
 	#include "/lib/simplex_noise.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFogAmount.glsl"
+	#include "/utils/borderFogAmount.glsl"
 #endif
 
 void main() {
@@ -255,7 +255,7 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFogAmount.glsl"
+	#include "/utils/borderFogAmount.glsl"
 #endif
 
 void main() {

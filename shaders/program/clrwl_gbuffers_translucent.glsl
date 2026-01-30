@@ -99,7 +99,7 @@ void main() {
 	#include "/lib/taa_jitter.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFogAmount.glsl"
+	#include "/utils/borderFogAmount.glsl"
 #endif
 
 void main() {

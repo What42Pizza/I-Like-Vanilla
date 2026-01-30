@@ -94,7 +94,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	
 	println!("Rebuilding ids...");
 	let shaders_path = get_shaders_path()?;
-	let input = fs::read_to_string(shaders_path.join("common/block datas input.txt"))?;
+	let input = fs::read_to_string(shaders_path.join("block datas input.txt"))?;
 	
 	// step 1: sanitize input
 	let lines =

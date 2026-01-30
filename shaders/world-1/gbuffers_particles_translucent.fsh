@@ -4,9 +4,9 @@
 #define NETHER
 #define FSH
 
-#include "/common/settings.glsl"
-#include "/common/uniforms.glsl"
+#include "/basics/settings.glsl"
+#include "/basics/uniforms.glsl"
 #include "/generated/common.glsl"
-#include "/common/common.glsl"
+#include "/basics/common.glsl"
 
 #include "/program/gbuffers_particles_translucent.glsl"

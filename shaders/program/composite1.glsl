@@ -17,7 +17,7 @@ flat in_out float extraFogDist;
 #ifdef FSH
 
 #include "/utils/screen_to_view.glsl"
-#include "/lib/borderFogAmount.glsl"
+#include "/utils/borderFogAmount.glsl"
 #include "/utils/reprojection.glsl"
 
 #include "/utils/getFogColor.glsl"

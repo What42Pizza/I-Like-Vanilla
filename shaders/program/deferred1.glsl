@@ -22,7 +22,7 @@ flat in_out vec3 shadowcasterLight;
 	#include "/lib/voxy_ssao.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
-	#include "/lib/borderFogAmount.glsl"
+	#include "/utils/borderFogAmount.glsl"
 #endif
 
 
