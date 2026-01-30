@@ -72,6 +72,7 @@ void main() {
 			playerPos.y -= 0.125 / (1.0 + horizontalDist);
 		#endif
 		playerPos.y += 0.1 / (1.0 + horizontalDist) * sign(isEyeInWater - 0.5);
+		playerPos += mat3(gbufferModelViewInverse) * shadowLightPosition * length(playerPos) / 10000.0;
 		#if PIXELATED_SHADOWS == 0
 			playerPos.y += 0.0078125 * horizontalDist * uint(isEyeInWater == 1); // offset shadow bias
 		#else

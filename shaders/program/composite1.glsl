@@ -60,19 +60,12 @@ void main() {
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
-	#ifdef VOXY
-		float depthVx;
-		if (isCloud) depthVx = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
-		else depthVx = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
-		vec3 viewPosVx = screenToViewVx(vec3(texcoord, depthVx));
-		if (viewPosVx.z > viewPos.z) viewPos = viewPosVx;
-	#endif
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = uint(depth == 1.0 && depthDh == 1.0);
 	#elif defined VOXY
-		float fogAmount = uint(depth == 1.0 && depthVx == 1.0);
+		float fogAmount = uint(depth == 1.0);
 	#else
 		float _fogDistance;
 		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);

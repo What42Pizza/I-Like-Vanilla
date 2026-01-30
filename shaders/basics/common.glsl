@@ -115,9 +115,9 @@ float getLum(vec3 color) {
 }
 
 float getSaturation(vec3 v) {
-	float maxv = max(max(v.r, v.g), v.b);
-	float minv = min(min(v.r, v.g), v.b);
-	return (maxv == 0.0) ? 0.0 : (maxv - minv) / maxv;
+	float maxV = max(max(v.r, v.g), v.b);
+	float minV = min(min(v.r, v.g), v.b);
+	return (maxV == 0.0) ? 0.0 : (maxV - minV) / maxV;
 }
 
 // taken from: https://stackoverflow.com/a/17897228, which is licensed under WTFPL (public domain)
