@@ -85,11 +85,11 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
 	#endif
 	
 	if (isEyeInWater == 1) {
-		fogColorOut = WATER_FOG_COLOR;
+		fogColorOut = WATER_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0));
 	} else if (isEyeInWater == 2) {
-		fogColorOut = LAVA_FOG_COLOR;
+		fogColorOut = LAVA_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0));
 	} else if (isEyeInWater == 3) {
-		fogColorOut = POWDERED_SNOW_FOG_COLOR;
+		fogColorOut = POWDERED_SNOW_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0));
 	}
 	
 	return fogColorOut;

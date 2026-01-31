@@ -643,7 +643,7 @@ specularness: 0.8
 block vine:
 weight: 2
 waviness: 3
-brightness: 1.25
+brightness: 1.2
 specularness: 0.75
 
 block weeping_vines, twisted_vines, weeping_vines_plant, twisted_vines_plant:
@@ -665,6 +665,7 @@ specularness: 0.5
 
 block tall_grass:half=upper, large_fern:half=upper:
 weight: 10
+shadow casting: foliage
 waviness: 3
 specularness: 0.5
 
@@ -699,9 +700,14 @@ do bottom waving: false
 waviness: 3
 specularness: 0.5
 
-block red_mushrooms, brown_mushrooms, crimson_fungus, warped_fungus, cobweb:
+block red_mushrooms, brown_mushrooms, crimson_fungus, warped_fungus:
 weight: 2
 shadow casting: foliage
+
+block cobweb:
+weight: 2
+shadow casting: foliage
+brightness: 0.8
 
 block dead_bush, tall_dry_grass:
 weight: 1

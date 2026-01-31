@@ -295,7 +295,7 @@ void main() {
 	} else if (isEyeInWater == 1) {
 		fogDensity = WATER_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;
-		extraFogDist = 20.0;
+		extraFogDist = 24.0;
 	} else if (isEyeInWater == 2) {
 		fogDensity = LAVA_FOG_DENSITY * 0.25;
 		fogDarken = 1.0;

@@ -104,11 +104,11 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#endif
 	
 	if (isEyeInWater == 1) {
-		skyColor = mix(skyColor, WATER_FOG_COLOR, 0.75);
+		skyColor = mix(skyColor, WATER_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
 	} else if (isEyeInWater == 2) {
-		skyColor = mix(skyColor, LAVA_FOG_COLOR, 0.75);
+		skyColor = mix(skyColor, LAVA_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
 	} else if (isEyeInWater == 3) {
-		skyColor = mix(skyColor, POWDERED_SNOW_FOG_COLOR, 0.75);
+		skyColor = mix(skyColor, POWDERED_SNOW_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
 	}
 	
 	return skyColor;

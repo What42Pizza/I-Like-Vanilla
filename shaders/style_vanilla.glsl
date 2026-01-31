@@ -206,7 +206,7 @@
 #endif
 #if SKYLIGHT_SUNRISE_BRIGHTNESS == -1
 #undef SKYLIGHT_SUNRISE_BRIGHTNESS
-										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.2
+										#define SKYLIGHT_SUNRISE_BRIGHTNESS 1.15
 #endif
 #if AMBIENT_SUNRISE_RED == -1
 #undef AMBIENT_SUNRISE_RED
@@ -222,7 +222,7 @@
 #endif
 #if AMBIENT_SUNRISE_BRIGHTNESS == -1
 #undef AMBIENT_SUNRISE_BRIGHTNESS
-										#define AMBIENT_SUNRISE_BRIGHTNESS 0.85
+										#define AMBIENT_SUNRISE_BRIGHTNESS 0.8
 #endif
 
 
@@ -231,7 +231,7 @@
 
 #if SKYLIGHT_SUNSET_RED == -1
 #undef SKYLIGHT_SUNSET_RED
-										#define SKYLIGHT_SUNSET_RED 1.2
+										#define SKYLIGHT_SUNSET_RED 1.25
 #endif
 #if SKYLIGHT_SUNSET_GREEN == -1
 #undef SKYLIGHT_SUNSET_GREEN
@@ -247,7 +247,7 @@
 #endif
 #if AMBIENT_SUNSET_RED == -1
 #undef AMBIENT_SUNSET_RED
-										#define AMBIENT_SUNSET_RED 1.05
+										#define AMBIENT_SUNSET_RED 1.04
 #endif
 #if AMBIENT_SUNSET_GREEN == -1
 #undef AMBIENT_SUNSET_GREEN
@@ -259,7 +259,7 @@
 #endif
 #if AMBIENT_SUNSET_BRIGHTNESS == -1
 #undef AMBIENT_SUNSET_BRIGHTNESS
-										#define AMBIENT_SUNSET_BRIGHTNESS 0.85
+										#define AMBIENT_SUNSET_BRIGHTNESS 0.8
 #endif
 
 
@@ -276,7 +276,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.65
+										#define BLOCK_BLUE 0.6
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -802,7 +802,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.13
+										#define VIBRANCE 0.1
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -818,7 +818,7 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.25
+										#define SURFACE_CONTRAST 0.24
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
@@ -1414,7 +1414,7 @@
 #endif
 #if SKY_HORIZON_SUNRISE_GREEN == -1
 #undef SKY_HORIZON_SUNRISE_GREEN
-										#define SKY_HORIZON_SUNRISE_GREEN 0.55
+										#define SKY_HORIZON_SUNRISE_GREEN 0.5
 #endif
 #if SKY_HORIZON_SUNRISE_BLUE == -1
 #undef SKY_HORIZON_SUNRISE_BLUE
@@ -1584,7 +1584,7 @@
 #endif
 #if WATER_FOG_GREEN == -1
 #undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN -0.05
+										#define WATER_FOG_GREEN 0.05
 #endif
 #if WATER_FOG_BLUE == -1
 #undef WATER_FOG_BLUE
@@ -1592,7 +1592,7 @@
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.07
+										#define WATER_FOG_DENSITY 0.05
 #endif
 #if LAVA_FOG_RED == -1
 #undef LAVA_FOG_RED
@@ -1600,11 +1600,11 @@
 #endif
 #if LAVA_FOG_GREEN == -1
 #undef LAVA_FOG_GREEN
-										#define LAVA_FOG_GREEN 0.4
+										#define LAVA_FOG_GREEN 0.25
 #endif
 #if LAVA_FOG_BLUE == -1
 #undef LAVA_FOG_BLUE
-										#define LAVA_FOG_BLUE 0.15
+										#define LAVA_FOG_BLUE 0.05
 #endif
 #if LAVA_FOG_DENSITY == -1
 #undef LAVA_FOG_DENSITY
