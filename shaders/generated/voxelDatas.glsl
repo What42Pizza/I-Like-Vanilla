@@ -24,9 +24,9 @@ if (voxelId < 71u) {
 							SET_EMISSION(vec3(0.3, 0.3, 0.3));
 						} else {
 							if (voxelId < 4u) {
-								SET_EMISSION(vec3(6.0 / 15.0));
+								SET_EMISSION(vec3(0.25, 0.25, 0.25));
 							} else {
-								SET_EMISSION(vec3(7.0 / 15.0));
+								SET_EMISSION(vec3(0.25, 0.25, 0.25));
 							}
 						}
 					} else {
@@ -48,29 +48,29 @@ if (voxelId < 71u) {
 					if (voxelId < 13u) {
 						if (voxelId < 11u) {
 							if (voxelId < 10u) {
-								SET_EMISSION(vec3(10.0 / 15.0));
+								SET_EMISSION(vec3(1.0, 1.0, 0.9));
 							} else {
-								SET_EMISSION(vec3(11.0 / 15.0));
+								SET_EMISSION(vec3(1.0, 0.9, 0.8));
 							}
 						} else {
 							if (voxelId < 12u) {
-								SET_EMISSION(vec3(4.0 / 15.0));
+								SET_EMISSION(vec3(0.25, 0.25, 0.25));
 							} else {
-								SET_EMISSION(vec3(5.0 / 15.0));
+								SET_EMISSION(vec3(0.25, 0.25, 0.25));
 							}
 						}
 					} else {
 						if (voxelId < 15u) {
 							if (voxelId < 14u) {
-								SET_EMISSION(vec3(0.25, 0.25, 0.25));
+								SET_EMISSION(vec3(0.3, 0.3, 0.3));
 							} else {
-								SET_EMISSION(vec3(0.25, 0.25, 0.25));
+								SET_EMISSION(vec3(0.4, 0.4, 0.4));
 							}
 						} else {
 							if (voxelId < 16u) {
-								SET_EMISSION(vec3(8.0 / 15.0));
+								SET_EMISSION(vec3(0.9, 1.0, 1.0));
 							} else {
-								SET_EMISSION(vec3(9.0 / 15.0));
+								SET_EMISSION(vec3(1.0, 1.0, 1.0));
 							}
 						}
 					}
@@ -86,7 +86,7 @@ if (voxelId < 71u) {
 							}
 						} else {
 							if (voxelId < 20u) {
-								SET_EMISSION(vec3(0.1, 0.0, 0.0));
+								SET_EMISSION(vec3(5.0 / 15.0));
 							} else {
 								SET_EMISSION(vec3(0.25, 0.25, 0.25));
 							}
@@ -110,29 +110,29 @@ if (voxelId < 71u) {
 					if (voxelId < 29u) {
 						if (voxelId < 27u) {
 							if (voxelId < 26u) {
-								SET_EMISSION(vec3(1.0, 1.0, 0.9));
+								SET_EMISSION(vec3(3.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(1.0, 0.9, 0.8));
+								SET_EMISSION(vec3(0.0 / 15.0));
 							}
 						} else {
 							if (voxelId < 28u) {
-								SET_EMISSION(vec3(12.0 / 15.0));
+								SET_EMISSION(vec3(0.9, 0.95, 1.0));
 							} else {
-								SET_EMISSION(vec3(13.0 / 15.0));
+								SET_EMISSION(vec3(2.0 / 15.0));
 							}
 						}
 					} else {
 						if (voxelId < 31u) {
 							if (voxelId < 30u) {
-								SET_EMISSION(vec3(0.4, 0.5, 0.5));
+								SET_EMISSION(vec3(7.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(0.9, 0.95, 1.0));
+								SET_EMISSION(vec3(4.0 / 15.0));
 							}
 						} else {
 							if (voxelId < 32u) {
-								SET_EMISSION(vec3(0.9, 1.0, 1.0));
+								SET_EMISSION(vec3(1.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(1.0, 1.0, 1.0));
+								SET_EMISSION(vec3(6.0 / 15.0));
 							}
 						}
 					}
@@ -144,29 +144,29 @@ if (voxelId < 71u) {
 					if (voxelId < 37u) {
 						if (voxelId < 35u) {
 							if (voxelId < 34u) {
-								SET_EMISSION(vec3(1.0, 1.0, 1.0));
+								SET_EMISSION(vec3(0.1, 0.0, 0.0));
 							} else {
 								SET_EMISSION(vec3(1.0, 1.0, 1.0));
 							}
 						} else {
 							if (voxelId < 36u) {
-								SET_EMISSION(vec3(0.1, 0.1, 0.1));
+								SET_EMISSION(vec3(12.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(0.2, 0.2, 0.2));
+								SET_EMISSION(vec3(13.0 / 15.0));
 							}
 						}
 					} else {
 						if (voxelId < 39u) {
 							if (voxelId < 38u) {
-								SET_EMISSION(vec3(14.0 / 15.0));
+								SET_EMISSION(vec3(1.0, 1.0, 1.0));
 							} else {
-								SET_EMISSION(vec3(15.0 / 15.0));
+								SET_EMISSION(vec3(0.4, 0.5, 0.5));
 							}
 						} else {
 							if (voxelId < 40u) {
-								SET_EMISSION(vec3(0.2, 0.4, 0.3));
-							} else {
 								SET_EMISSION(vec3(1.0, 1.0, 1.0));
+							} else {
+								SET_EMISSION(vec3(0.2, 0.4, 0.3));
 							}
 						}
 					}
@@ -174,29 +174,29 @@ if (voxelId < 71u) {
 					if (voxelId < 45u) {
 						if (voxelId < 43u) {
 							if (voxelId < 42u) {
-								SET_EMISSION(vec3(2.0 / 15.0));
+								SET_EMISSION(vec3(10.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(3.0 / 15.0));
+								SET_EMISSION(vec3(11.0 / 15.0));
 							}
 						} else {
 							if (voxelId < 44u) {
-								SET_EMISSION(vec3(0.25, 0.25, 0.25));
+								SET_EMISSION(vec3(0.1, 0.1, 0.1));
 							} else {
-								SET_EMISSION(vec3(0.25, 0.25, 0.25));
+								SET_EMISSION(vec3(0.2, 0.2, 0.2));
 							}
 						}
 					} else {
 						if (voxelId < 47u) {
 							if (voxelId < 46u) {
-								SET_EMISSION(vec3(0.3, 0.3, 0.3));
+								SET_EMISSION(vec3(14.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(0.4, 0.4, 0.4));
+								SET_EMISSION(vec3(15.0 / 15.0));
 							}
 						} else {
 							if (voxelId < 48u) {
-								SET_EMISSION(vec3(0.0 / 15.0));
+								SET_EMISSION(vec3(8.0 / 15.0));
 							} else {
-								SET_EMISSION(vec3(1.0 / 15.0));
+								SET_EMISSION(vec3(9.0 / 15.0));
 							}
 						}
 					}
@@ -236,9 +236,9 @@ if (voxelId < 71u) {
 					}
 				} else {
 					if (voxelId < 58u) {
-						SET_EMISSION(vec3(1.0, 0.9, 0.5));
-					} else {
 						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
+					} else {
+						SET_EMISSION(vec3(1.0, 1.0, 0.9));
 					}
 				}
 			} else {
@@ -296,26 +296,26 @@ if (voxelId < 71u) {
 			if (voxelId < 79u) {
 				if (voxelId < 75u) {
 					if (voxelId < 73u) {
-						SET_EMISSION(vec3(1.0, 1.0, 0.9));
+						SET_EMISSION(vec3(1.0, 0.9, 0.5));
 					} else {
 						if (voxelId < 74u) {
 							SET_EMISSION(vec3(0.0, 0.15, 0.75));
 						} else {
-							SET_EMISSION(vec3(0.0, 0.5, 0.0));
+							SET_EMISSION(vec3(0.7, 0.5, 0.3));
 						}
 					}
 				} else {
 					if (voxelId < 77u) {
 						if (voxelId < 76u) {
-							SET_EMISSION(vec3(0.3, 0.5, 0.4));
+							SET_EMISSION(vec3(0.0, 0.7, 0.9));
 						} else {
-							SET_EMISSION(vec3(0.7, 0.5, 0.3));
+							SET_EMISSION(vec3(0.3, 0.5, 0.4));
 						}
 					} else {
 						if (voxelId < 78u) {
-							SET_EMISSION(vec3(1.0, 1.0, 0.9));
+							SET_EMISSION(vec3(0.0, 0.5, 0.0));
 						} else {
-							SET_EMISSION(vec3(0.0, 0.7, 0.9));
+							SET_EMISSION(vec3(1.0, 1.0, 0.9));
 						}
 					}
 				}

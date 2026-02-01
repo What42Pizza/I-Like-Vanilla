@@ -517,11 +517,11 @@
 #endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.7
+										#define AO_AMOUNT_LIT 0.65
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.7
+										#define AO_AMOUNT_UNLIT 0.65
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

@@ -646,14 +646,21 @@ waviness: 3
 brightness: 1.2
 specularness: 0.75
 
-block weeping_vines, twisted_vines, weeping_vines_plant, twisted_vines_plant:
-weight: 2
-waviness: 3
-specularness: 0.75
-
 block pale_hanging_moss:
 weight: 1
 waviness: 3
+specularness: 0.5
+
+block weeping_vines, twisting_vines, weeping_vines_plant, twisting_vines_plant:
+weight: 2
+waviness: 3
+shadow casting: foliage
+specularness: 0.75
+
+block tube_coral, brain_coral, bubble_coral, fire_coral, horn_coral, tube_coral_fan, brain_coral_fan, bubble_coral_fan, fire_coral_fan, horn_coral_fan, dead_tube_coral, dead_brain_coral, dead_bubble_coral, dead_fire_coral, dead_horn_coral, dead_tube_coral_fan, dead_brain_coral_fan, dead_bubble_coral_fan, dead_fire_coral_fan, dead_horn_coral_fan:
+weight: 5
+shadow casting: foliage
+waviness: 2
 specularness: 0.5
 
 block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush:

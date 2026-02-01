@@ -71,7 +71,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		vec3 playerDir = mat3(gbufferModelViewInverse) * viewDir;
 		playerDir /= max(length(playerDir.xz), abs(playerDir.y * UNDERGROUND_FOG_ALTITUDE_IMPACT));
 		float edgeAltitude = playerDir.y * far * 0.95 + eyeAltitude * 1.0;
-		float darkenAmount = percentThrough(edgeAltitude, 64, 64 - far * 0.25);
+		float darkenAmount = percentThrough(edgeAltitude, SEA_LEVEL, SEA_LEVEL - far * 0.25);
 		darkenAmount *= uint(isEyeInWater == 0);
 		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenAmount);
 		

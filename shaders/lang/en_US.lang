@@ -1812,6 +1812,9 @@ option.UNDERGROUND_FOG_ALTITUDE_IMPACT=Underground Fog Altitude Impact
 option.UNDERGROUND_FOG_ALTITUDE_IMPACT.comment=The underground fog tries to only appear for blocks below y=64 (when this setting is at 1.0), but this changes that value depending on your altitude. Higher impact values will make the underground fog start lower when you're higher, and lower values will make it appear higher when you're higher
 value.UNDERGROUND_FOG_ALTITUDE_IMPACT.-1=Use Style
 
+option.SEA_LEVEL=Sea Level
+option.SEA_LEVEL.comment=Sets the expected y level of the sea, used for underground fog positioning
+
 
 
 

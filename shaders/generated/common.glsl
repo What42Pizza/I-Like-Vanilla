@@ -3,4 +3,4 @@
 
 const uint BLOCK_ID_END_PORTAL = 42u;
 const uint BLOCK_ID_NETHER_PORTAL = 43u;
-const uint BLOCK_ID_WATER = 50u;
+const uint BLOCK_ID_WATER = 54u;
