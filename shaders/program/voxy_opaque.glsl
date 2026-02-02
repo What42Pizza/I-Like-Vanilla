@@ -69,7 +69,25 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb *= glcolor;
 	color.rgb *= 0.95 + 0.05 * worldNormal.y;
 	
-	if (parameters.customId == 11571u) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
+	if (materialId == BLOCK_ID_LAVA) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
+	
+	#if LAVA_NOISE_ENABLED == 1
+		if (materialId == BLOCK_ID_LAVA) {
+			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+			vec2 worldPos2 = playerPos.xz + cameraPosition.xz + playerPos.y + cameraPosition.y;
+			worldPos2 += worldPos2.yx * 0.125;
+			float noise = 1.25;
+			noise -= valueNoise(vec3(worldPos2 * 0.125, frameTimeCounter * 0.125)) * 0.5;
+			worldPos2 += 128.0;
+			noise -= valueNoise(vec3(worldPos2 * 0.25 , frameTimeCounter * 0.125)) * 0.25;
+			worldPos2 += 128.0;
+			noise -= valueNoise(vec3(worldPos2 * 1.0  , frameTimeCounter * 0.125)) * 0.125;
+			float upDot = dot(normal, gbufferModelView[1].xyz);
+			const float halfStrength = LAVA_NOISE_AMOUNT * 0.5;
+			noise = mix(1.0, noise * noise, halfStrength + halfStrength * upDot);
+			color.rgb *= noise;
+		}
+	#endif
 	
 	
 	// vsh lighting

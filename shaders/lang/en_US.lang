@@ -30,6 +30,15 @@ value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
 value.FANCY_NETHER_PORTAL_ENABLED.0=Off
 value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
+option.LAVA_NOISE_ENABLED=Lava Noise
+option.LAVA_NOISE_ENABLED.comment=Adds dark patches to lava
+value.LAVA_NOISE_ENABLED.-1=Use Style
+value.LAVA_NOISE_ENABLED.0=Off
+value.LAVA_NOISE_ENABLED.1=On
+
+option.LAVA_NOISE_AMOUNT=Lava Noise Amount
+value.LAVA_NOISE_AMOUNT.-1=Use Style
+
 
 
 

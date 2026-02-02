@@ -2,6 +2,14 @@
 #undef FANCY_NETHER_PORTAL_ENABLED
 										#define FANCY_NETHER_PORTAL_ENABLED 1
 #endif
+#if LAVA_NOISE_ENABLED == -1
+#undef LAVA_NOISE_ENABLED
+										#define LAVA_NOISE_ENABLED 1
+#endif
+#if LAVA_NOISE_AMOUNT == -1
+#undef LAVA_NOISE_AMOUNT
+										#define LAVA_NOISE_AMOUNT 1.1
+#endif
 
 
 

@@ -3,6 +3,7 @@ in_out vec2 lmcoord;
 in_out vec3 glcolor;
 in_out float ao;
 #if PBR_TYPE == 0 && POM_ENABLED == 0
+	flat in_out vec3 normal;
 	flat in_out vec2 encodedNormal;
 #endif
 #if PBR_TYPE == 1 || POM_ENABLED == 1
@@ -15,6 +16,7 @@ in_out vec3 playerPos;
 	flat in_out vec2 midTexCoord;
 	flat in_out vec2 midCoordOffset;
 #endif
+flat in_out uint materialId;
 #if PBR_TYPE == 0
 	flat in_out float reflectiveness;
 	flat in_out float specularness;
@@ -160,6 +162,23 @@ void main() {
 		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
 	#endif
 	
+	#if LAVA_NOISE_ENABLED == 1
+		if (materialId == BLOCK_ID_LAVA) {
+			vec2 worldPos2 = playerPos.xz + cameraPosition.xz + playerPos.y + cameraPosition.y;
+			worldPos2 += worldPos2.yx * 0.125;
+			float noise = 1.25;
+			noise -= valueNoise(vec3(worldPos2 * 0.125, frameTimeCounter * 0.125)) * 0.5;
+			worldPos2 += 128.0;
+			noise -= valueNoise(vec3(worldPos2 * 0.25 , frameTimeCounter * 0.125)) * 0.25;
+			worldPos2 += 128.0;
+			noise -= valueNoise(vec3(worldPos2 * 1.0  , frameTimeCounter * 0.125)) * 0.125;
+			float upDot = dot(normal, gbufferModelView[1].xyz);
+			const float halfStrength = LAVA_NOISE_AMOUNT * 0.5;
+			noise = mix(1.0, noise * noise, halfStrength + halfStrength * upDot);
+			color.rgb *= noise;
+		}
+	#endif
+	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		if (isDangerousLight > 0.0) {
 			vec3 blockPos = fract(playerPos + cameraPosition);
@@ -263,13 +282,16 @@ void main() {
 	
 	// block id stuff
 	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
-	uint materialId = encodedData;
+	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
 	
 	// process normals
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	
 	#if PBR_TYPE == 0
 		// foliage normals

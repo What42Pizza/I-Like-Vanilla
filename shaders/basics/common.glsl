@@ -270,24 +270,30 @@ vec3 randomVec3FromRValue(uint rng) {
 	return randomVec3(rng);
 }
 
-float valueHash(vec3 p) {
-	p = fract(p * 0.3183099 + vec3(0.71, 0.113, 0.419));
-	p *= 17.0;
-	return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+float valueHash(ivec3 v) {
+	vec3 h = fract(v * 0.3183099 + vec3(0.71, 0.113, 0.419));
+	h *= 17.0;
+	return fract(h.x * h.y * h.z * (h.x + h.y + h.z));
 }
 
-float valueNoise3(vec3 v) {
-	vec3 i = floor(v);
-	vec3 f = fract(v);
+float valueHash(ivec2 v) {
+	vec2 h = fract(v * 0.3183099 + vec2(0.71, 0.113));
+	h *= 17.0;
+	return fract(h.x * h.y * (h.x + h.y));
+}
+
+float valueNoise(vec3 v) {
+	ivec3 i = ivec3(floor(v));
+	vec3 f = v - i;
 	
 	float lll = valueHash(i);
-	float llh = valueHash(i + vec3(0.0, 0.0, 1.0));
-	float lhl = valueHash(i + vec3(0.0, 1.0, 0.0));
-	float lhh = valueHash(i + vec3(0.0, 1.0, 1.0));
-	float hll = valueHash(i + vec3(1.0, 0.0, 0.0));
-	float hlh = valueHash(i + vec3(1.0, 0.0, 1.0));
-	float hhl = valueHash(i + vec3(1.0, 1.0, 0.0));
-	float hhh = valueHash(i + vec3(1.0, 1.0, 1.0));
+	float llh = valueHash(i + ivec3(0, 0, 1));
+	float lhl = valueHash(i + ivec3(0, 1, 0));
+	float lhh = valueHash(i + ivec3(0, 1, 1));
+	float hll = valueHash(i + ivec3(1, 0, 0));
+	float hlh = valueHash(i + ivec3(1, 0, 1));
+	float hhl = valueHash(i + ivec3(1, 1, 0));
+	float hhh = valueHash(i + ivec3(1, 1, 1));
 	
 	vec3 u = f * f * (3.0 - 2.0 * f);
 	float ll = mix(lll, llh, u.z);

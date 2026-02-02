@@ -37,7 +37,7 @@ const COMMANDS: &[data::Command] = &[
 	data::Command::new("count_sloc", "Counts the significant lines of code", commands::count_sloc::function),
 	data::Command::new("check_settings", "Detects all shader settings and ensures they are consistent across all files", commands::check_settings::function),
 	data::Command::new("export", "Exports the shader with only shader files included", commands::export::function),
-	data::Command::new("rebuild_ids", "Rebuilds all block ids based on the '/shaders/common/block datas input.txt' file", commands::rebuild_ids::function),
+	data::Command::new("rebuild_ids", "Rebuilds all block ids based on the '/shaders/block datas input.txt' file", commands::rebuild_ids::function),
 ];
 
 

@@ -7,9 +7,9 @@ float sampleEndCloud(vec3 pos) {
 	pos *= 0.25 / END_CLOUDS_SCALE;
 	pos.y *= 2.0;
 	float cloudSample = 0.0;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.125  ) * 1.0 ) * 1.0 ;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.0625 ) * 0.5 ) * 0.5 ;
-	cloudSample += valueNoise3((pos + frameTimeCounter * 0.125 * 0.03125) * 0.25) * 0.25;
+	cloudSample += valueNoise((pos + frameTimeCounter * 0.125 * 0.125  ) * 1.0 ) * 1.0 ;
+	cloudSample += valueNoise((pos + frameTimeCounter * 0.125 * 0.0625 ) * 0.5 ) * 0.5 ;
+	cloudSample += valueNoise((pos + frameTimeCounter * 0.125 * 0.03125) * 0.25) * 0.25;
 	cloudSample /= 1.0 + 0.5 + 0.25;
 	cloudSample = (cloudSample - (1.0 - END_CLOUDS_COVERAGE * 0.75)) / END_CLOUDS_COVERAGE * 0.75;
 	return clamp(cloudSample, 0.0, 1.0);
