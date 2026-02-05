@@ -1,6 +1,10 @@
-#if FANCY_NETHER_PORTAL_ENABLED == -1
-#undef FANCY_NETHER_PORTAL_ENABLED
-										#define FANCY_NETHER_PORTAL_ENABLED 1
+#if FOLIAGE_NOISE_ENABLED == -1
+#undef FOLIAGE_NOISE_ENABLED
+										#define FOLIAGE_NOISE_ENABLED 1
+#endif
+#if FOLIAGE_NOISE_AMOUNT == -1
+#undef FOLIAGE_NOISE_AMOUNT
+										#define FOLIAGE_NOISE_AMOUNT 0.2
 #endif
 #if LAVA_NOISE_ENABLED == -1
 #undef LAVA_NOISE_ENABLED
@@ -9,6 +13,10 @@
 #if LAVA_NOISE_AMOUNT == -1
 #undef LAVA_NOISE_AMOUNT
 										#define LAVA_NOISE_AMOUNT 0.85
+#endif
+#if FANCY_NETHER_PORTAL_ENABLED == -1
+#undef FANCY_NETHER_PORTAL_ENABLED
+										#define FANCY_NETHER_PORTAL_ENABLED 1
 #endif
 
 
@@ -77,11 +85,11 @@
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
-										#define SIDE_SHADING_BRIGHT 0.7
+										#define SIDE_SHADING_BRIGHT 0.75
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.7
+										#define SIDE_SHADING_DARK 0.75
 #endif
 #if NIGHT_SATURATION_DECREASE == -1
 #undef NIGHT_SATURATION_DECREASE
@@ -128,7 +136,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.04
+										#define SKYLIGHT_DAY_RED 1.03
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -156,7 +164,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.95
+										#define AMBIENT_DAY_BRIGHTNESS 1.0
 #endif
 
 
@@ -284,7 +292,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.6
+										#define BLOCK_BLUE 0.65
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -412,7 +420,7 @@
 #endif
 #if HANDHELD_LIGHT_DISTANCE == -1
 #undef HANDHELD_LIGHT_DISTANCE
-										#define HANDHELD_LIGHT_DISTANCE 11
+										#define HANDHELD_LIGHT_DISTANCE 12
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
@@ -437,7 +445,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.1
+										#define TEXTURE_CONTRAST 0.2
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
@@ -453,7 +461,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 0.99
+										#define FOLIAGE_TINT_BLUE 0.97
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -492,7 +500,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.95
+										#define BLOOM_AMOUNT 0.9
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -504,7 +512,7 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 1.0
+										#define BLOOM_SIZE 1.1
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
@@ -525,15 +533,15 @@
 #endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.65
+										#define AO_AMOUNT_LIT 0.6
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.65
+										#define AO_AMOUNT_UNLIT 0.6
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.0
+										#define AO_SIZE 1.1
 #endif
 
 
@@ -810,7 +818,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.1
+										#define VIBRANCE 0.08
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -826,11 +834,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.24
+										#define SURFACE_CONTRAST 0.22
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST 0.3
+										#define UNDERGROUND_CONTRAST 0.24
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER

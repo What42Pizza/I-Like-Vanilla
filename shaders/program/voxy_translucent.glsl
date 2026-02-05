@@ -56,8 +56,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// main color
 	vec4 color = parameters.sampledColour;
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 2.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.08 - TEXTURE_CONTRAST * 0.65);
+	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.08 - TEXTURE_CONTRAST * 0.3);
 	color.rgb *= parameters.tinting.rgb;
 	color.rgb *= glcolor;
 	

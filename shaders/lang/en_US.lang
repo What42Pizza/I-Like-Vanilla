@@ -24,13 +24,16 @@ option.PBR_TYPE.comment=Specifies which type of PBR to use (note: POM has to be 
 value.PBR_TYPE.0=Internal
 value.PBR_TYPE.1=LabPBR 1.3
 
-option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
-option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals
-value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
-value.FANCY_NETHER_PORTAL_ENABLED.0=Off
-value.FANCY_NETHER_PORTAL_ENABLED.1=On
+option.FOLIAGE_NOISE_ENABLED=Foliage Noise Enabled
+option.FOLIAGE_NOISE_ENABLED.comment=Randomly makes foliage blocks brighter/darker depending on its world position (affects all blocks that are don't cast shadows when 'Exclude Foliage' is enabled)
+value.FOLIAGE_NOISE_ENABLED.-1=Use Style
+value.FOLIAGE_NOISE_ENABLED.0=Off
+value.FOLIAGE_NOISE_ENABLED.1=On
 
-option.LAVA_NOISE_ENABLED=Lava Noise
+option.FOLIAGE_NOISE_AMOUNT=Foliage Noise Amount
+value.FOLIAGE_NOISE_AMOUNT.-1=Use Style
+
+option.LAVA_NOISE_ENABLED=Lava Noise Enabled
 option.LAVA_NOISE_ENABLED.comment=Adds dark patches to lava
 value.LAVA_NOISE_ENABLED.-1=Use Style
 value.LAVA_NOISE_ENABLED.0=Off
@@ -38,6 +41,12 @@ value.LAVA_NOISE_ENABLED.1=On
 
 option.LAVA_NOISE_AMOUNT=Lava Noise Amount
 value.LAVA_NOISE_AMOUNT.-1=Use Style
+
+option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
+option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals
+value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
+value.FANCY_NETHER_PORTAL_ENABLED.0=Off
+value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
 
 

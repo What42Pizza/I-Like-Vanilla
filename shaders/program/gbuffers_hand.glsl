@@ -16,8 +16,8 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
 	if (color.a == 0.0) discard;
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 2.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.65);
+	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.3);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	
 	

@@ -136,8 +136,8 @@ void main() {
 	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
 	if (rawColor.a < 0.01) discard;
 	vec4 color = rawColor;
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 2.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.65 + (1.0 - ao) * 0.25);
+	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.3 + (1.0 - ao) * 0.25);
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
 	
@@ -285,6 +285,8 @@ void main() {
 	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
+	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
+	
 	
 	// process normals
 	
@@ -295,7 +297,7 @@ void main() {
 	
 	#if PBR_TYPE == 0
 		// foliage normals
-		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
+		if (isFoliage) {
 			normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
 		}
 	#endif
@@ -309,7 +311,7 @@ void main() {
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
 		rawTbn = tbn;
-		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
+		if (isFoliage) {
 			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 		}
 	#endif
@@ -328,6 +330,15 @@ void main() {
 	
 	
 	// misc
+	
+	#if FOLIAGE_NOISE_ENABLED
+		if (isFoliage) {
+			ivec2 iWorldPos2 = ivec2(playerPos.xz + cameraPosition.xz + at_midBlock.xz / 64.0);
+			uint rng = uint(iWorldPos2.x) + uint(iWorldPos2.y) * 1024u;
+			float lift = randomFloat(rng);
+			glcolor *= 1.0 + lift * vec3(1.2, 0.8, 0.9) * 0.25 * FOLIAGE_NOISE_AMOUNT;
+		}
+	#endif
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		isDangerousLight = 0.0;

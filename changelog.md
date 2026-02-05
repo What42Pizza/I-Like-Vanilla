@@ -1,5 +1,6 @@
 - v1.3.0
   - Discontinued OptiFine support
+  - Added foliage and lava noise/variation (configurable)
   - Split setting 'AO Amount' into lit and shaded variants
   - Split setting 'Shadows Enabled' into overworld and end variants
   - Added setting 'TAA Jitter Strength'
