@@ -83,7 +83,11 @@ uniform bool isOtherLightSource;
 uniform float horizonAltitudeAddend;
 uniform float blockFlickerAmount;
 uniform float rainReflectionStrength;
-uniform float inPaleGarden;
+#if MC_VERSION >= 12102
+	uniform float inPaleGarden;
+#else
+	const float inPaleGarden = 0.0;
+#endif
 uniform float inSnowyBiome;
 uniform float lightningFlashAmount;
 uniform float betterRainStrength;

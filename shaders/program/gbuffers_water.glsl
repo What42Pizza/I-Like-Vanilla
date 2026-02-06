@@ -306,6 +306,9 @@ void main() {
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
 			playerPos.y += 0.1 / (1.0 + length(playerPos.xz)) * sign(isEyeInWater - 0.5);
+			#if defined VOXY && MC_VERSION <= 12001
+				playerPos.y -= length(playerPos.xz) * 0.001;
+			#endif
 		}
 	#endif
 	
