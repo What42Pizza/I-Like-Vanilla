@@ -1169,7 +1169,7 @@
 #endif
 #if CLOUD_WEATHER_COVERAGE == -1
 #undef CLOUD_WEATHER_COVERAGE
-										#define CLOUD_WEATHER_COVERAGE 0.95
+										#define CLOUD_WEATHER_COVERAGE 0.9
 #endif
 #if CLOUD_BOTTOM_Y == -1
 #undef CLOUD_BOTTOM_Y

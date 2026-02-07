@@ -43,7 +43,7 @@ flat in_out float extraFogDist;
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	#ifdef OVERWORLD
+	#if defined OVERWORLD && REALISTIC_CLOUDS_ENABLED == 0
 		bool isCloud = unpack_2x8(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).y > 0.5;
 	#else
 		const bool isCloud = false;
