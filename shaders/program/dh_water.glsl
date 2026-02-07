@@ -56,10 +56,40 @@ void main() {
 	
 	if (dhBlock == DH_BLOCK_WATER) {
 		
+		color.rgb *= 1.1;
+		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
 		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
 		
+		vec3 viewDir = normalize(viewPos);
+		float fresnel = -dot(normal, viewDir);
+		
+		#if WAVING_WATER_SURFACE_ENABLED == 1
+			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.25;
+			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.125;
+			if (wavingSurfaceAmount > 0.00001) {
+				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND * 0.55, WAVING_WATER_FRESNEL_SURFACE * 0.55, lmcoord.y);
+				float frameTimeCounter = frameTimeCounter * WAVING_WATER_SPEED;
+				noisePos += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4 * 0.18;
+				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				noisePos += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4 * 0.18;
+				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				vec3 normalForFresnel = vec3(0.0, 1.0, 0.0);
+				normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
+				//normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
+				//normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
+				//normalForFresnel.xz *= wavingSurfaceAmount;
+				normalForFresnel = mat3(gbufferModelView) * normalize(normalForFresnel);
+				fresnel = dot(normalForFresnel, viewDir); // note: there should be made negative, but instead the next line does 1+fresnel instead of 1-fresnel
+				color.rgb *= 1.0 + (fresnel + 0.5) * fresnelMult;
+			}
+		#endif
+		
 		color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		
+		color.a *= 1.0 + fresnel * 0.125;
 		
 	}
 	
@@ -114,7 +144,7 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	dhBlock = dhMaterialId;
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	if (dhBlock == DH_BLOCK_WATER) {
 		playerPos.y -= 0.11213;

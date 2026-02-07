@@ -18,8 +18,19 @@ flat in_out vec3 shadowcasterLight;
 #if SSAO_ENABLED == 1
 	#include "/lib/ssao.glsl"
 #endif
+#ifdef DISTANT_HORIZONS
+	#define LOD_SCREEN_TO_VIEW_FN screenToViewDh
+	#define LOD_DEPTH_TEX DH_DEPTH_BUFFER_ALL
+	#define LOD_MODEL_VIEW_INVERSE_MAT gbufferModelViewInverse
+	#define LOD_PROJECTION_MAT dhProjection
+	#include "/lib/lod_ssao.glsl"
+#endif
 #ifdef VOXY
-	#include "/lib/voxy_ssao.glsl"
+	#define LOD_SCREEN_TO_VIEW_FN screenToViewVx
+	#define LOD_DEPTH_TEX vxDepthTexOpaque
+	#define LOD_MODEL_VIEW_INVERSE_MAT vxModelViewInv
+	#define LOD_PROJECTION_MAT vxProj
+	#include "/lib/lod_ssao.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
 	#include "/utils/borderFogAmount.glsl"
@@ -95,8 +106,6 @@ void main() {
 		float specularness = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
 		#ifndef MODERN_BACKEND
-			//vec3 xDir = normalize(dFdx(viewPos));
-			//vec3 yDir = normalize(dFdy(viewPos));
 			vec3 viewPosUp    = screenToView(vec3(texcoord + ivec2( 0, -1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0, -1), 0).r));
 			vec3 viewPosDown  = screenToView(vec3(texcoord + ivec2( 0,  1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0,  1), 0).r));
 			vec3 viewPosLeft  = screenToView(vec3(texcoord + ivec2(-1,  0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2(-1,  0), 0).r));
@@ -118,12 +127,21 @@ void main() {
 			}
 		#endif
 		
+		#ifdef DISTANT_HORIZONS
+			
+			if (depth == 1.0 && dhDepth != 1.0) {
+				float vxAo = getLodAoAmount(normal);
+				color *= 0.98 - vxAo * 0.49 * VANILLA_AO_BRIGHT;
+			}
+			
+		#endif
+		
 		#ifdef VOXY
 			
 			float voxyOpaqueDepth = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
 			vec3 voxyOpaqueViewPos = screenToViewVx(vec3(texcoord, voxyOpaqueDepth));
 			if (voxyOpaqueViewPos.z > viewPos.z - 0.5) {
-				float vxAo = getVoxyAoAmount(normal);
+				float vxAo = getLodAoAmount(normal);
 				color *= 0.98 - vxAo * 0.49 * VANILLA_AO_BRIGHT;
 			}
 			
@@ -144,8 +162,6 @@ void main() {
 			#endif
 			color = mix(color, skyColor, skyAmount);
 		#endif
-		//if (texcoord.x < 0.5) color = normal;
-		//else color = newNormal;
 		
 	}
 	

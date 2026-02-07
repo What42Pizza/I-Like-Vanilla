@@ -66,7 +66,6 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	glcolor *= 0.98;
 	if (dhMaterialId == DH_BLOCK_LEAVES) {
 		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.95);
 		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE) * 1.05;

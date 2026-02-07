@@ -53,7 +53,7 @@ void main() {
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.99;
-		if (lengthCylinder >= far - 10 - 8 * dither) discard;
+		if (lengthCylinder >= far - 12 - 8 * dither) discard;
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1

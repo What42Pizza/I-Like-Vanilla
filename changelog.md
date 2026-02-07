@@ -1,5 +1,5 @@
-- v1.3.0
-  - Discontinued OptiFine support
+- **v1.3.0**
+  - Partially discontinued OptiFine support
   - Added foliage and lava noise/variation (configurable)
   - Split setting 'AO Amount' into lit and shaded variants
   - Split setting 'Shadows Enabled' into overworld and end variants
@@ -9,6 +9,8 @@
   - Added setting 'Sky Weather Desaturation'
   - Added setting 'Underground Fog Altitude Impact'
   - Improved custom skybox support
+  - Added vanilla-like AO to distant horizons terrain (same as the AO for voxy terrain)
+  - Fixed 1.17 support
   - Now well over 400 settings
 
 <br>
@@ -97,7 +99,7 @@
 - **v1.1.0** (25/11/10)
   - Enabled pixelated shadows on the vanilla style
   - Added 'Fancy Nether Portals' setting (enabled by default)
-  - Added 'Snowy Tweaks' setting (eanbled by default)
+  - Added 'Snowy Tweaks' setting (enabled by default)
   - Added 'Foliage Tint Red/Green/Blue' settings
   - Split setting 'Contrast' into surface and underground variants
   - Removed setting 'Cloud Transparency (Realistic)'
