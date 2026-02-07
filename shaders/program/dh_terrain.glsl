@@ -71,8 +71,8 @@ void main() {
 		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.95);
 		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE) * 1.05;
 	}
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.25);
+	glcolor.rgb = mix(glcolor.rgb, glcolor.rgb * glcolor.rgb * (3.0 - 2.0 * glcolor.rgb), TEXTURE_CONTRAST * 1.0);
+	glcolor.rgb = mix(vec3(getLum(glcolor.rgb)), glcolor.rgb, 1.05 - TEXTURE_CONTRAST * 0.25);
 	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.0 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
 	
 	
