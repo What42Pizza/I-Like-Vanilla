@@ -271,6 +271,9 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	#ifndef MODERN_BACKEND
+		if (encodedData == 65535u) encodedData = 0u;
+	#endif
 	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	

@@ -78,6 +78,11 @@ void main() {
 			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		}
 		vec3 normal = decodeNormal(data.zw);
+		#ifndef MODERN_BACKEND
+			vec3 xDir = normalize(dFdx(viewPos));
+			vec3 yDir = normalize(dFdy(viewPos));
+			normal = cross(xDir, yDir);
+		#endif
 		vec2 lmcoord = unpack_2x8(data.x);
 		
 		#if REFLECTIVE_EVERYTHING == 1

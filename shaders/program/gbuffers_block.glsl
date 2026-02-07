@@ -110,6 +110,9 @@ void main() {
 	
 	// block id stuff
 	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	#ifndef MODERN_BACKEND
+		if (encodedData == 65535u) encodedData = 0u;
+	#endif
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	

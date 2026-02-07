@@ -94,6 +94,17 @@ void main() {
 		vec2 lmcoord = unpack_2x8(data.x);
 		float specularness = unpack_2x8(data.y).y;
 		vec3 normal = decodeNormal(data.zw);
+		#ifndef MODERN_BACKEND
+			//vec3 xDir = normalize(dFdx(viewPos));
+			//vec3 yDir = normalize(dFdy(viewPos));
+			vec3 viewPosUp    = screenToView(vec3(texcoord + ivec2( 0, -1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0, -1), 0).r));
+			vec3 viewPosDown  = screenToView(vec3(texcoord + ivec2( 0,  1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0,  1), 0).r));
+			vec3 viewPosLeft  = screenToView(vec3(texcoord + ivec2(-1,  0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2(-1,  0), 0).r));
+			vec3 viewPosRight = screenToView(vec3(texcoord + ivec2( 1,  0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 1,  0), 0).r));
+			vec3 xDir = normalize(viewPosLeft - viewPosRight);
+			vec3 yDir = normalize(viewPosUp - viewPosDown);
+			normal = cross(xDir, yDir);
+		#endif
 		float shadowBrightness;
 		doFshLighting(color, shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, depth);
 		
@@ -133,6 +144,8 @@ void main() {
 			#endif
 			color = mix(color, skyColor, skyAmount);
 		#endif
+		//if (texcoord.x < 0.5) color = normal;
+		//else color = newNormal;
 		
 	}
 	
