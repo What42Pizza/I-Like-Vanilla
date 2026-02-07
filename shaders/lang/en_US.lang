@@ -2033,6 +2033,7 @@ option.CLOUD_COMPATIBILITY=Cloud Compatibility
 option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
 value.CLOUD_COMPATIBILITY.0=Off
 value.CLOUD_COMPATIBILITY.1=On
+value.CLOUD_COMPATIBILITY.2=Auto
 
 option.REFLECTIVE_EVERYTHING=Reflective Everything
 option.REFLECTIVE_EVERYTHING.comment=Make EVERYTHING reflective

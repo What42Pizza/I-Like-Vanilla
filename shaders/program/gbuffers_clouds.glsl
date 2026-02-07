@@ -17,7 +17,7 @@ void main() {
 	
 	#if CLOUD_COMPATIBILITY == 1
 		vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-		if (color.a == 0.0) discard;
+		if (color.a < 0.5) discard;
 	#else
 		vec4 color = vec4(1.0);
 	#endif

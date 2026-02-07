@@ -271,6 +271,9 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	
 	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	#ifndef MODERN_BACKEND
+		if (encodedData == 65535u) encodedData = 0u;
+	#endif
 	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
@@ -306,6 +309,9 @@ void main() {
 			playerPos.y += sin(playerPos.x * 0.9 + playerPos.z * 0.6 + frameTimeCounter * 2.5) * 0.01 * wavingAmount;
 			playerPos -= cameraPosition;
 			playerPos.y += 0.1 / (1.0 + length(playerPos.xz)) * sign(isEyeInWater - 0.5);
+			#if defined VOXY && MC_VERSION <= 12001
+				playerPos.y -= length(playerPos.xz) * 0.001;
+			#endif
 		}
 	#endif
 	

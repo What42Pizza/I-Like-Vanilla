@@ -1,3 +1,9 @@
+#if MC_VERSION >= 11800 || MC_VERSION == 11605
+	#define MODERN_BACKEND
+#endif
+
+
+
 // optifine settings (DON'T DELETE)
 /*
 const int   colortex0Format       = RGB10_A2;
@@ -145,6 +151,17 @@ const float shadowIntervalSize    = 2.0;
 	#undef EMISSIVE_TEXTURES_ENABLED
 	#define EMISSIVE_TEXTURES_ENABLED 0
 #endif
+
+#if CLOUD_COMPATIBILITY == 2
+	#undef CLOUD_COMPATIBILITY
+	#if MODERN_BACKEND
+		#define CLOUD_COMPATIBILITY 0
+	#else
+		#define CLOUD_COMPATIBILITY 1
+	#endif
+#endif
+#undef CLOUD_COMPATIBILITY
+#define CLOUD_COMPATIBILITY 1
 
 
 

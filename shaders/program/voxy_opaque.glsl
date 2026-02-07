@@ -10,6 +10,9 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// basics
 	uint encodedData = uint(max(parameters.customId - (1u << 13u), 0) + (1u << 13u));
+	#ifndef MODERN_BACKEND
+		if (encodedData == 65535u) encodedData = 0u;
+	#endif
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
