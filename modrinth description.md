@@ -23,6 +23,8 @@ Shaders typically fall into one of two camps: completely overhauling minecraft's
 
 ### Supports [Voxy](https://modrinth.com/mod/voxy), [Distant Horizons](https://modrinth.com/mod/distanthorizons), [Colorwheel](https://modrinth.com/mod/colorwheel), and more!
 
+## Note: Optifine support will be partially dropped in the next update
+
 <br>
 
 ## How to install:

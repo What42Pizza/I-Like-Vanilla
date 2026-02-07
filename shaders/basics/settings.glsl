@@ -1,4 +1,4 @@
-#if MC_VERSION >= 11800 || MC_VERSION == 11605
+#if (MC_VERSION >= 11800 || MC_VERSION == 11605) && defined IS_IRIS
 	#define MODERN_BACKEND
 #endif
 
@@ -167,6 +167,22 @@ const float shadowIntervalSize    = 2.0;
 
 #if (defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1) || (defined NETHER && CUSTOM_NETHER_SKYBOX == 1) || (defined END && CUSTOM_END_SKYBOX == 1)
 	#define CUSTOM_SKYBOX
+#endif
+
+
+
+// How on earth can optifine be THIS bad???
+#if TEMPORAL_FILTER_ENABLED == 1
+	#undef TEMPORAL_FILTER_ENABLED
+	#define TEMPORAL_FILTER_ENABLED 1
+#endif
+#if SSS_PHOSPHOR == 1
+	#undef SSS_PHOSPHOR
+	#define SSS_PHOSPHOR 1
+#endif
+#if MOTION_BLUR_ENABLED == 1
+	#undef MOTION_BLUR_ENABLED
+	#define MOTION_BLUR_ENABLED 1
 #endif
 
 

@@ -7,7 +7,7 @@ profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
 
 option.STYLE=Style
-option.STYLE.comment=Changes the default settings. When a setting is set to 'Use Style', it uses whatever default is set by this option. (If this version of the shader is already locked to a style, this setting does nothing)\n\n§bIf you want to see the default values for each style, you can download the corresponding style version.
+option.STYLE.comment=Changes the default values for settings that are set to 'Use STyle' (this does nothing on OptiFine versions)\n\nIf you want to see the default setting values for each style, you can download the corresponding OptiFine (style-specific) version.
 value.STYLE.0=Vanilla
 value.STYLE.1=Fantasy
 value.STYLE.2=Realistic

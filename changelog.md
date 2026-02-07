@@ -11,7 +11,7 @@
   - Improved custom skybox support
   - Added vanilla-like AO to distant horizons terrain (same as the AO for voxy terrain)
   - Fixed 1.17 support
-  - Now well over 400 settings
+  - Now includes well over 400 settings
 
 <br>
 <br>

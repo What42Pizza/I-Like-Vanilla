@@ -22,10 +22,8 @@ void main() {
 	
 	
 	// hide nearby particles
-	if (color.a > 0.99) {
-		float transparency = percentThrough(blockDepth, 0.5, 1.2);
-		color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
-	}
+	float transparency = percentThrough(blockDepth, 0.5, 1.2);
+	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	
 	
 	#if PBR_TYPE == 0

@@ -38,7 +38,7 @@ Because of the extensive and tedious usage of `#define`s, this repo contains a r
 
 Here's a list of the commands and why they exist:
 
-- **export:** This creates the zip files which are uploaded to modrinth and curseforge. It takes the shader code, license, changelog, and shader readme and packages it into zip files, and it automatically splices together code to make the style-specific versions.
+- **export:** This creates the zip files which are uploaded to modrinth and curseforge. It takes the shader code, license, changelog, and shader readme and packages it into zip files, and it automatically splices together code to make the optifine (style-specific) versions.
 - **check_settings:** Detects all settings in all setting-related files to check for missing settings, broken settings, mis-ordered settings, etc
 - **count_sloc:** Counts the significant lines of code. May not be accurate, idk. It only counts .glsl files, since the .vsh and .fsh files don't contain anything meaningful.
 
@@ -50,7 +50,7 @@ As always, you can edit your repo's rust-utils to add more commands and/or tweak
 
 ## OptiFine Support:
 
-OptiFine is now discontinued
+OptiFine is now mostly discontinued, there's no reason to use it in the latest mc versions, but it's still useful due to Iris's lack of support for non-current versions
 
 <br>
 <br>

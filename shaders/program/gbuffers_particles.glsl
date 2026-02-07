@@ -2,7 +2,7 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
 #if PBR_TYPE == 0
-	flat in_out vec2 encodedNormal;
+	flat in_out vec3 normal;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
@@ -14,6 +14,11 @@ in_out float blockDepth;
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
+	
+	
+	// hide nearby particles
+	float transparency = percentThrough(blockDepth, 0.5, 1.2);
+	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	
 	
 	#if PBR_TYPE == 0
@@ -35,14 +40,14 @@ void main() {
 	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
-		color = vec4(0.5, 0.5, 0.5, 1.0);
+		color = vec4(0.5, 0.75, 0.75, 1.0);
 	#endif
 	color.rgb *= 0.5;
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
-		encodedNormal
+		pack_2x8(reflectiveness, 0.0),
+		normal
 	);
 	
 }
@@ -68,11 +73,12 @@ void main() {
 	adjustLmcoord(lmcoord);
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
+	glcolor.rgb *= 1.25;
 	glcolor.a = sqrt(glcolor.a);
-	vec3 normal = gl_NormalMatrix * vec3(0.5, 0.5, 0.0);
-	#if PBR_TYPE == 0
-		encodedNormal = encodeNormal(normal);
+	#if PBR_TYPE != 0
+		vec3 normal;
 	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
