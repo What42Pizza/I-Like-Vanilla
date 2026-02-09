@@ -45,7 +45,7 @@ void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoo
 	const float blendMax = 0.98;
 	const float blendVariable = blendStill - blendMoving;
 	const float blendConstant = blendMoving;
-	const float depthFactor = 0.012 * TEMPORAL_FILTER_DEPTH;
+	const float depthFactor = 0.01 * TEMPORAL_FILTER_DEPTH;
 	
 	vec2 velocity = (texcoord - prevCoord.xy) * viewSize;
 	float velocityAmount = dot(velocity, velocity) * 10.0;

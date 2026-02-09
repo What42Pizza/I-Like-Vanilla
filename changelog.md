@@ -1,4 +1,9 @@
-- **v1.3.0**
+- v1.3.1
+  - Fixed bugs
+
+<br>
+
+- **v1.3.0** (26/02/07)
   - Partially discontinued OptiFine support
   - Added foliage and lava noise/variation (configurable)
   - Split setting 'AO Amount' into lit and shaded variants
@@ -11,6 +16,7 @@
   - Improved custom skybox support
   - Added vanilla-like AO to distant horizons terrain (same as the AO for voxy terrain)
   - Fixed 1.17 support
+  - Many more fixes and tweaks
   - Now includes well over 400 settings
 
 <br>

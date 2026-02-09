@@ -48,6 +48,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		vec3 bitangent = cross(tangent, normal);
 		
 		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
+		if (shadowPos.z > 1.0) return 1.0;
 		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
 		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
@@ -81,6 +82,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		//viewPos += normal * 0.0015 * (25.0 + length(viewPos));
 		
 		//vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
+		//if (shadowPos.z > 1.0) return 1.0;
 		//vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * tangent);
 		//vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * bitangent);
 		//shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
@@ -98,12 +100,14 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 		// no filtering, pixelated edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
+		if (shadowPos.z > 1.0) return 1.0;
 		return uint(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
+		if (shadowPos.z > 1.0) return 1.0;
 		return uint(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
 		
 	#else
@@ -165,6 +169,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		#endif
 		
 		vec3 shadowPos = getShadowPos(viewPos, normal);
+		if (shadowPos.z > 1.0) return 1.0;
 		
 		float dither = bayer64(gl_FragCoord.xy);
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));

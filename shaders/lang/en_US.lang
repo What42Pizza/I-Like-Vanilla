@@ -667,6 +667,7 @@ value.TAA_ENABLED.1=On
 
 option.TAA_JITTER_AMOUNT=TAA Jitter Amount
 option.TAA_JITTER_AMOUNT.comment=Controls the strength of the taa jitter (note: this has no effect on the smoothing, go to the Temporal Filter menu for that)
+value.TAA_JITTER_AMOUNT.-1=Use Style
 
 option.FXAA_ENABLED=FXAA
 option.FXAA_ENABLED.comment=A simple form of anti-aliasing (makes jagged edges smooth)

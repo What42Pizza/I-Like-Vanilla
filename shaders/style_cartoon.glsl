@@ -489,6 +489,10 @@
 
 
 
+#if TAA_JITTER_AMOUNT == -1
+#undef TAA_JITTER_AMOUNT
+										#define TAA_JITTER_AMOUNT 0.95
+#endif
 #if OUTLINES_ENABLED == -1
 #undef OUTLINES_ENABLED
 										#define OUTLINES_ENABLED 1

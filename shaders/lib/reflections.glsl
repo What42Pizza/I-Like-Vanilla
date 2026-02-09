@@ -39,7 +39,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 		#endif
 		float realToScreen = screenPos.z - realDepth;
 		
-		if (realToScreen > 0.0 && realToScreen < sqrt(stepVector.z) * 0.5) {
+		if (realToScreen > 0.0 && realToScreen < sqrt(abs(stepVector.z) + 0.01) * 0.5) {
 			hitCount ++;
 			if (hitCount >= 5) { // converged on point
 				reflectionPos = screenPos.xy;
