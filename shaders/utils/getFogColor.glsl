@@ -65,11 +65,11 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
 		fogColorOut *= 3.0/2.0 * 1.2;
 		fogColorOut *= 0.3 + 0.7 * dayPercent;
 		
-		float worldAltitude = playerPos.y / UNDERGROUND_FOG_ALTITUDE_IMPACT + eyeAltitude;
-		float darkenAmount = percentThrough(worldAltitude, SEA_LEVEL, SEA_LEVEL - 24);
-		darkenAmount = max(darkenAmount, 1.0 - skylightBrightness * skylightBrightness);
-		darkenAmount *= uint(isEyeInWater == 0);
-		fogColorOut = mix(fogColorOut, vec3(UNDERGROUND_FOG_BRIGHTNESS), darkenAmount);
+		float darkenAmount = dot(viewDir, gbufferModelView[1].xyz);
+		darkenAmount += (eyeAltitude - 64.0) / 256.0;
+		darkenAmount -= 2.0 - eyeBrightnessSmooth.y / 240.0 * 2.0;
+		darkenAmount = percentThrough(darkenAmount, -0.45, -0.6);
+		fogColorOut = mix(fogColorOut, vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), darkenAmount);
 		
 	#elif defined NETHER
 		

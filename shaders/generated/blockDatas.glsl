@@ -50,7 +50,7 @@ if (materialId < 36u) {
 						}
 					} else {
 						if (materialId < 4u) {
-							SET_SPECULARNESS(0.5);
+							SET_SPECULARNESS(0.2);
 						} else {
 							TWEAK_GLCOLOR_BRIGHTNESS(1.15);
 						}
@@ -302,7 +302,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 			if (materialId < 104u) {
 				if (materialId < 72u) {
 					if (materialId < 56u) {
-						SET_SPECULARNESS(0.5);
+						SET_SPECULARNESS(0.2);
 					} else {
 						if (materialId < 64u) {
 							if (materialId < 60u) {

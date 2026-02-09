@@ -669,13 +669,13 @@ weight: 50
 shadow casting: foliage
 do bottom waving: false
 waviness: 3
-specularness: 0.5
+specularness: 0.2
 
 block tall_grass:half=upper, large_fern:half=upper:
 weight: 10
 shadow casting: foliage
 waviness: 3
-specularness: 0.5
+specularness: 0.2
 
 block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling:
 weight: 1
