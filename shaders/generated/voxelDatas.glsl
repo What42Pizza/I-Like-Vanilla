@@ -238,7 +238,7 @@ if (voxelId < 71u) {
 					if (voxelId < 58u) {
 						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
 					} else {
-						SET_EMISSION(vec3(1.0, 1.0, 0.9));
+						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
 					}
 				}
 			} else {
@@ -246,7 +246,7 @@ if (voxelId < 71u) {
 					if (voxelId < 60u) {
 						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
 					} else {
-						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
+						SET_EMISSION(vec3(1.0, 1.0, 0.9));
 					}
 				} else {
 					if (voxelId < 62u) {
@@ -266,7 +266,7 @@ if (voxelId < 71u) {
 					}
 				} else {
 					if (voxelId < 66u) {
-						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
+						SET_EMISSION(vec3(1.0, 0.9, 0.5));
 					} else {
 						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
 					}
@@ -296,7 +296,7 @@ if (voxelId < 71u) {
 			if (voxelId < 79u) {
 				if (voxelId < 75u) {
 					if (voxelId < 73u) {
-						SET_EMISSION(vec3(1.0, 0.9, 0.5));
+						SET_TRANSLUCENCY(vec3(0.9, 0.9, 0.9));
 					} else {
 						if (voxelId < 74u) {
 							SET_EMISSION(vec3(0.0, 0.15, 0.75));

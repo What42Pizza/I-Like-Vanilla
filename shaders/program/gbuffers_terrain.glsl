@@ -300,9 +300,11 @@ void main() {
 	
 	#if PBR_TYPE == 0
 		// foliage normals
-		if (isFoliage) {
-			normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
-		}
+		#if OVERRIDE_FOLIAGE_NORMALS == 1
+			if (isFoliage) {
+				normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
+			}
+		#endif
 	#endif
 	
 	#if PBR_TYPE == 0 && POM_ENABLED == 0
@@ -314,9 +316,11 @@ void main() {
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
 		rawTbn = tbn;
-		if (isFoliage) {
-			tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
-		}
+		#if OVERRIDE_FOLIAGE_NORMALS == 1
+			if (isFoliage) {
+				tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
+			}
+		#endif
 	#endif
 	
 	

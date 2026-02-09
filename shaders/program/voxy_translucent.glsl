@@ -33,9 +33,11 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	worldNormal *= float(parameters.face & 1) * 2.0 - 1.0;
 	
 	// foliage normals
-	if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
-		worldNormal = vec3(0.0, 1.0, 0.0);
-	}
+	#if OVERRIDE_FOLIAGE_NORMALS == 1
+		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
+			worldNormal = vec3(0.0, 1.0, 0.0);
+		}
+	#endif
 	
 	vec3 normal = mat3(gbufferModelView) * worldNormal;
 	

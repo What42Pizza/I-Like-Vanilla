@@ -237,6 +237,10 @@ option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
 value.SIDE_SHADING_DARK.-1=Use Style
 
+option.OVERRIDE_FOLIAGE_NORMALS=Override Foliage Normals
+option.OVERRIDE_FOLIAGE_NORMALS.comment=Sets the normals (surface direction) of foliage blocks (grass, flowers, etc) to always face upwards (just like vanilla and most other shaders)
+value.OVERRIDE_FOLIAGE_NORMALS.-1=Use Style
+
 option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
 value.NIGHT_SATURATION_DECREASE.-1=Use Style 
@@ -1680,6 +1684,9 @@ value.SKY_DAY_GREEN.-1=use Style
 option.SKY_DAY_BLUE=Sky Day Blue
 value.SKY_DAY_BLUE.-1=use Style
 
+option.SKY_DAY_BRIGHTNESS=Sky Day Brightness
+value.SKY_DAY_BRIGHTNESS=Use Style
+
 option.SKY_NIGHT_RED=Sky Night Red
 value.SKY_NIGHT_RED.-1=use Style
 
@@ -1688,6 +1695,9 @@ value.SKY_NIGHT_GREEN.-1=use Style
 
 option.SKY_NIGHT_BLUE=Sky Night Blue
 value.SKY_NIGHT_BLUE.-1=use Style
+
+option.SKY_NIGHT_BRIGHTNESS=Sky Night Brightness
+value.SKY_NIGHT_BRIGHTNESS=Use Style
 
 option.SKY_HORIZON_DAY_RED=Horizon Day Red
 value.SKY_HORIZON_DAY_RED.-1=use Style
@@ -1698,6 +1708,9 @@ value.SKY_HORIZON_DAY_GREEN.-1=use Style
 option.SKY_HORIZON_DAY_BLUE=Horizon Day Blue
 value.SKY_HORIZON_DAY_BLUE.-1=use Style
 
+option.SKY_HORIZON_DAY_BRIGHTNESS=Horizon Day Brightness
+value.SKY_HORIZON_DAY_BRIGHTNESS=Use Style
+
 option.SKY_HORIZON_NIGHT_RED=Horizon Night Red
 value.SKY_HORIZON_NIGHT_RED.-1=use Style
 
@@ -1706,6 +1719,9 @@ value.SKY_HORIZON_NIGHT_GREEN.-1=use Style
 
 option.SKY_HORIZON_NIGHT_BLUE=Horizon Night Blue
 value.SKY_HORIZON_NIGHT_BLUE.-1=use Style
+
+option.SKY_HORIZON_NIGHT_BRIGHTNESS=Horizon Night Brightness
+value.SKY_HORIZON_NIGHT_BRIGHTNESS=Use Style
 
 option.SKY_HORIZON_SUNRISE_RED=Horizon Sunrise Red
 value.SKY_HORIZON_SUNRISE_RED.-1=use Style
@@ -1716,6 +1732,9 @@ value.SKY_HORIZON_SUNRISE_GREEN.-1=use Style
 option.SKY_HORIZON_SUNRISE_BLUE=Horizon Sunrise Blue
 value.SKY_HORIZON_SUNRISE_BLUE.-1=use Style
 
+option.SKY_HORIZON_SUNRISE_BRIGHTNESS=Horizon Sunrise Brightness
+value.SKY_HORIZON_SUNRISE_BRIGHTNESS=Use Style
+
 option.SKY_HORIZON_SUNSET_RED=Horizon Sunset Red
 value.SKY_HORIZON_SUNSET_RED.-1=use Style
 
@@ -1724,6 +1743,9 @@ value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
 
 option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
 value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
+
+option.SKY_HORIZON_SUNSET_BRIGHTNESS=Horizon Sunset Brightness
+value.SKY_HORIZON_SUNSET_BRIGHTNESS=Use Style
 
 
 

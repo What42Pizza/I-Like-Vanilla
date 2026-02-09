@@ -677,6 +677,10 @@ shadow casting: foliage
 waviness: 3
 specularness: 0.2
 
+block leaf_litter:
+weight: 20
+shadow casting: foliage
+
 block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling:
 weight: 1
 shadow casting: foliage
