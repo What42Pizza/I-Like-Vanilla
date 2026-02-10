@@ -71,6 +71,7 @@ uniform vec2 pixelSize;
 
 uniform float betterRainStrength;
 uniform float rainReflectionStrength;
+uniform vec2 smootherEyeBrightness;
 
 uniform bool isSun;
 
@@ -119,6 +120,7 @@ vec2 pixelSize = vec2(1.0 / viewWidth, 1.0 / viewHeight);
 
 float betterRainStrength = 1.0 - sqrt(1.0 - rainStrength);
 float rainReflectionStrength = betterRainStrength;
+vec2 smootherEyeBrightness = eyeBrightnessSmooth / 240.0;
 
 bool isDay = sunAngle <= 0.5;
 bool isOtherLightSource = shadowLightPosition.z > 0.0001;

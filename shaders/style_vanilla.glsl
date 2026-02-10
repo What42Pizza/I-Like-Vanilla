@@ -1386,15 +1386,15 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.2
+										#define SKY_DAY_RED 0.3
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.35
+										#define SKY_DAY_GREEN 0.45
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.0
+										#define SKY_DAY_BLUE 1.1
 #endif
 #if SKY_DAY_BRIGHTNESS == -1
 #undef SKY_DAY_BRIGHTNESS
@@ -1418,15 +1418,15 @@
 #endif
 #if SKY_HORIZON_DAY_RED == -1
 #undef SKY_HORIZON_DAY_RED
-										#define SKY_HORIZON_DAY_RED 0.45
+										#define SKY_HORIZON_DAY_RED 0.5
 #endif
 #if SKY_HORIZON_DAY_GREEN == -1
 #undef SKY_HORIZON_DAY_GREEN
-										#define SKY_HORIZON_DAY_GREEN 0.55
+										#define SKY_HORIZON_DAY_GREEN 0.6
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 0.8
+										#define SKY_HORIZON_DAY_BLUE 0.85
 #endif
 #if SKY_HORIZON_DAY_BRIGHTNESS == -1
 #undef SKY_HORIZON_DAY_BRIGHTNESS

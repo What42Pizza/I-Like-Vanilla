@@ -9,16 +9,16 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 	#ifdef OVERWORLD
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 0
-			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.75 + 0.1;
+			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.75;
 			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.25;
-			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.75 + 0.1;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.75;
 			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
 			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR;
 			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR;
 		#elif CUSTOM_OVERWORLD_SKYBOX == 1
-			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8 + 0.05;
+			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.8;
 			const vec3 NIGHT_COLOR = SKY_NIGHT_COLOR * 0.3;
-			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8 + 0.1;
+			const vec3 HORIZON_DAY_COLOR = SKY_HORIZON_DAY_COLOR * 0.8;
 			const vec3 HORIZON_NIGHT_COLOR = SKY_HORIZON_NIGHT_COLOR * 0.25;
 			const vec3 HORIZON_SUNRISE_COLOR = SKY_HORIZON_SUNRISE_COLOR * 0.75;
 			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * 0.75;
@@ -69,8 +69,8 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		}
 		
 		float darkenAmount = dot(viewDir, gbufferModelView[1].xyz);
-		darkenAmount += (eyeAltitude - 64.0) / 256.0;
-		darkenAmount -= 1.0 - eyeBrightnessSmooth.y / 240.0;
+		darkenAmount += (eyeAltitude - 60.0) / 128.0;
+		darkenAmount -= 0.9 - eyeBrightnessSmooth.y / 240.0;
 		darkenAmount = percentThrough(darkenAmount, -0.45, -0.6);
 		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), darkenAmount);
 		
