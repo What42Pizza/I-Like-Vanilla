@@ -1,4 +1,5 @@
 - v1.3.1
+  - Replaced bloom implementation
   - Fixed bugs
 
 <br>

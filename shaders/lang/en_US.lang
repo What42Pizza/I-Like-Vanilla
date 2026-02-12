@@ -1412,7 +1412,7 @@ option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
 value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
 option.SKY_WEATHER_BRIGHTNESS=Sky Weather Brightness
-option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing (this is also dependant on the Sky Weather Brightness setting)
+option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing (this is also dependant on the Sky Weather Desaturation setting)
 value.SKY_WEATHER_BRIGHTNESS.-1=Use Style
 
 option.SKY_WEATHER_DESATURATION=Sky Weather Desaturation
@@ -1434,7 +1434,7 @@ option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only wo
 value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
 
 option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
-option.NEARBY_CLOUD_DIST.comment=The distance at which clouds at still considered nearby, only works for non-realistic clouds
+option.NEARBY_CLOUD_DIST.comment=The distance at which clouds are still considered nearby, only works for non-realistic clouds
 value.NEARBY_CLOUD_DIST.-1=Use Style
 
 option.CLOUD_FOG_START=Cloud Fog Start

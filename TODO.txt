@@ -9,29 +9,25 @@ Separate depth sunrays and vol sunrays settings
 
 
 
-New pipeline:
+New pipeline: (now kinda outdated with new bloom)
 
 composite pass 1: (half res * 2)
 atmospheric fog amount (writes to intermediates texture a)
-bloom filtering (writes to the intermediates texture rgb)
 sunrays processing (writes to the intermediates texture rg w/ temporal filtering)
 clouds processing (writes to the intermediates texture ba w/ temporal filtering)
 
-composite pass 2: (half res)
-bloom processing (writes to the intermediates2 texture w/ temporal filtering)
+composite pass 2:
+add sunrays and clouds (samples from the intermediates textures)
 
 composite pass 3:
-add sunrays, clouds, and bloom (all sampling from the intermediates and intermediates2 textures)
-
-composite pass 4:
 reflections
 
-composite pass 5:
+composite pass 4:
 TAA
 DOF
 motion blur
 
-composite pass 6:
+composite pass 5:
 final post-processing (color correction, etc)
 
 

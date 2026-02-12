@@ -21,9 +21,6 @@ in_out vec2 texcoord;
 #if REALISTIC_CLOUDS_ENABLED == 1
 	#include "/utils/getCloudColor.glsl"
 #endif
-#if BLOOM_ENABLED == 1
-	#include "/lib/bloom.glsl"
-#endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
@@ -109,14 +106,6 @@ void main() {
 		color *= 1.0 - thickness;
 		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
 		color += mix(END_CLOUDS_DARK_COLOR, END_CLOUDS_BRIGHT_COLOR, brightness) * thickness;
-	#endif
-	
-	
-	
-	// ======== BLOOM CALCULATIONS ======== //
-	
-	#if BLOOM_ENABLED == 1
-		addBloom(color);
 	#endif
 	
 	

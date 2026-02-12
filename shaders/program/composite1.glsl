@@ -218,48 +218,16 @@ void main() {
 	
 	
 	
-	// ======== BLOOM FILTERING ======== //
-	
-	#if BLOOM_ENABLED == 1
-		float bloomMult = dot(color, vec3(1.0, 0.8, 0.0) * 0.5);
-		bloomMult = (bloomMult - BLOOM_LOW_CUTOFF) / (BLOOM_HIGH_CUTOFF - BLOOM_LOW_CUTOFF);
-		bloomMult = clamp(bloomMult, 0.0, 1.0) * (1.0 - fogAmount);
-		bloomMult *= 0.75 + 0.25 * getSaturation(color);
-		bloomMult *= bloomMult;
-		vec3 bloomColor = color * bloomMult;
-	#endif
-	
-	
-	
-	#if BLOOM_ENABLED == 0 && !defined NOISY_RENDERS_ACTIVE
+	#if !defined NOISY_RENDERS_ACTIVE
 		/* DRAWBUFFERS:0 */
 		color *= 0.5;
 		gl_FragData[0] = vec4(color, 1.0);
 	#endif
-	#if BLOOM_ENABLED == 1 && !defined NOISY_RENDERS_ACTIVE
-		/* DRAWBUFFERS:04 */
-		color *= 0.5;
-		bloomColor *= 0.5;
-		gl_FragData[0] = vec4(color, 1.0);
-		gl_FragData[1] = vec4(bloomColor, 1.0);
-	#endif
-	#if BLOOM_ENABLED == 0 && defined NOISY_RENDERS_ACTIVE
+	#if defined NOISY_RENDERS_ACTIVE
 		/* DRAWBUFFERS:06 */
 		color *= 0.5;
 		gl_FragData[0] = vec4(color, 1.0);
 		gl_FragData[1] = vec4(
-			pack_2x8(depthSunraysAddition, volSunraysAmount),
-			pack_2x8(cloudData),
-			0.0, 1.0
-		);
-	#endif
-	#if BLOOM_ENABLED == 1 && defined NOISY_RENDERS_ACTIVE
-		/* DRAWBUFFERS:046 */
-		color *= 0.5;
-		bloomColor *= 0.5;
-		gl_FragData[0] = vec4(color, 1.0);
-		gl_FragData[1] = vec4(bloomColor, 1.0);
-		gl_FragData[2] = vec4(
 			pack_2x8(depthSunraysAddition, volSunraysAmount),
 			pack_2x8(cloudData),
 			0.0, 1.0

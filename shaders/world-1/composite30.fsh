@@ -1,0 +1,12 @@
+#version 140
+
+#define SHADER_COMPOSITE30
+#define NETHER
+#define FSH
+
+#include "/basics/settings.glsl"
+#include "/basics/uniforms.glsl"
+#include "/generated/common.glsl"
+#include "/basics/common.glsl"
+
+#include "/program/composite30.glsl"

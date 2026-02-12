@@ -51,9 +51,11 @@ void main() {
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
-		float dither = bayer64(gl_FragCoord.xy);
+		//float dither = bayer64(gl_FragCoord.xy);
+		#include "/utils/var_rng.glsl"
+		float dither = randomFloat(rng) * 0.5 + 0.5;
 		#if TEMPORAL_FILTER_ENABLED == 1
-			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+			//dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance += dither * 4.0;
@@ -154,6 +156,7 @@ void main() {
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
 			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
+			lmcoord = clamp(lmcoord, 0.0, 1.0);
 			color.rgb *= 1.0 + glowingAmount * 0.25;
 		}
 	#endif
@@ -166,7 +169,7 @@ void main() {
 		if (materialId == BLOCK_ID_LAVA) {
 			vec2 worldPos2 = playerPos.xz + cameraPosition.xz + playerPos.y + cameraPosition.y;
 			worldPos2 += worldPos2.yx * 0.125;
-			float noise = 1.25;
+			float noise = 1.4;
 			noise -= valueNoise(vec3(worldPos2 * 0.125, frameTimeCounter * 0.125)) * 0.5;
 			worldPos2 += 128.0;
 			noise -= valueNoise(vec3(worldPos2 * 0.25 , frameTimeCounter * 0.125)) * 0.25;

@@ -21,6 +21,11 @@ void main() {
 	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	
 	
+	// make yellow colors brighter
+	float brightnessIncrease = dot(color.rgb, vec3(0.2, 0.7, 0.1));
+	color.rgb *= 1.0 + 0.25 * brightnessIncrease;
+	
+	
 	#if PBR_TYPE == 1
 		vec3 normal = texture2D(normals, texcoord).rgb;
 		normal.xy -= 0.5;
