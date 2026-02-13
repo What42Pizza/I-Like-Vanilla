@@ -45,7 +45,11 @@ void main() {
 	//bloomMult *= bloomMult;
 	
 	float bloomMult = dot(bloomColor, vec3(0.2, 0.7, 0.1));
-	bloomMult *= bloomMult;
+	#if HORROR_MODE == 1
+		bloomMult *= 1.5;
+	#else
+		bloomMult *= bloomMult;
+	#endif
 	
 	bloomMult = smoothstep(BLOOM_LOW_CUTOFF, BLOOM_HIGH_CUTOFF, bloomMult);
 	bloomMult *= getSaturation(bloomColor);
@@ -53,7 +57,9 @@ void main() {
 	fogDecrease *= fogDecrease;
 	bloomMult *= fogDecrease;
 	bloomColor *= bloomMult;
-	//bloomColor = vec3(bloomMult);
+	#if HORROR_MODE == 1
+		bloomColor = vec3(bloomMult);
+	#endif
 	
 	// scary mode:
 	//const vec3 targetColor = vec3(1.0, 1.0, 0.0);

@@ -399,6 +399,26 @@ value.AMBIENT_NIGHT_BLUE.-1=Use Style
 option.AMBIENT_NIGHT_BRIGHTNESS=Ambient Night Brightness
 value.AMBIENT_NIGHT_BRIGHTNESS.-1=Use Style
 
+option.MOON_PHASE_BRIGHTNESS_MULT_1=Moon Phase Brightness Mult 1
+option.MOON_PHASE_BRIGHTNESS_MULT_1.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'full moon' (brightest)
+value.MOON_PHASE_BRIGHTNESS_MULT_1.-1=Use Style
+
+option.MOON_PHASE_BRIGHTNESS_MULT_2=Moon Phase Brightness Mult 2
+option.MOON_PHASE_BRIGHTNESS_MULT_2.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'waning gibbous' / 'waxing gibbous' (2nd brightest)
+value.MOON_PHASE_BRIGHTNESS_MULT_2.-1=Use Style
+
+option.MOON_PHASE_BRIGHTNESS_MULT_3=Moon Phase Brightness Mult 3
+option.MOON_PHASE_BRIGHTNESS_MULT_3.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'last quarter' / 'first quarter' (middle brightness)
+value.MOON_PHASE_BRIGHTNESS_MULT_3.-1=Use Style
+
+option.MOON_PHASE_BRIGHTNESS_MULT_4=Moon Phase Brightness Mult 4
+option.MOON_PHASE_BRIGHTNESS_MULT_4.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'waning crescent' / 'waxing crescent' (2nd darkest)
+value.MOON_PHASE_BRIGHTNESS_MULT_4.-1=Use Style
+
+option.MOON_PHASE_BRIGHTNESS_MULT_5=Moon Phase Brightness Mult 5
+option.MOON_PHASE_BRIGHTNESS_MULT_5.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'new moon' (darkest)
+value.MOON_PHASE_BRIGHTNESS_MULT_5.-1=Use Style
+
 
 
 
@@ -2067,6 +2087,11 @@ option.BSL_MODE=BSL Mode
 option.BSL_MODE.comment=Makes this shader look like BSL (as a joke)
 value.BSL_MODE.0=Off
 value.BSL_MODE.1=On
+
+option.HORROR_MODE=Horror Mode
+option.HORROR_MODE.comment=Exposes internal data for the bloom effect, making everything look like a horror game
+value.HORROR_MODE.0=Off
+value.HORROR_MODE.1=On
 
 
 

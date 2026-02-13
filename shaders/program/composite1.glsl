@@ -252,7 +252,7 @@ void main() {
 	
 	if (isEyeInWater == 0) {
 		#ifdef OVERWORLD
-			fogDarken = 1.5;
+			fogDarken = 1.3;
 		#elif defined NETHER
 			fogDarken = 0.75;
 		#else

@@ -40,6 +40,7 @@ uniform vec3 sunPosition;
 uniform vec3 moonPosition;
 uniform vec3 shadowLightPosition;
 uniform float sunAngle;
+uniform int moonPhase;
 uniform vec3 fogColor;
 uniform vec3 skyColor;
 uniform ivec2 eyeBrightness;

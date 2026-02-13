@@ -70,7 +70,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 		float darkenAmount = dot(viewDir, gbufferModelView[1].xyz);
 		darkenAmount += (eyeAltitude - 60.0) / 128.0;
-		darkenAmount -= 0.9 - eyeBrightnessSmooth.y / 240.0;
+		darkenAmount -= 0.9 - smootherEyeBrightness.y;
 		darkenAmount = percentThrough(darkenAmount, -0.45, -0.6);
 		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), darkenAmount);
 		

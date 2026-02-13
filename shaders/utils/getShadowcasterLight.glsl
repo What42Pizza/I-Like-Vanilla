@@ -13,6 +13,8 @@ vec3 getShadowcasterLight() {
 				+ SKYLIGHT_SUNSET_COLOR * sunsetColorPercent;
 		} else {
 			shadowcasterLight = SKYLIGHT_NIGHT_COLOR;
+			const float[] phaseMults = float[8] (MOON_PHASE_BRIGHTNESS_MULT_1, MOON_PHASE_BRIGHTNESS_MULT_2, MOON_PHASE_BRIGHTNESS_MULT_3, MOON_PHASE_BRIGHTNESS_MULT_4, MOON_PHASE_BRIGHTNESS_MULT_5, MOON_PHASE_BRIGHTNESS_MULT_4, MOON_PHASE_BRIGHTNESS_MULT_3, MOON_PHASE_BRIGHTNESS_MULT_2);
+			shadowcasterLight *= phaseMults[moonPhase];
 		}
 		
 		shadowcasterLight *= 1.0 - 0.3 * inPaleGarden;

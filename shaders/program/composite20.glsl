@@ -65,8 +65,12 @@ void main() {
 		#ifdef END
 			const float bloomAmount = BLOOM_END_AMOUNT;
 		#endif
-		bloomAddition *= 1.0 - getLum(color);
-		color += bloomAddition * bloomAmount * 0.8;
+		#if HORROR_MODE == 1
+			color = bloomAddition;
+		#else
+			bloomAddition *= 1.0 - getLum(color);
+			color += bloomAddition * bloomAmount * 0.8;
+		#endif
 	#endif
 	
 	
@@ -130,7 +134,8 @@ void main() {
 	
 	#if BSL_MODE == 1
 		color = pow(color, vec3(1.1));
-		color = mix(vec3(0.11), vec3(0.9), color);
+		color = mix(vec3(0.1), vec3(0.9), color);
+		color += vec3(0.0, 0.02, 0.04);
 	#endif
 	
 	

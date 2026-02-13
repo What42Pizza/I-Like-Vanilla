@@ -40,6 +40,12 @@ void main() {
 	vec2 texcoord = texcoord;
 	vec3 bloomColor = texelFetch(BLOOM_TEXTURE, texelcoord, 0).rgb;
 	
+	#if HORROR_MODE == 1
+		/* DRAWBUFFERS:4 */
+		gl_FragData[0] = vec4(bloomColor, 1.0);
+		return;
+	#endif
+	
 	vec2 stepDir = stepDir;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord * 4 + 1, 0).r;
 	float blockDepth = toBlockDepth(depth);

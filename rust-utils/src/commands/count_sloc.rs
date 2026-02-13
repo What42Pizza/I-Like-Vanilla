@@ -22,13 +22,11 @@ pub fn function(args: &[String]) -> Result<()> {
 pub fn get_file_sloc(path: &Path) -> Result<usize> {
 	
 	// must be .glsl, and not a style define
-	if let Some(Some(name)) = path.file_name().map(OsStr::to_str) && name.starts_with("style_") {return Ok(0);}
-	let Some(extension) = path.extension() else {return Ok(0);};
-	let Some(extension) = extension.to_str() else {return Ok(0);};
-	match extension {
-		"glsl" | "properties" => {}
-		_ => return Ok(0),
-	}
+	if let Some(Some(name)) = path.file_name().map(OsStr::to_str) && name.starts_with("style_") { return Ok(0); }
+	if path.components().find(|v| v.as_os_str().to_str() == Some("generated")).is_some() { return Ok(0); }
+	let Some(extension) = path.extension() else { return Ok(0); };
+	let Some(extension) = extension.to_str() else { return Ok(0); };
+	if !matches!(extension, "glsl" | "properties") { return Ok(0); }
 	
 	
 	

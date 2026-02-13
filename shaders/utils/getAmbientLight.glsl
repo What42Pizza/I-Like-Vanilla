@@ -13,6 +13,9 @@ vec3 getAmbientLight(float ambientBrightness, float lightDot) {
 			+ AMBIENT_SUNRISE_COLOR * ambientSunrisePercent
 			+ AMBIENT_SUNSET_COLOR * ambientSunsetPercent;
 		
+		const float[] phaseMults = float[8] (MOON_PHASE_BRIGHTNESS_MULT_1, MOON_PHASE_BRIGHTNESS_MULT_2, MOON_PHASE_BRIGHTNESS_MULT_3, MOON_PHASE_BRIGHTNESS_MULT_4, MOON_PHASE_BRIGHTNESS_MULT_5, MOON_PHASE_BRIGHTNESS_MULT_4, MOON_PHASE_BRIGHTNESS_MULT_3, MOON_PHASE_BRIGHTNESS_MULT_2);
+		ambientLight *= 1.0 - (1.0 - phaseMults[moonPhase]) * ambientMoonPercent;
+		
 		ambientLight *= SHADOWS_BRIGHTNESS;
 		ambientLight *= 1.0 - 0.1 * inPaleGarden;
 		ambientLight *= 1.0 + 0.0625 * clamp(1.0 - lightDot * 10.0, 0.0, 1.0);

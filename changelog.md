@@ -1,5 +1,6 @@
 - v1.3.1
   - Replaced bloom implementation
+  - Added settings for moon phase brightness multipliers
   - Fixed bugs
 
 <br>
