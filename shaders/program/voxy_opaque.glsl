@@ -15,6 +15,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	#endif
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
+	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
 	
 	vec3 screenPos = vec3(gl_FragCoord.xy * pixelSize, gl_FragCoord.z);
 	vec3 viewPos = screenToViewVx(screenPos);
@@ -50,7 +51,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// foliage normals
 	#if OVERRIDE_FOLIAGE_NORMALS == 1
-		if ((encodedData & (3u << 14u)) >= (2u << 14u)) {
+		if (isFoliage) {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
 	#endif
@@ -72,7 +73,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.08 - TEXTURE_CONTRAST * 0.3);
 	color.rgb *= tintColor;
 	color.rgb *= glcolor;
-	color.rgb *= 0.95 + 0.05 * worldNormal.y;
+	color.rgb *= 1.0 + 0.0625 * worldNormal.y + 0.03125 * uint(isFoliage);
 	
 	if (materialId == BLOCK_ID_LAVA) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
 	

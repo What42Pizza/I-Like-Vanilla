@@ -245,7 +245,7 @@ value.OVERRIDE_FOLIAGE_NORMALS.1=On
 
 option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
-value.NIGHT_SATURATION_DECREASE.-1=Use Style 
+value.NIGHT_SATURATION_DECREASE.-1=Use Style
 
 option.WEATHER_BRIGHTNESS_MULT=Weather Brightness Multiplier
 option.WEATHER_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing

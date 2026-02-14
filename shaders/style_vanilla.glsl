@@ -181,11 +181,11 @@
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.7
+										#define SKYLIGHT_NIGHT_GREEN 0.75
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.0
+										#define SKYLIGHT_NIGHT_BLUE 1.05
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
@@ -197,7 +197,7 @@
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.7
+										#define AMBIENT_NIGHT_GREEN 0.75
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
@@ -528,7 +528,7 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.0
+										#define BLOOM_AMOUNT 0.95
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -561,11 +561,11 @@
 #endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.6
+										#define AO_AMOUNT_LIT 0.5
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.6
+										#define AO_AMOUNT_UNLIT 0.5
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE

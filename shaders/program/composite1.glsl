@@ -73,8 +73,8 @@ void main() {
 	
 	#ifdef OVERWORLD
 		float distMult = max(playerPos.y + cameraPosition.y - 64.0, 0.0);
-		const float distMultAmplitude = 1.2;
-		const float distMultSlope = 16.0;
+		const float distMultAmplitude = 1.5;
+		const float distMultSlope = 8.0;
 		distMult = distMultAmplitude * distMultSlope / (distMult + distMultSlope);
 	#elif defined NETHER
 		float distMult = max(playerPos.y + cameraPosition.y - 30.0, 0.0);
@@ -252,7 +252,7 @@ void main() {
 	
 	if (isEyeInWater == 0) {
 		#ifdef OVERWORLD
-			fogDarken = 1.3;
+			fogDarken = 1.1;
 		#elif defined NETHER
 			fogDarken = 0.75;
 		#else

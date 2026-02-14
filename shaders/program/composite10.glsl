@@ -12,8 +12,13 @@ const bool colortex0MipmapEnabled = true;
 #endif
 
 void main() {
-	vec3 bloomColor = texelFetch(MAIN_TEXTURE, texelcoord, 2).rgb * 2.0;
-	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord * 4 + 1, 0).r;
+	#if HORROR_MODE == 0
+		vec3 bloomColor = texelFetch(MAIN_TEXTURE, texelcoord, 2).rgb * 2.0;
+		float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord * 4 + 1, 0).r;
+	#else
+		vec3 bloomColor = texture2DLod(MAIN_TEXTURE, texcoord, 2).rgb * 2.0;
+		float depth = texture2D(DEPTH_BUFFER_WO_TRANS, texcoord).r;
+	#endif
 	
 	
 	#ifdef DISTANT_HORIZONS

@@ -140,11 +140,11 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.05
+										#define SKYLIGHT_DAY_RED 1.1
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
-										#define SKYLIGHT_DAY_GREEN 0.95
+										#define SKYLIGHT_DAY_GREEN 1.0
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
@@ -152,7 +152,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -168,7 +168,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.35
+										#define AMBIENT_DAY_BRIGHTNESS 0.3
 #endif
 
 
@@ -544,7 +544,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.4
+										#define BLOOM_LOW_CUTOFF 0.2
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -565,7 +565,7 @@
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.9
+										#define AO_AMOUNT_UNLIT 0.75
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -838,7 +838,7 @@
 #endif
 #if AUTO_EXPOSURE_BRIGHT_MULT == -1
 #undef AUTO_EXPOSURE_BRIGHT_MULT
-										#define AUTO_EXPOSURE_BRIGHT_MULT 0.6
+										#define AUTO_EXPOSURE_BRIGHT_MULT 0.7
 #endif
 #if AUTO_EXPOSURE_DARK_MULT == -1
 #undef AUTO_EXPOSURE_DARK_MULT
@@ -1406,11 +1406,11 @@
 
 #if SKY_DAY_RED == -1
 #undef SKY_DAY_RED
-										#define SKY_DAY_RED 0.15
+										#define SKY_DAY_RED 0.3
 #endif
 #if SKY_DAY_GREEN == -1
 #undef SKY_DAY_GREEN
-										#define SKY_DAY_GREEN 0.2
+										#define SKY_DAY_GREEN 0.4
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
