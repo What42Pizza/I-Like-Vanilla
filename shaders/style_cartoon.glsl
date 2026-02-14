@@ -550,6 +550,10 @@
 #undef BLOOM_HIGH_CUTOFF
 										#define BLOOM_HIGH_CUTOFF 1.0
 #endif
+#if BLOOM_STYLE == -1
+#undef BLOOM_STYLE
+										#define BLOOM_STYLE 1
+#endif
 
 
 

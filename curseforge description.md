@@ -19,7 +19,7 @@ Shaders typically fall into one of two camps: completely overhauling minecraft's
 
 ### Supports [Voxy](https://modrinth.com/mod/voxy), [Distant Horizons](https://modrinth.com/mod/distanthorizons), [Colorwheel](https://modrinth.com/mod/colorwheel), and more!
 
-## Note: Optifine support will be partially dropped in the next update
+### Note: Optifine is only partially supported. If you think it should be more supported, you can always let me know
 
 <br>
 
@@ -103,7 +103,7 @@ All of these tests were done with a GTX 1070 + 16 Chunks + 1080p + Distant Horiz
 
 <br>
 
-![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/f096b2f6337d557519145440e413bb26a26641fb.jpeg)
+![Example Image (Village)](https://cdn.modrinth.com/data/DoODk4HD/images/9028a07e88871c018c344d36c1b8876ccdaf8431.jpeg)
 
 <br>
 

@@ -734,6 +734,10 @@ do bottom waving: false
 waviness: 2
 brightness: 0.95
 
+block bee_nest:
+weight: 1
+brightness: 0.9
+
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
@@ -871,4 +875,8 @@ block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terraco
 weight: 10
 reflectiveness: 0.5
 specularness: 0.5
+brightness: 0.9
+
+block yellow_terracotta:
+weight: 1
 brightness: 0.9

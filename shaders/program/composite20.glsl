@@ -68,8 +68,12 @@ void main() {
 		#if HORROR_MODE == 1
 			color = bloomAddition;
 		#else
-			bloomAddition *= 1.0 - getLum(color);
-			color += bloomAddition * bloomAmount * 0.8;
+			#if BLOOM_STYLE == 1
+				bloomAddition *= 1.0 - getLum(color);
+			#elif BLOOM_STYLE == 2
+				bloomAddition *= 0.5;
+			#endif
+			color += bloomAddition * bloomAmount;
 		#endif
 	#endif
 	

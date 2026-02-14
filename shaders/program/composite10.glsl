@@ -49,15 +49,21 @@ void main() {
 	//bloomMult *= bloomColorHsv.z;
 	//bloomMult *= bloomMult;
 	
-	float bloomMult = dot(bloomColor, vec3(0.2, 0.7, 0.1));
 	#if HORROR_MODE == 1
+		float bloomMult = dot(bloomColor, vec3(0.2, 0.7, 0.1));
 		bloomMult *= 1.5;
-	#else
+	#elif BLOOM_STYLE == 1
+		float bloomMult = dot(bloomColor, vec3(0.2, 0.7, 0.1));
 		bloomMult *= bloomMult;
+	#elif BLOOM_STYLE == 2
+		float bloomMult = getLum(bloomColor);
+		//bloomMult = 1.0 - (1.0 - bloomMult) * (1.0 - bloomMult);
 	#endif
 	
 	bloomMult = smoothstep(BLOOM_LOW_CUTOFF, BLOOM_HIGH_CUTOFF, bloomMult);
-	bloomMult *= getSaturation(bloomColor);
+	#if BLOOM_STYLE == 1
+		bloomMult *= getSaturation(bloomColor);
+	#endif	
 	float fogDecrease = 1.0 - 0.5 * fogAmount;
 	fogDecrease *= fogDecrease;
 	bloomMult *= fogDecrease;
@@ -65,16 +71,6 @@ void main() {
 	#if HORROR_MODE == 1
 		bloomColor = vec3(bloomMult);
 	#endif
-	
-	// scary mode:
-	//const vec3 targetColor = vec3(1.0, 1.0, 0.0);
-	//float bloomMult = dot(bloomColor / getLum(bloomColor), targetColor / getLum(targetColor) * 0.75) * getLum(bloomColor);
-	//bloomMult = smoothstep(BLOOM_LOW_CUTOFF, BLOOM_HIGH_CUTOFF, bloomMult);
-	//bloomMult *= getSaturation(bloomColor);
-	//float fogDecrease = 1.0 - 0.5 * fogAmount;
-	//fogDecrease *= fogDecrease;
-	//bloomMult *= fogDecrease;
-	//bloomColor = vec3(bloomMult);
 	
 	
 	/* DRAWBUFFERS:4 */

@@ -761,6 +761,12 @@ option.BLOOM_HIGH_CUTOFF=Bloom High Cutoff
 option.BLOOM_HIGH_CUTOFF.comment=The value at which all colors are treated as equally light
 value.BLOOM_HIGH_CUTOFF.-1=Use Style
 
+option.BLOOM_STYLE=Bloom Style
+option.BLOOM_STYLE.comment=Changes the bloom calculations to be either realistic or stylized
+value.BLOOM_STYLE.-1=Use Style
+value.BLOOM_STYLE.1=Stylized
+value.BLOOM_STYLE.2=Realistic
+
 
 
 

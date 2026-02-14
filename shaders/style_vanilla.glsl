@@ -528,15 +528,15 @@
 
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.95
+										#define BLOOM_AMOUNT 0.75
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 1.1
+										#define BLOOM_NETHER_AMOUNT 0.85
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 0.8
+										#define BLOOM_END_AMOUNT 0.65
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -550,7 +550,10 @@
 #undef BLOOM_HIGH_CUTOFF
 										#define BLOOM_HIGH_CUTOFF 1.0
 #endif
-
+#if BLOOM_STYLE == -1
+#undef BLOOM_STYLE
+										#define BLOOM_STYLE 1
+#endif
 
 
 
