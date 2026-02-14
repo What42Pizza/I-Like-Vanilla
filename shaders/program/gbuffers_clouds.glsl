@@ -40,8 +40,9 @@ void main() {
 	vec3 yDir = dFdy(playerPos);
 	vec3 normal = normalize(cross(xDir, yDir));
 	normal.xz = abs(normal.xz);
-	float normalFactor = mix(0.2, 0.1, betterRainStrength);
-	color.rgb *= getCloudColor((1.0 - normalFactor) + normalFactor * dot(normal, normalize(vec3(0.5, 1.0, 0.0))));
+	float cloudBrightness = dot(normal, normalize(vec3(0.5, 1.0, 0.0)));
+	float maxBrightnessDecrease = mix(0.25, 0.1, betterRainStrength);
+	color.rgb *= getCloudColor(cloudBrightness * maxBrightnessDecrease + (1.0 - maxBrightnessDecrease));
 	
 	
 	// fog transparency

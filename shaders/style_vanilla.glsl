@@ -646,7 +646,7 @@
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 0.3
+										#define SUNRAYS_INCREASE_SUNSET 0.35
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED
@@ -1221,15 +1221,15 @@
 
 #if CLOUD_DAY_RED == -1
 #undef CLOUD_DAY_RED
-										#define CLOUD_DAY_RED 1.0
+										#define CLOUD_DAY_RED 0.9
 #endif
 #if CLOUD_DAY_GREEN == -1
 #undef CLOUD_DAY_GREEN
-										#define CLOUD_DAY_GREEN 1.0
+										#define CLOUD_DAY_GREEN 0.95
 #endif
 #if CLOUD_DAY_BLUE == -1
 #undef CLOUD_DAY_BLUE
-										#define CLOUD_DAY_BLUE 1.1
+										#define CLOUD_DAY_BLUE 1.0
 #endif
 #if CLOUD_NIGHT_RED == -1
 #undef CLOUD_NIGHT_RED
@@ -1266,6 +1266,18 @@
 #if CLOUD_SUNSET_BLUE == -1
 #undef CLOUD_SUNSET_BLUE
 										#define CLOUD_SUNSET_BLUE 0.5
+#endif
+#if CLOUD_BOTTOM_TINT_RED == -1
+#undef CLOUD_BOTTOM_TINT_RED
+										#define CLOUD_BOTTOM_TINT_RED 0.6
+#endif
+#if CLOUD_BOTTOM_TINT_GREEN == -1
+#undef CLOUD_BOTTOM_TINT_GREEN
+										#define CLOUD_BOTTOM_TINT_GREEN 0.65
+#endif
+#if CLOUD_BOTTOM_TINT_BLUE == -1
+#undef CLOUD_BOTTOM_TINT_BLUE
+										#define CLOUD_BOTTOM_TINT_BLUE 1.1
 #endif
 
 
@@ -1417,11 +1429,11 @@
 #endif
 #if SKY_DAY_BLUE == -1
 #undef SKY_DAY_BLUE
-										#define SKY_DAY_BLUE 1.1
+										#define SKY_DAY_BLUE 1.05
 #endif
 #if SKY_DAY_BRIGHTNESS == -1
 #undef SKY_DAY_BRIGHTNESS
-										#define SKY_DAY_BRIGHTNESS 1.0
+										#define SKY_DAY_BRIGHTNESS 1.1
 #endif
 #if SKY_NIGHT_RED == -1
 #undef SKY_NIGHT_RED
@@ -1449,11 +1461,11 @@
 #endif
 #if SKY_HORIZON_DAY_BLUE == -1
 #undef SKY_HORIZON_DAY_BLUE
-										#define SKY_HORIZON_DAY_BLUE 0.85
+										#define SKY_HORIZON_DAY_BLUE 0.9
 #endif
 #if SKY_HORIZON_DAY_BRIGHTNESS == -1
 #undef SKY_HORIZON_DAY_BRIGHTNESS
-										#define SKY_HORIZON_DAY_BRIGHTNESS 1.0
+										#define SKY_HORIZON_DAY_BRIGHTNESS 1.05
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
@@ -1610,7 +1622,7 @@
 
 #if ATMOSPHERIC_FOG_DENSITY == -1
 #undef ATMOSPHERIC_FOG_DENSITY
-										#define ATMOSPHERIC_FOG_DENSITY 0.1
+										#define ATMOSPHERIC_FOG_DENSITY 0.07
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY

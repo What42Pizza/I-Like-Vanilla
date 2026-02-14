@@ -1560,6 +1560,18 @@ option.CLOUD_SUNSET_BLUE=Cloud Sunset Blue
 option.CLOUD_SUNSET_BLUE.comment=Clouds blue color during sunset
 value.CLOUD_SUNSET_BLUE.-1=Use Style
 
+option.CLOUD_BOTTOM_TINT_RED=Cloud Bottom Tint Red
+option.CLOUD_BOTTOM_TINT_RED.comment=Controls the color of the bottom / sides of clouds
+value.CLOUD_BOTTOM_TINT_RED.-1=Use Style
+
+option.CLOUD_BOTTOM_TINT_GREEN=Cloud Bottom Tint Green
+option.CLOUD_BOTTOM_TINT_GREEN.comment=Controls the color of the bottom / sides of clouds
+value.CLOUD_BOTTOM_TINT_GREEN.-1=Use Style
+
+option.CLOUD_BOTTOM_TINT_BLUE=Cloud Bottom Tint Blue
+option.CLOUD_BOTTOM_TINT_BLUE.comment=Controls the color of the bottom / sides of clouds
+value.CLOUD_BOTTOM_TINT_BLUE.-1=Use Style
+
 
 
 

@@ -1263,6 +1263,18 @@
 #undef CLOUD_SUNSET_BLUE
 										#define CLOUD_SUNSET_BLUE 0.3
 #endif
+#if CLOUD_BOTTOM_TINT_RED == -1
+#undef CLOUD_BOTTOM_TINT_RED
+										#define CLOUD_BOTTOM_TINT_RED 0.6
+#endif
+#if CLOUD_BOTTOM_TINT_GREEN == -1
+#undef CLOUD_BOTTOM_TINT_GREEN
+										#define CLOUD_BOTTOM_TINT_GREEN 0.65
+#endif
+#if CLOUD_BOTTOM_TINT_BLUE == -1
+#undef CLOUD_BOTTOM_TINT_BLUE
+										#define CLOUD_BOTTOM_TINT_BLUE 1.1
+#endif
 
 
 

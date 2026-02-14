@@ -10,5 +10,6 @@ vec3 getCloudColor(float brightness) {
 	#if AUTO_EXPOSURE_ENABLED == 1
 		cloudColor *= 0.9;
 	#endif
-	return mix(vec3(0.0, 0.1, 0.3) * (0.1 + 0.9 * dayPercent), cloudColor, brightness);
+	cloudColor *= mix(CLOUD_BOTTOM_TINT * (0.1 + 0.9 * dayPercent), vec3(1.0), brightness);
+	return cloudColor;
 }
