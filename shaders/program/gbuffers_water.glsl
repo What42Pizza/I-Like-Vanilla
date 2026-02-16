@@ -138,8 +138,8 @@ void main() {
 				vec3 normalWithoutMult = tbn * normalize(normal);
 				normal.xy *= wavingSurfaceAmount;
 				normal = tbn * normalize(normal);
-				fresnel = dot(normalWithoutMult, viewDir); // note: there should be made negative, but instead the next line does 1+fresnel instead of 1-fresnel
-				color.rgb *= 1.0 + (fresnel + 0.5) * fresnelMult;
+				fresnel = -dot(normalWithoutMult, viewDir);
+				color.rgb *= 1.0 + (0.5 - fresnel) * fresnelMult;
 			}
 		#endif
 		
@@ -159,13 +159,13 @@ void main() {
 		} else {
 			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 16.0 / (16.0 + waterDepth));
 		}
-		color.a *= 1.0 + fresnel * 0.125;
+		color.a *= 1.0 - fresnel * 0.125;
 		
 		#if WATER_FOAM_ENABLED == 1
 			float foamAmount = percentThrough(waterDepth, 1.2, 0.0);
 			reflectiveness *= 1.0 - foamAmount;
 			foamAmount *= foamAmount;
-			foamAmount *= 1.0 + 0.25 * fresnel;
+			foamAmount *= 1.0 - 0.25 * fresnel;
 			foamAmount *= 0.5 + 0.5 * lmcoord.y;
 			#if WAVING_WATER_SURFACE_ENABLED == 1
 				foamAmount *= 0.4 + 0.6 * length(rawNormalNoise);

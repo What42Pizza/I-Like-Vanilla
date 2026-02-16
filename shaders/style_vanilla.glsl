@@ -526,6 +526,10 @@
 
 
 
+#if BLOOM_STYLE == -1
+#undef BLOOM_STYLE
+										#define BLOOM_STYLE 1
+#endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
 										#define BLOOM_AMOUNT 0.75
@@ -540,7 +544,7 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 1.1
+										#define BLOOM_SIZE 1.0
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
@@ -549,10 +553,6 @@
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
 										#define BLOOM_HIGH_CUTOFF 1.0
-#endif
-#if BLOOM_STYLE == -1
-#undef BLOOM_STYLE
-										#define BLOOM_STYLE 1
 #endif
 
 
@@ -564,15 +564,15 @@
 #endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.5
+										#define AO_AMOUNT_LIT 0.55
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.5
+										#define AO_AMOUNT_UNLIT 0.55
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.1
+										#define AO_SIZE 1.0
 #endif
 
 
@@ -853,7 +853,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.0
+										#define SATURATION -0.02
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK

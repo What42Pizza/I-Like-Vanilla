@@ -1,7 +1,7 @@
 - v1.3.1
   - Replaced bloom implementation
+  - Added settings 'Bloom Style' and 'Bloom Render Scale'
   - Added settings for moon phase brightness multipliers
-  - Added setting 'Bloom Style'
   - Tweaked settings and effects for Fantasy and Realistic styles
   - Fixed bugs
 

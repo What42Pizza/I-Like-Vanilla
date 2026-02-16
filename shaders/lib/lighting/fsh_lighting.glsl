@@ -271,7 +271,9 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	float brightForSS = max(blockBrightness, ambientBrightness);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.75;
 	ambientLight *= 1.0 + sideShading;
-	#ifndef NETHER
+	#ifdef NETHER
+		blockBrightness *= 1.0 + 0.75 * sideShading;
+	#else
 		blockBrightness *= 1.0 + sideShading;
 	#endif
 	

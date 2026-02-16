@@ -738,6 +738,10 @@ block bee_nest:
 weight: 1
 brightness: 0.9
 
+block hay_block:
+weight: 1
+brightness: 0.95
+
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2

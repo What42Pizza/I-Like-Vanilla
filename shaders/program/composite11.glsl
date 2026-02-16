@@ -5,27 +5,27 @@ in_out vec2 stepDir;
 
 #if BLOOM_QUALITY == 1
 	#define SAMPLE_COUNT 3
-	const float stepAmount = 0.4 * BLOOM_SIZE * 0.08;
+	const float stepAmount = 0.4 * BLOOM_SIZE * 0.1;
 	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.852, 0.527, 0.23);
 	const float weightsTotal = 4.218;
 #elif BLOOM_QUALITY == 2
 	#define SAMPLE_COUNT 4
-	const float stepAmount = 0.32 * BLOOM_SIZE * 0.08;
+	const float stepAmount = 0.32 * BLOOM_SIZE * 0.1;
 	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.902, 0.664, 0.398, 0.194);
 	const float weightsTotal = 5.316;
 #elif BLOOM_QUALITY == 3
 	#define SAMPLE_COUNT 6
-	const float stepAmount = 0.225 * BLOOM_SIZE * 0.08;
+	const float stepAmount = 0.225 * BLOOM_SIZE * 0.1;
 	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.95, 0.817, 0.634, 0.445, 0.282, 0.162);
 	const float weightsTotal = 7.58;
 #elif BLOOM_QUALITY == 4
 	#define SAMPLE_COUNT 8
-	const float stepAmount = 0.17 * BLOOM_SIZE * 0.08;
+	const float stepAmount = 0.17 * BLOOM_SIZE * 0.1;
 	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.971, 0.891, 0.771, 0.63, 0.486, 0.353, 0.243, 0.157);
 	const float weightsTotal = 10.004;
 #elif BLOOM_QUALITY == 5
 	#define SAMPLE_COUNT 12
-	const float stepAmount = 0.115 * BLOOM_SIZE * 0.08;
+	const float stepAmount = 0.115 * BLOOM_SIZE * 0.1;
 	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.986, 0.948, 0.888, 0.81, 0.718, 0.621, 0.523, 0.429, 0.343, 0.266, 0.212, 0.149);
 	const float weightsTotal = 14.786;
 #endif
@@ -46,10 +46,12 @@ void main() {
 		return;
 	#endif
 	
+	const int bloomIntScale = 1 << BLOOM_RENDER_SCALE;
+	
 	vec2 stepDir = stepDir;
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord * 4 + 1, 0).r;
+	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord * bloomIntScale + bloomIntScale / 2, 0).r;
 	float blockDepth = toBlockDepth(depth);
-	stepDir /= blockDepth * 0.5 + 1.0;
+	stepDir /= blockDepth * 0.25 + 1.0;
 	
 	texcoord -= stepDir * SAMPLE_COUNT;
 	texcoord += stepDir * (bayer64(gl_FragCoord.xy) - 0.5) * 0.25;

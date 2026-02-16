@@ -735,9 +735,22 @@ option.BLOOM_ENABLED.comment=Makes bright colors bleed into the surroundings\n\n
 value.BLOOM_ENABLED.0=Off
 value.BLOOM_ENABLED.1=On
 
+option.BLOOM_STYLE=Bloom Style
+option.BLOOM_STYLE.comment=Changes the bloom calculations to be either realistic or stylized
+value.BLOOM_STYLE.-1=Use Style
+value.BLOOM_STYLE.1=Stylized
+value.BLOOM_STYLE.2=Realistic
+
 option.BLOOM_QUALITY=Bloom Quality
 option.BLOOM_QUALITY.comment=Controls the number of samples for bloom level
 value.BLOOM_QUALITY.-1=Use Style
+
+option.BLOOM_RENDER_SCALE=Bloom Render Scale
+option.BLOOM_RENDER_SCALE.comment=Controls the resolution that bloom is rendered at. Each dimension is decreased by this amount, meaning the number of pixels is decreased by this value squared, meaning the default value of x0.25 is 16x less pixels
+value.BLOOM_RENDER_SCALE.3=x0.125
+value.BLOOM_RENDER_SCALE.2=x0.25
+value.BLOOM_RENDER_SCALE.1=x0.5
+value.BLOOM_RENDER_SCALE.0=x1
 
 option.BLOOM_AMOUNT=Bloom Amount
 value.BLOOM_AMOUNT.-1=Use Style
@@ -760,12 +773,6 @@ value.BLOOM_LOW_CUTOFF.-1=Use Style
 option.BLOOM_HIGH_CUTOFF=Bloom High Cutoff
 option.BLOOM_HIGH_CUTOFF.comment=The value at which all colors are treated as equally light
 value.BLOOM_HIGH_CUTOFF.-1=Use Style
-
-option.BLOOM_STYLE=Bloom Style
-option.BLOOM_STYLE.comment=Changes the bloom calculations to be either realistic or stylized
-value.BLOOM_STYLE.-1=Use Style
-value.BLOOM_STYLE.1=Stylized
-value.BLOOM_STYLE.2=Realistic
 
 
 
