@@ -154,6 +154,7 @@ void main() {
 	#if EMISSIVE_TEXTURES_ENABLED == 1
 		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
+			float glowingAmount = glowingAmount * max(getLum(rawColor.rgb) * 1.25, getSaturation(rawColor.rgb));
 			lmcoord.x = glowingAmount + (1.0 - glowingAmount) * lmcoord.x;
 			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
 			lmcoord = clamp(lmcoord, 0.0, 1.0);

@@ -481,7 +481,7 @@
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
-										#define FOLIAGE_TINT_GREEN 1.05
+										#define FOLIAGE_TINT_GREEN 1.06
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE

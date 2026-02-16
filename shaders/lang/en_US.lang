@@ -666,6 +666,8 @@ screen.HEIGHT_BASED_DESATURATION_MENU=Height-Based Desaturation
 option.HBD_ENABLED=HBD Enabled
 option.HBD_ENABLED.comment=Enabled or disables height-based desaturation (only applies in the overworld)
 value.HBD_ENABLED.-1=Use Style
+value.HBD_ENABLED.0=Off
+value.HBD_ENABLED.1=On
 
 option.HBD_STRENGTH=HBD Strength
 option.HBD_STRENGTH.comment=Sets the maximum strength of the height-based desaturation
