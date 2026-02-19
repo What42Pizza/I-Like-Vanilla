@@ -83,6 +83,35 @@ value.GLOWING_STEMS_STRENGTH.-1=Use Style
 
 
 
+screen.SPECIFIC_GLOWING_ORES_MENU=Specific Glowing Ores
+screen.SPECIFIC_GLOWING_ORES_MENU.comment=Allows you to set the brightness of individual ores
+
+option.GLOWING_COAL_ORE_STRENGTH=Glowing Coal Ore Strength
+
+option.GLOWING_IRON_ORE_STRENGTH=Glowing Iron Ore Strength
+
+option.GLOWING_COPPER_ORE_STRENGTH=Glowing Copper Ore Strength
+
+option.GLOWING_GOLD_ORE_STRENGTH=Glowing Gold Ore Strength
+
+option.GLOWING_REDSTONE_ORE_STRENGTH=Glowing Redstone Ore Strength
+
+option.GLOWING_EMERALD_ORE_STRENGTH=Glowing Emerald Ore Strength
+
+option.GLOWING_LAPIS_ORE_STRENGTH=Glowing Lapis Ore Strength
+
+option.GLOWING_DIAMOND_ORE_STRENGTH=Glowing Diamond Ore Strength
+
+option.GLOWING_NETHER_GOLD_ORE_STRENGTH=Glowing Nether Gold Strength
+
+option.GLOWING_NETHER_QUARTS_ORE_STRENGTH=Glowing Nether Quartz Strength
+
+option.GLOWING_ANCIENT_DEBRIS_STRENGTH=Glowing Ancient Debris Strength
+
+
+
+
+
 screen.POM_MENU=POM (Experimental)
 screen.POM_MENU.comment=Parallax Occlusion Mapping, adds fake depth to textures
 

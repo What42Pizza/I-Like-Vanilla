@@ -562,39 +562,39 @@ emission: vec3(0.9, 0.95, 1.0)
 
 block coal_ore, deepslate_coal_ore:
 weight: 1
-glow detect min: vec3(0.0, 0.0, 14.5)
+glow detect min: vec3( 0.0,  0.0, 14.5)
 glow detect max: vec3(90.0, 16.0, 29.4)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_COAL_ORE_STRENGTH
 
 block iron_ore, deepslate_iron_ore:
 weight: 1
 glow detect min: vec3(18.0, 24.8, 53.3)
 glow detect max: vec3(56.0, 37.5, 88.6)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_IRON_ORE_STRENGTH
 
 block copper_ore, deepslate_copper_ore:
 weight: 1
 glow detect min: vec3(  0.0, 31.8, 46.3)
 glow detect max: vec3(162.0, 65.6, 87.8)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_COPPER_ORE_STRENGTH
 
 block gold_ore, deepslate_gold_ore:
 weight: 1
 glow detect min: vec3(36.0, 29.0,  92.2)
 glow detect max: vec3(72.0, 94.0, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_GOLD_ORE_STRENGTH
 
 block redstone_ore:lit=false, deepslate_redstone_ore:lit=false:
 weight: 1
-glow detect min: vec3( 0.0, 46.3, 58.8)
-glow detect max: vec3(18.0, 100.0, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow detect min: vec3(  0.0,  46.3,  21.0)
+glow detect max: vec3(360.0, 100.0, 100.0)
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH
 
 block redstone_ore:lit=true, deepslate_redstone_ore:lit=true:
 weight: 1
-glow detect min: vec3( 0.0, 46.3, 58.8)
-glow detect max: vec3(18.0, 100.0, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow detect min: vec3(  0.0,  46.3,  21.0)
+glow detect max: vec3(360.0, 100.0, 100.0)
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH
 voxelize: true
 emission: vec3(0.1, 0.0, 0.0)
 
@@ -602,37 +602,37 @@ block emerald_ore, deepslate_emerald_ore:
 weight: 1
 glow detect min: vec3(126.0,  14.9,  48.2)
 glow detect max: vec3(162.0, 100.0, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_EMERALD_ORE_STRENGTH
 
 block lapis_ore, deepslate_lapis_ore:
 weight: 1
 glow detect min: vec3(198.0, 57.0, 54.5)
 glow detect max: vec3(234.0, 91.5, 95.7)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_LAPIS_ORE_STRENGTH
 
 block diamond_ore, deepslate_diamond_ore:
 weight: 1
 glow detect min: vec3(162.0, 16.5,  57.3)
 glow detect max: vec3(184.0, 86.3, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_DIAMOND_ORE_STRENGTH
 
 block nether_gold_ore, deepslate_nether_gold_ore:
 weight: 1
 glow detect min: vec3(25.0, 29.0,  78.0)
-glow detect max: vec3(72.0, 85.4, 100.0)
-glow amount: GLOWING_ORES_STRENGTH
+glow detect max: vec3(72.0, 94.0, 100.0)
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_NETHER_GOLD_ORE_STRENGTH
 
 block nether_quartz_ore, deepslate_nether_quartz_ore:
 weight: 1
-glow detect min: vec3(  0.0,  6.5, 72.5)
-glow detect max: vec3(360.0, 30.3, 90.6)
-glow amount: GLOWING_ORES_STRENGTH
+glow detect min: vec3(  0.0,  5.0, 65.0)
+glow detect max: vec3(360.0, 30.3, 92.0)
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_NETHER_QUARTS_ORE_STRENGTH
 
 block ancient_debris:
 weight: 1
 glow detect min: vec3(11.4, 15.4, 39.6)
 glow detect max: vec3(20.9, 36.6, 58.4)
-glow amount: GLOWING_ORES_STRENGTH * 0.75
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_ANCIENT_DEBRIS_STRENGTH
 
 block raw_iron_block, raw_copper_block, raw_gold_block:
 weight: 1
