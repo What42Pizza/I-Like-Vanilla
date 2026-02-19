@@ -3,7 +3,6 @@ in_out vec2 lmcoord;
 in_out vec4 glcolor;
 flat in_out vec3 normal;
 in_out vec3 viewPos;
-in_out vec3 debug;
 
 flat in_out vec3 shadowcasterLight;
 
@@ -67,7 +66,7 @@ void main() {
 	playerPos.z += horizontalAmount;
 	
 	float worldY = playerPos.y + cameraPosition.y;
-	bool isBottom = (gl_VertexID % 4) > 1;
+	bool isBottom = playerPos.y < 0.0;
 	float maxY = cloudHeight + 1.0 - uint(isBottom) * 10.0;
 	worldY = min(worldY, maxY);
 	playerPos.y = worldY - cameraPosition.y;
@@ -76,7 +75,7 @@ void main() {
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		gl_Position = projectIsometric(playerPos);
 	#else
-		gl_Position = gbufferProjection * vec4(viewPos, 1.0);
+		gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * vec4(playerPos, 1.0);
 	#endif
 	
 	#if TAA_ENABLED == 1

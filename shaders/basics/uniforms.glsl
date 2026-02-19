@@ -50,7 +50,7 @@ uniform float wetness;
 uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
-uniform float cloudHeight;
+uniform float cloudHeight = 256.0;
 
 uniform vec4 entityColor;
 uniform int entityId;
@@ -137,7 +137,7 @@ const float damageAmount = 0.0;
 
 float taaOffsetX = fract(1.3247179572 * frameCounter + 0.5) * 2.0 - 1.0;
 float taaOffsetY = fract(1.7548776662 * frameCounter + 0.5) * 2.0 - 1.0;
-vec2 taaOffsetUniform = vec2(taaOffsetX / viewWidth * TAA_JITTER_AMOUNT, taaOffsetY / viewHeight * TAA_JITTER_AMOUNT);
+vec2 taaOffsetUniform = vec2(taaOffsetX / viewWidth, taaOffsetY / viewHeight);
 
 const float sunRiseStart = 0.0;
 const float sunRiseEnd = 0.05;
