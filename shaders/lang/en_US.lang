@@ -1509,10 +1509,6 @@ option.CLOUD_FOG_CURVE=Cloud Fog Curve
 option.CLOUD_FOG_CURVE.comment=Set how quickly the clouds fade out
 value.CLOUD_FOG_CURVE.-1=Use Style
 
-option.CLOUD_WEATHER_DARKEN=Cloud Weather Darken
-option.CLOUD_WEATHER_DARKEN.comment=How much to darken clouds when raining / snowing
-value.CLOUD_WEATHER_DARKEN.-1=Use Style
-
 option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
 value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
 value.REALISTIC_CLOUDS_ENABLED.0=Off
@@ -1609,6 +1605,18 @@ value.CLOUD_BOTTOM_TINT_GREEN.-1=Use Style
 option.CLOUD_BOTTOM_TINT_BLUE=Cloud Bottom Tint Blue
 option.CLOUD_BOTTOM_TINT_BLUE.comment=Controls the color of the bottom / sides of clouds
 value.CLOUD_BOTTOM_TINT_BLUE.-1=Use Style
+
+option.CLOUD_WEATHER_TINT_RED=Cloud Weather Tint Red
+option.CLOUD_WEATHER_TINT_RED.comment=Controls the color of clouds during rain
+value.CLOUD_WEATHER_TINT_RED.-1=Use Style
+
+option.CLOUD_WEATHER_TINT_GREEN=Cloud Weather Tint Green
+option.CLOUD_WEATHER_TINT_GREEN.comment=Controls the color of clouds during rain
+value.CLOUD_WEATHER_TINT_GREEN.-1=Use Style
+
+option.CLOUD_WEATHER_TINT_BLUE=Cloud Weather Tint Blue
+option.CLOUD_WEATHER_TINT_BLUE.comment=Controls the color of clouds during rain
+value.CLOUD_WEATHER_TINT_BLUE.-1=Use Style
 
 
 

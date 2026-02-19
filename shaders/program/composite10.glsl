@@ -51,7 +51,7 @@ void main() {
 	
 	bloomMult = smoothstep(BLOOM_LOW_CUTOFF, BLOOM_HIGH_CUTOFF, bloomMult);
 	#if BLOOM_STYLE == 1
-		bloomMult *= getSaturation(bloomColor);
+		bloomMult *= 0.5 + 0.5 * getSaturation(bloomColor);
 	#endif	
 	float fogDecrease = 1.0 - 0.5 * fogAmount;
 	fogDecrease *= fogDecrease;

@@ -9,7 +9,6 @@ flat in_out vec2 encodedNormal;
 void main() {
 	vec4 color = glcolor;
 	if (color.a < 0.01) discard;
-	color.a = 0.5 + 0.5 * color.a;
 	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
@@ -18,7 +17,7 @@ void main() {
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
-		pack_2x8(eyeBrightness / 240.0),
+		pack_2x8(lmcoord),
 		pack_2x8(0.0, 0.3),
 		encodedNormal
 	);
@@ -43,6 +42,8 @@ void main() {
 	glcolor = gl_Color;
 	encodedNormal = encodeNormal(gbufferModelView[1].xyz);
 	
+	glcolor.a = 0.5 + 0.5 * glcolor.a;
+	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 		gl_Position = projectIsometric(playerPos);
@@ -53,6 +54,12 @@ void main() {
 		vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
 		screenDir = normalize(screenDir) * lineWidth;
 		screenDir.xy = screenDir.yx;
+		if (glcolor.r + glcolor.b + glcolor.g < 0.1) {
+			lmcoord = eyeBrightness / 512.0;
+			lmcoord *= lmcoord;
+			lmcoord.x = max(lmcoord.x, heldBlockLightValue / 32.0);
+			glcolor.a = 1.0 - max(lmcoord.x, lmcoord.y);
+		}
 		screenDir.x *= -1;
 		screenDir *= sign(screenDir.x);
 		screenDir.x *= invAspectRatio;

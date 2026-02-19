@@ -3,6 +3,7 @@
   - Added settings 'Bloom Style' and 'Bloom Render Scale'
   - Added settings for moon phase brightness multipliers
   - Added settings for the brightnesses of each glowing ore
+  - Split setting 'Cloud Weather Darken' into 'Cloud Weather Tint Red/Green/Blue'
   - Tweaked settings and effects for Fantasy and Realistic styles
   - Improved glowing ores support
   - Fixed bugs

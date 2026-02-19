@@ -54,7 +54,8 @@ void main() {
 	stepDir /= blockDepth * 0.25 + 1.0;
 	
 	texcoord -= stepDir * SAMPLE_COUNT;
-	texcoord += stepDir * (bayer64(gl_FragCoord.xy) - 0.5) * 0.5;
+	float dither = fract(bayer64(gl_FragCoord.xy) + 0.5 * frameCounter);
+	texcoord += stepDir * (dither - 0.5) * 0.5;
 	for (int i = 0; i < SAMPLE_COUNT; i++) {
 		bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord, 0).rgb * sampleWeights[SAMPLE_COUNT - 1 - i];
 		texcoord += stepDir;

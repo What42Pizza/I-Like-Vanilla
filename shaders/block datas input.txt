@@ -759,6 +759,11 @@ weight: 100
 specularness: 0.2
 brightness: 0.82
 
+block red_sand:
+weight: 3
+specularness: 0.2
+brightness: 0.95
+
 block diorite, diorite_stairs, diorite_slab, diorite_wall:
 weight: 2
 specularness: 0.25

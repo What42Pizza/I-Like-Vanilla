@@ -15,14 +15,17 @@ flat in_out vec3 shadowcasterLight;
 void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
-	color.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	
 	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
 	
 	#if TEMPORAL_FILTER_ENABLED == 1
-		color.a = mix(1.0, color.a, 16.0 / (16.0 + length(viewPos))) * uint(color.a > 0.0);
+		float alphaLift = length(viewPos) / 16.0;
+		alphaLift = min(alphaLift, 0.75) * uint(color.a > 0.0);
+		color.a = alphaLift + (1.0 - alphaLift) * color.a;
 	#endif
+	
+	color.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	
 	/* DRAWBUFFERS:0 */
@@ -58,6 +61,7 @@ void main() {
 	shadowcasterLight = getShadowcasterLight();
 	
 	vec3 playerPos = gl_Vertex.xyz;
+	playerPos.x += bayer16(playerPos.xz);
 	
 	float horizontalAmount = playerPos.y * WEATHER_HORIZONTAL_AMOUNT * 0.5;
 	playerPos.xz *= 2.0;
