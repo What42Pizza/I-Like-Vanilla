@@ -634,6 +634,12 @@ glow detect min: vec3(11.4, 15.4, 39.6)
 glow detect max: vec3(20.9, 36.6, 58.4)
 glow amount: GLOWING_ORES_STRENGTH * GLOWING_ANCIENT_DEBRIS_STRENGTH
 
+block gilded_blackstone:
+weight: 1
+glow detect min: vec3(29.5, 70.2, 49.4)
+glow detect max: vec3(55.3, 93.1, 98.8)
+glow amount: GLOWING_ORES_STRENGTH * GLOWING_GILDED_BLACKSTONE_STRENGTH
+
 block raw_iron_block, raw_copper_block, raw_gold_block:
 weight: 1
 specularness: 0.5

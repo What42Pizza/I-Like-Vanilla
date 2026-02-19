@@ -71,9 +71,17 @@ option.EMISSIVE_TEXTURES_ENABLED.comment=Enabled glowing ores, glowing stems, et
 value.EMISSIVE_TEXTURES_ENABLED.0=Off
 value.EMISSIVE_TEXTURES_ENABLED.1=On
 
-option.GLOWING_ORES_STRENGTH=Glowing Ores Strength
-option.GLOWING_ORES_STRENGTH.comment=The emissive strength for glowing ores
-value.GLOWING_ORES_STRENGTH.-1=Use Style
+option.GLOWING_ORES_STRENGTH_OVERWORLD=Glowing Ores Strength (Overworld)
+option.GLOWING_ORES_STRENGTH_OVERWORLD.comment=The emissive strength for glowing ores when in the overworld
+value.GLOWING_ORES_STRENGTH_OVERWORLD.-1=Use Style
+
+option.GLOWING_ORES_STRENGTH_NETHER=Glowing Ores Strength (Nether)
+option.GLOWING_ORES_STRENGTH_NETHER.comment=The emissive strength for glowing ores when in the nether
+value.GLOWING_ORES_STRENGTH_NETHER.-1=Use Style
+
+option.GLOWING_ORES_STRENGTH_END=Glowing Ores Strength (End)
+option.GLOWING_ORES_STRENGTH_END.comment=The emissive strength for glowing ores when in the end
+value.GLOWING_ORES_STRENGTH_END.-1=Use Style
 
 option.GLOWING_STEMS_STRENGTH=Glowing Stems Strength
 option.GLOWING_STEMS_STRENGTH.comment=The emissive strength of Crimson Stems and Warped Stems
