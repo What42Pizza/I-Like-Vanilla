@@ -159,6 +159,8 @@ void main() {
 			lmcoord.y = glowingAmount * 0.25 + (1.0 - glowingAmount * 0.25) * lmcoord.y;
 			lmcoord = clamp(lmcoord, 0.0, 1.0);
 			color.rgb *= 1.0 + glowingAmount * 0.25;
+		} else {
+			color.rgb *= 0.75;
 		}
 	#endif
 	
