@@ -86,25 +86,31 @@ void main() {
 		vec2 lmcoord = unpack_2x8(data.x);
 		
 		#if REFLECTIVE_EVERYTHING == 1
-			float reflectionStrength = 1.0;
+			float reflectiveness = 1.0;
 		#else
-			float reflectionStrength = unpack_2x8(data.y).x;
+			vec2 refPlusSpec = unpack_2x8(data.y);
+			float reflectiveness = refPlusSpec.x;
+			float specularness = refPlusSpec.y;
+			if (abs(specularness - 254.0 / 255.0) < 0.001) {
+				reflectiveness = 0.0;
+				specularness = 0.0;
+			}
 		#endif
 		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
-			reflectionStrength *= sqrt(invCloudsThickness);
+			reflectiveness *= sqrt(invCloudsThickness);
 		#endif
 		#if BORDER_FOG_ENABLED == 1
 			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 			float _fogDistance;
 			float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
-			reflectionStrength *= 1.0 - fogAmount;
+			reflectiveness *= 1.0 - fogAmount;
 		#endif
-		if (reflectionStrength > 0.01) {
+		if (reflectiveness > 0.01) {
 			#ifdef DISTANT_HORIZONS
-				doReflections(color, depth0, dhDepth0, normal, viewPos, lmcoord, reflectionStrength);
+				doReflections(color, depth0, dhDepth0, normal, viewPos, lmcoord, reflectiveness);
 			#else
-				doReflections(color, depth0, 0.0, normal, viewPos, lmcoord, reflectionStrength);
+				doReflections(color, depth0, 0.0, normal, viewPos, lmcoord, reflectiveness);
 			#endif
 		}
 		

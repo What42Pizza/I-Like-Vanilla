@@ -21,7 +21,7 @@ void main() {
 	
 	#if TEMPORAL_FILTER_ENABLED == 1
 		float alphaLift = length(viewPos) / 16.0;
-		alphaLift = min(alphaLift, 0.75) * uint(color.a > 0.0);
+		alphaLift = min(alphaLift, 0.75) * color.a;
 		color.a = alphaLift + (1.0 - alphaLift) * color.a;
 	#endif
 	

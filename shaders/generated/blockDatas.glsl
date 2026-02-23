@@ -52,7 +52,7 @@ if (materialId < 24u) {
 						}
 					} else {
 						if (materialId < 4u) {
-							SET_GLOWING_COLOR(vec3(21.0,  31.3, 69.4), vec3(60.0, 100.0, 100.0), 1.5);
+							SET_GLOWING_COLOR(vec3(21.0,  31.3, 69.4), vec3(60.0, 100.0, 100.0), 0.6);
 							SET_VOXEL_ID(58u);
 						} else {
 							SET_REFLECTIVENESS(0.4);
@@ -145,7 +145,7 @@ if (materialId < 24u) {
 			} else {
 				if (materialId < 22u) {
 					SET_SPECULARNESS(0.2);
-					TWEAK_GLCOLOR_BRIGHTNESS(0.82);
+					TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 				} else {
 					SET_REFLECTIVENESS(0.4);
 					SET_SPECULARNESS(1.0);
@@ -175,7 +175,7 @@ if (materialId < 24u) {
 								SET_REFLECTIVENESS(1.0);
 								SET_SPECULARNESS(0.5);
 							} else {
-								SET_GLOWING_COLOR(vec3(28.0, 56.7, 64.3), vec3(51.0, 79.3, 96.9), 0.7);
+								SET_GLOWING_COLOR(vec3(28.0, 56.7, 64.3), vec3(51.0, 79.3, 96.9), 1.1);
 								SET_VOXEL_ID(76u);
 							}
 						}
@@ -228,7 +228,7 @@ if (materialId < 24u) {
 									SET_VOXEL_ID(75u);
 								} else {
 									if (materialId < 41u) {
-										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.92);
 									} else {
 									}
 								}
@@ -385,30 +385,30 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 76u) {
 								if (materialId < 74u) {
 									if (materialId < 73u) {
-										SET_GLOWING_COLOR(vec3(25.0, 29.0,  78.0), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_NETHER_GOLD_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(25.0, 29.0,  78.0), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_NETHER_GOLD_ORE_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3(162.0, 16.5,  57.3), vec3(184.0, 86.3, 100.0), GLOWING_ORES_STRENGTH * GLOWING_DIAMOND_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(162.0, 16.5,  57.3), vec3(184.0, 86.3, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_DIAMOND_ORE_STRENGTH);
 									}
 								} else {
 									if (materialId < 75u) {
-										SET_GLOWING_COLOR(vec3(11.4, 15.4, 39.6), vec3(20.9, 36.6, 58.4), GLOWING_ORES_STRENGTH * GLOWING_ANCIENT_DEBRIS_STRENGTH);
+										SET_GLOWING_COLOR(vec3(11.4, 15.4, 39.6), vec3(20.9, 36.6, 58.4), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_ANCIENT_DEBRIS_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3(  0.0,  5.0, 65.0), vec3(360.0, 30.3, 92.0), GLOWING_ORES_STRENGTH * GLOWING_NETHER_QUARTS_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(  0.0,  5.0, 65.0), vec3(360.0, 30.3, 92.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_NETHER_QUARTS_ORE_STRENGTH);
 									}
 								}
 							} else {
 								if (materialId < 78u) {
 									if (materialId < 77u) {
-										SET_GLOWING_COLOR(vec3(  0.0,  46.3,  21.0), vec3(360.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(  0.0,  46.3,  21.0), vec3(360.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_REDSTONE_ORE_STRENGTH);
 										SET_VOXEL_ID(49u);
 									} else {
-										SET_GLOWING_COLOR(vec3(  0.0,  46.3,  21.0), vec3(360.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(  0.0,  46.3,  21.0), vec3(360.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_REDSTONE_ORE_STRENGTH);
 									}
 								} else {
 									if (materialId < 79u) {
-										SET_GLOWING_COLOR(vec3(198.0, 57.0, 54.5), vec3(234.0, 91.5, 95.7), GLOWING_ORES_STRENGTH * GLOWING_LAPIS_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(198.0, 57.0, 54.5), vec3(234.0, 91.5, 95.7), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_LAPIS_ORE_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3(126.0,  14.9,  48.2), vec3(162.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_EMERALD_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(126.0,  14.9,  48.2), vec3(162.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_EMERALD_ORE_STRENGTH);
 									}
 								}
 							}
@@ -432,7 +432,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 										SET_SPECULARNESS(0.5);
 										TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 									} else {
-										SET_GLOWING_COLOR(vec3(25.0, 29.0,  49.4), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_GILDED_BLACKSTONE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(25.0, 29.0,  49.4), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_GILDED_BLACKSTONE_STRENGTH);
 									}
 								} else {
 									if (materialId < 87u) {
@@ -487,15 +487,15 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 100u) {
 								if (materialId < 98u) {
 									if (materialId < 97u) {
-										SET_GLOWING_COLOR(vec3(18.0, 24.8, 53.3), vec3(56.0, 37.5, 88.6), GLOWING_ORES_STRENGTH * GLOWING_IRON_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(18.0, 24.8, 53.3), vec3(56.0, 37.5, 88.6), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_IRON_ORE_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3( 0.0,  0.0, 14.5), vec3(90.0, 16.0, 29.4), GLOWING_ORES_STRENGTH * GLOWING_COAL_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3( 0.0,  0.0, 14.5), vec3(90.0, 16.0, 29.4), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_COAL_ORE_STRENGTH);
 									}
 								} else {
 									if (materialId < 99u) {
-										SET_GLOWING_COLOR(vec3(36.0, 29.0,  92.2), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_GOLD_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(36.0, 29.0,  92.2), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_GOLD_ORE_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3(  0.0, 31.8, 46.3), vec3(162.0, 65.6, 87.8), GLOWING_ORES_STRENGTH * GLOWING_COPPER_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(  0.0, 31.8, 46.3), vec3(162.0, 65.6, 87.8), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_COPPER_ORE_STRENGTH);
 									}
 								}
 							} else {

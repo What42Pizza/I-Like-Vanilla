@@ -103,7 +103,9 @@ void main() {
 		
 		vec4 data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
 		vec2 lmcoord = unpack_2x8(data.x);
-		float specularness = unpack_2x8(data.y).y;
+		vec2 refPlusSpec = unpack_2x8(data.y);
+		float reflectiveness = refPlusSpec.x;
+		float specularness = refPlusSpec.y;
 		vec3 normal = decodeNormal(data.zw);
 		#ifndef MODERN_BACKEND
 			vec3 viewPosUp    = screenToView(vec3(texcoord + ivec2( 0, -1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0, -1), 0).r));
@@ -114,8 +116,14 @@ void main() {
 			vec3 yDir = normalize(viewPosUp - viewPosDown);
 			normal = cross(xDir, yDir);
 		#endif
+		float glowingAmount = 0.0;
+		if (abs(specularness - 254.0 / 255.0) < 0.001) {
+			glowingAmount = reflectiveness * 2.0;
+			reflectiveness = 0.0;
+			specularness = 0.0;
+		}
 		float shadowBrightness;
-		doFshLighting(color, shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, depth);
+		doFshLighting(color, shadowBrightness, lmcoord.x, lmcoord.y, specularness, glowingAmount, viewPos, normal, depth);
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {

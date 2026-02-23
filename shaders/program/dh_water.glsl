@@ -103,7 +103,7 @@ void main() {
 	
 	// main lighting
 	float _shadowBrightness;
-	doFshLighting(color.rgb, _shadowBrightness, lmcoord.x, lmcoord.y, specularness, viewPos, normal, gl_FragCoord.z);
+	doFshLighting(color.rgb, _shadowBrightness, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
 	/* DRAWBUFFERS:03 */

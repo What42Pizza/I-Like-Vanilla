@@ -222,7 +222,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 
 
 
-void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal, float depth) {
+void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrightness, float ambientBrightness, float specularness, float glowingAmount, vec3 viewPos, vec3 normal, float depth) {
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -337,6 +337,8 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
 	nightVisionMin *= 1.0 + 0.5 * sideShading;
 	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
+	
+	lighting += glowingAmount * vec3(1.0, 0.85, 0.8);
 	
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		lighting = vec3(1.0);

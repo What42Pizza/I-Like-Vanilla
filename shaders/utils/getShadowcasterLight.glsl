@@ -22,7 +22,7 @@ vec3 getShadowcasterLight() {
 		
 		return shadowcasterLight;
 	#elif defined NETHER
-		return vec3(0.0);
+		return vec3(1.0);
 	#elif defined END
 		return END_SKYLIGHT_COLOR;
 	#endif
