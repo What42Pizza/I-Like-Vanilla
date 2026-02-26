@@ -228,7 +228,7 @@ if (materialId < 24u) {
 									SET_VOXEL_ID(75u);
 								} else {
 									if (materialId < 41u) {
-										TWEAK_GLCOLOR_BRIGHTNESS(0.92);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 									} else {
 									}
 								}

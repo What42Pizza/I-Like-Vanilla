@@ -909,4 +909,4 @@ brightness: 0.9
 
 block white_terracotta, yellow_terracotta:
 weight: 1
-brightness: 0.92
+brightness: 0.9

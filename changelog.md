@@ -1,4 +1,4 @@
-- v1.3.1
+- v1.3.1 (26/02/26)
   - Replaced bloom implementation
   - Added settings 'Bloom Style' and 'Bloom Render Scale'
   - Added settings for moon phase brightness multipliers
