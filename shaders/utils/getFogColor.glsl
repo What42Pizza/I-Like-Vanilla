@@ -3,7 +3,7 @@
 
 
 
-vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
+vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 	vec3 fogColorOut;
 	
 	#ifdef OVERWORLD
@@ -65,7 +65,11 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos, float skylightBrightness) {
 		fogColorOut *= 3.0/2.0 * 1.2;
 		fogColorOut *= 0.3 + 0.7 * dayPercent;
 		
-		fogColorOut = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), fogColorOut, smootherEyeBrightness.y);
+		#if UNDERGROUND_FOG_CONDITION == 1
+			fogColorOut = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), fogColorOut, smootherEyeBrightness.y);
+		#elif UNDERGROUND_FOG_CONDITION == 2
+			fogColorOut = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), fogColorOut, positionalUndergroundDarkness);
+		#endif
 		
 	#elif defined NETHER
 		

@@ -384,7 +384,7 @@ block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathe
 weight: 10
 glow detect min: vec3(21.0,  31.3, 69.4)
 glow detect max: vec3(60.0, 100.0, 100.0)
-glow amount: 0.6
+glow amount: 0.5
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

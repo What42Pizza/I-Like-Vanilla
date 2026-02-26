@@ -320,11 +320,11 @@
 #endif
 #if BLOCK_GREEN == -1
 #undef BLOCK_GREEN
-										#define BLOCK_GREEN 0.85
+										#define BLOCK_GREEN 0.9
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.65
+										#define BLOCK_BLUE 0.7
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -1594,9 +1594,9 @@
 #undef UNDERGROUND_FOG_BRIGHTNESS
 										#define UNDERGROUND_FOG_BRIGHTNESS 0.1
 #endif
-#if UNDERGROUND_FOG_ALTITUDE_IMPACT == -1
-#undef UNDERGROUND_FOG_ALTITUDE_IMPACT
-										#define UNDERGROUND_FOG_ALTITUDE_IMPACT 1.25
+#if UNDERGROUND_FOG_CONDITION == -1
+#undef UNDERGROUND_FOG_CONDITION
+										#define UNDERGROUND_FOG_CONDITION 1
 #endif
 
 
@@ -1646,7 +1646,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 1.5
+										#define WEATHER_FOG_DENSITY 1.0
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY

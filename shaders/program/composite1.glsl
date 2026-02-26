@@ -117,7 +117,7 @@ void main() {
 	
 	float fogDensity = fogDensity;
 	float fogDarken = fogDarken;
-	vec3 atmoFogColor = getFogColor(viewPos, playerPos, brightnesses.y);
+	vec3 atmoFogColor = getFogColor(viewPos, playerPos);
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
 	if (isEyeInWater == 0) {

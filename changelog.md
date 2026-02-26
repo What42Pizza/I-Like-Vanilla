@@ -5,6 +5,7 @@
   - Added settings for the brightnesses of each glowing ore
   - Split the setting 'Glowing Ores Strength' into overworld, nether, and end variants
   - Split setting 'Cloud Weather Darken' into 'Cloud Weather Tint Red/Green/Blue'
+  - Tweaked underground fog and added setting 'Underground Fog Condition'
   - Tweaked settings and effects for Fantasy and Realistic styles
   - Improved glowing ores support
   - Fixed bugs

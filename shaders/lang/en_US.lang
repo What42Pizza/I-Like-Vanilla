@@ -1945,9 +1945,11 @@ option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
 option.UNDERGROUND_FOG_BRIGHTNESS.comment=The underground sky is made darker so that the underground fog is made darker, and this controls the brightness of that underground darkness
 value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
 
-option.UNDERGROUND_FOG_ALTITUDE_IMPACT=Underground Fog Altitude Impact
-option.UNDERGROUND_FOG_ALTITUDE_IMPACT.comment=The underground fog tries to only appear for blocks below y=64 (when this setting is at 1.0), but this changes that value depending on your altitude. Higher impact values will make the underground fog start lower when you're higher, and lower values will make it appear higher when you're higher
-value.UNDERGROUND_FOG_ALTITUDE_IMPACT.-1=Use Style
+option.UNDERGROUND_FOG_CONDITION=Underground Fog Condition
+option.UNDERGROUND_FOG_CONDITION.comment=When to apply the underground fog darkening\n\nSkylight: apply the fog darkness according to skylight\nPosition: apply the fog darkness when below sea level
+value.UNDERGROUND_FOG_CONDITION.-1=Use style
+value.UNDERGROUND_FOG_CONDITION.1=Brightness
+value.UNDERGROUND_FOG_CONDITION.2=Position
 
 
 

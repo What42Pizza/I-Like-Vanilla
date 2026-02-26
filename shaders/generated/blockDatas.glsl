@@ -52,7 +52,7 @@ if (materialId < 24u) {
 						}
 					} else {
 						if (materialId < 4u) {
-							SET_GLOWING_COLOR(vec3(21.0,  31.3, 69.4), vec3(60.0, 100.0, 100.0), 0.6);
+							SET_GLOWING_COLOR(vec3(21.0,  31.3, 69.4), vec3(60.0, 100.0, 100.0), 0.5);
 							SET_VOXEL_ID(58u);
 						} else {
 							SET_REFLECTIVENESS(0.4);

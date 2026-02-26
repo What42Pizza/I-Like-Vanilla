@@ -50,7 +50,7 @@ uniform float wetness;
 uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
-uniform float cloudHeight = 256.0;
+uniform float cloudHeight = 192.0;
 
 uniform vec4 entityColor;
 uniform int entityId;
@@ -58,6 +58,7 @@ uniform float nightVision;
 uniform float blindness;
 uniform float darknessFactor;
 uniform float darknessLightFactor;
+uniform int currentRenderedItemId;
 
 
 
@@ -73,6 +74,9 @@ uniform vec2 pixelSize;
 uniform float betterRainStrength;
 uniform float rainReflectionStrength;
 uniform vec2 smootherEyeBrightness;
+#if UNDERGROUND_FOG_CONDITION == 2
+	uniform float positionalUndergroundDarkness;
+#endif
 
 uniform bool isSun;
 
@@ -122,6 +126,9 @@ vec2 pixelSize = vec2(1.0 / viewWidth, 1.0 / viewHeight);
 float betterRainStrength = 1.0 - sqrt(1.0 - rainStrength);
 float rainReflectionStrength = betterRainStrength;
 vec2 smootherEyeBrightness = eyeBrightnessSmooth / 240.0;
+#if UNDERGROUND_FOG_CONDITION == 2
+	float positionalUndergroundDarkness = percentThrough(eyeAltitude, 60.0, 52.0);
+#endif
 
 bool isDay = sunAngle <= 0.5;
 bool isOtherLightSource = shadowLightPosition.z > 0.0001;

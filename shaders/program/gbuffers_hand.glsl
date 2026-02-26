@@ -83,6 +83,20 @@ void main() {
 	#endif
 	
 	
+	// block id stuff
+	uint encodedData = max(uint(currentRenderedItemId) - (1u << 13u), 0u) + (1u << 13u);
+	#ifndef MODERN_BACKEND
+		if (encodedData == 65535u) encodedData = 0u;
+	#endif
+	uint materialId = encodedData;
+	materialId &= (1u << 10u) - 1u;
+	
+	
+	// get block data
+	#define DO_BRIGHTNESS_TWEAKS
+	#include "/generated/blockDatas.glsl"
+	
+	
 	#if ISOMETRIC_RENDERING_ENABLED == 1
 		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
 		gl_Position = projectIsometric(playerPos);
