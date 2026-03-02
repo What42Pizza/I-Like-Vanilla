@@ -316,7 +316,7 @@
 
 #if BLOCK_RED == -1
 #undef BLOCK_RED
-										#define BLOCK_RED 1.0
+										#define BLOCK_RED 1.05
 #endif
 #if BLOCK_GREEN == -1
 #undef BLOCK_GREEN
@@ -324,7 +324,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.7
+										#define BLOCK_BLUE 0.6
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -642,7 +642,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.7
+										#define SUNRAYS_AMOUNT_DAY 0.75
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -654,7 +654,7 @@
 #endif
 #if SUNRAYS_INCREASE_SUNSET == -1
 #undef SUNRAYS_INCREASE_SUNSET
-										#define SUNRAYS_INCREASE_SUNSET 0.35
+										#define SUNRAYS_INCREASE_SUNSET 0.3
 #endif
 #if SUNRAYS_SUN_RED == -1
 #undef SUNRAYS_SUN_RED

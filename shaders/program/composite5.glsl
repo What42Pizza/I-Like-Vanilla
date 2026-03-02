@@ -121,7 +121,7 @@ void main() {
 	/* DRAWBUFFERS:0 */
 	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
-	#if TEMPORAL_FILTER_ENABLED == 1 || SSS_PHOSPHOR == 1 || MOTION_BLUR_ENABLED == 1
+	#if TEMPORAL_FILTER_ENABLED == 1 || MOTION_BLUR_ENABLED == 1 || SSS_PHOSPHOR == 1 || SSS_LIDAR == 1
 		/* DRAWBUFFERS:01 */
 		#if MOTION_BLUR_ENABLED == 1
 			prevColor *= 0.5;

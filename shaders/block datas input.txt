@@ -663,6 +663,10 @@ weight: 10
 waviness: 1
 brightness: 1.15
 
+block pumpkin:
+weight: 1
+alias: BLOCK_ID_PUMPKIN
+
 block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves:
 weight: 2000
 waviness: 3

@@ -1,3 +1,9 @@
+- v1.3.2
+  - Tweaked effects
+  - Fixed reflections regression
+
+<br>
+
 - v1.3.1 (26/02/26)
   - Replaced bloom implementation
   - Added settings 'Bloom Style' and 'Bloom Render Scale'

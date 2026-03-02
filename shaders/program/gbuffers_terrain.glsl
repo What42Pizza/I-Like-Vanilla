@@ -181,6 +181,8 @@ void main() {
 		}
 	#endif
 	
+	color.rgb *= 1.0 - dot(normal, gbufferModelView[1].xyz) * 0.125 * SIDE_SHADING_BRIGHT * uint(materialId == BLOCK_ID_PUMPKIN);
+	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		if (isDangerousLight > 0.0) {
 			vec3 blockPos = fract(playerPos + cameraPosition);
