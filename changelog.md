@@ -1,6 +1,7 @@
 - v1.3.2
   - Tweaked effects
   - Fixed reflections regression
+  - Split setting 'Shadow Distance' into 'Shadow Map Scale' and 'Shadow Map Distance Cutoff'
 
 <br>
 
