@@ -968,6 +968,10 @@
 #undef NEARBY_PARTICLE_TRANSPARENCY
 										#define NEARBY_PARTICLE_TRANSPARENCY 1.0
 #endif
+#if ENTITY_FLASH_STRENGTH == -1
+#undef ENTITY_FLASH_STRENGTH
+										#define ENTITY_FLASH_STRENGTH 0.5
+#endif
 
 
 
@@ -1122,6 +1126,10 @@
 
 
 
+#if HORIZON_FADE_STRENGTH == -1
+#undef HORIZON_FADE_STRENGTH
+										#define HORIZON_FADE_STRENGTH 2
+#endif
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
 										#define SUN_BRIGHTNESS 1.0

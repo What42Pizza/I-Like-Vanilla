@@ -16,7 +16,7 @@ const int   colortex2Format       = RGBA16;
 #endif
 const int   colortex3Format       = RGBA16;
 const bool  colortex3Clear        = true;
-const int   colortex4Format       = RGB8;
+const int   colortex4Format       = R11F_G11F_B10F;
 const bool  colortex4Clear        = false;
 const int   colortex5Format       = RGB10_A2;
 const bool  colortex5Clear        = true;

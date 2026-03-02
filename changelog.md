@@ -1,7 +1,9 @@
 - v1.3.2
-  - Tweaked effects
-  - Fixed reflections regression
+  - Added setting 'Horizon Fade Strength'
+  - Added setting 'Entity Flash Strength'
   - Split setting 'Shadow Distance' into 'Shadow Map Scale' and 'Shadow Map Distance Cutoff'
+  - Fixed reflections regression
+  - Tweaked effects
 
 <br>
 

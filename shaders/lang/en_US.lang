@@ -1263,6 +1263,10 @@ option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
 option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
 value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
 
+option.ENTITY_FLASH_STRENGTH=Entity Flash Strength
+option.ENTITY_FLASH_STRENGTH.comment=Controls the strength of entity flashes, such as hitting entities, creepers flashing before exploding, etc
+value.ENTITY_FLASH_STRENGTH.-1=Use style
+
 
 
 
@@ -1433,6 +1437,10 @@ value.WATER_COLOR_AMOUNT.-1=Use Style
 
 
 screen.SKY_MENU=Sky
+
+option.HORIZON_FADE_STRENGTH=Horizon Fade Strength
+option.HORIZON_FADE_STRENGTH.comment=How quickly the sky should fade from its top color to its bottom color
+value.HORIZON_FADE_STRENGTH.-1=Use Style
 
 option.SUN_BRIGHTNESS=Sun Brightness
 value.SUN_BRIGHTNESS.-1=Use Style

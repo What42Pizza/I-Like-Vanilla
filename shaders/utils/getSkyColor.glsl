@@ -38,8 +38,24 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		float horizonAmount = 1.0 - upDot;
-		horizonAmount *= horizonAmount;
-		horizonAmount *= horizonAmount;
+		#if HORIZON_FADE_STRENGTH > 0
+			horizonAmount *= horizonAmount;
+		#endif
+		#if HORIZON_FADE_STRENGTH > 1
+			horizonAmount *= horizonAmount;
+		#endif
+		#if HORIZON_FADE_STRENGTH > 2
+			horizonAmount *= horizonAmount;
+		#endif
+		#if HORIZON_FADE_STRENGTH > 3
+			horizonAmount *= horizonAmount;
+		#endif
+		#if HORIZON_FADE_STRENGTH > 4
+			horizonAmount *= horizonAmount;
+		#endif
+		#if HORIZON_FADE_STRENGTH > 5
+			horizonAmount *= horizonAmount;
+		#endif
 		horizonAmount = 1.0 - horizonAmount;
 		skyColor = mix(horizonColor, skyColor, horizonAmount);
 		

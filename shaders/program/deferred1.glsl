@@ -82,7 +82,8 @@ void main() {
 			#else
 				const float objectsMixingSlope = 32.0;
 			#endif
-			vec3 skyObjects = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * (1.0 - 0.6 * skyColor) * clamp(1.0 - objectsMixingSlope * (1.0 - fogDistance), 0.0, 1.0);
+			vec3 skyObjects = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb;
+			skyObjects *= (1.0 - 0.6 * skyColor) * clamp(1.0 - objectsMixingSlope * (1.0 - fogDistance), 0.0, 1.0);
 			#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1
 				skyObjects *= OVERWORLD_SKYBOX_BRIGHTNESS;
 			#endif
