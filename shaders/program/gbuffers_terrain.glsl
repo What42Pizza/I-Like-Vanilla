@@ -138,10 +138,10 @@ void main() {
 	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
 	if (rawColor.a < 0.01) discard;
 	vec4 color = rawColor;
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.3 + (1.0 - ao) * 0.25);
-	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	color.rgb *= glcolor;
+	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
+	color.rgb *= 0.92 - TEXTURE_CONTRAST * 0.1 + texContrastMult * TEXTURE_CONTRAST;
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 + (1.0 - ao) * 0.25);
 	
 	#if POM_ENABLED == 1
 		color.rgb *= 1.0 - 0.1 * uint(prevDepth != normalAndDepth.a);

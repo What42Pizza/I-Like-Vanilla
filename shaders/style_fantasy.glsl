@@ -472,7 +472,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.1
+										#define TEXTURE_CONTRAST 0.25
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION

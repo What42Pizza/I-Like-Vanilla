@@ -477,7 +477,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.2
+										#define TEXTURE_CONTRAST 0.5
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
@@ -540,7 +540,7 @@
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.75
+										#define BLOOM_AMOUNT 0.7
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -552,11 +552,11 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 1.0
+										#define BLOOM_SIZE 1.2
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.35
+										#define BLOOM_LOW_CUTOFF 0.25
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF

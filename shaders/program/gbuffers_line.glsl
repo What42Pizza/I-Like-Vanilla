@@ -56,7 +56,6 @@ void main() {
 		screenDir.xy = screenDir.yx;
 		if (glcolor.r + glcolor.b + glcolor.g < 0.1) {
 			lmcoord = eyeBrightness / 512.0;
-			lmcoord *= lmcoord;
 			lmcoord.x = max(lmcoord.x, heldBlockLightValue / 32.0);
 			glcolor.a = 1.0 - max(lmcoord.x, lmcoord.y);
 		}

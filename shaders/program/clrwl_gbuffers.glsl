@@ -29,15 +29,16 @@ void main() {
 	
 	float reflectiveness = reflectiveness;
 	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
-	color.rgb = mix(color.rgb, color.rgb * color.rgb * (3.0 - 2.0 * color.rgb), TEXTURE_CONTRAST * 1.0);
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 - TEXTURE_CONTRAST * 0.3);
-	color.rgb = clamp(color.rgb, 0.0, 1.0);
 	
 	color.rgb = mix(color.rgb, overlayColor.rgb, overlayColor.a);
 	ao = (ao * ao + ao * 2.0) * 0.3333; // kinda like squaring but not as intense
 	ao = 1.0 - (1.0 - ao) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	color.rgb *= ao;
 	color.rgb *= glcolor;
+	
+	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
+	color.rgb *= 0.92 - TEXTURE_CONTRAST * 0.1 + texContrastMult * TEXTURE_CONTRAST;
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
 	
 	doVshLighting(lmcoord, viewPos, normal);
 	

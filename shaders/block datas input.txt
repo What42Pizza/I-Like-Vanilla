@@ -382,9 +382,10 @@ emission: vec3(15.0 / 15.0)
 
 block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, candle, campfire, furnace:lit=true:
 weight: 10
+brightness: 1.2
 glow detect min: vec3(21.0,  31.3, 69.4)
 glow detect max: vec3(60.0, 100.0, 100.0)
-glow amount: 0.5
+glow amount: 0.25
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 
@@ -722,6 +723,7 @@ block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tuli
 weight: 3
 shadow casting: foliage
 do bottom waving: false
+brightness: 0.95
 waviness: 2
 
 block potatoes, carrots, beetroots, wheat:
@@ -770,7 +772,7 @@ brightness: 0.95
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
-brightness: 0.8
+brightness: 0.85
 
 block red_sand:
 weight: 3
@@ -872,7 +874,11 @@ weight: 2
 brightness: 0.9
 
 block yellow_wool, yellow_carpet:
-weight: 2
+weight: 1
+brightness: 0.85
+
+block orange_wool, orange_carpet:
+weight: 1
 brightness: 0.85
 
 block snow_block, snow, powder_snow, grass_block:snowy=true:

@@ -119,6 +119,15 @@ float getSaturation(vec3 v) {
 	float minV = min(min(v.r, v.g), v.b);
 	return (maxV == 0.0) ? 0.0 : (maxV - minV) / maxV;
 }
+float getSaturation2(vec3 c) {
+    float maxc = max(c.r, max(c.g, c.b));
+    float minc = min(c.r, min(c.g, c.b));
+    float delta = maxc - minc;
+    float l = (maxc + minc) * 0.5;
+
+    if (delta == 0.0) return 0.0;
+    return delta / (1.0 - abs(2.0 * l - 1.0));
+}
 
 // taken from: https://stackoverflow.com/a/17897228, which is licensed under WTFPL (public domain)
 vec3 rgbToHsv(vec3 c) {
