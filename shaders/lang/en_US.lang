@@ -2268,8 +2268,13 @@ value.PANINI_PROJECTION_ENABLED.1=On
 option.PANINI_PROJECTION_STRENGTH=Panini Strength
 option.PANINI_PROJECTION_STRENGTH.comment=Controls the strength of the Panini projection distortion
 
+option.PANINI_SAMPLING_METHOD=Panini Sampling Method
+option.PANINI_SAMPLING_METHOD.comment=Controls how pixels are moved from one location to another
+value.PANINI_SAMPLING_METHOD.1=Smooth
+value.PANINI_SAMPLING_METHOD.2=Sharp
+
 option.PANINI_SHARPENING_STILL=Panini Sharpening (Still)
-option.PANINI_SHARPENING_STILL.comment=Due to the nature of this post-processing step, it needs extra sharpening, and this controls the strength of that extra sharpening (when standing still)
+option.PANINI_SHARPENING_STILL.comment=If the sampling method is set to smooth then an extra sharping step is needed, and this controls the strength of that extra sharpening (when standing still)
 
 option.PANINI_SHARPENING_MOVING=Panini Sharpening (Moving)
-option.PANINI_SHARPENING_MOVING.comment=Due to the nature of this post-processing step, it needs extra sharpening, and this controls the strength of that extra sharpening (when moving)
+option.PANINI_SHARPENING_MOVING.comment=If the sampling method is set to smooth then an extra sharping step is needed, and this controls the strength of that extra sharpening (when moving)

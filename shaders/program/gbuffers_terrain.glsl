@@ -51,11 +51,11 @@ void main() {
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
-		//float dither = bayer64(gl_FragCoord.xy);
-		#include "/utils/var_rng.glsl"
-		float dither = randomFloat(rng) * 0.5 + 0.5;
+		float dither = bayer64(gl_FragCoord.xy);
+		//#include "/utils/var_rng.glsl"
+		//float dither = randomFloat(rng) * 0.5 + 0.5;
 		#if TEMPORAL_FILTER_ENABLED == 1
-			//dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance += dither * 4.0;

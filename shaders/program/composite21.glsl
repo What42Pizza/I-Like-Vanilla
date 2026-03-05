@@ -58,19 +58,25 @@ void main() {
 	
 	vec2 texcoord = panini(texcoord);
 	
-	vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
+	#if PANINI_SAMPLING_METHOD == 1
+		vec3 color = texture2D(MAIN_TEXTURE, texcoord).rgb;
+	#elif PANINI_SAMPLING_METHOD == 2
+		vec3 color = texelFetch(MAIN_TEXTURE, ivec2(texcoord * viewSize + 0.5), 0).rgb;
+	#endif
 	
-	vec3 blur = vec3(0.0);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x, -pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x,          0.0) * 2.0).rgb * (0.607 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x,  pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2(         0.0, -pixelSize.y) * 2.0).rgb * (0.607 / 4.900);
-	blur +=                                                                          color * (1.000 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2(         0.0,  pixelSize.y) * 2.0).rgb * (0.607 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x, -pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,          0.0) * 2.0).rgb * (0.607 / 4.900);
-	blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,  pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
-	color = mix(color, blur, -PANINI_SHARPENING_STILL - (PANINI_SHARPENING_MOVING - PANINI_SHARPENING_STILL) * uint(cameraPosition != previousCameraPosition));
+	#if PANINI_SAMPLING_METHOD == 1
+		vec3 blur = vec3(0.0);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x, -pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x,          0.0) * 2.0).rgb * (0.607 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2(-pixelSize.x,  pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2(         0.0, -pixelSize.y) * 2.0).rgb * (0.607 / 4.900);
+		blur +=                                                                          color * (1.000 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2(         0.0,  pixelSize.y) * 2.0).rgb * (0.607 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x, -pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,          0.0) * 2.0).rgb * (0.607 / 4.900);
+		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,  pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
+		color = mix(color, blur, -PANINI_SHARPENING_STILL - (PANINI_SHARPENING_MOVING - PANINI_SHARPENING_STILL) * uint(cameraPosition != previousCameraPosition));
+	#endif
 	
 	/* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0);
