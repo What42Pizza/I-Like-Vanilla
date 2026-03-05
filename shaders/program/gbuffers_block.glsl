@@ -4,7 +4,6 @@ in_out vec3 glcolor;
 #if PBR_TYPE == 0
 	flat in_out vec2 encodedNormal;
 #endif
-in_out vec3 playerPos;
 #if PBR_TYPE == 0
 	flat in_out float reflectiveness;
 	flat in_out float specularness;
@@ -75,13 +74,11 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 #if WAVING_ENABLED == 1
 	#include "/lib/waving.glsl"
-#endif
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
 #endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -94,7 +91,6 @@ void main() {
 	adjustLmcoord(lmcoord);
 	
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
-	playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	
 	// process gl_Color (foliage tint, vanilla ao)
@@ -141,16 +137,7 @@ void main() {
 	#include "/generated/blockDatas.glsl"
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
-	#endif
-	
-	
-	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -1.5) return; // simple but effective(?) optimization
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	
 	#if TAA_ENABLED == 1

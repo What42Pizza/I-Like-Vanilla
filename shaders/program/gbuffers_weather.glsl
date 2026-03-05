@@ -43,12 +43,10 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -76,11 +74,7 @@ void main() {
 	playerPos.y = worldY - cameraPosition.y;
 	
 	viewPos = mat3(gbufferModelView) * playerPos;
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * vec4(playerPos, 1.0);
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);

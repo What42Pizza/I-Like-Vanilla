@@ -2,6 +2,7 @@
   - Added setting 'Horizon Fade Strength'
   - Added setting 'Entity Flash Strength'
   - Split setting 'Shadow Distance' into 'Shadow Map Scale' and 'Shadow Map Distance Cutoff'
+  - Added Panini projection (configurable)
   - Fixed reflections regression
   - Tweaked effects
 

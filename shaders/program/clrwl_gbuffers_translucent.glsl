@@ -93,9 +93,6 @@ void main() {
 
 #include "/utils/getShadowcasterLight.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -131,16 +128,7 @@ void main() {
 	shadowcasterLight = getShadowcasterLight();
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = gl_ProjectionMatrix * startMat(viewPos);
-	#endif
-	
-	
-	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -1.5) return; // simple but effective(?) optimization
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	
 	#if TAA_ENABLED == 1

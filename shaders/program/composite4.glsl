@@ -9,7 +9,7 @@ in_out vec2 texcoord;
 #endif
 #if REFLECTIONS_ENABLED == 1
 	#include "/utils/depth.glsl"
-	#include "/utils/screen_to_view.glsl"
+	#include "/utils/projections.glsl"
 	#include "/utils/getSkyColor.glsl"
 	#include "/lib/reflections.glsl"
 #endif

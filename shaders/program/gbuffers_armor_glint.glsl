@@ -24,9 +24,8 @@ void main() {
 
 #ifdef VSH
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
+#include "/utils/projections.glsl"
+
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -38,17 +37,7 @@ void main() {
 	glcolor.a *= 3.0;
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = ftransform();
-	#endif
-	
-	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -1.0) return; // simple but effective(?) optimization
-	#endif
-	
+	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);

@@ -29,9 +29,8 @@ void main() {
 
 #ifdef VSH
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
+#include "/utils/projections.glsl"
+
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -44,28 +43,23 @@ void main() {
 	
 	glcolor.a = 0.5 + 0.5 * glcolor.a;
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-		gl_Position = projectIsometric(playerPos);
-	#else
-		float lineWidth = 0.002;
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(vaPosition, 1.0);
-		vec4 offsetPos = projectionMatrix * modelViewMatrix * vec4(vaPosition + vaNormal, 1.0);
-		vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
-		screenDir = normalize(screenDir) * lineWidth;
-		screenDir.xy = screenDir.yx;
-		if (glcolor.r + glcolor.b + glcolor.g < 0.1) {
-			lmcoord = eyeBrightness / 512.0;
-			lmcoord.x = max(lmcoord.x, heldBlockLightValue / 32.0);
-			glcolor.a = 1.0 - max(lmcoord.x, lmcoord.y);
-		}
-		screenDir.x *= -1;
-		screenDir *= sign(screenDir.x);
-		screenDir.x *= invAspectRatio;
-		screenDir *= (gl_VertexID % 2) * 2.0 - 1.0;
-		gl_Position.xy += screenDir * gl_Position.w;
-		gl_Position.z -= 0.0001;
-	#endif
+	float lineWidth = 0.002;
+	gl_Position = playerToNdc(vaPosition);
+	vec4 offsetPos = playerToNdc(vaPosition + vaNormal);
+	vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
+	screenDir = normalize(screenDir) * lineWidth;
+	screenDir.xy = screenDir.yx;
+	if (glcolor.r + glcolor.b + glcolor.g < 0.1) {
+		lmcoord = eyeBrightness / 512.0;
+		lmcoord.x = max(lmcoord.x, heldBlockLightValue / 32.0);
+		glcolor.a = 1.0 - max(lmcoord.x, lmcoord.y);
+	}
+	screenDir.x *= -1;
+	screenDir *= sign(screenDir.x);
+	screenDir.x *= invAspectRatio;
+	screenDir *= (gl_VertexID % 2) * 2.0 - 1.0;
+	gl_Position.xy += screenDir * gl_Position.w;
+	gl_Position.z -= 0.0001;
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);

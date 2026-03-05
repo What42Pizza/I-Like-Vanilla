@@ -116,6 +116,7 @@ All of these tests were done with a GTX 1070 + 16 Chunks + 1080p + Distant Horiz
 - **[Complementary Reimagined](https://modrinth.com/shader/complementary-reimagined):** Noise textures
 - **[Ian McEwan, Ashima Arts](https://github.com/ashima/webgl-noise):** Simplex noise implementation
 - **[Vildravn](https://godotshaders.com/shader/colorblindness-correction-shader/):** Colorblindness correction filters
+- **[Lowell Camp](https://github.com/camplowell/MC_shader_testing):** Panini projection filter
 - **[Simon Rodriguez](https://github.com/kosua20/MIDIVisualizer/blob/master/resources/shaders/fxaa.frag):** FXAA implementation
 - **[Nathan Reed](https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/):** Easy hashing function
 - **[Stephen Hill](https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl):** ACES tonemapper implementation

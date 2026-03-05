@@ -16,7 +16,7 @@ in_out vec2 texcoord;
 #ifdef FSH
 
 #if VOL_SUNRAYS_ENABLED == 1
-	#include "/utils/screen_to_view.glsl"
+	#include "/utils/projections.glsl"
 #endif
 #if REALISTIC_CLOUDS_ENABLED == 1
 	#include "/utils/getCloudColor.glsl"

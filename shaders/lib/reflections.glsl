@@ -1,8 +1,8 @@
 void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflectionDir, vec3 normal) {
 	
 	// basic setup
-	vec3 screenPos = endMat(gbufferProjection * startMat(viewPos)) * 0.5 + 0.5;
-	vec3 nextScreenPos = endMat(gbufferProjection * startMat(viewPos - reflectionDir * pow(dot(viewPos, viewPos), 0.3))) * 0.5 + 0.5; // normally this would be pos+dir (and step=next-pos), but for some reason it works better this way
+	vec3 screenPos = mult(gbufferProjection, viewPos) * 0.5 + 0.5;
+	vec3 nextScreenPos = mult(gbufferProjection, viewPos - reflectionDir * pow(dot(viewPos, viewPos), 0.3)) * 0.5 + 0.5; // normally this would be pos+dir (and step=next-pos), but for some reason it works better this way
 	
 	// calculate the optimal stepVector that will stop at the screen edge
 	vec3 stepVector = screenPos - nextScreenPos;

@@ -1,4 +1,4 @@
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 
 float sampleEndCloud(vec3 pos) {
 	pos.x += pos.y * pos.y * (1.0 / 128.0);

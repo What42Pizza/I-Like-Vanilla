@@ -16,9 +16,8 @@ flat in_out float extraFogDist;
 
 #ifdef FSH
 
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 #include "/utils/borderFogAmount.glsl"
-#include "/utils/reprojection.glsl"
 
 #include "/utils/getFogColor.glsl"
 #if DEPTH_SUNRAYS_ENABLED == 1
@@ -92,7 +91,7 @@ void main() {
 		vec2 prevCoord = texcoord;
 		if (!depthIsHand(depth)) {
 			vec3 cameraOffset = cameraPosition - previousCameraPosition;
-			prevCoord = reprojection(pos, cameraOffset);
+			prevCoord = reproject(pos, cameraOffset);
 		}
 		vec2 prevNoisyRender;
 		bool prevIsValid = all(greaterThanEqual(prevCoord, vec2(0.0))) && all(lessThan(prevCoord, vec2(1.0)));

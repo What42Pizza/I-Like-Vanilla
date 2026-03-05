@@ -2097,26 +2097,6 @@ value.POWDERED_SNOW_FOG_DENSITY.-1=Use Style
 
 
 
-screen.ISOMETRIC_MENU=Isometric Rendering
-
-option.ISOMETRIC_RENDERING_ENABLED=Isometric Rendering Enabled
-option.ISOMETRIC_RENDERING_ENABLED.comment=Changes the projection to Isometric
-value.ISOMETRIC_RENDERING_ENABLED.0=Off
-value.ISOMETRIC_RENDERING_ENABLED.1=On
-
-option.ISOMETRIC_WORLD_SCALE=Isometric World Scale
-option.ISOMETRIC_WORLD_SCALE.comment=This controls how "zoomed-out" the camera is
-
-option.ISOMETRIC_BACKWARD_VISIBILITY=Isometric Backwards Visibility
-option.ISOMETRIC_BACKWARD_VISIBILITY.comment=This controls how close the clipping plane is behind you
-
-option.ISOMETRIC_FORWARD_VISIBILITY=Isometric Forward Visibility
-option.ISOMETRIC_FORWARD_VISIBILITY.comment=This controls how close the clipping plane is in front of you
-
-
-
-
-
 screen.PERFORMANCE_MENU=Performance
 screen.PERFORMANCE_MENU.comment=The settings that have the biggest impact on performance
 
@@ -2124,7 +2104,13 @@ screen.PERFORMANCE_MENU.comment=The settings that have the biggest impact on per
 
 
 
-screen.DEBUG_MENU=Debug
+screen.EXTRAS_MENU=Extras
+
+option.PROJECTION_TYPE=Projection Type
+option.PROJECTION_TYPE.comment=Changes how the world is warped onto the screen. Default: normal rendering, Panini: stretches the center, better for high FOV (currently unavailable), Isometric: everything is the same size
+value.PROJECTION_TYPE.0=Default
+value.PROJECTION_TYPE.1=Panini
+value.PROJECTION_TYPE.2=Isometric
 
 option.DO_COLOR_CODED_GBUFFERS=Color Coded Gbuffers
 option.DO_COLOR_CODED_GBUFFERS.comment=Sets the colors of everything according to which shader is rendering them, useful for debugging
@@ -2248,3 +2234,42 @@ option.SSS_LIDAR=Lidar
 option.SSS_LIDAR.comment=Enabled a lidar-like effect
 value.SSS_LIDAR.0=Off
 value.SSS_LIDAR.1=On
+
+
+
+
+
+screen.ISOMETRIC_MENU=Isometric Rendering
+
+option.ISOMETRIC_RENDERING_ENABLED=Isometric Rendering Enabled
+option.ISOMETRIC_RENDERING_ENABLED.comment=Changes the projection to Isometric
+value.ISOMETRIC_RENDERING_ENABLED.0=Off
+value.ISOMETRIC_RENDERING_ENABLED.1=On
+
+option.ISOMETRIC_WORLD_SCALE=Isometric World Scale
+option.ISOMETRIC_WORLD_SCALE.comment=This controls how "zoomed-out" the camera is
+
+option.ISOMETRIC_BACKWARD_VISIBILITY=Isometric Backwards Visibility
+option.ISOMETRIC_BACKWARD_VISIBILITY.comment=This controls how close the clipping plane is behind you
+
+option.ISOMETRIC_FORWARD_VISIBILITY=Isometric Forward Visibility
+option.ISOMETRIC_FORWARD_VISIBILITY.comment=This controls how close the clipping plane is in front of you
+
+
+
+screen.PANINI_MENU=Panini Projection
+screen.PANINI_MENU.comment=Enables a post-processing step that replicates Panini projection, which is meant to help high FOVs look more natural
+
+option.PANINI_PROJECTION_ENABLED=Panini Projection Enabled
+option.PANINI_PROJECTION_ENABLED.comment=Enables a post-processing step that replicates Panini projection, which is meant to help high FOVs look more natural. The default strength of 0.55 seems best for Quake Pro (aka 110 degrees)
+value.PANINI_PROJECTION_ENABLED.0=Off
+value.PANINI_PROJECTION_ENABLED.1=On
+
+option.PANINI_PROJECTION_STRENGTH=Panini Strength
+option.PANINI_PROJECTION_STRENGTH.comment=Controls the strength of the Panini projection distortion
+
+option.PANINI_SHARPENING_STILL=Panini Sharpening (Still)
+option.PANINI_SHARPENING_STILL.comment=Due to the nature of this post-processing step, it needs extra sharpening, and this controls the strength of that extra sharpening (when standing still)
+
+option.PANINI_SHARPENING_MOVING=Panini Sharpening (Moving)
+option.PANINI_SHARPENING_MOVING.comment=Due to the nature of this post-processing step, it needs extra sharpening, and this controls the strength of that extra sharpening (when moving)

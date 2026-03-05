@@ -1,4 +1,4 @@
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 
 float sampleCloud(vec3 pos, const bool isNormal) {
 	//pos.xz = floor(pos.xz / 16.0) * 16.0;

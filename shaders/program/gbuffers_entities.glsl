@@ -62,11 +62,9 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -96,17 +94,7 @@ void main() {
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = ftransform();
-	#endif
-	
-	
-	#if ISOMETRIC_RENDERING_ENABLED == 0
-		if (gl_Position.z < -5.0) return; // simple but effective(?) optimization
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	
 	#if TAA_ENABLED == 1

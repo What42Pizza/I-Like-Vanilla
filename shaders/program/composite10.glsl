@@ -7,7 +7,7 @@ in_out vec2 texcoord;
 const bool colortex0MipmapEnabled = true;
 
 #if BORDER_FOG_ENABLED == 1
-	#include "/utils/screen_to_view.glsl"
+	#include "/utils/projections.glsl"
 	#include "/utils/borderFogAmount.glsl"
 #endif
 

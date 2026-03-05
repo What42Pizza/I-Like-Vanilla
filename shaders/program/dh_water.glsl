@@ -18,7 +18,7 @@ flat in_out vec3 shadowcasterLight;
 #include "/lib/lighting/fsh_lighting.glsl"
 #include "/utils/depth.glsl"
 
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
@@ -128,9 +128,6 @@ void main() {
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -150,11 +147,7 @@ void main() {
 	shadowcasterLight = getShadowcasterLight();
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = gl_ProjectionMatrix * gbufferModelView * startMat(playerPos);
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	
 	#if TAA_ENABLED == 1

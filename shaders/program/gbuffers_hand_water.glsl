@@ -65,13 +65,11 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/screen_to_view.glsl"
+#define PROJECTION_MATRIX gl_ProjectionMatrix
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -97,11 +95,9 @@ void main() {
 	shadowcasterLight = getShadowcasterLight();
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		vec3 playerPos = endMat(gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex);
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = ftransform();
+	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
+	#if PROJECTION_TYPE == 1
+		//gl_Position.xy *= 1.5;
 	#endif
 	
 	

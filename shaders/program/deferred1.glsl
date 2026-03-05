@@ -9,7 +9,7 @@ flat in_out vec3 shadowcasterLight;
 
 #include "/lib/lighting/fsh_lighting.glsl"
 #include "/utils/depth.glsl"
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 #include "/utils/getSkyColor.glsl"
 
 #if OUTLINES_ENABLED == 1

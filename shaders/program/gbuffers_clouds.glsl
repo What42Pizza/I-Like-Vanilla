@@ -81,9 +81,8 @@ void main() {
 
 #ifdef VSH
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
+#include "/utils/projections.glsl"
+
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -93,13 +92,10 @@ void main() {
 		texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	#endif
 	
-	playerPos = (gbufferModelViewInverse * gl_ModelViewMatrix * gl_Vertex).xyz;
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	playerPos = mat3(gbufferModelViewInverse) * viewPos;
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = ftransform();
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);

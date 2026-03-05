@@ -48,9 +48,6 @@ void main() {
 
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if ISOMETRIC_RENDERING_ENABLED == 1
-	#include "/utils/isometric.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -73,11 +70,7 @@ void main() {
 	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.0 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
-		gl_Position = projectIsometric(playerPos);
-	#else
-		gl_Position = gl_ProjectionMatrix * startMat(viewPos);
-	#endif
+	gl_Position = viewToNdc(viewPos);
 	
 	
 	#if TAA_ENABLED == 1

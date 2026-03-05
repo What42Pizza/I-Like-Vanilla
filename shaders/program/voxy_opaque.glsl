@@ -1,7 +1,7 @@
 layout(location = 0) out vec4 albedoOut;
 layout(location = 1) out vec4 auxDataOut;
 
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 

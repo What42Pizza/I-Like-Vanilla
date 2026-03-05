@@ -221,15 +221,13 @@ vec3 decodeNormal(vec2 v) {
 
 
 
-vec4 startMat(vec3 pos) {
-	return vec4(pos.xyz, 1.0);
-}
-vec3 endMat(vec4 pos) {
-	return pos.xyz / pos.w;
+vec3 mult(mat4 a, vec3 b) {
+	vec4 tmp = a * vec4(b, 1.0);
+	return tmp.xyz / tmp.w;
 }
 
-vec3 transform(mat4 matrix, vec3 pos) {
-	return mat3(matrix) * pos + matrix[3].xyz;
+vec3 transform(mat4 a, vec3 b) {
+	return mat3(a) * b + a[3].xyz;
 }
 
 bool depthIsHand(float depth) {

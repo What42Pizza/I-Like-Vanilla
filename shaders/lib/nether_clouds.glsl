@@ -1,4 +1,4 @@
-#include "/utils/screen_to_view.glsl"
+#include "/utils/projections.glsl"
 
 float sampleNetherCloud(vec3 pos) {
 	pos *= 0.25 / NETHER_CLOUDS_SCALE;

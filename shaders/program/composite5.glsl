@@ -9,10 +9,7 @@ in_out vec2 texcoord;
 
 #ifdef FSH
 
-#include "/utils/reprojection.glsl"
-#ifdef DISTANT_HORIZONS
-	#include "/utils/screen_to_view.glsl"
-#endif
+#include "/utils/projections.glsl"
 
 #if SSS_PHOSPHOR == 1
 	#include "/lib/super_secret_settings/phosphor.glsl"
@@ -70,7 +67,7 @@ void main() {
 	#endif
 	if (doReprojection) {
 		vec3 cameraOffset = cameraPosition - previousCameraPosition;
-		prevCoord = reprojection(pos, cameraOffset);
+		prevCoord = reproject(pos, cameraOffset);
 	}
 	
 	
