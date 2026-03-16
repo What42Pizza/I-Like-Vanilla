@@ -20,6 +20,8 @@ void main() {
 	float transparency = percentThrough(blockDepth, 0.5, 1.2);
 	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	
+	color.rgb *= 1.0 + min(color.r, color.g) * 0.25;
+	
 	
 	#if PBR_TYPE == 0
 		float reflectiveness = 0.0;

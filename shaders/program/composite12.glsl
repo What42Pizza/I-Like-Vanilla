@@ -51,7 +51,7 @@ void main() {
 	vec2 stepDir = stepDir;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord * bloomIntScale + bloomIntScale / 2, 0).r;
 	float blockDepth = toBlockDepth(depth);
-	stepDir /= blockDepth * 0.25 + 1.0;
+	stepDir /= blockDepth * 0.125 + 1.0;
 	
 	texcoord -= stepDir * SAMPLE_COUNT;
 	float dither = fract(bayer64(gl_FragCoord.xy) + 0.5 * frameCounter);

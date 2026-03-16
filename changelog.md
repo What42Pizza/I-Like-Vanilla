@@ -1,4 +1,9 @@
-- v1.3.2
+- v1.3.3
+  - Fixed bugs
+
+<br>
+
+- v1.3.2 (26/03/10)
   - Added setting 'Horizon Fade Strength'
   - Added setting 'Entity Flash Strength'
   - Split setting 'Shadow Distance' into 'Shadow Map Scale' and 'Shadow Map Distance Cutoff'

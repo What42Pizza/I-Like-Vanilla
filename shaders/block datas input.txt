@@ -63,6 +63,7 @@ translucency: vec3(0.5, 0.5, 1.0)
 block lava, flowing_lava:
 weight: 100
 alias: BLOCK_ID_LAVA
+brightness: 0.85
 voxelize: true
 emission: vec3(1.0, 0.5, 0.0)
 translucency: vec3(0.0, 0.0, 0.0)

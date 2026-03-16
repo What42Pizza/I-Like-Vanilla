@@ -211,7 +211,7 @@
 
 
 vec4 playerToNdc(vec3 playerPos) {
-	return viewToNdc(mat3(gbufferModelView) * playerPos);
+	return viewToNdc(transform(gbufferModelView, playerPos));
 }
 
 vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
