@@ -142,9 +142,9 @@ void main() {
 	#ifndef NETHER
 		atmoFogAmount *= 1.0 - 0.25 * uint(isEyeInWater == 0);
 	#endif
-	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
-	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
-	color += atmoFogColor * atmoFogAmount;
+	//color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
+	//color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
+	//color += atmoFogColor * atmoFogAmount;
 	
 	#if defined OVERWORLD && HBD_ENABLED == 1
 		float desaturationAmount = 1.0 - HBD_SCALE / (max(playerPos.y + cameraPosition.y - 64.0, 0) + HBD_SCALE);

@@ -46,6 +46,8 @@ void main() {
 
 #ifdef VSH
 
+#define PROJECTION_MATRIX gl_ProjectionMatrix
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
 #if TAA_ENABLED == 1
@@ -64,13 +66,14 @@ void main() {
 	
 	
 	if (dhMaterialId == DH_BLOCK_LEAVES) {
-		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.95);
+		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.9);
 		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE) * 1.05;
 	}
-	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.0 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.1 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
 	
 	
 	gl_Position = viewToNdc(viewPos);
+	gl_Position = ftransform();
 	
 	
 	#if TAA_ENABLED == 1

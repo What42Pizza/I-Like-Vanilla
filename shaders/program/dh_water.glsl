@@ -125,6 +125,8 @@ void main() {
 
 #ifdef VSH
 
+#define PROJECTION_MATRIX gl_ProjectionMatrix
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
