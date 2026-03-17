@@ -44,8 +44,8 @@ void main() {
 	glcolor.a = 0.5 + 0.5 * glcolor.a;
 	
 	float lineWidth = 0.002;
-	gl_Position = playerToNdc(vaPosition);
-	vec4 offsetPos = playerToNdc(vaPosition + vaNormal);
+	gl_Position = viewToNdc(vaPosition);
+	vec4 offsetPos = viewToNdc(vaPosition + vaNormal);
 	vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
 	screenDir = normalize(screenDir) * lineWidth;
 	screenDir.xy = screenDir.yx;

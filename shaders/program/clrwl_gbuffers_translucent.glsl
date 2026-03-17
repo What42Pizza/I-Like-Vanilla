@@ -91,6 +91,8 @@ void main() {
 
 #ifdef VSH
 
+
+#include "/utils/projections.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1

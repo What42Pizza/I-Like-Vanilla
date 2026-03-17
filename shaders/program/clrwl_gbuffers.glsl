@@ -74,6 +74,8 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
+
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
