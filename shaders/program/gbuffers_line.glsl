@@ -43,9 +43,11 @@ void main() {
 	
 	glcolor.a = 0.5 + 0.5 * glcolor.a;
 	
+	vec3 viewPos = transform(gl_ModelViewMatrix, vaPosition);
+	
 	float lineWidth = 0.002;
-	gl_Position = viewToNdc(vaPosition);
-	vec4 offsetPos = viewToNdc(vaPosition + vaNormal);
+	gl_Position = viewToNdc(viewPos);
+	vec4 offsetPos = viewToNdc(viewPos + vaNormal);
 	vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
 	screenDir = normalize(screenDir) * lineWidth;
 	screenDir.xy = screenDir.yx;
