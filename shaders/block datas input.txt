@@ -826,8 +826,14 @@ reflectiveness: 0.4
 specularness: 0.3
 brightness: 0.85
 
-block gold_block, light_weighted_pressure_plate, redstone_block, emerald_block, lapis_block, diamond_block, netherite_block:
+block light_weighted_pressure_plate, redstone_block, emerald_block, lapis_block, diamond_block, netherite_block:
 weight: 1
+reflectiveness: 0.4
+specularness: 0.3
+
+block gold_block:
+weight: 1
+brightness: 0.9
 reflectiveness: 0.4
 specularness: 0.3
 
