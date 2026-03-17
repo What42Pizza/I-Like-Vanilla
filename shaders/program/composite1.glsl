@@ -142,9 +142,9 @@ void main() {
 	#ifndef NETHER
 		atmoFogAmount *= 1.0 - 0.25 * uint(isEyeInWater == 0);
 	#endif
-	//color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
-	//color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
-	//color += atmoFogColor * atmoFogAmount;
+	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
+	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
+	color += atmoFogColor * atmoFogAmount;
 	
 	#if defined OVERWORLD && HBD_ENABLED == 1
 		float desaturationAmount = 1.0 - HBD_SCALE / (max(playerPos.y + cameraPosition.y - 64.0, 0) + HBD_SCALE);
@@ -161,9 +161,7 @@ void main() {
 		float depthSunraysAddition = getDepthSunraysAmount();
 		depthSunraysAddition *= 1.0 - 0.8 * fogAmount;
 		float dither = bayer64(gl_FragCoord.xy);
-		#if TEMPORAL_FILTER_ENABLED == 1
-			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-		#endif
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		depthSunraysAddition += dither / 255.0;
 	#else
 		float depthSunraysAddition = 0.0;
