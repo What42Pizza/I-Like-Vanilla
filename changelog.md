@@ -1,5 +1,5 @@
-- v1.3.3
-  - Fixed bugs
+- v1.3.3 (26/03/17)
+  - Fixed several bugs
 
 <br>
 
