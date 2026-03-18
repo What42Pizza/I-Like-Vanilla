@@ -8,6 +8,7 @@ in_out vec4 glcolor;
 void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
+	color.a *= 1.25;
 	
 	/* DRAWBUFFERS:0 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
@@ -24,6 +25,7 @@ void main() {
 
 #ifdef VSH
 
+#define PROJECTION_MATRIX gl_ProjectionMatrix
 #include "/utils/projections.glsl"
 
 #if TAA_ENABLED == 1
@@ -33,8 +35,6 @@ void main() {
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	glcolor = gl_Color;
-	//glcolor.a = 0.5 + 0.5 * glcolor.a;
-	glcolor.a *= 3.0;
 	
 	
 	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
