@@ -20,13 +20,17 @@
 	
 	// CODE FROM COMPLEMENTARY REIMAGINED:
 	vec3 screenToView(vec3 screenPos) {
-		vec3 ndcPos = screenPos * 2.0 - 1.0;
-		vec4 iProjDiag = vec4(
-			gbufferProjectionInverse[0].x,
-			gbufferProjectionInverse[1].y,
-			gbufferProjectionInverse[2].zw
-		);
-		vec4 viewPos = iProjDiag * ndcPos.xyzz + gbufferProjectionInverse[3];
+		#if MATRIX_COMPATIBILITY == 1
+			vec4 viewPos = gbufferProjectionInverse * vec4(screenPos * 2.0 - 1.0, 1.0);
+		#else
+			vec3 ndcPos = screenPos * 2.0 - 1.0;
+			vec4 iProjDiag = vec4(
+				gbufferProjectionInverse[0].x,
+				gbufferProjectionInverse[1].y,
+				gbufferProjectionInverse[2].zw
+			);
+			vec4 viewPos = iProjDiag * ndcPos.xyzz + gbufferProjectionInverse[3];
+		#endif
 		return viewPos.xyz / viewPos.w;
 	}
 	// END OF COMPLEMENTARY REIMAGINED`S CODE
