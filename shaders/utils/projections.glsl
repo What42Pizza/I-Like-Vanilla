@@ -18,7 +18,6 @@
 		return PROJECTION_MATRIX * vec4(viewPos, 1.0);
 	}
 	
-	// CODE FROM COMPLEMENTARY REIMAGINED:
 	vec3 screenToView(vec3 screenPos) {
 		#if MATRIX_COMPATIBILITY == 1
 			vec4 viewPos = gbufferProjectionInverse * vec4(screenPos * 2.0 - 1.0, 1.0);
@@ -33,17 +32,20 @@
 		#endif
 		return viewPos.xyz / viewPos.w;
 	}
-	// END OF COMPLEMENTARY REIMAGINED`S CODE
 	
 	#ifdef DISTANT_HORIZONS
 		vec3 screenToViewDh(vec3 screenPos) {
-			vec3 ndcPos = screenPos * 2.0 - 1.0;
-			vec4 iProjDiag = vec4(
-				dhProjectionInverse[0].x,
-				dhProjectionInverse[1].y,
-				dhProjectionInverse[2].zw
-			);
-			vec4 viewPos = iProjDiag * ndcPos.xyzz + dhProjectionInverse[3];
+			#if MATRIX_COMPATIBILITY == 1
+				vec4 viewPos = dhProjectionInverse * vec4(screenPos * 2.0 - 1.0, 1.0);
+			#else
+				vec3 ndcPos = screenPos * 2.0 - 1.0;
+				vec4 iProjDiag = vec4(
+					dhProjectionInverse[0].x,
+					dhProjectionInverse[1].y,
+					dhProjectionInverse[2].zw
+				);
+				vec4 viewPos = iProjDiag * ndcPos.xyzz + dhProjectionInverse[3];
+			#endif
 			return viewPos.xyz / viewPos.w;
 		}
 	#endif
@@ -226,16 +228,6 @@ vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
 	vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
 	return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
 }
-//vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
-//	screenPos = screenPos * 2.0 - 1.0;
-//	vec4 viewPos = gbufferProjectionInverse * vec4(screenPos, 1.0);
-//	vec3 playerPos = mat3(gbufferModelViewInverse) * (viewPos.xyz / viewPos.w);
-	
-//	vec3 prevPlayerPos = playerPos + cameraOffset;
-//	vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
-//	vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
-//	return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
-//}
 
 
 
