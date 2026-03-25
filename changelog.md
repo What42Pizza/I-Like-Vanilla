@@ -1,5 +1,6 @@
 - v1.3.4
   - Fixed fast leaves
+  - Fixed more bugs
 
 <br>
 

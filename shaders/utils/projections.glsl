@@ -52,13 +52,17 @@
 	
 	#ifdef VOXY
 		vec3 screenToViewVx(vec3 screenPos) {
-			vec3 ndcPos = screenPos * 2.0 - 1.0;
-			vec4 iProjDiag = vec4(
-				vxProjInv[0].x,
-				vxProjInv[1].y,
-				vxProjInv[2].zw
-			);
-			vec4 viewPos = iProjDiag * ndcPos.xyzz + vxProjInv[3];
+			#if MATRIX_COMPATIBILITY == 1
+				vec4 viewPos = vxProjInv * vec4(screenPos * 2.0 - 1.0, 1.0);
+			#else
+				vec3 ndcPos = screenPos * 2.0 - 1.0;
+				vec4 iProjDiag = vec4(
+					vxProjInv[0].x,
+					vxProjInv[1].y,
+					vxProjInv[2].zw
+				);
+				vec4 viewPos = iProjDiag * ndcPos.xyzz + vxProjInv[3];
+				#endif
 			return viewPos.xyz / viewPos.w;
 		}
 	#endif
