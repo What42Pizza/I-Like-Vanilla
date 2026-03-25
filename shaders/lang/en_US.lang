@@ -1542,6 +1542,12 @@ option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
 option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
 value.CLOUD_OPACITY_DISTANCE.-1=Use Style
 
+option.CLOUD_COMPATIBILITY=Cloud Compatibility
+option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
+value.CLOUD_COMPATIBILITY.0=Off
+value.CLOUD_COMPATIBILITY.1=On
+value.CLOUD_COMPATIBILITY.2=Auto
+
 
 
 
@@ -2125,12 +2131,6 @@ option.SHOW_DANGEROUS_LIGHT.comment=Show blocks where hostile mobs can spawn (yo
 value.SHOW_DANGEROUS_LIGHT.0=Off
 value.SHOW_DANGEROUS_LIGHT.1=On
 
-option.CLOUD_COMPATIBILITY=Cloud Compatibility
-option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
-value.CLOUD_COMPATIBILITY.0=Off
-value.CLOUD_COMPATIBILITY.1=On
-value.CLOUD_COMPATIBILITY.2=Auto
-
 option.REFLECTIVE_EVERYTHING=Reflective Everything
 option.REFLECTIVE_EVERYTHING.comment=Make EVERYTHING reflective
 value.REFLECTIVE_EVERYTHING.-1=Use Style
@@ -2278,3 +2278,12 @@ option.PANINI_SHARPENING_STILL.comment=If the sampling method is set to smooth t
 
 option.PANINI_SHARPENING_MOVING=Panini Sharpening (Moving)
 option.PANINI_SHARPENING_MOVING.comment=If the sampling method is set to smooth then an extra sharping step is needed, and this controls the strength of that extra sharpening (when moving)
+
+
+
+screen.COMPATIBILITY_MENU=Compatibility
+
+option.MATRIX_COMPATIBILITY=Matrix Compatibility
+option.MATRIX_COMPATIBILITY.comment=Improves compatibility with mod at the potential cost of some performance
+value.MATRIX_COMPATIBILITY.0=Off
+value.MATRIX_COMPATIBILITY.1=On
