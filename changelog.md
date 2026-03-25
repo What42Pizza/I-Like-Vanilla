@@ -1,3 +1,13 @@
+- v1.3.4
+  - Fixed fast leaves
+
+<br>
+
+- v1.3.3b (26/03/19)
+  - Fixed more bugs
+
+<br>
+
 - v1.3.3 (26/03/17)
   - Fixed several bugs
 

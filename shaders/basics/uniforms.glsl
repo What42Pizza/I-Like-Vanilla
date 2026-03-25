@@ -59,6 +59,7 @@ uniform float blindness;
 uniform float darknessFactor;
 uniform float darknessLightFactor;
 uniform int currentRenderedItemId;
+uniform float alphaTestRef;
 
 
 

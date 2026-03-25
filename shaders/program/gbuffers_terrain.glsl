@@ -136,7 +136,7 @@ void main() {
 	
 	// get texture color
 	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
-	if (rawColor.a < 0.01) discard;
+	if (rawColor.a < alphaTestRef) discard;
 	vec4 color = rawColor;
 	color.rgb *= glcolor;
 	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
