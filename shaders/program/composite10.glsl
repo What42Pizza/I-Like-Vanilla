@@ -41,7 +41,7 @@ void main() {
 	
 	#if HORROR_MODE == 1
 		float bloomMult = dot(bloomColor, vec3(0.2, 0.5, 0.1));
-		bloomMult *= 1.3;
+		bloomMult *= 1.0;
 	#elif BLOOM_STYLE == 1
 		float bloomMult = dot(bloomColor, vec3(0.7, 0.4, -0.5) * 0.9);
 		bloomMult *= bloomMult;

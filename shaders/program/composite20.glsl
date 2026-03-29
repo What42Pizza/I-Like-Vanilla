@@ -84,6 +84,9 @@ void main() {
 	#if AUTO_EXPOSURE_ENABLED == 1
 		color *= autoExposureMult;
 	#endif
+	#if HORROR_MODE == 1
+		color *= 1.5;
+	#endif
 	doColorCorrection(color);
 	#if COLORBLIND_MODE != 0
 		applyColorblindnessCorrection(color);
@@ -149,6 +152,8 @@ void main() {
 	#endif
 	
 	//color = vec3(texture2D(shadowtex0, texcoord).r);
+	
+	color.r += 1.0 / 256.0;
 	
 	
 	

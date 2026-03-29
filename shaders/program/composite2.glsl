@@ -146,7 +146,7 @@ void main() {
 	#endif
 	
 	#if VOL_SUNRAYS_ENABLED == 1
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.2;
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.1;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
 		//volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * uint(sunAngle < 0.5));

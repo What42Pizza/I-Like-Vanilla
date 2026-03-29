@@ -556,7 +556,7 @@
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.25
+										#define BLOOM_LOW_CUTOFF 0.15
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
@@ -833,7 +833,7 @@
 #endif
 #if OVERWORLD_BRIGHTNESS == -1
 #undef OVERWORLD_BRIGHTNESS
-										#define OVERWORLD_BRIGHTNESS 1.0
+										#define OVERWORLD_BRIGHTNESS 0.95
 #endif
 #if NETHER_BRIGHTNESS == -1
 #undef NETHER_BRIGHTNESS
@@ -857,15 +857,15 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.08
+										#define VIBRANCE 0.05
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.02
+										#define SATURATION -0.05
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK 0.1
+										#define SATURATION_DARK 0.05
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
@@ -873,11 +873,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.22
+										#define SURFACE_CONTRAST 0.23
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST 0.24
+										#define UNDERGROUND_CONTRAST 0.23
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER

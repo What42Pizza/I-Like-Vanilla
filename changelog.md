@@ -4,6 +4,7 @@
   - Added setting 'Matrix Compatibility'
   - Fixed fast leaves
   - Fixed more bugs
+  - Tweaked default settings and effects
 
 <br>
 
