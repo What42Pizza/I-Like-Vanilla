@@ -1,4 +1,7 @@
 - v1.3.4
+  - Improved bloom processing
+  - Improved volumetric sunrays
+  - Added setting 'Matrix Compatibility'
   - Fixed fast leaves
   - Fixed more bugs
 

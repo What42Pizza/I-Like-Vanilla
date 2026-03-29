@@ -9,7 +9,7 @@ vec3 getDistortedShadowPos(vec3 shadowPos) {
 
 float getVolSunraysAmount(vec3 playerPos, float distMult) {
 	
-	float finalMult = sqrt(length(playerPos)) * 16.0;
+	float finalMult = sqrt(length(playerPos)) * 8.0;
 	vec3 playerPosStep = playerPos / SUNRAYS_QUALITY;
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, vec3(0.0)));
 	vec3 nextShadowPos = transform(shadowProjection, transform(shadowModelView, playerPosStep));
@@ -34,7 +34,7 @@ float getVolSunraysAmount(vec3 playerPos, float distMult) {
 	float sunraysAmount = total / SUNRAYS_QUALITY;
 	sunraysAmount *= finalMult;
 	
-	//sunraysAmount += 4.0 * step(0.00001, sunraysAmount);
+	//sunraysAmount += 8.0 * step(0.00001, sunraysAmount) * eyeBrightnessSmooth.y / 240.0;
 	
 	return sunraysAmount;
 }

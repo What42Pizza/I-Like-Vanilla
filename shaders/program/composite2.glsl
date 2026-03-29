@@ -69,10 +69,13 @@ void main() {
 			if (viewPosDh.b > viewPos.b) viewPos = viewPosDh;
 		#endif
 		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+		float undergroundAmount = pow(volSunraysAmount, 0.6) * 4.0;
+		volSunraysAmount = mix(volSunraysAmount, undergroundAmount, (1.0 - eyeBrightnessSmooth.y / 240.0) * (SUNRAYS_UNDERGROUND_MULT - 1.0) * 0.5 + 0.1);
 		float altitude = playerPos.y + cameraPosition.y;
-		volSunraysAmount *= 1.0 - percentThrough(altitude, 64.0, 32.0);
+		altitude += (0.25 - abs(mod(sunAngle, 0.5) - 0.25)) * 64.0; // make sure altitude light leaking prevention has less effect near noon
+		volSunraysAmount *= 8.0 / (8.0 - min(altitude, 64.0) + 64.0);
 		
-		volSunraysAmount = exp(-volSunraysAmount); // after this, volSunraysAmount is inverted (1-x)
+		volSunraysAmount = exp(-volSunraysAmount); // after this, volSunraysAmount is inverted x=(1-x)
 		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
 		color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
 		color = mix(volSunraysColor, color, volSunraysAmount);
@@ -143,11 +146,11 @@ void main() {
 	#endif
 	
 	#if VOL_SUNRAYS_ENABLED == 1
-		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.4 : SUNRAYS_AMOUNT_NIGHT * 0.4;
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.2;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
-		volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * uint(sunAngle < 0.5));
-		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		//volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * uint(sunAngle < 0.5));
+		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE * 2.0 + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET * 2.0;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
 		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);

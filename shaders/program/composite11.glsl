@@ -1,5 +1,4 @@
 in_out vec2 texcoord;
-in_out vec2 stepDir;
 
 
 
@@ -15,9 +14,8 @@ in_out vec2 stepDir;
 	const float weightsTotal = 5.316;
 #elif BLOOM_QUALITY == 3
 	#define SAMPLE_COUNT 6
-	const float stepAmount = 0.225 * BLOOM_SIZE * 0.1;
-	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.95, 0.817, 0.634, 0.445, 0.282, 0.162);
-	const float weightsTotal = 7.58;
+	const float sampleWeights[SAMPLE_COUNT] = float[SAMPLE_COUNT] (0.9394131, 0.7788008, 0.56978285, 0.36787945, 0.2096114, 0.10539923);
+	const float weightsTotal = 6.9417734;
 #elif BLOOM_QUALITY == 4
 	#define SAMPLE_COUNT 8
 	const float stepAmount = 0.17 * BLOOM_SIZE * 0.1;
@@ -34,36 +32,28 @@ in_out vec2 stepDir;
 
 #ifdef FSH
 
+const bool colortex4MipmapEnabled = true;
+
 #include "/utils/depth.glsl"
 
 void main() {
-	vec2 texcoord = texcoord;
-	vec3 bloomColor = texelFetch(BLOOM_TEXTURE, texelcoord, 0).rgb;
-	
 	#if HORROR_MODE == 1
-		/* DRAWBUFFERS:4 */
-		gl_FragData[0] = vec4(bloomColor, 1.0);
+		discard;
 		return;
 	#endif
 	
 	const int bloomIntScale = 1 << BLOOM_RENDER_SCALE;
+	vec2 stepDir = vec2(invAspectRatio, 0.0) * BLOOM_SIZE * 0.1 / SAMPLE_COUNT;
 	
-	vec2 stepDir = stepDir;
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord * bloomIntScale + bloomIntScale / 2, 0).r;
 	float blockDepth = toBlockDepth(depth);
 	stepDir /= blockDepth * 0.125 + 1.0;
 	
-	texcoord -= stepDir * SAMPLE_COUNT;
-	float dither = fract(bayer64(gl_FragCoord.xy) + 0.5 * frameCounter);
-	texcoord += stepDir * (dither - 0.5) * 0.5;
+	vec3 bloomColor = texture2DLod(BLOOM_TEXTURE, texcoord, 2).rgb;
 	for (int i = 0; i < SAMPLE_COUNT; i++) {
-		bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord, 0).rgb * sampleWeights[SAMPLE_COUNT - 1 - i];
-		texcoord += stepDir;
-	}
-	texcoord += stepDir;
-	for (int i = 0; i < SAMPLE_COUNT; i++) {
-		bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord, 0).rgb * sampleWeights[i];
-		texcoord += stepDir;
+		vec2 offset = stepDir * (i + 1);
+		bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord + offset, 2).rgb * sampleWeights[i];
+		bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord - offset, 2).rgb * sampleWeights[i];
 	}
 	bloomColor /= weightsTotal;
 	
@@ -81,10 +71,6 @@ void main() {
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
-	
-	float noise = (frameCounter & 1) * PI * 0.25;
-	stepDir = vec2(cos(noise) * invAspectRatio, sin(noise)) * stepAmount;
-	
 }
 
 #endif
