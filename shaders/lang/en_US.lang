@@ -2017,6 +2017,10 @@ option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
 option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
 value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
+option.NIGHT_ATMOSPHERIC_FOG_DENSITY=Night Atmospheric Fog Density
+option.NIGHT_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at night)
+value.NIGHT_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
 option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
 option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground
 value.UNDERGROUND_FOG_DENSITY.-1=Use Style

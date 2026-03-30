@@ -38,7 +38,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		//vec3 actualNormal = cross(viewStepX, viewStepY);
 		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
 		//normal = maybeGrass ? actualNormal : normal;
-		viewPos += normal * 0.0015 * (25.0 + length(viewPos));
+		viewPos += normal * 0.0015 * (40.0 + length(viewPos));
 		
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
 		if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
@@ -90,10 +90,10 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 		float shadowSample = 0.0;
 		float bias = 0.0002 + length(viewPos) * 0.035 / shadowMapResolution;
-		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += uint(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
 		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
@@ -101,14 +101,14 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		// no filtering, pixelated edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
 		if (shadowPos.z > 1.0) return 1.0;
-		return uint(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
+		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
 		if (shadowPos.z > 1.0) return 1.0;
-		return uint(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
+		return float(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
 		
 	#else
 		
@@ -201,7 +201,7 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 	#ifdef SHADOWS_ENABLED
 		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
 		#if PIXELATED_SHADOWS > 0
-			shadowBrightness = mix(shadowBrightness, ambientBrightness, uint(depthIsHand(depth)));
+			shadowBrightness = mix(shadowBrightness, ambientBrightness, float(depthIsHand(depth)));
 		#endif
 		//#if defined DISTANT_HORIZONS || defined VOXY
 		//	float len = max(length(viewPos) * invFar, 0.8);
@@ -309,13 +309,13 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		float specular = max(dot(reflectedDir, lightDir), 0.0);
 		specular *= specular;
 		specular *= specular;
-		specular = 1.0 - (1.0 - specular) * (1.0 - specular);
+		specular *= specular;
 		specular *= 1.0 - betterRainStrength;
 		vec3 specularColor = shadowcasterLight * (sunAngle < 0.5 ? vec3(1.0, 1.0, 0.6) : vec3(0.5, 0.7, 0.9) * 0.75);
 		#if PBR_TYPE == 0
-			specularness *= 1.0 - getSaturation(color);
+			specular *= 1.0 - 0.25 * getSaturation(color);
 		#endif
-		lighting += specularColor * specular * (0.1 + 0.9 * specularness) * shadowBrightness;
+		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(shadowBrightness * 64.0, 1.0);
 	#endif
 	
 	blockBrightness *= 1.2 - min(getLum(lighting), 1.0);

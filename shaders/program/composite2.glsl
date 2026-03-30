@@ -141,7 +141,7 @@ void main() {
 			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.85;
 		}
 		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
-		depthSunraysAmountMult *= 0.5 + 0.5 * uint(isEyeInWater == 0);
+		depthSunraysAmountMult *= 0.5 + 0.5 * float(isEyeInWater == 0);
 		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 	#endif
 	
@@ -149,7 +149,7 @@ void main() {
 		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.1;
 		volSunraysAmountMult *= sqrt(sunLightBrightness + moonLightBrightness);
 		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
-		//volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * uint(sunAngle < 0.5));
+		//volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * float(sunAngle < 0.5));
 		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE * 2.0 + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET * 2.0;
 		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
 		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 

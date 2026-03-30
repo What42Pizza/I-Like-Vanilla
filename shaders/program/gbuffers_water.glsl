@@ -69,7 +69,7 @@ void main() {
 	#elif PBR_TYPE == 1
 		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
-		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), uint(materialId == BLOCK_ID_WATER));
+		reflectiveness = mix(reflectiveness, mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y), float(materialId == BLOCK_ID_WATER));
 		float specularness = sqrt(pbrData.r);
 		vec3 normal = texture2D(normals, texcoord).rgb;
 		normal.xy -= 0.5;
@@ -80,7 +80,7 @@ void main() {
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	float reflectivenessMult = mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
-	reflectiveness *= 1.0 - uint(materialId != BLOCK_ID_WATER) * (1.0 - reflectivenessMult);
+	reflectiveness *= 1.0 - float(materialId != BLOCK_ID_WATER) * (1.0 - reflectivenessMult);
 	
 	
 	// get texture color

@@ -44,9 +44,9 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// normals
 	vec3 worldNormal = vec3(
-		uint((parameters.face >> 1) == 2),
-		uint((parameters.face >> 1) == 0),
-		uint((parameters.face >> 1) == 1)
+		float((parameters.face >> 1) == 2),
+		float((parameters.face >> 1) == 0),
+		float((parameters.face >> 1) == 1)
 	);
 	worldNormal *= float(parameters.face & 1) * 2.0 - 1.0;
 	
@@ -75,7 +75,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
 	color.rgb *= 0.92 - TEXTURE_CONTRAST * 0.1 + texContrastMult * TEXTURE_CONTRAST;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
-	color.rgb *= 1.0 + 0.0625 * worldNormal.y + 0.03125 * uint(isFoliage);
+	color.rgb *= 1.0 + 0.0625 * worldNormal.y + 0.03125 * float(isFoliage);
 	
 	if (materialId == BLOCK_ID_LAVA) color.rgb *= 0.92; // the voxy lava brightness seems to change every time it's reloaded?
 	

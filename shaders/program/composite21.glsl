@@ -75,7 +75,7 @@ void main() {
 		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x, -pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
 		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,          0.0) * 2.0).rgb * (0.607 / 4.900);
 		blur += texture2D(MAIN_TEXTURE, texcoord + vec2( pixelSize.x,  pixelSize.y) * 2.0).rgb * (0.368 / 4.900);
-		color = mix(color, blur, -PANINI_SHARPENING_STILL - (PANINI_SHARPENING_MOVING - PANINI_SHARPENING_STILL) * uint(cameraPosition != previousCameraPosition));
+		color = mix(color, blur, -PANINI_SHARPENING_STILL - (PANINI_SHARPENING_MOVING - PANINI_SHARPENING_STILL) * float(cameraPosition != previousCameraPosition));
 	#endif
 	
 	/* DRAWBUFFERS:0 */

@@ -26,16 +26,16 @@ void main() {
 	
 	#ifdef DISTANT_HORIZONS
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord * bloomIntScale + bloomIntScale / 2, 0).r;
-		float fogAmount = uint(depth == 1.0 && depthDh == 1.0);
+		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#elif defined VOXY
-		float fogAmount = uint(depth == 1.0);
+		float fogAmount = float(depth == 1.0);
 	#elif BORDER_FOG_ENABLED == 1
 		vec3 viewPos = screenToView(vec3(texcoord, depth));
 		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 		float _fogDistance;
 		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#else
-		float fogAmount = uint(depth == 1.0);
+		float fogAmount = float(depth == 1.0);
 	#endif
 	
 	

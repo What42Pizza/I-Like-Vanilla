@@ -833,7 +833,7 @@
 #endif
 #if OVERWORLD_BRIGHTNESS == -1
 #undef OVERWORLD_BRIGHTNESS
-										#define OVERWORLD_BRIGHTNESS 0.95
+										#define OVERWORLD_BRIGHTNESS 0.97
 #endif
 #if NETHER_BRIGHTNESS == -1
 #undef NETHER_BRIGHTNESS
@@ -1106,7 +1106,7 @@
 
 #if WATER_COLOR_RED == -1
 #undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.05
+										#define WATER_COLOR_RED 0.0
 #endif
 #if WATER_COLOR_GREEN == -1
 #undef WATER_COLOR_GREEN
@@ -1652,6 +1652,10 @@
 #undef ATMOSPHERIC_FOG_DENSITY
 										#define ATMOSPHERIC_FOG_DENSITY 0.07
 #endif
+#if NIGHT_ATMOSPHERIC_FOG_DENSITY == -1
+#undef NIGHT_ATMOSPHERIC_FOG_DENSITY
+										#define NIGHT_ATMOSPHERIC_FOG_DENSITY 0.15
+#endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
 										#define UNDERGROUND_FOG_DENSITY 0.8
@@ -1691,19 +1695,19 @@
 
 #if WATER_FOG_RED == -1
 #undef WATER_FOG_RED
-										#define WATER_FOG_RED -0.05
+										#define WATER_FOG_RED 0.05
 #endif
 #if WATER_FOG_GREEN == -1
 #undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.05
+										#define WATER_FOG_GREEN 0.15
 #endif
 #if WATER_FOG_BLUE == -1
 #undef WATER_FOG_BLUE
-										#define WATER_FOG_BLUE 0.85
+										#define WATER_FOG_BLUE 0.8
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.05
+										#define WATER_FOG_DENSITY 0.04
 #endif
 #if LAVA_FOG_RED == -1
 #undef LAVA_FOG_RED

@@ -33,7 +33,7 @@ float getDepthSunraysAmount() {
 		#ifdef DISTANT_HORIZONS
 			isSky = isSky && texelFetch(DH_DEPTH_BUFFER_WO_TRANS, ivec2(pos * viewSize), 0).r == 1.0;
 		#endif
-		total += float(uint(isSky));
+		total += float(isSky);
 		pos += coordStep;
 	}
 	

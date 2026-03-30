@@ -26,9 +26,9 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// normals
 	vec3 worldNormal = vec3(
-		uint((parameters.face >> 1) == 2),
-		uint((parameters.face >> 1) == 0),
-		uint((parameters.face >> 1) == 1)
+		float((parameters.face >> 1) == 2),
+		float((parameters.face >> 1) == 0),
+		float((parameters.face >> 1) == 1)
 	);
 	worldNormal *= float(parameters.face & 1) * 2.0 - 1.0;
 	

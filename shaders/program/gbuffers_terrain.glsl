@@ -144,7 +144,7 @@ void main() {
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 + (1.0 - ao) * 0.25);
 	
 	#if POM_ENABLED == 1
-		color.rgb *= 1.0 - 0.1 * uint(prevDepth != normalAndDepth.a);
+		color.rgb *= 1.0 - 0.1 * float(prevDepth != normalAndDepth.a);
 		color.rgb *= 1.0 - pomDepth;
 	#endif
 	
@@ -181,15 +181,15 @@ void main() {
 		}
 	#endif
 	
-	color.rgb *= 1.0 - dot(normal, gbufferModelView[1].xyz) * 0.125 * SIDE_SHADING_BRIGHT * uint(materialId == BLOCK_ID_PUMPKIN);
+	color.rgb *= 1.0 - dot(normal, gbufferModelView[1].xyz) * 0.125 * SIDE_SHADING_BRIGHT * float(materialId == BLOCK_ID_PUMPKIN);
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		if (isDangerousLight > 0.0) {
 			vec3 blockPos = fract(playerPos + cameraPosition);
 			float centerDist = length(blockPos.xz - 0.5);
 			vec3 indicatorColor = isDangerousLight > 0.75 ? vec3(1.0, 0.0, 0.0) : vec3(1.0, 1.0, 0.0);
-			color.rgb = mix(color.rgb, indicatorColor, 0.35 * uint(centerDist < 0.45));
-			lmcoord.x = max(lmcoord.x, 0.1 * uint(centerDist < 0.45));
+			color.rgb = mix(color.rgb, indicatorColor, 0.35 * float(centerDist < 0.45));
+			lmcoord.x = max(lmcoord.x, 0.1 * float(centerDist < 0.45));
 		}
 	#endif
 	

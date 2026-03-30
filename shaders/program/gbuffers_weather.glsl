@@ -69,7 +69,7 @@ void main() {
 	
 	float worldY = playerPos.y + cameraPosition.y;
 	bool isBottom = playerPos.y < 0.0;
-	float maxY = cloudHeight + 1.0 - uint(isBottom) * 10.0;
+	float maxY = cloudHeight + 1.0 - float(isBottom) * 10.0;
 	worldY = min(worldY, maxY);
 	playerPos.y = worldY - cameraPosition.y;
 	

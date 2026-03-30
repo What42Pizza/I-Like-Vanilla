@@ -28,7 +28,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 plusXPos = plusXPos4.xyz / plusXPos4.w * 0.5 + 0.5;
 	float testPlusX = texture2D(LOD_DEPTH_TEX, plusXPos.xy).r;
 	vec3 viewPosPlusX = LOD_SCREEN_TO_VIEW_FN(vec3(plusXPos.xy, testPlusX));
-	float plusXAmount = uint(length(viewPosPlusX) < length(viewPos + xDir) * 0.999 - 0.25);
+	float plusXAmount = float(length(viewPosPlusX) < length(viewPos + xDir) * 0.999 - 0.25);
 	plusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusXAmount;
 	
@@ -36,7 +36,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 minusXPos = minusXPos4.xyz / minusXPos4.w * 0.5 + 0.5;
 	float testMinusX = texture2D(LOD_DEPTH_TEX, minusXPos.xy).r;
 	vec3 viewPosMinusX = LOD_SCREEN_TO_VIEW_FN(vec3(minusXPos.xy, testMinusX));
-	float minusXAmount = uint(length(viewPosMinusX) < length(viewPos - xDir) * 0.999 - 0.25);
+	float minusXAmount = float(length(viewPosMinusX) < length(viewPos - xDir) * 0.999 - 0.25);
 	minusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusXAmount;
 	
@@ -44,7 +44,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 plusYPos = plusYPos4.xyz / plusYPos4.w * 0.5 + 0.5;
 	float testPlusY = texture2D(LOD_DEPTH_TEX, plusYPos.xy).r;
 	vec3 viewPosPlusY = LOD_SCREEN_TO_VIEW_FN(vec3(plusYPos.xy, testPlusY));
-	float plusYAmount = uint(length(viewPosPlusY) < length(viewPos + yDir) * 0.999 - 0.25);
+	float plusYAmount = float(length(viewPosPlusY) < length(viewPos + yDir) * 0.999 - 0.25);
 	plusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusYAmount;
 	
@@ -52,7 +52,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 minusYPos = minusYPos4.xyz / minusYPos4.w * 0.5 + 0.5;
 	float testMinusY = texture2D(LOD_DEPTH_TEX, minusYPos.xy).r;
 	vec3 viewPosMinusY = LOD_SCREEN_TO_VIEW_FN(vec3(minusYPos.xy, testMinusY));
-	float minusYAmount = uint(length(viewPosMinusY) < length(viewPos - yDir) * 0.999 - 0.2);
+	float minusYAmount = float(length(viewPosMinusY) < length(viewPos - yDir) * 0.999 - 0.2);
 	minusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusYAmount;
 	

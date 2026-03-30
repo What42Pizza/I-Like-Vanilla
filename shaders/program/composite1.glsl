@@ -62,9 +62,9 @@ void main() {
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	#ifdef DISTANT_HORIZONS
-		float fogAmount = uint(depth == 1.0 && depthDh == 1.0);
+		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
 	#elif defined VOXY
-		float fogAmount = uint(depth == 1.0);
+		float fogAmount = float(depth == 1.0);
 	#else
 		float _fogDistance;
 		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
@@ -124,7 +124,7 @@ void main() {
 			atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
 		#endif
 		#ifdef OVERWORLD
-			fogDensity = mix(UNDERGROUND_FOG_DENSITY, ATMOSPHERIC_FOG_DENSITY, min(brightnesses.y * 1.5, 1.0));
+			fogDensity = mix(UNDERGROUND_FOG_DENSITY, mix(ATMOSPHERIC_FOG_DENSITY, NIGHT_ATMOSPHERIC_FOG_DENSITY, ambientMoonPercent), min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * brightnesses.y);
 			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY * 1.0, PALE_GARDEN_FOG_DENSITY * 1.0, dayPercent), inPaleGarden);
 		#elif defined NETHER
@@ -140,7 +140,7 @@ void main() {
 	fogDist = mix(fogDist, 0.0, fogAmount);
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
 	#ifndef NETHER
-		atmoFogAmount *= 1.0 - 0.25 * uint(isEyeInWater == 0);
+		atmoFogAmount *= 1.0 - 0.25 * float(isEyeInWater == 0);
 	#endif
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
@@ -263,15 +263,15 @@ void main() {
 		extraFogDist = 8.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 8.0;
 	} else if (isEyeInWater == 1) {
-		fogDensity = WATER_FOG_DENSITY * 0.25;
+		fogDensity = WATER_FOG_DENSITY * 0.2;
 		fogDarken = 1.0;
-		extraFogDist = 24.0;
+		extraFogDist = 48.0;
 	} else if (isEyeInWater == 2) {
-		fogDensity = LAVA_FOG_DENSITY * 0.25;
+		fogDensity = LAVA_FOG_DENSITY * 0.2;
 		fogDarken = 1.0;
 		extraFogDist = 1.5;
 	} else if (isEyeInWater == 3) {
-		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.25;
+		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.2;
 		fogDarken = 1.0;
 		extraFogDist = 1.0;
 	}
