@@ -16,6 +16,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
+	bool isFlatShaded = (encodedData & (3u << 14u)) >= (1u << 14u);
 	
 	vec3 screenPos = vec3(gl_FragCoord.xy * pixelSize, gl_FragCoord.z);
 	vec3 viewPos = screenToViewVx(screenPos);
@@ -51,7 +52,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// foliage normals
 	#if OVERRIDE_FOLIAGE_NORMALS == 1
-		if (isFoliage) {
+		if (isFlatShaded) {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
 	#endif

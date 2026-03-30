@@ -291,6 +291,7 @@ void main() {
 	materialId &= (1u << 10u) - 1u;
 	
 	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
+	bool isFlatShaded = (encodedData & (3u << 14u)) >= (1u << 14u);
 	
 	
 	// process normals
@@ -303,7 +304,7 @@ void main() {
 	#if PBR_TYPE == 0
 		// foliage normals
 		#if OVERRIDE_FOLIAGE_NORMALS == 1
-			if (isFoliage) {
+			if (isFlatShaded) {
 				normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
 			}
 		#endif
@@ -319,7 +320,7 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 		rawTbn = tbn;
 		#if OVERRIDE_FOLIAGE_NORMALS == 1
-			if (isFoliage) {
+			if (isFlatShaded) {
 				tbn = mat3(gbufferModelView[0].xyz, gbufferModelView[2].xyz, gbufferModelView[1].xyz);
 			}
 		#endif

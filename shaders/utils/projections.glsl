@@ -33,6 +33,15 @@
 		return viewPos.xyz / viewPos.w;
 	}
 	
+	vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
+		vec3 viewPos = screenToView(screenPos);
+		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+		vec3 prevPlayerPos = playerPos + cameraOffset;
+		vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
+		vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
+		return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
+	}
+	
 	#ifdef DISTANT_HORIZONS
 		vec3 screenToViewDh(vec3 screenPos) {
 			#if MATRIX_COMPATIBILITY == 1
@@ -169,7 +178,7 @@
 	
 	
 	vec4 viewToNdc(vec3 viewPos) {
-		vec3 screenPos = playerPos;
+		vec3 screenPos = viewPos;
 		screenPos.xyz *= getIsometricScale();
 		screenPos.z -= getIsometricZOffset();
 		return vec4(screenPos, 1.0);
@@ -185,7 +194,7 @@
 	vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
 		
 		vec3 playerPos = screenPos * 2.0 - 1.0;
-		playerPos.z += getIsometricOffset();
+		playerPos.z += getIsometricZOffset();
 		playerPos /= getIsometricScale();
 		playerPos = mat3(gbufferModelViewInverse) * playerPos;
 		
@@ -206,7 +215,7 @@
 	#endif
 	
 	#ifdef VOXY
-		vec3 screenToViewVX(vec3 pos) {
+		vec3 screenToViewVx(vec3 pos) {
 			pos = pos * 2.0 - 1.0;
 			pos.z += getIsometricZOffset();
 			pos /= getIsometricScale();
@@ -222,15 +231,6 @@
 
 vec4 playerToNdc(vec3 playerPos) {
 	return viewToNdc(transform(gbufferModelView, playerPos));
-}
-
-vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
-	vec3 viewPos = screenToView(screenPos);
-	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-	vec3 prevPlayerPos = playerPos + cameraOffset;
-	vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
-	vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
-	return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
 }
 
 

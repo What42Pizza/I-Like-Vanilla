@@ -24,7 +24,7 @@ void main() {
 		color.rgb = 1.0 - color.rgb;
 		
 		color.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
-		color.rgb *= 1.0 - 0.6 * rainStrength;
+		color.rgb *= 1.0 - SUN_MOON_WEATHER_OPACITY_DECREASE * rainStrength;
 		
 	#endif
 	

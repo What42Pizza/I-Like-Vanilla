@@ -430,6 +430,7 @@ emission: vec3(1.0, 0.9, 0.8)
 block fire:
 weight: 5
 shadow casting: never
+brightness: 0.9
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

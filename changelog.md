@@ -2,6 +2,7 @@
   - Improved bloom processing
   - Improved volumetric sunrays
   - Added setting 'Matrix Compatibility'
+  - Added setting 'Sun/Moon Weather Opacity Decrease'
   - Fixed fast leaves
   - Fixed more bugs
   - Tweaked default settings and effects

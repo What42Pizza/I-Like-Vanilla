@@ -98,7 +98,7 @@ void main() {
 		float prevLinearDepth = toLinearDepth(texture2D(PREV_DEPTH_TEXTURE, prevCoord).r);
 		float depthDiff = (linearDepth - prevLinearDepth) * far;
 		if (depthDiff < 1.0 && clamp(prevCoord, 0.0, 1.0) == prevCoord) {
-			color = max(color, texelFetch(PREV_TEXTURE, ivec2(prevCoord * viewSize), 0).rgb * 2.0) - 1.0 / 255.0;
+			color = max(color, texelFetch(PREV_TEXTURE, ivec2(prevCoord * viewSize), 0).rgb * 2.0) - 1.0 / 255.0 * uint(((texelcoord.x + texelcoord.y + frameCounter) & 7) == 0);
 		}
 	#endif
 	

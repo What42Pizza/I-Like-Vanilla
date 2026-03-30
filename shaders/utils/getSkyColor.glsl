@@ -85,7 +85,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		}
 		
 		vec3 playerDir = mat3(gbufferModelViewInverse) * viewDir;
-		playerDir /= max(length(playerDir.xz), abs(playerDir.y * 1.1));
+		playerDir /= max(length(playerDir.xz), abs(playerDir.y * 1.25));
 		float yPos = playerDir.y * far + cameraPosition.y;
 		float darkenAmount = percentThrough(yPos, 56.0, 56.0 - far / 4.0);
 		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), darkenAmount);
