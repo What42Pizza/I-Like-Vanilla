@@ -273,11 +273,6 @@ void main() {
 			}
 		#endif
 	}
-	#ifdef SHADOWS_ENABLED
-		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a * 2.0) * 0.3333; // kinda like squaring but not as intense
-	#else
-		glcolor4.a = (glcolor4.a * glcolor4.a + glcolor4.a) * 0.5; // kinda like squaring but not as intense
-	#endif
 	ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
 	

@@ -58,8 +58,8 @@ void main() {
 		
 		color.rgb *= 1.1;
 		
-		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
-		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_SATURATION);
+		color.rgb *= WATER_TINT;
 		
 		vec3 viewDir = normalize(viewPos);
 		float fresnel = -dot(normal, viewDir);

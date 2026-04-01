@@ -37,7 +37,6 @@ void main() {
 	reflectiveness *= 1.0 - 0.5 * getSaturation(color.rgb);
 	
 	color.rgb = mix(color.rgb, overlayColor.rgb, overlayColor.a);
-	ao = (ao * ao + ao * 2.0) * 0.3333; // kinda like squaring but not as intense
 	ao = 1.0 - (1.0 - ao) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	color.rgb *= ao;
 	color.rgb *= glcolor;

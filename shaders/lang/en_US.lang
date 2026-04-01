@@ -1419,21 +1419,33 @@ value.WATER_FOAM_AMOUNT.-1=Use Style
 
 screen.WATER_COLOR_MENU=Water Color
 
-option.WATER_COLOR_RED=Water Color Red
-option.WATER_COLOR_RED.comment=Red value for custom water color
-value.WATER_COLOR_RED.-1=Use Style
+option.WATER_SATURATION=Water Saturation
+option.WATER_SATURATION.comment=How much to saturate / desaturate water (this is applied before the 'Water Tint Red/Green/Blue' settings)
+value.WATER_SATURATION.-1=Use Style
 
-option.WATER_COLOR_GREEN=Water Color Green
-option.WATER_COLOR_GREEN.comment=Green value for custom water color
-value.WATER_COLOR_GREEN.-1=Use Style
+option.WATER_TINT_SHALLOW_RED=Water Tint (Shallow) Red
+option.WATER_TINT_SHALLOW_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_SHALLOW_RED.-1=Use Style
 
-option.WATER_COLOR_BLUE=Water Color Blue
-option.WATER_COLOR_BLUE.comment=Blue value for custom water color
-value.WATER_COLOR_BLUE.-1=Use Style
+option.WATER_TINT_SHALLOW_GREEN=Water Tint (Shallow) Green
+option.WATER_TINT_SHALLOW_GREEN.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_SHALLOW_GREEN.-1=Use Style
 
-option.WATER_COLOR_AMOUNT=Water Color Amount
-option.WATER_COLOR_AMOUNT.comment=How much to mix in the custom water color (0.0 means use only the loaded water texture and 1.0 means only use the water color defined above)
-value.WATER_COLOR_AMOUNT.-1=Use Style
+option.WATER_TINT_SHALLOW_BLUE=Water Tint (Shallow) Blue
+option.WATER_TINT_SHALLOW_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_SHALLOW_BLUE.-1=Use Style
+
+option.WATER_TINT_DEEP_RED=Water Tint (Deep) Red
+option.WATER_TINT_DEEP_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_DEEP_RED.-1=Use Style
+
+option.WATER_TINT_DEEP_GREEN=Water Tint (Deep) Green
+option.WATER_TINT_DEEP_GREEN.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_DEEP_GREEN.-1=Use Style
+
+option.WATER_TINT_DEEP_BLUE=Water Tint (Deep) Blue
+option.WATER_TINT_DEEP_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_DEEP_BLUE.-1=Use Style
 
 
 

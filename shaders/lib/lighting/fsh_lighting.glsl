@@ -38,7 +38,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		//vec3 actualNormal = cross(viewStepX, viewStepY);
 		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
 		//normal = maybeGrass ? actualNormal : normal;
-		viewPos += normal * 0.0015 * (40.0 + length(viewPos));
+		viewPos += normal * 0.0025 * (40.0 + length(viewPos));
 		
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
 		if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {

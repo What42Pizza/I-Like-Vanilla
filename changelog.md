@@ -5,6 +5,7 @@
   - Added setting 'Sun/Moon Weather Opacity Decrease'
   - Added setting 'Enchantment Glint Strength'
   - Added setting 'Matrix Compatibility'
+  - Reworked water color settings
   - Fixed fast leaves
   - Fixed more bugs
   - Tweaked default settings and effects

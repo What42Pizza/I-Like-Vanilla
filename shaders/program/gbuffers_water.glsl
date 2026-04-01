@@ -110,8 +110,7 @@ void main() {
 	// water
 	if (materialId == BLOCK_ID_WATER) {
 		
-		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.8);
-		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_SATURATION);
 		
 		vec3 viewDir = normalize(viewPos);
 		float fresnel = -dot(normal, viewDir);
@@ -154,12 +153,15 @@ void main() {
 			//opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
 		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
+		float waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
 		if (isEyeInWater == 1) {
 			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 		} else {
-			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 16.0 / (16.0 + waterDepth));
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, waterDepthPercent);
 		}
 		color.a *= 1.0 - fresnel * 0.125;
+		
+		color.rgb *= mix(WATER_TINT_DEEP, WATER_TINT_SHALLOW, waterDepthPercent);
 		
 		#if WATER_FOAM_ENABLED == 1
 			float foamAmount = percentThrough(waterDepth, 1.2, 0.0);

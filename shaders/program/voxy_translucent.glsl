@@ -70,10 +70,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	if (materialId == BLOCK_ID_WATER) {
 		
-		color.rgb *= 1.125;
-		
-		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 0.825);
-		color.rgb = mix(color.rgb, WATER_COLOR, WATER_COLOR_AMOUNT);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_SATURATION);
 		
 		vec3 viewDir = normalize(viewPos);
 		float fresnel = -dot(normal, viewDir);
@@ -104,14 +101,17 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		#endif
 		
 		
+		float waterDepthPercent = 0.0;
 		if (isEyeInWater == 1) {
 			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 		} else {
 			float blockDepth = length(viewPos);
 			float opaqueBlockDepth = length(screenToViewVx(vec3(gl_FragCoord.xy * pixelSize, texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r)));
 			float waterDepth = opaqueBlockDepth - blockDepth;
-			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, 32.0 / (32.0 + waterDepth));
+			waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, waterDepthPercent);
 		}
+		color.rgb *= mix(WATER_TINT_DEEP, WATER_TINT_SHALLOW, waterDepthPercent);
 		
 		color.a *= 1.0 + fresnel * 0.125;
 		

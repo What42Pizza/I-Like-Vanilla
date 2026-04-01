@@ -153,7 +153,7 @@ void main() {
 	
 	//color = vec3(texture2D(shadowtex0, texcoord).r);
 	
-	color.r += 1.0 / 256.0;
+	//color.r += 1.0 / 256.0;
 	
 	
 	

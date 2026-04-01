@@ -84,11 +84,11 @@
 #endif
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.0
+										#define VANILLA_AO_BRIGHT 1.2
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 0.9
+										#define VANILLA_AO_DARK 1.1
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -1104,21 +1104,33 @@
 
 
 
-#if WATER_COLOR_RED == -1
-#undef WATER_COLOR_RED
-										#define WATER_COLOR_RED 0.25
+#if WATER_SATURATION == -1
+#undef WATER_SATURATION
+										#define WATER_SATURATION 0.8
 #endif
-#if WATER_COLOR_GREEN == -1
-#undef WATER_COLOR_GREEN
-										#define WATER_COLOR_GREEN 0.35
+#if WATER_TINT_SHALLOW_RED == -1
+#undef WATER_TINT_SHALLOW_RED
+										#define WATER_TINT_SHALLOW_RED 0.8
 #endif
-#if WATER_COLOR_BLUE == -1
-#undef WATER_COLOR_BLUE
-										#define WATER_COLOR_BLUE 0.6
+#if WATER_TINT_SHALLOW_GREEN == -1
+#undef WATER_TINT_SHALLOW_GREEN
+										#define WATER_TINT_SHALLOW_GREEN 1.1
 #endif
-#if WATER_COLOR_AMOUNT == -1
-#undef WATER_COLOR_AMOUNT
-										#define WATER_COLOR_AMOUNT 0.5
+#if WATER_TINT_SHALLOW_BLUE == -1
+#undef WATER_TINT_SHALLOW_BLUE
+										#define WATER_TINT_SHALLOW_BLUE 1.1
+#endif
+#if WATER_TINT_DEEP_RED == -1
+#undef WATER_TINT_DEEP_RED
+										#define WATER_TINT_DEEP_RED 0.8
+#endif
+#if WATER_TINT_DEEP_GREEN == -1
+#undef WATER_TINT_DEEP_GREEN
+										#define WATER_TINT_DEEP_GREEN 1.1
+#endif
+#if WATER_TINT_DEEP_BLUE == -1
+#undef WATER_TINT_DEEP_BLUE
+										#define WATER_TINT_DEEP_BLUE 1.1
 #endif
 
 
