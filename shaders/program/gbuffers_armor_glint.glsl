@@ -9,6 +9,7 @@ void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	color.r *= 0.9;
+	color.rgb *= ENCHANTMENT_GLINT_STRENGTH;
 	
 	/* DRAWBUFFERS:0 */
 	#if DO_COLOR_CODED_GBUFFERS == 1

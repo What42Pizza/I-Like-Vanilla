@@ -3,6 +3,7 @@
   - Improved volumetric sunrays
   - Added setting 'Night Atmospheric Fog Density'
   - Added setting 'Sun/Moon Weather Opacity Decrease'
+  - Added setting 'Enchantment Glint Strength'
   - Added setting 'Matrix Compatibility'
   - Fixed fast leaves
   - Fixed more bugs
