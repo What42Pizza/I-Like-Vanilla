@@ -237,9 +237,12 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
-		#ifndef SHADOWS_ENABLED
-			lightDot = 0.5 + 0.5 * lightDot; // reminder: still kinda in -1 to 1 range, just want to make the lighting less intense when shadows are off
+		#ifdef SHADOWS_ENABLED
+			float lightDotLift = 0.25;
+		#else
+			float lightDotLift = 1.0;
 		#endif
+		lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
 	#else
 		float lightDot = 1.0;
 	#endif
@@ -315,10 +318,12 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		#if PBR_TYPE == 0
 			specular *= 1.0 - 0.25 * getSaturation(color);
 		#endif
-		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(shadowBrightness * 64.0, 1.0);
+		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(shadowBrightness * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
-	blockBrightness *= 1.2 - min(getLum(lighting), 1.0);
+	blockBrightness *= 1.25 - min(getLum(lighting), 1.0);
+	lighting *= 1.0 - 0.25 * blockBrightness;
+	
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif

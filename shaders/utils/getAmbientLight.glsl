@@ -18,9 +18,11 @@ vec3 getAmbientLight(float ambientBrightness, float lightDot) {
 		
 		ambientLight *= SHADOWS_BRIGHTNESS;
 		ambientLight *= 1.0 - 0.1 * inPaleGarden;
-		ambientLight *= 1.0 + 0.0625 * clamp(1.0 - lightDot * 10.0, 0.0, 1.0);
+		//float sceneDarkness = clamp(lightDot * -8.0, 0.0, 1.0) * (sunLightBrightness + moonLightBrightness);
+		//ambientLight *= 1.0 + 0.0625 * sceneDarkness;
 		ambientBrightness *= 0.9 + 0.2 * screenBrightness;
 		ambientLight = mix(CAVE_AMBIENT_COLOR * 0.6 * (1.0 + 0.4 * screenBrightness), ambientLight, ambientBrightness);
+		//ambientLight = vec3(sceneDarkness);
 		
 	#elif defined NETHER
 		vec3 ambientLight = NETHER_AMBIENT_COLOR;

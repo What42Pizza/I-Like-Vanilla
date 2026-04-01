@@ -8,7 +8,6 @@ in_out vec4 glcolor;
 void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
-	color.r *= 0.9;
 	color.rgb *= ENCHANTMENT_GLINT_STRENGTH;
 	
 	/* DRAWBUFFERS:0 */
@@ -36,6 +35,9 @@ void main() {
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	glcolor = gl_Color;
+	
+	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
+	glcolor.rgb *= 1.5 - 0.5 * max(brightnesses.x, brightnesses.y) - vec3(0.05, 0.0, 0.0);
 	
 	
 	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
