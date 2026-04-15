@@ -30,7 +30,7 @@ void main() {
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
 	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-	if (lengthCylinder < far - 10.0 - 8.0 * dither) discard;
+	if (lengthCylinder < far - 12.0 - 8.0 * dither) discard;
 	
 	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	if (depth < 1.0 && length(playerPos) > toLinearDepth(depth) * far) discard;
@@ -93,19 +93,13 @@ void main() {
 		} else {
 			float blockDepth = length(viewPos);
 			float opaqueBlockDepth = length(screenToViewDh(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r)));
-			float waterDepth = opaqueBlockDepth - blockDepth;
+			float waterDepth = opaqueBlockDepth - blockDepth + 16.0;
 			waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
 			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, waterDepthPercent);
 		}
 		color.rgb *= mix(WATER_TINT_DEEP, WATER_TINT_SHALLOW, waterDepthPercent);
 		
 		color.a *= 1.0 + fresnel * 0.125;
-		
-		// water needs to be more opaque in dark areas
-		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
-		alphaLift = sqrt(alphaLift);
-		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
-		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
 		
 	}
 	
@@ -160,7 +154,8 @@ void main() {
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	if (dhBlock == DH_BLOCK_WATER) {
-		playerPos.y -= 0.11213;
+		playerPos.y -= 2.0 / 16.0;
+		viewPos = mat3(gbufferModelView) * playerPos;
 	}
 	shadowcasterLight = getShadowcasterLight();
 	

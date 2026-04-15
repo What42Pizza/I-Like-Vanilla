@@ -52,8 +52,8 @@ void main() {
 		#if TEMPORAL_FILTER_ENABLED == 1
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
-		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y)) * 0.99;
-		if (lengthCylinder >= far - 12 - 8 * dither) discard;
+		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+		if (lengthCylinder >= far - 12.0 - 8.0 * dither) discard;
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
