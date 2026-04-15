@@ -1,4 +1,4 @@
-- v1.3.4
+- v1.3.4 (26/04/14)
   - Improved bloom processing
   - Improved volumetric sunrays
   - Added setting 'Night Atmospheric Fog Density'

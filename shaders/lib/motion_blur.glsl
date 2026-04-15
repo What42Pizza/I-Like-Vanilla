@@ -12,8 +12,8 @@ void doMotionBlur(inout vec3 color, vec2 prevCoord) {
 	
 	for (int i = 0; i < SAMPLE_COUNT; i++) {
 		pos += coordStep;
-		vec3 sample = texture2DLod(PREV_TEXTURE, pos, 0).rgb * 2.0;
-		color += sample * sample;
+		vec3 sample_ = texture2DLod(PREV_TEXTURE, pos, 0).rgb * 2.0;
+		color += sample_ * sample_;
 	}
 	color /= SAMPLE_COUNT + 1;
 	

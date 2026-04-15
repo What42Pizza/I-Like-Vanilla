@@ -501,7 +501,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	// step 10: generate 'generated/common.glsl'
 	let mut generated_common_file = GENERATED_COMMON_START[1..].to_string();
 	for (alias, int_id) in aliases {
-		generated_common_file += &format!("const uint {alias} = {}u;\n", int_id & ((1 << 13) - 1));
+		generated_common_file += &format!("const uint {alias} = {}u;\n", int_id & ((1 << 11) - 1));
 	}
 	fs::write(shaders_path.join("generated/common.glsl"), generated_common_file)?;
 	

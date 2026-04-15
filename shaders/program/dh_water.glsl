@@ -56,13 +56,11 @@ void main() {
 	
 	if (dhBlock == DH_BLOCK_WATER) {
 		
-		color.rgb *= 1.1;
-		
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_SATURATION);
-		color.rgb *= WATER_TINT;
 		
 		vec3 viewDir = normalize(viewPos);
 		float fresnel = -dot(normal, viewDir);
+		
 		
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.25;
@@ -71,25 +69,43 @@ void main() {
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND * 0.55, WAVING_WATER_FRESNEL_SURFACE * 0.55, lmcoord.y);
 				float frameTimeCounter = frameTimeCounter * WAVING_WATER_SPEED;
 				noisePos += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4 * 0.18;
-				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
-				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
 				noisePos += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4 * 0.18;
-				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
-				//noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
-				vec3 normalForFresnel = vec3(0.0, 1.0, 0.0);
-				normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
-				//normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
-				//normalForFresnel.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
-				//normalForFresnel.xz *= wavingSurfaceAmount;
-				normalForFresnel = mat3(gbufferModelView) * normalize(normalForFresnel);
-				fresnel = dot(normalForFresnel, viewDir); // note: there should be made negative, but instead the next line does 1+fresnel instead of 1-fresnel
+				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				noisePos += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25 * 0.18;
+				normal = vec3(0.0, 1.0, 0.0);
+				normal.xz += (texture2D(noisetex, noisePos * 0.03125 + frameTimeCounter * vec2( 0.01,  0.01)).br * 2.0 - 1.0) * 0.4;
+				normal.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2( 0.01, -0.01)).br * 2.0 - 1.0) * 0.25;
+				normal.xz += (texture2D(noisetex, noisePos * 0.0625  + frameTimeCounter * vec2(-0.01,  0.01)).br * 2.0 - 1.0) * 0.25;
+				vec3 normalWithoutMult = mat3(gbufferModelView) * normalize(normal);
+				normal.xz *= wavingSurfaceAmount;
+				normal = mat3(gbufferModelView) * normalize(normal);
+				fresnel = dot(normalWithoutMult, viewDir); // note: there should be made negative, but instead the next line does 1+fresnel instead of 1-fresnel
 				color.rgb *= 1.0 + (fresnel + 0.5) * fresnelMult;
 			}
 		#endif
 		
-		color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		
+		float waterDepthPercent = 0.0;
+		if (isEyeInWater == 1) {
+			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
+		} else {
+			float blockDepth = length(viewPos);
+			float opaqueBlockDepth = length(screenToViewDh(vec3(gl_FragCoord.xy * pixelSize, texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r)));
+			float waterDepth = opaqueBlockDepth - blockDepth;
+			waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
+			color.a = 1.0 - mix(WATER_TRANSPARENCY_DEEP, WATER_TRANSPARENCY_SHALLOW, waterDepthPercent);
+		}
+		color.rgb *= mix(WATER_TINT_DEEP, WATER_TINT_SHALLOW, waterDepthPercent);
 		
 		color.a *= 1.0 + fresnel * 0.125;
+		
+		// water needs to be more opaque in dark areas
+		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
+		alphaLift = sqrt(alphaLift);
+		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
+		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
 		
 	}
 	
