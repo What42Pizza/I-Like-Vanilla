@@ -1,3 +1,14 @@
+- v1.3.5
+  - Significantly improved bloom processing
+  - Split setting 'Lava Noise Amount' into overworld, nether, and end variants
+
+<br>
+
+- v1.3.4b (26/04/15)
+  - Fixed bugs that caused the shader to not load
+
+<br>
+
 - v1.3.4 (26/04/14)
   - Improved bloom processing
   - Improved volumetric sunrays
