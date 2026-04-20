@@ -39,8 +39,14 @@ value.LAVA_NOISE_ENABLED.-1=Use Style
 value.LAVA_NOISE_ENABLED.0=Off
 value.LAVA_NOISE_ENABLED.1=On
 
-option.LAVA_NOISE_AMOUNT=Lava Noise Amount
-value.LAVA_NOISE_AMOUNT.-1=Use Style
+option.LAVA_NOISE_AMOUNT_OVERWORLD=Lava Noise Amount (Overworld)
+value.LAVA_NOISE_AMOUNT_OVERWORLD.-1=Use Style
+
+option.LAVA_NOISE_AMOUNT_NETHER=Lava Noise Amount (Nether)
+value.LAVA_NOISE_AMOUNT_NETHER.-1=Use Style
+
+option.LAVA_NOISE_AMOUNT_END=Lava Noise Amount (End)
+value.LAVA_NOISE_AMOUNT_END.-1=Use Style
 
 option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
 option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals

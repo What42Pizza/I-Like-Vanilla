@@ -61,6 +61,9 @@ void main() {
 		bloomColor = vec3(bloomMult);
 	#endif
 	
+	bloomColor *= bloomColor;
+	//bloomColor = sqrt(bloomColor);
+	
 	
 	/* DRAWBUFFERS:4 */
 	gl_FragData[0] = vec4(bloomColor, 1.0);

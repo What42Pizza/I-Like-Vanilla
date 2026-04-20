@@ -175,7 +175,13 @@ void main() {
 			worldPos2 += 128.0;
 			noise -= valueNoise(vec3(worldPos2 * 1.0  , frameTimeCounter * 0.125)) * 0.125;
 			float upDot = dot(normal, gbufferModelView[1].xyz);
-			const float halfStrength = LAVA_NOISE_AMOUNT * 0.5;
+			#ifdef OVERWORLD
+				const float halfStrength = LAVA_NOISE_AMOUNT_OVERWORLD * 0.5;
+			#elif defined NETHER
+				const float halfStrength = LAVA_NOISE_AMOUNT_NETHER * 0.5;
+			#elif defined END
+				const float halfStrength = LAVA_NOISE_AMOUNT_END * 0.5;
+			#endif
 			noise = mix(1.0, noise * noise, halfStrength + halfStrength * upDot);
 			color.rgb *= noise;
 		}

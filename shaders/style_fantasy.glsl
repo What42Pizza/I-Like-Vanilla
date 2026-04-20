@@ -10,9 +10,17 @@
 #undef LAVA_NOISE_ENABLED
 										#define LAVA_NOISE_ENABLED 1
 #endif
-#if LAVA_NOISE_AMOUNT == -1
-#undef LAVA_NOISE_AMOUNT
-										#define LAVA_NOISE_AMOUNT 1.1
+#if LAVA_NOISE_AMOUNT_OVERWORLD == -1
+#undef LAVA_NOISE_AMOUNT_OVERWORLD
+										#define LAVA_NOISE_AMOUNT_OVERWORLD 0.75
+#endif
+#if LAVA_NOISE_AMOUNT_NETHER == -1
+#undef LAVA_NOISE_AMOUNT_NETHER
+										#define LAVA_NOISE_AMOUNT_NETHER 1.1
+#endif
+#if LAVA_NOISE_AMOUNT_END == -1
+#undef LAVA_NOISE_AMOUNT_END
+										#define LAVA_NOISE_AMOUNT_END 0.5
 #endif
 #if FANCY_NETHER_PORTAL_ENABLED == -1
 #undef FANCY_NETHER_PORTAL_ENABLED
@@ -551,7 +559,7 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 2.5
+										#define BLOOM_SIZE 1.5
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF

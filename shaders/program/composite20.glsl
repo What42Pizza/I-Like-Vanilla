@@ -55,15 +55,22 @@ void main() {
 	// ======= BLOOM ======== //
 	
 	#if BLOOM_ENABLED == 1
-		vec3 bloomAddition = texture2D(BLOOM_TEXTURE, texcoord).rgb;
+		vec3 bloomAddition = vec3(0.0);
+		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord).rgb;
+		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( invAspectRatio,  0.0)).rgb;
+		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           ,  1.0)).rgb;
+		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2(-invAspectRatio,  0.0)).rgb;
+		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           , -1.0)).rgb;
+		bloomAddition *= 0.2;
+		bloomAddition = sqrt(bloomAddition);
 		#ifdef OVERWORLD
-			const float bloomAmount = BLOOM_AMOUNT;
+			const float bloomAmount = BLOOM_AMOUNT * 0.8;
 		#endif
 		#ifdef NETHER
-			const float bloomAmount = BLOOM_NETHER_AMOUNT;
+			const float bloomAmount = BLOOM_NETHER_AMOUNT * 0.8;
 		#endif
 		#ifdef END
-			const float bloomAmount = BLOOM_END_AMOUNT;
+			const float bloomAmount = BLOOM_END_AMOUNT * 0.8;
 		#endif
 		#if HORROR_MODE == 1
 			color = bloomAddition;
