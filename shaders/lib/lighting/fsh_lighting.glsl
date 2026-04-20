@@ -203,17 +203,11 @@ float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambie
 		#if PIXELATED_SHADOWS > 0
 			shadowBrightness = mix(shadowBrightness, ambientBrightness, float(depthIsHand(depth)));
 		#endif
-		//#if defined DISTANT_HORIZONS || defined VOXY
-		//	float len = max(length(viewPos) * invFar, 0.8);
-		//	shadowBrightness = mix(shadowBrightness, ambientBrightness, smoothstep(len, 0.75, 0.8));
-		//#endif
 	#else
 		float shadowBrightness = ambientBrightness;
 	#endif
 	
-	const float SUNLIGHT_CEL_INTERMEDIATE = 1.0 - (1.0 - SUNLIGHT_CEL_AMOUNT) * (1.0 - SUNLIGHT_CEL_AMOUNT);
-	const float SUNLIGHT_CEL_SHADING_MULT = 1.0 / (1.01 - SUNLIGHT_CEL_INTERMEDIATE);
-	shadowBrightness *= clamp(lightDot * SUNLIGHT_CEL_SHADING_MULT, 0.0, 1.0);
+	shadowBrightness *= clamp(lightDot / (1.0001 - SUNLIGHT_CEL_AMOUNT), 0.0, 1.0);
 	
 	return shadowBrightness;
 }
@@ -238,7 +232,7 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 		#ifdef SHADOWS_ENABLED
-			float lightDotLift = 0.25;
+			float lightDotLift = 0.5;
 		#else
 			float lightDotLift = 1.0;
 		#endif
@@ -264,13 +258,13 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	vec3 ambientLight = getAmbientLight(ambientBrightness, lightDot);
 	
 	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
-	// +-1.0x: -0.5
-	// +-1.0z: -0.15
+	// +-1.0x: -0.4
+	// +-1.0z: -0.0
 	// +1.0y: +0.325
 	// -1.0y: -0.65
 	normalForSS.xz = abs(normalForSS.xz);
 	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
-	float sideShading = dot(normalForSS, vec3(-0.5, 0.65, -0.15));
+	float sideShading = dot(normalForSS, vec3(-0.4, 0.65, 0.0));
 	float brightForSS = max(blockBrightness, ambientBrightness);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.75;
 	ambientLight *= 1.0 + sideShading;
@@ -291,13 +285,13 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	#endif
 	
 	shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness, depth);
+	shadowBrightness *= 1.0 + sideShading;
 	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	shadowBrightness *= ambientBrightness * ambientBrightness;
 	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
 	shadowBrightness *= 1.0 - rainDecrease;
 	
 	vec3 skyLighting = shadowcasterLight * shadowBrightness;
-	skyLighting *= 1.0 + 0.5 * sideShading;
 	ambientLight *= 1.0 - shadowBrightness;
 	
 	vec3 lighting = ambientLight + skyLighting;
@@ -349,5 +343,6 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		lighting = vec3(1.0);
 	#endif
 	color *= lighting;
+	//color = lighting;
 	
 }

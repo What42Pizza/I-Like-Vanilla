@@ -383,10 +383,7 @@ emission: vec3(15.0 / 15.0)
 
 block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, candle, campfire, furnace:lit=true:
 weight: 10
-brightness: 1.2
-glow detect min: vec3(21.0,  31.3, 69.4)
-glow detect max: vec3(60.0, 100.0, 100.0)
-glow amount: 0.25
+brightness: 1.1
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 
@@ -825,7 +822,6 @@ block iron_block, iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
 weight: 1
 reflectiveness: 0.4
 specularness: 0.3
-brightness: 0.85
 
 block light_weighted_pressure_plate, redstone_block, emerald_block, lapis_block, diamond_block, netherite_block:
 weight: 1
@@ -868,6 +864,7 @@ translucency: vec3(0.5, 1.0, 0.6)
 
 block honey_block:
 weight: 1
+brightness: 0.9
 reflectiveness: 0.75
 specularness: 0.3
 voxelize: true
@@ -879,7 +876,7 @@ specularness: 0.75
 
 block white_wool, white_carpet:
 weight: 2
-brightness: 0.9
+brightness: 0.95
 
 block yellow_wool, yellow_carpet:
 weight: 1
@@ -909,15 +906,15 @@ shadow casting: never
 
 block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_bricks, quartz_pillar:
 weight: 10
-reflectiveness: 0.5
+reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.8
+brightness: 0.85
 
 block smooth_quartz, smooth_quartz_stairs, smooth_quartz_slab:
 weight: 10
-reflectiveness: 0.6
+reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.8
+brightness: 0.85
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
 weight: 10

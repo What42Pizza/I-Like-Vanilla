@@ -52,8 +52,7 @@ if (materialId < 24u) {
 						}
 					} else {
 						if (materialId < 4u) {
-							SET_GLOWING_COLOR(vec3(21.0,  31.3, 69.4), vec3(60.0, 100.0, 100.0), 0.25);
-							TWEAK_GLCOLOR_BRIGHTNESS(1.2);
+							TWEAK_GLCOLOR_BRIGHTNESS(1.1);
 							SET_VOXEL_ID(58u);
 						} else {
 							SET_REFLECTIVENESS(0.4);
@@ -179,7 +178,7 @@ if (materialId < 24u) {
 								SET_VOXEL_ID(76u);
 							} else {
 								if (materialId < 29u) {
-									TWEAK_GLCOLOR_BRIGHTNESS(0.9);
+									TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 								} else {
 									SET_REFLECTIVENESS(0.9);
 									SET_SPECULARNESS(0.4);
@@ -244,6 +243,7 @@ if (materialId < 24u) {
 									if (materialId < 43u) {
 										SET_REFLECTIVENESS(0.75);
 										SET_SPECULARNESS(0.3);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 										SET_VOXEL_ID(5u);
 									} else {
 										SET_REFLECTIVENESS(0.5);
@@ -262,7 +262,6 @@ if (materialId < 24u) {
 									if (materialId < 47u) {
 										SET_REFLECTIVENESS(0.4);
 										SET_SPECULARNESS(0.3);
-										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 									} else {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 									}
@@ -644,13 +643,13 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							SET_VOXEL_ID(55u);
 						} else {
 							if (materialId < 134u) {
-								SET_REFLECTIVENESS(0.6);
+								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.5);
-								TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 							} else {
-								SET_REFLECTIVENESS(0.5);
+								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.5);
-								TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 							}
 						}
 					}

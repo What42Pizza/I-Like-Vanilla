@@ -2,6 +2,7 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
 in_out float ao;
+in_out float upDot;
 #if PBR_TYPE == 0 && POM_ENABLED == 0
 	flat in_out vec3 normal;
 	flat in_out vec2 encodedNormal;
@@ -174,7 +175,6 @@ void main() {
 			noise -= valueNoise(vec3(worldPos2 * 0.25 , frameTimeCounter * 0.125)) * 0.25;
 			worldPos2 += 128.0;
 			noise -= valueNoise(vec3(worldPos2 * 1.0  , frameTimeCounter * 0.125)) * 0.125;
-			float upDot = dot(normal, gbufferModelView[1].xyz);
 			#ifdef OVERWORLD
 				const float halfStrength = LAVA_NOISE_AMOUNT_OVERWORLD * 0.5;
 			#elif defined NETHER
@@ -187,7 +187,7 @@ void main() {
 		}
 	#endif
 	
-	color.rgb *= 1.0 - dot(normal, gbufferModelView[1].xyz) * 0.125 * SIDE_SHADING_BRIGHT * float(materialId == BLOCK_ID_PUMPKIN);
+	color.rgb *= 1.0 - upDot * 0.125 * SIDE_SHADING_BRIGHT * float(materialId == BLOCK_ID_PUMPKIN);
 	
 	#if SHOW_DANGEROUS_LIGHT == 1
 		if (isDangerousLight > 0.0) {
@@ -279,8 +279,6 @@ void main() {
 			}
 		#endif
 	}
-	ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
-	glcolor = glcolor4.rgb * ao;
 	
 	
 	// block id stuff
@@ -326,6 +324,14 @@ void main() {
 			}
 		#endif
 	#endif
+	
+	
+	upDot = dot(normal, gbufferModelView[1].xyz);
+	ao = 1.0 - glcolor4.a;
+	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
+	ao *= 15.0/16.0 + abs(upDot) / 16.0;
+	ao = 1.0 - ao;
+	glcolor = glcolor4.rgb * ao;
 	
 	
 	// get block data
