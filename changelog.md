@@ -1,6 +1,8 @@
 - v1.3.5
+  - Added colored shadows
   - Significantly improved bloom processing
   - Split setting 'Lava Noise Amount' into overworld, nether, and end variants
+  - Renamed setting 'Water Saturation' to 'Water Biome Influence'
 
 <br>
 

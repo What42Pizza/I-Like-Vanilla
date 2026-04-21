@@ -1,4 +1,7 @@
 in_out vec2 texcoord;
+#if COLORED_SHADOWS_ENABLED == 1
+	in_out vec3 glcolor;
+#endif
 
 
 
@@ -6,6 +9,11 @@ in_out vec2 texcoord;
 
 void main() {
 	vec4 color = texture2D(texture, texcoord);
+	
+	#if COLORED_SHADOWS_ENABLED == 1
+		color.rgb *= glcolor;
+	#endif
+	
 	gl_FragData[0] = color;
 }
 
@@ -24,12 +32,17 @@ void main() {
 
 void main() {
 	
+	// skip entities with this id, currently only used for lightning
 	if (entityId == 10000) {
 		gl_Position = vec4(1.0);
 		return;
 	}
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	
+	#if COLORED_SHADOWS_ENABLED
+		glcolor = gl_Color.rgb;
+	#endif
 	
 	vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	
@@ -83,7 +96,7 @@ void main() {
 		#endif
 	}
 	
-	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1 || COLORED_LIGHTING_ENABLED == 1
+	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
 		gl_Position = shadowProjection * shadowModelView * vec4(playerPos, 1.0);
 	#else
 		gl_Position = ftransform();

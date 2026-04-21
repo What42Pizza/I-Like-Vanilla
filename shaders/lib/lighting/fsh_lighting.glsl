@@ -26,18 +26,46 @@ vec3 getShadowPos(vec3 viewPos, vec3 normal) {
 
 
 
+#if PIXELATED_SHADOWS == 0 && SHADOW_FILTERING == 0
+	#define samplePosType ivec2
+	#define rawSample(sampler, pos) texelFetch(sampler, pos, 0)
+#else
+	#define samplePosType vec2
+	#define rawSample(sampler, pos) texture2D(sampler, pos)
+#endif
+
+vec3 sampleShadowAtPoint(samplePosType shadowmapPos, float depth) {
+	#if COLORED_SHADOWS_ENABLED == 0
+		
+		bool isLit = rawSample(shadowtex0, shadowmapPos).r >= depth;
+		return vec3(float(isLit));
+		
+	#elif COLORED_SHADOWS_ENABLED == 1
+		
+		bool isLit1 = rawSample(shadowtex1, shadowmapPos).r >= depth;
+		if (isLit1) {
+			bool isLit2 = rawSample(shadowtex0, shadowmapPos).r >= depth;
+			if (isLit2) {
+				return vec3(1.0);
+			} else {
+				return rawSample(shadowcolor0, shadowmapPos).rgb;
+			}
+		} else {
+			vec3(0.0);
+		}
+		
+	#endif
+}
+
+
+
 #ifdef SHADOWS_ENABLED
-float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
-	if (lightDot < 0.0) return 0.0; // surface is facing away from shadowLightPosition
+vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
+	if (lightDot < 0.0) return vec3(0.0); // surface is facing away from shadowLightPosition
 	
 	#if PIXELATED_SHADOWS > 0
 		// no filtering, world-aligned pixelated
 		
-		//vec3 viewStepX = normalize(dFdx(viewPos));
-		//vec3 viewStepY = normalize(dFdy(viewPos));
-		//vec3 actualNormal = cross(viewStepX, viewStepY);
-		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.01;
-		//normal = maybeGrass ? actualNormal : normal;
 		viewPos += normal * 0.0025 * (40.0 + length(viewPos));
 		
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
@@ -48,67 +76,33 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		vec3 bitangent = cross(tangent, normal);
 		
 		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
-		if (shadowPos.z > 1.0) return 1.0;
+		if (shadowPos.z > 1.0) return vec3(1.0);
 		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
 		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
 		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
 		
-		//vec3 viewStepX = normalize(dFdx(viewPos));
-		//vec3 viewStepY = normalize(dFdy(viewPos));
-		//vec3 actualNormal = cross(viewStepX, viewStepY);
-		//bool maybeGrass = abs(normal.x - gbufferModelView[1].x) + abs(normal.y - gbufferModelView[1].y) + abs(normal.z - gbufferModelView[1].z) < 0.0001;
-		////normal = maybeGrass ? actualNormal : normal;
-		
-		//normal = mat3(gbufferModelViewInverse) * normal;
-		//vec3 tangent = cross(normal, vec3(0.0, 1.0, 0.0));//gbufferModelView[1].xyz);
-		//if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
-		//	tangent = cross(normal, vec3(1.0, 0.0, 0.0));//gbufferModelView[0].xyz);
-		//}
-		//tangent = normalize(tangent);
-		//vec3 bitangent = cross(normal, tangent);
-		//mat3 tbn = mat3(tangent, bitangent, normal);
-		
-		//vec3 worldPos = transform(gbufferModelViewInverse, viewPos) + cameraPosition;
-		
-		//vec3 normalPos = transpose(tbn) * worldPos;
-		////normalPos += transpose(tbn) * (mat3(gbufferModelView) * cameraPosition);
-		//normalPos = floor(normalPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
-		////normalPos -= transpose(tbn) * (mat3(gbufferModelView) * cameraPosition);
-		//worldPos = tbn * normalPos;
-		
-		//viewPos = transform(gbufferModelView, worldPos - cameraPosition);
-		//normal = mat3(gbufferModelView) * normal;
-		//viewPos += normal * 0.0015 * (25.0 + length(viewPos));
-		
-		//vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
-		//if (shadowPos.z > 1.0) return 1.0;
-		//vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * tangent);
-		//vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * bitangent);
-		//shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
-		//shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
-		
-		float shadowSample = 0.0;
+		vec3 shadowSample = vec3(0.0);
 		float bias = 0.0002 + length(viewPos) * 0.035 / shadowMapResolution;
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy).r >= shadowPos.z - bias);
-		shadowSample += float(texture2D(shadowtex0, shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy).r >= shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy, shadowPos.z - bias);
 		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
-		if (shadowPos.z > 1.0) return 1.0;
-		return float(texelFetch(shadowtex0, ivec2(shadowPos.xy * shadowMapResolution - 0.25), 0).r >= shadowPos.z);
+		if (shadowPos.z > 1.0) return vec3(1.0);
+		return sampleShadowAtPoint(ivec2(shadowPos.xy * shadowMapResolution - 0.25), shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
 		vec3 shadowPos = getShadowPos(viewPos, normal);
-		if (shadowPos.z > 1.0) return 1.0;
-		return float(texture2D(shadowtex0, shadowPos.xy).r >= shadowPos.z);
+		if (shadowPos.z > 1.0) return vec3(1.0);
+		return sampleShadowAtPoint(shadowPos.xy, shadowPos.z);
 		
 	#else
 		
@@ -169,7 +163,7 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		#endif
 		
 		vec3 shadowPos = getShadowPos(viewPos, normal);
-		if (shadowPos.z > 1.0) return 1.0;
+		if (shadowPos.z > 1.0) return vec3(1.0);
 		
 		float dither = bayer64(gl_FragCoord.xy);
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
@@ -179,38 +173,19 @@ float sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		rotationMatrix[1] = vec2(sin(randomAngle), cos(randomAngle)) * noiseMult;
 		rotationMatrix[0] = vec2(-rotationMatrix[1].y, rotationMatrix[1].x);
 		
-		float shadowBrightness = 0.0;
+		vec3 shadowSample = vec3(0.0);
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {
-			if (texture2D(shadowtex0, shadowPos.xy + rotationMatrix * SHADOW_OFFSETS[i].xy).r >= shadowPos.z) {
-				shadowBrightness += SHADOW_OFFSETS[i].z;
-			}
+			vec2 samplePos = shadowPos.xy + rotationMatrix * SHADOW_OFFSETS[i].xy;
+			shadowSample += sampleShadowAtPoint(samplePos, shadowPos.z) * SHADOW_OFFSETS[i].z;
 		}
-		shadowBrightness /= SHADOW_OFFSET_WEIGHTS_TOTAL;
-		float shadowSample = min(shadowBrightness * 2.5, 1.0);
-		return shadowSample * shadowSample;
+		shadowSample /= SHADOW_OFFSET_WEIGHTS_TOTAL;
+		float mult = min(getLum(shadowSample) * 2.5, 1.0);
+		shadowSample = shadowSample / getLum(shadowSample + 0.1) * mult * mult;
+		return shadowSample;
 		
 	#endif
 }
 #endif
-
-
-
-float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambientBrightness, float depth) {
-	
-	// sample shadow
-	#ifdef SHADOWS_ENABLED
-		float shadowBrightness = sampleShadow(viewPos, lightDot, normal);
-		#if PIXELATED_SHADOWS > 0
-			shadowBrightness = mix(shadowBrightness, ambientBrightness, float(depthIsHand(depth)));
-		#endif
-	#else
-		float shadowBrightness = ambientBrightness;
-	#endif
-	
-	shadowBrightness *= clamp(lightDot / (1.0001 - SUNLIGHT_CEL_AMOUNT), 0.0, 1.0);
-	
-	return shadowBrightness;
-}
 
 
 
@@ -232,10 +207,11 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 		#ifdef SHADOWS_ENABLED
-			float lightDotLift = 0.5;
+			float lightDotLift = 0.3;
 		#else
 			float lightDotLift = 1.0;
 		#endif
+		// TODO: reintroduce 'SUNLIGHT_CEL_AMOUNT' here?
 		lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
 	#else
 		float lightDot = 1.0;
@@ -284,17 +260,21 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness, depth);
-	shadowBrightness *= 1.0 + sideShading;
-	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
-	shadowBrightness *= ambientBrightness * ambientBrightness;
-	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
-	shadowBrightness *= 1.0 - rainDecrease;
+	vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
+	shadowColor = mix(vec3(getLum(shadowColor)), shadowColor, 0.75);
+	#if PIXELATED_SHADOWS > 0
+		shadowColor = mix(shadowColor, ambientLight, float(depthIsHand(depth)));
+	#endif
+	float shadowColorBrightness = min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
+	shadowColorBrightness *= lightDot;
+	shadowColorBrightness *= 1.0 + sideShading;
+	shadowColorBrightness *= ambientBrightness * ambientBrightness;
+	shadowColorBrightness *= 1.0 - rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
+	shadowColor *= shadowColorBrightness * shadowcasterLight;
+	shadowBrightness = getLum(shadowColor);
 	
-	vec3 skyLighting = shadowcasterLight * shadowBrightness;
-	ambientLight *= 1.0 - shadowBrightness;
-	
-	vec3 lighting = ambientLight + skyLighting;
+	ambientLight *= 1.0 - 0.75 * shadowBrightness;
+	vec3 lighting = ambientLight + shadowColor;
 	
 	#ifdef OVERWORLD
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
@@ -343,6 +323,5 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		lighting = vec3(1.0);
 	#endif
 	color *= lighting;
-	//color = lighting;
 	
 }

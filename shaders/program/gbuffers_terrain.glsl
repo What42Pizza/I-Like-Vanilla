@@ -252,6 +252,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
+	vec4 glcolor4 = gl_Color;
 	
 	#if POM_ENABLED == 0
 		vec3 viewPos;
@@ -265,8 +266,7 @@ void main() {
 	#endif
 	
 	
-	// process gl_Color (foliage tint, vanilla ao)
-	vec4 glcolor4 = gl_Color;
+	// start processing glcolor (foliage tint)
 	if (glcolor4.rgb != vec3(1.0)) {
 		glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
 		glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
@@ -326,11 +326,13 @@ void main() {
 	#endif
 	
 	
+	// finish processing glcolor (ao)
 	upDot = dot(normal, gbufferModelView[1].xyz);
 	ao = 1.0 - glcolor4.a;
 	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
-	ao *= 15.0/16.0 + abs(upDot) / 16.0;
+	//ao *= 15.0/16.0 + abs(upDot) / 16.0;
 	ao = 1.0 - ao;
+	
 	glcolor = glcolor4.rgb * ao;
 	
 	

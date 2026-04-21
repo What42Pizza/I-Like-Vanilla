@@ -2,40 +2,19 @@
 
 
 
-float getShadowBrightness(vec3 viewPos, vec3 normal, float lightDot, float ambientBrightness) {
-	
-	float shadowBrightness = ambientBrightness;
-	
-	shadowBrightness *= clamp(lightDot / (1.0001 - SUNLIGHT_CEL_AMOUNT), 0.0, 1.0);
-	
-	return shadowBrightness;
-}
-
-
-
 
 
 void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal) {
 	
-	#if AMBIENT_CEL_AMOUNT != 0
-		ambientBrightness = sqrt(ambientBrightness);
-		ambientBrightness = mix(ambientBrightness, floor(ambientBrightness * 3.0 + 0.5) / 3.0, AMBIENT_CEL_AMOUNT / 100.0);
-		ambientBrightness *= ambientBrightness;
-	#endif
-	#if BLOCKLIGHT_CEL_AMOUNT != 0
-		blockBrightness = sqrt(blockBrightness);
-		blockBrightness = mix(blockBrightness, floor(blockBrightness * 3.0 + 0.5) / 3.0, BLOCKLIGHT_CEL_AMOUNT / 100.0);
-		blockBrightness *= blockBrightness;
-	#endif
-	
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
-		#ifdef SHADOWS_ENABLED
-			float lightDotLift = 0.5;
-		#else
-			float lightDotLift = 1.0;
-		#endif
-		lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
+		//#ifdef SHADOWS_ENABLED
+		//	float lightDotLift = 0.5;
+		//#else
+		//	float lightDotLift = 1.0;
+		//#endif
+		//// TODO: reintroduce 'SUNLIGHT_CEL_AMOUNT' here?
+		//lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
 	#else
 		float lightDot = 1.0;
 	#endif
@@ -83,17 +62,7 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	float shadowBrightness = getShadowBrightness(viewPos, normal, lightDot, ambientBrightness);
-	shadowBrightness *= 1.0 + sideShading;
-	shadowBrightness *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
-	shadowBrightness *= ambientBrightness * ambientBrightness;
-	float rainDecrease = rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
-	shadowBrightness *= 1.0 - rainDecrease;
-	
-	vec3 skyLighting = shadowcasterLight * shadowBrightness;
-	ambientLight *= 1.0 - shadowBrightness;
-	
-	vec3 lighting = ambientLight + skyLighting;
+	vec3 lighting = ambientLight;
 	
 	#ifdef OVERWORLD
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
@@ -111,7 +80,7 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		#if PBR_TYPE == 0
 			specular *= 1.0 - 0.25 * getSaturation(color);
 		#endif
-		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(shadowBrightness * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
+		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * clamp(lightDot * 64.0, 0.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
 	blockBrightness *= 1.25 - min(getLum(lighting), 1.0);

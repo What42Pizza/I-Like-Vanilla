@@ -110,7 +110,7 @@ void main() {
 	// water
 	if (materialId == BLOCK_ID_WATER) {
 		
-		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_SATURATION);
+		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_BIOME_INFLUENCE);
 		
 		vec3 viewDir = normalize(viewPos);
 		float fresnel = -dot(normal, viewDir);
@@ -170,7 +170,7 @@ void main() {
 			foamAmount *= 1.0 - 0.25 * fresnel;
 			foamAmount *= 0.5 + 0.5 * lmcoord.y;
 			#if WAVING_WATER_SURFACE_ENABLED == 1
-				foamAmount *= 0.4 + 0.6 * length(rawNormalNoise);
+				foamAmount *= 0.35 + 0.65 * length(rawNormalNoise);
 			#endif
 			color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.5);
 		#endif
@@ -179,6 +179,9 @@ void main() {
 		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
 		alphaLift = sqrt(alphaLift);
 		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
+		#if WATER_FOAM_ENABLED == 1
+			alphaLift += foamAmount * WATER_FOAM_AMOUNT;
+		#endif
 		color.a = 1.0 - (1.0 - alphaLift) * (1.0 - color.a);
 		
 	}

@@ -162,6 +162,11 @@ option.END_SHADOWS_ENABLED.comment=Enables or disables shadow casting when in th
 value.END_SHADOWS_ENABLED.0=Off
 value.END_SHADOWS_ENABLED.1=On
 
+option.COLORED_SHADOWS_ENABLED=Colored Shadows Enabled
+option.COLORED_SHADOWS_ENABLED.comment=Allows blocks such as water and stained glass to cast colored shadows instead of fully-blocked shadows
+value.COLORED_SHADOWS_ENABLED.0=Off
+value.COLORED_SHADOWS_ENABLED.1=On
+
 option.SHADOWS_ON_TRANSPARENTS=Shadows On Transparents
 option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, stained glass, etc
 value.SHADOWS_ON_TRANSPARENTS.0=Off
@@ -1425,9 +1430,9 @@ value.WATER_FOAM_AMOUNT.-1=Use Style
 
 screen.WATER_COLOR_MENU=Water Color
 
-option.WATER_SATURATION=Water Saturation
-option.WATER_SATURATION.comment=How much to saturate / desaturate water (this is applied before the 'Water Tint Red/Green/Blue' settings)
-value.WATER_SATURATION.-1=Use Style
+option.WATER_BIOME_INFLUENCE=Water Biome Influence
+option.WATER_BIOME_INFLUENCE.comment=How much to saturate / desaturate the vanilla water (this is applied before the 'Water Tint Red/Green/Blue' settings)
+value.WATER_BIOME_INFLUENCE.-1=Use Style
 
 option.WATER_TINT_SHALLOW_RED=Water Tint (Shallow) Red
 option.WATER_TINT_SHALLOW_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
