@@ -281,16 +281,22 @@ vec3 randomVec3FromRValue(uint rng) {
 	return randomVec3(rng);
 }
 
+float valueHash(ivec2 v) {
+	vec2 h = fract(v * 0.3183099 + vec2(0.71, 0.113));
+	h *= 17.0;
+	return fract(h.x * h.y * (h.x + h.y));
+}
+
 float valueHash(ivec3 v) {
 	vec3 h = fract(v * 0.3183099 + vec3(0.71, 0.113, 0.419));
 	h *= 17.0;
 	return fract(h.x * h.y * h.z * (h.x + h.y + h.z));
 }
 
-float valueHash(ivec2 v) {
-	vec2 h = fract(v * 0.3183099 + vec2(0.71, 0.113));
-	h *= 17.0;
-	return fract(h.x * h.y * (h.x + h.y));
+float valueHash(ivec4 v) {
+    vec4 h = fract(v * 0.3183099 + vec4(0.71, 0.113, 0.419, 0.233));
+    h *= 17.0;
+    return fract(h.x * h.y * h.z * h.w * (h.x + h.y + h.z + h.w));
 }
 
 float valueNoise(vec3 v) {
@@ -307,6 +313,45 @@ float valueNoise(vec3 v) {
 	float hhh = valueHash(i + ivec3(1, 1, 1));
 	
 	vec3 u = f * f * (3.0 - 2.0 * f);
+	float ll = mix(lll, llh, u.z);
+	float lh = mix(lhl, lhh, u.z);
+	float hl = mix(hll, hlh, u.z);
+	float hh = mix(hhl, hhh, u.z);
+	float l = mix(ll, lh, u.y);
+	float h = mix(hl, hh, u.y);
+	return mix(l, h, u.x);
+}
+
+float valueNoise(vec4 v) {
+	ivec4 i = ivec4(floor(v));
+	vec4 f = v - i;
+	
+	float llll = valueHash(i);
+	float lllh = valueHash(i + ivec4(0, 0, 0, 1));
+	float llhl = valueHash(i + ivec4(0, 0, 1, 0));
+	float llhh = valueHash(i + ivec4(0, 0, 1, 1));
+	float lhll = valueHash(i + ivec4(0, 1, 0, 0));
+	float lhlh = valueHash(i + ivec4(0, 1, 0, 1));
+	float lhhl = valueHash(i + ivec4(0, 1, 1, 0));
+	float lhhh = valueHash(i + ivec4(0, 1, 1, 1));
+	float hlll = valueHash(i + ivec4(1, 0, 0, 0));
+	float hllh = valueHash(i + ivec4(1, 0, 0, 1));
+	float hlhl = valueHash(i + ivec4(1, 0, 1, 0));
+	float hlhh = valueHash(i + ivec4(1, 0, 1, 1));
+	float hhll = valueHash(i + ivec4(1, 1, 0, 0));
+	float hhlh = valueHash(i + ivec4(1, 1, 0, 1));
+	float hhhl = valueHash(i + ivec4(1, 1, 1, 0));
+	float hhhh = valueHash(i + ivec4(1, 1, 1, 1));
+	
+	vec4 u = f * f * (3.0 - 2.0 * f);
+	float lll = mix(llll, lllh, u.w);
+	float llh = mix(llhl, llhh, u.w);
+	float lhl = mix(lhll, lhlh, u.w);
+	float lhh = mix(lhhl, lhhh, u.w);
+	float hll = mix(hlll, hllh, u.w);
+	float hlh = mix(hlhl, hlhh, u.w);
+	float hhl = mix(hhll, hhlh, u.w);
+	float hhh = mix(hhhl, hhhh, u.w);
 	float ll = mix(lll, llh, u.z);
 	float lh = mix(lhl, lhh, u.z);
 	float hl = mix(hll, hlh, u.z);

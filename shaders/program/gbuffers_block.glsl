@@ -1,6 +1,10 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
+#if FANCY_END_PORTAL_ENABLED == 1
+	flat in_out uint materialId;
+	in_out vec3 viewPos;
+#endif
 #if PBR_TYPE == 0
 	flat in_out vec2 encodedNormal;
 #endif
@@ -54,6 +58,32 @@ void main() {
 	#endif
 	
 	
+	#if FANCY_END_PORTAL_ENABLED == 1
+		if (materialId == BLOCK_ID_END_PORTAL) {
+			
+			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+			vec3 pos = playerPos + cameraPosition;
+			vec3 dir = normalize(playerPos);
+			float dither = bayer64(gl_FragCoord.xy);
+			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+			pos += dir * (12.0 + dither);
+			float total = 0.0;
+			for (int i = 0; i < 8; i++) {
+				total *= 0.9;
+				float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0));
+				noise = smoothstep(0.45, 0.98, noise);
+				total += noise;
+				pos -= dir;
+			}
+			total *= 0.25;
+			color.rgb = vec3(pow(total, 1.2), total * total, total);
+			color.rgb *= 2.0;
+			lmcoord = vec2(0.4, 0.5);
+			
+		}
+	#endif
+	
+	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 0.5, 0.0, 1.0);
@@ -74,6 +104,8 @@ void main() {
 
 #ifdef VSH
 
+uniform int blockEntityId;
+
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
@@ -90,7 +122,10 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	#if FANCY_END_PORTAL_ENABLED == 0
+		vec3 viewPos;
+	#endif
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
 	// process gl_Color (foliage tint, vanilla ao)
@@ -100,11 +135,14 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint encodedData = uint(max(uint(blockEntityId) - (1u << 13u), 0u) + (1u << 13u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
-	uint materialId = encodedData;
+	#if FANCY_END_PORTAL_ENABLED == 0
+		uint materialId;
+	#endif
+	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
 	

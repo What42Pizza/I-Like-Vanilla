@@ -16,7 +16,7 @@
 #endif
 #if LAVA_NOISE_AMOUNT_NETHER == -1
 #undef LAVA_NOISE_AMOUNT_NETHER
-										#define LAVA_NOISE_AMOUNT_NETHER 0.8
+										#define LAVA_NOISE_AMOUNT_NETHER 0.75
 #endif
 #if LAVA_NOISE_AMOUNT_END == -1
 #undef LAVA_NOISE_AMOUNT_END
@@ -25,6 +25,10 @@
 #if FANCY_NETHER_PORTAL_ENABLED == -1
 #undef FANCY_NETHER_PORTAL_ENABLED
 										#define FANCY_NETHER_PORTAL_ENABLED 1
+#endif
+#if FANCY_END_PORTAL_ENABLED == -1
+#undef FANCY_END_PORTAL_ENABLED
+										#define FANCY_END_PORTAL_ENABLED 1
 #endif
 #if ENCHANTMENT_GLINT_STRENGTH == -1
 #undef ENCHANTMENT_GLINT_STRENGTH
@@ -50,7 +54,7 @@
 #endif
 #if GLOWING_ORES_STRENGTH_NETHER == -1
 #undef GLOWING_ORES_STRENGTH_NETHER
-										#define GLOWING_ORES_STRENGTH_NETHER 0.25
+										#define GLOWING_ORES_STRENGTH_NETHER 0.2
 #endif
 #if GLOWING_ORES_STRENGTH_END == -1
 #undef GLOWING_ORES_STRENGTH_END
@@ -172,7 +176,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -188,7 +192,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.95
+										#define AMBIENT_DAY_BRIGHTNESS 0.9
 #endif
 
 
@@ -556,11 +560,11 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 0.6
+										#define BLOOM_NETHER_AMOUNT 0.5
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 0.45
+										#define BLOOM_END_AMOUNT 0.4
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
@@ -885,11 +889,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.23
+										#define SURFACE_CONTRAST 0.22
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST 0.23
+										#define UNDERGROUND_CONTRAST 0.22
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -1706,7 +1710,7 @@
 #endif
 #if NETHER_FOG_DENSITY == -1
 #undef NETHER_FOG_DENSITY
-										#define NETHER_FOG_DENSITY 1.5
+										#define NETHER_FOG_DENSITY 1.0
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
