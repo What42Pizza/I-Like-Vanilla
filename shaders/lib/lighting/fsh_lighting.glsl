@@ -26,6 +26,8 @@ vec3 getShadowPos(vec3 viewPos, vec3 normal) {
 
 
 
+#ifdef SHADOWS_ENABLED
+
 #if PIXELATED_SHADOWS == 0 && SHADOW_FILTERING == 0
 	#define samplePosType ivec2
 	#define rawSample(sampler, pos) texelFetch(sampler, pos, 0)
@@ -42,24 +44,16 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, float depth) {
 		
 	#elif COLORED_SHADOWS_ENABLED == 1
 		
-		bool isLit1 = rawSample(shadowtex1, shadowmapPos).r >= depth;
-		if (isLit1) {
-			bool isLit2 = rawSample(shadowtex0, shadowmapPos).r >= depth;
-			if (isLit2) {
-				return vec3(1.0);
-			} else {
-				return rawSample(shadowcolor0, shadowmapPos).rgb;
-			}
-		} else {
-			vec3(0.0);
-		}
+		if (rawSample(shadowtex0, shadowmapPos).r >= depth) return vec3(1.0);
+		if (rawSample(shadowtex1, shadowmapPos).r < depth) return vec3(0.0);
+		vec4 shadowColor = rawSample(shadowcolor0, shadowmapPos);
+		return shadowColor.rgb * (1.0 - shadowColor.a);
 		
 	#endif
 }
 
 
 
-#ifdef SHADOWS_ENABLED
 vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	if (lightDot < 0.0) return vec3(0.0); // surface is facing away from shadowLightPosition
 	
@@ -185,6 +179,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 	#endif
 }
+
 #endif
 
 
@@ -260,8 +255,11 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
-	shadowColor = mix(vec3(getLum(shadowColor)), shadowColor, 0.75);
+	#ifdef SHADOWS_ENABLED
+		vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
+	#else
+		vec3 shadowColor = ambientLight;
+	#endif
 	#if PIXELATED_SHADOWS > 0
 		shadowColor = mix(shadowColor, ambientLight, float(depthIsHand(depth)));
 	#endif
