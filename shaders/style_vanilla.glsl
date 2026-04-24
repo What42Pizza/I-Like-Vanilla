@@ -164,7 +164,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.03
+										#define SKYLIGHT_DAY_RED 1.02
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -180,11 +180,11 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.93
+										#define AMBIENT_DAY_RED 0.94
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.95
+										#define AMBIENT_DAY_GREEN 0.96
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -340,7 +340,7 @@
 #endif
 #if BLOCK_BLUE == -1
 #undef BLOCK_BLUE
-										#define BLOCK_BLUE 0.6
+										#define BLOCK_BLUE 0.65
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -1630,13 +1630,17 @@
 
 
 
-#if UNDERGROUND_FOG_BRIGHTNESS == -1
-#undef UNDERGROUND_FOG_BRIGHTNESS
-										#define UNDERGROUND_FOG_BRIGHTNESS 0.1
-#endif
 #if UNDERGROUND_FOG_CONDITION == -1
 #undef UNDERGROUND_FOG_CONDITION
 										#define UNDERGROUND_FOG_CONDITION 1
+#endif
+#if UNDERGROUND_FOG_COLOR_TYPE == -1
+#undef UNDERGROUND_FOG_COLOR_TYPE
+										#define UNDERGROUND_FOG_COLOR_TYPE 2
+#endif
+#if UNDERGROUND_FOG_BRIGHTNESS == -1
+#undef UNDERGROUND_FOG_BRIGHTNESS
+										#define UNDERGROUND_FOG_BRIGHTNESS 0.1
 #endif
 
 

@@ -1,8 +1,9 @@
-- v1.3.5
+- v1.3.5 (26/04/23)
   - Added colored shadows
   - Significantly improved bloom processing
   - Added fancy end portals (configurable)
   - Split setting 'Lava Noise Amount' into overworld, nether, and end variants
+  - Added setting 'Underground Fog Color Type'
   - Renamed setting 'Water Saturation' to 'Water Biome Influence'
 
 <br>

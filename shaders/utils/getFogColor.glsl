@@ -65,10 +65,15 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		fogColorOut *= 3.0/2.0 * 1.2;
 		fogColorOut *= 0.3 + 0.7 * dayPercent;
 		
+		#if UNDERGROUND_FOG_COLOR_TYPE == 1
+			#define FOG_COLOR fogColor
+		#elif UNDERGROUND_FOG_COLOR_TYPE == 2
+			#define FOG_COLOR vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5)
+		#endif
 		#if UNDERGROUND_FOG_CONDITION == 1
-			fogColorOut = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), fogColorOut, smootherEyeBrightness.y);
+			fogColorOut = mix(FOG_COLOR, fogColorOut, smootherEyeBrightness.y);
 		#elif UNDERGROUND_FOG_CONDITION == 2
-			fogColorOut = mix(vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), fogColorOut, positionalUndergroundDarkness);
+			fogColorOut = mix(FOG_COLOR, fogColorOut, positionalUndergroundDarkness);
 		#endif
 		
 	#elif defined NETHER

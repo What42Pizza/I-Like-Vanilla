@@ -88,7 +88,12 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		playerDir /= max(length(playerDir.xz), abs(playerDir.y * 1.25));
 		float yPos = playerDir.y * far + cameraPosition.y;
 		float darkenAmount = percentThrough(yPos, 56.0, 56.0 - far / 4.0);
-		skyColor = mix(skyColor, vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5), darkenAmount);
+		#if UNDERGROUND_FOG_COLOR_TYPE == 1
+			#define FOG_COLOR fogColor
+		#elif UNDERGROUND_FOG_COLOR_TYPE == 2
+			#define FOG_COLOR vec3(UNDERGROUND_FOG_BRIGHTNESS * 0.5)
+		#endif
+		skyColor = mix(skyColor, FOG_COLOR, darkenAmount);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
 			skyColor *= CUSTOM_OVERWORLD_SKY_BRIGHTNESS;
