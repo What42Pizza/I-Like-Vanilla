@@ -82,8 +82,6 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 		skyColor += vec3(0.0, 0.03, 0.3);
 	}
 	
-	const float inputColorWeight = 0.2;
-	
 	vec3 reflectionColor;
 	if (error == 0) {
 		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb * 2.0;
@@ -92,7 +90,6 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	} else {
 		reflectionColor = skyColor;
 	}
-	reflectionColor *= (1.0 - inputColorWeight) + color * inputColorWeight;
-	color = mix(color, reflectionColor, reflectionStrength);
+	color = mix(color, reflectionColor * REFLECTIONS_BRIGHTNESS, reflectionStrength);
 	
 }

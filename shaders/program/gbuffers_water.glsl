@@ -39,9 +39,6 @@ flat in_out vec3 shadowcasterLight;
 #if WAVING_WATER_SURFACE_ENABLED == 1
 	#include "/lib/simplex_noise.glsl"
 #endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/utils/borderFogAmount.glsl"
-#endif
 
 void main() {
 	

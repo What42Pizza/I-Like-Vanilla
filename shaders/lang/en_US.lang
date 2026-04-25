@@ -883,6 +883,10 @@ option.WATER_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Water Reflection Streng
 option.WATER_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for water not in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
 value.WATER_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
+option.REFLECTIONS_BRIGHTNESS=Reflections Brightness
+option.REFLECTIONS_BRIGHTNESS.comment=How much to brighten/darken reflections
+value.REFLECTIONS_BRIGHTNESS.-1=Use Style
+
 #option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
 #option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
 #value.RAIN_REFLECTION_AMOUNT.-1=Use Style
@@ -1452,6 +1456,10 @@ option.WATER_TINT_SHALLOW_BLUE=Water Tint (Shallow) Blue
 option.WATER_TINT_SHALLOW_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
 value.WATER_TINT_SHALLOW_BLUE.-1=Use Style
 
+option.WATER_TINT_SHALLOW_BRIGHTNESS=Water Tint (Shallow) Brightness
+option.WATER_TINT_SHALLOW_BRIGHTNESS.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_SHALLOW_BRIGHTNESS.-1=Use Style
+
 option.WATER_TINT_DEEP_RED=Water Tint (Deep) Red
 option.WATER_TINT_DEEP_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
 value.WATER_TINT_DEEP_RED.-1=Use Style
@@ -1463,6 +1471,10 @@ value.WATER_TINT_DEEP_GREEN.-1=Use Style
 option.WATER_TINT_DEEP_BLUE=Water Tint (Deep) Blue
 option.WATER_TINT_DEEP_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
 value.WATER_TINT_DEEP_BLUE.-1=Use Style
+
+option.WATER_TINT_DEEP_BRIGHTNESS=Water Tint (Deep) Brightness
+option.WATER_TINT_DEEP_BRIGHTNESS.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
+value.WATER_TINT_DEEP_BRIGHTNESS.-1=Use Style
 
 
 

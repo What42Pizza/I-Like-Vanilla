@@ -158,10 +158,6 @@ void main() {
 		if (gl_FragCoord.x + gl_FragCoord.y < 1.1) depth = autoExposureBrightness;
 	#endif
 	
-	//color = vec3(texture2D(shadowtex0, texcoord).r);
-	
-	//color.r += 1.0 / 256.0;
-	
 	
 	
 	color += (fract(52.9829189 * fract(0.06711056 * gl_FragCoord.x + 0.00583715 * gl_FragCoord.y + 0.0003181 * frameCounter)) - 0.5) / 255.0;
