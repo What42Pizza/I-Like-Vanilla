@@ -63,7 +63,7 @@ translucency: vec3(0.5, 0.5, 1.0)
 block lava, flowing_lava:
 weight: 100
 alias: BLOCK_ID_LAVA
-brightness: 0.85
+brightness: 0.9
 voxelize: true
 emission: vec3(1.0, 0.5, 0.0)
 translucency: vec3(0.0, 0.0, 0.0)
@@ -503,19 +503,19 @@ block ochre_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.85
+brightness: 0.8
 
 block verdant_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.85
+brightness: 0.8
 
 block pearlescent_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.85
+brightness: 0.8
 
 block conduit:
 weight: 1
@@ -546,7 +546,7 @@ emission: vec3(1.0, 0.9, 0.5)
 
 block magma_block:
 weight: 20
-brightness: 0.75
+brightness: 0.7
 glow detect min: vec3(  0.0, 64.5, 79.2)
 glow detect max: vec3(360.0, 97.0, 98.4)
 glow amount: 1.0
@@ -646,7 +646,7 @@ glow amount: GLOWING_ORES_STRENGTH * 1.5 * GLOWING_GILDED_BLACKSTONE_STRENGTH
 block raw_iron_block, raw_copper_block, raw_gold_block:
 weight: 1
 specularness: 0.5
-brightness: 0.8
+brightness: 0.85
 
 
 
@@ -751,7 +751,7 @@ shadow casting: foliage
 block cobweb:
 weight: 2
 shadow casting: foliage
-brightness: 0.8
+brightness: 0.85
 
 block dead_bush, tall_dry_grass:
 weight: 1
@@ -908,13 +908,13 @@ block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_br
 weight: 10
 reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.85
+brightness: 0.95
 
 block smooth_quartz, smooth_quartz_stairs, smooth_quartz_slab:
 weight: 10
 reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.85
+brightness: 0.95
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
 weight: 10

@@ -162,7 +162,7 @@ if (materialId < 24u) {
 		if (materialId < 74u) {
 			if (materialId < 40u) {
 				if (materialId < 25u) {
-					TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+					TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 					SET_VOXEL_ID(81u);
 				} else {
 					if (materialId < 30u) {
@@ -206,7 +206,7 @@ if (materialId < 24u) {
 									SET_SPECULARNESS(0.25);
 									TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 								} else {
-									TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+									TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 								}
 							} else {
 								if (materialId < 38u) {
@@ -358,7 +358,7 @@ if (materialId < 24u) {
 								} else {
 									if (materialId < 69u) {
 										SET_SPECULARNESS(0.5);
-										TWEAK_GLCOLOR_BRIGHTNESS(0.8);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 									} else {
 										SET_GLOWING_COLOR(vec3(25.0, 29.0,  49.4), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * 1.5 * GLOWING_GILDED_BLACKSTONE_STRENGTH);
 									}
@@ -431,17 +431,17 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 88u) {
 								if (materialId < 86u) {
 									if (materialId < 85u) {
-										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 										SET_VOXEL_ID(44u);
 									} else {
 										SET_VOXEL_ID(43u);
 									}
 								} else {
 									if (materialId < 87u) {
-										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 										SET_VOXEL_ID(46u);
 									} else {
-										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.8);
 										SET_VOXEL_ID(45u);
 									}
 								}
@@ -570,7 +570,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 					} else {
 						if (materialId < 118u) {
 							SET_GLOWING_COLOR(vec3(  0.0, 64.5, 79.2), vec3(360.0, 97.0, 98.4), 1.0);
-							TWEAK_GLCOLOR_BRIGHTNESS(0.75);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.7);
 						} else {
 							if (materialId < 122u) {
 								if (materialId < 120u) {
@@ -645,11 +645,11 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 134u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.5);
-								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(0.5);
-								TWEAK_GLCOLOR_BRIGHTNESS(0.85);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 							}
 						}
 					}
