@@ -30,6 +30,7 @@ void doColorCorrection(inout vec3 color) {
 		// Integral of `1-x^2` maxes out at 2/3
 		// Integral of `1-4/9*x^2` maxes out at 1 (because it has more area)
 		// Integral of `1-4/9*x^2` is `x-4/27*x^3`
+		// Or more generally, for any power p, `out = in - pow(in, p + 1) * pow(p / (p + 1), p) / (p + 1)`, with the derivative of this being `y = 1 - pow(px / (p + 1), p)`
 	#elif TONEMAPPER == 2
 		// Reinhard
 		float lum = getLum(color);

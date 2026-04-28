@@ -294,9 +294,13 @@ option.WEATHER_BRIGHTNESS_MULT=Weather Brightness Multiplier
 option.WEATHER_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing
 value.WEATHER_BRIGHTNESS_MULT.-1=Use Style
 
-option.BRIGHT_BLOCK_DECREASE=Bright Block Decrease
-option.BRIGHT_BLOCK_DECREASE.comment=How much to darken blocks like sand that would otherwise be too bright
-value.BRIGHT_BLOCK_DECREASE.-1=Use Style
+option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
+option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
+value.BRIGHTNESS_TWEAKS_STRENGTH.-1=Use Style
+
+option.DYNAMIC_BRIGHTNESS_STRENGTH=Dynamic Brightness Strength
+option.DYNAMIC_BRIGHTNESS_STRENGTH.comment=Subtly darkens block which are very bright. Changing this value is only noticeable when comparing before/after pictures, but its effect can still be felt in-game
+value.DYNAMIC_BRIGHTNESS_STRENGTH.-1=Use Style
 
 
 
@@ -1286,6 +1290,10 @@ value.DAMAGE_EFFECT_STRENGTH.-1=Use Style
 option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
 option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
 value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
+
+option.COLORED_PARTICLE_TRANSPARENCY=Colored Particle Transparency
+option.COLORED_PARTICLE_TRANSPARENCY.comment=Modifies the transparency of particles that have dynamic color, such as potion effect particles
+value.COLORED_PARTICLE_TRANSPARENCY.-1=Use Style
 
 option.ENTITY_FLASH_STRENGTH=Entity Flash Strength
 option.ENTITY_FLASH_STRENGTH.comment=Controls the strength of entity flashes, such as hitting entities, creepers flashing before exploding, etc

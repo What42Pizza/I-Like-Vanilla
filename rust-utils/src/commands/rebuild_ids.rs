@@ -20,7 +20,7 @@ const BLOCK_DATAS_START: &str = r#"
 	#define SET_SPECULARNESS(v)
 #endif
 #ifdef DO_BRIGHTNESS_TWEAKS
-	#define TWEAK_GLCOLOR_BRIGHTNESS(v) glcolor.rgb *= (v - 1.0) * BRIGHT_BLOCK_DECREASE + 1.0;
+	#define TWEAK_GLCOLOR_BRIGHTNESS(v) glcolor.rgb *= (v - 1.0) * BRIGHTNESS_TWEAKS_STRENGTH + 1.0;
 #else
 	#define TWEAK_GLCOLOR_BRIGHTNESS(v)
 #endif

@@ -72,8 +72,6 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec4 color = parameters.sampledColour;
 	color.rgb *= tintColor;
 	color.rgb *= glcolor;
-	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
-	color.rgb *= 0.92 - TEXTURE_CONTRAST * 0.1 + texContrastMult * TEXTURE_CONTRAST;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
 	color.rgb *= 1.0 + 0.0625 * worldNormal.y + 0.03125 * float(isFoliage);
 	

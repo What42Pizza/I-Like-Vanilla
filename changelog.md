@@ -1,3 +1,12 @@
+- v1.3.6
+  - Added setting 'Reflections Brightness'
+  - Added settings 'Water Tint (Shallow) Brightness' and 'Water Tint (Deep) Brightness'
+  - Added setting 'Dynamic Brightness Strength'
+  - Renamed setting 'Bright Block Decrease' to 'Brightness Tweaks Strength'
+  - Tweaked misc features and lighting
+
+<br>
+
 - v1.3.5 (26/04/23)
   - Added colored shadows
   - Significantly improved bloom processing

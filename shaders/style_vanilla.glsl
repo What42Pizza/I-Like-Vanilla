@@ -105,7 +105,7 @@
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 1.0
+										#define VANILLA_AO_DARK 0.9
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -113,7 +113,7 @@
 #endif
 #if SIDE_SHADING_DARK == -1
 #undef SIDE_SHADING_DARK
-										#define SIDE_SHADING_DARK 0.85
+										#define SIDE_SHADING_DARK 0.8
 #endif
 #if OVERRIDE_FOLIAGE_NORMALS == -1
 #undef OVERRIDE_FOLIAGE_NORMALS
@@ -127,9 +127,13 @@
 #undef WEATHER_BRIGHTNESS_MULT
 										#define WEATHER_BRIGHTNESS_MULT 0.45
 #endif
-#if BRIGHT_BLOCK_DECREASE == -1
-#undef BRIGHT_BLOCK_DECREASE
-										#define BRIGHT_BLOCK_DECREASE 1.0
+#if BRIGHTNESS_TWEAKS_STRENGTH == -1
+#undef BRIGHTNESS_TWEAKS_STRENGTH
+										#define BRIGHTNESS_TWEAKS_STRENGTH 1.0
+#endif
+#if DYNAMIC_BRIGHT_BLOCK_DECREASE == -1
+#undef DYNAMIC_BRIGHT_BLOCK_DECREASE
+										#define DYNAMIC_BRIGHT_BLOCK_DECREASE 0.5
 #endif
 
 
@@ -172,19 +176,19 @@
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.99
+										#define SKYLIGHT_DAY_BLUE 1.0
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.94
+										#define AMBIENT_DAY_RED 0.98
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.94
+										#define AMBIENT_DAY_GREEN 0.96
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -373,15 +377,15 @@
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.75
+										#define CAVE_AMBIENT_GREEN 0.8
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.75
+										#define CAVE_AMBIENT_BLUE 0.8
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.24
+										#define CAVE_AMBIENT_BRIGHTNESS 0.26
 #endif
 
 
@@ -493,7 +497,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.5
+										#define TEXTURE_CONTRAST 0.75
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
@@ -853,7 +857,7 @@
 #endif
 #if OVERWORLD_BRIGHTNESS == -1
 #undef OVERWORLD_BRIGHTNESS
-										#define OVERWORLD_BRIGHTNESS 0.98
+										#define OVERWORLD_BRIGHTNESS 1.0
 #endif
 #if NETHER_BRIGHTNESS == -1
 #undef NETHER_BRIGHTNESS
@@ -885,7 +889,7 @@
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
-										#define SATURATION_DARK 0.05
+										#define SATURATION_DARK 0.0
 #endif
 #if SATURATION_LIGHT == -1
 #undef SATURATION_LIGHT
@@ -985,7 +989,11 @@
 #endif
 #if NEARBY_PARTICLE_TRANSPARENCY == -1
 #undef NEARBY_PARTICLE_TRANSPARENCY
-										#define NEARBY_PARTICLE_TRANSPARENCY 0.9
+										#define NEARBY_PARTICLE_TRANSPARENCY 0.0
+#endif
+#if COLORED_PARTICLE_TRANSPARENCY == -1
+#undef COLORED_PARTICLE_TRANSPARENCY
+										#define COLORED_PARTICLE_TRANSPARENCY 0.75
 #endif
 #if ENTITY_FLASH_STRENGTH == -1
 #undef ENTITY_FLASH_STRENGTH
@@ -1117,7 +1125,7 @@
 #endif
 #if WATER_FOAM_AMOUNT == -1
 #undef WATER_FOAM_AMOUNT
-										#define WATER_FOAM_AMOUNT 0.45
+										#define WATER_FOAM_AMOUNT 0.4
 #endif 
 
 

@@ -24,6 +24,7 @@ void main() {
 	// hide nearby particles
 	float transparency = percentThrough(blockDepth, 0.5, 1.2);
 	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
+	color.a *= 1.0 - COLORED_PARTICLE_TRANSPARENCY * getSaturation(glcolor.rgb);
 	
 	
 	#if PBR_TYPE == 0

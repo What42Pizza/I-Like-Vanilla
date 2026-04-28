@@ -503,19 +503,19 @@ block ochre_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.8
+brightness: 0.9
 
 block verdant_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.8
+brightness: 0.9
 
 block pearlescent_froglight:
 weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
-brightness: 0.8
+brightness: 0.9
 
 block conduit:
 weight: 1
@@ -643,10 +643,14 @@ glow detect min: vec3(25.0, 29.0,  49.4)
 glow detect max: vec3(72.0, 94.0, 100.0)
 glow amount: GLOWING_ORES_STRENGTH * 1.5 * GLOWING_GILDED_BLACKSTONE_STRENGTH
 
-block raw_iron_block, raw_copper_block, raw_gold_block:
+block raw_iron_block, raw_copper_block:
 weight: 1
 specularness: 0.5
-brightness: 0.85
+
+block raw_gold_block:
+weight: 1
+specularness: 0.5
+brightness: 0.9
 
 
 
@@ -656,7 +660,7 @@ block sugar_cane:
 weight: 1
 shadow casting: foliage
 waviness: 1
-brightness: 0.85
+brightness: 0.9
 
 block bamboo, bamboo_sapling:
 weight: 10
@@ -751,37 +755,29 @@ shadow casting: foliage
 block cobweb:
 weight: 2
 shadow casting: foliage
-brightness: 0.85
+//brightness: 0.85
 
 block dead_bush, tall_dry_grass:
 weight: 1
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
-brightness: 0.95
-
-block bee_nest:
-weight: 1
-brightness: 0.9
-
-block hay_block:
-weight: 1
-brightness: 0.95
+//brightness: 0.95
 
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
-brightness: 0.85
+brightness: 0.95
 
 block red_sand:
 weight: 3
 specularness: 0.2
-brightness: 0.95
+//brightness: 0.95
 
 block diorite, diorite_stairs, diorite_slab, diorite_wall:
 weight: 2
 specularness: 0.25
-brightness: 0.95
+//brightness: 0.95
 
 block polished_granite, polished_granite_stairs, polished_granite_slab, polished_diorite, polished_diorite_stairs, polished_diorite_slab, polished_andesite, polished_andesite_stairs, polished_andesite_slab, polished_deepslate, polished_deepslate_stairs, polished_deepslate_slab:
 weight: 3
@@ -830,7 +826,7 @@ specularness: 0.3
 
 block gold_block:
 weight: 1
-brightness: 0.9
+//brightness: 0.9
 reflectiveness: 0.4
 specularness: 0.3
 
@@ -864,7 +860,7 @@ translucency: vec3(0.5, 1.0, 0.6)
 
 block honey_block:
 weight: 1
-brightness: 0.9
+//brightness: 0.9
 reflectiveness: 0.75
 specularness: 0.3
 voxelize: true
@@ -888,7 +884,7 @@ brightness: 0.85
 
 block snow_block, snow, powder_snow, grass_block:snowy=true:
 weight: 50
-brightness: 0.92
+brightness: 0.93
 
 block nether_portal:
 weight: 1
@@ -920,8 +916,8 @@ block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terraco
 weight: 10
 reflectiveness: 0.5
 specularness: 0.5
-brightness: 0.9
+brightness: 0.95
 
 block white_terracotta, yellow_terracotta:
 weight: 1
-brightness: 0.9
+brightness: 0.95
