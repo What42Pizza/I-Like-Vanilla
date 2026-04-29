@@ -699,7 +699,7 @@ shadow casting: foliage
 waviness: 2
 specularness: 0.5
 
-block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush:
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush:
 weight: 50
 shadow casting: foliage
 do bottom waving: false

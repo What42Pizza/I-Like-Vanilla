@@ -154,11 +154,11 @@ vec3 hsvToRgb(vec3 c) {
 //	return (v1 + v2 - sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 //}
 
-//vec3 smoothMax(vec3 v1, vec3 v2, float a) {
-//	float v1Lum = getLum(v1);
-//	float v2Lum = getLum(v2);
-//	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
-//}
+vec3 smoothMax(vec3 v1, vec3 v2, float a) {
+	float v1Lum = getLum(v1);
+	float v2Lum = getLum(v2);
+	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
+}
 
 float percentThrough(float v, float low, float high) {
 	return clamp((v - low) / (high - low), 0.0, 1.0);
@@ -239,7 +239,7 @@ bool depthIsHand(float depth) {
 }
 
 void adjustLmcoord(inout vec2 lmcoord) {
-	const float low = 0.0625;
+	const float low = 0.0;
 	const float high = 0.95;
 	lmcoord -= low;
 	lmcoord /= high - low;

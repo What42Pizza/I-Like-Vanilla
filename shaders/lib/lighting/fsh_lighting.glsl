@@ -257,6 +257,7 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	
 	#ifdef SHADOWS_ENABLED
 		vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
+		shadowColor *= shadowcasterLight;
 	#else
 		vec3 shadowColor = ambientLight;
 	#endif
@@ -267,12 +268,14 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 	shadowColorBrightness *= lightDot;
 	shadowColorBrightness *= 1.0 + sideShading;
 	shadowColorBrightness *= ambientBrightness * ambientBrightness;
-	shadowColorBrightness *= 1.0 - rainStrength * dayPercent * (1.0 - WEATHER_BRIGHTNESS_MULT);
-	shadowColor *= shadowColorBrightness * shadowcasterLight;
+	shadowColorBrightness *= 1.0 - rainStrength * (1.0 - mix(WEATHER_BRIGHTNESS_MULT_NIGHT, WEATHER_BRIGHTNESS_MULT_DAY, dayPercent));
+	shadowColor *= shadowColorBrightness;
 	shadowBrightness = getLum(shadowColor);
 	
-	ambientLight *= 1.0 - 0.75 * shadowBrightness;
-	vec3 lighting = ambientLight + shadowColor;
+	//ambientLight *= 1.0 - 0.75 * shadowBrightness;
+	ambientLight *= 1.0 - rainStrength * (1.0 - mix(WEATHER_BRIGHTNESS_MULT_NIGHT, WEATHER_BRIGHTNESS_MULT_DAY, dayPercent)) * 0.25;
+	//vec3 lighting = ambientLight + shadowColor;
+	vec3 lighting = smoothMax(ambientLight, shadowColor, 0.1);
 	
 	#ifdef OVERWORLD
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
@@ -293,17 +296,21 @@ void doFshLighting(inout vec3 color, out float shadowBrightness, float blockBrig
 		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(shadowBrightness * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
-	blockBrightness *= 1.25 - min(getLum(lighting), 1.0);
-	lighting *= 1.0 - 0.25 * blockBrightness;
+	//blockBrightness *= 1.25 - min(getLum(lighting), 1.0);
+	//lighting *= 1.0 - 0.25 * blockBrightness;
 	
+	//blockBrightness = 1.0 - (1.0 - blockBrightness) * (1.0 - blockBrightness);
+	const float blockBrightnessCurve = 0.25;
+	blockBrightness = -1.0 * blockBrightnessCurve * blockBrightness * blockBrightness + blockBrightnessCurve * blockBrightness + blockBrightness;
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	vec3 blockLight = blockBrightness * BLOCK_COLOR;
+	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness) * blockBrightness;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
-	lighting += blockLight;
+	//lighting += blockLight;
+	lighting = smoothMax(lighting, blockLight, 0.1);
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

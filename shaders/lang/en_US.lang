@@ -290,9 +290,13 @@ option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
 value.NIGHT_SATURATION_DECREASE.-1=Use Style
 
-option.WEATHER_BRIGHTNESS_MULT=Weather Brightness Multiplier
-option.WEATHER_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing
-value.WEATHER_BRIGHTNESS_MULT.-1=Use Style
+option.WEATHER_BRIGHTNESS_MULT_DAY=Weather Brightness Multiplier (Day)
+option.WEATHER_BRIGHTNESS_MULT_DAY.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing during the day
+value.WEATHER_BRIGHTNESS_MULT_DAY.-1=Use Style
+
+option.WEATHER_BRIGHTNESS_MULT_NIGHT=Weather Brightness Multiplier (Night)
+option.WEATHER_BRIGHTNESS_MULT_NIGHT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing during night
+value.WEATHER_BRIGHTNESS_MULT_NIGHT.-1=Use Style
 
 option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
 option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
@@ -532,17 +536,37 @@ value.AMBIENT_SUNSET_BRIGHTNESS.-1=Use Style
 
 screen.BLOCKLIGHT_LIGHTING_MENU=Blocklight Lighting
 
-option.BLOCK_RED=Block Red
-value.BLOCK_RED.-1=Use Style
+option.BLOCK_RED_DARK=Block Red (Dark)
+option.BLOCK_RED_DARK.comment=The darker blocklight color (further from the source)
+value.BLOCK_RED_DARK.-1=Use Style
 
-option.BLOCK_GREEN=Block Green
-value.BLOCK_GREEN.-1=Use Style
+option.BLOCK_GREEN_DARK=Block Green (Dark)
+option.BLOCK_GREEN_DARK.comment=The darker blocklight color (further from the source)
+value.BLOCK_GREEN_DARK.-1=Use Style
 
-option.BLOCK_BLUE=Block Blue
-value.BLOCK_BLUE.-1=Use Style
+option.BLOCK_BLUE_DARK=Block Blue (Dark)
+option.BLOCK_BLUE_DARK.comment=The darker blocklight color (further from the source)
+value.BLOCK_BLUE_DARK.-1=Use Style
 
-option.BLOCK_BRIGHTNESS=Block Brightness
-value.BLOCK_BRIGHTNESS.-1=Use Style
+option.BLOCK_BRIGHTNESS_DARK=Block Brightness (Dark)
+option.BLOCK_BRIGHTNESS_DARK.comment=The darker blocklight color (further from the source)
+value.BLOCK_BRIGHTNESS_DARK.-1=Use Style
+
+option.BLOCK_RED_BRIGHT=Block Red (Bright)
+option.BLOCK_RED_BRIGHT.comment=The brighter blocklight color (near the source)
+value.BLOCK_RED_BRIGHT.-1=Use Style
+
+option.BLOCK_GREEN_BRIGHT=Block Green (Bright)
+option.BLOCK_GREEN_BRIGHT.comment=The brighter blocklight color (near the source)
+value.BLOCK_GREEN_BRIGHT.-1=Use Style
+
+option.BLOCK_BLUE_BRIGHT=Block Blue (Bright)
+option.BLOCK_BLUE_BRIGHT.comment=The brighter blocklight color (near the source)
+value.BLOCK_BLUE_BRIGHT.-1=Use Style
+
+option.BLOCK_BRIGHTNESS_BRIGHT=Block Brightness (Bright)
+option.BLOCK_BRIGHTNESS_BRIGHT.comment=The brighter blocklight color (near the source)
+value.BLOCK_BRIGHTNESS_BRIGHT.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_CURVE=Block Brightness Curve
 option.BLOCK_BRIGHTNESS_CURVE.comment=Take the calculated block brightness to the power of [this setting]

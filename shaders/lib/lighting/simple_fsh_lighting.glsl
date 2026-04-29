@@ -9,7 +9,7 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
 		//#ifdef SHADOWS_ENABLED
-		//	float lightDotLift = 0.5;
+		//	float lightDotLift = 0.3;
 		//#else
 		//	float lightDotLift = 1.0;
 		//#endif
@@ -83,17 +83,21 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * clamp(lightDot * 64.0, 0.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
-	blockBrightness *= 1.25 - min(getLum(lighting), 1.0);
-	lighting *= 1.0 - 0.25 * blockBrightness;
+	//blockBrightness *= 1.25 - min(getLum(lighting), 1.0);
+	//lighting *= 1.0 - 0.25 * blockBrightness;
 	
+	//blockBrightness = 1.0 - (1.0 - blockBrightness) * (1.0 - blockBrightness);
+	const float blockBrightnessCurve = 0.25;
+	blockBrightness = -1.0 * blockBrightnessCurve * blockBrightness * blockBrightness + blockBrightnessCurve * blockBrightness + blockBrightness;
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	vec3 blockLight = blockBrightness * BLOCK_COLOR;
+	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness) * blockBrightness;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
-	lighting += blockLight;
+	//lighting += blockLight;
+	lighting = smoothMax(lighting, blockLight, 0.1);
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {
