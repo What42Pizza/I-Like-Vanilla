@@ -2,6 +2,7 @@
   - Added setting 'Reflections Brightness'
   - Added settings 'Water Tint (Shallow) Brightness' and 'Water Tint (Deep) Brightness'
   - Added setting 'Dynamic Brightness Strength'
+  - Added settings 'Bloom Detect Tint Red/Green/Blue'
   - Split blocklight colors into dark and bright variants
   - Split setting 'Weather Brightness Mult' into day and night variants
   - Renamed setting 'Bright Block Decrease' to 'Brightness Tweaks Strength'

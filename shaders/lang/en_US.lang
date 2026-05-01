@@ -302,9 +302,9 @@ option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
 option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
 value.BRIGHTNESS_TWEAKS_STRENGTH.-1=Use Style
 
-option.DYNAMIC_BRIGHTNESS_STRENGTH=Dynamic Brightness Strength
-option.DYNAMIC_BRIGHTNESS_STRENGTH.comment=Subtly darkens block which are very bright. Changing this value is only noticeable when comparing before/after pictures, but its effect can still be felt in-game
-value.DYNAMIC_BRIGHTNESS_STRENGTH.-1=Use Style
+option.DYNAMIC_BRIGHT_BLOCK_DECREASE=Dynamic Brightness Strength
+option.DYNAMIC_BRIGHT_BLOCK_DECREASE.comment=Subtly darkens block which are very bright. Changing this value is only noticeable when comparing before/after pictures, but its effect can still be felt in-game
+value.DYNAMIC_BRIGHT_BLOCK_DECREASE.-1=Use Style
 
 
 
@@ -846,6 +846,18 @@ value.BLOOM_LOW_CUTOFF.-1=Use Style
 option.BLOOM_HIGH_CUTOFF=Bloom High Cutoff
 option.BLOOM_HIGH_CUTOFF.comment=The value at which all colors are treated as equally light
 value.BLOOM_HIGH_CUTOFF.-1=Use Style
+
+option.BLOOM_DETECT_TINT_RED=Bloom Detect Tint Red
+option.BLOOM_DETECT_TINT_RED.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
+value.BLOOM_DETECT_TINT_RED.-1=Use Style
+
+option.BLOOM_DETECT_TINT_GREEN=Bloom Detect Tint Green
+option.BLOOM_DETECT_TINT_GREEN.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
+value.BLOOM_DETECT_TINT_GREEN.-1=Use Style
+
+option.BLOOM_DETECT_TINT_BLUE=Bloom Detect Tint Blue
+option.BLOOM_DETECT_TINT_BLUE.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
+value.BLOOM_DETECT_TINT_BLUE.-1=Use Style
 
 
 

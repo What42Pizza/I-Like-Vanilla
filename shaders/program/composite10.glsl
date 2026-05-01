@@ -23,6 +23,8 @@ void main() {
 		float depth = texture2D(DEPTH_BUFFER_WO_TRANS, texcoord).r;
 	#endif
 	
+	bloomColor *= BLOOM_DETECT_TINT;
+	
 	
 	#ifdef DISTANT_HORIZONS
 		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord * bloomIntScale + bloomIntScale / 2, 0).r;
@@ -40,8 +42,7 @@ void main() {
 	
 	
 	#if HORROR_MODE == 1
-		float bloomMult = dot(bloomColor, vec3(0.2, 0.5, 0.1));
-		bloomMult *= 1.0;
+		float bloomMult = dot(bloomColor, vec3(0.2, 0.4, 0.2));
 	#elif BLOOM_STYLE == 1
 		float bloomMult = dot(bloomColor, vec3(0.7, 0.4, -0.5) * 0.9);
 		bloomMult *= bloomMult;

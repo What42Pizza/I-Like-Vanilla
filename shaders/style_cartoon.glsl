@@ -602,6 +602,18 @@
 #undef BLOOM_HIGH_CUTOFF
 										#define BLOOM_HIGH_CUTOFF 1.0
 #endif
+#if BLOOM_DETECT_TINT_RED == -1
+#undef BLOOM_DETECT_TINT_RED
+										#define BLOOM_DETECT_TINT_RED 1.0
+#endif
+#if BLOOM_DETECT_TINT_GREEN == -1
+#undef BLOOM_DETECT_TINT_GREEN
+										#define BLOOM_DETECT_TINT_GREEN 1.0
+#endif
+#if BLOOM_DETECT_TINT_BLUE == -1
+#undef BLOOM_DETECT_TINT_BLUE
+										#define BLOOM_DETECT_TINT_BLUE 1.0
+#endif
 
 
 
