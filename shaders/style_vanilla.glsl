@@ -101,11 +101,11 @@
 
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.1
+										#define VANILLA_AO_BRIGHT 1.05
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
-										#define VANILLA_AO_DARK 0.9
+										#define VANILLA_AO_DARK 0.85
 #endif
 #if SIDE_SHADING_BRIGHT == -1
 #undef SIDE_SHADING_BRIGHT
@@ -184,7 +184,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -192,7 +192,7 @@
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
-										#define AMBIENT_DAY_GREEN 0.96
+										#define AMBIENT_DAY_GREEN 0.98
 #endif
 #if AMBIENT_DAY_BLUE == -1
 #undef AMBIENT_DAY_BLUE
@@ -200,7 +200,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.95
+										#define AMBIENT_DAY_BRIGHTNESS 0.9
 #endif
 
 
@@ -209,35 +209,35 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 0.75
+										#define SKYLIGHT_NIGHT_RED 0.6
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.75
+										#define SKYLIGHT_NIGHT_GREEN 0.7
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.1
+										#define SKYLIGHT_NIGHT_BLUE 1.4
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.32
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.35
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.75
+										#define AMBIENT_NIGHT_RED 0.6
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.75
+										#define AMBIENT_NIGHT_GREEN 0.7
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.0
+										#define AMBIENT_NIGHT_BLUE 1.3
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.3
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.31
 #endif
 #if MOON_PHASE_BRIGHTNESS_MULT_1 == -1
 #undef MOON_PHASE_BRIGHTNESS_MULT_1
@@ -340,7 +340,7 @@
 
 #if BLOCK_RED_DARK == -1
 #undef BLOCK_RED_DARK
-										#define BLOCK_RED_DARK 1.1
+										#define BLOCK_RED_DARK 1.15
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
@@ -348,11 +348,7 @@
 #endif
 #if BLOCK_BLUE_DARK == -1
 #undef BLOCK_BLUE_DARK
-										#define BLOCK_BLUE_DARK 0.45
-#endif
-#if BLOCK_BRIGHTNESS_DARK == -1
-#undef BLOCK_BRIGHTNESS_DARK
-										#define BLOCK_BRIGHTNESS_DARK 1.16
+										#define BLOCK_BLUE_DARK 0.4
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
@@ -360,15 +356,15 @@
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
-										#define BLOCK_GREEN_BRIGHT 0.9
+										#define BLOCK_GREEN_BRIGHT 1.0
 #endif
 #if BLOCK_BLUE_BRIGHT == -1
 #undef BLOCK_BLUE_BRIGHT
-										#define BLOCK_BLUE_BRIGHT 0.8
+										#define BLOCK_BLUE_BRIGHT 1.0
 #endif
-#if BLOCK_BRIGHTNESS_BRIGHT == -1
-#undef BLOCK_BRIGHTNESS_BRIGHT
-										#define BLOCK_BRIGHTNESS_BRIGHT 1.16
+#if BLOCK_BRIGHTNESS == -1
+#undef BLOCK_BRIGHTNESS
+										#define BLOCK_BRIGHTNESS 1.2
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -393,19 +389,19 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 0.95
+										#define CAVE_AMBIENT_RED 1.05
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
-										#define CAVE_AMBIENT_GREEN 0.8
+										#define CAVE_AMBIENT_GREEN 1.0
 #endif
 #if CAVE_AMBIENT_BLUE == -1
 #undef CAVE_AMBIENT_BLUE
-										#define CAVE_AMBIENT_BLUE 0.7
+										#define CAVE_AMBIENT_BLUE 0.95
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.24
+										#define CAVE_AMBIENT_BRIGHTNESS 0.22
 #endif
 
 
@@ -492,7 +488,7 @@
 #endif
 #if HANDHELD_LIGHT_DISTANCE == -1
 #undef HANDHELD_LIGHT_DISTANCE
-										#define HANDHELD_LIGHT_DISTANCE 12
+										#define HANDHELD_LIGHT_DISTANCE 11
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
@@ -618,17 +614,18 @@
 
 
 
+
 #if SSAO_ENABLED == -1
 #undef SSAO_ENABLED
 										#define SSAO_ENABLED 1
 #endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.55
+										#define AO_AMOUNT_LIT 0.5
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.55
+										#define AO_AMOUNT_UNLIT 0.5
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
@@ -913,11 +910,11 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.05
+										#define VIBRANCE 0.0
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION -0.1
+										#define SATURATION 0.0
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -1577,15 +1574,15 @@
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
-										#define SKY_HORIZON_NIGHT_RED 0.1
+										#define SKY_HORIZON_NIGHT_RED 0.2
 #endif
 #if SKY_HORIZON_NIGHT_GREEN == -1
 #undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 0.15
+										#define SKY_HORIZON_NIGHT_GREEN 0.25
 #endif
 #if SKY_HORIZON_NIGHT_BLUE == -1
 #undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 0.3
+										#define SKY_HORIZON_NIGHT_BLUE 0.4
 #endif
 #if SKY_HORIZON_NIGHT_BRIGHTNESS == -1
 #undef SKY_HORIZON_NIGHT_BRIGHTNESS

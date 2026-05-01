@@ -52,7 +52,7 @@ if (materialId < 25u) {
 						}
 					} else {
 						if (materialId < 4u) {
-							TWEAK_GLCOLOR_BRIGHTNESS(1.1);
+							TWEAK_GLCOLOR_BRIGHTNESS(1.2);
 							SET_VOXEL_ID(58u);
 						} else {
 							SET_REFLECTIVENESS(0.4);

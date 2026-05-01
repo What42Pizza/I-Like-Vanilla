@@ -350,10 +350,6 @@
 #undef BLOCK_BLUE_DARK
 										#define BLOCK_BLUE_DARK 0.85
 #endif
-#if BLOCK_BRIGHTNESS_DARK == -1
-#undef BLOCK_BRIGHTNESS_DARK
-										#define BLOCK_BRIGHTNESS_DARK 1.0
-#endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
 										#define BLOCK_RED_BRIGHT 1.0
@@ -366,9 +362,9 @@
 #undef BLOCK_BLUE_BRIGHT
 										#define BLOCK_BLUE_BRIGHT 0.85
 #endif
-#if BLOCK_BRIGHTNESS_BRIGHT == -1
-#undef BLOCK_BRIGHTNESS_BRIGHT
-										#define BLOCK_BRIGHTNESS_BRIGHT 1.0
+#if BLOCK_BRIGHTNESS == -1
+#undef BLOCK_BRIGHTNESS
+										#define BLOCK_BRIGHTNESS 1.0
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE

@@ -123,15 +123,15 @@ void main() {
 			reflectiveness = 0.0;
 			specularness = 0.0;
 		}
-		float shadowBrightness;
-		doFshLighting(color, shadowBrightness, lmcoord.x, lmcoord.y, specularness, glowingAmount, viewPos, normal, depth);
+		float inSunlightAmount;
+		doFshLighting(color, inSunlightAmount, lmcoord.x, lmcoord.y, specularness, glowingAmount, viewPos, normal, depth);
 		
 		#if SSAO_ENABLED == 1
 			if (!depthIsHand(depth)) {
 				float aoFactor = getAoAmount(depth);
 				aoFactor *= 1.0 - 0.5 * getLum(color);
 				aoFactor *= 1.0 - 0.4 * nightVision;
-				color *= 1.0 - aoFactor * mix(AO_AMOUNT_UNLIT, AO_AMOUNT_LIT, max(shadowBrightness, lmcoord.x));
+				color *= 1.0 - aoFactor * mix(AO_AMOUNT_UNLIT, AO_AMOUNT_LIT, max(inSunlightAmount, lmcoord.x));
 				//color = vec3(aoFactor);
 			}
 		#endif

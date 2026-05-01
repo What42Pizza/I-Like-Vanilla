@@ -548,10 +548,6 @@ option.BLOCK_BLUE_DARK=Block Blue (Dark)
 option.BLOCK_BLUE_DARK.comment=The darker blocklight color (further from the source)
 value.BLOCK_BLUE_DARK.-1=Use Style
 
-option.BLOCK_BRIGHTNESS_DARK=Block Brightness (Dark)
-option.BLOCK_BRIGHTNESS_DARK.comment=The darker blocklight color (further from the source)
-value.BLOCK_BRIGHTNESS_DARK.-1=Use Style
-
 option.BLOCK_RED_BRIGHT=Block Red (Bright)
 option.BLOCK_RED_BRIGHT.comment=The brighter blocklight color (near the source)
 value.BLOCK_RED_BRIGHT.-1=Use Style
@@ -564,9 +560,9 @@ option.BLOCK_BLUE_BRIGHT=Block Blue (Bright)
 option.BLOCK_BLUE_BRIGHT.comment=The brighter blocklight color (near the source)
 value.BLOCK_BLUE_BRIGHT.-1=Use Style
 
-option.BLOCK_BRIGHTNESS_BRIGHT=Block Brightness (Bright)
-option.BLOCK_BRIGHTNESS_BRIGHT.comment=The brighter blocklight color (near the source)
-value.BLOCK_BRIGHTNESS_BRIGHT.-1=Use Style
+option.BLOCK_BRIGHTNESS=Block Brightness
+option.BLOCK_BRIGHTNESS.comment=Overall blocklight brightness
+value.BLOCK_BRIGHTNESS.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_CURVE=Block Brightness Curve
 option.BLOCK_BRIGHTNESS_CURVE.comment=Take the calculated block brightness to the power of [this setting]
