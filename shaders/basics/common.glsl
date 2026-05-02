@@ -239,11 +239,9 @@ bool depthIsHand(float depth) {
 }
 
 void adjustLmcoord(inout vec2 lmcoord) {
-	const float low = 0.0625;
-	const float high = 0.95;
-	lmcoord -= low;
-	lmcoord /= high - low;
-	lmcoord = clamp(lmcoord, 0.0, 1.0);
+	const float low = 1.0 / 16.0;
+	const vec2 high = vec2(13.0 / 16.0, 15.0 / 16.0);
+	lmcoord = clamp((lmcoord - low) / (high - low), 0.0, 1.0);
 }
 
 

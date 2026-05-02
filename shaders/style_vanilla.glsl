@@ -205,35 +205,35 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 0.6
+										#define SKYLIGHT_NIGHT_RED 0.65
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.7
+										#define SKYLIGHT_NIGHT_GREEN 0.65
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.4
+										#define SKYLIGHT_NIGHT_BLUE 1.25
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.35
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.36
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.6
+										#define AMBIENT_NIGHT_RED 0.65
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.7
+										#define AMBIENT_NIGHT_GREEN 0.65
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.3
+										#define AMBIENT_NIGHT_BLUE 1.15
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.31
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.32
 #endif
 #if MOON_PHASE_BRIGHTNESS_MULT_1 == -1
 #undef MOON_PHASE_BRIGHTNESS_MULT_1
@@ -348,7 +348,7 @@
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
-										#define BLOCK_RED_BRIGHT 1.0
+										#define BLOCK_RED_BRIGHT 1.05
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
@@ -356,7 +356,7 @@
 #endif
 #if BLOCK_BLUE_BRIGHT == -1
 #undef BLOCK_BLUE_BRIGHT
-										#define BLOCK_BLUE_BRIGHT 1.0
+										#define BLOCK_BLUE_BRIGHT 0.95
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -1784,7 +1784,7 @@
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.04
+										#define WATER_FOG_DENSITY 0.05
 #endif
 #if LAVA_FOG_RED == -1
 #undef LAVA_FOG_RED
