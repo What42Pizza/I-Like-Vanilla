@@ -7,19 +7,9 @@ in_out vec4 glcolor;
 	flat in_out mat3 tbn;
 #endif
 
-#if MC_VERSION >= 260000
-	flat in_out vec3 shadowcasterLight;
-	in_out vec3 viewPos;
-	in_out vec3 normal;
-#endif
-
 
 
 #ifdef FSH
-
-#if MC_VERSION >= 260000
-	#include "/lib/lighting/fsh_lighting.glsl"
-#endif
 
 void main() {
 	
@@ -54,13 +44,6 @@ void main() {
 	#endif
 	
 	
-	#if MC_VERSION >= 260000
-		// main lighting
-		float _inSunlightAmount;
-		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);	
-	#endif
-	
-	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.5, 1.0, 0.0, 1.0);
@@ -83,21 +66,12 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#if MC_VERSION >= 260000
-	#include "/utils/getShadowcasterLight.glsl"
-#endif
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
 void main() {
-	
-	#if MC_VERSION < 260000
-		vec3 viewPos;
-		vec3 normal;
-	#endif
-	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
@@ -109,7 +83,7 @@ void main() {
 			return;
 		}
 	#endif
-	normal = gl_NormalMatrix * gl_Normal;
+	vec3 normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);
 	#endif
@@ -119,11 +93,7 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
-	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
-	
-	#if MC_VERSION >= 260000
-		shadowcasterLight = getShadowcasterLight();
-	#endif
+	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
 	gl_Position = viewToNdc(viewPos);
