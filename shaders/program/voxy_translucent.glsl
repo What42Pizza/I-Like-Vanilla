@@ -1,3 +1,5 @@
+#undef SHADOWS_ENABLED
+
 layout(location = 0) out vec4 albedoOut;
 layout(location = 1) out vec4 auxDataOut;
 
@@ -5,7 +7,7 @@ layout(location = 1) out vec4 auxDataOut;
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 vec3 shadowcasterLight = getShadowcasterLight();
-#include "/lib/lighting/simple_fsh_lighting.glsl"
+#include "/lib/lighting/fsh_lighting.glsl"
 
 
 
@@ -62,8 +64,13 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	// main color
 	vec4 color = parameters.sampledColour;
 	color.rgb *= parameters.tinting.rgb;
+	vec4 rawColor = color;
 	color.rgb *= glcolor;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	
+	float m = getLum(color.rgb);
+	m = m * m * (3.0 - 2.0 * m);
+	color.rgb *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
 	
 	
 	if (materialId == BLOCK_ID_WATER) {
@@ -123,7 +130,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	
 	// main lighting
-	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	float _inSunlightAmount;
+	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
 	color.rgb *= 0.5;

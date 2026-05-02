@@ -85,12 +85,11 @@ void main() {
 	if (rawColor.a < 0.01) discard;
 	vec4 color = rawColor;
 	color *= glcolor;
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
 	color.rgb *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
-	
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
 	
 	
 	// misc

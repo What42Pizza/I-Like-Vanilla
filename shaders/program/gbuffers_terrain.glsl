@@ -141,16 +141,13 @@ void main() {
 	
 	vec4 color = rawColor;
 	color.rgb *= glcolor;
-	
-	vec3 averageBlockColor = texture2DLod(MAIN_TEXTURE, texcoord, 1000000).rgb * glcolor;
-	float averageLum = getLum(averageBlockColor);
-	color.rgb *= 1.0 - averageBlockColor * averageLum * averageLum / 4.0 * DYNAMIC_BRIGHT_BLOCK_DECREASE;
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
 	color.rgb *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
 	
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05 + (1.0 - ao) * 0.25);
+	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.0 + (1.0 - ao) * 0.25);
 	
 	#if POM_ENABLED == 1
 		color.rgb *= 1.0 - 0.1 * float(prevDepth != normalAndDepth.a);

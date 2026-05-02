@@ -755,29 +755,24 @@ shadow casting: foliage
 block cobweb:
 weight: 2
 shadow casting: foliage
-//brightness: 0.85
 
 block dead_bush, tall_dry_grass:
 weight: 1
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
-//brightness: 0.95
 
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
-brightness: 0.95
 
 block red_sand:
 weight: 3
 specularness: 0.2
-//brightness: 0.95
 
 block diorite, diorite_stairs, diorite_slab, diorite_wall:
 weight: 2
 specularness: 0.25
-//brightness: 0.95
 
 block polished_granite, polished_granite_stairs, polished_granite_slab, polished_diorite, polished_diorite_stairs, polished_diorite_slab, polished_andesite, polished_andesite_stairs, polished_andesite_slab, polished_deepslate, polished_deepslate_stairs, polished_deepslate_slab:
 weight: 3
@@ -826,7 +821,6 @@ specularness: 0.3
 
 block gold_block:
 weight: 1
-//brightness: 0.9
 reflectiveness: 0.4
 specularness: 0.3
 
@@ -860,7 +854,6 @@ translucency: vec3(0.5, 1.0, 0.6)
 
 block honey_block:
 weight: 1
-//brightness: 0.9
 reflectiveness: 0.75
 specularness: 0.3
 voxelize: true
@@ -882,10 +875,6 @@ block orange_wool, orange_carpet:
 weight: 1
 brightness: 0.85
 
-block snow_block, snow, powder_snow, grass_block:snowy=true:
-weight: 50
-brightness: 0.93
-
 block nether_portal:
 weight: 1
 alias: BLOCK_ID_NETHER_PORTAL
@@ -904,20 +893,13 @@ block quartz_block, quartz_stairs, quartz_slab, chiseled_quartz_block, quartz_br
 weight: 10
 reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.95
 
 block smooth_quartz, smooth_quartz_stairs, smooth_quartz_slab:
 weight: 10
 reflectiveness: 0.4
 specularness: 0.5
-brightness: 0.95
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
 weight: 10
 reflectiveness: 0.5
 specularness: 0.5
-brightness: 0.95
-
-block white_terracotta, yellow_terracotta:
-weight: 1
-brightness: 0.95

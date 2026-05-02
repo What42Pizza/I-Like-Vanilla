@@ -40,10 +40,11 @@ void main() {
 	ao = 1.0 - (1.0 - ao) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	color.rgb *= ao;
 	color.rgb *= glcolor;
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	
-	float texContrastMult = getSaturation(color.rgb) * getLum(color.rgb);
-	color.rgb *= 0.92 - TEXTURE_CONTRAST * 0.1 + texContrastMult * TEXTURE_CONTRAST;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
+	float m = getLum(color.rgb);
+	m = m * m * (3.0 - 2.0 * m);
+	color.rgb *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
 	
 	doVshLighting(lmcoord, viewPos, normal);
 	

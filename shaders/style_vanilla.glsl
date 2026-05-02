@@ -101,7 +101,7 @@
 
 #if VANILLA_AO_BRIGHT == -1
 #undef VANILLA_AO_BRIGHT
-										#define VANILLA_AO_BRIGHT 1.05
+										#define VANILLA_AO_BRIGHT 1.1
 #endif
 #if VANILLA_AO_DARK == -1
 #undef VANILLA_AO_DARK
@@ -134,10 +134,6 @@
 #if BRIGHTNESS_TWEAKS_STRENGTH == -1
 #undef BRIGHTNESS_TWEAKS_STRENGTH
 										#define BRIGHTNESS_TWEAKS_STRENGTH 1.0
-#endif
-#if DYNAMIC_BRIGHT_BLOCK_DECREASE == -1
-#undef DYNAMIC_BRIGHT_BLOCK_DECREASE
-										#define DYNAMIC_BRIGHT_BLOCK_DECREASE 0.5
 #endif
 
 
@@ -184,7 +180,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.3
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.2
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -200,7 +196,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.9
+										#define AMBIENT_DAY_BRIGHTNESS 0.85
 #endif
 
 
@@ -521,15 +517,15 @@
 #endif
 #if FOLIAGE_TINT_RED == -1
 #undef FOLIAGE_TINT_RED
-										#define FOLIAGE_TINT_RED 0.95
+										#define FOLIAGE_TINT_RED 1.0
 #endif
 #if FOLIAGE_TINT_GREEN == -1
 #undef FOLIAGE_TINT_GREEN
-										#define FOLIAGE_TINT_GREEN 1.06
+										#define FOLIAGE_TINT_GREEN 1.1
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 0.97
+										#define FOLIAGE_TINT_BLUE 1.02
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -910,7 +906,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.0
+										#define VIBRANCE 0.1
 #endif
 #if SATURATION == -1
 #undef SATURATION

@@ -302,10 +302,6 @@ option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
 option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
 value.BRIGHTNESS_TWEAKS_STRENGTH.-1=Use Style
 
-option.DYNAMIC_BRIGHT_BLOCK_DECREASE=Dynamic Brightness Strength
-option.DYNAMIC_BRIGHT_BLOCK_DECREASE.comment=Subtly darkens block which are very bright. Changing this value is only noticeable when comparing before/after pictures, but its effect can still be felt in-game
-value.DYNAMIC_BRIGHT_BLOCK_DECREASE.-1=Use Style
-
 
 
 

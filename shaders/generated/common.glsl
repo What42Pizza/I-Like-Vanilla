@@ -1,8 +1,8 @@
 // THIS FILE IS AUTO-GENERATED, DO NOT EDIT DIRECTLY!!!
 // To edit auto-generated data, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
 
-const uint BLOCK_ID_LAVA = 25u;
-const uint BLOCK_ID_END_PORTAL = 38u;
-const uint BLOCK_ID_PUMPKIN = 67u;
-const uint BLOCK_ID_WATER = 74u;
-const uint BLOCK_ID_NETHER_PORTAL = 121u;
+const uint BLOCK_ID_LAVA = 28u;
+const uint BLOCK_ID_END_PORTAL = 42u;
+const uint BLOCK_ID_NETHER_PORTAL = 43u;
+const uint BLOCK_ID_WATER = 59u;
+const uint BLOCK_ID_PUMPKIN = 63u;
