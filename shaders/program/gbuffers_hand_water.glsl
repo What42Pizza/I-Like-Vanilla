@@ -1,3 +1,7 @@
+#if SHADOWS_ON_TRANSPARENTS == 0
+	#undef SHADOWS_ENABLED
+#endif
+
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
@@ -15,7 +19,7 @@ flat in_out vec3 shadowcasterLight;
 
 #ifdef FSH
 
-#include "/lib/lighting/simple_fsh_lighting.glsl"
+#include "/lib/lighting/fsh_lighting.glsl"
 
 void main() {
 	
@@ -40,7 +44,8 @@ void main() {
 	#endif
 	
 	
-	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
+	float _inSunlightAmount;
+	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, 0.0, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
 	/* DRAWBUFFERS:03 */
