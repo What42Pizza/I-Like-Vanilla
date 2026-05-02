@@ -253,7 +253,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
 		inSunlightAmount = getLum(shadowColor);
 		#if PIXELATED_SHADOWS > 0
-			inSunlightAmount *= float(depthIsHand(depth));
+			inSunlightAmount *= float(!depthIsHand(depth));
 		#endif
 	#else
 		vec3 shadowColor = vec3(1.0);

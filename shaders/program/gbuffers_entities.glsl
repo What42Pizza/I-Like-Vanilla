@@ -7,7 +7,7 @@ in_out vec4 glcolor;
 	flat in_out mat3 tbn;
 #endif
 
-#if MC_VERSION > 12100
+#if MC_VERSION >= 260000
 	flat in_out vec3 shadowcasterLight;
 	in_out vec3 viewPos;
 	in_out vec3 normal;
@@ -17,7 +17,7 @@ in_out vec4 glcolor;
 
 #ifdef FSH
 
-#if MC_VERSION > 12100
+#if MC_VERSION >= 260000
 	#include "/lib/lighting/fsh_lighting.glsl"
 #endif
 
@@ -54,7 +54,7 @@ void main() {
 	#endif
 	
 	
-	#if MC_VERSION > 12100
+	#if MC_VERSION >= 260000
 		// main lighting
 		float _inSunlightAmount;
 		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);	
@@ -83,7 +83,7 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#if MC_VERSION > 12100
+#if MC_VERSION >= 260000
 	#include "/utils/getShadowcasterLight.glsl"
 #endif
 
@@ -121,7 +121,7 @@ void main() {
 	
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
-	#if MC_VERSION > 12100
+	#if MC_VERSION >= 260000
 		shadowcasterLight = getShadowcasterLight();
 	#endif
 	
