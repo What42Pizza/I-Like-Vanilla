@@ -1,5 +1,3 @@
-// NOTE: THIS SHADE FILE IS DISABLED WITHIN THE WORLD FOLDERS BECAUSE IRIS'S SEPARATE ENTITY DRAWS IS NOT CURRENTLY WORKING
-
 #if SHADOWS_ON_TRANSPARENTS == 0
 	#undef SHADOWS_ENABLED
 #endif
@@ -69,7 +67,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
+		pack_2x8(reflectiveness, 0.0),
 		encodedNormal
 	);
 	
@@ -81,6 +79,7 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 #include "/utils/getShadowcasterLight.glsl"
 
