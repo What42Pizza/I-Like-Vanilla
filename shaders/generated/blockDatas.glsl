@@ -176,7 +176,6 @@ if (materialId < 27u) {
 					SET_REFLECTIVENESS(0.4);
 					SET_SPECULARNESS(1.0);
 				} else {
-					TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 					SET_VOXEL_ID(81u);
 				}
 			} else {
