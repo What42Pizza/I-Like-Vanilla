@@ -47,7 +47,15 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, float depth) {
 		if (rawSample(shadowtex0, shadowmapPos).r >= depth) return vec3(1.0);
 		if (rawSample(shadowtex1, shadowmapPos).r < depth) return vec3(0.0);
 		vec4 shadowColor = rawSample(shadowcolor0, shadowmapPos);
-		return shadowColor.rgb * (1.0 - shadowColor.a);
+		shadowColor.rgb = 0.25 + 0.75 * shadowColor.rgb;
+		
+		return shadowColor.rgb * step(-0.99, -shadowColor.a);
+		
+		//shadowColor.a *= shadowColor.a;
+		//shadowColor.a *= shadowColor.a;
+		//shadowColor.a *= shadowColor.a;
+		//shadowColor.a *= shadowColor.a;
+		//return shadowColor.rgb * (1.0 - shadowColor.a);
 		
 	#endif
 }

@@ -9,6 +9,10 @@ vec3 getDistortedShadowPos(vec3 shadowPos) {
 
 float getVolSunraysAmount(vec3 playerPos, float distMult) {
 	
+	float playerLen = length(playerPos);
+	playerPos /= playerLen;
+	playerPos *= min(playerLen, far);
+	
 	float finalMult = sqrt(length(playerPos)) * 8.0;
 	vec3 playerPosStep = playerPos / SUNRAYS_QUALITY;
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, vec3(0.0)));
