@@ -114,8 +114,6 @@ void main() {
 	
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
-	shadowcasterLight = getShadowcasterLight();
-	
 	
 	gl_Position = viewToNdc(viewPos);
 	
@@ -126,6 +124,8 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
+	
+	shadowcasterLight = getShadowcasterLight();
 	
 }
 

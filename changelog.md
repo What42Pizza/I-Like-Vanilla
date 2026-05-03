@@ -8,7 +8,7 @@
   - Reworked block brightness tweaks
   - Reworked lighting calculations
   - Reworked many default setting values
-  - Fixed fullbright entities in mc 26.1
+  - Fixed fullbright bugs in mc 26.1
 
 <br>
 
