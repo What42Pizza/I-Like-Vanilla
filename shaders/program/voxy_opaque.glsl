@@ -9,14 +9,14 @@ layout(location = 1) out vec4 auxDataOut;
 void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// basics
-	uint encodedData = uint(max(parameters.customId - (1u << 13u), 0) + (1u << 13u));
+	uint encodedData = uint(max(parameters.customId - (1u << 12u), 0) + (1u << 12u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
-	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
-	bool isFlatShaded = (encodedData & (3u << 14u)) >= (1u << 14u);
+	bool isFoliage = (encodedData & (3u << 13u)) >= (2u << 13u);
+	bool isFlatShaded = (encodedData & (3u << 13u)) >= (1u << 13u);
 	
 	vec3 screenPos = vec3(gl_FragCoord.xy * pixelSize, gl_FragCoord.z);
 	vec3 viewPos = screenToViewVx(screenPos);

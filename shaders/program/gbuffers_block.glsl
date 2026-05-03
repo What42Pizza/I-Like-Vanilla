@@ -137,7 +137,7 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = uint(max(uint(blockEntityId) - (1u << 13u), 0u) + (1u << 13u));
+	uint encodedData = uint(max(uint(blockEntityId) - (1u << 12u), 0u) + (1u << 12u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif

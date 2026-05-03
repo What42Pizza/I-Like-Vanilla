@@ -46,7 +46,7 @@ void main() {
 	
 	vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 	
-	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 12u), 0) + (1u << 12u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
@@ -60,9 +60,9 @@ void main() {
 	#endif
 	
 	#if EXCLUDE_FOLIAGE == 1
-		bool excludeFromShadows = (encodedData & (3u << 14u)) >= (1u << 14u); // test if 'shadow casting' value is 1 or 3
+		bool excludeFromShadows = (encodedData & (3u << 13u)) >= (1u << 13u); // test if 'shadow casting' value is 1 or 3
 	#else
-		bool excludeFromShadows = (encodedData & (3u << 14u)) == (1u << 14u); // test if 'shadow casting' value is 1
+		bool excludeFromShadows = (encodedData & (3u << 13u)) == (1u << 13u); // test if 'shadow casting' value is 1
 	#endif
 	if (excludeFromShadows) {
 		gl_Position = vec4(1.0);

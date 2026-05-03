@@ -287,15 +287,15 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 12u), 0) + (1u << 12u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
 	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
-	bool isFoliage = (encodedData & (3u << 14u)) >= (2u << 14u);
-	bool isFlatShaded = (encodedData & (3u << 14u)) >= (1u << 14u);
+	bool isFoliage = (encodedData & (3u << 13u)) >= (2u << 13u);
+	bool isFlatShaded = (encodedData & (3u << 13u)) >= (1u << 13u);
 	
 	
 	// process normals

@@ -30,7 +30,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	#if COLORED_LIGHTING_ENABLED == 1
-		uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+		uint encodedData = uint(max(mc_Entity.x - (1u << 12u), 0) + (1u << 12u));
 		#ifndef MODERN_BACKEND
 			if (encodedData == 65535u) encodedData = 0u;
 		#endif

@@ -115,7 +115,7 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	encodedNormal = encodeNormal(normal);
 	
-	uint encodedData = uint(max(mc_Entity.x - (1u << 13u), 0) + (1u << 13u));
+	uint encodedData = uint(max(mc_Entity.x - (1u << 12u), 0) + (1u << 12u));
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
