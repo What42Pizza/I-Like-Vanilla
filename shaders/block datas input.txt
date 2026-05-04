@@ -380,9 +380,17 @@ emission: vec3(15.0 / 15.0)
 
 // classic blocklights
 
-block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, candle, campfire, furnace:lit=true:
+block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, candle:
 weight: 10
 brightness: 1.2
+voxelize: true
+emission: vec3(1.0, 1.0, 0.9)
+
+block campfire, furnace:lit=true:
+weight: 1
+glow detect min: vec3(21.4,  31.3, 69.4)
+glow detect max: vec3(49.2, 100.0, 97.6)
+glow amount: 0.5
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

@@ -53,7 +53,7 @@ void main() {
 	#endif
 	
 	
-	/* DRAWBUFFERS:03 */
+	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.5, 0.75, 0.75, 1.0);
 	#endif
