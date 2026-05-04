@@ -6,11 +6,16 @@ in_out vec4 glcolor;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
+in_out vec3 viewPos;
 in_out float blockDepth;
+
+flat in_out vec3 shadowcasterLight;
 
 
 
 #ifdef FSH
+
+#include "/lib/lighting/simple_fsh_lighting.glsl"
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
@@ -20,8 +25,6 @@ void main() {
 	float transparency = percentThrough(blockDepth, 0.5, 1.2);
 	color.a *= (transparency - 1.0) * NEARBY_PARTICLE_TRANSPARENCY + 1.0;
 	color.a *= 1.0 - COLORED_PARTICLE_TRANSPARENCY * getSaturation(glcolor.rgb);
-	
-	color.rgb *= 1.0 + min(color.r, color.g) * 0.25;
 	
 	
 	#if PBR_TYPE == 0
@@ -41,7 +44,10 @@ void main() {
 	#endif
 	
 	
-	/* DRAWBUFFERS:02 */
+	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	
+	
+	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.5, 0.75, 0.75, 1.0);
 	#endif
@@ -63,6 +69,7 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -86,8 +93,10 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	blockDepth = length(viewPos);
+	
+	shadowcasterLight = getShadowcasterLight();
 	
 	
 	gl_Position = viewToNdc(viewPos);
