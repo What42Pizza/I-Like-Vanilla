@@ -5,10 +5,11 @@
   - Split blocklight colors into dark and bright variants
   - Split setting 'Weather Brightness Mult' into day and night variants
   - Renamed setting 'Bright Block Decrease' to 'Brightness Tweaks Strength'
+  - Added setting 'Mixed Particle Rendering'
   - Reworked block brightness tweaks
   - Reworked lighting calculations
   - Reworked many default setting values
-  - Fixed fullbright bugs in mc 26.1
+  - Fixed full-bright bugs in mc 26.1
 
 <br>
 

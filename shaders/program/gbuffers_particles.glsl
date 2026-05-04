@@ -6,16 +6,20 @@ in_out vec4 glcolor;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
-in_out vec3 viewPos;
 in_out float blockDepth;
 
-flat in_out vec3 shadowcasterLight;
+#if MIXED_PARTICLE_RENDERING == 0
+	in_out vec3 viewPos;
+	flat in_out vec3 shadowcasterLight;
+#endif
 
 
 
 #ifdef FSH
 
-#include "/lib/lighting/simple_fsh_lighting.glsl"
+#if MIXED_PARTICLE_RENDERING == 0
+	#include "/lib/lighting/simple_fsh_lighting.glsl"
+#endif
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
@@ -44,7 +48,9 @@ void main() {
 	#endif
 	
 	
-	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	#if MIXED_PARTICLE_RENDERING == 0
+		doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
+	#endif
 	
 	
 	/* DRAWBUFFERS:03 */
@@ -56,7 +62,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(reflectiveness, 0.0),
-		normal
+		encodeNormal(normal)
 	);
 	
 }
@@ -69,7 +75,9 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
+#if MIXED_PARTICLE_RENDERING == 0
+	#include "/utils/getShadowcasterLight.glsl"
+#endif
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -93,10 +101,11 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
+	#if MIXED_PARTICLE_RENDERING == 1
+		vec3 viewPos;
+	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	blockDepth = length(viewPos);
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	gl_Position = viewToNdc(viewPos);
@@ -108,6 +117,10 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
+	
+	#if MIXED_PARTICLE_RENDERING == 0
+		shadowcasterLight = getShadowcasterLight();
+	#endif
 	
 }
 

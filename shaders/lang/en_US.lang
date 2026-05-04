@@ -1626,12 +1626,6 @@ option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
 option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
 value.CLOUD_OPACITY_DISTANCE.-1=Use Style
 
-option.CLOUD_COMPATIBILITY=Cloud Compatibility
-option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
-value.CLOUD_COMPATIBILITY.0=Off
-value.CLOUD_COMPATIBILITY.1=On
-value.CLOUD_COMPATIBILITY.2=Auto
-
 
 
 
@@ -2377,7 +2371,18 @@ option.PANINI_SHARPENING_MOVING.comment=If the sampling method is set to smooth 
 
 screen.COMPATIBILITY_MENU=Compatibility
 
+option.CLOUD_COMPATIBILITY=Cloud Compatibility
+option.CLOUD_COMPATIBILITY.comment=Uses older (and likely slower) code to somewhat improve the compatibility of clouds
+value.CLOUD_COMPATIBILITY.0=Off
+value.CLOUD_COMPATIBILITY.1=On
+value.CLOUD_COMPATIBILITY.2=Auto
+
 option.MATRIX_COMPATIBILITY=Matrix Compatibility
 option.MATRIX_COMPATIBILITY.comment=Improves compatibility with mod at the potential cost of some performance
 value.MATRIX_COMPATIBILITY.0=Off
 value.MATRIX_COMPATIBILITY.1=On
+
+option.MIXED_PARTICLE_RENDERING=Mixed Particle Rendering
+option.MIXED_PARTICLE_RENDERING.comment=If this is left disabled, all particles will always be lit correctly, but some particles (e.g. underwater particles) will not be rendered. Enabling this means all particles will always be rendered, but may or may not be lit correctly
+value.MIXED_PARTICLE_RENDERING.0=Off
+value.MIXED_PARTICLE_RENDERING.1=On
