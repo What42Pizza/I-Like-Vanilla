@@ -28,11 +28,10 @@ void main() {
 	color.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	
-	/* DRAWBUFFERS:0 */
+	/* DRAWBUFFERS:8 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.0, 0.5, 1.0, 1.0);
 	#endif
-	color.rgb *= 0.5;
 	gl_FragData[0] = color;
 	
 }
@@ -61,8 +60,8 @@ void main() {
 	vec3 playerPos = gl_Vertex.xyz;
 	playerPos.x += bayer16(playerPos.xz);
 	
-	float horizontalAmount = playerPos.y * WEATHER_HORIZONTAL_AMOUNT * 0.5;
-	playerPos.xz *= 2.0;
+	float horizontalAmount = playerPos.y * WEATHER_HORIZONTAL_AMOUNT;
+	playerPos *= 2.0;
 	playerPos.x += horizontalAmount;
 	horizontalAmount *= 0.5;
 	playerPos.z += horizontalAmount;

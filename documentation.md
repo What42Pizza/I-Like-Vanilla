@@ -184,15 +184,16 @@ This describes which /main_files-s handle different effects
 - - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
 - - y: reflectiveness (8-bit) & is cloud (8-bit)
 - - zw: normal
-- **colortex4:  Bloom Texture** (stored with 0.5 multiplier)
+- **colortex4:  Bloom Texture**
 - **colortex5:  Sky Objects Texture**
 - **colortex6:  Noisy Renders Texture**
 - - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit, value = 1/stored-1)
 - - y: clouds transparency (8-bit, value = 1-stored) & clouds brightness (8-bit, value = 1-stored)
 - **colortex7:  Prev Depth Texture**
 - - r: depth (16-bit)
-- **colortex8:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
-- **colortex9:  Debug Output** (normally not used)
+- **colortex8:  Weather Texture**
+- **colortex9:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
+- **colortex15: Debug Output** (normally not used)
 
 <br>
 

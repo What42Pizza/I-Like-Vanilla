@@ -5,7 +5,7 @@
 	"version": 1,
 	"excludeLodsFromVanillaDepth": false,
 	"opaqueDrawBuffers": [0, 2],
-	"translucentDrawBuffers": [8, 3],
+	"translucentDrawBuffers": [9, 3],
 	"blending": {-1:"off"},
 	#if TAA_ENABLED == 1
 		"taaOffset": "{ return taaOffsetUniform; }",

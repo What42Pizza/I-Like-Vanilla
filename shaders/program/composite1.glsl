@@ -219,6 +219,15 @@ void main() {
 	
 	
 	
+	// ======== MIX WEATHER RENDER ======== //
+	
+	if (rainStrength > 0.0) {
+		vec4 weather = texelFetch(WEATHER_TEXTURE, texelcoord, 0);
+		color = mix(color, weather.rgb * 1.5, weather.a);
+	}
+	
+	
+	
 	#if !defined NOISY_RENDERS_ACTIVE
 		/* DRAWBUFFERS:0 */
 		color *= 0.5;
