@@ -321,6 +321,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	
 	lighting += glowingAmount * vec3(1.0, 0.85, 0.8);
 	
+	sideShading *= 1.0 - blockBrightness * blockBrightness;
 	lighting *= 1.0 + sideShading;
 	
 	#if DO_COLOR_CODED_GBUFFERS == 1

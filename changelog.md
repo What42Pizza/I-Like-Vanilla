@@ -1,4 +1,4 @@
-- v1.3.6
+- v1.3.6 (26/05/04)
   - Added setting 'Reflections Brightness'
   - Added settings 'Water Tint (Shallow) Brightness' and 'Water Tint (Deep) Brightness'
   - Added settings 'Bloom Detect Tint Red/Green/Blue'
@@ -10,6 +10,7 @@
   - Reworked lighting calculations
   - Reworked many default setting values
   - Fixed full-bright bugs in mc 26.1
+  - Passed 1 million downloads!
 
 <br>
 
