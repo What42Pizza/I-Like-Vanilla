@@ -1,3 +1,10 @@
+- v1.3.6b
+  - Improved reflections
+  - Tweaked side shading
+  - Removed default green effect of night vision
+
+<br>
+
 - v1.3.6 (26/05/04)
   - Added setting 'Reflections Brightness'
   - Added settings 'Water Tint (Shallow) Brightness' and 'Water Tint (Deep) Brightness'
