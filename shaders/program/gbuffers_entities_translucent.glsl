@@ -99,6 +99,7 @@ void main() {
 			return;
 		}
 	#endif
+	
 	#if PBR_TYPE != 0
 		vec3 normal;
 	#endif

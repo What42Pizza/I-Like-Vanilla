@@ -25,6 +25,13 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 	#endif
 	screenPos += stepVector * (dither + length(viewPos) / 1024) * REFLECTION_DITHER_AMOUNT;
 	
+	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
+	vec3 absPlayerPos = abs(playerPos * worldNormal);
+	float playerPosMax = max(absPlayerPos.x, max(absPlayerPos.y, absPlayerPos.z));
+	float ratioUpperBound = 1.0 / (1.0 + playerPosMax * 8.0);
+	ratioUpperBound = 1.0003 + ratioUpperBound * 0.01;
+	
 	int hitCount = 0;
 	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
 		
@@ -37,12 +44,19 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 			vec4 sampleScreenPos = gbufferProjection * vec4(realBlockViewPos, 1.0);
 			realDepth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
 		#endif
-		float realToScreen = screenPos.z - realDepth;
+		//float realToScreen = screenPos.z - realDepth;
+		
+		float ratio = screenPos.z / realDepth;
 		
 		//if (realToScreen > 0.0 && realToScreen < sqrt(stepVector.z) * 0.5) {
 		//if (realToScreen > 0.0 && (toLinearDepth(screenPos.z) - toLinearDepth(realDepth)) < toLinearDepth(realDepth) * 0.1) {
-		float ratio = toLinearDepth(screenPos.z) / toLinearDepth(realDepth);
-		if (realToScreen > 0.0 && ratio > 1.0 && ratio < 1.0 + 0.75 * toLinearDepth(screenPos.z)) {
+		//float linearScreenDepth = toLinearDepth(screenPos.z);
+		//float linearRealDepth = toLinearDepth(realDepth);
+		//float ratio = linearScreenDepth / linearRealDepth;
+		
+		//if (ratio > 0.999 && ratio < 1.05 + 0.5 * linearScreenDepth) {
+		if (ratio > 1.0 && ratio < ratioUpperBound) {
+		//if (realToScreen > 0.0 && ratio > 1.0 && ratio < 1.0 + 0.75 * toLinearDepth(screenPos.z)) {
 			hitCount ++;
 			if (hitCount >= 5) { // converged on point
 				reflectionPos = screenPos.xy;

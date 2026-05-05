@@ -133,7 +133,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	#if FANCY_END_PORTAL_ENABLED == 0
+	#if FANCY_END_PORTAL_ENABLED != 1
 		vec3 viewPos;
 	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
@@ -159,7 +159,10 @@ void main() {
 	
 	// process normals
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);

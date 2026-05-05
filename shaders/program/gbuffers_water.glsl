@@ -74,7 +74,6 @@ void main() {
 		normal.xy += 0.5;
 		normal = normalize(normal * 2.0 - 1.0);
 		normal = tbn * normal;
-		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	float reflectivenessMult = mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
 	reflectiveness *= 1.0 - float(materialId != BLOCK_ID_WATER) * (1.0 - reflectivenessMult);

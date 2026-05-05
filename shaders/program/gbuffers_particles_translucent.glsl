@@ -3,6 +3,7 @@ in_out vec2 lmcoord;
 in_out vec4 glcolor;
 #if PBR_TYPE == 0
 	flat in_out vec3 normal;
+	flat in_out vec2 encodedNormal;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
@@ -56,7 +57,7 @@ void main() {
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
 		pack_2x8(reflectiveness, 0.0),
-		normal
+		encodedNormal
 	);
 	
 }
@@ -83,11 +84,14 @@ void main() {
 	glcolor = gl_Color;
 	glcolor.rgb *= 1.25;
 	glcolor.a = sqrt(glcolor.a);
+	
 	#if PBR_TYPE != 0
 		vec3 normal;
 	#endif
 	normal = gl_NormalMatrix * gl_Normal;
-	#if PBR_TYPE == 1
+	#if PBR_TYPE == 0
+		encodedNormal = encodeNormal(normal);
+	#elif PBR_TYPE == 1
 		vec3 tangent = normalize(gl_NormalMatrix * at_tangent.xyz);
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);

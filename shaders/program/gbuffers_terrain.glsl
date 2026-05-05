@@ -259,7 +259,7 @@ void main() {
 	adjustLmcoord(lmcoord);
 	vec4 glcolor4 = gl_Color;
 	
-	#if POM_ENABLED == 0
+	#if POM_ENABLED != 1
 		vec3 viewPos;
 	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
