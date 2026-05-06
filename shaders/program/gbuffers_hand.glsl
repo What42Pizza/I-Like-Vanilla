@@ -8,14 +8,21 @@ in_out vec3 viewPos;
 	flat in_out mat3 tbn;
 #endif
 
+#if EMISSIVE_TEXTURES_ENABLED == 1
+	in_out vec3 glowingColorMin;
+	in_out vec3 glowingColorMax;
+	in_out float glowingAmount;
+#endif
+
 
 
 #ifdef FSH
 
 void main() {
 	
-	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
-	if (color.a == 0.0) discard;
+	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
+	if (rawColor.a == 0.0) discard;
+	vec4 color = rawColor;
 	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
 	
 	
@@ -35,6 +42,18 @@ void main() {
 	#endif
 	
 	
+	float reflectiveness = 0.0;
+	float specularness = 0.3;
+	
+	#if EMISSIVE_TEXTURES_ENABLED == 1
+		vec3 hsv = rgbToHsv(rawColor.rgb);
+		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
+			specularness = 254.0 / 255.0;
+			reflectiveness = clamp(glowingAmount * 0.5, 0.0, 1.0);
+		}
+	#endif
+	
+	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 0.5, 0.25, 1.0);
@@ -43,7 +62,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(0.0, 0.3),
+		pack_2x8(reflectiveness, specularness),
 		encodedNormal
 	);
 	
@@ -89,6 +108,9 @@ void main() {
 	
 	// get block data
 	#define DO_BRIGHTNESS_TWEAKS
+	#if EMISSIVE_TEXTURES_ENABLED == 1
+		#define GET_GLOWING_COLOR
+	#endif
 	#include "/generated/blockDatas.glsl"
 	
 	

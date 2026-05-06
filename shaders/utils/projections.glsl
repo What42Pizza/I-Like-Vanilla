@@ -80,7 +80,7 @@
 	
 	
 	
-	const float paniniScale = 0.5;
+	const float paniniScale = PANINI_PROJECTION_STRENGTH * 0.5;
 	const vec3 paniniCameraPos = vec3(0, 0, paniniScale);
 	
 	
@@ -128,6 +128,15 @@
 		vec3 newViewPos = normalize(cylinderPos) * length(viewPos);
 		
 		return newViewPos;
+	}
+	
+	vec2 reproject(vec3 screenPos, vec3 cameraOffset) {
+		vec3 viewPos = screenToView(screenPos);
+		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+		vec3 prevPlayerPos = playerPos + cameraOffset;
+		vec3 prevViewPos = mat3(gbufferPreviousModelView) * prevPlayerPos;
+		vec4 prevCoord = gbufferPreviousProjection * vec4(prevViewPos, 1.0);
+		return prevCoord.xy / prevCoord.w * 0.5 + 0.5;
 	}
 	
 	#ifdef DISTANT_HORIZONS

@@ -572,15 +572,15 @@
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.4
+										#define BLOOM_AMOUNT 0.55
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 0.5
+										#define BLOOM_NETHER_AMOUNT 0.7
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 0.4
+										#define BLOOM_END_AMOUNT 0.55
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE

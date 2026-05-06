@@ -637,13 +637,13 @@ value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 screen.END_LIGHTING_MENU=End Lighting
 
 option.END_SKYLIGHT_RED=End Skylight Red
-value.END_AMBIENT_RED.-1=Use Style
+value.END_SKYLIGHT_RED.-1=Use Style
 
 option.END_SKYLIGHT_GREEN=End Skylight Green
-value.END_AMBIENT_GREEN.-1=Use Style
+value.END_SKYLIGHT_GREEN.-1=Use Style
 
 option.END_SKYLIGHT_BLUE=End Skylight Blue
-value.END_AMBIENT_BLUE.-1=Use Style
+value.END_SKYLIGHT_BLUE.-1=Use Style
 
 option.END_SKYLIGHT_BRIGHTNESS=End Skylight Brightness
 value.END_SKYLIGHT_BRIGHTNESS.-1=Use Style

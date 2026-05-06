@@ -383,6 +383,9 @@ emission: vec3(15.0 / 15.0)
 block torch, wall_torch, lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, candle:
 weight: 10
 brightness: 1.2
+glow detect min: vec3(33.6,  40.8, 100.0)
+glow detect max: vec3(60.0, 100.0, 100.0)
+glow amount: 0.2
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

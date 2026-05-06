@@ -68,6 +68,7 @@ if (materialId < 28u) {
 						}
 					} else {
 						if (materialId < 8u) {
+							SET_GLOWING_COLOR(vec3(33.6,  40.8, 100.0), vec3(60.0, 100.0, 100.0), 0.2);
 							TWEAK_GLCOLOR_BRIGHTNESS(1.2);
 							SET_VOXEL_ID(69u);
 						} else {

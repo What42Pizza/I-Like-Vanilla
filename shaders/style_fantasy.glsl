@@ -175,7 +175,7 @@
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
-										#define SKYLIGHT_DAY_BRIGHTNESS 1.4
+										#define SKYLIGHT_DAY_BRIGHTNESS 1.35
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
@@ -335,7 +335,7 @@
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
-										#define BLOCK_GREEN_DARK 0.7
+										#define BLOCK_GREEN_DARK 0.65
 #endif
 #if BLOCK_BLUE_DARK == -1
 #undef BLOCK_BLUE_DARK
@@ -343,7 +343,7 @@
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
-										#define BLOCK_RED_BRIGHT 1.1
+										#define BLOCK_RED_BRIGHT 1.0
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
@@ -351,15 +351,15 @@
 #endif
 #if BLOCK_BLUE_BRIGHT == -1
 #undef BLOCK_BLUE_BRIGHT
-										#define BLOCK_BLUE_BRIGHT 0.35
+										#define BLOCK_BLUE_BRIGHT 0.5
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 0.75
+										#define BLOCK_BRIGHTNESS 0.8
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
-										#define BLOCK_BRIGHTNESS_CURVE 2
+										#define BLOCK_BRIGHTNESS_CURVE 1
 #endif
 #if BLOCK_BRIGHTNESS_NIGHT_MULT == -1
 #undef BLOCK_BRIGHTNESS_NIGHT_MULT
@@ -563,7 +563,7 @@
 
 #if BLOOM_STYLE == -1
 #undef BLOOM_STYLE
-										#define BLOOM_STYLE 2
+										#define BLOOM_STYLE 1
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
@@ -579,15 +579,15 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 1.5
+										#define BLOOM_SIZE 1.3
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
-										#define BLOOM_LOW_CUTOFF 0.5
+										#define BLOOM_LOW_CUTOFF 0.3
 #endif
 #if BLOOM_HIGH_CUTOFF == -1
 #undef BLOOM_HIGH_CUTOFF
-										#define BLOOM_HIGH_CUTOFF 1.0
+										#define BLOOM_HIGH_CUTOFF 0.8
 #endif
 #if BLOOM_DETECT_TINT_RED == -1
 #undef BLOOM_DETECT_TINT_RED
@@ -877,7 +877,7 @@
 #endif
 #if OVERWORLD_BRIGHTNESS == -1
 #undef OVERWORLD_BRIGHTNESS
-										#define OVERWORLD_BRIGHTNESS 1.15
+										#define OVERWORLD_BRIGHTNESS 1.05
 #endif
 #if NETHER_BRIGHTNESS == -1
 #undef NETHER_BRIGHTNESS
