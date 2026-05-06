@@ -403,6 +403,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 82u) {
 								if (materialId < 80u) {
 									if (materialId < 79u) {
+										TWEAK_GLCOLOR_BRIGHTNESS(1.1);
 										SET_VOXEL_ID(36u);
 									} else {
 										SET_VOXEL_ID(35u);

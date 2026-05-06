@@ -181,13 +181,13 @@ void main() {
 			worldPos2 += 128.0;
 			noise -= valueNoise(vec3(worldPos2 * 1.0  , frameTimeCounter * 0.125)) * 0.125;
 			#ifdef OVERWORLD
-				const float halfStrength = LAVA_NOISE_AMOUNT_OVERWORLD * 0.5;
+				const float halfStrength = LAVA_NOISE_AMOUNT_OVERWORLD * 0.3;
 			#elif defined NETHER
-				const float halfStrength = LAVA_NOISE_AMOUNT_NETHER * 0.5;
+				const float halfStrength = LAVA_NOISE_AMOUNT_NETHER * 0.3;
 			#elif defined END
-				const float halfStrength = LAVA_NOISE_AMOUNT_END * 0.5;
+				const float halfStrength = LAVA_NOISE_AMOUNT_END * 0.3;
 			#endif
-			noise = mix(1.0, noise * noise, halfStrength + halfStrength * upDot);
+			noise = mix(1.0, noise * noise * noise, halfStrength + halfStrength * upDot);
 			color.rgb *= noise;
 		}
 	#endif

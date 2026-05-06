@@ -1,7 +1,8 @@
-- v1.3.6b
+- v1.3.7
   - Improved reflections
   - Tweaked side shading
   - Removed default green effect of night vision
+  - Tweaked settings and effects
 
 <br>
 
