@@ -86,7 +86,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 		vec3 playerDir = mat3(gbufferModelViewInverse) * viewDir;
 		playerDir /= max(length(playerDir.xz), abs(playerDir.y * 1.25));
-		float yPos = playerDir.y * far + cameraPosition.y;
+		float yPos = playerDir.y * far + cameraPosition.y * eyeBrightnessSmooth.y / 240.0;
 		float darkenAmount = percentThrough(yPos, 56.0, 56.0 - far / 4.0);
 		#if UNDERGROUND_FOG_COLOR_TYPE == 1
 			#define FOG_COLOR fogColor
