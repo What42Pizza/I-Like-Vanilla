@@ -82,6 +82,10 @@ void main() {
 			gl_Position = vec4(1.0);
 			return;
 		}
+	#else
+		#ifndef SHADOWS_ENABLED
+			lmcoord = mix(eyeBrightnessSmooth / 240.0, lmcoord, step(0.99, glcolor.a));
+		#endif
 	#endif
 	vec3 normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 0
