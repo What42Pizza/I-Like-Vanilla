@@ -91,7 +91,8 @@ void main() {
 	
 	// main lighting
 	float _inSunlightAmount;
-	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
+	float glowingAmount = getSaturation(glcolor);
+	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, glowingAmount, viewPos, normal, gl_FragCoord.z);
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -143,6 +144,7 @@ void main() {
 	vec4 glcolor4 = gl_Color;
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
+	//glcolor *= 1.0 + 0.5 * getSaturation(glcolor.rgb);
 	
 	
 	// block id stuff
