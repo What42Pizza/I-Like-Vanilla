@@ -24,6 +24,7 @@ void main() {
 
 void main() {
 	gl_Position = ftransform();
+	color = vec3(gl_Color.rgb);
 	bool isStar = gl_Color.r == gl_Color.g && gl_Color.g == gl_Color.b && gl_Color.r > 0.0 && gl_Color.r < 0.51 && gl_Color.a < 0.8; // vanilla Star Detection by Builderb0y (edited by What42)
 	#if CUSTOM_OVERWORLD_SKYBOX == 0
 		if (!isStar) {
@@ -42,7 +43,7 @@ void main() {
 			const float starsBrightness = STARS_BRIGHTNESS;
 		#endif
 		float nightPercent = ambientMoonPercent + max(ambientSunrisePercent + ambientSunsetPercent, 0.0);
-		color = vec3(gl_Color.rgb * starsBrightness);
+		color *= starsBrightness;
 	#endif
 	
 	

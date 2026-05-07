@@ -300,7 +300,7 @@ void main() {
 	
 	// process normals
 	
-	#if PBR_TYPE != 0
+	#if !(PBR_TYPE == 0 && POM_ENABLED == 0)
 		vec3 normal;
 	#endif
 	normal = gl_NormalMatrix * gl_Normal;
