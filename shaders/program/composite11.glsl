@@ -63,7 +63,7 @@ void main() {
 		return;
 	#endif
 	
-	vec2 stepAmount = vec2(invAspectRatio, 1.0) * BLOOM_SIZE * 0.04;
+	vec2 stepAmount = vec2(invAspectRatio, 1.0) * BLOOM_SIZE * 0.03;
 	vec3 bloomColor = vec3(0.0);
 	
 	doBloomTile(bloomColor, stepAmount);

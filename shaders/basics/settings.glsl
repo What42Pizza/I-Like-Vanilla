@@ -164,6 +164,25 @@ const float shadowIntervalSize    = 2.0;
 #undef CLOUD_COMPATIBILITY
 #define CLOUD_COMPATIBILITY 1
 
+#if BSL_MODE == 1
+	#undef BLOOM_STYLE
+	#undef BLOOM_SIZE
+	#undef BLOOM_AMOUNT
+	#undef BLOOM_NETHER_AMOUNT
+	#undef BLOOM_END_AMOUNT
+	#undef VIBRANCE
+	#undef SATURATION 0.1
+	#define BLOOM_STYLE 2
+	#define BLOOM_SIZE 2.0
+	#define BLOOM_AMOUNT 2.2
+	#define BLOOM_NETHER_AMOUNT 2.2
+	#define BLOOM_END_AMOUNT 2.2
+	#define BLOOM_LOW_CUTOFF 0.0
+	#define BLOOM_HIGH_CUTOFF 0.6
+	#define VIBRANCE -0.1
+	#define SATURATION 0.1
+#endif
+
 
 
 #if (defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1) || (defined NETHER && CUSTOM_NETHER_SKYBOX == 1) || (defined END && CUSTOM_END_SKYBOX == 1)

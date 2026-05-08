@@ -32,7 +32,7 @@ vec3 getAmbientLight(float ambientBrightness, float lightDot) {
 	#endif
 	
 	#if BSL_MODE == 1
-		ambientLight *= 0.75;
+		ambientLight *= 0.5;
 	#endif
 	
 	return ambientLight;

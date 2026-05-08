@@ -141,7 +141,7 @@ void main() {
 	#ifndef MODERN_BACKEND
 		if (encodedData == 65535u) encodedData = 0u;
 	#endif
-	#if FANCY_END_PORTAL_ENABLED == 0
+	#if FANCY_END_PORTAL_ENABLED != 1
 		uint materialId;
 	#endif
 	materialId = encodedData;

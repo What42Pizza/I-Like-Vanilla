@@ -148,8 +148,8 @@ void main() {
 	
 	#if BSL_MODE == 1
 		color = pow(color, vec3(1.1));
-		color = mix(vec3(0.1), vec3(0.9), color);
-		color += vec3(0.0, 0.02, 0.04);
+		color = mix(vec3(0.05), vec3(0.95), color);
+		color += vec3(0.0, 0.02, 0.05);
 	#endif
 	
 	
