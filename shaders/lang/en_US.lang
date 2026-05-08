@@ -2329,11 +2329,6 @@ value.SSS_LIDAR.1=On
 
 screen.ISOMETRIC_MENU=Isometric Rendering
 
-option.ISOMETRIC_RENDERING_ENABLED=Isometric Rendering Enabled
-option.ISOMETRIC_RENDERING_ENABLED.comment=Changes the projection to Isometric
-value.ISOMETRIC_RENDERING_ENABLED.0=Off
-value.ISOMETRIC_RENDERING_ENABLED.1=On
-
 option.ISOMETRIC_WORLD_SCALE=Isometric World Scale
 option.ISOMETRIC_WORLD_SCALE.comment=This controls how "zoomed-out" the camera is
 

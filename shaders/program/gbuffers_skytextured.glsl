@@ -48,6 +48,7 @@ void main() {
 
 #ifdef VSH
 
+#include "/utils/projections.glsl"
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
@@ -56,11 +57,11 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	
-	#if ISOMETRIC_RENDERING_ENABLED == 1
+	#if PROJECTION_TYPE == 2
 		vec4 playerPos4 = gbufferModelViewInverse * gbufferProjectionInverse * ftransform();
 		vec3 playerPos = playerPos4.xyz / playerPos4.w;
-		playerPos *= 6;
-		gl_Position = projectIsometric(playerPos);
+		playerPos *= 5;
+		gl_Position = viewToNdc(mat3(gbufferModelView) * playerPos);
 		gl_Position.z = gl_Position.w;
 	#else
 		gl_Position = ftransform();
