@@ -156,7 +156,7 @@ void main() {
 			
 			float voxyTransparentDepth = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
 			vec3 voxyTransparentViewPos = screenToViewVx(vec3(texcoord, voxyTransparentDepth));
-			if (voxyTransparentViewPos.z > viewPos.z - 0.5 || depth > 0.998) {
+			if (voxyTransparentViewPos.z > viewPos.z - 0.5 || depth > fromLinearDepth(0.9)) {
 				vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENTS_TEXTURE, texelcoord, 0);
 				voxyTransparents.rgb *= 2.0;
 				voxyTransparents.a *= float(!depthIsHand(depth));

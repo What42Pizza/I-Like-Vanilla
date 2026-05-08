@@ -41,26 +41,31 @@ void main() {
 	glcolor = gl_Color;
 	encodedNormal = encodeNormal(gbufferModelView[1].xyz);
 	
-	glcolor.a = 0.5 + 0.5 * glcolor.a;
-	
-	vec3 viewPos = transform(gl_ModelViewMatrix, vaPosition);
-	
-	float lineWidth = 0.002;
-	gl_Position = viewToNdc(viewPos);
-	vec4 offsetPos = viewToNdc(viewPos + vaNormal);
-	vec2 screenDir = offsetPos.xy / offsetPos.w - gl_Position.xy / gl_Position.w;
-	screenDir = normalize(screenDir) * lineWidth;
-	screenDir.xy = screenDir.yx;
+	//glcolor.a = 0.5 + 0.5 * glcolor.a;
 	if (glcolor.r + glcolor.b + glcolor.g < 0.1) {
 		lmcoord = eyeBrightness / 512.0;
 		lmcoord.x = max(lmcoord.x, heldBlockLightValue / 32.0);
 		glcolor.a = 1.0 - max(lmcoord.x, lmcoord.y);
 	}
-	screenDir.x *= -1;
-	screenDir *= sign(screenDir.x);
-	screenDir.x *= invAspectRatio;
-	screenDir *= (gl_VertexID % 2) * 2.0 - 1.0;
-	gl_Position.xy += screenDir * gl_Position.w;
+	
+	// taken from the vanilla rendertype_lines.vsh:
+	float lineWidth = 1.5;
+	const float VIEW_SHRINK = 1.0 - (1.0 / 256.0);
+	const mat4 VIEW_SCALE = mat4(
+		VIEW_SHRINK, 0.0, 0.0, 0.0,
+		0.0, VIEW_SHRINK, 0.0, 0.0,
+		0.0, 0.0, VIEW_SHRINK, 0.0,
+		0.0, 0.0, 0.0, 1.0
+	);
+	vec4 linePosStart = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * vec4(vaPosition, 1.0);
+	vec4 linePosEnd = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * vec4(vaPosition + vaNormal, 1.0);
+	vec3 ndc1 = linePosStart.xyz / linePosStart.w;
+	vec3 ndc2 = linePosEnd.xyz / linePosEnd.w;
+	vec2 lineScreenDirection = normalize((ndc2.xy - ndc1.xy) * viewSize);
+	vec2 lineOffset = vec2(-lineScreenDirection.y, lineScreenDirection.x) * lineWidth * pixelSize;
+	lineOffset *= sign(lineOffset.x) * (1.0 - (gl_VertexID % 2) * 2.0);
+	gl_Position = vec4((ndc1 + vec3(lineOffset, 0.0)) * linePosStart.w, linePosStart.w);
+	
 	gl_Position.z -= 0.0001;
 	
 	#if TAA_ENABLED == 1

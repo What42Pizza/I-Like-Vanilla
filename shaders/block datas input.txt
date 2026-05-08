@@ -1,5 +1,5 @@
 // This file is used for auto-generating shader code
-// After updating this file, execute `cargo run -- update_block_datas` in the 'rust-utils' folder
+// After updating this file, execute `cargo run -- rebuild_ids` in the 'rust-utils' folder
 
 
 

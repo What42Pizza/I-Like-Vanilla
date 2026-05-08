@@ -62,7 +62,8 @@
 		"lightningFlashAmount",
 		"betterRainStrength",
 		"inSnowyBiome",
-		"inPaleGarden"
+		"inPaleGarden",
+		"invAspectRatio"
 	],
 	"samplers": {
 		"tex": "sampler2D",
