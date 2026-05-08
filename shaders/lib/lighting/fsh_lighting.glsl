@@ -315,9 +315,9 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
 	}
 	vec3 nightVisionMin = vec3(betterNightVision);
-	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
+	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT * (1.0 - ambientBrightness);
 	nightVisionMin *= 1.0 + 0.5 * sideShading;
-	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
+	lighting += nightVisionMin * (1.0 - 0.75 * getLum(lighting));
 	
 	lighting += glowingAmount * vec3(1.0, 0.85, 0.8);
 	
