@@ -674,4 +674,3 @@ const float sunPathRotation = -30.0; // [-80.0 -75.0 -70.0 -65.0 -60.0 -55.0 -50
 
 #define CLOUD_COMPATIBILITY 2 // [0 1 2]
 #define MATRIX_COMPATIBILITY 0 // [0 1]
-#define MIXED_PARTICLE_RENDERING 0 // [0 1]

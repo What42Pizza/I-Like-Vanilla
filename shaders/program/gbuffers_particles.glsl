@@ -9,18 +9,15 @@ in_out vec4 glcolor;
 #endif
 in_out float blockDepth;
 
-#if MIXED_PARTICLE_RENDERING == 0
-	in_out vec3 viewPos;
-	flat in_out vec3 shadowcasterLight;
-#endif
+in_out vec3 viewPos;
+
+flat in_out vec3 shadowcasterLight;
 
 
 
 #ifdef FSH
 
-#if MIXED_PARTICLE_RENDERING == 0
-	#include "/lib/lighting/simple_fsh_lighting.glsl"
-#endif
+#include "/lib/lighting/simple_fsh_lighting.glsl"
 
 void main() {
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
@@ -49,9 +46,10 @@ void main() {
 	#endif
 	
 	
-	#if MIXED_PARTICLE_RENDERING == 0
+	float isAfterDeferred = texelFetch(colortex10, ivec2(0), 0).r;
+	if (isAfterDeferred > 0.5) {
 		doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, specularness, viewPos, normal);
-	#endif
+	}
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -76,9 +74,7 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#if MIXED_PARTICLE_RENDERING == 0
-	#include "/utils/getShadowcasterLight.glsl"
-#endif
+#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -105,9 +101,6 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
-	#if MIXED_PARTICLE_RENDERING != 0
-		vec3 viewPos;
-	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	blockDepth = length(viewPos);
 	
@@ -122,9 +115,7 @@ void main() {
 	
 	doVshLighting(lmcoord, viewPos, normal);
 	
-	#if MIXED_PARTICLE_RENDERING == 0
-		shadowcasterLight = getShadowcasterLight();
-	#endif
+	shadowcasterLight = getShadowcasterLight();
 	
 }
 

@@ -1,12 +1,12 @@
 #version 140
 
-#define SHADER_GBUFFERS_ENTITIES_TRANSLUCENT
-#define NETHER
-#define VSH
+#define SHADER_DEFERRED1
+#define OVERWORLD
+#define FSH
 
 #include "/basics/settings.glsl"
 #include "/basics/uniforms.glsl"
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/gbuffers_entities.glsl"
+#include "/program/deferred99.glsl"

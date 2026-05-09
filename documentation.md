@@ -193,6 +193,7 @@ This describes which /main_files-s handle different effects
 - - r: depth (16-bit)
 - **colortex8:  Weather Texture**
 - **colortex9:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
+- **colortex10: Deferred Lighting Indicator** (1x1, is black when before deferred and is white after)
 - **colortex15: Debug Output** (normally not used)
 
 <br>

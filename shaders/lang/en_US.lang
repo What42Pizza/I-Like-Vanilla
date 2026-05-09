@@ -2376,8 +2376,3 @@ option.MATRIX_COMPATIBILITY=Matrix Compatibility
 option.MATRIX_COMPATIBILITY.comment=Improves compatibility with mod at the potential cost of some performance
 value.MATRIX_COMPATIBILITY.0=Off
 value.MATRIX_COMPATIBILITY.1=On
-
-option.MIXED_PARTICLE_RENDERING=Mixed Particle Rendering
-option.MIXED_PARTICLE_RENDERING.comment=If this is left disabled, all particles will always be lit correctly, but some particles (e.g. underwater particles) will not be rendered. Enabling this means all particles will always be rendered, but may or may not be lit correctly
-value.MIXED_PARTICLE_RENDERING.0=Off
-value.MIXED_PARTICLE_RENDERING.1=On

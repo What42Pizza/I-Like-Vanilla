@@ -9,4 +9,4 @@
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/gbuffers_particles_translucent.glsl"
+#include "/program/gbuffers_particles.glsl"

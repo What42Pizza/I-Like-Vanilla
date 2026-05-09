@@ -1,30 +1,29 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
+in_out vec3 viewPos;
 #if FANCY_END_PORTAL_ENABLED == 1
 	flat in_out uint materialId;
-	in_out vec3 viewPos;
 #endif
 #if PBR_TYPE == 0
+	flat in_out vec3 normal;
 	flat in_out vec2 encodedNormal;
-#endif
-#if PBR_TYPE == 0
 	flat in_out float reflectiveness;
 	flat in_out float specularness;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
 
+flat in_out vec3 shadowcasterLight;
+
 
 
 #ifdef FSH
 
+#include "/lib/lighting/fsh_lighting.glsl"
+
 void main() {
 	vec2 lmcoord = lmcoord;
-	
-	//const uint low = 1023u;
-	//const uint high = 1023u;
-	//if (materialId >= low && materialId <= high) discard;
 	
 	
 	// get pbr data
@@ -90,6 +89,14 @@ void main() {
 	#endif
 	
 	
+	// main lighting
+	float isAfterDeferred = texelFetch(colortex10, ivec2(0), 0).r;
+	if (isAfterDeferred > 0.5) {
+		float _inSunlightAmount;
+		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
+	}
+	
+	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 0.5, 0.0, 1.0);
@@ -114,6 +121,7 @@ uniform int blockEntityId;
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if WAVING_ENABLED == 1
 	#include "/lib/waving.glsl"
@@ -139,11 +147,15 @@ void main() {
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
 	
+	float brightnessIncrease = getSaturation(glcolor.rgb);
+	brightnessIncrease = 1.0 - (1.0 - brightnessIncrease) * (1.0 - brightnessIncrease);
+	glcolor *= 1.0 + 0.5 * brightnessIncrease;
+	
 	
 	// block id stuff
 	uint encodedData = uint(blockEntityId);
 	encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
-	#if FANCY_END_PORTAL_ENABLED != 1
+	#if FANCY_END_PORTAL_ENABLED == 0
 		uint materialId;
 	#endif
 	materialId = encodedData;
@@ -152,7 +164,10 @@ void main() {
 	
 	// process normals
 	
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);
@@ -172,6 +187,7 @@ void main() {
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/generated/blockDatas.glsl"
+	reflectiveness = 0.0;
 	
 	
 	gl_Position = viewToNdc(viewPos);
@@ -183,6 +199,8 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
+	
+	shadowcasterLight = getShadowcasterLight();
 	
 }
 

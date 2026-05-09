@@ -20,6 +20,7 @@ const float HALF_PI = PI / 2.0;
 	uniform sampler2D colortex7;
 	uniform sampler2D colortex8;
 	uniform sampler2D colortex9;
+	uniform sampler2D colortex10;
 	uniform sampler2D depthtex0;
 	uniform sampler2D depthtex1;
 	uniform sampler2D depthtex2;
@@ -65,6 +66,7 @@ const float HALF_PI = PI / 2.0;
 #define PREV_DEPTH_TEXTURE          colortex7
 #define WEATHER_TEXTURE             colortex8
 #define VOXY_TRANSPARENTS_TEXTURE   colortex9
+#define MISC_DATA_TEXTURE           colortex10
 
 #define DEPTH_BUFFER_ALL                   depthtex0
 #define DEPTH_BUFFER_WO_TRANS              depthtex1

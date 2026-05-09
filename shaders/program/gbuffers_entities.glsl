@@ -1,15 +1,21 @@
 in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec4 glcolor;
+in_out vec3 viewPos;
 #if PBR_TYPE == 0
+	flat in_out vec3 normal;
 	flat in_out vec2 encodedNormal;
 #elif PBR_TYPE == 1
 	flat in_out mat3 tbn;
 #endif
 
+flat in_out vec3 shadowcasterLight;
+
 
 
 #ifdef FSH
+
+#include "/lib/lighting/fsh_lighting.glsl"
 
 void main() {
 	
@@ -23,7 +29,7 @@ void main() {
 	
 	
 	// hurt flash, creeper flash, etc
-	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * ENTITY_FLASH_STRENGTH, 1.0));
+	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.5, 1.0));
 	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
@@ -44,6 +50,14 @@ void main() {
 	#endif
 	
 	
+	// main lighting
+	float isAfterDeferred = texelFetch(colortex10, ivec2(0), 0).r;
+	if (isAfterDeferred > 0.5) {
+		float _inSunlightAmount;
+		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
+	}
+	
+	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.5, 1.0, 0.0, 1.0);
@@ -52,7 +66,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
+		pack_2x8(reflectiveness, 0.0),
 		encodedNormal
 	);
 	
@@ -66,6 +80,7 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
+#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -82,12 +97,12 @@ void main() {
 			gl_Position = vec4(1.0);
 			return;
 		}
-	#else
-		#ifndef SHADOWS_ENABLED
-			lmcoord = mix(eyeBrightnessSmooth / 240.0, lmcoord, step(0.99, glcolor.a));
-		#endif
 	#endif
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	
+	#if PBR_TYPE != 0
+		vec3 normal;
+	#endif
+	normal = gl_NormalMatrix * gl_Normal;
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);
 	#endif
@@ -97,7 +112,7 @@ void main() {
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
 	
-	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
+	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
 	gl_Position = viewToNdc(viewPos);
@@ -109,6 +124,8 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
+	
+	shadowcasterLight = getShadowcasterLight();
 	
 }
 
