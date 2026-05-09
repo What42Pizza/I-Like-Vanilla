@@ -262,8 +262,7 @@ if (materialId < 28u) {
 							} else {
 								if (materialId < 50u) {
 									if (materialId < 49u) {
-										SET_REFLECTIVENESS(0.5);
-										SET_SPECULARNESS(0.3);
+										SET_SPECULARNESS(1.0);
 										SET_VOXEL_ID(15u);
 									} else {
 										SET_REFLECTIVENESS(0.4);

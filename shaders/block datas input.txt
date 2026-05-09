@@ -858,8 +858,7 @@ specularness: 0.5
 
 block slime_block:
 weight: 1
-reflectiveness: 0.5
-specularness: 0.3
+specularness: 1.0
 voxelize: true
 translucency: vec3(0.5, 1.0, 0.6)
 

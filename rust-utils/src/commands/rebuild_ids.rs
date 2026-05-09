@@ -297,7 +297,6 @@ pub fn function(args: &[String]) -> Result<()> {
 				(2, false) => 3,
 				_ => return Err(Error::msg(format!("Group id {:?} in input file 'block datas input.txt' is invalid: combination of 'shadow casting' value {} + 'do bottom waving' value {} is not allowed", leaf.block_ids, leaf.shadow_casting, leaf.do_bottom_waving))),
 			};
-			println!("{}", *curr_id);
 			leaf.int_id =
 				*curr_id
 				| 1 << 14
