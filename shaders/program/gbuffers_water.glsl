@@ -50,7 +50,14 @@ void main() {
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-		if (lengthCylinder >= far - 12.0 - 8.0 * dither) discard;
+		if (lengthCylinder >= far - 8.0 - 8.0 * dither) discard;
+		//float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		//float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		//if (depth == 1.0 && length(viewPos) > far * 0.25) discard;
+		//float depthDhTransparent = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		//float depthDhOpaque = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		//if (depthDhTransparent < depthDhOpaque) discard;
+		//if (length(viewPos) > far * 0.75) discard;
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
@@ -145,6 +152,14 @@ void main() {
 		vec3 opaqueViewPos = screenToView(vec3(texelcoord * pixelSize, opaqueDepth));
 		float blockDepth = length(viewPos);
 		float opaqueBlockDepth = length(opaqueViewPos);
+		#ifdef DISTANT_HORIZONS
+			//float opaqueDepthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+			//if (opaqueBlockDepth > 0) {
+			//	vec3 opaqueViewPosDh = screenToViewDh(vec3(texelcoord * pixelSize, opaqueDepthDh));
+			//	float opaqueBlockDepthDh = length(opaqueViewPosDh);
+			//	opaqueBlockDepth = min(opaqueBlockDepth, opaqueBlockDepthDh);
+			//}
+		#endif
 		#if BORDER_FOG_ENABLED == 1
 			// this tries to fix underwater border fog but it breaks more stuff than it fixes
 			//vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;

@@ -24,11 +24,11 @@ const int   colortex6Format       = RG16;
 const bool  colortex6Clear        = false;
 const int   colortex7Format       = R16;
 const bool  colortex7Clear        = false;
-#ifdef VOXY
-	const int   colortex8Format   = RGBA8;
-	const bool  colortex8Clear    = true;
-#endif
 const int   colortex9Format       = RGBA8;
+#if defined VOXY || define DISTANT_HORIZONS
+	const int   colortex9Format   = RGBA8;
+	const bool  colortex9Clear    = true;
+#endif
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Clear       = false;
 const float wetnessHalflife       = 30.0f;

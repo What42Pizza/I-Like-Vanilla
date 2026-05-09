@@ -17,6 +17,7 @@ flat in_out float extraFogDist;
 #ifdef FSH
 
 #include "/utils/projections.glsl"
+#include "/utils/depth.glsl"
 #include "/utils/borderFogAmount.glsl"
 
 #include "/utils/getFogColor.glsl"
@@ -60,6 +61,19 @@ void main() {
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	
+	
+	#ifdef DISTANT_HORIZONS
+		//float dhTransparentDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		//vec3 dhTransparentViewPos = screenToViewDh(vec3(texcoord, dhTransparentDepth));
+		//if (dhTransparentViewPos.z > viewPos.z - 0.5 || depth > fromLinearDepth(0.9)) {
+		//	vec4 dhTransparents = texelFetch(VOXY_TRANSPARENTS_TEXTURE, texelcoord, 0);
+		//	dhTransparents.rgb *= 2.0;
+		//	dhTransparents.a *= float(!depthIsHand(depth));
+		//	color.rgb = mix(color.rgb, dhTransparents.rgb, dhTransparents.a);
+		//}
+	#endif
+	
 	
 	#ifdef DISTANT_HORIZONS
 		float fogAmount = float(depth == 1.0 && depthDh == 1.0);

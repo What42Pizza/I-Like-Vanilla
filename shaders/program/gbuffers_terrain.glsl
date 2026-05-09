@@ -43,12 +43,12 @@ void main() {
 	
 	// fade distant terrain
 	#ifdef DISTANT_HORIZONS
-		float dither = bayer64(gl_FragCoord.xy);
-		#if TEMPORAL_FILTER_ENABLED == 1
-			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-		#endif
-		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-		if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
+		//float dither = bayer64(gl_FragCoord.xy);
+		//#if TEMPORAL_FILTER_ENABLED == 1
+		//	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		//#endif
+		//float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+		//if (lengthCylinder >= far - 4.0 - 12.0 * dither) discard;
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1

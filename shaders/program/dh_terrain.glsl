@@ -13,8 +13,8 @@ flat in_out int dhBlock;
 
 void main() {
 	
-	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-	if (lengthCylinder < far - 20.0) discard;
+	//float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+	//if (lengthCylinder < far - 20.0) discard;
 	
 	vec3 color = glcolor;
 	
@@ -24,7 +24,7 @@ void main() {
 	uvec3 noisePos = uvec3(ivec3((playerPos + cameraPosition) * ceil(worldScale) + 0.5));
 	uint noise = randomizeUint(noisePos.x) ^ randomizeUint(noisePos.y) ^ randomizeUint(noisePos.z);
 	color += 0.03 * randomFloat(noise);
-	color = clamp(color, vec3(0.0), vec3(1.0));
+	//color = clamp(color, vec3(0.0), vec3(1.0));
 	
 	
 	/* DRAWBUFFERS:02 */
@@ -32,7 +32,7 @@ void main() {
 	gl_FragData[0] = vec4(color, 1.0);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(0.0, 0.3),
+		pack_2x8(0.0, float(dhBlock == DH_BLOCK_LEAVES)),
 		encodedNormal
 	);
 	
@@ -65,11 +65,23 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	if (dhMaterialId == DH_BLOCK_LEAVES) {
-		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION * 0.9);
-		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE) * 1.05;
+	if (dhMaterialId == DH_BLOCK_LEAVES || dhMaterialId == DH_BLOCK_GRASS) {
+		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION);
+		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+		#if SNOWY_TWEAKS_ENABLED == 1
+			if (inSnowyBiome > 0.0) {
+				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
+				glcolor = mix(glcolor, vec3(1.0, 1.05, 1.2), snowiness);
+				glcolor *= 1.0 + 0.4 * snowiness;
+			}
+		#endif
 	}
-	if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.1 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	//if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.1 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	
+	glcolor = glcolor - (4.0 / 27.0) * glcolor * glcolor * glcolor;
+	float m = getLum(glcolor);
+	m = m * m * (3.0 - 2.0 * m);
+	glcolor *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
 	
 	
 	gl_Position = viewToNdc(viewPos);
