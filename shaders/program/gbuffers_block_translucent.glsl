@@ -94,7 +94,7 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, getSaturation(glcolor.rgb) * 0.5, viewPos, normal, gl_FragCoord.z);
 	
 	
-	/* DRAWBUFFERS:02 */
+	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 0.5, 0.0, 1.0);
 	#endif
@@ -150,10 +150,8 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = uint(max(uint(blockEntityId) - (1u << 12u), 0u) + (1u << 12u));
-	#ifndef MODERN_BACKEND
-		if (encodedData == 65535u) encodedData = 0u;
-	#endif
+	uint encodedData = uint(blockEntityId);
+	encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
 	#if FANCY_END_PORTAL_ENABLED == 0
 		uint materialId;
 	#endif
@@ -186,6 +184,7 @@ void main() {
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/generated/blockDatas.glsl"
+	reflectiveness = 0.0;
 	
 	
 	gl_Position = viewToNdc(viewPos);

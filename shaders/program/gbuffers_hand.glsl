@@ -98,10 +98,8 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = max(uint(currentRenderedItemId) - (1u << 12u), 0u) + (1u << 12u);
-	#ifndef MODERN_BACKEND
-		if (encodedData == 65535u) encodedData = 0u;
-	#endif
+	uint encodedData = uint(currentRenderedItemId);
+	encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	

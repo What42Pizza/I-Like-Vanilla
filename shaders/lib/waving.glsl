@@ -39,7 +39,7 @@ void applyWaving(inout vec3 position, uint encodedData) {
 		if (wavingScaleIndex == 2u) wavingScale = WAVING_AMOUNT_2;
 		else wavingScale = WAVING_AMOUNT_3;
 	}
-	if (((encodedData & (3u << 13u)) == (3u << 13u)) && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
+	if (((encodedData & (3u << 12u)) == (3u << 12u)) && gl_MultiTexCoord0.y > mc_midTexCoord.y) return; // don't apply waving to base
 	#if !defined SHADER_SHADOW && !defined NETHER
 		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
 		if (wavingScale == 0.0) return;

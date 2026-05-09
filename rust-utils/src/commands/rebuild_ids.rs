@@ -78,9 +78,9 @@ const BLOCK_PROPERTIES_START: &str = r#"
 # How the block ids work:
 # 
 # 1: There is a basic int value automatically given to each block group using the rust-utils rebuild_ids command which is used to traverse the tree structure in blockDatas.glsl
-# 2: Bits 13-14 are set according to the block group's shadow casting value and no bottom waving value (0 is always, 1 is never, 2 is foliage, 3 is foliage + no bottom waving)
-# 4: Bit 12 is always set to ensure that no auto-generated ids can be mistaken for custom ids
-# 3: Bits 10-11 are set depending on the block group's waviness value (which is 0-3)
+# 2: Bit 14 is always set to ensure that no auto-generated ids can be mistaken for custom ids
+# 3: Bits 12-13 are set according to the block group's shadow casting value and no bottom waving value (0 is always, 1 is never, 2 is foliage, 3 is foliage + no bottom waving)
+# 4: Bits 10-11 are set depending on the block group's waviness value (which is 0-3)
 # 5: The other 10 bits are used for the generated int value
 
 "#;
@@ -297,11 +297,12 @@ pub fn function(args: &[String]) -> Result<()> {
 				(2, false) => 3,
 				_ => return Err(Error::msg(format!("Group id {:?} in input file 'block datas input.txt' is invalid: combination of 'shadow casting' value {} + 'do bottom waving' value {} is not allowed", leaf.block_ids, leaf.shadow_casting, leaf.do_bottom_waving))),
 			};
+			println!("{}", *curr_id);
 			leaf.int_id =
 				*curr_id
-				| ((leaf.waviness as u16) << 10)
-				| 1 << 12
-				| ((casting_plus_bottom_value) << 13);
+				| 1 << 14
+				| ((casting_plus_bottom_value) << 12)
+				| ((leaf.waviness as u16) << 10);
 			*curr_id += 1;
 			if let Some(alias) = leaf.alias {
 				aliases.push((alias, leaf.int_id));

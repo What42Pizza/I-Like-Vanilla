@@ -14,10 +14,8 @@ vec3 shadowcasterLight = getShadowcasterLight();
 void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// basics
-	uint encodedData = uint(max(parameters.customId - (1u << 12u), 0) + (1u << 12u));
-	#ifndef MODERN_BACKEND
-		if (encodedData == 65535u) encodedData = 0u;
-	#endif
+	uint encodedData = uint(parameters.customId);
+	encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
 	uint materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
@@ -36,7 +34,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// foliage normals
 	#if OVERRIDE_FOLIAGE_NORMALS == 1
-		if ((encodedData & (3u << 13u)) >= (2u << 13u)) {
+		if ((encodedData & (3u << 12u)) >= (2u << 12u)) {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
 	#endif

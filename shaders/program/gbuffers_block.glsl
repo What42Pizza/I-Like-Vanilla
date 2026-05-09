@@ -22,6 +22,10 @@ in_out vec3 glcolor;
 void main() {
 	vec2 lmcoord = lmcoord;
 	
+	//const uint low = 1023u;
+	//const uint high = 1023u;
+	//if (materialId >= low && materialId <= high) discard;
+	
 	
 	// get pbr data
 	#if PBR_TYPE == 0
@@ -137,10 +141,8 @@ void main() {
 	
 	
 	// block id stuff
-	uint encodedData = uint(max(uint(blockEntityId) - (1u << 12u), 0u) + (1u << 12u));
-	#ifndef MODERN_BACKEND
-		if (encodedData == 65535u) encodedData = 0u;
-	#endif
+	uint encodedData = uint(blockEntityId);
+	encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
 	#if FANCY_END_PORTAL_ENABLED != 1
 		uint materialId;
 	#endif
