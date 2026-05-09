@@ -45,24 +45,22 @@ void main() {
 	#ifdef DISTANT_HORIZONS
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth));
-		if (dhViewPos.z > viewPos.z) viewPos = dhViewPos;
+		if (depth == 1.0) viewPos = dhViewPos;
 	#endif
 	
 	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-	#ifdef DISTANT_HORIZONS
-		float skyAmount = float(depth == 1.0 && dhDepth == 1.0);
-		float fogDistance = skyAmount;
-	#else
-		#if BORDER_FOG_ENABLED == 1
-			float fogDistance;
-			float skyAmount = getBorderFogAmount(playerPos, fogDistance);
-			#if FOG_BUG_RECREATION == 1
-				skyAmount *= 1.0 - 0.0001 * float(depth < 1.0);
-			#endif
-		#else
-			float skyAmount = float(depth == 1.0);
-			float fogDistance = skyAmount;
+	#if BORDER_FOG_ENABLED == 1
+		float fogDistance;
+		float skyAmount = getBorderFogAmount(playerPos, fogDistance);
+		#if FOG_BUG_RECREATION == 1
+			skyAmount *= 1.0 - 0.0001 * float(depth < 1.0);
 		#endif
+	#else
+		float skyAmount = float(depth == 1.0);
+		float fogDistance = skyAmount;
+	#endif
+	#ifdef DISTANT_HORIZONS
+		skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
 	#endif
 	
 	

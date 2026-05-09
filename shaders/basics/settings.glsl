@@ -124,7 +124,7 @@ const float shadowIntervalSize    = 2.0;
 	#define SHARPENING_ENABLED 0
 #endif
 
-#if defined DISTANT_HORIZONS || defined VOXY
+#if defined VOXY
 	#undef BORDER_FOG_ENABLED
 	#define BORDER_FOG_ENABLED 0
 #endif

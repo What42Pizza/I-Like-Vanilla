@@ -11,6 +11,10 @@ flat in_out int dhBlock;
 
 flat in_out vec3 shadowcasterLight;
 
+#if BORDER_FOG_ENABLED == 1
+	in_out float fogAmount;
+#endif
+
 
 
 #ifdef FSH
@@ -146,6 +150,12 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
+	// fog
+	#if BORDER_FOG_ENABLED == 1
+		color.a *= 1.0 - fogAmount;
+	#endif
+	
+	
 	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
@@ -173,6 +183,9 @@ void main() {
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
+#if BORDER_FOG_ENABLED == 1
+	#include "/utils/borderFogAmount.glsl"
+#endif
 
 void main() {
 	glcolor = gl_Color;
@@ -196,6 +209,12 @@ void main() {
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
+	#endif
+	
+	
+	#if BORDER_FOG_ENABLED == 1
+		float _fogDistance;
+		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	

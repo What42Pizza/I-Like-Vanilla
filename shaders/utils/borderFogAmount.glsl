@@ -6,13 +6,20 @@
 float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
 	
 	fogDistance = max(length(playerPos.xz), abs(playerPos.y));
-	fogDistance *= invFar;
+	#ifdef DISTANT_HORIZONS
+		fogDistance /= dhRenderDistance;
+	#else
+		fogDistance *= invFar;
+	#endif
 	#ifdef OVERWORLD
-		const float borderFogStart = BORDER_FOG_START_OVERWORLD;
+		float borderFogStart = BORDER_FOG_START_OVERWORLD;
 	#elif defined NETHER
-		const float borderFogStart = BORDER_FOG_START_NETHER;
+		float borderFogStart = BORDER_FOG_START_NETHER;
 	#elif defined END
-		const float borderFogStart = BORDER_FOG_START_END;
+		float borderFogStart = BORDER_FOG_START_END;
+	#endif
+	#ifdef DISTANT_HORIZONS
+		borderFogStart *= 0.25;
 	#endif
 	float fogAmount = (fogDistance - borderFogStart) / (BORDER_FOG_END - borderFogStart);
 	fogAmount = clamp(fogAmount, 0.0, 1.0);
