@@ -13,8 +13,6 @@ in_out vec3 viewPos;
 	flat in_out mat3 tbn;
 #endif
 
-flat in_out vec3 shadowcasterLight;
-
 
 
 #ifdef FSH
@@ -71,7 +69,6 @@ void main() {
 #define PROJECTION_MATRIX gl_ProjectionMatrix
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -95,8 +92,6 @@ void main() {
 		vec3 bitangent = normalize(cross(normal, tangent) * at_tangent.w);
 		tbn = mat3(tangent, bitangent, normal);
 	#endif
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));

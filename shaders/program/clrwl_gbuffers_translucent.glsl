@@ -6,8 +6,6 @@ in_out vec3 viewPos;
 flat in_out float reflectiveness;
 flat in_out float specularness;
 
-flat in_out vec3 shadowcasterLight;
-
 #if SHOW_DANGEROUS_LIGHT == 1
 	in_out vec3 playerPos;
 	flat in_out float isDangerousLight;
@@ -93,7 +91,6 @@ void main() {
 
 
 #include "/utils/projections.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -124,8 +121,6 @@ void main() {
 	#define GET_SPECULARNESS
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/generated/blockDatas.glsl"
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	gl_Position = viewToNdc(viewPos);

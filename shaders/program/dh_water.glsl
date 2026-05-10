@@ -9,8 +9,6 @@ in_out vec3 playerPos;
 flat in_out vec3 normal;
 flat in_out int dhBlock;
 
-flat in_out vec3 shadowcasterLight;
-
 #if BORDER_FOG_ENABLED == 1
 	in_out float fogAmount;
 #endif
@@ -178,7 +176,6 @@ void main() {
 #define PROJECTION_MATRIX gl_ProjectionMatrix
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -201,7 +198,6 @@ void main() {
 		playerPos.y -= 2.0 / 16.0;
 		viewPos = mat3(gbufferModelView) * playerPos;
 	}
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	gl_Position = viewToNdc(viewPos);

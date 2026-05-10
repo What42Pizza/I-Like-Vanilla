@@ -1,5 +1,4 @@
 in_out vec2 texcoord;
-flat in_out vec3 shadowcasterLight;
 
 
 
@@ -185,12 +184,9 @@ void main() {
 
 #ifdef VSH
 
-#include "/utils/getShadowcasterLight.glsl"
-
 void main() {
 	gl_Position = ftransform();
 	texcoord = gl_MultiTexCoord0.xy;
-	shadowcasterLight = getShadowcasterLight();
 }
 
 #endif

@@ -1,7 +1,3 @@
-#include "/utils/getAmbientLight.glsl"
-
-
-
 void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal) {
 	
 	#if defined OVERWORLD || defined END
@@ -24,7 +20,12 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		ambientBrightness = 1.0;
 	#endif
 	
-	vec3 ambientLight = getAmbientLight(ambientBrightness, lightDot);
+	//vec2 prepareData10 = texelFetch(MISC_DATA_TEXTURE, ivec2(1, 0), 0).rg;
+	vec2 prepareData01 = texelFetch(MISC_DATA_TEXTURE, ivec2(0, 1), 0).rg;
+	vec2 prepareData11 = texelFetch(MISC_DATA_TEXTURE, ivec2(1, 1), 0).rg;
+	//vec3 shadowcasterLight = vec3(prepareData10, prepareData01.r) * 2.0;
+	vec3 ambientLight = vec3(prepareData01.g, prepareData11) * 2.0;
+	ambientLight = mix(CAVE_AMBIENT_COLOR * 0.6 * (1.0 + 0.4 * screenBrightness), ambientLight, ambientBrightness);
 	
 	#if BLOCK_BRIGHTNESS_CURVE == 2
 		blockBrightness = pow2(blockBrightness);

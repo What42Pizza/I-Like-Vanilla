@@ -9,8 +9,6 @@ in_out vec3 viewPos;
 	flat in_out mat3 tbn;
 #endif
 
-flat in_out vec3 shadowcasterLight;
-
 
 
 #ifdef FSH
@@ -80,7 +78,6 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -124,8 +121,6 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 }
 

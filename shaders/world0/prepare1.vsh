@@ -1,12 +1,12 @@
 #version 140
 
-#define SHADER_DEFERRED99
+#define SHADER_PREPARE1
 #define OVERWORLD
-#define FSH
+#define VSH
 
 #include "/basics/settings.glsl"
 #include "/basics/uniforms.glsl"
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/deferred99.glsl"
+#include "/program/prepare1.glsl"

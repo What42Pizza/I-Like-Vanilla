@@ -14,8 +14,6 @@ in_out vec3 viewPos;
 	flat in_out mat3 tbn;
 #endif
 
-flat in_out vec3 shadowcasterLight;
-
 
 
 #ifdef FSH
@@ -121,7 +119,6 @@ uniform int blockEntityId;
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if WAVING_ENABLED == 1
 	#include "/lib/waving.glsl"
@@ -198,8 +195,6 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 }
 

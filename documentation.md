@@ -122,53 +122,53 @@ You should be able to figure this out yourself, but I'll still give some quick o
 This describes which /main_files-s handle different effects
 
 - **Shadows:**
-- - Main Processing:  /main_files/deferred.glsl  (via sampleShadow())
-- - Rendering:  /main_files/shadow.glsl
+  - Main Processing:  /main_files/deferred.glsl  (via sampleShadow())
+  - Rendering:  /main_files/shadow.glsl
 - **Reflections**
-- - Main Processing:  /main_files/composite.glsl  (via doReflections())
+  - Main Processing:  /main_files/composite.glsl  (via doReflections())
 - **Colorblindness Correction**
-- - Main Processing:  /main_files/composite5.glsl  (via applyColorblindnessCorrection())
+  - Main Processing:  /main_files/composite5.glsl  (via applyColorblindnessCorrection())
 - **TAA:**
-- - Main Processing:  /main_files/composite4.glsl  (via doTAA())
-- - Jitter:  /main_files/*  (via doTaaJitter())
+  - Main Processing:  /main_files/composite4.glsl  (via doTAA())
+  - Jitter:  /main_files/*  (via doTaaJitter())
 - **FXAA:**
-- - Main Processing:  /main_files/composite4.glsl  (view doFxaa())
+  - Main Processing:  /main_files/composite4.glsl  (view doFxaa())
 - **Isometric Rendering**
-- - Main Processing:  /main_files/*  (via projectIsometric())
+  - Main Processing:  /main_files/*  (via projectIsometric())
 - **SSAO**
-- - Main Processing: /main_files/deferred.glsl  (via getAoAmount())
+  - Main Processing: /main_files/deferred.glsl  (via getAoAmount())
 - **Sunrays:**
-- - Main Processing:  /main_files/composite1.glsl  (via getDepthSunraysAmount() and getVolSunraysAmount())
-- - Application:  /main_files/composite2.glsl  (calculations are written to a mip-mapped buffer that is sampled with higher lod so that the noise is reduced)
+  - Main Processing:  /main_files/composite1.glsl  (via getDepthSunraysAmount() and getVolSunraysAmount())
+  - Application:  /main_files/composite2.glsl  (calculations are written to a mip-mapped buffer that is sampled with higher lod so that the noise is reduced)
 - **Bloom:**
-- - Main Processing:  /main_files/composite1.glsl  (via getBloomAddition())
-- - Pre-Processing:  /main_files/composite.glsl
-- - Application:  /main_files/composite2.glsl  (calculations are written to a mip-mapped buffer that is sampled with higher lod so that the noise is reduced)
+  - Main Processing:  /main_files/composite1.glsl  (via getBloomAddition())
+  - Pre-Processing:  /main_files/composite.glsl
+  - Application:  /main_files/composite2.glsl  (calculations are written to a mip-mapped buffer that is sampled with higher lod so that the noise is reduced)
 - **Depth of Field**
-- - Main Processing:  /main_files/composite3.glsl  (via doDOF())
+  - Main Processing:  /main_files/composite3.glsl  (via doDOF())
 - **Motion Blur**
-- - Main Processing:  /main_files/composite4.glsl  (via doMotionBlur())
+  - Main Processing:  /main_files/composite4.glsl  (via doMotionBlur())
 - **Auto Exposure**
-- - Main Processing:  /main_files.composite.glsl
+  - Main Processing:  /main_files.composite.glsl
 - **Sharpening:**
-- - Main Processing:  /main_files/composite4.glsl  (via doSharpening())
+  - Main Processing:  /main_files/composite4.glsl  (via doSharpening())
 - **Waving Blocks**
-- - Main Processing:  /main_files/terrain.glsl  (via applyWaving())
-- - Main Processing (for shadows):  /main_files/shadow.glsl  (via applyWaving())
+  - Main Processing:  /main_files/terrain.glsl  (via applyWaving())
+  - Main Processing (for shadows):  /main_files/shadow.glsl  (via applyWaving())
 - **Fog:**
-- - Main Processing:  /main_files/deferred.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
-- - Main Processing (transparents):  /main_files/water.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
-- - Main Processing (clouds):  /main_files/clouds.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
+  - Main Processing:  /main_files/deferred.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
+  - Main Processing (transparents):  /main_files/water.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
+  - Main Processing (clouds):  /main_files/clouds.glsl  (via getFogDistance(), getBorderFogAmount(), and applyBorderFog())
 - **Handheld Light**
-- - Main Processing:  /lib/lighting/basic_lighting.glsl
+  - Main Processing:  /lib/lighting/basic_lighting.glsl
 - **Underwater Waviness**
-- - Main Processing:  /main_files/composite2.glsl
+  - Main Processing:  /main_files/composite2.glsl
 - **Vignette:**
-- - Main Processing:  /main_files/composite5.glsl
+  - Main Processing:  /main_files/composite5.glsl
 - **Color Correction and/or Tonemapping:**
-- - Main Processing:  /main_files/composite5.glsl  (via doColorCorrection())
+  - Main Processing:  /main_files/composite5.glsl  (via doColorCorrection())
 - **Lighting:**
-- - Main Processing:  /main_files/terrain.glsl,  /main_files/textured.glsl,  /main_files/water.glsl,  /main_files/entities.glsl,  /main_files/hand.glsl  (via doPreLighting() and getBasicLighting())
+  - Main Processing:  /main_files/terrain.glsl,  /main_files/textured.glsl,  /main_files/water.glsl,  /main_files/entities.glsl,  /main_files/hand.glsl  (via doPreLighting() and getBasicLighting())
 
 <br>
 
@@ -177,23 +177,27 @@ This describes which /main_files-s handle different effects
 - **colortex0:  Main Image** (stored with 0.5 multiplier)
 - **colortex1:  Prev Texture** (stored with 0.5 multiplier)
 - **colortex2:  Opaque Data**
-- - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
-- - y: reflectiveness (8-bit) & specularness (8-bit)
-- - zw: normal
+  - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
+  - y: reflectiveness (8-bit) & specularness (8-bit)
+  - zw: normal
 - **colortex3:  Transparent Data**
-- - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
-- - y: reflectiveness (8-bit) & is cloud (8-bit)
-- - zw: normal
+  - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
+  - y: reflectiveness (8-bit) & is cloud (8-bit)
+  - zw: normal
 - **colortex4:  Bloom Texture**
 - **colortex5:  Sky Objects Texture**
 - **colortex6:  Noisy Renders Texture**
-- - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit, value = 1/stored-1)
-- - y: clouds transparency (8-bit, value = 1-stored) & clouds brightness (8-bit, value = 1-stored)
+  - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit, value = 1/stored-1)
+  - y: clouds transparency (8-bit, value = 1-stored) & clouds brightness (8-bit, value = 1-stored)
 - **colortex7:  Prev Depth Texture**
-- - r: depth (16-bit)
+  - r: depth (16-bit)
 - **colortex8:  Weather Texture**
 - **colortex9:  Voxy Transparents Texture** (stored with 0.5 multiplier on rgb)
-- **colortex10: Deferred Lighting Indicator** (1x1, is black when before deferred and is white after)
+- **colortex10: Misc Data Texture**
+  - pixel (0, 0): is black when before deferred and is white after
+  - pixel (1, 0): shadow caster light RG                  (stored with 0.5 multiplier)
+  - pixel (0, 1): shadow caster light B & ambient light R (stored with 0.5 multiplier)
+  - pixel (1, 1): ambient light GB                        (stored with 0.5 multiplier)
 - **colortex15: Debug Output** (normally not used)
 
 <br>

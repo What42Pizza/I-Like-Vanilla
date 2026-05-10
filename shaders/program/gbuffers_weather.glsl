@@ -4,8 +4,6 @@ in_out vec4 glcolor;
 flat in_out vec3 normal;
 in_out vec3 viewPos;
 
-flat in_out vec3 shadowcasterLight;
-
 
 
 #ifdef FSH
@@ -44,7 +42,6 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -54,8 +51,6 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	normal = gl_NormalMatrix * gl_Normal;
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	vec3 playerPos = gl_Vertex.xyz;
 	playerPos.x += bayer16(playerPos.xz);

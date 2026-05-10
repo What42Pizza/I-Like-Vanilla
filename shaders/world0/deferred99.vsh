@@ -1,6 +1,6 @@
 #version 140
 
-#define SHADER_DEFERRED1
+#define SHADER_DEFERRED99
 #define OVERWORLD
 #define VSH
 

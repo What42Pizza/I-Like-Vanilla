@@ -19,8 +19,6 @@ flat in_out uint materialId;
 flat in_out vec2 midTexCoord;
 flat in_out vec2 midCoordOffset;
 
-flat in_out vec3 shadowcasterLight;
-
 #if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1 || PBR_TYPE == 1
 	in_out mat3 tbn;
 #endif
@@ -258,7 +256,6 @@ void main() {
 
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#include "/utils/getShadowcasterLight.glsl"
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
@@ -293,8 +290,6 @@ void main() {
 	
 	midTexCoord = mat2(gl_TextureMatrix[0]) * mc_midTexCoord;
 	midCoordOffset = abs(texcoord - midTexCoord);
-	
-	shadowcasterLight = getShadowcasterLight();
 	
 	
 	#if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1 || PBR_TYPE == 1
