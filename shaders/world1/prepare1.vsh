@@ -1,6 +1,6 @@
 #version 140
 
-#define SHADER_GBUFFERS_SKYTEXTURED
+#define SHADER_PREPARE1
 #define END
 #define VSH
 
@@ -9,4 +9,4 @@
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/gbuffers_skytextured.glsl"
+#include "/program/prepare1.glsl"

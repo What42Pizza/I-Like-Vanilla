@@ -1,7 +1,7 @@
 #version 140
 
-#define SHADER_GBUFFERS_SKYTEXTURED
-#define END
+#define SHADER_DEFERRED99
+#define NETHER
 #define VSH
 
 #include "/basics/settings.glsl"
@@ -9,4 +9,4 @@
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/gbuffers_skytextured.glsl"
+#include "/program/deferred99.glsl"
