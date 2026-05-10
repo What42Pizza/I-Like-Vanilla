@@ -187,7 +187,6 @@ void main() {
 	#endif
 	#define DO_BRIGHTNESS_TWEAKS
 	#include "/generated/blockDatas.glsl"
-	reflectiveness = 0.0;
 	
 	
 	gl_Position = viewToNdc(viewPos);

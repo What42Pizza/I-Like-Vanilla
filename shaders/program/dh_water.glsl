@@ -38,7 +38,7 @@ void main() {
 	
 	float vanillaDepth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
 	vec3 vanillaViewPos = screenToView(vec3(texelcoord * pixelSize, vanillaDepth));
-	if ((vanillaViewPos.z > viewPos.z && vanillaDepth < 1.0)) discard;
+	if (vanillaViewPos.z > viewPos.z && vanillaDepth < 1.0) discard;
 	
 	
 	vec4 color = glcolor;

@@ -51,13 +51,6 @@ void main() {
 		#endif
 		float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
 		if (lengthCylinder >= far - 8.0 - 8.0 * dither) discard;
-		//float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		//float depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		//if (depth == 1.0 && length(viewPos) > far * 0.25) discard;
-		//float depthDhTransparent = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		//float depthDhOpaque = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		//if (depthDhTransparent < depthDhOpaque) discard;
-		//if (length(viewPos) > far * 0.75) discard;
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
