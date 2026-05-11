@@ -2,7 +2,7 @@
   - Improved reflections
   - Tweaked side shading
   - Tweaked the default green effect of night vision
-  - Tweaked settings and effects
+  - Tweaked many more settings and effects
   - Fixed many bugs
 
 <br>

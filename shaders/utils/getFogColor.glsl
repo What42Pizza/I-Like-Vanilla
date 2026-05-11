@@ -1,5 +1,5 @@
-#ifndef INCLUDE_GET_SKY_COLOR
-#define INCLUDE_GET_SKY_COLOR
+#ifndef INCLUDE_GET_FOG_COLOR
+#define INCLUDE_GET_FOG_COLOR
 
 
 
@@ -57,8 +57,10 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#if HORIZON_FADE_STRENGTH > 5
 			horizonAmount *= horizonAmount;
 		#endif
-		horizonAmount = 1.0 - horizonAmount;
-		fogColorOut = mix(horizonColor, fogColorOut, horizonAmount);
+		#if FOG_BUG_RECREATION == 1
+			horizonAmount = 1.0;
+		#endif
+		fogColorOut = mix(fogColorOut, horizonColor, horizonAmount);
 		
 		float sunDot = dot(viewDir, sunPosition * 0.01) * 0.5 + 0.5;
 		#if CUSTOM_OVERWORLD_SKYBOX == 0

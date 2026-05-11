@@ -759,7 +759,7 @@ do bottom waving: false
 waviness: 3
 specularness: 0.5
 
-block red_mushrooms, brown_mushrooms, crimson_fungus, warped_fungus:
+block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus:
 weight: 2
 shadow casting: foliage
 

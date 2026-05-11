@@ -10,6 +10,9 @@ in_out vec2 texcoord;
 #include "/utils/depth.glsl"
 #include "/utils/projections.glsl"
 #include "/utils/getSkyColor.glsl"
+#if FOG_BUG_RECREATION == 1
+	#include "/utils/getFogColor.glsl"
+#endif
 
 #if OUTLINES_ENABLED == 1
 	#include "/lib/outlines.glsl"
@@ -164,7 +167,7 @@ void main() {
 		
 		#if BORDER_FOG_ENABLED == 1
 			#if FOG_BUG_RECREATION == 1
-				skyColor += FOG_BUG_AMOUNT * 0.1;
+				skyColor = getFogColor(viewPos, playerPos);
 			#endif
 			color = mix(color, skyColor, skyAmount);
 		#endif

@@ -67,6 +67,7 @@
 	],
 	"samplers": {
 		"tex": "sampler2D",
+		"colortex10": "sampler2D",
 		"shadowtex0": "sampler2D",
 		"noisetex": "sampler2D",
 		"vxDepthTexOpaque": "sampler2D"

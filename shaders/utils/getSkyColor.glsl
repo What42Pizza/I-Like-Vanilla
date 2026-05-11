@@ -56,8 +56,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#if HORIZON_FADE_STRENGTH > 5
 			horizonAmount *= horizonAmount;
 		#endif
-		horizonAmount = 1.0 - horizonAmount;
-		skyColor = mix(horizonColor, skyColor, horizonAmount);
+		skyColor = mix(skyColor, horizonColor, horizonAmount);
 		
 		float sunDot = dot(viewDir, sunPosition * 0.01) * 0.5 + 0.5;
 		#if CUSTOM_OVERWORLD_SKYBOX == 0

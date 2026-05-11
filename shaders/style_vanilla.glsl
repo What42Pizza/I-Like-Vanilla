@@ -910,7 +910,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.0
+										#define SATURATION 0.05
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
