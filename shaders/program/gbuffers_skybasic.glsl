@@ -9,7 +9,7 @@ void main() {
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		vec3 color = vec3(1.0, 1.0, 0.5);
 	#endif
-	gl_FragData[0] = vec4(color, 1.0);
+	gl_FragData[0] = vec4(color * 0.5, 1.0);
 }
 
 #endif

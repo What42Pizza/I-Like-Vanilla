@@ -23,7 +23,7 @@ void main() {
 		}
 		color.rgb = 1.0 - color.rgb;
 		
-		color.rgb *= sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS;
+		color.rgb *= (sunPosition.z < 0.0 ? SUN_BRIGHTNESS : MOON_BRIGHTNESS) * 1.5;
 		color.rgb *= 1.0 - SUN_MOON_WEATHER_OPACITY_DECREASE * rainStrength;
 		
 	#endif
@@ -38,6 +38,7 @@ void main() {
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 1.0, 0.0, 1.0);
 	#endif
+	color *= 0.5;
 	gl_FragData[0] = color;
 	
 }

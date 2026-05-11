@@ -182,6 +182,7 @@ if (materialId < 28u) {
 					SET_REFLECTIVENESS(0.4);
 					SET_SPECULARNESS(1.0);
 				} else {
+					TWEAK_GLCOLOR_BRIGHTNESS(1.1);
 					SET_VOXEL_ID(82u);
 				}
 			} else {

@@ -1777,7 +1777,12 @@ value.NETHER_CLOUDS_SCALE.-1=Use Style
 option.NETHER_CLOUDS_COVERAGE=Nether Clouds Coverage
 value.NETHER_CLOUDS_COVERAGE.-1=Use Style
 
+option.NETHER_CLOUDS_DENSITY=Nether Clouds Density
+option.NETHER_CLOUDS_DENSITY.comment=How quickly the clouds transition to max opacity
+value.NETHER_CLOUDS_DENSITY.-1=Use Style
+
 option.NETHER_CLOUDS_TRANSPARENCY=Nether Clouds Transparency
+option.NETHER_CLOUDS_TRANSPARENCY.comment=The final mixing multiplier for nether clouds
 value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
 
 option.NETHER_CLOUDS_BASE_RED=Nether Clouds Base Color Red
@@ -2082,9 +2087,6 @@ option.FOG_BUG_RECREATION=Fog Bug Recreation
 option.FOG_BUG_RECREATION.comment=Partially recreates the vanilla bug of fully in-fog chunks not matching the sky color (requires Border Fog to be enabled and Cylindrical Clipping to be disabled)
 value.FOG_BUG_RECREATION.0=Off
 value.FOG_BUG_RECREATION.1=On
-
-option.FOG_BUG_AMOUNT=Fog Bug Amount
-option.FOG_BUG_AMOUNT.comment=How much brighter in-fog chunks are compared to the sky
 
 
 

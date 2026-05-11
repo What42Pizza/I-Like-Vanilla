@@ -235,7 +235,9 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	vec2 prepareData11 = texelFetch(MISC_DATA_TEXTURE, ivec2(1, 1), 0).rg;
 	vec3 shadowcasterLight = vec3(prepareData10, prepareData01.r) * 2.0;
 	vec3 ambientLight = vec3(prepareData01.g, prepareData11) * 2.0;
-	ambientLight = mix(CAVE_AMBIENT_COLOR * 0.6 * (1.0 + 0.4 * screenBrightness), ambientLight, ambientBrightness);
+	#ifdef OVERWORLD
+		ambientLight = mix(CAVE_AMBIENT_COLOR * 0.6 * (1.0 + 0.4 * screenBrightness), ambientLight, ambientBrightness);
+	#endif
 	
 	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
 	// +-1.0x: -0.4
@@ -303,11 +305,11 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	blockBrightness *= 1.0 - min(getLum(lighting), 1.0);
-	lighting *= 1.0 - blockBrightness;
-	blockLight *= blockBrightness;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
+	blockLight *= blockBrightness;
+	lighting *= 1.0 - min(getLum(blockLight), 1.0);
 	lighting += blockLight;
 	
 	float betterNightVision = nightVision;

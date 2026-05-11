@@ -434,7 +434,7 @@
 #endif
 #if NETHER_BLOCKLIGHT_BRIGHTNESS_MULT == -1
 #undef NETHER_BLOCKLIGHT_BRIGHTNESS_MULT
-										#define NETHER_BLOCKLIGHT_BRIGHTNESS_MULT 1.6
+										#define NETHER_BLOCKLIGHT_BRIGHTNESS_MULT 2.0
 #endif
 
 
@@ -906,7 +906,7 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.1
+										#define VIBRANCE 0.15
 #endif
 #if SATURATION == -1
 #undef SATURATION
@@ -1204,7 +1204,7 @@
 #endif
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.05
+										#define SUN_BRIGHTNESS 1.0
 #endif
 #if SUN_OPACITY == -1
 #undef SUN_OPACITY
@@ -1448,11 +1448,15 @@
 #endif
 #if NETHER_CLOUDS_COVERAGE == -1
 #undef NETHER_CLOUDS_COVERAGE
-										#define NETHER_CLOUDS_COVERAGE 0.8
+										#define NETHER_CLOUDS_COVERAGE 0.6
+#endif
+#if NETHER_CLOUDS_DENSITY == -1
+#undef NETHER_CLOUDS_DENSITY
+										#define NETHER_CLOUDS_DENSITY 0.25
 #endif
 #if NETHER_CLOUDS_TRANSPARENCY == -1
 #undef NETHER_CLOUDS_TRANSPARENCY
-										#define NETHER_CLOUDS_TRANSPARENCY 0.85
+										#define NETHER_CLOUDS_TRANSPARENCY 0.25
 #endif
 #if NETHER_CLOUDS_BASE_RED == -1
 #undef NETHER_CLOUDS_BASE_RED
