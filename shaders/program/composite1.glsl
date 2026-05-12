@@ -76,7 +76,8 @@ void main() {
 	
 	
 	#ifdef DISTANT_HORIZONS
-		float fogAmount = float(depth == 1.0 && depthDh == 1.0);
+		float _fogDistance;
+		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#elif defined VOXY
 		float fogAmount = float(depth == 1.0);
 	#else

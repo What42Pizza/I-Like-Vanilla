@@ -76,7 +76,7 @@ void main() {
 			}
 		#endif
 	}
-	//if (dhMaterialId != DH_BLOCK_LEAVES) glcolor *= 1.1 + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.15;// + 0.3 * (gl_Normal.y * 0.5 - 0.5);
 	
 	glcolor = glcolor - (4.0 / 27.0) * glcolor * glcolor * glcolor;
 	float m = getLum(glcolor);
