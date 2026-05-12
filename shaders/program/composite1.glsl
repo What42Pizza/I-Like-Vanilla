@@ -80,8 +80,12 @@ void main() {
 	#elif defined VOXY
 		float fogAmount = float(depth == 1.0);
 	#else
-		float _fogDistance;
-		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		#if BORDER_FOG_ENABLED == 1 || CYLINDRICAL_CLIPPING == 1
+			float _fogDistance;
+			float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		#else
+			const float fogAmount = 0.0;
+		#endif
 	#endif
 	
 	#ifdef OVERWORLD
