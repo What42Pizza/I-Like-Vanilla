@@ -1792,7 +1792,7 @@
 #endif
 #if WATER_FOG_GREEN == -1
 #undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.15
+										#define WATER_FOG_GREEN 0.2
 #endif
 #if WATER_FOG_BLUE == -1
 #undef WATER_FOG_BLUE

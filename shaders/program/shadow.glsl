@@ -26,15 +26,16 @@ void main() {
 		if (ivec3(color * 255.0 + 0.5) == ivec3(1, 2, 255)) color.rgb -= 0.01;
 		if (materialId == BLOCK_ID_WATER) {
 			vec3 worldPos = playerPos + cameraPosition;
-			worldPos *= 2.5;
-			worldPos.y += (worldPos.x + worldPos.z) * 0.5;
+			worldPos *= 2.0;
+			worldPos.x *= 0.5;
+			worldPos.y += (worldPos.x + worldPos.z);
 			worldPos.y += frameTimeCounter;
-			bool noiseLeft = valueNoise(worldPos + vec3(-0.1, 0.0, 0.0)) < 0.5;
-			bool noiseRight = valueNoise(worldPos + vec3(0.1, 0.0, 0.0)) < 0.5;
-			worldPos.y -= frameTimeCounter;
-			bool noiseUp = valueNoise(worldPos + vec3(-0.1, 0.0, 0.0)) < 0.5;
-			bool noiseDown = valueNoise(worldPos + vec3(0.1, 0.0, 0.0)) < 0.5;
-			bool isBright = noiseLeft != noiseRight || noiseUp != noiseDown;
+			bool noise_1 = valueNoise(worldPos + vec3(0.0, 0.0, -0.08)) < 0.5;
+			bool noise_2 = valueNoise(worldPos + vec3(0.0, 0.0, 0.08)) < 0.5;
+			worldPos.y -= frameTimeCounter * 2.0;
+			bool noise_3 = valueNoise(worldPos + vec3(0.0, 0.0, -0.08)) < 0.5;
+			bool noise_4 = valueNoise(worldPos + vec3(0.0, 0.0, 0.08)) < 0.5;
+			bool isBright = noise_1 != noise_2 || noise_3 != noise_4;
 			color.rgb = mix(ivec3(1, 2, 255) / 255.0, ivec3(1, 3, 255) / 255.0, float(isBright));
 		}
 	#endif

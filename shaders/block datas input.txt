@@ -690,7 +690,7 @@ specularness: 0.8
 
 block vine:
 weight: 2
-waviness: 3
+waviness: 2
 brightness: 1.2
 specularness: 0.75
 
