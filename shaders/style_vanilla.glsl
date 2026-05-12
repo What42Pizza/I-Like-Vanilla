@@ -1236,7 +1236,7 @@
 #endif
 #if WEATHER_TRANSPARENCY == -1
 #undef WEATHER_TRANSPARENCY
-										#define WEATHER_TRANSPARENCY 0.3
+										#define WEATHER_TRANSPARENCY 0.0
 #endif
 #if WEATHER_HORIZONTAL_AMOUNT == -1
 #undef WEATHER_HORIZONTAL_AMOUNT
@@ -1690,6 +1690,18 @@
 #if UNDERGROUND_FOG_BRIGHTNESS == -1
 #undef UNDERGROUND_FOG_BRIGHTNESS
 										#define UNDERGROUND_FOG_BRIGHTNESS 0.1
+#endif
+#if END_FOG_RED == -1
+#undef END_FOG_RED
+										#define END_FOG_RED 0.4
+#endif
+#if END_FOG_GREEN == -1
+#undef END_FOG_GREEN
+										#define END_FOG_GREEN 0.2
+#endif
+#if END_FOG_BLUE == -1
+#undef END_FOG_BLUE
+										#define END_FOG_BLUE 0.5
 #endif
 
 

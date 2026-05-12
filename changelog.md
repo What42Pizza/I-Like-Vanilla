@@ -1,3 +1,12 @@
+- v1.3.7
+  - Added water caustics
+  - Introduced fix for all randomly un-shaded / double-shaded objects
+  - Improved nether clouds
+  - Added settings 'End Fog Red/Green/Blue'
+  - Fixed bugs
+
+<br>
+
 - v1.3.6b (26/05/08)
   - Improved reflections
   - Tweaked side shading

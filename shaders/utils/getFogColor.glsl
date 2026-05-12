@@ -103,7 +103,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		
 	#elif defined END
 		
-		fogColorOut = vec3(0.4, 0.2, 0.5);
+		fogColorOut = END_FOG_COLOR;
 		
 	#endif
 	

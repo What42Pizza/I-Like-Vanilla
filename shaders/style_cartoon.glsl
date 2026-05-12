@@ -1691,6 +1691,18 @@
 #undef UNDERGROUND_FOG_BRIGHTNESS
 										#define UNDERGROUND_FOG_BRIGHTNESS 0.4
 #endif
+#if END_FOG_RED == -1
+#undef END_FOG_RED
+										#define END_FOG_RED 0.4
+#endif
+#if END_FOG_GREEN == -1
+#undef END_FOG_GREEN
+										#define END_FOG_GREEN 0.2
+#endif
+#if END_FOG_BLUE == -1
+#undef END_FOG_BLUE
+										#define END_FOG_BLUE 0.5
+#endif
 
 
 

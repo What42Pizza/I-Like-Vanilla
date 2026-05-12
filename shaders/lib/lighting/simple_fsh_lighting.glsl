@@ -1,11 +1,5 @@
 void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientBrightness, float specularness, vec3 viewPos, vec3 normal) {
 	
-	#if defined OVERWORLD || defined END
-		float lightDot = dot(normalize(shadowLightPosition), normal);
-	#else
-		float lightDot = 1.0;
-	#endif
-	
 	// night saturation decrease
 	#ifdef OVERWORLD
 		float nightPercent = 1.0 - dayPercent;
@@ -46,11 +40,11 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 	
 	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
 	blockBrightness *= 1.0 - min(getLum(lighting), 1.0);
-	lighting *= 1.0 - blockBrightness;
-	blockLight *= blockBrightness;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
+	blockLight *= blockBrightness;
+	lighting *= 1.0 - min(getLum(blockLight), 1.0);
 	lighting += blockLight;
 	
 	float betterNightVision = nightVision;
@@ -59,8 +53,8 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		betterNightVision *= NIGHT_VISION_BRIGHTNESS;
 	}
 	vec3 nightVisionMin = vec3(betterNightVision);
-	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT;
-	lighting += nightVisionMin * (1.0 - 0.25 * getLum(lighting));
+	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT * (1.0 - ambientBrightness);
+	lighting += nightVisionMin * (1.0 - 0.75 * getLum(lighting));
 	
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		lighting = vec3(1.0);

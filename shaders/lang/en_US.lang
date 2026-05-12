@@ -173,6 +173,11 @@ option.COLORED_SHADOWS_ENABLED.comment=Allows blocks such as water and stained g
 value.COLORED_SHADOWS_ENABLED.0=Off
 value.COLORED_SHADOWS_ENABLED.1=On
 
+option.WATER_CAUSTICS_ENABLED=Water Caustics Enabled
+option.WATER_CAUSTICS_ENABLED.comment=Adds waves to underwater light (requires Colored Shadows to be enabled)
+value.WATER_CAUSTICS_ENABLED.0=Off
+value.WATER_CAUSTICS_ENABLED.1=On
+
 option.SHADOWS_ON_TRANSPARENTS=Shadows On Transparents
 option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, stained glass, etc
 value.SHADOWS_ON_TRANSPARENTS.0=Off
@@ -2037,6 +2042,15 @@ value.UNDERGROUND_FOG_COLOR_TYPE.2=Static
 option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
 option.UNDERGROUND_FOG_BRIGHTNESS.comment=The underground sky is made darker so that the underground fog is made darker, and this controls the brightness of that underground darkness
 value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
+
+option.END_FOG_RED=End Fog Red
+value.END_FOG_RED.-1=Use Style
+
+option.END_FOG_GREEN=End Fog Green
+value.END_FOG_GREEN.-1=Use Style
+
+option.END_FOG_BLUE=End Fog Blue
+value.END_FOG_BLUE.-1=Use Style
 
 
 

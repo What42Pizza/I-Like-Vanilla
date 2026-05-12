@@ -1,18 +1,4 @@
-vec3 getPixelatedShadowPos(vec3 viewPos, vec3 normal) {
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-	playerPos += cameraPosition;
-	playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
-	playerPos -= cameraPosition;
-	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
-	float distortFactor = getDistortFactor(shadowPos);
-	shadowPos = distort(shadowPos, distortFactor);
-	shadowPos = shadowPos * 0.5 + 0.5;
-	return shadowPos;
-}
-
-vec3 getShadowPos(vec3 viewPos, vec3 normal) {
-	viewPos += normal * 0.001 * (25.0 + length(viewPos));
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+vec3 getShadowPos(vec3 playerPos, vec3 normal) {
 	vec3 shadowPos = transform(shadowProjection, transform(shadowModelView, playerPos));
 	float distortFactor = getDistortFactor(shadowPos);
 	shadowPos = distort(shadowPos, distortFactor);
@@ -32,7 +18,7 @@ vec3 getShadowPos(vec3 viewPos, vec3 normal) {
 	#define rawSample(sampler, pos) texture2D(sampler, pos)
 #endif
 
-vec3 sampleShadowAtPoint(samplePosType shadowmapPos, float depth) {
+vec3 sampleShadowAtPoint(samplePosType shadowmapPos, vec3 playerPos, float depth) {
 	#if COLORED_SHADOWS_ENABLED == 0
 		
 		bool isLit = rawSample(shadowtex0, shadowmapPos).r >= depth;
@@ -43,15 +29,15 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, float depth) {
 		if (rawSample(shadowtex0, shadowmapPos).r >= depth) return vec3(1.0);
 		if (rawSample(shadowtex1, shadowmapPos).r < depth) return vec3(0.0);
 		vec4 shadowColor = rawSample(shadowcolor0, shadowmapPos);
+		
+		#if WATER_CAUSTICS_ENABLED == 1
+			ivec3 shadowColorInt = ivec3(shadowColor.rgb * 255.0 + 0.5);
+			if (shadowColorInt == ivec3(1, 2, 255)) shadowColor.rgb = (vec3(0.0 , 0.06, 0.95) + 0.25) / 0.75;
+			if (shadowColorInt == ivec3(1, 3, 255)) shadowColor.rgb = (vec3(0.45, 0.4 , 0.9 ) + 0.25) / 0.75;
+		#endif
+		
 		shadowColor.rgb = 0.25 + 0.75 * shadowColor.rgb;
-		
 		return shadowColor.rgb * step(-0.99, -shadowColor.a);
-		
-		//shadowColor.a *= shadowColor.a;
-		//shadowColor.a *= shadowColor.a;
-		//shadowColor.a *= shadowColor.a;
-		//shadowColor.a *= shadowColor.a;
-		//return shadowColor.rgb * (1.0 - shadowColor.a);
 		
 	#endif
 }
@@ -73,7 +59,12 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		tangent = normalize(tangent);
 		vec3 bitangent = cross(tangent, normal);
 		
-		vec3 shadowPos = getPixelatedShadowPos(viewPos, normal);
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		playerPos += cameraPosition;
+		playerPos = floor(playerPos * PIXELATED_SHADOWS) / PIXELATED_SHADOWS;
+		playerPos -= cameraPosition;
+		
+		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
 		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
@@ -82,25 +73,29 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		
 		vec3 shadowSample = vec3(0.0);
 		float bias = 0.0002 + length(viewPos) * 0.035 / shadowMapResolution;
-		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy, shadowPos.z - bias);
-		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy, shadowPos.z - bias);
-		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy, shadowPos.z - bias);
-		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy, playerPos, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy, playerPos, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy, playerPos, shadowPos.z - bias);
+		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy - shadowPosStepY.xy, playerPos, shadowPos.z - bias);
 		return shadowSample * 0.25;
 		
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
-		vec3 shadowPos = getShadowPos(viewPos, normal);
+		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
-		return sampleShadowAtPoint(ivec2(shadowPos.xy * shadowMapResolution - 0.25), shadowPos.z);
+		return sampleShadowAtPoint(ivec2(shadowPos.xy * shadowMapResolution - 0.25), playerPos, shadowPos.z);
 		
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
-		vec3 shadowPos = getShadowPos(viewPos, normal);
+		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
-		return sampleShadowAtPoint(shadowPos.xy, shadowPos.z);
+		return sampleShadowAtPoint(shadowPos.xy, playerPos, shadowPos.z);
 		
 	#else
 		
@@ -160,7 +155,9 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 			);
 		#endif
 		
-		vec3 shadowPos = getShadowPos(viewPos, normal);
+		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
 		
 		float dither = bayer64(gl_FragCoord.xy);
@@ -174,7 +171,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		vec3 shadowSample = vec3(0.0);
 		for (int i = 0; i < SHADOW_OFFSET_COUNT; i++) {
 			vec2 samplePos = shadowPos.xy + rotationMatrix * SHADOW_OFFSETS[i].xy;
-			shadowSample += sampleShadowAtPoint(samplePos, shadowPos.z) * SHADOW_OFFSETS[i].z;
+			shadowSample += sampleShadowAtPoint(samplePos, playerPos, shadowPos.z) * SHADOW_OFFSETS[i].z;
 		}
 		shadowSample /= SHADOW_OFFSET_WEIGHTS_TOTAL;
 		float mult = min(getLum(shadowSample) * 2.5, 1.0);

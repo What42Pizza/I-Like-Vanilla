@@ -11,20 +11,9 @@ in_out vec3 viewPos;
 #include "/lib/lighting/simple_fsh_lighting.glsl"
 
 void main() {
-	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord) * glcolor;
 	
-	
 	doSimpleFshLighting(color.rgb, lmcoord.x, lmcoord.y, 0.3, viewPos, normal);
-	
-	#if TEMPORAL_FILTER_ENABLED == 1
-		float alphaLift = length(viewPos) / 16.0;
-		alphaLift = min(alphaLift, 0.75) * color.a;
-		color.a = alphaLift + (1.0 - alphaLift) * color.a;
-	#endif
-	
-	color.a *= 1.0 - WEATHER_TRANSPARENCY;
-	
 	
 	/* DRAWBUFFERS:8 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
@@ -75,6 +64,12 @@ void main() {
 	#endif
 	
 	glcolor = gl_Color;
+	
+	const float distSlope  = 2.0;
+	const float alphaClose = 0.75;
+	const float alphaFar   = 1.25;
+	glcolor.a = alphaFar - (alphaFar - alphaClose) * distSlope / (length(playerPos.xz) + distSlope);
+	glcolor.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	
 	doVshLighting(lmcoord, viewPos, normal);
