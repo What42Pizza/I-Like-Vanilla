@@ -11,7 +11,8 @@ float sampleEndCloud(vec3 pos) {
 	cloudSample += valueNoise((pos + frameTimeCounter * 0.125 * 0.0625 ) * 0.5 ) * 0.5 ;
 	cloudSample += valueNoise((pos + frameTimeCounter * 0.125 * 0.03125) * 0.25) * 0.25;
 	cloudSample /= 1.0 + 0.5 + 0.25;
-	cloudSample = (cloudSample - (1.0 - END_CLOUDS_COVERAGE * 0.75)) / END_CLOUDS_COVERAGE * 0.75;
+	cloudSample *= cloudSample;
+	cloudSample = (cloudSample - (1.0 - END_CLOUDS_COVERAGE)) / END_CLOUDS_COVERAGE;
 	return clamp(cloudSample, 0.0, 1.0);
 }
 
@@ -19,10 +20,16 @@ float sampleEndCloud(vec3 pos) {
 
 // returns the cloud thickness (inverted) and brightness for this pixel
 vec2 computeEndClouds(vec3 playerPos) {
+	
+	float len = length(playerPos);
+	playerPos /= len;
+	len = min(len, 100);
+	playerPos *= len;
+	
 	vec3 pos = cameraPosition + playerPos; // start at the block and move towards the camera
 	vec3 endPos = cameraPosition;
 	vec3 stepVec = endPos - pos;
-	float densityMult = length(stepVec) * -0.03125;
+	float densityMult = length(stepVec) * -0.01;
 	stepVec /= CLOUDS_QUALITY;
 	
 	float dither = bayer64(gl_FragCoord.xy);

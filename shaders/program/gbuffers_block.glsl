@@ -69,16 +69,20 @@ void main() {
 			vec3 dir = normalize(playerPos);
 			float dither = bayer64(gl_FragCoord.xy);
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-			pos += dir * (12.0 + dither);
+			pos += dir * (14.0 + dither);
 			float total = 0.0;
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < 16; i++) {
 				total *= 0.9;
-				float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0));
-				noise = smoothstep(0.45, 0.98, noise);
+				float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0)) * 0.8;
+				noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 2.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.4;
+				noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 4.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.2;
+				noise *= noise;
+				noise *= noise;
+				noise = smoothstep(0.15, 0.5, noise);
 				total += noise;
 				pos -= dir;
 			}
-			total *= 0.25;
+			total *= 0.1;
 			color.rgb = vec3(pow(total, 1.2), total * total, total);
 			color.rgb *= 2.0;
 			lmcoord = vec2(0.4, 0.5);

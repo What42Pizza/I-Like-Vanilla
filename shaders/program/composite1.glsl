@@ -226,12 +226,7 @@ void main() {
 			#endif
 			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);
-				#ifdef END
-					float mixAmount = 0.65 + 0.25 * fogAmount;
-				#else
-					const float mixAmount = 0.5;
-				#endif
-				cloudData = mix(cloudData, prevCloudsData, mixAmount);
+				cloudData = mix(cloudData, prevCloudsData, 0.5);
 			#endif
 		}
 	#endif

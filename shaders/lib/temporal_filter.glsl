@@ -22,13 +22,6 @@ void doNeighborClamping(vec3 color, inout vec3 prevColor) {
 
 void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoord) {
 	
-	#ifdef END
-		#ifdef DISTANT_HORIZONS
-			if (depth == 1.0 && dhDepth == 1.0) return;
-		#else
-			if (depth == 1.0) return;
-		#endif
-	#endif
 	if (clamp(prevCoord, 0.0, 1.0) != prevCoord) return;
 	
 	float prevDepth = texture2D(DEPTH_BUFFER_WO_TRANS, prevCoord).r;
