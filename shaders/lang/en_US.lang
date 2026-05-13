@@ -173,11 +173,6 @@ option.COLORED_SHADOWS_ENABLED.comment=Allows blocks such as water and stained g
 value.COLORED_SHADOWS_ENABLED.0=Off
 value.COLORED_SHADOWS_ENABLED.1=On
 
-option.WATER_CAUSTICS_ENABLED=Water Caustics Enabled
-option.WATER_CAUSTICS_ENABLED.comment=Adds waves to underwater light (requires Colored Shadows to be enabled)
-value.WATER_CAUSTICS_ENABLED.0=Off
-value.WATER_CAUSTICS_ENABLED.1=On
-
 option.SHADOWS_ON_TRANSPARENTS=Shadows On Transparents
 option.SHADOWS_ON_TRANSPARENTS.comment=Controls whether shadows will on water, stained glass, etc
 value.SHADOWS_ON_TRANSPARENTS.0=Off
@@ -262,6 +257,53 @@ option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Perfor
 value.EXCLUDE_FOLIAGE.-1=Use Style
 value.EXCLUDE_FOLIAGE.0=Off
 value.EXCLUDE_FOLIAGE.1=On
+
+
+
+
+
+screen.WATER_CAUSTICS_MENU=Water Caustics
+
+option.WATER_CAUSTICS_ENABLED=Water Caustics Enabled
+option.WATER_CAUSTICS_ENABLED.comment=Adds waves to underwater light (requires Colored Shadows to be enabled)
+value.WATER_CAUSTICS_ENABLED.0=Off
+value.WATER_CAUSTICS_ENABLED.1=On
+
+option.WATER_CAUSTICS_SIZE=Water Caustics Size
+value.WATER_CAUSTICS_SIZE.-1=Use Style
+
+option.WATER_CAUSTICS_HORIZONTAL_STRETCH=Water Caustics Horizontal Stretch
+value.WATER_CAUSTICS_HORIZONTAL_STRETCH.-1=Use Style
+
+option.WATER_CAUSTICS_SPEED=Water Caustics Speed
+value.WATER_CAUSTICS_SPEED.-1=Use Style
+
+option.WATER_CAUSTICS_THICKNESS=Water Caustics Thickness
+value.WATER_CAUSTICS_THICKNESS.-1=Use Style
+
+option.WATER_CAUSTICS_DARK_RED=Caustics Dark Red
+option.WATER_CAUSTICS_DARK_RED.comment=Controls the darker light color of water caustics
+value.WATER_CAUSTICS_DARK_RED.-1=Use Style
+
+option.WATER_CAUSTICS_DARK_GREEN=Caustics Dark Green
+option.WATER_CAUSTICS_DARK_GREEN.comment=Controls the darker light color of water caustics
+value.WATER_CAUSTICS_DARK_GREEN.-1=Use Style
+
+option.WATER_CAUSTICS_DARK_BLUE=Caustics Dark Blue
+option.WATER_CAUSTICS_DARK_BLUE.comment=Controls the darker light color of water caustics
+value.WATER_CAUSTICS_DARK_BLUE.-1=Use Style
+
+option.WATER_CAUSTICS_BRIGHT_RED=Caustics Bright Red
+option.WATER_CAUSTICS_DARK_RED.comment=Controls the brighter (highlight) light color of water caustics
+value.WATER_CAUSTICS_BRIGHT_RED.-1=Use Style
+
+option.WATER_CAUSTICS_BRIGHT_GREEN=Caustics Bright Green
+option.WATER_CAUSTICS_DARK_GREEN.comment=Controls the brighter (highlight) light color of water caustics
+value.WATER_CAUSTICS_BRIGHT_GREEN.-1=Use Style
+
+option.WATER_CAUSTICS_BRIGHT_BLUE=Caustics Bright Blue
+option.WATER_CAUSTICS_DARK_BLUE.comment=Controls the brighter (highlight) light color of water caustics
+value.WATER_CAUSTICS_BRIGHT_BLUE.-1=Use Style
 
 
 

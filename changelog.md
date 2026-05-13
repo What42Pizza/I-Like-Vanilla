@@ -5,6 +5,7 @@
   - Improved nether clouds
   - Added settings 'End Fog Red/Green/Blue'
   - Fixed bugs
+  - Now over 500 settings
 
 <br>
 
