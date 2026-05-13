@@ -293,17 +293,25 @@ option.WATER_CAUSTICS_DARK_BLUE=Caustics Dark Blue
 option.WATER_CAUSTICS_DARK_BLUE.comment=Controls the darker light color of water caustics
 value.WATER_CAUSTICS_DARK_BLUE.-1=Use Style
 
+option.WATER_CAUSTICS_DARK_BRIGHTNESS=Caustics Dark Brightness
+option.WATER_CAUSTICS_DARK_BRIGHTNESS.comment=Controls the darker light color of water caustics
+value.WATER_CAUSTICS_DARK_BRIGHTNESS.-1=Use Style
+
 option.WATER_CAUSTICS_BRIGHT_RED=Caustics Bright Red
-option.WATER_CAUSTICS_DARK_RED.comment=Controls the brighter (highlight) light color of water caustics
+option.WATER_CAUSTICS_BRIGHT_RED.comment=Controls the brighter (highlight) light color of water caustics
 value.WATER_CAUSTICS_BRIGHT_RED.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_GREEN=Caustics Bright Green
-option.WATER_CAUSTICS_DARK_GREEN.comment=Controls the brighter (highlight) light color of water caustics
+option.WATER_CAUSTICS_BRIGHT_GREEN.comment=Controls the brighter (highlight) light color of water caustics
 value.WATER_CAUSTICS_BRIGHT_GREEN.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_BLUE=Caustics Bright Blue
-option.WATER_CAUSTICS_DARK_BLUE.comment=Controls the brighter (highlight) light color of water caustics
+option.WATER_CAUSTICS_BRIGHT_BLUE.comment=Controls the brighter (highlight) light color of water caustics
 value.WATER_CAUSTICS_BRIGHT_BLUE.-1=Use Style
+
+option.WATER_CAUSTICS_BRIGHT_BRIGHTNESS=Caustics Bright Brightness
+option.WATER_CAUSTICS_BRIGHT_BRIGHTNESS.comment=Controls the brighter (highlight) light color of water caustics
+value.WATER_CAUSTICS_BRIGHT_BRIGHTNESS.-1=Use Style
 
 
 
