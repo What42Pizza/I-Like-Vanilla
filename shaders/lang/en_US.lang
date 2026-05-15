@@ -1858,6 +1858,18 @@ option.NETHER_CLOUDS_FOG_INFLUENCE=Nether Clouds Fog Influence
 option.NETHER_CLOUDS_FOG_INFLUENCE.comment=How much the nether fog color influences the color of the nether clouds (this value is simply added to the value from the Nether Clouds Base Color)
 value.NETHER_CLOUDS_FOG_INFLUENCE.-1=Use Style
 
+option.NETHER_CLOUDS_TINT_RED=Nether Clouds Tint Red
+option.NETHER_CLOUDS_TINT_RED.comment=The final red multiplier for the nether clouds color
+value.NETHER_CLOUDS_TINT_RED.-1=Use Style
+
+option.NETHER_CLOUDS_TINT_GREEN=Nether Clouds Tint Green
+option.NETHER_CLOUDS_TINT_GREEN.comment=The final green multiplier for the nether clouds color
+value.NETHER_CLOUDS_TINT_GREEN.-1=Use Style
+
+option.NETHER_CLOUDS_TINT_BLUE=Nether Clouds Tint Blue
+option.NETHER_CLOUDS_TINT_BLUE.comment=The final blue multiplier for the nether clouds color
+value.NETHER_CLOUDS_TINT_BLUE.-1=Use Style
+
 
 
 
@@ -2006,6 +2018,18 @@ value.NETHER_SKY_FOG_INFLUENCE.-1=Use Style
 option.NETHER_SKY_FOG_SATURATION=Fog Saturation
 option.NETHER_SKY_FOG_SATURATION.comment=How much to increase/decrease the vanilla fog saturation before adding to the sky color
 value.NETHER_SKY_FOG_SATURATION.-1=Use Style
+
+option.NETHER_SKY_TINT_RED=Tint Red
+option.NETHER_SKY_TINT_RED.comment=The final red multiplier for the nether sky color
+value.NETHER_SKY_TINT_RED.-1=Use Style
+
+option.NETHER_SKY_TINT_GREEN=Tint Green
+option.NETHER_SKY_TINT_GREEN.comment=The final green multiplier for the nether sky color
+value.NETHER_SKY_TINT_GREEN.-1=Use Style
+
+option.NETHER_SKY_TINT_BLUE=Tint Blue
+option.NETHER_SKY_TINT_BLUE.comment=The final blue multiplier for the nether sky color
+value.NETHER_SKY_TINT_BLUE.-1=Use Style
 
 
 

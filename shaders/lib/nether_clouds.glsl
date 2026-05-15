@@ -17,6 +17,12 @@ float sampleNetherCloud(vec3 pos) {
 
 // returns the cloud thickness and brightness (both inverted) for this pixel
 vec2 computeNetherClouds(vec3 playerPos) {
+	
+	float len = length(playerPos);
+	playerPos /= len;
+	len = min(len, far);
+	playerPos *= len;
+	
 	vec3 pos = cameraPosition + playerPos; // start at the block and move towards the camera
 	vec3 endPos = cameraPosition;
 	vec3 stepVec = endPos - pos;

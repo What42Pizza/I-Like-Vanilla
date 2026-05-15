@@ -100,6 +100,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		fogColorOut = fogColor;
 		fogColorOut = mix(vec3(getLum(fogColorOut)), fogColorOut, NETHER_SKY_FOG_SATURATION);
 		fogColorOut = NETHER_SKY_BASE_COLOR + NETHER_SKY_FOG_INFLUENCE * fogColorOut;
+		fogColorOut *= NETHER_SKY_TINT_COLOR;
 		
 	#elif defined END
 		

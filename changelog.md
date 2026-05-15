@@ -1,3 +1,15 @@
+- v1.3.8
+  - Added settings 'Nether Sky Tint Red/Green/Blue'
+  - Added settings 'Nether Clouds Tint Red/Green/Blue'
+  - Improved nether effects (Nether Clouds and Border Fog)
+
+<br>
+
+- v1.3.7b (26/05/15)
+  - Fixed shader not loading on amd gpus
+
+<br>
+
 - v1.3.7 (26/05/14)
   - Added water caustics (configurable)
   - Added additional vanilla-like end portal effects

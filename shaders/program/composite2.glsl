@@ -158,6 +158,7 @@ void main() {
 	#endif
 	#if NETHER_CLOUDS_ENABLED == 1
 		cloudsColor = normalize(fogColor) * NETHER_CLOUDS_FOG_INFLUENCE + NETHER_CLOUDS_BASE_COLOR;
+		cloudsColor *= NETHER_CLOUDS_TINT_COLOR;
 	#endif
 	
 	
