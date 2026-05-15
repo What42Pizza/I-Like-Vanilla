@@ -250,19 +250,18 @@ void adjustLmcoord(inout vec2 lmcoord) {
 
 
 
-uint randomizeUint(inout uint rng) {
+void randomizeUint(inout uint rng) {
 	#define ROTATE_RIGHT(value, shift) (value >> shift) | (value << (32u - shift))
 	rng = rng * 747796405u + 2891336453u;
 	rng ^= ROTATE_RIGHT(rng, 11u);
 	rng ^= ROTATE_RIGHT(rng, 17u);
 	rng ^= ROTATE_RIGHT(rng, 23u);
-	return rng;
 }
 
 float randomFloat(inout uint rng) {
-	uint v = randomizeUint(rng);
+	randomizeUint(rng);
 	const uint BIT_MASK = (2u << 16u) - 1u;
-	float normalizedValue = float(v & BIT_MASK) / float(BIT_MASK);
+	float normalizedValue = float(rng & BIT_MASK) / float(BIT_MASK);
 	return normalizedValue * 2.0 - 1.0;
 }
 

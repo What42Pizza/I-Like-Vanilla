@@ -2,7 +2,7 @@ in_out vec2 texcoord;
 in_out vec2 lmcoord;
 in_out vec3 glcolor;
 in_out vec3 viewPos;
-#if FANCY_END_PORTAL_ENABLED == 1
+#if FANCY_END_PORTAL_ENABLED > 0
 	flat in_out uint materialId;
 #endif
 #if PBR_TYPE == 0
@@ -18,6 +18,7 @@ in_out vec3 viewPos;
 
 #ifdef FSH
 
+#include "/utils/projections.glsl"
 #include "/lib/lighting/fsh_lighting.glsl"
 
 void main() {
@@ -61,32 +62,73 @@ void main() {
 	#endif
 	
 	
-	#if FANCY_END_PORTAL_ENABLED == 1
+	#if FANCY_END_PORTAL_ENABLED > 0
 		if (materialId == BLOCK_ID_END_PORTAL) {
 			
-			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-			vec3 pos = playerPos + cameraPosition;
-			vec3 dir = normalize(playerPos);
-			float dither = bayer64(gl_FragCoord.xy);
-			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-			pos += dir * (14.0 + dither);
-			float total = 0.0;
-			for (int i = 0; i < 16; i++) {
-				total *= 0.9;
-				float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0)) * 0.8;
-				noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 2.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.4;
-				noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 4.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.2;
-				noise *= noise;
-				noise *= noise;
-				noise = smoothstep(0.15, 0.5, noise);
-				total += noise;
-				pos -= dir;
-			}
-			total *= 0.1;
-			color.rgb = vec3(pow(total, 1.2), total * total, total);
-			color.rgb *= 2.0;
-			lmcoord = vec2(0.4, 0.5);
+			#if FANCY_END_PORTAL_ENABLED == 1 || FANCY_END_PORTAL_ENABLED == 2
+				color.rgb = vec3(0.0);
+				
+				#if FANCY_END_PORTAL_ENABLED == 1
+					vec3 pos = vec3(texelcoord * pixelSize * 16.0, 0.0);
+					pos = pos.xzy;
+					vec3 dir = vec3(0.0);
+				#elif FANCY_END_PORTAL_ENABLED == 2
+					vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos + gbufferModelViewInverse[3].xyz * 0.25; // idk why *0.25 is needed here, it really shouldn't be here
+					vec3 pos = playerPos + cameraPosition;
+					vec3 dir = playerPos;
+					dir = dir / dir.y * sign(dir.y) * 1.25;
+				#endif
+				
+				const int sampleCount = 6;
+				const vec3[sampleCount] sampleColors = vec3[sampleCount]( // sorted furthest to nearest
+					vec3(0.8 , 0.65, 1.0 ) * 0.4,
+					vec3(0.4 , 1.04, 0.75) * 0.6,
+					vec3(0.8 , 0.7 , 1.0 ) * 0.8,
+					vec3(0.45, 1.07, 0.8 ) * 1.1,
+					vec3(0.8 , 0.75, 1.0 ) * 1.4,
+					vec3(0.5 , 1.1 , 0.85) * 1.8
+				);
+				pos += dir * sampleCount;
+				for (int i = 0; i < sampleCount; i++) {
+					float cosI = cos(i * 1.37);
+					float sinI = sin(i * 1.37);
+					mat2 rotation = mat2(cosI, -sinI, sinI, cosI);
+					vec2 texcoord = rotation * pos.xz * 0.125;
+					texcoord.y += frameTimeCounter / 32.0;
+					vec3 texSample = texture2D(MAIN_TEXTURE, texcoord).rgb;
+					texSample = 1.0 - (1.0 - texSample) * (1.0 - texSample) * (1.0 - texSample);
+					texSample.rg *= 0.25 + 0.75 * texSample.b;
+					texSample *= sampleColors[i];
+					color.rgb += texSample;
+					pos -= dir;
+				}
+			#endif
 			
+			#if FANCY_END_PORTAL_ENABLED == 3
+				vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+				vec3 pos = playerPos + cameraPosition;
+				vec3 dir = normalize(playerPos);
+				float dither = bayer64(gl_FragCoord.xy);
+				dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+				pos += dir * (14.0 + dither);
+				float total = 0.0;
+				for (int i = 0; i < 16; i++) {
+					total *= 0.9;
+					float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0));
+					noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 2.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.5;
+					noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 4.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.25;
+					noise *= noise;
+					noise *= noise;
+					noise = smoothstep(0.5, 0.7, noise);
+					total += noise;
+					pos -= dir;
+				}
+				total *= 0.1;
+				color.rgb = vec3(pow(total, 1.2), total * total, total);
+				color.rgb *= 2.0;
+			#endif
+			
+			lmcoord = vec2(0.4, 0.5);
 		}
 	#endif
 	
@@ -137,7 +179,7 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	#if FANCY_END_PORTAL_ENABLED != 1
+	#if FANCY_END_PORTAL_ENABLED == 0
 		vec3 viewPos;
 	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);

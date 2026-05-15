@@ -1,5 +1,6 @@
-- v1.3.7
+- v1.3.7 (26/05/14)
   - Added water caustics (configurable)
+  - Added additional vanilla-like end portal effects
   - Introduced fix for all randomly un-shaded / double-shaded objects
   - Significantly improved end clouds, end portal, and end sky
   - Improved nether clouds
