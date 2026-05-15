@@ -105,7 +105,7 @@ void main() {
 			#endif
 			
 			#if FANCY_END_PORTAL_ENABLED == 3
-				vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+				vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos + gbufferModelViewInverse[3].xyz * 0.25; // idk why *0.25 is needed here, it really shouldn't be here
 				vec3 pos = playerPos + cameraPosition;
 				vec3 dir = normalize(playerPos);
 				float dither = bayer64(gl_FragCoord.xy);
@@ -113,19 +113,20 @@ void main() {
 				pos += dir * (14.0 + dither);
 				float total = 0.0;
 				for (int i = 0; i < 16; i++) {
-					total *= 0.9;
-					float noise = valueNoise(vec4(pos * vec3(1, 0.125, 1), frameTimeCounter * 0.5 + i / 8.0));
-					noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 2.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.5;
-					noise += valueNoise(vec4(pos * vec3(1, 0.125, 1) * 4.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.25;
+					total *= 0.95;
+					float noise = valueNoise(vec4(pos * vec3(1, 0.0625, 1), frameTimeCounter * 0.5 + i / 8.0));
+					noise += valueNoise(vec4(pos * vec3(1, 0.0625, 1) * 2.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.5;
+					noise += valueNoise(vec4(pos * vec3(1, 0.0625, 1) * 4.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.25;
+					noise += valueNoise(vec4(pos * vec3(1, 0.0625, 1) * 8.0, frameTimeCounter * 0.5 + i / 8.0)) * 0.125;
 					noise *= noise;
 					noise *= noise;
-					noise = smoothstep(0.5, 0.7, noise);
+					noise = smoothstep(0.75, 0.9, noise);
 					total += noise;
 					pos -= dir;
 				}
-				total *= 0.1;
+				total *= 0.075;
 				color.rgb = vec3(pow(total, 1.2), total * total, total);
-				color.rgb *= 2.0;
+				color.rgb *= 3.0;
 			#endif
 			
 			lmcoord = vec2(0.4, 0.5);
