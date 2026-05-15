@@ -1807,7 +1807,7 @@
 #endif
 #if BORDER_FOG_CURVE_NETHER == -1
 #undef BORDER_FOG_CURVE_NETHER
-										#define BORDER_FOG_CURVE_NETHER 3
+										#define BORDER_FOG_CURVE_NETHER 2
 #endif
 #if BORDER_FOG_CURVE_END == -1
 #undef BORDER_FOG_CURVE_END
