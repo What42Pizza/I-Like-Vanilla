@@ -1,4 +1,5 @@
 - v1.3.8
+  - Added Story-Mode-like clouds (configurable)
   - Added settings 'Nether Sky Tint Red/Green/Blue'
   - Added settings 'Nether Clouds Tint Red/Green/Blue'
   - Improved nether effects (Nether Clouds and Border Fog)

@@ -1652,6 +1652,14 @@ option.CLOUD_FOG_CURVE=Cloud Fog Curve
 option.CLOUD_FOG_CURVE.comment=Set how quickly the clouds fade out
 value.CLOUD_FOG_CURVE.-1=Use Style
 
+option.STORY_MODE_CLOUDS_ENABLED=Story Mode Clouds Enabled
+option.STORY_MODE_CLOUDS_ENABLED.comment=Enables clouds similar to that of Minecraft Story Mode (requires Realistic Clouds to be disabled)
+value.STORY_MODE_CLOUDS_ENABLED.-1=Use Style
+
+option.STORY_MODE_CLOUDS_CURVE=Story Mode Clouds Curve
+option.STORY_MODE_CLOUDS_CURVE.comment=Controls the transparency fade of story-mode-type clouds
+value.STORY_MODE_CLOUDS_CURVE.-1=Use Style
+
 option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
 value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
 value.REALISTIC_CLOUDS_ENABLED.0=Off

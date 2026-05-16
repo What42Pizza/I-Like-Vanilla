@@ -770,6 +770,7 @@ shadow casting: foliage
 
 block dead_bush, tall_dry_grass:
 weight: 1
+brightness: 0.9
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
