@@ -60,6 +60,13 @@ void main() {
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif
+	#ifdef VOXY
+		// this does slightly fix something but idk if it's worth it
+		//float depthVx = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
+		//if (depthVx != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVx));
+		//float depthVxTrans = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+		//if (depthVxTrans != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVxTrans));
+	#endif
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	
 	

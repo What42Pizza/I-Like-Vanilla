@@ -307,6 +307,7 @@ void main() {
 		// foliage normals
 		#if OVERRIDE_FOLIAGE_NORMALS == 1
 			if (isFlatShaded) {
+				//normal = normalize(mix(normal, gl_NormalMatrix * vec3(0.0, 1.0, 0.0), 0.75));
 				normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
 			}
 		#endif

@@ -2,6 +2,8 @@
   - Added Story-Mode-like clouds (configurable)
   - Added settings 'Nether Sky Tint Red/Green/Blue'
   - Added settings 'Nether Clouds Tint Red/Green/Blue'
+  - Enabled border fog for Voxy
+  - Added setting 'Voxy Border Fog Dist Mult'
   - Improved nether effects (Nether Clouds and Border Fog)
 
 <br>

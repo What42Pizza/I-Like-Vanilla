@@ -49,6 +49,13 @@ void main() {
 		vec3 dhViewPos = screenToViewDh(vec3(texcoord, dhDepth));
 		if (depth == 1.0) viewPos = dhViewPos;
 	#endif
+	//#ifdef VOXY
+	//	// this does slightly fix something but idk if it's worth it
+	//	float depthVx = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
+	//	if (depthVx != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVx));
+	//	float depthVxTrans = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+	//	if (depthVxTrans != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVxTrans));
+	//#endif
 	
 	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
 	#if BORDER_FOG_ENABLED == 1
@@ -58,7 +65,11 @@ void main() {
 			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
 		#endif
 		#ifdef VOXY
+			//float vxDepthOpaque = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
+			//float vxDepthTrans = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
+			//skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && vxDepthOpaque == 1.0 && vxDepthTrans == 1.0));
 			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0));
+			fogDistance = mix(fogDistance, 1.0, float(depth == 1.0));
 		#endif
 		#if FOG_BUG_RECREATION == 1
 			skyAmount *= 1.0 - 0.0001 * float(depth < 1.0);
