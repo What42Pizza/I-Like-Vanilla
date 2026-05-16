@@ -8,6 +8,8 @@ float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
 	fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 	#ifdef DISTANT_HORIZONS
 		fogDistance /= dhRenderDistance;
+	#elif defined VOXY
+		fogDistance /= (vxRenderDistance - 4) * 16.0 * VOXY_BORDER_FOG_DIST_MULT;
 	#else
 		fogDistance *= invFar;
 	#endif

@@ -126,11 +126,6 @@ const float shadowIntervalSize    = 2.0;
 	#define SHARPENING_ENABLED 0
 #endif
 
-#if defined VOXY
-	#undef BORDER_FOG_ENABLED
-	#define BORDER_FOG_ENABLED 0
-#endif
-
 #if SSS_PIXELS != 0
 	#undef TAA_ENABLED
 	#defined TAA_ENABLED 0

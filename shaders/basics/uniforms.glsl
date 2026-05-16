@@ -13,12 +13,17 @@ uniform mat4 dhProjectionInverse;
 uniform mat4 dhPreviousProjection;
 uniform float near;
 uniform float far;
-uniform float dhNearPlane;
-uniform float dhFarPlane;
-uniform int dhRenderDistance;
-uniform mat4 vxModelViewInv;
-uniform mat4 vxProj;
-uniform mat4 vxProjInv;
+#ifdef DISTANT_HORIZONS
+	uniform float dhNearPlane;
+	uniform float dhFarPlane;
+	uniform int dhRenderDistance;
+#endif
+#ifdef VOXY
+	uniform int vxRenderDistance;
+	uniform mat4 vxModelViewInv;
+	uniform mat4 vxProj;
+	uniform mat4 vxProjInv;
+#endif
 
 uniform float viewHeight;
 uniform float viewWidth;

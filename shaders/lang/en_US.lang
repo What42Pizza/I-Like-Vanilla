@@ -255,7 +255,7 @@ option.PIXELATED_SHADOWS_SOFTNESS.comment=How soft the transition from in-shadow
 value.PIXELATED_SHADOWS_SOFTNESS.-1=Use Style
 
 option.EXCLUDE_FOLIAGE=Exclude Foliage
-option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows\n\n(Performance cost: Low)
+option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows
 value.EXCLUDE_FOLIAGE.-1=Use Style
 value.EXCLUDE_FOLIAGE.0=Off
 value.EXCLUDE_FOLIAGE.1=On
@@ -322,19 +322,19 @@ value.WATER_CAUSTICS_BRIGHT_BRIGHTNESS.-1=Use Style
 screen.SHADING_MENU=Shading
 
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
-option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)
 value.VANILLA_AO_BRIGHT.-1=Use Style
 
 option.VANILLA_AO_DARK=Vanilla AO (Dark)
-option.VANILLA_AO_DARK.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+option.VANILLA_AO_DARK.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in dimly lit areas (lower is more accurate, higher is more vanilla-like)
 value.VANILLA_AO_DARK.-1=Use Style
 
 option.SIDE_SHADING_BRIGHT=Side Shading (Bright)
-option.SIDE_SHADING_BRIGHT.comment=How much to increase / decrease the sides of blocks at brightly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+option.SIDE_SHADING_BRIGHT.comment=How much to increase / decrease the sides of blocks at brightly lit areas (lower is more accurate, higher is more vanilla-like)
 value.SIDE_SHADING_BRIGHT.-1=Use Style
 
 option.SIDE_SHADING_DARK=Side Shading (Dark)
-option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)\n\n(Performance cost: None)
+option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)
 value.SIDE_SHADING_DARK.-1=Use Style
 
 option.OVERRIDE_FOLIAGE_NORMALS=Override Foliage Normals
@@ -853,7 +853,7 @@ prefix.TEMPORAL_FILTER_DEPTH=x
 screen.BLOOM_MENU=Bloom
 
 option.BLOOM_ENABLED=Bloom Enabled
-option.BLOOM_ENABLED.comment=Makes bright colors bleed into the surroundings\n\n(Performance cost: Low-Medium, depending on settings)
+option.BLOOM_ENABLED.comment=Makes bright colors bleed into the surroundings
 value.BLOOM_ENABLED.0=Off
 value.BLOOM_ENABLED.1=On
 
@@ -942,7 +942,7 @@ option.AO_QUALITY.comment=Controls the number of samples for SSAO
 screen.REFLECTION_MENU=Reflections
 
 option.REFLECTIONS_ENABLED=Reflections Enabled
-option.REFLECTIONS_ENABLED.comment=Enabled reflections\n\n(Performance cost: HIGH)
+option.REFLECTIONS_ENABLED.comment=Enabled reflections
 value.REFLECTIONS_ENABLED.0=Off
 value.REFLECTIONS_ENABLED.1=On
 
@@ -999,13 +999,13 @@ value.REFLECTIONS_BRIGHTNESS.-1=Use Style
 screen.SUNRAYS_MENU=Sunrays
 
 option.DEPTH_SUNRAYS_ENABLED=Sunrays Enabled (Depth-Based)
-option.DEPTH_SUNRAYS_ENABLED.comment=(Performance cost: Low-Medium, depending on settings)
+option.DEPTH_SUNRAYS_ENABLED.comment=Enabled screen-based sunrays, which are low-ish quality but very cheap
 value.DEPTH_SUNRAYS_ENABLED.-1=Use Style
 value.DEPTH_SUNRAYS_ENABLED.0=Off
 value.DEPTH_SUNRAYS_ENABLED.1=On
 
 option.VOL_SUNRAYS_ENABLED=Sunrays Enabled (Volumetric)
-option.VOL_SUNRAYS_ENABLED.comment=(Performance cost: Medium, depending on settings)
+option.VOL_SUNRAYS_ENABLED.comment=Enables world-space sunrays, which are expensive but generally better-looking
 value.VOL_SUNRAYS_ENABLED.-1=Use Style
 value.VOL_SUNRAYS_ENABLED.0=Off
 value.VOL_SUNRAYS_ENABLED.1=On
@@ -1184,7 +1184,7 @@ value.KUWAHARA_SIZE.-1=Use Style
 screen.SHARPENING_MENU=Sharpening
 
 option.SHARPENING_ENABLED=Sharpening Enabled
-option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA / FXAA). (Performance cost: Low)
+option.SHARPENING_ENABLED.comment=Accentuates edges (hopefully without making them pixelated, only recommended if using TAA / FXAA)
 value.SHARPENING_ENABLED.0=Off
 value.SHARPENING_ENABLED.1=On
 
@@ -1305,7 +1305,7 @@ value.COLORBLIND_INTENSITY.-1=Use Style
 screen.VIGNETTE_MENU=Vignette
 
 option.VIGNETTE_ENABLED=Vignette Enabled
-option.VIGNETTE_ENABLED.comment=Darkens the edges of the screen. (Performance cost: Low-None)
+option.VIGNETTE_ENABLED.comment=Darkens the edges of the screen
 value.VIGNETTE_ENABLED.-1=Use Style
 value.VIGNETTE_ENABLED.0=Off
 value.VIGNETTE_ENABLED.1=On
@@ -1398,7 +1398,6 @@ screen.WAVING_MENU=Waving
 screen.WAVING_BLOCKS_MENU=Waving Blocks
 
 option.WAVING_ENABLED=Waving Enabled
-option.WAVING_ENABLED.comment=(Performance cost: Low-None)
 value.WAVING_ENABLED.-1=Use Style
 value.WAVING_ENABLED.0=Off
 value.WAVING_ENABLED.1=On
@@ -2144,7 +2143,7 @@ screen.BORDER_FOG_MENU=Border Fog
 screen.BORDER_FOG_MENU.comment=Fog that appears at the edge of the rendered chunks
 
 option.BORDER_FOG_ENABLED=Border Fog Enabled
-option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Distant Horizons is enabled)\n\n(Performance cost: Low)
+option.BORDER_FOG_ENABLED.comment=Enables the fog that appears at the edge of loaded chunks (this is automatically disabled when Voxy is enabled)
 value.BORDER_FOG_ENABLED.0=Off
 value.BORDER_FOG_ENABLED.1=On
 
@@ -2185,6 +2184,10 @@ option.FOG_BUG_RECREATION=Fog Bug Recreation
 option.FOG_BUG_RECREATION.comment=Partially recreates the vanilla bug of fully in-fog chunks not matching the sky color (requires Border Fog to be enabled and Cylindrical Clipping to be disabled)
 value.FOG_BUG_RECREATION.0=Off
 value.FOG_BUG_RECREATION.1=On
+
+option.VOXY_BORDER_FOG_DIST_MULT=Voxy Distance Mult
+option.VOXY_BORDER_FOG_DIST_MULT.comment=How much to decrease the fog distance when Voxy is enabled
+prefix.VOXY_BORDER_FOG_DIST_MULT=x
 
 
 

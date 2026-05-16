@@ -75,18 +75,17 @@ void main() {
 	#endif
 	
 	
-	#ifdef DISTANT_HORIZONS
+	#if BORDER_FOG_ENABLED == 1 || CYLINDRICAL_CLIPPING == 1
 		float _fogDistance;
 		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
-	#elif defined VOXY
-		float fogAmount = float(depth == 1.0);
-	#else
-		#if BORDER_FOG_ENABLED == 1 || CYLINDRICAL_CLIPPING == 1
-			float _fogDistance;
-			float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
-		#else
-			const float fogAmount = 0.0;
+		#ifdef DISTANT_HORIZONS
+			fogAmount = mix(fogAmount, 1.0, float(depth == 1.0 && depthDh == 1.0));
 		#endif
+		#ifdef VOXY
+			fogAmount = mix(fogAmount, 1.0, float(depth == 1.0));
+		#endif
+	#else
+		const float fogAmount = 0.0;
 	#endif
 	
 	#ifdef OVERWORLD

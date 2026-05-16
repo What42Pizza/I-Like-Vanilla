@@ -54,15 +54,18 @@ void main() {
 	#if BORDER_FOG_ENABLED == 1
 		float fogDistance;
 		float skyAmount = getBorderFogAmount(playerPos, fogDistance);
+		#ifdef DISTANT_HORIZONS
+			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
+		#endif
+		#ifdef VOXY
+			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0));
+		#endif
 		#if FOG_BUG_RECREATION == 1
 			skyAmount *= 1.0 - 0.0001 * float(depth < 1.0);
 		#endif
 	#else
 		float skyAmount = float(depth == 1.0);
 		float fogDistance = skyAmount;
-	#endif
-	#ifdef DISTANT_HORIZONS
-		skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
 	#endif
 	
 	
