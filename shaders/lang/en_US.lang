@@ -2000,6 +2000,14 @@ value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
 option.SKY_HORIZON_SUNSET_BRIGHTNESS=Horizon Sunset Brightness
 value.SKY_HORIZON_SUNSET_BRIGHTNESS.-1=Use Style
 
+option.SUNRISE_SUNSET_TOP_HEIGHT=Sunrise/Sunset Top Height
+option.SUNRISE_SUNSET_TOP_HEIGHT.comment=Controls the top height of the sunrise/sunset sky glow
+value.SUNRISE_SUNSET_TOP_HEIGHT.-1=Use Style
+
+option.SUNRISE_SUNSET_Bottom_HEIGHT=Sunrise/Sunset Bottom Height
+option.SUNRISE_SUNSET_Bottom_HEIGHT.comment=Controls the bottom height of the sunrise/sunset sky glow
+value.SUNRISE_SUNSET_Bottom_HEIGHT.-1=Use Style
+
 
 
 
