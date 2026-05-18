@@ -64,8 +64,8 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#elif CUSTOM_OVERWORLD_SKYBOX == 1
 			sunDot *= sunDot;
 		#endif
-		float upDotSS = 1.0 - (1.0 - upDot) * (1.0 - upDot);
-		sunDot *= percentThrough(upDotSS * (1.0 - SUNRISE_SUNSET_TOP_HEIGHT * 0.5), 1.0, SUNRISE_SUNSET_BOTTOM_HEIGHT);
+		float upDotForSS = 1.0 - (1.0 - upDot) * (1.0 - upDot);
+		sunDot *= percentThrough(upDotForSS * (1.0 - SUNRISE_SUNSET_TOP_HEIGHT * 0.5), 1.0, SUNRISE_SUNSET_BOTTOM_HEIGHT);
 		sunDot *= sunriseSunsetPercent;
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		skyColor = mix(skyColor, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);

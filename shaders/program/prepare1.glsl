@@ -37,7 +37,7 @@ void main() {
 			shadowCasterLight *= phaseMults[moonPhase];
 		}
 		
-		shadowCasterLight *= 1.0 - 0.3 * inPaleGarden;
+		shadowCasterLight *= 1.0 - 0.25 * inPaleGarden;
 		shadowCasterLight *= 1.0 - 0.2 * (SHADOWS_BRIGHTNESS - 1.0);
 		
 	#elif defined NETHER
@@ -61,7 +61,7 @@ void main() {
 		ambientLight *= 1.0 - (1.0 - phaseMults[moonPhase]) * ambientMoonPercent;
 		
 		ambientLight *= SHADOWS_BRIGHTNESS;
-		ambientLight *= 1.0 - 0.1 * inPaleGarden;
+		ambientLight *= 1.0 - 0.25 * inPaleGarden;
 		
 	#elif defined NETHER
 		ambientLight = NETHER_AMBIENT_COLOR;

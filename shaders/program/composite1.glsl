@@ -151,7 +151,7 @@ void main() {
 		#ifdef OVERWORLD
 			fogDensity = mix(UNDERGROUND_FOG_DENSITY, mix(ATMOSPHERIC_FOG_DENSITY, NIGHT_ATMOSPHERIC_FOG_DENSITY, ambientMoonPercent), min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * brightnesses.y);
-			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY * 1.0, PALE_GARDEN_FOG_DENSITY * 1.0, dayPercent), inPaleGarden);
+			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
 		#elif defined NETHER
 			fogDensity = NETHER_FOG_DENSITY;
 		#elif defined END
@@ -289,7 +289,7 @@ void main() {
 		#else
 			fogDarken = 1.0;
 		#endif
-		extraFogDist = 8.0 * inPaleGarden;
+		extraFogDist = 2.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 8.0;
 	} else if (isEyeInWater == 1) {
 		fogDensity = WATER_FOG_DENSITY * 0.2;

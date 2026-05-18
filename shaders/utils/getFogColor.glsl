@@ -68,8 +68,9 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#elif CUSTOM_OVERWORLD_SKYBOX == 1
 			sunDot *= sunDot;
 		#endif
-		sunDot *= 1.0 - upDot;
-		sunDot *= 1.0 - (1.0 - sunriseSunsetPercent) * (1.0 - sunriseSunsetPercent);
+		float upDotForSS = 1.0 - (1.0 - upDot) * (1.0 - upDot);
+		sunDot *= percentThrough(upDotForSS * (1.0 - SUNRISE_SUNSET_TOP_HEIGHT * 0.5), 1.0, SUNRISE_SUNSET_BOTTOM_HEIGHT);
+		sunDot *= sunriseSunsetPercent;
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		fogColorOut = mix(fogColorOut, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		
