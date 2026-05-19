@@ -916,7 +916,6 @@ screen.SSAO_MENU=SSAO
 
 option.SSAO_ENABLED=SSAO Enabled
 option.SSAO_ENABLED.comment=Darkens corners / crevasses
-value.SSAO_ENABLED.-1=Use Style
 value.SSAO_ENABLED.0=Off
 value.SSAO_ENABLED.1=On
 

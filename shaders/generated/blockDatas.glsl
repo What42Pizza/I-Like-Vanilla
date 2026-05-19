@@ -548,6 +548,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 								if (materialId < 113u) {
 									if (materialId < 112u) {
 										SET_SPECULARNESS(0.5);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 									} else {
 									}
 								} else {
@@ -555,6 +556,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 									} else {
 										SET_SPECULARNESS(0.5);
+										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 									}
 								}
 							} else {

@@ -266,7 +266,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.3
+										#define SKYLIGHT_NIGHT_BLUE 1.35
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
@@ -282,7 +282,7 @@
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.2
+										#define AMBIENT_NIGHT_BLUE 1.25
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
@@ -664,10 +664,6 @@
 
 
 
-#if SSAO_ENABLED == -1
-#undef SSAO_ENABLED
-										#define SSAO_ENABLED 1
-#endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
 										#define AO_AMOUNT_LIT 0.5
@@ -959,11 +955,12 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										#define VIBRANCE 0.15
+										// note: it might be better to leave this at 0.0 because then there's a mix of saturated and non-saturated blocks?
+										#define VIBRANCE 0.0
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.05
+										#define SATURATION 0.25
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -1848,7 +1845,7 @@
 #endif
 #if WEATHER_FOG_DENSITY == -1
 #undef WEATHER_FOG_DENSITY
-										#define WEATHER_FOG_DENSITY 1.5
+										#define WEATHER_FOG_DENSITY 1.3
 #endif
 #if PALE_GARDEN_FOG_DENSITY == -1
 #undef PALE_GARDEN_FOG_DENSITY

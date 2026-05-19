@@ -49,11 +49,8 @@ void doColorCorrection(inout vec3 color) {
 	color = clamp(color, 0.0, 1.0);
 	
 	// saturation & vibrance
-	float maxChannel = max(max(color.r, color.g), color.b);
-	float minChannel = min(min(color.r, color.g), color.b);
-	float delta = maxChannel - minChannel;
-	float saturation = (maxChannel == 0.0) ? 0.0 : delta / maxChannel;
-	float vibranceAmount = pow2(1.0 - saturation) * VIBRANCE * 1.5;
+	float saturation = getSaturation(color);
+	float vibranceAmount = (pow3(1.0 - saturation)) * VIBRANCE * 1.5;
 	float colorLum = getLum(color);
 	vec3 lumDiff = color - colorLum;
 	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1.0 - colorLum) * 2.0) * 0.3;

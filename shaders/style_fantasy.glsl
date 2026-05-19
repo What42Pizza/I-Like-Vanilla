@@ -665,10 +665,6 @@
 
 
 
-#if SSAO_ENABLED == -1
-#undef SSAO_ENABLED
-										#define SSAO_ENABLED 1
-#endif
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
 										#define AO_AMOUNT_LIT 0.7

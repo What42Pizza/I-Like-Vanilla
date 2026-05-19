@@ -746,7 +746,7 @@ waviness: 2
 
 block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers:
 weight: 3
-brightness: 0.9
+brightness: 0.8
 shadow casting: foliage
 do bottom waving: false
 brightness: 0.95
@@ -758,14 +758,16 @@ shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper:
+block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper, pitcher_crop:half=upper:
 weight: 1
+brightness: 0.85
 shadow casting: foliage
 waviness: 3
 specularness: 0.5
 
-block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower:
+block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower, pitcher_crop:half=lower:
 weight: 1
+brightness: 0.85
 shadow casting: foliage
 do bottom waving: false
 waviness: 3

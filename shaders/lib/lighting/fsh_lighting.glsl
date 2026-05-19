@@ -46,11 +46,12 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, vec3 playerPos, float depth
 
 vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	if (lightDot < 0.0) return vec3(0.0); // surface is facing away from shadowLightPosition
+	float lViewPos = length(viewPos);
 	
 	#if PIXELATED_SHADOWS > 0
 		// no filtering, world-aligned pixelated
 		
-		viewPos += normal * 0.0025 * (40.0 + length(viewPos));
+		viewPos += normal * 0.0025 * (40.0 + lViewPos);
 		
 		vec3 tangent = cross(normal, gbufferModelView[1].xyz);
 		if (abs(tangent.x) + abs(tangent.y) + abs(tangent.z) < 0.01) {
@@ -68,11 +69,11 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		if (shadowPos.z > 1.0) return vec3(1.0);
 		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
-		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
-		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.0008;
+		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.00075 + length(shadowPos.xy - 0.5) * 0.0011;
+		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.00075 + length(shadowPos.xy - 0.5) * 0.0011;
 		
 		vec3 shadowSample = vec3(0.0);
-		float bias = 0.0002 + length(viewPos) * 0.035 / shadowMapResolution;
+		float bias = 0.0002 + lViewPos * 0.035 / shadowMapResolution;
 		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy + shadowPosStepY.xy, playerPos, shadowPos.z - bias);
 		shadowSample += sampleShadowAtPoint(shadowPos.xy + shadowPosStepX.xy - shadowPosStepY.xy, playerPos, shadowPos.z - bias);
 		shadowSample += sampleShadowAtPoint(shadowPos.xy - shadowPosStepX.xy + shadowPosStepY.xy, playerPos, shadowPos.z - bias);
@@ -82,7 +83,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	#elif SHADOW_FILTERING == 0
 		
 		// no filtering, pixelated edges
-		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		viewPos += normal * 0.001 * (25.0 + lViewPos);
 		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
@@ -91,7 +92,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 	#elif SHADOW_FILTERING == 1
 		
 		// no filtering, smooth edges
-		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		viewPos += normal * 0.001 * (25.0 + lViewPos);
 		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
@@ -155,7 +156,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 			);
 		#endif
 		
-		viewPos += normal * 0.001 * (25.0 + length(viewPos));
+		viewPos += normal * 0.001 * (25.0 + lViewPos);
 		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		vec3 shadowPos = getShadowPos(playerPos, normal);
 		if (shadowPos.z > 1.0) return vec3(1.0);
