@@ -45,7 +45,10 @@ void main() {
 	// add noise for fake texture
 	float worldScale = 300.0 / length(playerPos);
 	uvec3 noisePos = uvec3(ivec3((playerPos + cameraPosition) * ceil(worldScale) + 0.5));
-	uint noise = randomizeUint(noisePos.x) ^ randomizeUint(noisePos.y) ^ randomizeUint(noisePos.z);
+	randomizeUint(noisePos.x);
+	randomizeUint(noisePos.y);
+	randomizeUint(noisePos.z);
+	uint noise = noisePos.x ^ noisePos.y ^ noisePos.z;
 	color.rgb += 0.03 * randomFloat(noise);
 	//color.rgb = clamp(color.rgb, vec3(0.0), vec3(1.0));
 	
