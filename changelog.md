@@ -6,6 +6,7 @@
   - Enabled border fog for Voxy
   - Added setting 'Voxy Border Fog Dist Mult'
   - Improved nether effects (Nether Clouds and Border Fog)
+  - Tweaked settings and effects
 
 <br>
 

@@ -141,6 +141,8 @@ void main() {
 		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	}
 	
+	color.rgb *= 1.0 + 0.5 * step(0.9, lmcoord.x);
+	
 	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
@@ -190,10 +192,6 @@ void main() {
 	vec4 glcolor4 = gl_Color;
 	float ao = 1.0 - (1.0 - glcolor4.a) * mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	glcolor = glcolor4.rgb * ao;
-	
-	float brightnessIncrease = getSaturation(glcolor.rgb);
-	brightnessIncrease = 1.0 - (1.0 - brightnessIncrease) * (1.0 - brightnessIncrease);
-	glcolor *= 1.0 + 0.5 * brightnessIncrease;
 	
 	
 	// block id stuff
