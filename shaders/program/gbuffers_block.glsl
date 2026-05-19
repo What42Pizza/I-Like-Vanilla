@@ -141,7 +141,7 @@ void main() {
 		doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	}
 	
-	color.rgb *= 1.0 + 0.5 * step(0.9, lmcoord.x);
+	color.rgb *= 1.0 + 0.75 * step(0.9, lmcoord.x) * step(0.1, getSaturation(glcolor.rgb));
 	
 	
 	/* DRAWBUFFERS:02 */

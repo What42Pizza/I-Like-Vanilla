@@ -800,7 +800,7 @@ specularness: 0.25
 
 block polished_granite, polished_granite_stairs, polished_granite_slab, polished_diorite, polished_diorite_stairs, polished_diorite_slab, polished_andesite, polished_andesite_stairs, polished_andesite_slab, polished_deepslate, polished_deepslate_stairs, polished_deepslate_slab:
 weight: 3
-reflectiveness: 0.3
+reflectiveness: 0.25
 specularness: 0.6
 
 block pointed_dripstone:

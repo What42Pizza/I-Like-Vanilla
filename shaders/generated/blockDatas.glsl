@@ -621,7 +621,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 								if (materialId < 130u) {
 									TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 								} else {
-									SET_REFLECTIVENESS(0.3);
+									SET_REFLECTIVENESS(0.25);
 									SET_SPECULARNESS(0.6);
 								}
 							}

@@ -249,7 +249,7 @@
 #endif
 #if AMBIENT_DAY_BRIGHTNESS == -1
 #undef AMBIENT_DAY_BRIGHTNESS
-										#define AMBIENT_DAY_BRIGHTNESS 0.85
+										#define AMBIENT_DAY_BRIGHTNESS 0.9
 #endif
 
 
@@ -262,15 +262,15 @@
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.75
+										#define SKYLIGHT_NIGHT_GREEN 0.7
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.2
+										#define SKYLIGHT_NIGHT_BLUE 1.3
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
-										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.36
+										#define SKYLIGHT_NIGHT_BRIGHTNESS 0.34
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
@@ -278,15 +278,15 @@
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.75
+										#define AMBIENT_NIGHT_GREEN 0.7
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.1
+										#define AMBIENT_NIGHT_BLUE 1.2
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
-										#define AMBIENT_NIGHT_BRIGHTNESS 0.32
+										#define AMBIENT_NIGHT_BRIGHTNESS 0.3
 #endif
 #if MOON_PHASE_BRIGHTNESS_MULT_1 == -1
 #undef MOON_PHASE_BRIGHTNESS_MULT_1
@@ -389,7 +389,7 @@
 
 #if BLOCK_RED_DARK == -1
 #undef BLOCK_RED_DARK
-										#define BLOCK_RED_DARK 0.9
+										#define BLOCK_RED_DARK 1.0
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
@@ -401,7 +401,7 @@
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
-										#define BLOCK_RED_BRIGHT 1.01
+										#define BLOCK_RED_BRIGHT 1.05
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
@@ -413,7 +413,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.1
+										#define BLOCK_BRIGHTNESS 1.05
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -578,7 +578,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 1.02
+										#define FOLIAGE_TINT_BLUE 1.01
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -744,7 +744,7 @@
 #endif
 #if SUNRAYS_AMOUNT_DAY == -1
 #undef SUNRAYS_AMOUNT_DAY
-										#define SUNRAYS_AMOUNT_DAY 0.75
+										#define SUNRAYS_AMOUNT_DAY 0.7
 #endif
 #if SUNRAYS_AMOUNT_NIGHT == -1
 #undef SUNRAYS_AMOUNT_NIGHT
@@ -1647,15 +1647,15 @@
 #endif
 #if SKY_HORIZON_NIGHT_RED == -1
 #undef SKY_HORIZON_NIGHT_RED
-										#define SKY_HORIZON_NIGHT_RED 0.2
+										#define SKY_HORIZON_NIGHT_RED 0.35
 #endif
 #if SKY_HORIZON_NIGHT_GREEN == -1
 #undef SKY_HORIZON_NIGHT_GREEN
-										#define SKY_HORIZON_NIGHT_GREEN 0.25
+										#define SKY_HORIZON_NIGHT_GREEN 0.35
 #endif
 #if SKY_HORIZON_NIGHT_BLUE == -1
 #undef SKY_HORIZON_NIGHT_BLUE
-										#define SKY_HORIZON_NIGHT_BLUE 0.4
+										#define SKY_HORIZON_NIGHT_BLUE 0.5
 #endif
 #if SKY_HORIZON_NIGHT_BRIGHTNESS == -1
 #undef SKY_HORIZON_NIGHT_BRIGHTNESS
@@ -1840,7 +1840,7 @@
 #endif
 #if NIGHT_ATMOSPHERIC_FOG_DENSITY == -1
 #undef NIGHT_ATMOSPHERIC_FOG_DENSITY
-										#define NIGHT_ATMOSPHERIC_FOG_DENSITY 0.15
+										#define NIGHT_ATMOSPHERIC_FOG_DENSITY 0.2
 #endif
 #if UNDERGROUND_FOG_DENSITY == -1
 #undef UNDERGROUND_FOG_DENSITY
