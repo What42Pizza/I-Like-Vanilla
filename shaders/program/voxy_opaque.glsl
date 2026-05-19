@@ -82,7 +82,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	#if LAVA_NOISE_ENABLED == 1
 		if (materialId == BLOCK_ID_LAVA) {
-			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+			vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 			vec2 worldPos2 = playerPos.xz + cameraPosition.xz + playerPos.y + cameraPosition.y;
 			worldPos2 += worldPos2.yx * 0.125;
 			float noise = 1.25;

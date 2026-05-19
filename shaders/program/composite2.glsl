@@ -68,7 +68,7 @@ void main() {
 			vec3 viewPosDh = screenToViewDh(screenPosDh);
 			if (viewPosDh.b > viewPos.b) viewPos = viewPosDh;
 		#endif
-		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		float undergroundAmount = pow(volSunraysAmount, 0.6) * 4.0;
 		volSunraysAmount = mix(volSunraysAmount, undergroundAmount, (1.0 - eyeBrightnessSmooth.y / 240.0) * (SUNRAYS_UNDERGROUND_MULT - 1.0) * 0.5 + 0.1);
 		float altitude = playerPos.y + cameraPosition.y;

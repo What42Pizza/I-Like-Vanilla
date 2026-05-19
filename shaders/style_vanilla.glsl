@@ -258,15 +258,15 @@
 
 #if SKYLIGHT_NIGHT_RED == -1
 #undef SKYLIGHT_NIGHT_RED
-										#define SKYLIGHT_NIGHT_RED 0.65
+										#define SKYLIGHT_NIGHT_RED 0.8
 #endif
 #if SKYLIGHT_NIGHT_GREEN == -1
 #undef SKYLIGHT_NIGHT_GREEN
-										#define SKYLIGHT_NIGHT_GREEN 0.65
+										#define SKYLIGHT_NIGHT_GREEN 0.75
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.25
+										#define SKYLIGHT_NIGHT_BLUE 1.2
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
@@ -274,15 +274,15 @@
 #endif
 #if AMBIENT_NIGHT_RED == -1
 #undef AMBIENT_NIGHT_RED
-										#define AMBIENT_NIGHT_RED 0.65
+										#define AMBIENT_NIGHT_RED 0.8
 #endif
 #if AMBIENT_NIGHT_GREEN == -1
 #undef AMBIENT_NIGHT_GREEN
-										#define AMBIENT_NIGHT_GREEN 0.65
+										#define AMBIENT_NIGHT_GREEN 0.75
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.15
+										#define AMBIENT_NIGHT_BLUE 1.1
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
@@ -389,11 +389,11 @@
 
 #if BLOCK_RED_DARK == -1
 #undef BLOCK_RED_DARK
-										#define BLOCK_RED_DARK 1.1
+										#define BLOCK_RED_DARK 0.9
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
-										#define BLOCK_GREEN_DARK 0.8
+										#define BLOCK_GREEN_DARK 0.7
 #endif
 #if BLOCK_BLUE_DARK == -1
 #undef BLOCK_BLUE_DARK
@@ -401,7 +401,7 @@
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
-										#define BLOCK_RED_BRIGHT 1.05
+										#define BLOCK_RED_BRIGHT 1.01
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
@@ -413,7 +413,7 @@
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.2
+										#define BLOCK_BRIGHTNESS 1.1
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -707,7 +707,7 @@
 #endif
 #if REFLECTIONS_BRIGHTNESS == -1
 #undef REFLECTIONS_BRIGHTNESS
-										#define REFLECTIONS_BRIGHTNESS 1.0
+										#define REFLECTIONS_BRIGHTNESS 1.5
 #endif
 //#if RAIN_REFLECTION_AMOUNT == -1
 //#undef RAIN_REFLECTION_AMOUNT

@@ -56,7 +56,7 @@ void main() {
 	worldY = min(worldY, maxY);
 	playerPos.y = worldY - cameraPosition.y;
 	
-	viewPos = mat3(gbufferModelView) * playerPos;
+	viewPos = transform(gbufferModelView, playerPos);
 	gl_Position = viewToNdc(viewPos);
 	
 	#if TAA_ENABLED == 1

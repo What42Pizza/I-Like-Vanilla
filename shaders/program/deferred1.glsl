@@ -57,7 +57,7 @@ void main() {
 	//	if (depthVxTrans != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVxTrans));
 	//#endif
 	
-	vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
+	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#if BORDER_FOG_ENABLED == 1
 		float fogDistance;
 		float skyAmount = getBorderFogAmount(playerPos, fogDistance);
