@@ -294,7 +294,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		#if PBR_TYPE == 0
 			specular *= 1.0 - 0.25 * getSaturation(color);
 		#endif
-		lighting += specularColor * specular * (0.1 + 0.5 * specularness) * min(inSunlightAmount * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
+		lighting += specularColor * specular * (0.05 + 0.6 * specularness) * min(inSunlightAmount * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
 	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);

@@ -973,7 +973,7 @@ option.WATER_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for w
 value.WATER_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.REFLECTIONS_BRIGHTNESS=Reflections Brightness
-option.REFLECTIONS_BRIGHTNESS.comment=How much to brighten/darken reflections
+option.REFLECTIONS_BRIGHTNESS.comment=How much to brighten/darken reflections (only effects reflected terrain)
 value.REFLECTIONS_BRIGHTNESS.-1=Use Style
 
 #option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
