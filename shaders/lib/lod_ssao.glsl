@@ -17,12 +17,14 @@ float getLodAoAmount(vec3 normal) {
 	if (dot(xDir, xDir) < 0.001) xDir = cross(normal, gbufferModelView[2].xyz);
 	xDir = normalize(xDir);
 	vec3 yDir = normalize(cross(normal, xDir));
-	xDir *= 0.55;
-	yDir *= 0.55;
+	xDir *= 0.7;
+	yDir *= 0.7;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	viewPos += (xDir + yDir) * dither; // note: for some reason `dither - 0.5` looks worse?
+	viewPos += (xDir + yDir) * (dither - 0.5);
+	
+	//float upDot = dot(normal, gbufferModelView[1].xyz);
 	
 	vec4 plusXPos4 = LOD_PROJECTION_MAT * vec4(viewPos + xDir, 1.0);
 	vec3 plusXPos = plusXPos4.xyz / plusXPos4.w * 0.5 + 0.5;
@@ -30,7 +32,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 viewPosPlusX = LOD_SCREEN_TO_VIEW_FN(vec3(plusXPos.xy, testPlusX));
 	float plusXAmount = float(length(viewPosPlusX) < length(viewPos + xDir) * 0.999 - 0.25);
 	plusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * xDir, blockPos - 0.5);
-	aoAmount *= 1.0 - plusXAmount;
+	aoAmount *= 1.0 - plusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 minusXPos4 = LOD_PROJECTION_MAT * vec4(viewPos - xDir, 1.0);
 	vec3 minusXPos = minusXPos4.xyz / minusXPos4.w * 0.5 + 0.5;
@@ -38,7 +40,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 viewPosMinusX = LOD_SCREEN_TO_VIEW_FN(vec3(minusXPos.xy, testMinusX));
 	float minusXAmount = float(length(viewPosMinusX) < length(viewPos - xDir) * 0.999 - 0.25);
 	minusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -xDir, blockPos - 0.5);
-	aoAmount *= 1.0 - minusXAmount;
+	aoAmount *= 1.0 - minusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 plusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos + yDir, 1.0);
 	vec3 plusYPos = plusYPos4.xyz / plusYPos4.w * 0.5 + 0.5;
@@ -46,7 +48,7 @@ float getLodAoAmount(vec3 normal) {
 	vec3 viewPosPlusY = LOD_SCREEN_TO_VIEW_FN(vec3(plusYPos.xy, testPlusY));
 	float plusYAmount = float(length(viewPosPlusY) < length(viewPos + yDir) * 0.999 - 0.25);
 	plusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * yDir, blockPos - 0.5);
-	aoAmount *= 1.0 - plusYAmount;
+	aoAmount *= 1.0 - plusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	vec4 minusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos - yDir, 1.0);
 	vec3 minusYPos = minusYPos4.xyz / minusYPos4.w * 0.5 + 0.5;
@@ -54,9 +56,9 @@ float getLodAoAmount(vec3 normal) {
 	vec3 viewPosMinusY = LOD_SCREEN_TO_VIEW_FN(vec3(minusYPos.xy, testMinusY));
 	float minusYAmount = float(length(viewPosMinusY) < length(viewPos - yDir) * 0.999 - 0.2);
 	minusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -yDir, blockPos - 0.5);
-	aoAmount *= 1.0 - minusYAmount;
+	aoAmount *= 1.0 - minusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	aoAmount = 1.0 - aoAmount;
-	aoAmount *= 1.0 - 0.5 * dot(normal, gbufferModelView[1].xyz);
+	aoAmount *= 1.0 - 0.75 * dot(normal, gbufferModelView[1].xyz);
 	return aoAmount;
 }

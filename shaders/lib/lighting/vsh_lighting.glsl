@@ -5,7 +5,7 @@ void doVshLighting(inout vec2 lmcoord, vec3 viewPos, vec3 normal) {
 	
 	lmcoord.y = (lmcoord.y * lmcoord.y + lmcoord.y) * 0.5; // kinda like squaring but not as intense
 	
-	#if HANDHELD_LIGHT_ENABLED == 1
+	#if HANDHELD_LIGHT_ENABLED == 1 && SHOW_DANGEROUS_LIGHT == 0
 		float viewPosLen = length(viewPos);
 		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
 			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
