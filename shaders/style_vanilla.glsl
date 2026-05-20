@@ -221,7 +221,7 @@
 
 #if SKYLIGHT_DAY_RED == -1
 #undef SKYLIGHT_DAY_RED
-										#define SKYLIGHT_DAY_RED 1.0
+										#define SKYLIGHT_DAY_RED 1.01
 #endif
 #if SKYLIGHT_DAY_GREEN == -1
 #undef SKYLIGHT_DAY_GREEN
@@ -229,7 +229,7 @@
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.98
+										#define SKYLIGHT_DAY_BLUE 0.97
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
@@ -237,7 +237,7 @@
 #endif
 #if AMBIENT_DAY_RED == -1
 #undef AMBIENT_DAY_RED
-										#define AMBIENT_DAY_RED 0.98
+										#define AMBIENT_DAY_RED 0.97
 #endif
 #if AMBIENT_DAY_GREEN == -1
 #undef AMBIENT_DAY_GREEN
@@ -389,7 +389,7 @@
 
 #if BLOCK_RED_DARK == -1
 #undef BLOCK_RED_DARK
-										#define BLOCK_RED_DARK 1.0
+										#define BLOCK_RED_DARK 0.97
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
@@ -409,11 +409,11 @@
 #endif
 #if BLOCK_BLUE_BRIGHT == -1
 #undef BLOCK_BLUE_BRIGHT
-										#define BLOCK_BLUE_BRIGHT 0.95
+										#define BLOCK_BLUE_BRIGHT 0.93
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
-										#define BLOCK_BRIGHTNESS 1.05
+										#define BLOCK_BRIGHTNESS 1.1
 #endif
 #if BLOCK_BRIGHTNESS_CURVE == -1
 #undef BLOCK_BRIGHTNESS_CURVE
@@ -438,7 +438,7 @@
 
 #if CAVE_AMBIENT_RED == -1
 #undef CAVE_AMBIENT_RED
-										#define CAVE_AMBIENT_RED 1.05
+										#define CAVE_AMBIENT_RED 1.1
 #endif
 #if CAVE_AMBIENT_GREEN == -1
 #undef CAVE_AMBIENT_GREEN
@@ -578,7 +578,7 @@
 #endif
 #if FOLIAGE_TINT_BLUE == -1
 #undef FOLIAGE_TINT_BLUE
-										#define FOLIAGE_TINT_BLUE 1.01
+										#define FOLIAGE_TINT_BLUE 1.0
 #endif
 #if SNOWY_TWEAKS_ENABLED == -1
 #undef SNOWY_TWEAKS_ENABLED
@@ -695,11 +695,11 @@
 #endif
 #if WATER_REFLECTION_AMOUNT_SURFACE == -1
 #undef WATER_REFLECTION_AMOUNT_SURFACE
-										#define WATER_REFLECTION_AMOUNT_SURFACE 0.2
+										#define WATER_REFLECTION_AMOUNT_SURFACE 0.25
 #endif
 #if WATER_REFLECTION_AMOUNT_UNDERGROUND == -1
 #undef WATER_REFLECTION_AMOUNT_UNDERGROUND
-										#define WATER_REFLECTION_AMOUNT_UNDERGROUND 0.2
+										#define WATER_REFLECTION_AMOUNT_UNDERGROUND 0.25
 #endif
 #if REFLECTIONS_BRIGHTNESS == -1
 #undef REFLECTIONS_BRIGHTNESS
@@ -955,8 +955,8 @@
 #endif
 #if VIBRANCE == -1
 #undef VIBRANCE
-										// note: it might be better to leave this at 0.0 because then there's a mix of saturated and non-saturated blocks?
-										#define VIBRANCE 0.0
+										// note: it might be better to leave this near 0.0 because then there's a mix of saturated and non-saturated blocks?
+										#define VIBRANCE 0.05
 #endif
 #if SATURATION == -1
 #undef SATURATION
