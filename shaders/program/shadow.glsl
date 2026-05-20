@@ -22,7 +22,7 @@ void main() {
 		color.rgb *= glcolor;
 	#endif
 	
-	#if WATER_CAUSTICS_ENABLED == 1
+	#if COLORED_SHADOWS_ENABLED == 1 && WATER_CAUSTICS_ENABLED == 1
 		ivec3 colorInt = ivec3(color * 255.0 + 0.5);
 		if (colorInt.r == 1 && (colorInt.g == 2 || colorInt.g == 3) && colorInt.b == 255) color.rgb -= 0.01;
 		if (materialId == BLOCK_ID_WATER) {
@@ -67,7 +67,7 @@ void main() {
 	
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
-	#if COLORED_SHADOWS_ENABLED
+	#if COLORED_SHADOWS_ENABLED == 1
 		glcolor = gl_Color.rgb;
 	#endif
 	
