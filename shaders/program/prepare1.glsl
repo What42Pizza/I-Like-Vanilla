@@ -63,6 +63,10 @@ void main() {
 		ambientLight *= SHADOWS_BRIGHTNESS;
 		ambientLight *= 1.0 - 0.25 * inPaleGarden;
 		
+		#ifndef SHADOWS_ENABLED
+			ambientLight *= 0.98;
+		#endif
+		
 	#elif defined NETHER
 		ambientLight = NETHER_AMBIENT_COLOR;
 	#elif defined END

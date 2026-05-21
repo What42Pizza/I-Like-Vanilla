@@ -206,7 +206,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		#ifdef SHADOWS_ENABLED
 			float lightDotLift = 0.3;
 		#else
-			float lightDotLift = 1.0;
+			float lightDotLift = 0.5;
 		#endif
 		// TODO: reintroduce 'SUNLIGHT_CEL_AMOUNT' here?
 		lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
