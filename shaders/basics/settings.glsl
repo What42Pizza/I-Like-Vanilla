@@ -128,11 +128,11 @@ const float shadowIntervalSize    = 2.0;
 
 #if SSS_PIXELS != 0
 	#undef TAA_ENABLED
-	#defined TAA_ENABLED 0
+	#define TAA_ENABLED 0
 	#undef FXAA_ENABLED
-	#defined FXAA_ENABLED 0
+	#define FXAA_ENABLED 0
 	#undef SHARPENING_ENABLED
-	#defined SHARPENING_ENABLED 0
+	#define SHARPENING_ENABLED 0
 #endif
 
 #if TEMPORAL_FILTER_ENABLED == 0
@@ -152,7 +152,7 @@ const float shadowIntervalSize    = 2.0;
 
 #if CLOUD_COMPATIBILITY == 2
 	#undef CLOUD_COMPATIBILITY
-	#if MODERN_BACKEND
+	#ifdef MODERN_BACKEND
 		#define CLOUD_COMPATIBILITY 0
 	#else
 		#define CLOUD_COMPATIBILITY 1

@@ -126,7 +126,7 @@ void main() {
 			vec3 cameraOffset = cameraPosition - previousCameraPosition;
 			prevCoord = reproject(pos, cameraOffset);
 		}
-		vec2 prevNoisyRender;
+		vec2 prevNoisyRender = vec2(0.0);
 		bool prevIsValid = all(greaterThanEqual(prevCoord, vec2(0.0))) && all(lessThan(prevCoord, vec2(1.0)));
 		if (prevIsValid) {
 			float prevDepth = texture2D(PREV_DEPTH_TEXTURE, prevCoord).r;
@@ -289,6 +289,7 @@ void main() {
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	if (isEyeInWater == 0) {
+		fogDensity = 0.0;
 		#ifdef OVERWORLD
 			fogDarken = 1.1;
 			fogDarken = mix(fogDarken, 0.85, betterRainStrength * eyeBrightnessSmooth.y / 240.0);
@@ -311,6 +312,10 @@ void main() {
 		fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.2;
 		fogDarken = 1.0;
 		extraFogDist = 1.0;
+	} else {
+		fogDensity = 1.0;
+		fogDarken = 1.0;
+		extraFogDist = 0.0;
 	}
 	
 	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);

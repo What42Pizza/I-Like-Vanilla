@@ -115,7 +115,7 @@ void main() {
 		#if WAVING_WATER_SURFACE_ENABLED == 1
 			vec2 noisePos = (playerPos.xz + cameraPosition.xz) / WAVING_WATER_SCALE * 0.25;
 			float wavingSurfaceAmount = mix(WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND, WAVING_WATER_SURFACE_AMOUNT_SURFACE, lmcoord.y) * fresnel * 0.125;
-			vec2 rawNormalNoise;
+			vec2 rawNormalNoise = vec2(0.0);
 			if (wavingSurfaceAmount > 0.00001) {
 				float fresnelMult = mix(WAVING_WATER_FRESNEL_UNDERGROUND * 0.55, WAVING_WATER_FRESNEL_SURFACE * 0.55, lmcoord.y);
 				float frameTimeCounter = frameTimeCounter * WAVING_WATER_SPEED;
