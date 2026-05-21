@@ -182,9 +182,6 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	
-	#if FANCY_END_PORTAL_ENABLED == 0
-		vec3 viewPos;
-	#endif
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
 	
