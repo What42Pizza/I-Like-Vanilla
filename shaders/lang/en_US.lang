@@ -1525,6 +1525,9 @@ option.WATER_FOAM_AMOUNT=Water Foam Amount
 option.WATER_FOAM_AMOUNT.comment=Makes the edges of water more white
 value.WATER_FOAM_AMOUNT.-1=Use Style
 
+option.WATER_FOAM_SIZE=Water Foam Size
+value.WATER_FOAM_SIZE.-1=Use Style
+
 
 
 

@@ -116,13 +116,13 @@ void main() {
 		color.rgb *= mix(WATER_TINT_DEEP, WATER_TINT_SHALLOW, waterDepthPercent);
 		
 		//#if WATER_FOAM_ENABLED == 1
-		//	float foamAmount = percentThrough(waterDepth, 1.2, 0.0);
+		//	float foamAmount = percentThrough(waterDepth, WATER_FOAM_SIZE, 0.0);
 		//	reflectiveness *= 1.0 - foamAmount;
 		//	foamAmount *= foamAmount;
 		//	foamAmount *= 1.0 - 0.25 * fresnel;
 		//	foamAmount *= 0.5 + 0.5 * lmcoord.y;
 		//	#if WAVING_WATER_SURFACE_ENABLED == 1
-		//		foamAmount *= 0.35 + 0.65 * length(rawNormalNoise);
+		//		foamAmount *= 0.5 + 0.65 * length(rawNormalNoise);
 		//	#endif
 		//	color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.5);
 		//#endif

@@ -24,6 +24,7 @@ const int   colortex6Format       = RG16;
 const bool  colortex6Clear        = false;
 const int   colortex7Format       = R16;
 const bool  colortex7Clear        = false;
+const int   colortex8Format       = RGBA4;
 #if defined VOXY || defined DISTANT_HORIZONS
 	const int   colortex9Format   = RGBA8;
 	const bool  colortex9Clear    = true;

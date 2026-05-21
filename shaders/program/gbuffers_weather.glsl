@@ -68,7 +68,7 @@ void main() {
 	const float distSlope  = 2.0;
 	const float alphaClose = 0.75;
 	const float alphaFar   = 1.25;
-	glcolor.a = alphaFar - (alphaFar - alphaClose) * distSlope / (length(playerPos.xz) + distSlope);
+	glcolor.a *= alphaFar - (alphaFar - alphaClose) * distSlope / (length(playerPos.xz) + distSlope);
 	glcolor.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	

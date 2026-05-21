@@ -117,7 +117,7 @@
 #endif
 #if WATER_CAUSTICS_DARK_RED == -1
 #undef WATER_CAUSTICS_DARK_RED
-										#define WATER_CAUSTICS_DARK_RED 0.2
+										#define WATER_CAUSTICS_DARK_RED 0.25
 #endif
 #if WATER_CAUSTICS_DARK_GREEN == -1
 #undef WATER_CAUSTICS_DARK_GREEN
@@ -266,7 +266,7 @@
 #endif
 #if SKYLIGHT_NIGHT_BLUE == -1
 #undef SKYLIGHT_NIGHT_BLUE
-										#define SKYLIGHT_NIGHT_BLUE 1.35
+										#define SKYLIGHT_NIGHT_BLUE 1.3
 #endif
 #if SKYLIGHT_NIGHT_BRIGHTNESS == -1
 #undef SKYLIGHT_NIGHT_BRIGHTNESS
@@ -282,7 +282,7 @@
 #endif
 #if AMBIENT_NIGHT_BLUE == -1
 #undef AMBIENT_NIGHT_BLUE
-										#define AMBIENT_NIGHT_BLUE 1.25
+										#define AMBIENT_NIGHT_BLUE 1.2
 #endif
 #if AMBIENT_NIGHT_BRIGHTNESS == -1
 #undef AMBIENT_NIGHT_BRIGHTNESS
@@ -389,7 +389,7 @@
 
 #if BLOCK_RED_DARK == -1
 #undef BLOCK_RED_DARK
-										#define BLOCK_RED_DARK 0.97
+										#define BLOCK_RED_DARK 0.98
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
@@ -397,7 +397,7 @@
 #endif
 #if BLOCK_BLUE_DARK == -1
 #undef BLOCK_BLUE_DARK
-										#define BLOCK_BLUE_DARK 0.4
+										#define BLOCK_BLUE_DARK 0.35
 #endif
 #if BLOCK_RED_BRIGHT == -1
 #undef BLOCK_RED_BRIGHT
@@ -562,7 +562,7 @@
 #endif
 #if TEXTURE_CONTRAST == -1
 #undef TEXTURE_CONTRAST
-										#define TEXTURE_CONTRAST 0.75
+										#define TEXTURE_CONTRAST 0.9
 #endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
@@ -972,11 +972,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.24
+										#define SURFACE_CONTRAST 0.1
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST 0.24
+										#define UNDERGROUND_CONTRAST 0.1
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER
@@ -1201,7 +1201,11 @@
 #if WATER_FOAM_AMOUNT == -1
 #undef WATER_FOAM_AMOUNT
 										#define WATER_FOAM_AMOUNT 0.4
-#endif 
+#endif
+#if WATER_FOAM_SIZE == -1
+#undef WATER_FOAM_SIZE
+										#define WATER_FOAM_SIZE 1.1
+#endif
 
 
 
@@ -1217,7 +1221,7 @@
 #endif
 #if WATER_TINT_SHALLOW_GREEN == -1
 #undef WATER_TINT_SHALLOW_GREEN
-										#define WATER_TINT_SHALLOW_GREEN 1.1
+										#define WATER_TINT_SHALLOW_GREEN 1.05
 #endif
 #if WATER_TINT_SHALLOW_BLUE == -1
 #undef WATER_TINT_SHALLOW_BLUE

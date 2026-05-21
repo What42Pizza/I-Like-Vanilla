@@ -1200,7 +1200,11 @@
 #if WATER_FOAM_AMOUNT == -1
 #undef WATER_FOAM_AMOUNT
 										#define WATER_FOAM_AMOUNT 0.75
-#endif 
+#endif
+#if WATER_FOAM_SIZE == -1
+#undef WATER_FOAM_SIZE
+										#define WATER_FOAM_SIZE 1.3
+#endif
 
 
 

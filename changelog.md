@@ -7,7 +7,9 @@
   - Added settings 'Nether Sky Tint Red/Green/Blue'
   - Added settings 'Nether Clouds Tint Red/Green/Blue'
   - Added settings 'Sunrise/Sunset Top Height' and 'Sunrise/Sunset Bottom Height'
+  - Added setting 'Water Foam Size'
   - Fixed shader not loading with Distant Horizons enabled
+  - Fixed vanilla rain appearing and disappearing instantly
   - Fixed particle rain looking broken against distant terrain (configurable with new 'Fog Ignores Transparents' setting)
   - Fixed compiler warnings
   - Tweaked many settings and effects
