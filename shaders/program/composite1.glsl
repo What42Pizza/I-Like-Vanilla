@@ -49,14 +49,22 @@ void main() {
 		const bool isCloud = false;
 	#endif
 	
-	float depth;
-	if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-	else depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	#if FOG_IGNORES_TRANSPARENTS == 0
+		float depth;
+		if (isCloud) depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		else depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	#elif FOG_IGNORES_TRANSPARENTS == 1
+		float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+	#endif
 	vec3 viewPos = screenToView(vec3(texcoord, depth));
 	#ifdef DISTANT_HORIZONS
-		float depthDh;
-		if (isCloud) depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		else depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		#if FOG_IGNORES_TRANSPARENTS == 0
+			float depthDh;
+			if (isCloud) depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+			else depthDh = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
+		#elif FOG_IGNORES_TRANSPARENTS == 1
+			float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		#endif
 		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
 		if (viewPosDh.z > viewPos.z) viewPos = viewPosDh;
 	#endif

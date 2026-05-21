@@ -1,4 +1,4 @@
-- v1.3.8
+- v1.4.0
   - Added Story-Mode-like clouds (configurable)
   - Added new 'Vertical' end clouds type
   - Added settings 'Nether Sky Tint Red/Green/Blue'
@@ -8,6 +8,7 @@
   - Added setting 'Voxy Border Fog Dist Mult'
   - Improved nether effects (Nether Clouds and Border Fog)
   - Fixed shader not loading with Distant Horizons enabled
+  - Fixed particle rain looking broken against distant terrain (configurable with new 'Fog Ignores Transparents' setting)
   - Tweaked many settings and effects
 
 <br>

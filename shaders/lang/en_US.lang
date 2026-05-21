@@ -2491,3 +2491,8 @@ option.MATRIX_COMPATIBILITY=Matrix Compatibility
 option.MATRIX_COMPATIBILITY.comment=Improves compatibility with mod at the potential cost of some performance
 value.MATRIX_COMPATIBILITY.0=Off
 value.MATRIX_COMPATIBILITY.1=On
+
+option.FOG_IGNORES_TRANSPARENTS=Fog Ignores Transparents
+option.FOG_IGNORES_TRANSPARENTS.comment=Fixes things like Particle Rain, but makes other things look worse
+value.FOG_IGNORES_TRANSPARENTS.0=Off
+value.FOG_IGNORES_TRANSPARENTS.1=On
