@@ -175,6 +175,8 @@ void main() {
 			foamAmount *= 0.5 + 0.5 * lmcoord.y;
 			#if WAVING_WATER_SURFACE_ENABLED == 1
 				foamAmount *= 0.5 + 0.65 * length(rawNormalNoise);
+			#else
+				foamAmount *= 0.7;
 			#endif
 			color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.5);
 		#endif

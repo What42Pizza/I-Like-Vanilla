@@ -270,7 +270,13 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#endif
 	inSunlightAmount *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	inSunlightAmount *= clamp(lightDot, 0.0, 1.0);
-	inSunlightAmount *= ambientBrightness * ambientBrightness;
+	#ifdef SHADOWS_ENABLED
+		inSunlightAmount *= ambientBrightness * ambientBrightness;
+	#else
+		float dither = bayer64(gl_FragCoord.xy);
+		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		inSunlightAmount *= step(1.0, ambientBrightness + dither * 0.006);
+	#endif
 	inSunlightAmount *= 1.0 - rainStrength * (1.0 - mix(WEATHER_BRIGHTNESS_MULT_NIGHT, WEATHER_BRIGHTNESS_MULT_DAY, dayPercent));
 	
 	shadowColor = shadowColor / (getLum(shadowColor) + 0.00001) * inSunlightAmount * shadowcasterLight;

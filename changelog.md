@@ -4,6 +4,7 @@
   - Enabled border fog for Voxy
   - Added setting 'Voxy Border Fog Dist Mult'
   - Improved nether effects (Nether Clouds and Border Fog)
+  - Added fake shadows for when real-time shadows are disabled
   - Added settings 'Nether Sky Tint Red/Green/Blue'
   - Added settings 'Nether Clouds Tint Red/Green/Blue'
   - Added settings 'Sunrise/Sunset Top Height' and 'Sunrise/Sunset Bottom Height'
