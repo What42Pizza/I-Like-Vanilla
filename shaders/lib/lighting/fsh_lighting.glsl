@@ -306,9 +306,10 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
-	blockLight *= blockBrightness;
-	lighting *= 1.0 - min(getLum(blockLight), 1.0);
-	lighting += blockLight;
+	lighting = mix(lighting, blockLight, blockBrightness);
+	//blockLight *= blockBrightness;
+	//lighting *= 1.0 - min(getLum(blockLight), 1.0);
+	//lighting += blockLight;
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

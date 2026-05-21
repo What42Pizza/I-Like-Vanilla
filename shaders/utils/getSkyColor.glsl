@@ -117,10 +117,11 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 		#if CUSTOM_END_SKYBOX == 0
 			vec3 worldDir = mat3(gbufferModelViewInverse) * viewDir;
-			float brightness = valueNoise(worldDir * 64.0 * 0.125) * 0.5;
-			brightness += valueNoise(worldDir * 64.0 * 0.25) * 0.25;
-			brightness += valueNoise(worldDir * 64.0 * 0.5) * 0.125;
-			brightness += valueNoise(worldDir * 64.0) * 0.0625;
+			float brightness = 0.0;
+			brightness += valueNoise(worldDir * 90.0 * 0.125) * 0.5;
+			brightness += valueNoise(worldDir * 90.0 * 0.25 ) * 0.25;
+			brightness += valueNoise(worldDir * 90.0 * 0.5  ) * 0.125;
+			brightness += valueNoise(worldDir * 90.0 * 1.0  ) * 0.0625;
 			skyColor = mix(END_SKY_COLOR * 0.5, END_STATIC_COLOR, brightness * 0.5);
 		#elif CUSTOM_END_SKYBOX == 1
 			skyColor = vec3(0.0);

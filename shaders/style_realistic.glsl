@@ -1552,6 +1552,10 @@
 #undef END_CLOUDS_ENABLED
 										#define END_CLOUDS_ENABLED 1
 #endif
+#if END_CLOUDS_TYPE == -1
+#undef END_CLOUDS_TYPE
+										#define END_CLOUDS_TYPE 1
+#endif
 #if END_CLOUDS_SCALE == -1
 #undef END_CLOUDS_SCALE
 										#define END_CLOUDS_SCALE 1.8

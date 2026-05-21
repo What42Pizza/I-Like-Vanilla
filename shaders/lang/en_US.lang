@@ -1888,6 +1888,11 @@ value.END_CLOUDS_ENABLED.-1=Use Style
 value.END_CLOUDS_ENABLED.0=Off
 value.END_CLOUDS_ENABLED.1=On
 
+option.END_CLOUDS_TYPE=End Clouds Type
+value.END_CLOUDS_TYPE.-1=Use Style
+value.END_CLOUDS_TYPE.1=Vertical
+value.END_CLOUDS_TYPE.2=Swirly
+
 option.END_CLOUDS_SCALE=End Clouds Scale
 value.END_CLOUDS_SCALE.-1=Use Style
 
@@ -2003,9 +2008,9 @@ option.SUNRISE_SUNSET_TOP_HEIGHT=Sunrise/Sunset Top Height
 option.SUNRISE_SUNSET_TOP_HEIGHT.comment=Controls the top height of the sunrise/sunset sky glow
 value.SUNRISE_SUNSET_TOP_HEIGHT.-1=Use Style
 
-option.SUNRISE_SUNSET_Bottom_HEIGHT=Sunrise/Sunset Bottom Height
-option.SUNRISE_SUNSET_Bottom_HEIGHT.comment=Controls the bottom height of the sunrise/sunset sky glow
-value.SUNRISE_SUNSET_Bottom_HEIGHT.-1=Use Style
+option.SUNRISE_SUNSET_BOTTOM_HEIGHT=Sunrise/Sunset Bottom Height
+option.SUNRISE_SUNSET_BOTTOM_HEIGHT.comment=Controls the bottom height of the sunrise/sunset sky glow
+value.SUNRISE_SUNSET_BOTTOM_HEIGHT.-1=Use Style
 
 
 

@@ -342,9 +342,9 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 67u) {
 								if (materialId < 65u) {
 									if (materialId < 64u) {
-										SET_GLOWING_COLOR(vec3(36.0, 29.0,  92.2), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_GOLD_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3( 0.0,  0.0,  92.2), vec3(72.0, 94.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_GOLD_ORE_STRENGTH);
 									} else {
-										SET_GLOWING_COLOR(vec3(  0.0, 31.8, 46.3), vec3(162.0, 65.6, 87.8), GLOWING_ORES_STRENGTH * GLOWING_COPPER_ORE_STRENGTH);
+										SET_GLOWING_COLOR(vec3(  0.0, 26.3, 46.3), vec3(162.0, 65.6, 890.), GLOWING_ORES_STRENGTH * GLOWING_COPPER_ORE_STRENGTH);
 									}
 								} else {
 									if (materialId < 66u) {
