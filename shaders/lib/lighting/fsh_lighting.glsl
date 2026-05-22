@@ -69,8 +69,11 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 		if (shadowPos.z > 1.0) return vec3(1.0);
 		vec3 shadowPosStepX = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * tangent);
 		vec3 shadowPosStepY = normalize(mat3(shadowProjection) * mat3(shadowModelView) * mat3(gbufferModelViewInverse) * bitangent);
-		shadowPosStepX *= PIXELATED_SHADOWS_SOFTNESS * 0.00075 + length(shadowPos.xy - 0.5) * 0.0011;
-		shadowPosStepY *= PIXELATED_SHADOWS_SOFTNESS * 0.00075 + length(shadowPos.xy - 0.5) * 0.0011;
+		float stepMult = length(shadowPos.xy - 0.5);
+		stepMult = 1.0 - (1.0 - stepMult) * (1.0 - stepMult) * (1.0 - PIXELATED_SHADOWS_SOFTNESS);
+		stepMult = stepMult * 0.0007;
+		shadowPosStepX *= stepMult;
+		shadowPosStepY *= stepMult;
 		
 		vec3 shadowSample = vec3(0.0);
 		float bias = 0.0002 + lViewPos * 0.035 / shadowMapResolution;

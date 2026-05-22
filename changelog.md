@@ -1,4 +1,4 @@
-- v1.4.0
+- v1.4.0 (26/05/22)
   - Added Story-Mode-like clouds (configurable)
   - Added new 'Vertical' end clouds type
   - Enabled border fog for Voxy
