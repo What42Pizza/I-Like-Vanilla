@@ -1,5 +1,6 @@
-- v1.4.1
+- v1.4.0b
   - Replaced settings 'Shadows Enabled (Overworld/End)' with 'Shadows Type (Overworld/End)'
+  - Disabled 'Fog Ignores Transparents' by default due to unexpected bugs
 
 <br>
 
