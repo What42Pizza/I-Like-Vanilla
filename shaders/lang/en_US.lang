@@ -160,15 +160,17 @@ option.POM_QUALITY.comment=Controls the quality of the POM (lower values may not
 
 screen.SHADOWS_MENU=Shadows
 
-option.OVERWORLD_SHADOWS_ENABLED=Shadows Enabled (Overworld)
-option.OVERWORLD_SHADOWS_ENABLED.comment=Enables or disables shadow casting when in the overworld
-value.OVERWORLD_SHADOWS_ENABLED.0=Off
-value.OVERWORLD_SHADOWS_ENABLED.1=On
+option.OVERWORLD_SHADOWS_TYPE=Shadows Type (Overworld)
+option.OVERWORLD_SHADOWS_TYPE.comment=Enables or disables shadow casting when in the overworld
+value.OVERWORLD_SHADOWS_TYPE.0=None
+value.OVERWORLD_SHADOWS_TYPE.1=Faked
+value.OVERWORLD_SHADOWS_TYPE.2=Real-Time
 
-option.END_SHADOWS_ENABLED=Shadows Enabled (End)
-option.END_SHADOWS_ENABLED.comment=Enables or disables shadow casting when in the end
-value.END_SHADOWS_ENABLED.0=Off
-value.END_SHADOWS_ENABLED.1=On
+option.END_SHADOWS_TYPE=Shadows Type (End)
+option.END_SHADOWS_TYPE.comment=Enables or disables shadow casting when in the end
+value.END_SHADOWS_TYPE.0=None
+value.END_SHADOWS_TYPE.1=Faked
+value.END_SHADOWS_TYPE.2=Real-Time
 
 option.COLORED_SHADOWS_ENABLED=Colored Shadows Enabled
 option.COLORED_SHADOWS_ENABLED.comment=Allows blocks such as water and stained glass to cast colored shadows instead of fully-blocked shadows

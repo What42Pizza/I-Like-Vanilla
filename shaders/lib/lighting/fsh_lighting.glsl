@@ -8,7 +8,7 @@ vec3 getShadowPos(vec3 playerPos, vec3 normal) {
 
 
 
-#ifdef SHADOWS_ENABLED
+#if SHADOWS_TYPE == 2
 
 #if SHADOW_FILTERING == 0 && PIXELATED_SHADOWS == 0
 	#define samplePosType ivec2
@@ -206,7 +206,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	
 	#if defined OVERWORLD || defined END
 		float lightDot = dot(normalize(shadowLightPosition), normal);
-		#ifdef SHADOWS_ENABLED
+		#if SHADOWS_TYPE == 2
 			float lightDotLift = 0.3;
 		#else
 			float lightDotLift = 0.5;
@@ -227,9 +227,9 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		color += nightPercent * 0.06;
 	#endif
 	
-	#ifdef END
-		ambientBrightness = 1.0;
-	#endif
+	//#ifdef END
+	//	ambientBrightness = 1.0;
+	//#endif
 	
 	vec2 prepareData10 = texelFetch(MISC_DATA_TEXTURE, ivec2(1, 0), 0).rg;
 	vec2 prepareData01 = texelFetch(MISC_DATA_TEXTURE, ivec2(0, 1), 0).rg;
@@ -261,7 +261,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		blockBrightness = pow5(blockBrightness);
 	#endif
 	
-	#ifdef SHADOWS_ENABLED
+	#if SHADOWS_TYPE == 2
 		vec3 shadowColor = sampleShadow(viewPos, lightDot, normal);
 		inSunlightAmount = getLum(shadowColor);
 		#if PIXELATED_SHADOWS > 0
@@ -273,12 +273,12 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#endif
 	inSunlightAmount *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	inSunlightAmount *= clamp(lightDot, 0.0, 1.0);
-	#ifdef SHADOWS_ENABLED
-		inSunlightAmount *= ambientBrightness * ambientBrightness;
-	#else
+	#if SHADOWS_TYPE == 1
 		float dither = bayer64(gl_FragCoord.xy);
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		inSunlightAmount *= step(1.0, ambientBrightness + dither * 0.006);
+	#else
+		inSunlightAmount *= ambientBrightness * ambientBrightness;
 	#endif
 	inSunlightAmount *= 1.0 - rainStrength * (1.0 - mix(WEATHER_BRIGHTNESS_MULT_NIGHT, WEATHER_BRIGHTNESS_MULT_DAY, dayPercent));
 	
@@ -316,9 +316,6 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
 	lighting = mix(lighting, blockLight, blockBrightness);
-	//blockLight *= blockBrightness;
-	//lighting *= 1.0 - min(getLum(blockLight), 1.0);
-	//lighting += blockLight;
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

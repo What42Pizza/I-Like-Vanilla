@@ -1,4 +1,5 @@
-#undef SHADOWS_ENABLED
+#undef SHADOWS_TYPE
+#define SHADOWS_TYPE 0
 
 layout(location = 0) out vec4 albedoOut;
 layout(location = 1) out vec4 auxDataOut;

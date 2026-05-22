@@ -24,7 +24,7 @@ const float HALF_PI = PI / 2.0;
 	uniform sampler2D depthtex0;
 	uniform sampler2D depthtex1;
 	uniform sampler2D depthtex2;
-	#ifdef SHADOWS_ENABLED
+	#if SHADOWS_TYPE == 2
 		uniform sampler2D shadowtex0;
 		#if COLORED_SHADOWS_ENABLED == 1
 			uniform sampler2D shadowcolor0;

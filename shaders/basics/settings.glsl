@@ -108,16 +108,16 @@ const float shadowIntervalSize    = 2.0;
 	#define END_CLOUDS_ENABLED 0
 #endif
 
-#if defined OVERWORLD && OVERWORLD_SHADOWS_ENABLED == 1
-	#define SHADOWS_ENABLED
+#if defined OVERWORLD
+	#define SHADOWS_TYPE OVERWORLD_SHADOWS_TYPE
 #endif
-#if defined END && END_SHADOWS_ENABLED == 1
-	#define SHADOWS_ENABLED
+#if defined END
+	#define SHADOWS_TYPE END_SHADOWS_TYPE
 #endif
 
 
 
-#ifndef SHADOWS_ENABLED
+#if SHADOWS_TYPE < 2
 	#undef VOL_SUNRAYS_ENABLED
 	#define VOL_SUNRAYS_ENABLED 0
 #endif

@@ -1,3 +1,8 @@
+- v1.4.1
+  - Replaced settings 'Shadows Enabled (Overworld/End)' with 'Shadows Type (Overworld/End)'
+
+<br>
+
 - v1.4.0 (26/05/22)
   - Added Story-Mode-like clouds (configurable)
   - Added new 'Vertical' end clouds type

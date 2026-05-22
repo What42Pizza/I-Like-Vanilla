@@ -1,5 +1,6 @@
 #if SHADOWS_ON_TRANSPARENTS == 0
-	#undef SHADOWS_ENABLED
+	#undef SHADOWS_TYPE
+	#define SHADOWS_TYPE 0
 #endif
 
 in_out vec2 texcoord;
