@@ -415,12 +415,15 @@ emission: vec3(1.0, 1.0, 0.9)
 
 block soul_torch, soul_wall_torch, soul_lantern, soul_campfire:
 weight: 3
-brightness: 1.25
+brightness: 0.9
+shadow casting: foliage
 voxelize: true
 emission: vec3(0.0, 0.15, 0.75)
 
 block redstone_torch, redstone_wall_torch:
 weight: 5
+brightness: 0.9
+shadow casting: foliage
 voxelize: true
 emission: vec3(0.0, 0.5, 0.0)
 

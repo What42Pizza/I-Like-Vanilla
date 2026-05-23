@@ -192,6 +192,7 @@ if (materialId < 27u) {
 							}
 						} else {
 							if (materialId < 32u) {
+								TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 								SET_VOXEL_ID(72u);
 							} else {
 								if (materialId < 33u) {
@@ -638,7 +639,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 						if (materialId < 136u) {
 							if (materialId < 135u) {
 								if (materialId < 133u) {
-									TWEAK_GLCOLOR_BRIGHTNESS(1.25);
+									TWEAK_GLCOLOR_BRIGHTNESS(0.9);
 									SET_VOXEL_ID(71u);
 								} else {
 									if (materialId < 134u) {

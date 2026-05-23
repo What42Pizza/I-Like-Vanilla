@@ -28,15 +28,15 @@ void main() {
 		if (materialId == BLOCK_ID_WATER) {
 			vec3 worldPos = playerPos + cameraPosition;
 			worldPos *= 2.0 / WATER_CAUSTICS_SIZE;
-			worldPos.x /= WATER_CAUSTICS_HORIZONTAL_STRETCH;
+			worldPos.x /= WATER_CAUSTICS_HORIZONTAL_STRETCH * 1.5;
 			worldPos.y += (worldPos.x + worldPos.z);
 			worldPos.y += frameTimeCounter * WATER_CAUSTICS_SPEED;
-			bool noise_1 = valueNoise(worldPos + vec3(0.0, 0.0, -0.07 * WATER_CAUSTICS_THICKNESS)) < 0.5;
-			bool noise_2 = valueNoise(worldPos + vec3(0.0, 0.0, 0.07 * WATER_CAUSTICS_THICKNESS)) < 0.5;
+			float noise_1 = valueNoise(worldPos);
 			worldPos.y -= frameTimeCounter * 2.0 * WATER_CAUSTICS_SPEED;
-			bool noise_3 = valueNoise(worldPos + vec3(0.0, 0.0, -0.07 * WATER_CAUSTICS_THICKNESS)) < 0.5;
-			bool noise_4 = valueNoise(worldPos + vec3(0.0, 0.0, 0.07 * WATER_CAUSTICS_THICKNESS)) < 0.5;
-			bool isBright = noise_1 != noise_2 || noise_3 != noise_4;
+			float noise_2 = valueNoise(worldPos);
+			const float minValue = 0.497 - 0.03 * WATER_CAUSTICS_THICKNESS;
+			const float maxValue = 0.503 + 0.03 * WATER_CAUSTICS_THICKNESS;
+			bool isBright = (noise_1 > minValue && noise_1 < maxValue) || (noise_2 > minValue && noise_2 < maxValue);
 			color.rgb = mix(ivec3(1, 2, 255) / 255.0, ivec3(1, 3, 255) / 255.0, float(isBright));
 		}
 	#endif
