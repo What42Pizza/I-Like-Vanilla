@@ -1,4 +1,9 @@
-- v1.4.0b
+- v1.4.0c
+  - Fixed 'Water Caustics Bright/Dark Brightness' settings
+
+<br>
+
+- v1.4.0b (26/05/23)
   - Replaced settings 'Shadows Enabled (Overworld/End)' with 'Shadows Type (Overworld/End)'
   - Disabled 'Fog Ignores Transparents' by default due to unexpected bugs
   - Improved the color and shape of water caustics

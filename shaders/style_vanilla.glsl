@@ -666,15 +666,16 @@
 
 #if AO_AMOUNT_LIT == -1
 #undef AO_AMOUNT_LIT
-										#define AO_AMOUNT_LIT 0.45
+										#define AO_AMOUNT_LIT 0.5
 #endif
 #if AO_AMOUNT_UNLIT == -1
 #undef AO_AMOUNT_UNLIT
-										#define AO_AMOUNT_UNLIT 0.45
+										#define AO_AMOUNT_UNLIT 0.5
 #endif
 #if AO_SIZE == -1
 #undef AO_SIZE
-										#define AO_SIZE 1.0
+										// note: setting this too high makes incorrect ssao look worse
+										#define AO_SIZE 0.85
 #endif
 
 
