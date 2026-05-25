@@ -625,7 +625,7 @@
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.5
+										#define BLOOM_AMOUNT 0.45
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -1201,7 +1201,7 @@
 #endif
 #if WATER_FOAM_AMOUNT == -1
 #undef WATER_FOAM_AMOUNT
-										#define WATER_FOAM_AMOUNT 0.4
+										#define WATER_FOAM_AMOUNT 0.45
 #endif
 #if WATER_FOAM_SIZE == -1
 #undef WATER_FOAM_SIZE

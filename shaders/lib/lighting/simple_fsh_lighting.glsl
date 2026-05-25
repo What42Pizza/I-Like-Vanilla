@@ -38,14 +38,16 @@ void doSimpleFshLighting(inout vec3 color, float blockBrightness, float ambientB
 		lighting += lightningFlashAmount * LIGHTNING_BRIGHTNESS * 0.25 * ambientBrightness * ambientBrightness;
 	#endif
 	
+	blockBrightness = percentThrough(blockBrightness, 0.0, 0.85);
 	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
-	blockBrightness *= 1.0 - min(getLum(lighting), 1.0);
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
-	blockLight *= blockBrightness;
-	lighting *= 1.0 - min(getLum(blockLight), 1.0);
-	lighting += blockLight;
+	#ifdef OVERWORLD
+		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
+	#endif
+	blockBrightness *= 1.0 - getLum(lighting) * 0.75;
+	lighting = mix(lighting, blockLight, blockBrightness);
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

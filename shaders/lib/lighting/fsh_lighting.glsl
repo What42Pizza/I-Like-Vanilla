@@ -296,14 +296,15 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		lighting += specularColor * specular * (0.05 + 0.6 * specularness) * min(inSunlightAmount * 64.0, 1.0) * min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	#endif
 	
+	blockBrightness = percentThrough(blockBrightness, 0.0, 0.85);
 	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
-	#ifdef OVERWORLD
-		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
-	#endif
-	blockBrightness *= 1.0 - inSunlightAmount * 0.3 - getLum(lighting) * 0.7;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
+	#ifdef OVERWORLD
+		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
+	#endif
+	blockBrightness *= 1.0 - getLum(lighting) * 0.75;
 	lighting = mix(lighting, blockLight, blockBrightness);
 	
 	float betterNightVision = nightVision;
