@@ -45,8 +45,6 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	vec2 lmcoord = parameters.lightMap;
 	adjustLmcoord(lmcoord);
 	
-	doVshLighting(lmcoord, viewPos, normal);
-	
 	
 	// block-specific datas
 	float reflectiveness;
@@ -58,12 +56,16 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	#include "/generated/blockDatas.glsl"
 	
 	
+	// vsh lighting
+	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
+	
+	
 	// main color
-	vec4 color = parameters.sampledColour;
-	color.rgb *= parameters.tinting.rgb;
-	vec4 rawColor = color;
-	color.rgb *= glcolor;
+	vec4 rawColor = parameters.sampledColour;
+	vec4 color = rawColor;
 	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	color.rgb *= parameters.tinting.rgb;
+	color.rgb *= glcolor;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);

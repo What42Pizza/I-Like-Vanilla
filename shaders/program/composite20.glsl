@@ -81,6 +81,10 @@ void main() {
 				bloomAddition *= 0.5;
 			#endif
 			color += bloomAddition * bloomAmount;
+			//color = bloomAddition;
+			//color = vec3(getLum(color));
+			//color *= color;
+			//color *= color;
 		#endif
 	#endif
 	

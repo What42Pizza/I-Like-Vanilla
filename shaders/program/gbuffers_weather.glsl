@@ -72,7 +72,7 @@ void main() {
 	glcolor.a *= 1.0 - WEATHER_TRANSPARENCY;
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
 }
 

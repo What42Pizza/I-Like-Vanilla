@@ -83,7 +83,7 @@ void main() {
 	adjustLmcoord(lmcoord);
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
-	glcolor.rgb *= 1.25;
+	glcolor.rgb *= 1.5;
 	glcolor.a = sqrt(glcolor.a);
 	
 	#if PBR_TYPE != 0
@@ -110,7 +110,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
 }
 

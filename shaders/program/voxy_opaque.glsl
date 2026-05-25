@@ -66,11 +66,15 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	#include "/generated/blockDatas.glsl"
 	
 	
+	// vsh lighting
+	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
+	
+	
 	// main color
 	vec4 color = parameters.sampledColour;
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	color.rgb *= tintColor;
 	color.rgb *= glcolor;
-	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
@@ -103,10 +107,6 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 			color.rgb *= noise;
 		}
 	#endif
-	
-	
-	// vsh lighting
-	doVshLighting(lmcoord, viewPos, normal);
 	
 	
 	color.rgb *= 0.5;

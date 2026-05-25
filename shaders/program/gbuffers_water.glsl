@@ -82,8 +82,8 @@ void main() {
 	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
 	if (rawColor.a < 0.01) discard;
 	vec4 color = rawColor;
-	color *= glcolor;
 	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	color *= glcolor;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
@@ -335,7 +335,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
 }
 

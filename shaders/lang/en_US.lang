@@ -867,7 +867,6 @@ value.BLOOM_STYLE.2=Realistic
 
 option.BLOOM_QUALITY=Bloom Quality
 option.BLOOM_QUALITY.comment=Controls the number of samples for bloom level
-value.BLOOM_QUALITY.-1=Use Style
 
 option.BLOOM_RENDER_SCALE=Bloom Render Scale
 option.BLOOM_RENDER_SCALE.comment=Controls the resolution that bloom is rendered at. Each dimension is decreased by this amount, meaning the number of pixels is decreased by this value squared, meaning the default value of x0.25 is 16x less pixels
@@ -875,6 +874,9 @@ value.BLOOM_RENDER_SCALE.3=x0.125
 value.BLOOM_RENDER_SCALE.2=x0.25
 value.BLOOM_RENDER_SCALE.1=x0.5
 value.BLOOM_RENDER_SCALE.0=x1
+
+option.BLOOM_LEVELS=Bloom Levels
+option.BLOOM_LEVELS.comment=How many layers of bloom to calculate. If you increase this then you might want to decrease Bloom Size and increase Bloom Amount (and vice versa)
 
 option.BLOOM_AMOUNT=Bloom Amount
 value.BLOOM_AMOUNT.-1=Use Style

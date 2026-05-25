@@ -96,7 +96,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
 	
 }
 

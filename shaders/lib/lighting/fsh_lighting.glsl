@@ -240,17 +240,6 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		ambientLight = mix(CAVE_AMBIENT_COLOR * 0.6 * (1.0 + 0.4 * screenBrightness), ambientLight, ambientBrightness);
 	#endif
 	
-	vec3 normalForSS = mat3(gbufferModelViewInverse) * normal;
-	// +-1.0x: -0.4
-	// +-1.0z: -0.0
-	// +1.0y: +0.325
-	// -1.0y: -0.65
-	normalForSS.xz = abs(normalForSS.xz);
-	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
-	float sideShading = dot(normalForSS, vec3(-0.4, 0.65, 0.0));
-	float brightForSS = max(blockBrightness, ambientBrightness);
-	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.8;
-	
 	#if BLOCK_BRIGHTNESS_CURVE == 2
 		blockBrightness = pow2(blockBrightness);
 	#elif BLOCK_BRIGHTNESS_CURVE == 3
@@ -311,7 +300,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	blockBrightness *= 1.0 - min(getLum(lighting), 1.0);
+	blockBrightness *= 1.0 - inSunlightAmount * 0.3 - getLum(lighting) * 0.7;
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
@@ -324,13 +313,9 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	}
 	vec3 nightVisionMin = vec3(betterNightVision);
 	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT * (1.0 - ambientBrightness);
-	nightVisionMin *= 1.0 + 0.5 * sideShading;
 	lighting += nightVisionMin * (1.0 - 0.75 * getLum(lighting));
 	
 	lighting += glowingAmount * vec3(1.0, 0.85, 0.8);
-	
-	sideShading *= 1.0 - blockBrightness * blockBrightness;
-	lighting *= 1.0 + sideShading;
 	
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		lighting = vec3(1.0);

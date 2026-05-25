@@ -140,8 +140,8 @@ void main() {
 	if (rawColor.a < alphaTestRef) discard;
 	
 	vec4 color = rawColor;
-	color.rgb *= glcolor;
 	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	color.rgb *= glcolor;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
@@ -301,17 +301,15 @@ void main() {
 	#if !(PBR_TYPE == 0 && POM_ENABLED == 0)
 		vec3 normal;
 	#endif
-	normal = gl_NormalMatrix * gl_Normal;
+	vec3 worldNormal = gl_Normal;
 	
-	#if PBR_TYPE == 0
-		// foliage normals
-		#if OVERRIDE_FOLIAGE_NORMALS == 1
-			if (isFlatShaded) {
-				//normal = normalize(mix(normal, gl_NormalMatrix * vec3(0.0, 1.0, 0.0), 0.75));
-				normal = gl_NormalMatrix * vec3(0.0, 1.0, 0.0);
-			}
-		#endif
+	#if OVERRIDE_FOLIAGE_NORMALS == 1 && PBR_TYPE == 0
+		if (isFlatShaded) {
+			worldNormal = vec3(0.0, 1.0, 0.0);
+		}
 	#endif
+	
+	normal = gl_NormalMatrix * worldNormal;
 	
 	#if PBR_TYPE == 0 && POM_ENABLED == 0
 		encodedNormal = encodeNormal(normal);
@@ -418,7 +416,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
 	
 }
 

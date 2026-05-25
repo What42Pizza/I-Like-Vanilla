@@ -63,16 +63,32 @@ void main() {
 		return;
 	#endif
 	
-	vec2 stepAmount = vec2(invAspectRatio, 1.0) * BLOOM_SIZE * 0.03;
+	vec2 stepAmount = vec2(invAspectRatio, 1.0) * BLOOM_SIZE * 0.012;
 	vec3 bloomColor = vec3(0.0);
 	
 	doBloomTile(bloomColor, stepAmount);
-	stepAmount *= 2.0;
-	doBloomTile(bloomColor, stepAmount);
-	stepAmount *= 2.0;
-	doBloomTile(bloomColor, stepAmount);
+	#if BLOOM_LEVELS > 1
+		stepAmount *= 2.0;
+		doBloomTile(bloomColor, stepAmount);
+	#endif
+	#if BLOOM_LEVELS > 2
+		stepAmount *= 2.0;
+		doBloomTile(bloomColor, stepAmount);
+	#endif
+	#if BLOOM_LEVELS > 3
+		stepAmount *= 2.0;
+		doBloomTile(bloomColor, stepAmount);
+	#endif
+	#if BLOOM_LEVELS > 4
+		stepAmount *= 2.0;
+		doBloomTile(bloomColor, stepAmount);
+	#endif
+	#if BLOOM_LEVELS > 5
+		stepAmount *= 2.0;
+		doBloomTile(bloomColor, stepAmount);
+	#endif
 	
-	bloomColor /= weightsTotal * 3.0;
+	bloomColor /= weightsTotal * BLOOM_LEVELS;
 	
 	/* DRAWBUFFERS:4 */
 	gl_FragData[0] = vec4(bloomColor, 1.0);

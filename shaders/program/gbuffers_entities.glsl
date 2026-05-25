@@ -18,8 +18,8 @@ in_out vec3 viewPos;
 void main() {
 	
 	vec4 color = texture2D(MAIN_TEXTURE, texcoord);
-	color *= glcolor;
 	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	color *= glcolor;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
@@ -120,7 +120,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, viewPos, normal);
+	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
 }
 

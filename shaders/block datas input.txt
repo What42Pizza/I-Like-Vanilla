@@ -383,11 +383,10 @@ emission: vec3(15.0 / 15.0)
 
 block torch, wall_torch, candle:
 weight: 10
-brightness: 0.9
 shadow casting: foliage
-glow detect min: vec3(33.6,  40.8, 100.0)
+glow detect min: vec3( 0.0,   0.0, 100.0)
 glow detect max: vec3(60.0, 100.0, 100.0)
-glow amount: 0.25
+glow amount: 0.3
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 
@@ -429,6 +428,7 @@ emission: vec3(0.0, 0.5, 0.0)
 
 block sea_lantern:
 weight: 1
+brightness: 1.25
 voxelize: true
 emission: vec3(0.9, 1.0, 1.0)
 

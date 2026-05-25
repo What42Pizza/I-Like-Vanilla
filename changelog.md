@@ -1,5 +1,7 @@
-- v1.4.0c
+- v1.4.1
+  - Added setting 'Bloom Levels'
   - Fixed 'Water Caustics Bright/Dark Brightness' settings
+  - Tweaked settings
 
 <br>
 

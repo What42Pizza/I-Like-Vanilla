@@ -135,6 +135,13 @@ void main() {
 	
 	gl_Position.xyz = distort(gl_Position.xyz);
 	
+	// idk why but there was a situation where something with this block type (sand and sand-likes) was rendering its shadow incorrectly and was instead just two weird almost unmoving lines in the shadowmap
+	//const float low  = 16409;
+	//const float high = 16409;
+	//if (mc_Entity.x >= low && mc_Entity.x <= high) {
+	//	gl_Position = vec4(0.0);
+	//}
+	
 }
 
 #endif
