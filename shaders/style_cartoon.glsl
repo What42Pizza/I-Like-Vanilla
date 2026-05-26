@@ -564,6 +564,10 @@
 #undef TEXTURE_CONTRAST
 										#define TEXTURE_CONTRAST 0.0
 #endif
+#if TEXTURE_CONTRAST_2 == -1
+#undef TEXTURE_CONTRAST_2
+										#define TEXTURE_CONTRAST_2 0.0
+#endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
 										#define FOLIAGE_SATURATION 1.0

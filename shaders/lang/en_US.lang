@@ -757,6 +757,10 @@ option.TEXTURE_CONTRAST=Texture Contrast
 option.TEXTURE_CONTRAST.comment=Directly alters the contrast of textures (and is offset with saturation)
 value.TEXTURE_CONTRAST.-1=Use Style
 
+option.TEXTURE_CONTRAST_2=Texture Contrast 2
+option.TEXTURE_CONTRAST_2.comment=Alternative to Texture Contrast
+value.TEXTURE_CONTRAST_2.-1=Use Style
+
 option.FOLIAGE_SATURATION=Foliage Saturation
 option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
 value.FOLIAGE_SATURATION.-1=Use Style

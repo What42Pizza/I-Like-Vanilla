@@ -1,6 +1,8 @@
 - v1.4.1
   - Added setting 'Bloom Levels'
+  - Reworked block lighting calculations
   - Fixed 'Water Caustics Bright/Dark Brightness' settings
+  - Fixed bloom being off-center
   - Tweaked settings
 
 <br>

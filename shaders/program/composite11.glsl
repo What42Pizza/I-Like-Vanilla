@@ -47,12 +47,12 @@ println!("{}", total);
 
 const bool colortex4MipmapEnabled = true;
 
-void doBloomTile(inout vec3 bloomColor, vec2 stepAmount) {
+void doBloomTile(inout vec3 bloomColor, vec2 stepAmount, vec2 texcoord, int lod) {
 	for (int x = -HALF_SAMPLE_COUNT; x <= HALF_SAMPLE_COUNT; x++) {
 		for (int y = -HALF_SAMPLE_COUNT; y <= HALF_SAMPLE_COUNT; y++) {
 			vec2 offset = stepAmount * (vec2(x, y) / HALF_SAMPLE_COUNT);
 			float weight = sampleWeights[x + HALF_SAMPLE_COUNT] * sampleWeights[y + HALF_SAMPLE_COUNT];
-			bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord + offset, 2).rgb * weight;
+			bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord + offset, lod).rgb * weight;
 		}
 	}
 }
@@ -63,29 +63,37 @@ void main() {
 		return;
 	#endif
 	
+	vec2 texcoord = texcoord;
+	
 	vec2 stepAmount = vec2(invAspectRatio, 1.0) * BLOOM_SIZE * 0.012;
 	vec3 bloomColor = vec3(0.0);
 	
-	doBloomTile(bloomColor, stepAmount);
+	//texcoord.x += pixelSize.x * (1 << BLOOM_RENDER_SCALE) * 0.5; // technically these first two are needed but you can't really tell the difference
+	doBloomTile(bloomColor, stepAmount, texcoord, 1);
 	#if BLOOM_LEVELS > 1
 		stepAmount *= 2.0;
-		doBloomTile(bloomColor, stepAmount);
+		//texcoord.x += pixelSize.x * (1 << BLOOM_RENDER_SCALE); // also I have no clue why it's only the x axis that needs adjusting
+		doBloomTile(bloomColor, stepAmount, texcoord, 1);
 	#endif
 	#if BLOOM_LEVELS > 2
 		stepAmount *= 2.0;
-		doBloomTile(bloomColor, stepAmount);
+		texcoord.x += pixelSize.x * (2 << BLOOM_RENDER_SCALE);
+		doBloomTile(bloomColor, stepAmount, texcoord, 2);
 	#endif
 	#if BLOOM_LEVELS > 3
 		stepAmount *= 2.0;
-		doBloomTile(bloomColor, stepAmount);
+		texcoord.x += pixelSize.x * (4 << BLOOM_RENDER_SCALE);
+		doBloomTile(bloomColor, stepAmount, texcoord, 3);
 	#endif
 	#if BLOOM_LEVELS > 4
 		stepAmount *= 2.0;
-		doBloomTile(bloomColor, stepAmount);
+		texcoord.x += pixelSize.x * (8 << BLOOM_RENDER_SCALE);
+		doBloomTile(bloomColor, stepAmount, texcoord, 4);
 	#endif
 	#if BLOOM_LEVELS > 5
 		stepAmount *= 2.0;
-		doBloomTile(bloomColor, stepAmount);
+		texcoord.x += pixelSize.x * (16 << BLOOM_RENDER_SCALE);
+		doBloomTile(bloomColor, stepAmount, texcoord, 5);
 	#endif
 	
 	bloomColor /= weightsTotal * BLOOM_LEVELS;

@@ -117,11 +117,11 @@
 #endif
 #if WATER_CAUSTICS_DARK_RED == -1
 #undef WATER_CAUSTICS_DARK_RED
-										#define WATER_CAUSTICS_DARK_RED 0.3
+										#define WATER_CAUSTICS_DARK_RED 0.35
 #endif
 #if WATER_CAUSTICS_DARK_GREEN == -1
 #undef WATER_CAUSTICS_DARK_GREEN
-										#define WATER_CAUSTICS_DARK_GREEN 0.4
+										#define WATER_CAUSTICS_DARK_GREEN 0.45
 #endif
 #if WATER_CAUSTICS_DARK_BLUE == -1
 #undef WATER_CAUSTICS_DARK_BLUE
@@ -564,6 +564,10 @@
 #undef TEXTURE_CONTRAST
 										#define TEXTURE_CONTRAST 0.9
 #endif
+#if TEXTURE_CONTRAST_2 == -1
+#undef TEXTURE_CONTRAST_2
+										#define TEXTURE_CONTRAST_2 0.0
+#endif
 #if FOLIAGE_SATURATION == -1
 #undef FOLIAGE_SATURATION
 										#define FOLIAGE_SATURATION 0.9
@@ -957,11 +961,11 @@
 #if VIBRANCE == -1
 #undef VIBRANCE
 										// note: it might be better to leave this near 0.0 because then there's a mix of saturated and non-saturated blocks?
-										#define VIBRANCE 0.05
+										#define VIBRANCE 0.0
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.25
+										#define SATURATION 0.1
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
@@ -973,11 +977,11 @@
 #endif
 #if SURFACE_CONTRAST == -1
 #undef SURFACE_CONTRAST
-										#define SURFACE_CONTRAST 0.1
+										#define SURFACE_CONTRAST 0.12
 #endif
 #if UNDERGROUND_CONTRAST == -1
 #undef UNDERGROUND_CONTRAST
-										#define UNDERGROUND_CONTRAST 0.1
+										#define UNDERGROUND_CONTRAST 0.12
 #endif
 #if TONEMAPPER == -1
 #undef TONEMAPPER

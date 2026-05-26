@@ -85,6 +85,7 @@ void main() {
 	float m = getLum(glcolor);
 	m = m * m * (3.0 - 2.0 * m);
 	glcolor *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
+	color.rgb = color.rgb * (1.0 + TEXTURE_CONTRAST_2 * 0.025) - TEXTURE_CONTRAST_2 * 0.025;
 	
 	
 	gl_Position = viewToNdc(viewPos);
