@@ -1263,7 +1263,7 @@
 #endif
 #if SUN_BRIGHTNESS == -1
 #undef SUN_BRIGHTNESS
-										#define SUN_BRIGHTNESS 1.0
+										#define SUN_BRIGHTNESS 1.25
 #endif
 #if SUN_OPACITY == -1
 #undef SUN_OPACITY
@@ -1295,7 +1295,7 @@
 #endif
 #if WEATHER_TRANSPARENCY == -1
 #undef WEATHER_TRANSPARENCY
-										#define WEATHER_TRANSPARENCY 0.0
+										#define WEATHER_TRANSPARENCY 0.15
 #endif
 #if WEATHER_HORIZONTAL_AMOUNT == -1
 #undef WEATHER_HORIZONTAL_AMOUNT

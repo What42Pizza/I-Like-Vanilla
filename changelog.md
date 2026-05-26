@@ -3,6 +3,7 @@
   - Reworked block lighting calculations
   - Fixed 'Water Caustics Bright/Dark Brightness' settings
   - Fixed bloom being off-center
+  - Added setting 'Vanilla Clouds Height'
   - Tweaked settings
 
 <br>

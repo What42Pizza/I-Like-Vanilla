@@ -115,7 +115,7 @@ void main() {
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	#if STORY_MODE_CLOUDS_ENABLED == 1
 		alphaMult = percentThrough(cameraPosition.y, cloudHeight + 32.0, cloudHeight - 8.0); // start off inverted
-		alphaMult *= float(playerPos.y + cameraPosition.y > cloudHeight + 1);
+		alphaMult *= float(playerPos.y + cameraPosition.y > cloudHeight + 1.5);
 		alphaMult = 1.0 - alphaMult;
 	#endif
 	

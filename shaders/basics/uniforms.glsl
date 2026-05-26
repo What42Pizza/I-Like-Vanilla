@@ -55,7 +55,11 @@ uniform float wetness;
 uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
-uniform float cloudHeight = 192.0;
+#if VANILLA_CLOUDS_HEIGHT == -1
+	uniform float cloudHeight = 192.0;
+#else
+	const float cloudHeight = VANILLA_CLOUDS_HEIGHT;
+#endif
 
 uniform vec4 entityColor;
 uniform int entityId;

@@ -22,7 +22,7 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 	float sideShading = dot(normalForSS, vec3(-0.4, 0.65, 0.0));
 	float brightForSS = max(lmcoord.x, lmcoord.y);
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.8;
-	sideShading *= 1.0 - step(1.0, lmcoord.x) * 0.7;
+	sideShading *= 1.0 - step(1.0, lmcoord.x) * 0.6;
 	glcolor *= 1.0 + sideShading + step(1.0, lmcoord.x) * 0.125;
 	
 	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
