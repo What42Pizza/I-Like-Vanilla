@@ -97,7 +97,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		
 	#elif defined NETHER
 		
-		// must stay the same as in /utils/getSkyColor.glsl
+		// important: must stay the same as in /utils/getSkyColor.glsl
 		fogColorOut = fogColor;
 		fogColorOut = mix(vec3(getLum(fogColorOut)), fogColorOut, NETHER_SKY_FOG_SATURATION);
 		fogColorOut = NETHER_SKY_BASE_COLOR + NETHER_SKY_FOG_INFLUENCE * fogColorOut;
@@ -109,8 +109,12 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		
 	#endif
 	
+	// important: must stay the same as in /utils/getSkyColor.glsl
 	if (isEyeInWater == 1) {
-		fogColorOut = WATER_FOG_COLOR * (0.2 + 0.8 * max(dayPercent, eyeBrightnessSmooth.x / 240.0));
+		fogColorOut = fogColor;
+		fogColorOut = mix(vec3(getLum(fogColorOut)), fogColorOut, WATER_VANILLA_FOG_SATURATION);
+		fogColorOut = WATER_FOG_BASE_COLOR + WATER_VANILLA_FOG_INFLUENCE * fogColorOut;
+		fogColorOut *= WATER_FOG_TINT_COLOR;
 	} else if (isEyeInWater == 2) {
 		fogColorOut = LAVA_FOG_COLOR * (0.2 + 0.8 * max(dayPercent, eyeBrightnessSmooth.x / 240.0));
 	} else if (isEyeInWater == 3) {

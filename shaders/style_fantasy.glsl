@@ -1215,6 +1215,10 @@
 
 
 
+#if WATER_TEXTURE_INFLUENCE == -1
+#undef WATER_TEXTURE_INFLUENCE
+										#define WATER_TEXTURE_INFLUENCE 0.5
+#endif
 #if WATER_BIOME_INFLUENCE == -1
 #undef WATER_BIOME_INFLUENCE
 										#define WATER_BIOME_INFLUENCE 0.8
@@ -1888,17 +1892,37 @@
 
 
 
-#if WATER_FOG_RED == -1
-#undef WATER_FOG_RED
-										#define WATER_FOG_RED 0.1
+#if WATER_FOG_BASE_RED == -1
+#undef WATER_FOG_BASE_RED
+										#define WATER_FOG_BASE_RED 1.0
 #endif
-#if WATER_FOG_GREEN == -1
-#undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.1
+#if WATER_FOG_BASE_GREEN == -1
+#undef WATER_FOG_BASE_GREEN
+										#define WATER_FOG_BASE_GREEN 1.0
 #endif
-#if WATER_FOG_BLUE == -1
-#undef WATER_FOG_BLUE
-										#define WATER_FOG_BLUE 0.7
+#if WATER_FOG_BASE_BLUE == -1
+#undef WATER_FOG_BASE_BLUE
+										#define WATER_FOG_BASE_BLUE 1.0
+#endif
+#if WATER_VANILLA_FOG_INFLUENCE == -1
+#undef WATER_VANILLA_FOG_INFLUENCE
+										#define WATER_VANILLA_FOG_INFLUENCE 1.0
+#endif
+#if WATER_VANILLA_FOG_SATURATION == -1
+#undef WATER_VANILLA_FOG_SATURATION
+										#define WATER_VANILLA_FOG_SATURATION 1.0
+#endif
+#if WATER_FOG_TINT_RED == -1
+#undef WATER_FOG_TINT_RED
+										#define WATER_FOG_TINT_RED 1.0
+#endif
+#if WATER_FOG_TINT_GREEN == -1
+#undef WATER_FOG_TINT_GREEN
+										#define WATER_FOG_TINT_GREEN 1.0
+#endif
+#if WATER_FOG_TINT_BLUE == -1
+#undef WATER_FOG_TINT_BLUE
+										#define WATER_FOG_TINT_BLUE 1.0
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY

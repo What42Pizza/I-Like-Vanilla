@@ -75,6 +75,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	if (materialId == BLOCK_ID_WATER) {
 		
+		color.rgb = mix(parameters.tinting.rgb, color.rgb, WATER_TEXTURE_INFLUENCE);
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_BIOME_INFLUENCE);
 		
 		vec3 viewDir = normalize(viewPos);

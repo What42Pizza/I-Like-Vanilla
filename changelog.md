@@ -1,9 +1,12 @@
 - v1.4.1
   - Added setting 'Bloom Levels'
   - Reworked block lighting calculations
+  - Added setting 'Water Texture Influence'
+  - Replaced settings 'Water Fog Red/Green/Blue' with 'Water Fog Base Red/Green/Blue', 'Water Vanilla Fog Influence', 'Water Vanilla Fog Saturation', and 'Water Fog Red/Green/Blue Tint'
+  - Added setting 'Vanilla Clouds Height'
   - Fixed 'Water Caustics Bright/Dark Brightness' settings
   - Fixed bloom being off-center
-  - Added setting 'Vanilla Clouds Height'
+  - Fixed bug with transparent entities
   - Tweaked settings
 
 <br>

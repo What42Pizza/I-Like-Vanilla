@@ -107,7 +107,7 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 	#elif defined NETHER
 		
-		// must stay the same as in /utils/getFogColor.glsl
+		// important: this must stay the same as in /utils/getFogColor.glsl
 		skyColor = fogColor;
 		skyColor = mix(vec3(getLum(skyColor)), skyColor, NETHER_SKY_FOG_SATURATION);
 		skyColor = NETHER_SKY_BASE_COLOR + NETHER_SKY_FOG_INFLUENCE * skyColor;
@@ -129,8 +129,12 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		
 	#endif
 	
+	// important: this must stay the same as in /utils/getFogColor.glsl
 	if (isEyeInWater == 1) {
-		skyColor = mix(skyColor, WATER_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
+		skyColor = fogColor;
+		skyColor = mix(vec3(getLum(skyColor)), skyColor, WATER_VANILLA_FOG_SATURATION);
+		skyColor = WATER_FOG_BASE_COLOR + WATER_VANILLA_FOG_INFLUENCE * skyColor;
+		skyColor *= WATER_FOG_TINT_COLOR;
 	} else if (isEyeInWater == 2) {
 		skyColor = mix(skyColor, LAVA_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
 	} else if (isEyeInWater == 3) {

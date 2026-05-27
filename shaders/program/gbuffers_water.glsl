@@ -108,6 +108,7 @@ void main() {
 	// water
 	if (materialId == BLOCK_ID_WATER) {
 		
+		color.rgb = mix(glcolor.rgb, color.rgb, WATER_TEXTURE_INFLUENCE);
 		color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, WATER_BIOME_INFLUENCE);
 		
 		vec3 viewDir = normalize(viewPos);
@@ -159,7 +160,7 @@ void main() {
 			//opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
 		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
-		float waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
+		float waterDepthPercent = exp(waterDepth / -8.0); // note: 0.0 is deep and 1.0 is shallow
 		if (isEyeInWater == 1) {
 			color.a = 1.0 - WATER_TRANSPARENCY_DEEP;
 		} else {
@@ -180,6 +181,7 @@ void main() {
 			#else
 				foamAmount *= 0.7;
 			#endif
+			if (isEyeInWater > 0) foamAmount *= 0.5;
 			color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.0);
 		#endif
 		

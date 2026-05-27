@@ -127,6 +127,7 @@ void main() {
 		//	#else
 		//		foamAmount *= 0.7;
 		//	#endif
+		//	if (isEyeInWater > 0) foamAmount *= 0.5;
 		//	color.rgb = mix(color.rgb, vec3(0.75 + 0.25 * dayPercent), foamAmount * WATER_FOAM_AMOUNT * 2.0);
 		//#endif
 		

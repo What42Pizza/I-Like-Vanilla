@@ -95,6 +95,7 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	#endif
 	skyColor *= maxBrightness * maxBrightness;
 	if (isEyeInWater == 1) {
+		reflectionStrength *= 0.5;
 		skyColor = 0.08 + 0.125 * skyColor;
 		skyColor += vec3(0.0, 0.03, 0.3);
 	}

@@ -641,7 +641,7 @@
 #endif
 #if BLOOM_SIZE == -1
 #undef BLOOM_SIZE
-										#define BLOOM_SIZE 0.95
+										#define BLOOM_SIZE 0.8
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
@@ -1216,6 +1216,10 @@
 
 
 
+#if WATER_TEXTURE_INFLUENCE == -1
+#undef WATER_TEXTURE_INFLUENCE
+										#define WATER_TEXTURE_INFLUENCE 1.0
+#endif
 #if WATER_BIOME_INFLUENCE == -1
 #undef WATER_BIOME_INFLUENCE
 										#define WATER_BIOME_INFLUENCE 1.0
@@ -1889,21 +1893,41 @@
 
 
 
-#if WATER_FOG_RED == -1
-#undef WATER_FOG_RED
-										#define WATER_FOG_RED 0.05
+#if WATER_FOG_BASE_RED == -1
+#undef WATER_FOG_BASE_RED
+										#define WATER_FOG_BASE_RED 0.05
 #endif
-#if WATER_FOG_GREEN == -1
-#undef WATER_FOG_GREEN
-										#define WATER_FOG_GREEN 0.2
+#if WATER_FOG_BASE_GREEN == -1
+#undef WATER_FOG_BASE_GREEN
+										#define WATER_FOG_BASE_GREEN 0.1
 #endif
-#if WATER_FOG_BLUE == -1
-#undef WATER_FOG_BLUE
-										#define WATER_FOG_BLUE 0.8
+#if WATER_FOG_BASE_BLUE == -1
+#undef WATER_FOG_BASE_BLUE
+										#define WATER_FOG_BASE_BLUE 0.05
+#endif
+#if WATER_VANILLA_FOG_INFLUENCE == -1
+#undef WATER_VANILLA_FOG_INFLUENCE
+										#define WATER_VANILLA_FOG_INFLUENCE 1.0
+#endif
+#if WATER_VANILLA_FOG_SATURATION == -1
+#undef WATER_VANILLA_FOG_SATURATION
+										#define WATER_VANILLA_FOG_SATURATION 1.0
+#endif
+#if WATER_FOG_TINT_RED == -1
+#undef WATER_FOG_TINT_RED
+										#define WATER_FOG_TINT_RED 0.8
+#endif
+#if WATER_FOG_TINT_GREEN == -1
+#undef WATER_FOG_TINT_GREEN
+										#define WATER_FOG_TINT_GREEN 0.8
+#endif
+#if WATER_FOG_TINT_BLUE == -1
+#undef WATER_FOG_TINT_BLUE
+										#define WATER_FOG_TINT_BLUE 1.0
 #endif
 #if WATER_FOG_DENSITY == -1
 #undef WATER_FOG_DENSITY
-										#define WATER_FOG_DENSITY 0.05
+										#define WATER_FOG_DENSITY 0.07
 #endif
 #if LAVA_FOG_RED == -1
 #undef LAVA_FOG_RED
