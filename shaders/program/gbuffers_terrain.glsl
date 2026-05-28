@@ -304,7 +304,7 @@ void main() {
 	#endif
 	vec3 worldNormal = gl_Normal;
 	
-	#if OVERRIDE_FOLIAGE_NORMALS == 1 && PBR_TYPE == 0
+	#if OVERRIDE_FOLIAGE_NORMALS == 1
 		if (isFlatShaded) {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
