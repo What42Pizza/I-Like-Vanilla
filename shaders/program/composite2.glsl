@@ -68,9 +68,13 @@ void main() {
 			vec3 viewPosDh = screenToViewDh(screenPosDh);
 			if (viewPosDh.b > viewPos.b) viewPos = viewPosDh;
 		#endif
-		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		
+		volSunraysAmount *= 0.2 + 0.8 * abs(dot(normalize(viewPos), sunPosition * 0.01));
+		
 		float undergroundAmount = pow(volSunraysAmount, 0.6) * 4.0;
 		volSunraysAmount = mix(volSunraysAmount, undergroundAmount, (1.0 - eyeBrightnessSmooth.y / 240.0) * (SUNRAYS_UNDERGROUND_MULT - 1.0) * 0.5 + 0.1);
+		
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 		float altitude = playerPos.y + cameraPosition.y;
 		altitude += (0.25 - abs(mod(sunAngle, 0.5) - 0.25)) * 64.0; // make sure altitude light leaking prevention has less effect near noon
 		volSunraysAmount *= 8.0 / (8.0 - min(altitude, 64.0) + 64.0);
