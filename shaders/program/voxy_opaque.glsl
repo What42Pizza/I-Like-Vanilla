@@ -46,7 +46,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		float((parameters.face >> 1) == 0),
 		float((parameters.face >> 1) == 1)
 	);
-	worldNormal *= float(parameters.face & 1) * 2.0 - 1.0;
+	worldNormal *= float(parameters.face & 1u) * 2.0 - 1.0;
 	
 	// foliage normals
 	#if OVERRIDE_FOLIAGE_NORMALS == 1
