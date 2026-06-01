@@ -1,4 +1,4 @@
-- v1.4.1
+- v1.4.1 (26/06/01)
   - Added setting 'Bloom Levels'
   - Reworked block lighting calculations
   - Added setting 'Water Texture Influence'

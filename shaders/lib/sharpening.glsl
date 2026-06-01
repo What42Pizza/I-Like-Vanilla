@@ -96,7 +96,7 @@ void doSharpening(inout vec3 color, float depth) {
 	float blockDepth = clamp(linearDepth * far - 8.0, 0.0, 12.0 * 16.0);
 	float velocityFactor = float(cameraPosition != previousCameraPosition) * alteredSharpenVelocityAddition;
 	float depthAddition = alteredSharpenDepthAddition * 0.024 + velocityFactor * 0.0013;
-	float sharpenAmount = alteredSharpenAmount * 0.3 + (sqrt(blockDepth * 0.5 + 1.0) - 1.0) * depthAddition + velocityFactor * 0.065;
+	float sharpenAmount = alteredSharpenAmount * 0.3 + (sqrt(blockDepth * 0.5 + 1.0) - 1.0) * depthAddition + velocityFactor * 0.068;
 	color = mix(color, blur, -sharpenAmount); // exaggerate the difference between the image and the blurred image
 	//color = vec3(sharpenAmount);
 	
