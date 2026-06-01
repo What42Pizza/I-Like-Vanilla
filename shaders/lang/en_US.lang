@@ -1667,7 +1667,7 @@ value.CLOUD_FOG_CURVE.-1=Use Style
 
 option.VANILLA_CLOUDS_HEIGHT=Vanilla Clouds Height
 option.VANILLA_CLOUDS_HEIGHT.comment=Sometimes the shader doesn't know what the actual cloud height is, this can be used to override the default system and manually specify it
-value.VANILLA_CLOUDS_HEIGHT.-1=Auto Detect
+value.VANILLA_CLOUDS_HEIGHT.0=Auto Detect
 
 option.STORY_MODE_CLOUDS_ENABLED=Story Mode Clouds Enabled
 option.STORY_MODE_CLOUDS_ENABLED.comment=Enables clouds similar to that of Minecraft Story Mode (requires Realistic Clouds to be disabled)
