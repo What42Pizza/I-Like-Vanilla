@@ -117,6 +117,8 @@ uniform float ambientSunsetPercent;
 
 uniform float dayPercent;
 
+uniform float skySunriseSunsetPercent;
+
 uniform float blockFlickerAmount;
 
 uniform float invAspectRatio;
@@ -187,6 +189,7 @@ float ambientSunrisePercent = sunAngle >= ambientSunriseStart && sunAngle < 1.0 
 float ambientSunsetPercent = sunAngle >= ambientSunsetStart && sunAngle < 0.5 ? 1.0 - ambientSunPercent : sunAngle >= 0.5 && sunAngle < ambientSunsetEnd ? 1.0 - ambientMoonPercent : 0.0;
 
 float dayPercent = ambientSunPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.8;
+float skySunriseSunsetPercent = smoothstep(0.0, 1.0, ambientSunrisePercent + ambientSunsetPercent);
 const float blockFlickerAmount = 0.0;
 
 float invAspectRatio = 1.0 / aspectRatio;

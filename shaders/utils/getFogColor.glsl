@@ -7,6 +7,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 	vec3 fogColorOut;
 	
 	#ifdef OVERWORLD
+		vec3 viewDir = normalize(viewPos);
 		
 		#if CUSTOM_OVERWORLD_SKYBOX == 0
 			const vec3 DAY_COLOR = SKY_DAY_COLOR * 0.75;
@@ -24,18 +25,14 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 			const vec3 HORIZON_SUNSET_COLOR = SKY_HORIZON_SUNSET_COLOR * 0.75;
 		#endif
 		
-		float sunriseSunsetPercent = ambientSunrisePercent + ambientSunsetPercent;
-		vec3 viewDir = normalize(viewPos);
-		
-		float skyMixFactor = dayPercent;
 		float upDot = dot(viewDir, gbufferModelView[1].xyz);
-		fogColorOut = mix(NIGHT_COLOR, DAY_COLOR, skyMixFactor);
+		fogColorOut = mix(NIGHT_COLOR, DAY_COLOR, dayPercent);
 		fogColorOut = mix(fogColorOut, vec3(0.05 + dayPercent * 0.4), inPaleGarden);
 		upDot = max(upDot, 0.0);
-		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, skyMixFactor);
+		vec3 horizonColor = mix(HORIZON_NIGHT_COLOR, HORIZON_DAY_COLOR, dayPercent);
 		#if CUSTOM_OVERWORLD_SKYBOX == 1
-			horizonColor *= 1.0 - 0.4 * sunriseSunsetPercent;
-			fogColorOut *= 1.0 - 0.4 * sunriseSunsetPercent;
+			horizonColor *= 1.0 - 0.4 * skySunriseSunsetPercent;
+			fogColorOut *= 1.0 - 0.4 * skySunriseSunsetPercent;
 		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		float horizonAmount = 1.0 - upDot;
@@ -70,7 +67,7 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#endif
 		float upDotForSS = 1.0 - (1.0 - upDot) * (1.0 - upDot);
 		sunDot *= percentThrough(upDotForSS * (1.0 - SUNRISE_SUNSET_TOP_HEIGHT * 0.5), 1.0, SUNRISE_SUNSET_BOTTOM_HEIGHT);
-		sunDot *= sunriseSunsetPercent;
+		sunDot *= skySunriseSunsetPercent;
 		sunDot *= 1.0 - 0.5 * inPaleGarden;
 		fogColorOut = mix(fogColorOut, sunAngle > 0.25 && sunAngle < 0.75 ? HORIZON_SUNSET_COLOR : HORIZON_SUNRISE_COLOR, sunDot);
 		

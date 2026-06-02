@@ -1,3 +1,10 @@
+- v1.4.1b
+- Adjusted sunrise/sunset timings
+- Fixed falling rain/snow textures being too dark
+- Fixed volumetric sunrays brightness jump at sunrise/sunset
+
+<br>
+
 - v1.4.1 (26/06/01)
   - Added setting 'Bloom Levels'
   - Reworked block lighting calculations
