@@ -221,7 +221,7 @@ void main() {
 	#endif
 	
 	
-	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
+	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
 }
 
