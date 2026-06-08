@@ -73,22 +73,24 @@ void main() {
 	
 	
 	#if FXAA_ENABLED == 2 || TEMPORAL_FILTER_ENABLED == 2
-		float refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
-		float isEntity = unpack_7_7_1_1(refSpecGlowingEntity).w;
+		float refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).y;
+		bool isEntity = unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
 	#endif
 	
 	// ======== FXAA ======== //
 	#if FXAA_ENABLED == 1
 		doFxaa(color, MAIN_TEXTURE);
 	#elif FXAA_ENABLED == 2
-		if (isEntity > 0.5) doFxaa(color, MAIN_TEXTURE);
+		if (isEntity) doFxaa(color, MAIN_TEXTURE);
 	#endif
 	
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
 		doTemporalFilter(color, depth, depthDh, prevCoord);
 	#elif TEMPORAL_FILTER_ENABLED == 2
-		if (isEntity < 0.5) doTemporalFilter(color, depth, depthDh, prevCoord);
+		refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
+		isEntity = isEntity || unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
+		if (!isEntity) doTemporalFilter(color, depth, depthDh, prevCoord);
 	#endif
 	
 	
