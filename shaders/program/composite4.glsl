@@ -88,13 +88,8 @@ void main() {
 		#if REFLECTIVE_EVERYTHING == 1
 			float reflectiveness = 1.0;
 		#else
-			vec2 refPlusSpec = unpack_2x8(data.y);
-			float reflectiveness = refPlusSpec.x;
-			float specularness = refPlusSpec.y;
-			if (abs(specularness - 254.0 / 255.0) < 0.001) {
-				reflectiveness = 0.0;
-				specularness = 0.0;
-			}
+			vec4 refSpecGlowingEntity = unpack_7_7_1_1(data.y);
+			float reflectiveness = refSpecGlowingEntity.x * (1.0 - refSpecGlowingEntity.z); // z holds whether or not it's glowing, x holds the reflectiveness if not glowing
 		#endif
 		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;

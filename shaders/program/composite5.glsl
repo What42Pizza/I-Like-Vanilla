@@ -14,10 +14,10 @@ in_out vec2 texcoord;
 #if SSS_PHOSPHOR == 1
 	#include "/lib/super_secret_settings/phosphor.glsl"
 #endif
-#if FXAA_ENABLED == 1
+#if FXAA_ENABLED > 0
 	#include "/lib/fxaa.glsl"
 #endif
-#if TEMPORAL_FILTER_ENABLED == 1
+#if TEMPORAL_FILTER_ENABLED > 0
 	#include "/utils/depth.glsl"
 	#include "/lib/temporal_filter.glsl"
 #endif
@@ -72,14 +72,23 @@ void main() {
 	
 	
 	
+	#if FXAA_ENABLED == 2 || TEMPORAL_FILTER_ENABLED == 2
+		float refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
+		float isEntity = unpack_7_7_1_1(refSpecGlowingEntity).w;
+	#endif
+	
 	// ======== FXAA ======== //
 	#if FXAA_ENABLED == 1
 		doFxaa(color, MAIN_TEXTURE);
+	#elif FXAA_ENABLED == 2
+		if (isEntity > 0.5) doFxaa(color, MAIN_TEXTURE);
 	#endif
 	
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED == 1
 		doTemporalFilter(color, depth, depthDh, prevCoord);
+	#elif TEMPORAL_FILTER_ENABLED == 2
+		if (isEntity < 0.5) doTemporalFilter(color, depth, depthDh, prevCoord);
 	#endif
 	
 	
@@ -118,7 +127,7 @@ void main() {
 	/* DRAWBUFFERS:0 */
 	color *= 0.5;
 	gl_FragData[0] = vec4(color, 1.0);
-	#if TEMPORAL_FILTER_ENABLED == 1 || MOTION_BLUR_ENABLED == 1 || SSS_PHOSPHOR == 1 || SSS_LIDAR == 1
+	#if TEMPORAL_FILTER_ENABLED > 0 || MOTION_BLUR_ENABLED == 1 || SSS_PHOSPHOR == 1 || SSS_LIDAR == 1
 		/* DRAWBUFFERS:01 */
 		#if MOTION_BLUR_ENABLED == 1
 			prevColor *= 0.5;

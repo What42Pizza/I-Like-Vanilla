@@ -20,7 +20,7 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(brightness, brightness),
-		pack_2x8(0.0, 0.0),
+		pack_7_7_1_1(0.0, 0.0, 0.0, 0.0),
 		encodedNormal
 	);
 	

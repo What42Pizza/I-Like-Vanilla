@@ -44,7 +44,7 @@ void main() {
 	// fade distant terrain
 	#ifdef DISTANT_HORIZONS
 		//float dither = bayer64(gl_FragCoord.xy);
-		//#if TEMPORAL_FILTER_ENABLED == 1
+		//#if TEMPORAL_FILTER_ENABLED > 0
 		//	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		//#endif
 		//float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
@@ -55,7 +55,7 @@ void main() {
 		float dither = bayer64(gl_FragCoord.xy);
 		//#include "/utils/var_rng.glsl"
 		//float dither = randomFloat(rng) * 0.5 + 0.5;
-		#if TEMPORAL_FILTER_ENABLED == 1
+		#if TEMPORAL_FILTER_ENABLED > 0
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
@@ -162,11 +162,12 @@ void main() {
 		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
 	#endif
 	
+	float glowing = 0.0;
 	#if EMISSIVE_TEXTURES_ENABLED == 1
 		float specularness = specularness;
 		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
-			specularness = 254.0 / 255.0;
+			glowing = 1.0;
 			reflectiveness = clamp(glowingAmount * 0.5, 0.0, 1.0);
 		}
 	#endif
@@ -214,7 +215,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
+		pack_7_7_1_1(reflectiveness, specularness, glowing, 0.0),
 		encodedNormal
 	);
 	

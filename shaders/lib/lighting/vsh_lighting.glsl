@@ -18,6 +18,9 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 	// +1.0y: +0.325
 	// -1.0y: -0.65
 	normalForSS.xz = abs(normalForSS.xz);
+	#if defined SHADER_GBUFFERS_HAND || defined SHADER_GBUFFERS_HAND_WATER
+		normalForSS.xz = normalForSS.zx;
+	#endif
 	normalForSS.y *= sign(normalForSS.y) * -0.25 + 0.75; // -1: *1, 1: *0.5
 	float sideShading = dot(normalForSS, vec3(-0.4, 0.65, 0.0));
 	float brightForSS = max(lmcoord.x, lmcoord.y);

@@ -194,6 +194,10 @@ const float shadowIntervalSize    = 2.0;
 	#undef TEMPORAL_FILTER_ENABLED
 	#define TEMPORAL_FILTER_ENABLED 1
 #endif
+#if TEMPORAL_FILTER_ENABLED == 2
+	#undef TEMPORAL_FILTER_ENABLED
+	#define TEMPORAL_FILTER_ENABLED 2
+#endif
 #if SSS_PHOSPHOR == 1
 	#undef SSS_PHOSPHOR
 	#define SSS_PHOSPHOR 1

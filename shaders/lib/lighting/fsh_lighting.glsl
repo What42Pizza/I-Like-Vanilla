@@ -316,7 +316,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	nightVisionMin.rb *= 1.0 - NIGHT_VISION_GREEN_AMOUNT * (1.0 - ambientBrightness);
 	lighting += nightVisionMin * (1.0 - 0.75 * getLum(lighting));
 	
-	lighting += glowingAmount * vec3(1.0, 0.85, 0.8);
+	lighting = mix(lighting, lighting + vec3(0.4, 0.35, 0.3), glowingAmount);
 	
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		lighting = vec3(1.0);

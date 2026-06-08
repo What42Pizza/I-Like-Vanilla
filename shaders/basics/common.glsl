@@ -208,8 +208,28 @@ float pack_2x8(vec2 v) {
 float pack_2x8(float x, float y) { return pack_2x8(vec2(x, y)); }
 
 vec2 unpack_2x8(float pack) {
-	vec2 xy; xy.x = modf((65535.0 / 256.0) * pack, xy.y);
-	return xy * vec2(256.0 / 255.0, 1.0 / 255.0);
+	vec2 v; v.x = modf((65535.0 / 256.0) * pack, v.y);
+	return v * vec2(256.0 / 255.0, 1.0 / 255.0);
+}
+
+float pack_7_7_1_1(vec4 v) {
+	uvec4 i = uvec4(v * vec4(127.0, 127.0, 1.0, 1.0) + 0.5);
+	return (
+		((i.x & 127u) << 0u) +
+		((i.y & 127u) << 7u) +
+		((i.z &   1u) << 14u) +
+		((i.w &   1u) << 15u)
+	) / 65535.0;
+}
+float pack_7_7_1_1(float x, float y, float z, float w) { return pack_7_7_1_1(vec4(x, y, z, w)); }
+vec4 unpack_7_7_1_1(float pack) {
+	uint v = uint(pack * 65535.0 + 0.5);
+	return vec4(
+		float((v >>  0u) & 127u) / 127.0,
+		float((v >>  7u) & 127u) / 127.0,
+		float((v >> 14u) &   1u) / 1.0,
+		float((v >> 15u) &   1u) / 1.0
+	);
 }
 
 // octahedral encoding/decoding

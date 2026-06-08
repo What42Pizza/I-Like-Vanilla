@@ -20,10 +20,12 @@ in_out vec3 viewPos;
 
 void main() {
 	
-	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord) * vec4(glcolor, 1.0);
-	if (rawColor.a == 0.0) discard;
+	vec4 rawColor = texture2D(MAIN_TEXTURE, texcoord);
+	if (rawColor.a < alphaTestRef) discard;
+	
 	vec4 color = rawColor;
-	color.rgb = mix(vec3(getLum(color.rgb)), color.rgb, 1.05);
+	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
+	color.rgb *= glcolor;
 	
 	
 	// make yellow colors brighter
@@ -45,10 +47,11 @@ void main() {
 	float reflectiveness = 0.0;
 	float specularness = 0.3;
 	
+	float glowing = 0.0;
 	#if EMISSIVE_TEXTURES_ENABLED == 1
 		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
-			specularness = 254.0 / 255.0;
+			glowing = 1.0;
 			reflectiveness = clamp(glowingAmount * 0.5, 0.0, 1.0);
 		}
 	#endif
@@ -62,7 +65,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, specularness),
+		pack_7_7_1_1(reflectiveness, specularness, glowing, 1.0),
 		encodedNormal
 	);
 	
@@ -77,7 +80,7 @@ void main() {
 #define PROJECTION_MATRIX gl_ProjectionMatrix
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
-#if TAA_ENABLED == 1
+#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -118,7 +121,7 @@ void main() {
 	#endif
 	
 	
-	#if TAA_ENABLED == 1
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
 	

@@ -381,7 +381,7 @@ emission: vec3(15.0 / 15.0)
 
 // classic blocklights
 
-block torch, wall_torch, candle:
+block torch, wall_torch:
 weight: 10
 shadow casting: foliage
 glow detect min: vec3( 0.0,   0.0, 100.0)
@@ -403,7 +403,7 @@ block campfire, furnace:lit=true:
 weight: 1
 glow detect min: vec3(21.4,  31.3, 69.4)
 glow detect max: vec3(49.2, 100.0, 97.6)
-glow amount: 0.5
+glow amount: 1.0
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

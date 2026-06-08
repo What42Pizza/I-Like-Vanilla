@@ -813,6 +813,7 @@ option.TEMPORAL_FILTER_ENABLED=Temporal Filter
 option.TEMPORAL_FILTER_ENABLED.comment=Blends frames together to reduce flickering
 value.TEMPORAL_FILTER_ENABLED.0=Off
 value.TEMPORAL_FILTER_ENABLED.1=On
+value.TEMPORAL_FILTER_ENABLED.2=On (Except Entities)
 
 option.TAA_ENABLED=TAA
 option.TAA_ENABLED.comment=Enabled Temporal Anti-Aliasing (makes jagged edges smooth), requires Temporal Filter to be enabled\n\nNote: You can configure this using the Temporal Filter Settings menu, and this is disabled if Temporal Filtering is disabled
@@ -827,6 +828,7 @@ option.FXAA_ENABLED=FXAA
 option.FXAA_ENABLED.comment=A simple form of anti-aliasing (makes jagged edges smooth)
 value.FXAA_ENABLED.0=Off
 value.FXAA_ENABLED.1=On
+value.FXAA_ENABLED.2=On (Only Entities)
 
 option.OUTLINES_ENABLED=Outlines
 option.OUTLINES_ENABLED.comment=Adds black outlines over everything

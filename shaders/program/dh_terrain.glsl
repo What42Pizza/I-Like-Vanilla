@@ -35,7 +35,7 @@ void main() {
 	gl_FragData[0] = vec4(color, 1.0);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(0.0, float(dhBlock == DH_BLOCK_LEAVES)),
+		pack_7_7_1_1(0.0, float(dhBlock == DH_BLOCK_LEAVES), 0.0, 0.0),
 		encodedNormal
 	);
 	
