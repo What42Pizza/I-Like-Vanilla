@@ -114,7 +114,7 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	albedoOut = color;
 	auxDataOut = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(0.0, specularness),
+		pack_7_7_1_1(0.0, specularness, 0.0, 0.0),
 		encodeNormal(normal)
 	);
 	

@@ -58,7 +58,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_7_7_1_1(reflectiveness, specularness, 0.0, 0.0),
+		pack_7_7_1_1(reflectiveness, specularness, 0.0, 1.0),
 		encodedNormal
 	);
 	
@@ -73,7 +73,7 @@ void main() {
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if TAA_ENABLED == 1
+#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -105,7 +105,7 @@ void main() {
 	gl_Position = viewToNdc(viewPos);
 	
 	
-	#if TAA_ENABLED == 1
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
 	

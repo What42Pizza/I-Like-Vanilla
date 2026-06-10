@@ -178,11 +178,11 @@ This describes which /main_files-s handle different effects
 - **colortex1:  Prev Texture** (stored with 0.5 multiplier)
 - **colortex2:  Opaque Data**
   - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
-  - y: reflectiveness (8-bit) & specularness (8-bit)
+  - y: reflectiveness or glowing amount (7-bit) & specularness (7-bit) & is glowing (1-bit) & is entity (1-bit)
   - zw: normal
 - **colortex3:  Transparent Data**
   - x: lmcoord.x (8-bit) & lmcoord.y (8-bit)
-  - y: reflectiveness (8-bit) & is cloud (8-bit)
+  - y: reflectiveness & specularness (7-bit) & is cloud (1-bit) & is entity (1-bit)
   - zw: normal
 - **colortex4:  Bloom Texture**
 - **colortex5:  Sky Objects Texture**

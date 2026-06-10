@@ -166,7 +166,7 @@ void main() {
 	gl_FragData[0] = color;
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_2x8(reflectiveness, 0.0),
+		pack_7_7_1_1(reflectiveness, specularness, 0.0, 0.0),
 		encodeNormal(normal)
 	);
 	
