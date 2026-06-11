@@ -8,7 +8,7 @@
 	"translucentDrawBuffers": [9, 3],
 	"blending": {-1:"off"},
 	#if TAA_ENABLED == 1
-		"taaOffset": "{ return taaOffsetUniform; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.75; }",
 	#endif
 	"uniforms": [
 		"gbufferModelView",

@@ -1441,15 +1441,15 @@
 #endif
 #if CLOUD_WEATHER_TINT_RED == -1
 #undef CLOUD_WEATHER_TINT_RED
-										#define CLOUD_WEATHER_TINT_RED 0.65
+										#define CLOUD_WEATHER_TINT_RED 0.6
 #endif
 #if CLOUD_WEATHER_TINT_GREEN == -1
 #undef CLOUD_WEATHER_TINT_GREEN
-										#define CLOUD_WEATHER_TINT_GREEN 0.7
+										#define CLOUD_WEATHER_TINT_GREEN 0.65
 #endif
 #if CLOUD_WEATHER_TINT_BLUE == -1
 #undef CLOUD_WEATHER_TINT_BLUE
-										#define CLOUD_WEATHER_TINT_BLUE 0.95
+										#define CLOUD_WEATHER_TINT_BLUE 1.0
 #endif
 
 

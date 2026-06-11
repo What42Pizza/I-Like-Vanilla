@@ -158,11 +158,18 @@ void main() {
 	
 	// misc
 	
+	float glowing = 0.0;
 	#if PBR_TYPE == 0
 		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
+		vec3 debug = color.rgb;
+		if (materialId == BLOCK_ID_SCULK_GROUP_1 || materialId == BLOCK_ID_SCULK_GROUP_2) {
+			glowing = 1.0;
+			reflectiveness = getLum(rawColor.rgb) - rawColor.r;
+			reflectiveness *= reflectiveness;
+			reflectiveness *= 1.5;
+		}
 	#endif
 	
-	float glowing = 0.0;
 	#if EMISSIVE_TEXTURES_ENABLED == 1
 		float specularness = specularness;
 		vec3 hsv = rgbToHsv(rawColor.rgb);
@@ -205,6 +212,7 @@ void main() {
 			lmcoord.x = max(lmcoord.x, 0.1 * float(centerDist < 0.45));
 		}
 	#endif
+	color.rgb=debug;
 	
 	
 	/* DRAWBUFFERS:02 */

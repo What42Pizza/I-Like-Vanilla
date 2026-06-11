@@ -28,7 +28,7 @@ void main() {
 #define PROJECTION_MATRIX gl_ProjectionMatrix
 #include "/utils/projections.glsl"
 
-#if TAA_ENABLED == 1
+#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -42,7 +42,7 @@ void main() {
 	
 	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
 	
-	#if TAA_ENABLED == 1
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
 	

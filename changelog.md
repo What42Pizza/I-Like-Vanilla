@@ -3,6 +3,7 @@
   - Added options to only apply fxaa on entities and taa + temporal filter on everything else (enabled by default)
   - Swapped handheld object side shading axis
   - Tweaked emissive textures effect
+  - Added emissive glow to sculk blocks
   - Adjusted sunrise/sunset timings
   - Fixed falling rain/snow textures being too dark
   - Fixed volumetric sunrays brightness jump at sunrise/sunset
