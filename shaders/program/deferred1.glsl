@@ -17,7 +17,6 @@ in_out vec2 texcoord;
 #if OUTLINES_ENABLED == 1
 	#include "/lib/outlines.glsl"
 #endif
-vec3 debug;
 #if EDGE_HIGHLIGHT_ENABLED == 1
 	#include "/lib/edge_highlight.glsl"
 #endif
