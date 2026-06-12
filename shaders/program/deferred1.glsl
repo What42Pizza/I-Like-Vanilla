@@ -17,6 +17,10 @@ in_out vec2 texcoord;
 #if OUTLINES_ENABLED == 1
 	#include "/lib/outlines.glsl"
 #endif
+vec3 debug;
+#if EDGE_HIGHLIGHT_ENABLED == 1
+	#include "/lib/edge_highlight.glsl"
+#endif
 #if SSAO_ENABLED == 1
 	#include "/lib/ssao.glsl"
 #endif
@@ -80,11 +84,6 @@ void main() {
 	#endif
 	
 	
-	#if OUTLINES_ENABLED == 1
-		color *= 1.0 - getOutlineAmount();
-	#endif
-	
-	
 	vec3 skyColor = vec3(0.0);
 	if (skyAmount > 0.0) {
 		vec3 viewPos = screenToView(vec3(texcoord, 1.0));
@@ -144,6 +143,14 @@ void main() {
 			}
 		#endif
 		
+		#if EDGE_HIGHLIGHT_ENABLED == 1
+			if (!depthIsHand(depth)) {
+				float isEdgeHighlight = getEdgeHighlight(viewPos, playerPos, depth, normal);
+				color *= 1.0 + EDGE_HIGHLIGHT_BRIGHTNESS_MULT * 0.5 * isEdgeHighlight;
+				color += EDGE_HIGHLIGHT_BRIGHTNESS_LIFT * isEdgeHighlight;
+			}
+		#endif
+		
 		#ifdef DISTANT_HORIZONS
 			
 			if (depth == 1.0 && dhDepth != 1.0) {
@@ -181,6 +188,11 @@ void main() {
 		#endif
 		
 	}
+	
+	
+	#if OUTLINES_ENABLED == 1
+		color = mix(color, LINE_OUTLINES_COLOR, getOutlineAmount());
+	#endif
 	
 	
 	/* DRAWBUFFERS:0 */

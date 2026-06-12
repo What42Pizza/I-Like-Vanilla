@@ -33,14 +33,14 @@ float getOutlineAmount() {
 	float m = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 0,  0), 0).r);
 	if (m == 1.0) {return 0.0;}
 	m *= far;
-	float tl = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2(-1, -1), 0).r) * far;
-	float t  = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 0, -1), 0).r) * far;
-	float tr = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 1, -1), 0).r) * far;
-	float l  = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2(-1,  0), 0).r) * far;
-	float r  = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 1,  0), 0).r) * far;
-	float bl = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2(-1,  1), 0).r) * far;
-	float b  = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 0,  1), 0).r) * far;
-	float br = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 1,  1), 0).r) * far;
+	float tl = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2(-1, -1) * pixelSize * OUTLINES_SIZE).r) * far;
+	float t  = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 0, -1) * pixelSize * OUTLINES_SIZE).r) * far;
+	float tr = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 1, -1) * pixelSize * OUTLINES_SIZE).r) * far;
+	float l  = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2(-1,  0) * pixelSize * OUTLINES_SIZE).r) * far;
+	float r  = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 1,  0) * pixelSize * OUTLINES_SIZE).r) * far;
+	float bl = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2(-1,  1) * pixelSize * OUTLINES_SIZE).r) * far;
+	float b  = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 0,  1) * pixelSize * OUTLINES_SIZE).r) * far;
+	float br = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 1,  1) * pixelSize * OUTLINES_SIZE).r) * far;
 	
 	float lineA = (tl - m) + (br - m);
 	float lineB = (tr - m) + (bl - m);

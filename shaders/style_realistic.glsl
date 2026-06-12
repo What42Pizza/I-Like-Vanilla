@@ -614,9 +614,42 @@
 #undef TAA_JITTER_AMOUNT
 										#define TAA_JITTER_AMOUNT 1.0
 #endif
+
+
+
+
+
 #if OUTLINES_ENABLED == -1
 #undef OUTLINES_ENABLED
 										#define OUTLINES_ENABLED 0
+#endif
+#if OUTLINES_SIZE == -1
+#undef OUTLINES_SIZE
+										#define OUTLINES_SIZE 1.0
+#endif
+#if OUTLINES_RED == -1
+#undef OUTLINES_RED
+										#define OUTLINES_RED 0.0
+#endif
+#if OUTLINES_GREEN == -1
+#undef OUTLINES_GREEN
+										#define OUTLINES_GREEN 0.0
+#endif
+#if OUTLINES_BLUE == -1
+#undef OUTLINES_BLUE
+										#define OUTLINES_BLUE 0.0
+#endif
+#if EDGE_HIGHLIGHT_ENABLED == -1
+#undef EDGE_HIGHLIGHT_ENABLED
+										#define EDGE_HIGHLIGHT_ENABLED 0
+#endif
+#if EDGE_HIGHLIGHT_BRIGHTNESS_MULT == -1
+#undef EDGE_HIGHLIGHT_BRIGHTNESS_MULT
+										#define EDGE_HIGHLIGHT_BRIGHTNESS_MULT 0.25
+#endif
+#if EDGE_HIGHLIGHT_BRIGHTNESS_LIFT == -1
+#undef EDGE_HIGHLIGHT_BRIGHTNESS_LIFT
+										#define EDGE_HIGHLIGHT_BRIGHTNESS_LIFT 0.06
 #endif
 
 

@@ -830,12 +830,6 @@ value.FXAA_ENABLED.0=Off
 value.FXAA_ENABLED.1=On
 value.FXAA_ENABLED.2=On (Only Entities)
 
-option.OUTLINES_ENABLED=Outlines
-option.OUTLINES_ENABLED.comment=Adds black outlines over everything
-value.OUTLINES_ENABLED.-1=Use Style
-value.OUTLINES_ENABLED.0=Off
-value.OUTLINES_ENABLED.1=On
-
 
 
 
@@ -853,6 +847,48 @@ prefix.TEMPORAL_FILTER_MOVING=x
 option.TEMPORAL_FILTER_DEPTH=Blending Depth Amount
 option.TEMPORAL_FILTER_DEPTH.comment=Increases the blending amount for distant objects
 prefix.TEMPORAL_FILTER_DEPTH=x
+
+
+
+
+
+screen.OUTLINES_MENU=Outlines
+
+option.OUTLINES_ENABLED=Line Outlines
+option.OUTLINES_ENABLED.comment=Adds simple outlines to everything
+value.OUTLINES_ENABLED.-1=Use Style
+value.OUTLINES_ENABLED.0=Off
+value.OUTLINES_ENABLED.1=On
+
+option.OUTLINES_SIZE=Line Outlines Size
+value.OUTLINES_SIZE.-1=Use Style
+
+option.OUTLINES_RED=Line Outlines Red
+value.OUTLINES_RED.-1=Use Style
+
+option.OUTLINES_GREEN=Line Outlines Green
+value.OUTLINES_GREEN.-1=Use Style
+
+option.OUTLINES_BLUE=Line Outlines Blue
+value.OUTLINES_BLUE.-1=Use Style
+
+option.EDGE_HIGHLIGHT_ENABLED=Edge Highlights
+option.EDGE_HIGHLIGHT_ENABLED.comment=Enabled MC-Dungeons-like block highlights
+value.EDGE_HIGHLIGHT_ENABLED.-1=Use Style
+value.EDGE_HIGHLIGHT_ENABLED.0=Off
+value.EDGE_HIGHLIGHT_ENABLED.1=On
+
+option.EDGE_HIGHLIGHT_SIZE=Edge Highlights Size
+option.EDGE_HIGHLIGHT_SIZE.comment=Controls the size of edge highlights by 'defining the count of pixels per block', where the highlight is the size of one pixel
+prefix.EDGE_HIGHLIGHT_SIZE=1 / 
+
+option.EDGE_HIGHLIGHT_BRIGHTNESS_MULT=Edge Highlight Brightness Mult
+option.EDGE_HIGHLIGHT_BRIGHTNESS_MULT.comment=How much the edge highlight effect should brighten the pixel by multiplying (0.0 means no extra brightness, 0.5 means 1.5x brightness, etc)
+value.EDGE_HIGHLIGHT_BRIGHTNESS_MULT.-1=Use Style
+
+option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT=Edge Highlight Brightness Lift
+option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.comment=How much the edge highlight effect should brighten the pixel by adding
+value.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.-1=Use Style
 
 
 
