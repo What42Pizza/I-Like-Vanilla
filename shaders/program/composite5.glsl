@@ -86,7 +86,7 @@ void main() {
 		#if TEMPORAL_EXTRA_DEPTH_CHECK == 1
 			float prevDepth = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(0.0, pixelSize.y)).r; // the offset is needed because of the taa jitter, technically there should be 4 or more samples to deal with all directions, but only testing up seems to work fine
 			float depthDiff = (depth - prevDepth) / depth;
-			doTF = doTF && depthDiff < 0.00015;
+			doTF = doTF && (depthDiff < 0.001 || depth == 1.0);
 		#endif
 		#if TEMPORAL_FILTER_ENABLED == 2
 			if (doTF) {
