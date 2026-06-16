@@ -1385,15 +1385,15 @@
 #endif
 #if REALISTIC_CLOUD_DENSITY == -1
 #undef REALISTIC_CLOUD_DENSITY
-										#define REALISTIC_CLOUD_DENSITY 0.55
+										#define REALISTIC_CLOUD_DENSITY 0.8
 #endif
 #if CLOUD_COVERAGE == -1
 #undef CLOUD_COVERAGE
-										#define CLOUD_COVERAGE 0.4
+										#define CLOUD_COVERAGE 0.45
 #endif
 #if CLOUD_WEATHER_COVERAGE == -1
 #undef CLOUD_WEATHER_COVERAGE
-										#define CLOUD_WEATHER_COVERAGE 0.9
+										#define CLOUD_WEATHER_COVERAGE 0.8
 #endif
 #if CLOUD_BOTTOM_Y == -1
 #undef CLOUD_BOTTOM_Y
@@ -1507,7 +1507,7 @@
 #endif
 #if CLOUD_LAYER_2_WEIGHT == -1
 #undef CLOUD_LAYER_2_WEIGHT
-										#define CLOUD_LAYER_2_WEIGHT 0.35
+										#define CLOUD_LAYER_2_WEIGHT 0.5
 #endif
 #if CLOUD_LAYER_2_SPEED == -1
 #undef CLOUD_LAYER_2_SPEED
@@ -1519,7 +1519,7 @@
 #endif
 #if CLOUD_LAYER_3_WEIGHT == -1
 #undef CLOUD_LAYER_3_WEIGHT
-										#define CLOUD_LAYER_3_WEIGHT 0.1
+										#define CLOUD_LAYER_3_WEIGHT 0.2
 #endif
 #if CLOUD_LAYER_3_SPEED == -1
 #undef CLOUD_LAYER_3_SPEED
@@ -1531,7 +1531,7 @@
 #endif
 #if CLOUD_LAYER_4_WEIGHT == -1
 #undef CLOUD_LAYER_4_WEIGHT
-										#define CLOUD_LAYER_4_WEIGHT 0.04
+										#define CLOUD_LAYER_4_WEIGHT 0.1
 #endif
 #if CLOUD_LAYER_4_SPEED == -1
 #undef CLOUD_LAYER_4_SPEED

@@ -848,6 +848,11 @@ option.TEMPORAL_FILTER_DEPTH=Blending Depth Amount
 option.TEMPORAL_FILTER_DEPTH.comment=Increases the blending amount for distant objects
 prefix.TEMPORAL_FILTER_DEPTH=x
 
+option.TEMPORAL_EXTRA_DEPTH_CHECK=Extra Depth Check
+option.TEMPORAL_EXTRA_DEPTH_CHECK.comment=Helps prevent ghosting (for objects that were hidden but become visible) by adding extra additional checks, may slightly impact performance
+value.TEMPORAL_EXTRA_DEPTH_CHECK.0=Off
+value.TEMPORAL_EXTRA_DEPTH_CHECK.1=On
+
 
 
 

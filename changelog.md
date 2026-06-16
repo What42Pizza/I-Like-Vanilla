@@ -1,5 +1,6 @@
 - v1.4.2
   - Improved temporal filtering (with CatmullRom sampling)
+  - Added setting 'Extra Depth Check' for temporal filtering
   - Added options to only apply fxaa on entities and taa + temporal filter on everything else (enabled by default)
   - Added edge highlights (similar to MC Dungeons)
   - Swapped handheld object side shading axis

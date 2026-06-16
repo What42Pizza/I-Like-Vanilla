@@ -60,15 +60,11 @@ void main() {
 	#endif
 	
 	vec3 pos = vec3(texcoord, depth);
-	vec2 prevCoord = texcoord;
-	bool doReprojection = !depthIsHand(depth);
+	vec3 cameraOffset = cameraPosition - previousCameraPosition;
+	vec2 prevCoord = reproject(pos, cameraOffset);
 	#if SSS_LIDAR == 1
-		doReprojection = true;
+		prevIsValid = true;
 	#endif
-	if (doReprojection) {
-		vec3 cameraOffset = cameraPosition - previousCameraPosition;
-		prevCoord = reproject(pos, cameraOffset);
-	}
 	
 	
 	
@@ -85,12 +81,21 @@ void main() {
 	#endif
 	
 	// ======== TEMPORAL FILTER ======== //
-	#if TEMPORAL_FILTER_ENABLED == 1
-		doTemporalFilter(color, depth, depthDh, prevCoord);
-	#elif TEMPORAL_FILTER_ENABLED == 2
-		refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
-		isEntity = isEntity || unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
-		if (!isEntity) doTemporalFilter(color, depth, depthDh, prevCoord);
+	#if TEMPORAL_FILTER_ENABLED >= 1
+		bool doTF = true;
+		#if TEMPORAL_EXTRA_DEPTH_CHECK == 1
+			float prevDepth = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(0.0, pixelSize.y)).r; // the offset is needed because of the taa jitter, technically there should be 4 or more samples to deal with all directions, but only testing up seems to work fine
+			float depthDiff = (depth - prevDepth) / depth;
+			doTF = doTF && depthDiff < 0.00015;
+		#endif
+		#if TEMPORAL_FILTER_ENABLED == 2
+			if (doTF) {
+				refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
+				isEntity = isEntity || unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
+				doTF = doTF && !isEntity;
+			}
+		#endif
+		if (doTF) doTemporalFilter(color, depth, depthDh, prevCoord);
 	#endif
 	
 	
