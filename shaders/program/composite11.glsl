@@ -58,10 +58,6 @@ void doBloomTile(inout vec3 bloomColor, vec2 stepAmount, vec2 texcoord, int lod)
 }
 
 void main() {
-	#if HORROR_MODE == 1
-		discard;
-		return;
-	#endif
 	
 	vec2 texcoord = texcoord;
 	

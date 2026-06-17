@@ -57,11 +57,13 @@ void main() {
 	#if BLOOM_ENABLED == 1
 		vec3 bloomAddition = vec3(0.0);
 		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord).rgb;
-		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( invAspectRatio,  0.0)).rgb;
-		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           ,  1.0)).rgb;
-		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2(-invAspectRatio,  0.0)).rgb;
-		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           , -1.0)).rgb;
-		bloomAddition *= 0.2;
+		#if HORROR_MODE == 0
+			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( invAspectRatio,  0.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           ,  1.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2(-invAspectRatio,  0.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           , -1.0)).rgb;
+			bloomAddition *= 0.2;
+		#endif
 		bloomAddition = sqrt(bloomAddition);
 		#ifdef OVERWORLD
 			const float bloomAmount = BLOOM_AMOUNT * 0.6;
@@ -73,7 +75,7 @@ void main() {
 			const float bloomAmount = BLOOM_END_AMOUNT * 0.6;
 		#endif
 		#if HORROR_MODE == 1
-			color = bloomAddition;
+			color = bloomAddition * 0.8;
 		#else
 			#if BLOOM_STYLE == 1
 				bloomAddition *= 1.0 - getLum(color);

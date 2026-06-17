@@ -203,7 +203,7 @@ void main() {
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	if (dhBlock == DH_BLOCK_WATER) {
 		playerPos.y -= 2.0 / 16.0;
-		viewPos = mat3(gbufferModelView) * playerPos;
+		viewPos = transform(gbufferModelView, playerPos);
 	}
 	
 	

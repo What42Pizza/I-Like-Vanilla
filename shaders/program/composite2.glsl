@@ -178,7 +178,7 @@ void main() {
 		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
 	#endif
 	#if NETHER_CLOUDS_ENABLED == 1
-		cloudsColor = normalize(fogColor) * NETHER_CLOUDS_FOG_INFLUENCE + NETHER_CLOUDS_BASE_COLOR;
+		cloudsColor = normalize(fogColor + 0.001) * NETHER_CLOUDS_FOG_INFLUENCE + NETHER_CLOUDS_BASE_COLOR;
 		cloudsColor *= NETHER_CLOUDS_TINT_COLOR;
 	#endif
 	
