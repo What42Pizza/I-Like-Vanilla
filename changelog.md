@@ -3,6 +3,8 @@
   - Added setting 'Extra Depth Check' for temporal filtering
   - Added options to only apply fxaa on entities and taa + temporal filter on everything else (enabled by default)
   - Added edge highlights (similar to MC Dungeons)
+  - Added 'Emissives Bloom' feature (configurable, adds extra bloom to emissive pixels, disabled by default)
+  - Added 'Bloom Final Tint Red/Green/Blue' settings
   - Swapped handheld object side shading axis
   - Tweaked emissive textures effect
   - Added emissive glow to sculk blocks

@@ -57,6 +57,14 @@ void main() {
 		float bloomMult = getLum(bloomColor);
 	#endif
 	
+	
+	#if EMISSIVES_BLOOM_ENABLED == 1
+		vec4 opaqueData = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord * bloomIntScale + bloomIntScale / 2, 0);
+		vec4 miscData = unpack_7_7_1_1(opaqueData.y);
+		bloomMult += EMISSIVES_BLOOM_AMOUNT * miscData.z;
+	#endif
+	
+	
 	bloomMult = smoothstep(BLOOM_LOW_CUTOFF, BLOOM_HIGH_CUTOFF, bloomMult);
 	//#if BLOOM_STYLE == 1
 	//	bloomMult *= 0.5 + 0.5 * getSaturation(bloomColor);
@@ -71,6 +79,12 @@ void main() {
 	
 	bloomColor *= bloomColor;
 	//bloomColor = sqrt(bloomColor);
+	bloomColor *= BLOOM_FINAL_TINT;
+	
+	
+	#if EMISSIVES_BLOOM_ENABLED == 1
+		bloomColor *= 1.0 + 0.5 * EMISSIVES_BLOOM_AMOUNT * miscData.z;
+	#endif
 	
 	
 	/* DRAWBUFFERS:4 */

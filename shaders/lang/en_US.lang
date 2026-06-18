@@ -925,19 +925,29 @@ value.BLOOM_RENDER_SCALE.0=x1
 option.BLOOM_LEVELS=Bloom Levels
 option.BLOOM_LEVELS.comment=How many layers of bloom to calculate. If you increase this then you might want to decrease Bloom Size and increase Bloom Amount (and vice versa)
 
+option.BLOOM_SIZE=Bloom Size
+value.BLOOM_SIZE.-1=Use Style
+
+option.EMISSIVES_BLOOM_ENABLED=Emissives Bloom Enabled
+option.EMISSIVES_BLOOM_ENABLED.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
+value.EMISSIVES_BLOOM_ENABLED.0=Off
+value.EMISSIVES_BLOOM_ENABLED.1=On
+
+option.EMISSIVES_BLOOM_AMOUNT=Emissives Bloom Amount
+option.EMISSIVES_BLOOM_AMOUNT.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
+value.EMISSIVES_BLOOM_AMOUNT.-1=Use Style
+
 option.BLOOM_AMOUNT=Bloom Amount
+option.BLOOM_AMOUNT.comment=The amount of bloom when in the overworld
 value.BLOOM_AMOUNT.-1=Use Style
 
 option.BLOOM_NETHER_AMOUNT=Bloom Nether Amount
-option.BLOOM_NETHER_AMOUNT.comment=How much to increase Bloom Amount when in the nether
+option.BLOOM_NETHER_AMOUNT.comment=The amount of bloom when in the nether
 value.BLOOM_NETHER_AMOUNT.-1=Use Style
 
 option.BLOOM_END_AMOUNT=Bloom End Amount
-option.BLOOM_END_AMOUNT.comment=How much to increase Bloom Amount when in the end
+option.BLOOM_END_AMOUNT.comment=The amount of bloom when in the end
 value.BLOOM_END_AMOUNT.-1=Use Style
-
-option.BLOOM_SIZE=Bloom Size
-value.BLOOM_SIZE.-1=Use Style
 
 option.BLOOM_LOW_CUTOFF=Bloom Low Cutoff
 option.BLOOM_LOW_CUTOFF.comment=The value at which all colors are treated as equally dark
@@ -958,6 +968,18 @@ value.BLOOM_DETECT_TINT_GREEN.-1=Use Style
 option.BLOOM_DETECT_TINT_BLUE=Bloom Detect Tint Blue
 option.BLOOM_DETECT_TINT_BLUE.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
 value.BLOOM_DETECT_TINT_BLUE.-1=Use Style
+
+option.BLOOM_FINAL_TINT_RED=Bloom Final Tint Red
+option.BLOOM_FINAL_TINT_RED.comment=How much to tint the bloom color that is applied to the image
+value.BLOOM_FINAL_TINT_RED.-1=Use Style
+
+option.BLOOM_FINAL_TINT_GREEN=Bloom Final Tint Green
+option.BLOOM_FINAL_TINT_GREEN.comment=How much to tint the bloom color that is applied to the image
+value.BLOOM_FINAL_TINT_GREEN.-1=Use Style
+
+option.BLOOM_FINAL_TINT_BLUE=Bloom Final Tint Blue
+option.BLOOM_FINAL_TINT_BLUE.comment=How much to tint the bloom color that is applied to the image
+value.BLOOM_FINAL_TINT_BLUE.-1=Use Style
 
 
 

@@ -537,7 +537,7 @@
 #endif
 #if HANDHELD_LIGHT_DISTANCE == -1
 #undef HANDHELD_LIGHT_DISTANCE
-										#define HANDHELD_LIGHT_DISTANCE 20
+										#define HANDHELD_LIGHT_DISTANCE 10
 #endif
 #if HANDHELD_LIGHT_BRIGHTNESS == -1
 #undef HANDHELD_LIGHT_BRIGHTNESS
@@ -660,6 +660,18 @@
 #undef BLOOM_STYLE
 										#define BLOOM_STYLE 2
 #endif
+#if BLOOM_SIZE == -1
+#undef BLOOM_SIZE
+										#define BLOOM_SIZE 2.5
+#endif
+#if EMISSIVES_BLOOM_AMOUNT == -1
+#undef EMISSIVES_BLOOM_AMOUNT
+										#define EMISSIVES_BLOOM_AMOUNT 1.5
+#endif
+#if EMISSIVES_BLOOM_ENABLED == -1
+#undef EMISSIVES_BLOOM_ENABLED
+										#define EMISSIVES_BLOOM_ENABLED 0
+#endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
 										#define BLOOM_AMOUNT 1.5
@@ -671,10 +683,6 @@
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
 										#define BLOOM_END_AMOUNT 2.0
-#endif
-#if BLOOM_SIZE == -1
-#undef BLOOM_SIZE
-										#define BLOOM_SIZE 2.5
 #endif
 #if BLOOM_LOW_CUTOFF == -1
 #undef BLOOM_LOW_CUTOFF
@@ -695,6 +703,18 @@
 #if BLOOM_DETECT_TINT_BLUE == -1
 #undef BLOOM_DETECT_TINT_BLUE
 										#define BLOOM_DETECT_TINT_BLUE 1.0
+#endif
+#if BLOOM_FINAL_TINT_RED == -1
+#undef BLOOM_FINAL_TINT_RED
+										#define BLOOM_FINAL_TINT_RED 1.0
+#endif
+#if BLOOM_FINAL_TINT_GREEN == -1
+#undef BLOOM_FINAL_TINT_GREEN
+										#define BLOOM_FINAL_TINT_GREEN 0.9
+#endif
+#if BLOOM_FINAL_TINT_BLUE == -1
+#undef BLOOM_FINAL_TINT_BLUE
+										#define BLOOM_FINAL_TINT_BLUE 0.8
 #endif
 
 
