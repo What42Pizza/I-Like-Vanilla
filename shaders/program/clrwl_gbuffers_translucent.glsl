@@ -32,6 +32,7 @@ void main() {
 	color.rgb /= ao;
 	adjustLmcoord(lmcoord);
 	
+	vec3 glcolor = glcolor;
 	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
 	
 	float reflectiveness = reflectiveness;
@@ -94,7 +95,7 @@ void main() {
 
 #include "/utils/projections.glsl"
 
-#if TAA_ENABLED == 1
+#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 #if BORDER_FOG_ENABLED == 1
@@ -129,7 +130,7 @@ void main() {
 	gl_Position = viewToNdc(viewPos);
 	
 	
-	#if TAA_ENABLED == 1
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
 	
