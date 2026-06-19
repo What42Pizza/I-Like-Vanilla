@@ -2,7 +2,7 @@ Sometimes I can lose sight of what all I'm trying to achieve with this shader (a
 
 ### Effects should be subtle
 
-You shouldn't constantly notice the bloom, ssao, shadows, reflections, etc. There are some cases, like shadows and sunrays, where it's okay to briefly notice and appreciate the effects, but that should be a rarity. For the most part, you shouldn't even be able to tell that the effects are enabled. And a good way to think about it: you don't notice when it's enabled, but you do notice when it's not enabled.
+You shouldn't constantly notice the bloom, ssao, shadows, reflections, etc. There are some cases (like shadows and sunrays) where it's okay to notice and appreciate the effects, but those moments should be brief and rare. For the most part, you shouldn't even be able to tell that the effects are enabled. And a good way to think about it: you don't notice when it's enabled, but you do notice when it's not enabled.
 
 ### It should make everything look inspiring
 

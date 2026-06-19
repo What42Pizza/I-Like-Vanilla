@@ -928,15 +928,6 @@ option.BLOOM_LEVELS.comment=How many layers of bloom to calculate. If you increa
 option.BLOOM_SIZE=Bloom Size
 value.BLOOM_SIZE.-1=Use Style
 
-option.EMISSIVES_BLOOM_ENABLED=Emissives Bloom Enabled
-option.EMISSIVES_BLOOM_ENABLED.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
-value.EMISSIVES_BLOOM_ENABLED.0=Off
-value.EMISSIVES_BLOOM_ENABLED.1=On
-
-option.EMISSIVES_BLOOM_AMOUNT=Emissives Bloom Amount
-option.EMISSIVES_BLOOM_AMOUNT.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
-value.EMISSIVES_BLOOM_AMOUNT.-1=Use Style
-
 option.BLOOM_AMOUNT=Bloom Amount
 option.BLOOM_AMOUNT.comment=The amount of bloom when in the overworld
 value.BLOOM_AMOUNT.-1=Use Style
@@ -948,6 +939,15 @@ value.BLOOM_NETHER_AMOUNT.-1=Use Style
 option.BLOOM_END_AMOUNT=Bloom End Amount
 option.BLOOM_END_AMOUNT.comment=The amount of bloom when in the end
 value.BLOOM_END_AMOUNT.-1=Use Style
+
+option.EMISSIVES_BLOOM_ENABLED=Emissives Bloom Enabled
+option.EMISSIVES_BLOOM_ENABLED.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
+value.EMISSIVES_BLOOM_ENABLED.0=Off
+value.EMISSIVES_BLOOM_ENABLED.1=On
+
+option.EMISSIVES_BLOOM_AMOUNT=Emissives Bloom Amount
+option.EMISSIVES_BLOOM_AMOUNT.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
+value.EMISSIVES_BLOOM_AMOUNT.-1=Use Style
 
 option.BLOOM_LOW_CUTOFF=Bloom Low Cutoff
 option.BLOOM_LOW_CUTOFF.comment=The value at which all colors are treated as equally dark
@@ -2294,13 +2294,21 @@ prefix.VOXY_BORDER_FOG_DIST_MULT=x
 screen.ATMOSPHERIC_FOG_MENU=Atmospheric Fog
 screen.ATMOSPHERIC_FOG_MENU.comment=Fog that gives the world more depth, atmosphere, and color
 
-option.ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density
-option.ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog
-value.ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+option.DAY_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Day)
+option.DAY_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at day)
+value.DAY_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
-option.NIGHT_ATMOSPHERIC_FOG_DENSITY=Night Atmospheric Fog Density
+option.NIGHT_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Night)
 option.NIGHT_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at night)
 value.NIGHT_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+option.SUNRISE_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Sunrise)
+option.SUNRISE_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at sunrise)
+value.SUNRISE_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
+
+option.SUNSET_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Sunset)
+option.SUNSET_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at sunset)
+value.SUNSET_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
 option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground

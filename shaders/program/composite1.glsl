@@ -157,7 +157,12 @@ void main() {
 			atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
 		#endif
 		#ifdef OVERWORLD
-			fogDensity = mix(UNDERGROUND_FOG_DENSITY, mix(ATMOSPHERIC_FOG_DENSITY, NIGHT_ATMOSPHERIC_FOG_DENSITY, ambientMoonPercent), min(brightnesses.y * 1.5, 1.0));
+			fogDensity =
+				DAY_ATMOSPHERIC_FOG_DENSITY * ambientSunPercent
+				+ NIGHT_ATMOSPHERIC_FOG_DENSITY * ambientMoonPercent
+				+ SUNRISE_ATMOSPHERIC_FOG_DENSITY * ambientSunrisePercent
+				+ SUNSET_ATMOSPHERIC_FOG_DENSITY * ambientSunsetPercent;
+			fogDensity = mix(UNDERGROUND_FOG_DENSITY, fogDensity, min(brightnesses.y * 1.5, 1.0));
 			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * brightnesses.y);
 			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
 		#elif defined NETHER

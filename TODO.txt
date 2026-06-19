@@ -1,6 +1,5 @@
 Planned for next major version:
 Add situational effects:
-	end portal (& gateway) effects
 	reflective rain puddles
 Make most (all that can) settings be relative to style value
 Update documentation
@@ -33,21 +32,19 @@ final post-processing (color correction, etc)
 
 
 Other planned:
+Check if SUNRAYS_FLICKERING_FIX is still needed
 Test replacing all `1-(1-x)(1-x)` with `x(2-x)`
-Try out 'alphatest.program' and 'blend.program' (in shader.properties, see photon for good examples)
+Try out 'alphatest.program' (in shader.properties, see photon for good examples)
 turn betterNightVision into a uniform?
 Add generalized volumetrics?
 Make reflections (especially on water) noticeable at night
 Increase waviness of plant tops
 Add setting `Light Mixing: Artistic / Realistic`?
-Check if SUNRAYS_FLICKERING_FIX is still needed
 Check gamma correction stuff again to make sure it makes sense
 Add a scary style?
 Maybe add smaa from https://github.com/Luracasmus/smaa-mc
 Rework outline detection to use normals instead of depth?
 World curvature settings?
-Add water caustics?
-Improve TAA on moving entities
 Add documentation for super secret settings
 Add ripples to rain reflections
 Add void fog option?
@@ -68,9 +65,9 @@ Ongoing / continuous:
 OPTIMIZE (see shader assembly?)
 Update documentation
 Keep the shader simple!
-Cut down on the number of options
-Add more values to options (to an extent)
-Add more comments to options
+Cut down on the number of settings?
+Add more values to settings (to an extent)
+Add more comments to settings
 Make sure all styles look good in:
 	day
 	night

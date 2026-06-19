@@ -1,10 +1,11 @@
-- v1.4.2
+- v1.4.2 (26/06/19)
   - Improved temporal filtering (with CatmullRom sampling)
   - Added setting 'Extra Depth Check' for temporal filtering
   - Added options to only apply fxaa on entities and taa + temporal filter on everything else (enabled by default)
   - Added edge highlights (similar to MC Dungeons)
   - Added 'Emissives Bloom' feature (configurable, adds extra bloom to emissive pixels, disabled by default)
   - Added 'Bloom Final Tint Red/Green/Blue' settings
+  - Added 'Atmospheric Fog Density (Sunrise/Sunset)' settings (and renamed 'ATMOSPHERIC_FOG_DENSITY' value to 'DAY_ATMOSPHERIC_FOG_DENSITY')
   - Swapped handheld object side shading axis
   - Tweaked emissive textures effect
   - Added emissive glow to sculk blocks
