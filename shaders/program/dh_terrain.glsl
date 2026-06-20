@@ -13,8 +13,8 @@ flat in_out int dhBlock;
 
 void main() {
 	
-	//float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
-	//if (lengthCylinder < far - 20.0) discard;
+	float lengthCylinder = max(length(playerPos.xz), abs(playerPos.y));
+	if (lengthCylinder < far - 4.0) discard;
 	
 	vec3 color = glcolor;
 	
