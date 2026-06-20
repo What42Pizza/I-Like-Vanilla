@@ -33,7 +33,7 @@ in_out vec2 texcoord;
 
 void main() {
 	
-	float depth = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
+	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
 	
 	#if KUWAHARA_ENABLED == 1
 		vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;

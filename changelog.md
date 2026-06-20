@@ -1,3 +1,8 @@
+- v1.4.2b
+  - Fixed jittering water with 'Extra Depth Check' enabled
+
+<br>
+
 - v1.4.2 (26/06/19)
   - Improved temporal filtering (with CatmullRom sampling)
   - Added setting 'Extra Depth Check' for temporal filtering

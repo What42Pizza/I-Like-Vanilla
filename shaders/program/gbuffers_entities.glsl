@@ -57,6 +57,13 @@ void main() {
 	}
 	
 	
+	#if SHADOWS_TYPE < 2
+		float isEntity = step(color.a, 0.99); // allows terrain under entity shadows to still have taa
+	#else
+		const float isEntity = 1.0;
+	#endif
+	
+	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.5, 1.0, 0.0, 1.0);
@@ -65,7 +72,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_7_7_1_1(reflectiveness, specularness, 0.0, 1.0),
+		pack_7_7_1_1(reflectiveness, specularness, 0.0, isEntity),
 		encodedNormal
 	);
 	
@@ -89,11 +96,17 @@ void main() {
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
 	glcolor = gl_Color;
-	#ifdef NETHER
-		// remove entity shadows, may cause other problems
+	
+	#if SHADOWS_TYPE < 2
+		// handle entity shadows
 		if (glcolor.a < 1.0) {
-			gl_Position = vec4(1.0);
-			return;
+			#ifdef NETHER
+				// remove entity shadows, may cause other problems
+				gl_Position = vec4(1.0);
+				return;
+			#else
+				lmcoord.y = eyeBrightnessSmooth.y / 240.0;
+			#endif
 		}
 	#endif
 	
@@ -118,6 +131,9 @@ void main() {
 	
 	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
+	#endif
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 2
+		if (glcolor.a < 1.0) gl_Position.z -= 0.001;
 	#endif
 	
 	
