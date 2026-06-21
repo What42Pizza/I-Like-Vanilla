@@ -147,33 +147,15 @@ void main() {
 	float fogDist = length(playerPos);
 	fogDist *= 1.0 + distMult;
 	
-	float fogDensity = fogDensity;
 	float fogDarken = fogDarken;
 	vec3 atmoFogColor = getFogColor(viewPos, playerPos);
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
-	if (isEyeInWater == 0) {
-		#ifndef NETHER
+	#ifndef NETHER
+		if (isEyeInWater == 0) {
 			atmoFogColor *= 0.5 + 0.5 * brightnesses.y;
-		#endif
-		#ifdef OVERWORLD
-			fogDensity =
-				DAY_ATMOSPHERIC_FOG_DENSITY * ambientSunPercent
-				+ NIGHT_ATMOSPHERIC_FOG_DENSITY * ambientMoonPercent
-				+ SUNRISE_ATMOSPHERIC_FOG_DENSITY * ambientSunrisePercent
-				+ SUNSET_ATMOSPHERIC_FOG_DENSITY * ambientSunsetPercent;
-			fogDensity = mix(UNDERGROUND_FOG_DENSITY, fogDensity, min(brightnesses.y * 1.5, 1.0));
-			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * brightnesses.y);
-			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
-		#elif defined NETHER
-			fogDensity = NETHER_FOG_DENSITY;
-		#elif defined END
-			fogDensity = END_FOG_DENSITY;
-		#endif
-		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
-		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
-		fogDensity /= 256.0;
-	}
+		}
+	#endif
 	
 	fogDist = mix(fogDist, 0.0, fogAmount);
 	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
@@ -285,10 +267,27 @@ void main() {
 	// ======== ATMOSPHERIC FOG ======== //
 	
 	if (isEyeInWater == 0) {
-		fogDensity = 0.0;
+		float skylightExposure = eyeBrightnessSmooth.y / 240.0;
+		#ifdef OVERWORLD
+			fogDensity =
+				DAY_ATMOSPHERIC_FOG_DENSITY * ambientSunPercent
+				+ NIGHT_ATMOSPHERIC_FOG_DENSITY * ambientMoonPercent
+				+ SUNRISE_ATMOSPHERIC_FOG_DENSITY * ambientSunrisePercent
+				+ SUNSET_ATMOSPHERIC_FOG_DENSITY * ambientSunsetPercent;
+			fogDensity = mix(UNDERGROUND_FOG_DENSITY, fogDensity, min(skylightExposure * 1.5, 1.0));
+			fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * skylightExposure);
+			fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
+		#elif defined NETHER
+			fogDensity = NETHER_FOG_DENSITY;
+		#elif defined END
+			fogDensity = END_FOG_DENSITY;
+		#endif
+		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
+		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
+		fogDensity /= 256.0;
 		#ifdef OVERWORLD
 			fogDarken = 1.1;
-			fogDarken = mix(fogDarken, 0.85, betterRainStrength * eyeBrightnessSmooth.y / 240.0);
+			fogDarken = mix(fogDarken, 0.85, betterRainStrength * skylightExposure);
 		#elif defined NETHER
 			fogDarken = 0.75;
 		#else

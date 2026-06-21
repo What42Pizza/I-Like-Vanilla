@@ -16,7 +16,7 @@ float sampleCloud(vec3 pos, const bool isNormal) {
 
 
 
-// returns the cloud thinkness and brightness (both inverted) for this pixel
+// returns the cloud thickness and brightness (both inverted) for this pixel
 vec2 computeClouds(vec3 playerPos) {
 	
 	vec3 stepVec = playerPos;

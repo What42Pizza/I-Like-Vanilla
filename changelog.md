@@ -1,6 +1,7 @@
 - v1.4.2b
   - Fixed jittering water with 'Extra Depth Check' enabled
   - Fixed Distant Horizon terrain being visible close up
+  - Added distance fade-off to realistic style clouds (based on atmospheric fog settings)
 
 <br>
 
