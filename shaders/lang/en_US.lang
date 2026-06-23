@@ -895,6 +895,12 @@ option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT=Edge Highlight Brightness Lift
 option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.comment=How much the edge highlight effect should brighten the pixel by adding
 value.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.-1=Use Style
 
+option.EDGE_HIGHLIGHT_ON_ENTITIES=Edge Highlight On Entities
+option.EDGE_HIGHLIGHT_ON_ENTITIES.comment=Controls whether the edge highlight is added to entities (and other moving objects)
+value.EDGE_HIGHLIGHT_ON_ENTITIES.-1=Use Style
+value.EDGE_HIGHLIGHT_ON_ENTITIES.0=Off
+value.EDGE_HIGHLIGHT_ON_ENTITIES.1=On
+
 
 
 

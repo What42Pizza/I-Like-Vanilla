@@ -142,14 +142,6 @@ void main() {
 			}
 		#endif
 		
-		#if EDGE_HIGHLIGHT_ENABLED == 1
-			if (!depthIsHand(depth)) {
-				float isEdgeHighlight = getEdgeHighlight(viewPos, playerPos, depth, normal);
-				color *= 1.0 + EDGE_HIGHLIGHT_BRIGHTNESS_MULT * 0.5 * isEdgeHighlight;
-				color += EDGE_HIGHLIGHT_BRIGHTNESS_LIFT * isEdgeHighlight;
-			}
-		#endif
-		
 		#ifdef DISTANT_HORIZONS
 			
 			if (depth == 1.0 && dhDepth != 1.0) {
@@ -177,6 +169,19 @@ void main() {
 				color.rgb = mix(color.rgb, voxyTransparents.rgb, voxyTransparents.a);
 			}
 			
+		#endif
+		
+		#if EDGE_HIGHLIGHT_ENABLED == 1
+			#if EDGE_HIGHLIGHT_ON_ENTITIES == 1
+				bool doEdgeHighlight = !depthIsHand(depth);
+			#else
+				bool doEdgeHighlight = !depthIsHand(depth) && refSpecGlowingEntity.w < 0.5;
+			#endif
+			if (doEdgeHighlight) {
+				float isEdgeHighlight = getEdgeHighlight(viewPos, playerPos, depth, normal);
+				color *= 1.0 + EDGE_HIGHLIGHT_BRIGHTNESS_MULT * 0.5 * isEdgeHighlight;
+				color += EDGE_HIGHLIGHT_BRIGHTNESS_LIFT * isEdgeHighlight;
+			}
 		#endif
 		
 		#if BORDER_FOG_ENABLED == 1
