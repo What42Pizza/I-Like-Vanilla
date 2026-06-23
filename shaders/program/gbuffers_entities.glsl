@@ -57,11 +57,12 @@ void main() {
 	}
 	
 	
-	#if SHADOWS_TYPE < 2
-		float isEntity = step(color.a, 0.99); // allows terrain under entity shadows to still have taa
-	#else
-		const float isEntity = 1.0;
-	#endif
+	float isEntity = step(0.95, color.a); // allow temporal filter is this entity is transparent
+	
+	//float dither = bayer64(gl_FragCoord.xy);
+	//dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	//if (dither > color.a * 5.0) discard;
+	//color.a = max(color.a, 0.2);
 	
 	
 	/* DRAWBUFFERS:02 */
