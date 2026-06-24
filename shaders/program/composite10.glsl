@@ -61,7 +61,7 @@ void main() {
 	#if EMISSIVES_BLOOM_ENABLED == 1
 		vec4 opaqueData = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord * bloomIntScale + bloomIntScale / 2, 0);
 		vec4 miscData = unpack_7_7_1_1(opaqueData.y);
-		bloomMult += EMISSIVES_BLOOM_AMOUNT * miscData.z;
+		bloomMult += EMISSIVES_BLOOM_AMOUNT * min(miscData.x * 2.0, 1.0) * miscData.z;
 	#endif
 	
 	
@@ -83,7 +83,7 @@ void main() {
 	
 	
 	#if EMISSIVES_BLOOM_ENABLED == 1
-		bloomColor *= 1.0 + 0.5 * EMISSIVES_BLOOM_AMOUNT * miscData.z;
+		bloomColor *= 1.0 + 0.5 * EMISSIVES_BLOOM_AMOUNT * min(miscData.x * 2.0, 1.0) * miscData.z;
 	#endif
 	
 	

@@ -164,11 +164,17 @@ void main() {
 	
 	
 	float lowLightStrength = eyeBrightnessSmooth.y / 240.0 * mix(0.6, 1.0, ambientMoonPercent);
-	#if LOW_LIGHT_NOISE_STRENGTH > 0
-		color += texelFetch(noisetex, (ivec2(texelcoord / viewHeight * 540) + int(frameTimeCounter * 24.0) * 71) & 127, 0).b * lowLightStrength * (LOW_LIGHT_NOISE_STRENGTH / 100.0 / 50.0);
-	#endif
+	float invLum = 1.0 - getLum(color);
+	lowLightStrength *= invLum;
+	lowLightStrength *= invLum;
 	#if LOW_LIGHT_DESATURATION > 0
-		color = mix(color, vec3(getLum(color)), lowLightStrength * (LOW_LIGHT_DESATURATION / 100.0) * (1.0 - getLum(color)));
+		color = mix(color, vec3(getLum(color)), lowLightStrength * (LOW_LIGHT_DESATURATION / 100.0));
+	#endif
+	#if LOW_LIGHT_CONTRAST < 0
+		color = mix(color, vec3(0.02, 0.018, 0.015), lowLightStrength * (LOW_LIGHT_CONTRAST / -100.0));
+	#endif
+	#if LOW_LIGHT_STATIC_STRENGTH > 0
+		color += texelFetch(noisetex, (ivec2(texelcoord / viewHeight * 540) + int(frameTimeCounter * 24.0) * 71) & 127, 0).b * lowLightStrength * (LOW_LIGHT_STATIC_STRENGTH / 100.0 / 50.0);
 	#endif
 	
 	

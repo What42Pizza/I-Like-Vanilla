@@ -1,6 +1,9 @@
 - v1.4.3
-  - Added 'Low Light Desaturation' feature (configurable)
-  - Added 'Low Light Noise' feature (configurable, disabled by default)
+  - Added 'Low Light' features (all configurable):
+    - 'Low Light Desaturation'
+    - 'Low Light Contrast'
+    - 'Low Light Static' (disabled by default)
+  - Added setting 'Entity Flash Glowing Strength'
   - Fixed values for 'Handheld Light Realism'
 
 <br>

@@ -406,11 +406,11 @@
 #endif
 #if BLOCK_GREEN_BRIGHT == -1
 #undef BLOCK_GREEN_BRIGHT
-										#define BLOCK_GREEN_BRIGHT 0.7
+										#define BLOCK_GREEN_BRIGHT 0.75
 #endif
 #if BLOCK_BLUE_BRIGHT == -1
 #undef BLOCK_BLUE_BRIGHT
-										#define BLOCK_BLUE_BRIGHT 0.5
+										#define BLOCK_BLUE_BRIGHT 0.6
 #endif
 #if BLOCK_BRIGHTNESS == -1
 #undef BLOCK_BRIGHTNESS
@@ -546,7 +546,7 @@
 #endif
 #if HANDHELD_LIGHT_REALISM == -1
 #undef HANDHELD_LIGHT_REALISM
-										#define HANDHELD_LIGHT_REALISM 0.5
+										#define HANDHELD_LIGHT_REALISM 0.55
 #endif
 
 
@@ -671,7 +671,7 @@
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 1.0
+										#define BLOOM_AMOUNT 0.9
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
@@ -1131,17 +1131,25 @@
 #undef COLORED_PARTICLE_TRANSPARENCY
 										#define COLORED_PARTICLE_TRANSPARENCY 0.0
 #endif
-#if LOW_LIGHT_NOISE_STRENGTH == -1
-#undef LOW_LIGHT_NOISE_STRENGTH
-										#define LOW_LIGHT_NOISE_STRENGTH 60
-#endif
 #if LOW_LIGHT_DESATURATION == -1
 #undef LOW_LIGHT_DESATURATION
-										#define LOW_LIGHT_DESATURATION 5
+										#define LOW_LIGHT_DESATURATION 10
+#endif
+#if LOW_LIGHT_CONTRAST == -1
+#undef LOW_LIGHT_CONTRAST
+										#define LOW_LIGHT_CONTRAST -15
+#endif
+#if LOW_LIGHT_STATIC_STRENGTH == -1
+#undef LOW_LIGHT_STATIC_STRENGTH
+										#define LOW_LIGHT_STATIC_STRENGTH 60
 #endif
 #if ENTITY_FLASH_STRENGTH == -1
 #undef ENTITY_FLASH_STRENGTH
 										#define ENTITY_FLASH_STRENGTH 1.5
+#endif
+#if ENTITY_FLASH_GLOW_STRENGTH == -1
+#undef ENTITY_FLASH_GLOW_STRENGTH
+										#define ENTITY_FLASH_GLOW_STRENGTH 0.3
 #endif
 
 

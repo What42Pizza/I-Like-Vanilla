@@ -28,7 +28,8 @@ void main() {
 	
 	
 	// hurt flash, creeper flash, etc
-	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.5, 1.0));
+	color.rgb = mix(color.rgb, entityColor.rgb, min(entityColor.a * 1.25, 1.0) * ENTITY_FLASH_STRENGTH);
+	float glowing = step(0.01, entityColor.a);
 	//color.rgb *= 1.0 + (1.0 - max(lmcoord.x, lmcoord.y)) * entityColor.a;
 	
 	
@@ -59,6 +60,8 @@ void main() {
 	
 	float isEntity = step(0.95, color.a); // allow temporal filter is this entity is transparent
 	
+	reflectiveness = mix(reflectiveness, ENTITY_FLASH_GLOW_STRENGTH, glowing);
+	
 	//float dither = bayer64(gl_FragCoord.xy);
 	//dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	//if (dither > color.a * 5.0) discard;
@@ -73,7 +76,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_7_7_1_1(reflectiveness, specularness, 0.0, isEntity),
+		pack_7_7_1_1(reflectiveness, specularness, glowing, isEntity),
 		encodedNormal
 	);
 	
