@@ -1,4 +1,11 @@
-- v1.4.2b
+- v1.4.3
+  - Added 'Low Light Desaturation' feature (configurable)
+  - Added 'Low Light Noise' feature (configurable, disabled by default)
+  - Fixed values for 'Handheld Light Realism'
+
+<br>
+
+- v1.4.2b (26/06/23)
   - Fixed jittering water with 'Extra Depth Check' enabled
   - Fixed Distant Horizon terrain being visible close up
   - Added distance fade-off to realistic style clouds (based on atmospheric fog settings)
@@ -43,7 +50,7 @@
 
 <br>
 
-- v1.4.0 (26/05/22)
+- **v1.4.0** (26/05/22)
   - Added Story-Mode-like clouds (configurable)
   - Added new 'Vertical' end clouds type
   - Enabled border fog for Voxy
@@ -60,6 +67,8 @@
   - Fixed compiler warnings
   - Tweaked many settings and effects
 
+<br>
+<br>
 <br>
 
 - v1.3.7b (26/05/15)

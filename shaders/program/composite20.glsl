@@ -163,6 +163,16 @@ void main() {
 	
 	
 	
+	float lowLightStrength = eyeBrightnessSmooth.y / 240.0 * mix(0.6, 1.0, ambientMoonPercent);
+	#if LOW_LIGHT_NOISE_STRENGTH > 0
+		color += texelFetch(noisetex, (ivec2(texelcoord / viewHeight * 540) + int(frameTimeCounter * 24.0) * 71) & 127, 0).b * lowLightStrength * (LOW_LIGHT_NOISE_STRENGTH / 100.0 / 50.0);
+	#endif
+	#if LOW_LIGHT_DESATURATION > 0
+		color = mix(color, vec3(getLum(color)), lowLightStrength * (LOW_LIGHT_DESATURATION / 100.0) * (1.0 - getLum(color)));
+	#endif
+	
+	
+	
 	color += (fract(52.9829189 * fract(0.06711056 * gl_FragCoord.x + 0.00583715 * gl_FragCoord.y + 0.0003181 * frameCounter)) - 0.5) / 255.0;
 	
 	/* DRAWBUFFERS:07 */
