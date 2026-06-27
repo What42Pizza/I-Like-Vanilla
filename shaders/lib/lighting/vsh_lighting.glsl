@@ -7,7 +7,7 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
 			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
 			handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
-			float lightDot = abs(dot(normalize(viewPos), normal));
+			float lightDot = -dot(normalize(viewPos), normal);
 			handLightBrightness *= (lightDot - 1.0) * HANDHELD_LIGHT_REALISM + 1.0;
 			lmcoord.x = max(lmcoord.x, handLightBrightness);
 		}

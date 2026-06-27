@@ -2705,3 +2705,13 @@ option.FOG_IGNORES_TRANSPARENTS=Fog Ignores Transparents
 option.FOG_IGNORES_TRANSPARENTS.comment=Fixes things like Particle Rain, but makes other things look worse
 value.FOG_IGNORES_TRANSPARENTS.0=Off
 value.FOG_IGNORES_TRANSPARENTS.1=On
+
+option.HIDE_OPAQUE_HAND=Hide Opaque Hand
+option.HIDE_OPAQUE_HAND.comment=Disables part of the hand rendering, can be useful is niche situations
+value.HIDE_OPAQUE_HAND.0=Off
+value.HIDE_OPAQUE_HAND.1=On
+
+option.HIDE_TRANSPARENT_HAND=Hide Transparent Hand
+option.HIDE_TRANSPARENT_HAND.comment=Disables part of the hand rendering, can be useful is niche situations
+value.HIDE_TRANSPARENT_HAND.0=Off
+value.HIDE_TRANSPARENT_HAND.1=On

@@ -130,6 +130,9 @@ void main() {
 	viewPos = screenToView(screenPos);
 	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
 	
+	#if HIDE_OPAQUE_HAND == 1
+		gl_Position = vec4(1.0);
+	#endif
 }
 
 #endif

@@ -5,6 +5,8 @@
     - 'Low Light Static' (disabled by default)
   - Added setting 'Entity Flash Glowing Strength'
   - Fixed values for 'Handheld Light Realism'
+  - Fixed 'Entity Flash Strength'
+  - Added settings 'Hide Opaque/Transparent Hand'
 
 <br>
 

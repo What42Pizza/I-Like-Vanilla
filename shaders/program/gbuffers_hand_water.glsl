@@ -71,7 +71,7 @@ void main() {
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if TAA_ENABLED == 1
+#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -101,7 +101,7 @@ void main() {
 	#endif
 	
 	
-	#if TAA_ENABLED == 1
+	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
 	
@@ -110,6 +110,9 @@ void main() {
 	viewPos = screenToView(screenPos);
 	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
 	
+	#if HIDE_TRANSPARENT_HAND == 1
+		gl_Position = vec4(1.0);
+	#endif
 }
 
 #endif

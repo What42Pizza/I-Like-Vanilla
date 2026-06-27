@@ -118,6 +118,7 @@ void main() {
 		vec3 normal;
 	#endif
 	normal = gl_NormalMatrix * gl_Normal;
+	normal *= normal.z;
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);
 	#endif
@@ -136,9 +137,7 @@ void main() {
 	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
-	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 2
-		if (glcolor.a < 1.0) gl_Position.z -= 0.001;
-	#endif
+	gl_Position.z -= 0.0001;
 	
 	
 	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
