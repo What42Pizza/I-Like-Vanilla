@@ -95,7 +95,7 @@ void main() {
 	#endif
 	
 	
-	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
+	gl_Position = ftransform();
 	#if PROJECTION_TYPE == 1
 		//gl_Position.xy *= 1.5;
 	#endif
