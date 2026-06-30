@@ -174,7 +174,7 @@ void main() {
 		color = mix(color, vec3(0.02, 0.018, 0.015), lowLightStrength * (LOW_LIGHT_CONTRAST / -100.0));
 	#endif
 	#if LOW_LIGHT_STATIC_STRENGTH > 0
-		color += texelFetch(noisetex, (ivec2(texelcoord / viewHeight * 540) + int(frameTimeCounter * 24.0) * 71) & 127, 0).b * lowLightStrength * (LOW_LIGHT_STATIC_STRENGTH / 100.0 / 50.0);
+		color += texelFetch(noisetex, (ivec2(texelcoord / viewHeight * 540) + int(frameTimeCounter * 24.0) * ivec2(51, 71)) & 127, 0).b * lowLightStrength * (LOW_LIGHT_STATIC_STRENGTH / 100.0 / 50.0);
 	#endif
 	
 	

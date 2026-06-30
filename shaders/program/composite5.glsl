@@ -55,8 +55,6 @@ void main() {
 		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
 		vec4 sampleScreenPos = gbufferProjection * vec4(viewPos, 1.0);
 		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
-	#else
-		float depthDh = 1.0;
 	#endif
 	
 	vec3 pos = vec3(texcoord, depth);
@@ -95,7 +93,7 @@ void main() {
 				doTF = doTF && !isEntity;
 			}
 		#endif
-		if (doTF) doTemporalFilter(color, depth, depthDh, prevCoord);
+		if (doTF) doTemporalFilter(color, depth, prevCoord);
 	#endif
 	
 	

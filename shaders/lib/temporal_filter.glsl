@@ -47,7 +47,7 @@ vec3 textureCatmullRom(sampler2D colortex, vec2 texcoord) {
 	return color.rgb / color.a;
 }
 
-void doTemporalFilter(inout vec3 color, float depth, float dhDepth, vec2 prevCoord) {
+void doTemporalFilter(inout vec3 color, float depth, vec2 prevCoord) {
 	
 	if (
 		prevCoord.x < 0.0 || prevCoord.x > 1.0 ||
