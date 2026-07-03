@@ -1825,9 +1825,16 @@ option.CLOUD_FOG_CURVE=Cloud Fog Curve
 option.CLOUD_FOG_CURVE.comment=Set how quickly the clouds fade out
 value.CLOUD_FOG_CURVE.-1=Use Style
 
-option.VANILLA_CLOUDS_HEIGHT=Vanilla Clouds Height
+option.VANILLA_CLOUDS_HEIGHT=Detected Clouds Height
 option.VANILLA_CLOUDS_HEIGHT.comment=Sometimes the shader doesn't know what the actual cloud height is, this can be used to override the default system and manually specify it
 value.VANILLA_CLOUDS_HEIGHT.0=Auto Detect
+
+option.VANILLA_CLOUDS_HEIGHT_OFFSET=Clouds Height Offset
+option.VANILLA_CLOUDS_HEIGHT_OFFSET.comment=Moves the vanilla clouds up/down (this is sometimes/usually broken due to culling, which is something the shader can't fix)
+
+option.VANILLA_CLOUDS_SCALE=Vanilla Clouds Scale
+option.VANILLA_CLOUDS_SCALE.comment=Scales the vanilla clouds by a certain amount (in the x and z directions)
+value.VANILLA_CLOUDS_SCALE.-1=Use Style
 
 option.STORY_MODE_CLOUDS_ENABLED=Story Mode Clouds Enabled
 option.STORY_MODE_CLOUDS_ENABLED.comment=Enables clouds similar to that of Minecraft Story Mode (requires Realistic Clouds to be disabled)

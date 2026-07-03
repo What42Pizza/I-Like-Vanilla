@@ -7,6 +7,10 @@
   - Fixed values for 'Handheld Light Realism'
   - Fixed 'Entity Flash Strength'
   - Added settings 'Hide Opaque/Transparent Hand'
+  - Fixed realistic clouds
+  - Renamed 'Vanilla Clouds Height' to 'Detected Clouds Height' and added more values for it
+  - Added setting 'Vanilla Clouds Scale'
+  - Added setting 'Clouds Height Offset' (which may be broken for all users)
 
 <br>
 

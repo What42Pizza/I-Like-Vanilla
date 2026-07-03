@@ -65,7 +65,7 @@ void main() {
 	
 	
 	// fog transparency
-	float dist = length(playerPos.xz);
+	float dist = length(playerPos.xz) / VANILLA_CLOUDS_SCALE;
 	dist /= 128.0 * 16.0 * 1.25;
 	float fogAmount = percentThrough(dist, 1.0, CLOUD_FOG_START);
 	#if CLOUD_FOG_CURVE == 2
@@ -113,10 +113,13 @@ void main() {
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
 	#if STORY_MODE_CLOUDS_ENABLED == 1
-		alphaMult = percentThrough(cameraPosition.y, cloudHeight + 32.0, cloudHeight - 8.0); // start off inverted
+		alphaMult = percentThrough(cameraPosition.y, cloudHeight + 8.0, cloudHeight - 4.0); // start off inverted
 		alphaMult *= float(playerPos.y + cameraPosition.y > cloudHeight + 1.5);
 		alphaMult = 1.0 - alphaMult;
 	#endif
+	playerPos.xz *= VANILLA_CLOUDS_SCALE;
+	playerPos.y += VANILLA_CLOUDS_HEIGHT_OFFSET;
+	viewPos = transform(gbufferModelView, playerPos);
 	
 	gl_Position = viewToNdc(viewPos);
 	
