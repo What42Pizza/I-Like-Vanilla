@@ -343,7 +343,7 @@ if (materialId < 28u) {
 				}
 			}
 		} else {
-			SET_REFLECTIVENESS(0.2);
+			SET_REFLECTIVENESS(0.15);
 		}
 	} else {
 		if (materialId < 66u) {

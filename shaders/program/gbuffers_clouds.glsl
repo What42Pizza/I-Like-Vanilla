@@ -65,7 +65,7 @@ void main() {
 	
 	
 	// fog transparency
-	float dist = length(playerPos.xz) / VANILLA_CLOUDS_SCALE;
+	float dist = length(playerPos.xz) / VANILLA_CLOUDS_SCALE_XZ;
 	dist /= 128.0 * 16.0 * 1.25;
 	float fogAmount = percentThrough(dist, 1.0, CLOUD_FOG_START);
 	#if CLOUD_FOG_CURVE == 2
@@ -117,7 +117,8 @@ void main() {
 		alphaMult *= float(playerPos.y + cameraPosition.y > cloudHeight + 1.5);
 		alphaMult = 1.0 - alphaMult;
 	#endif
-	playerPos.xz *= VANILLA_CLOUDS_SCALE;
+	playerPos.xz *= VANILLA_CLOUDS_SCALE_XZ;
+	playerPos.y *= VANILLA_CLOUDS_SCALE_Y;
 	playerPos.y += VANILLA_CLOUDS_HEIGHT_OFFSET;
 	viewPos = transform(gbufferModelView, playerPos);
 	

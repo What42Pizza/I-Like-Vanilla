@@ -9,8 +9,9 @@
   - Added settings 'Hide Opaque/Transparent Hand'
   - Fixed realistic clouds
   - Renamed 'Vanilla Clouds Height' to 'Detected Clouds Height' and added more values for it
-  - Added setting 'Vanilla Clouds Scale'
+  - Added settings 'Vanilla Clouds Scale (Horizontal/Vertical)'
   - Added setting 'Clouds Height Offset' (which may be broken for all users)
+  - Added support for the modded Biomes O Plenty blocks
 
 <br>
 

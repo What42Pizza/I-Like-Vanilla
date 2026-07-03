@@ -1832,9 +1832,12 @@ value.VANILLA_CLOUDS_HEIGHT.0=Auto Detect
 option.VANILLA_CLOUDS_HEIGHT_OFFSET=Clouds Height Offset
 option.VANILLA_CLOUDS_HEIGHT_OFFSET.comment=Moves the vanilla clouds up/down (this is sometimes/usually broken due to culling, which is something the shader can't fix)
 
-option.VANILLA_CLOUDS_SCALE=Vanilla Clouds Scale
-option.VANILLA_CLOUDS_SCALE.comment=Scales the vanilla clouds by a certain amount (in the x and z directions)
-value.VANILLA_CLOUDS_SCALE.-1=Use Style
+option.VANILLA_CLOUDS_SCALE_XZ=Vanilla Clouds Scale (Horizontal)
+option.VANILLA_CLOUDS_SCALE_XZ.comment=Scales the vanilla clouds by a certain amount (in the x and z directions). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
+value.VANILLA_CLOUDS_SCALE_XZ.-1=Use Style
+
+option.VANILLA_CLOUDS_SCALE_Y=Vanilla Clouds Scale (Vertical)
+option.VANILLA_CLOUDS_SCALE_Y.comment=Scales the vanilla clouds by a certain amount (in the y direction). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
 
 option.STORY_MODE_CLOUDS_ENABLED=Story Mode Clouds Enabled
 option.STORY_MODE_CLOUDS_ENABLED.comment=Enables clouds similar to that of Minecraft Story Mode (requires Realistic Clouds to be disabled)
