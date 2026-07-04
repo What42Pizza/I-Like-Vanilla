@@ -79,6 +79,9 @@ void main() {
 	#endif
 	color.a *= fogAmount;
 	
+	color.a *= 1.0 - blindness;
+	color.a *= 1.0 - darknessFactor;
+	
 	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.0, 1.0, 1.0, 1.0);

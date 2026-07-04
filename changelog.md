@@ -1,4 +1,4 @@
-- v1.4.3
+- v1.4.3 (26/07/04)
   - Added 'Low Light' features (all configurable):
     - 'Low Light Desaturation'
     - 'Low Light Contrast'
@@ -12,6 +12,7 @@
   - Added settings 'Vanilla Clouds Scale (Horizontal/Vertical)'
   - Added setting 'Clouds Height Offset' (which may be broken for all users)
   - Added support for the modded Biomes O Plenty blocks
+  - Fixed Blindness and Darkness effects
 
 <br>
 

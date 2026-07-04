@@ -3,6 +3,7 @@ in_out vec2 texcoord;
 flat in_out float fogDensity;
 flat in_out float fogDarken;
 flat in_out float extraFogDist;
+flat in_out float distMultMult;
 
 #if DEPTH_SUNRAYS_ENABLED == 1
 	flat in_out vec2 lightCoord;
@@ -145,7 +146,7 @@ void main() {
 	
 	vec2 brightnesses = eyeBrightnessSmooth / 240.0;
 	float fogDist = length(playerPos);
-	fogDist *= 1.0 + distMult;
+	fogDist *= 1.0 + distMult * distMultMult;
 	
 	float fogDarken = fogDarken;
 	vec3 atmoFogColor = getFogColor(viewPos, playerPos);
@@ -158,13 +159,16 @@ void main() {
 	#endif
 	
 	fogDist = mix(fogDist, 0.0, fogAmount);
-	float atmoFogAmount = 1.0 - exp(-fogDensity * (fogDist + extraFogDist));
+	fogDist = smoothMax(fogDist + extraFogDist, 0.0, 0.2);
+	float atmoFogAmount = 1.0 - exp(-fogDensity * fogDist);
 	#ifndef NETHER
-		atmoFogAmount *= 1.0 - 0.25 * float(isEyeInWater == 0);
+		atmoFogAmount *= 1.0 - 0.25 * float(isEyeInWater == 0) * (1.0 - blindness) * (1.0 - darknessFactor);
 	#endif
 	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount;
+	
+	color *= 1.0 - 0.25 * blindness;
 	
 	#if defined OVERWORLD && HBD_ENABLED == 1
 		float desaturationAmount = 1.0 - HBD_SCALE / (max(playerPos.y + cameraPosition.y - 64.0, 0) + HBD_SCALE);
@@ -266,6 +270,7 @@ void main() {
 	
 	// ======== ATMOSPHERIC FOG ======== //
 	
+	distMultMult = 1.0;
 	if (isEyeInWater == 0) {
 		float skylightExposure = eyeBrightnessSmooth.y / 240.0;
 		#ifdef OVERWORLD
@@ -282,8 +287,6 @@ void main() {
 		#elif defined END
 			fogDensity = END_FOG_DENSITY;
 		#endif
-		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
-		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
 		fogDensity /= 256.0;
 		#ifdef OVERWORLD
 			fogDarken = 1.1;
@@ -313,13 +316,15 @@ void main() {
 		extraFogDist = 0.0;
 	}
 	
-	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
+	fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 64.0, blindness);
 	fogDarken = mix(fogDarken, 1.0, blindness);
-	extraFogDist *= 1.0 - blindness;
+	extraFogDist = mix(extraFogDist, BLINDNESS_EFFECT_FOG_DENSITY / -30.0, blindness);
+	distMultMult *= 1.0 - blindness;
 	
-	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
+	fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 100.0, darknessFactor);
 	fogDarken = mix(fogDarken, 1.0, darknessFactor);
-	extraFogDist = mix(extraFogDist, 4.0, darknessFactor);
+	extraFogDist = mix(extraFogDist, DARKNESS_EFFECT_FOG_DENSITY / -3.0, darknessFactor);
+	distMultMult *= 1.0 - darknessFactor;
 	
 	
 	

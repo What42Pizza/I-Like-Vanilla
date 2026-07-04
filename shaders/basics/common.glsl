@@ -164,6 +164,19 @@ vec3 smoothMax(vec3 v1, vec3 v2, float a) {
 	return (v1 + v2 + sqrt(pow2(v1 - v2) + a * (v1Lum + v2Lum) / 2.0)) / 2.0;
 }
 
+// taken from https://iquilezles.org/articles/smin/:
+float smoothMin(float a, float b, float k) {
+    k *= 2.0;
+    float x = b - a;
+    return 0.5 * (a + b - sqrt(x * x + k * k));
+}
+
+float smoothMax(float a, float b, float k) {
+    k *= 2.0;
+    float x = a - b;
+    return 0.5 * (a + b + sqrt(x * x + k * k));
+}
+
 float percentThrough(float v, float low, float high) {
 	return clamp((v - low) / (high - low), 0.0, 1.0);
 }

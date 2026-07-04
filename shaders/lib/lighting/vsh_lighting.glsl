@@ -33,7 +33,4 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 		lmcoord.x *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
 	#endif
 	
-	lmcoord *= 1.0 - 0.2 * darknessFactor;
-	lmcoord = max(lmcoord - 1.5 * darknessLightFactor, 0.0);
-	
 }

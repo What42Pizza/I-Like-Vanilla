@@ -138,6 +138,9 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		skyColor = mix(skyColor, POWDERED_SNOW_FOG_COLOR * (0.25 + 0.75 * max(dayPercent, eyeBrightnessSmooth.x / 240.0)), 0.75);
 	}
 	
+	skyColor *= 1.0 - blindness;
+	skyColor *= 1.0 - darknessFactor;
+	
 	return skyColor;
 	
 }
