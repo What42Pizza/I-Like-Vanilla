@@ -70,7 +70,7 @@ void main() {
 			float vxDepth0 = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
 			float vxDepth1 = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
 			vec3 viewPosVx = screenToViewVx(vec3(texcoord, vxDepth0));
-			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - 4.0);
+			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
 		#endif
 		if (useTransparentData) {
 			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
