@@ -1,3 +1,8 @@
+- v1.4.3b
+  - Improved mod compatibility
+
+<br>
+
 - v1.4.3 (26/07/04)
   - Added 'Low Light' features (all configurable):
     - 'Low Light Desaturation'

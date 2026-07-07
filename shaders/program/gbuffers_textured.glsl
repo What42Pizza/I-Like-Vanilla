@@ -81,7 +81,7 @@ void main() {
 	blockDepth = length(viewPos);
 	
 	
-	gl_Position = viewToNdc(viewPos);
+	gl_Position = ftransform();
 	
 	
 	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1

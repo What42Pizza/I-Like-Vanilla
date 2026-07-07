@@ -416,7 +416,7 @@ void main() {
 	#endif
 	
 	
-	gl_Position = playerToNdc(playerPos);
+	gl_Position = ftransform();
 	
 	
 	#if TAA_ENABLED == 1
