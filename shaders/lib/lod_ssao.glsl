@@ -1,8 +1,29 @@
 // these macros must be defined:
 // - LOD_SCREEN_TO_VIEW_FN
 // - LOD_DEPTH_TEX
-// - LOD_MODEL_VIEW_INVERSE_MAT
+// //- LOD_MODEL_VIEW_INVERSE_MAT
 // - LOD_PROJECTION_MAT
+
+// wip
+float lodAoDirection(vec3 viewPos, float depth, vec3 dir, vec3 blockPos) {
+	
+	vec4 screenPos4 = LOD_PROJECTION_MAT * vec4(viewPos + dir, 1.0);
+	vec3 screenPos = screenPos4.xyz / screenPos4.w * 0.5 + 0.5;
+	
+	ivec2 screenPosIntXY = ivec2(screenPos.xy * 0.999999 * viewSize);
+	//vec3 originalViewPos = LOD_SCREEN_TO_VIEW_FN(vec3((screenPosIntXY + 0.5) * pixelSize, screenPos.z));
+	//float linear
+	
+	float sampledDepth = texelFetch(LOD_DEPTH_TEX, screenPosIntXY, 0).r;
+	//vec3 sampledViewPos = LOD_SCREEN_TO_VIEW_FN(vec3((screenPosIntXY + 0.5) * pixelSize, sampledDepth));
+	//float linear
+	
+	//float aoAmount = float(length(sampledViewPos) < length(originalViewPos) * 1.001 + 10.5);
+	float aoAmount = float(sampledDepth < screenPos.z * 0.99999);
+	aoAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * dir, blockPos - 0.5);
+	
+	return 1.0 - aoAmount;// * (1.0 - upDot * abs(xDir.x));
+}
 
 float getLodAoAmount(vec3 normal) {
 	float aoAmount = 1.0;
@@ -10,7 +31,7 @@ float getLodAoAmount(vec3 normal) {
 	float centerDepth = texelFetch(LOD_DEPTH_TEX, texelcoord, 0).r;
 	if (centerDepth == 1.0) return 1.0;
 	vec3 viewPos = LOD_SCREEN_TO_VIEW_FN(vec3(texcoord, centerDepth));
-	vec3 blockPos = fract(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * viewPos + cameraPosition);
+	vec3 blockPos = fract(mat3(gbufferModelViewInverse) * viewPos + cameraPosition);
 	float viewPosLen = length(viewPos);
 	
 	vec3 xDir = cross(normal, gbufferModelView[1].xyz);
@@ -31,7 +52,7 @@ float getLodAoAmount(vec3 normal) {
 	float testPlusX = texture2D(LOD_DEPTH_TEX, plusXPos.xy).r;
 	vec3 viewPosPlusX = LOD_SCREEN_TO_VIEW_FN(vec3(plusXPos.xy, testPlusX));
 	float plusXAmount = float(length(viewPosPlusX) < length(viewPos + xDir) * 0.999 - 0.25);
-	plusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * xDir, blockPos - 0.5);
+	plusXAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 minusXPos4 = LOD_PROJECTION_MAT * vec4(viewPos - xDir, 1.0);
@@ -39,7 +60,7 @@ float getLodAoAmount(vec3 normal) {
 	float testMinusX = texture2D(LOD_DEPTH_TEX, minusXPos.xy).r;
 	vec3 viewPosMinusX = LOD_SCREEN_TO_VIEW_FN(vec3(minusXPos.xy, testMinusX));
 	float minusXAmount = float(length(viewPosMinusX) < length(viewPos - xDir) * 0.999 - 0.25);
-	minusXAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -xDir, blockPos - 0.5);
+	minusXAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * -xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 plusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos + yDir, 1.0);
@@ -47,7 +68,7 @@ float getLodAoAmount(vec3 normal) {
 	float testPlusY = texture2D(LOD_DEPTH_TEX, plusYPos.xy).r;
 	vec3 viewPosPlusY = LOD_SCREEN_TO_VIEW_FN(vec3(plusYPos.xy, testPlusY));
 	float plusYAmount = float(length(viewPosPlusY) < length(viewPos + yDir) * 0.999 - 0.25);
-	plusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * yDir, blockPos - 0.5);
+	plusYAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	vec4 minusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos - yDir, 1.0);
@@ -55,7 +76,7 @@ float getLodAoAmount(vec3 normal) {
 	float testMinusY = texture2D(LOD_DEPTH_TEX, minusYPos.xy).r;
 	vec3 viewPosMinusY = LOD_SCREEN_TO_VIEW_FN(vec3(minusYPos.xy, testMinusY));
 	float minusYAmount = float(length(viewPosMinusY) < length(viewPos - yDir) * 0.999 - 0.2);
-	minusYAmount *= 0.5 + dot(mat3(LOD_MODEL_VIEW_INVERSE_MAT) * -yDir, blockPos - 0.5);
+	minusYAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * -yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	aoAmount = 1.0 - aoAmount;

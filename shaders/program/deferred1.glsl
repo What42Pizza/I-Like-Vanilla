@@ -26,14 +26,14 @@ in_out vec2 texcoord;
 #ifdef DISTANT_HORIZONS
 	#define LOD_SCREEN_TO_VIEW_FN screenToViewDh
 	#define LOD_DEPTH_TEX DH_DEPTH_BUFFER_ALL
-	#define LOD_MODEL_VIEW_INVERSE_MAT gbufferModelViewInverse
+	//#define LOD_MODEL_VIEW_INVERSE_MAT gbufferModelViewInverse
 	#define LOD_PROJECTION_MAT dhProjection
 	#include "/lib/lod_ssao.glsl"
 #endif
 #ifdef VOXY
 	#define LOD_SCREEN_TO_VIEW_FN screenToViewVx
 	#define LOD_DEPTH_TEX vxDepthTexOpaque
-	#define LOD_MODEL_VIEW_INVERSE_MAT vxModelViewInv
+	//#define LOD_MODEL_VIEW_INVERSE_MAT vxModelViewInv
 	#define LOD_PROJECTION_MAT vxProj
 	#include "/lib/lod_ssao.glsl"
 #endif
@@ -162,7 +162,7 @@ void main() {
 			
 			float voxyTransparentDepth = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
 			vec3 voxyTransparentViewPos = screenToViewVx(vec3(texcoord, voxyTransparentDepth));
-			if (voxyTransparentViewPos.z > viewPos.z - 0.5 || depth > fromLinearDepth(0.9)) {
+			if (voxyTransparentViewPos.z > viewPos.z - 4.0 || depth > fromLinearDepth(0.9)) {
 				vec4 voxyTransparents = texelFetch(VOXY_TRANSPARENTS_TEXTURE, texelcoord, 0);
 				voxyTransparents.rgb *= 2.0;
 				voxyTransparents.a *= float(!depthIsHand(depth));

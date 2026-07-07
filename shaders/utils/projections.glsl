@@ -71,7 +71,7 @@
 					vxProjInv[2].zw
 				);
 				vec4 viewPos = iProjDiag * ndcPos.xyzz + vxProjInv[3];
-				#endif
+			#endif
 			return viewPos.xyz / viewPos.w;
 		}
 	#endif
