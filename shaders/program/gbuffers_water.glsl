@@ -216,7 +216,7 @@ void main() {
 			neighborCoord -= distToNext.x < distToNext.y ? ivec2(sign(tangentViewDir.x), 0) : ivec2(0, sign(tangentViewDir.y)); // I'm not entirely sure why it's -= instead of +=, must be coord space shenanigans
 			
 			ivec2 minCoord = ivec2((midTexCoord - midCoordOffset) * atlasSize);
-			ivec2 maxCoord = ivec2((midTexCoord + midCoordOffset) * atlasSize + 1.0);
+			ivec2 maxCoord = ivec2((midTexCoord + midCoordOffset) * atlasSize + 0.5);
 			neighborCoord -= minCoord;
 			neighborCoord %= maxCoord - minCoord;
 			neighborCoord += minCoord;
