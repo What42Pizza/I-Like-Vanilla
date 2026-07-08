@@ -155,7 +155,7 @@ void main() {
 			
 			float voxyOpaqueDepth = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
 			vec3 voxyOpaqueViewPos = screenToViewVx(vec3(texcoord, voxyOpaqueDepth));
-			if (voxyOpaqueViewPos.z > viewPos.z - 0.5) {
+			if (voxyOpaqueViewPos.z > viewPos.z - far / (16.0 * 5.0/8.0)) {
 				float vxAo = getLodAoAmount(normal);
 				color *= 0.98 - vxAo * 0.48 * VANILLA_AO_BRIGHT;
 			}

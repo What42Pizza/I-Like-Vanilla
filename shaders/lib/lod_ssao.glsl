@@ -4,27 +4,6 @@
 // //- LOD_MODEL_VIEW_INVERSE_MAT
 // - LOD_PROJECTION_MAT
 
-// wip
-float lodAoDirection(vec3 viewPos, float depth, vec3 dir, vec3 blockPos) {
-	
-	vec4 screenPos4 = LOD_PROJECTION_MAT * vec4(viewPos + dir, 1.0);
-	vec3 screenPos = screenPos4.xyz / screenPos4.w * 0.5 + 0.5;
-	
-	ivec2 screenPosIntXY = ivec2(screenPos.xy * 0.999999 * viewSize);
-	//vec3 originalViewPos = LOD_SCREEN_TO_VIEW_FN(vec3((screenPosIntXY + 0.5) * pixelSize, screenPos.z));
-	//float linear
-	
-	float sampledDepth = texelFetch(LOD_DEPTH_TEX, screenPosIntXY, 0).r;
-	//vec3 sampledViewPos = LOD_SCREEN_TO_VIEW_FN(vec3((screenPosIntXY + 0.5) * pixelSize, sampledDepth));
-	//float linear
-	
-	//float aoAmount = float(length(sampledViewPos) < length(originalViewPos) * 1.001 + 10.5);
-	float aoAmount = float(sampledDepth < screenPos.z * 0.99999);
-	aoAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * dir, blockPos - 0.5);
-	
-	return 1.0 - aoAmount;// * (1.0 - upDot * abs(xDir.x));
-}
-
 float getLodAoAmount(vec3 normal) {
 	float aoAmount = 1.0;
 	
