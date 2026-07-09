@@ -1,5 +1,6 @@
 - v1.4.3b
   - Improved mod compatibility
+  - Fixed bugs
 
 <br>
 

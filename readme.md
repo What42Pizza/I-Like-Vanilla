@@ -9,6 +9,7 @@ Note: OptiFine support is now discontinued. It might still somewhat work on Opti
 <br>
 
 ## Download on [Modrinth](https://modrinth.com/shader/i-like-vanilla)
+## Download [the latest development version](https://github.com/What42Pizza/I-Like-Vanilla/archive/refs/heads/main.zip)
 
 <br>
 
