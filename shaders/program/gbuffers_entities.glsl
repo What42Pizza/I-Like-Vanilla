@@ -91,7 +91,7 @@ void main() {
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
+#if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
 
@@ -118,7 +118,6 @@ void main() {
 		vec3 normal;
 	#endif
 	normal = gl_NormalMatrix * gl_Normal;
-	normal *= normal.z;
 	#if PBR_TYPE == 0
 		encodedNormal = encodeNormal(normal);
 	#endif
@@ -130,12 +129,19 @@ void main() {
 	
 	viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	
+	normal *= -sign(dot(normal, viewPos));
+	
 	
 	gl_Position = viewToNdc(viewPos);
 	
 	
-	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
-		doTaaJitter(gl_Position.xy);
+	#if TAA_ENABLED == 1
+		#if TEMPORAL_FILTER_ENABLED == 1
+			doTaaJitter(gl_Position.xy);
+		#elif TEMPORAL_FILTER_ENABLED == 2
+			// fixes jittery entity shadows
+			if (gl_Color.a < 0.99) doTaaJitter(gl_Position.xy);
+		#endif
 	#endif
 	gl_Position.z -= 0.0001;
 	
