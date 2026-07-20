@@ -45,6 +45,7 @@ void main() {
 	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
 	#endif
+	if (!depthIsHand(gl_Position.z)) gl_Position.z -= 0.0001;
 	
 	
 }
