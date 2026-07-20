@@ -1,3 +1,8 @@
+- v1.4.3c
+  - Fixed waving blocks not working
+
+<br>
+
 - v1.4.3b
   - Improved mod compatibility
   - Fixed several bugs
