@@ -1,6 +1,7 @@
 - v1.4.3b
   - Improved mod compatibility
-  - Fixed bugs
+  - Fixed several bugs
+  - Passed 2 million downloads!
 
 <br>
 
