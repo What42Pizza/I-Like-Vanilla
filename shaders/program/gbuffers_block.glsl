@@ -170,9 +170,6 @@ uniform int blockEntityId;
 #include "/utils/projections.glsl"
 #include "/lib/lighting/vsh_lighting.glsl"
 
-#if WAVING_ENABLED == 1
-	#include "/lib/waving.glsl"
-#endif
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif

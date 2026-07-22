@@ -1,5 +1,6 @@
 - v1.4.3c
   - Fixed waving blocks not working
+  - Fixed enchantment glints not appearing on entities
 
 <br>
 
