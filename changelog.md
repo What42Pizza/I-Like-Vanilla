@@ -1,3 +1,8 @@
+- v1.4.3d
+  - Added support for Farmer's Delight and Overweight Farming blocks
+
+<br>
+
 - v1.4.3c
   - Fixed waving blocks not working
   - Fixed enchantment glints not appearing on entities

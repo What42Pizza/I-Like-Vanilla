@@ -764,20 +764,31 @@ do bottom waving: false
 brightness: 0.95
 waviness: 2
 
-block potatoes, carrots, beetroots, wheat:
+block potatoes, carrots, beetroots, wheat, farmersdelight:wild_cabbages, farmersdelight:wild_onions, farmersdelight:wild_tomatoes, farmersdelight:wild_carrots, farmersdelight:wild_potatoes, farmersdelight:wild_beetroots, farmersdelight:tomatoes, farmersdelight:cabbages, farmersdelight:onions:
 weight: 5
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper, pitcher_crop:half=upper, biomesoplenty:tall_lavender:half=upper, biomesoplenty:tall_white_lavender:half=upper, biomesoplenty:blue_hydrangea:half=upper, biomesoplenty:goldenrod:half=upper, biomesoplenty:icy_iris:half=upper, biomesoplenty:barley:half=upper, biomesoplenty:sea_oats:half=upper, biomesoplenty:cattail:half=upper, biomesoplenty:reed:half=upper, biomesoplenty:watergrass:half=upper:
+block farmersdelight:wild_rice:half=upper:
+weight: 1
+shadow casting: foliage
+waviness: 2
+
+block farmersdelight:wild_rice:half=lower:
+weight: 1
+shadow casting: foliage
+do bottom waving: false
+waviness: 2
+
+block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper, pitcher_crop:half=upper, biomesoplenty:tall_lavender:half=upper, biomesoplenty:tall_white_lavender:half=upper, biomesoplenty:blue_hydrangea:half=upper, biomesoplenty:goldenrod:half=upper, biomesoplenty:icy_iris:half=upper, biomesoplenty:barley:half=upper, biomesoplenty:sea_oats:half=upper, biomesoplenty:cattail:half=upper, biomesoplenty:reed:half=upper, biomesoplenty:watergrass:half=upper, overweight_farming:allium_bush:half=upper:
 weight: 1
 brightness: 0.85
 shadow casting: foliage
 waviness: 3
 specularness: 0.5
 
-block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower, pitcher_crop:half=lower, biomesoplenty:tall_lavender:half=lower, biomesoplenty:tall_white_lavender:half=lower, biomesoplenty:blue_hydrangea:half=lower, biomesoplenty:goldenrod:half=lower, biomesoplenty:icy_iris:half=lower, biomesoplenty:barley:half=lower, biomesoplenty:sea_oats:half=lower, biomesoplenty:cattail:half=lower, biomesoplenty:reed:half=lower, biomesoplenty:watergrass:half=lower:
+block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower, pitcher_crop:half=lower, biomesoplenty:tall_lavender:half=lower, biomesoplenty:tall_white_lavender:half=lower, biomesoplenty:blue_hydrangea:half=lower, biomesoplenty:goldenrod:half=lower, biomesoplenty:icy_iris:half=lower, biomesoplenty:barley:half=lower, biomesoplenty:sea_oats:half=lower, biomesoplenty:cattail:half=lower, biomesoplenty:reed:half=lower, biomesoplenty:watergrass:half=lower, overweight_farming:allium_bush:half=lower:
 weight: 1
 brightness: 0.85
 shadow casting: foliage
@@ -785,7 +796,7 @@ do bottom waving: false
 waviness: 3
 specularness: 0.5
 
-block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom:
+block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom, farmersdelight:red_mushroom_colony, farmersdelight:brown_mushroom_colony:
 weight: 2
 shadow casting: foliage
 
