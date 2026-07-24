@@ -341,6 +341,8 @@ void main() {
 	ao = 1.0 - glcolor4.a;
 	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	//ao *= 15.0/16.0 + abs(upDot) / 16.0;
+	float lightDot = max(dot(normalize(shadowLightPosition), normal), 0.0);
+	ao *= 1.05 - (1.0 - lightDot) * 0.125 * lmcoord.y;
 	ao = 1.0 - ao;
 	
 	glcolor = glcolor4.rgb * ao;

@@ -126,6 +126,7 @@ void main() {
 	viewPos = transform(gbufferModelView, playerPos);
 	
 	gl_Position = viewToNdc(viewPos);
+	gl_Position.z += 0.00004;
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);

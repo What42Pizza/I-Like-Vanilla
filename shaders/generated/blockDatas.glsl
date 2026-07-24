@@ -139,8 +139,9 @@ if (materialId < 28u) {
 					if (materialId < 22u) {
 						if (materialId < 20u) {
 							if (materialId < 19u) {
-								SET_REFLECTIVENESS(0.7);
+								SET_REFLECTIVENESS(0.6);
 								SET_SPECULARNESS(0.5);
+								TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 							} else {
 							}
 						} else {

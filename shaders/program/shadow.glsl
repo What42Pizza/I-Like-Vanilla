@@ -127,11 +127,7 @@ void main() {
 		#endif
 	}
 	
-	#if WAVING_ENABLED == 1 || PHYSICALLY_WAVING_WATER_ENABLED == 1
-		gl_Position = shadowProjection * shadowModelView * vec4(playerPos, 1.0);
-	#else
-		gl_Position = ftransform();
-	#endif
+	gl_Position = shadowProjection * shadowModelView * vec4(playerPos, 1.0);
 	
 	gl_Position.xyz = distort(gl_Position.xyz);
 	

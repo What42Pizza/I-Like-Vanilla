@@ -229,7 +229,7 @@
 #endif
 #if SKYLIGHT_DAY_BLUE == -1
 #undef SKYLIGHT_DAY_BLUE
-										#define SKYLIGHT_DAY_BLUE 0.98
+										#define SKYLIGHT_DAY_BLUE 0.97
 #endif
 #if SKYLIGHT_DAY_BRIGHTNESS == -1
 #undef SKYLIGHT_DAY_BRIGHTNESS
@@ -1022,7 +1022,7 @@
 #endif
 #if SATURATION == -1
 #undef SATURATION
-										#define SATURATION 0.1
+										#define SATURATION 0.05
 #endif
 #if SATURATION_DARK == -1
 #undef SATURATION_DARK
