@@ -1,5 +1,9 @@
 - v1.4.3d
-  - Added support for Farmer's Delight and Overweight Farming blocks
+  - Added support for modded blocks from:
+    - Farmer's Delight
+	- Overweight Farming blocks
+	- Abundant Atmosphere
+	- Supplementaries
 
 <br>
 

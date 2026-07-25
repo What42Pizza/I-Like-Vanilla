@@ -705,7 +705,7 @@ block pumpkin:
 weight: 1
 alias: BLOCK_ID_PUMPKIN
 
-block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves:
+block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves, abundant_atmosphere:ashroot_leaves, abundant_atmosphere:gourdrot_leaves:
 weight: 2000
 waviness: 3
 specularness: 0.8
@@ -733,14 +733,14 @@ shadow casting: foliage
 waviness: 2
 specularness: 0.5
 
-block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves:
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves, abundant_atmosphere:cave_sprouts, abundant_atmosphere:rust_moss_sprouts, abundant_atmosphere:pink_water_lotus:half=lower, abundant_atmosphere:violet_water_lotus:half=lower:
 weight: 50
 shadow casting: foliage
 do bottom waving: false
 waviness: 3
 specularness: 0.2
 
-block tall_grass:half=upper, large_fern:half=upper:
+block tall_grass:half=upper, large_fern:half=upper, abundant_atmosphere:pink_water_lotus:half=upper, abundant_atmosphere:violet_water_lotus:half=upper:
 weight: 10
 shadow casting: foliage
 waviness: 3
@@ -750,13 +750,13 @@ block leaf_litter:
 weight: 20
 shadow casting: foliage
 
-block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling, biomesoplenty:flowering_oak_sapling, biomesoplenty:cypress_sapling, biomesoplenty:snowblossom_sapling, biomesoplenty:origin_oak_sapling, biomesoplenty:pine_sapling, biomesoplenty:red_maple_sapling, biomesoplenty:orange_maple_sapling, biomesoplenty:yellow_maple_sapling, biomesoplenty:redwood_sapling, biomesoplenty:mahogany_sapling, biomesoplenty:jacaranda_sapling, biomesoplenty:palm_sapling, biomesoplenty:willow_sapling, biomesoplenty:magic_sapling, biomesoplenty:umbran_sapling, biomesoplenty:hellbark_sapling, biomesoplenty:empyreal_sapling:
+block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling, biomesoplenty:flowering_oak_sapling, biomesoplenty:cypress_sapling, biomesoplenty:snowblossom_sapling, biomesoplenty:origin_oak_sapling, biomesoplenty:pine_sapling, biomesoplenty:red_maple_sapling, biomesoplenty:orange_maple_sapling, biomesoplenty:yellow_maple_sapling, biomesoplenty:redwood_sapling, biomesoplenty:mahogany_sapling, biomesoplenty:jacaranda_sapling, biomesoplenty:palm_sapling, biomesoplenty:willow_sapling, biomesoplenty:magic_sapling, biomesoplenty:umbran_sapling, biomesoplenty:hellbark_sapling, biomesoplenty:empyreal_sapling, abundant_atmosphere:ashroot_sapling:
 weight: 1
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers, biomesoplenty:flower_bud, biomesoplenty:origin_dandelion, biomesoplenty:origin_rose, biomesoplenty:marigold, biomesoplenty:violet, biomesoplenty:lavender, biomesoplenty:white_lavender, biomesoplenty:orange_cosmos, biomesoplenty:pink_daffodil, biomesoplenty:pink_hibiscus, biomesoplenty:glowflower, biomesoplenty:wilted_lily, biomesoplenty:burning_blossom, biomesoplenty:endbloom, biomesoplenty:waterlily:
+block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers, biomesoplenty:flower_bud, biomesoplenty:origin_dandelion, biomesoplenty:origin_rose, biomesoplenty:marigold, biomesoplenty:violet, biomesoplenty:lavender, biomesoplenty:white_lavender, biomesoplenty:orange_cosmos, biomesoplenty:pink_daffodil, biomesoplenty:pink_hibiscus, biomesoplenty:glowflower, biomesoplenty:wilted_lily, biomesoplenty:burning_blossom, biomesoplenty:endbloom, biomesoplenty:waterlily, abundant_atmosphere:catsbane, abundant_atmosphere:saffron_bushbuds, abundant_atmosphere:cherry_bushbuds, abundant_atmosphere:umbra_bushbuds, abundant_atmosphere:midnight_lily, supplementaries:wild_flax:
 weight: 3
 brightness: 0.8
 shadow casting: foliage
@@ -796,7 +796,7 @@ do bottom waving: false
 waviness: 3
 specularness: 0.5
 
-block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom, farmersdelight:red_mushroom_colony, farmersdelight:brown_mushroom_colony:
+block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom, farmersdelight:red_mushroom_colony, farmersdelight:brown_mushroom_colony, abundant_atmosphere:poreshroom, abundant_atmosphere:puffball_mushroom, supplementaries:bamboo_spikes:
 weight: 2
 shadow casting: foliage
 
