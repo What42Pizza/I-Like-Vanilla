@@ -102,6 +102,7 @@ if (materialId < 28u) {
 							SET_VOXEL_ID(66u);
 						} else {
 							SET_GLOWING_COLOR(vec3( 0.0,   0.0, 100.0), vec3(60.0, 100.0, 100.0), 0.3);
+							TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 							SET_VOXEL_ID(61u);
 						}
 					}
@@ -597,6 +598,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 								if (materialId < 123u) {
 									if (materialId < 122u) {
 									} else {
+										TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 									}
 								} else {
 									if (materialId < 124u) {
@@ -654,7 +656,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							}
 						} else {
 							SET_REFLECTIVENESS(1.0);
-							TWEAK_GLCOLOR_BRIGHTNESS(1.25);
+							TWEAK_GLCOLOR_BRIGHTNESS(1.1);
 							SET_VOXEL_ID(51u);
 						}
 					}

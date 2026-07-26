@@ -381,8 +381,9 @@ emission: vec3(15.0 / 15.0)
 
 // classic blocklights
 
-block torch, wall_torch:
+block torch, wall_torch, galosphere:light_stand, galosphere:chandelier, supplementaries:sconce, supplementaries:sconce_lever:
 weight: 10
+brightness: 0.95
 shadow casting: foliage
 glow detect min: vec3( 0.0,   0.0, 100.0)
 glow detect max: vec3(60.0, 100.0, 100.0)
@@ -390,7 +391,7 @@ glow amount: 0.3
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 
-block lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern:
+block lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, enderscape:bulb_lantern, abundant_atmosphere:mud_lamp:
 weight: 2
 brightness: 1.2
 glow detect min: vec3(33.6,  40.8, 100.0)
@@ -412,7 +413,7 @@ weight: 1
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 
-block soul_torch, soul_wall_torch, soul_lantern, soul_campfire:
+block soul_torch, soul_wall_torch, soul_lantern, soul_campfire, galosphere:soul_light_stand, galosphere:soul_chandelier, supplementaries:sconce_soul:
 weight: 3
 brightness: 0.9
 shadow casting: foliage
@@ -506,7 +507,7 @@ specularness: 0.5
 voxelize: true
 emission: vec3(0.3, 0.3, 0.3)
 
-block amethyst_cluster, biomesoplenty:rose_quartz_cluster:
+block amethyst_cluster, biomesoplenty:rose_quartz_cluster, galosphere:glinted_amethyst_cluster, galosphere:allurite_cluster, galosphere:glinted_allurite_cluster, galosphere:lumiere_cluster, galosphere:glinted_lumiere_cluster:
 weight: 1
 shadow casting: foliage
 reflectiveness: 1.0
@@ -568,7 +569,7 @@ emission: vec3(0.3, 0.3, 0.3)
 block glowstone:
 weight: 25
 reflectiveness: 1.0
-brightness: 1.25
+brightness: 1.1
 voxelize: true
 emission: vec3(1.0, 0.9, 0.3)
 
@@ -690,13 +691,13 @@ brightness: 0.9
 
 // natural blocks
 
-block sugar_cane:
+block sugar_cane, gardens_of_the_dead:whistlecane:
 weight: 1
 shadow casting: foliage
 waviness: 1
 brightness: 0.9
 
-block bamboo, bamboo_sapling:
+block bamboo, bamboo_sapling, abundant_atmosphere:red_bamboo, abundant_atmosphere:red_bamboo_sapling:
 weight: 10
 waviness: 1
 brightness: 1.15
@@ -705,7 +706,7 @@ block pumpkin:
 weight: 1
 alias: BLOCK_ID_PUMPKIN
 
-block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves, abundant_atmosphere:ashroot_leaves, abundant_atmosphere:gourdrot_leaves:
+block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves, abundant_atmosphere:ashroot_leaves, abundant_atmosphere:gourdrot_leaves, galosphere:opal_leaves, enderscape:veiled_leaves, newworld:fir_leaves, nethers_exoticism:jaboticaba_leaves, nethers_exoticism:kiwano_leaves, nethers_exoticism:ramboutan_leaves:
 weight: 2000
 waviness: 3
 specularness: 0.8
@@ -721,7 +722,7 @@ weight: 1
 waviness: 3
 specularness: 0.5
 
-block weeping_vines, twisting_vines, weeping_vines_plant, twisting_vines_plant:
+block weeping_vines, twisting_vines, weeping_vines_plant, twisting_vines_plant, enderscape:blinklight_vines_body, enderscape:blinklight_vines_head:
 weight: 2
 waviness: 3
 shadow casting: foliage
@@ -733,32 +734,32 @@ shadow casting: foliage
 waviness: 2
 specularness: 0.5
 
-block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves, abundant_atmosphere:cave_sprouts, abundant_atmosphere:rust_moss_sprouts, abundant_atmosphere:pink_water_lotus:half=lower, abundant_atmosphere:violet_water_lotus:half=lower:
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves, abundant_atmosphere:cave_sprouts, abundant_atmosphere:rust_moss_sprouts, abundant_atmosphere:short_cave_sprouts, abundant_atmosphere:pink_water_lotus:half=lower, abundant_atmosphere:violet_water_lotus:half=lower, enderscape:veiled_vines, newworld:moss_sprouts, gardens_of_the_dead:soulblight_sprouts, gardens_of_the_dead:blistercrown, gardens_of_the_dead:tall_blistercrown:half=lower, gardens_of_the_dead:soul_spore, gardens_of_the_dead:glowing_soul_spore:
 weight: 50
 shadow casting: foliage
 do bottom waving: false
 waviness: 3
 specularness: 0.2
 
-block tall_grass:half=upper, large_fern:half=upper, abundant_atmosphere:pink_water_lotus:half=upper, abundant_atmosphere:violet_water_lotus:half=upper:
+block tall_grass:half=upper, large_fern:half=upper, abundant_atmosphere:pink_water_lotus:half=upper, abundant_atmosphere:violet_water_lotus:half=upper, gardens_of_the_dead:tall_blistercrown:half=upper:
 weight: 10
 shadow casting: foliage
 waviness: 3
 specularness: 0.2
 
-block leaf_litter:
+block leaf_litter, abundant_atmosphere:moss_clump, abundant_atmosphere:rust_moss_clump, abundant_atmosphere:leaf_pile, galosphere:palladium_lattice:
 weight: 20
 shadow casting: foliage
 
-block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling, biomesoplenty:flowering_oak_sapling, biomesoplenty:cypress_sapling, biomesoplenty:snowblossom_sapling, biomesoplenty:origin_oak_sapling, biomesoplenty:pine_sapling, biomesoplenty:red_maple_sapling, biomesoplenty:orange_maple_sapling, biomesoplenty:yellow_maple_sapling, biomesoplenty:redwood_sapling, biomesoplenty:mahogany_sapling, biomesoplenty:jacaranda_sapling, biomesoplenty:palm_sapling, biomesoplenty:willow_sapling, biomesoplenty:magic_sapling, biomesoplenty:umbran_sapling, biomesoplenty:hellbark_sapling, biomesoplenty:empyreal_sapling, abundant_atmosphere:ashroot_sapling:
+block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling, biomesoplenty:flowering_oak_sapling, biomesoplenty:cypress_sapling, biomesoplenty:snowblossom_sapling, biomesoplenty:origin_oak_sapling, biomesoplenty:pine_sapling, biomesoplenty:red_maple_sapling, biomesoplenty:orange_maple_sapling, biomesoplenty:yellow_maple_sapling, biomesoplenty:redwood_sapling, biomesoplenty:mahogany_sapling, biomesoplenty:jacaranda_sapling, biomesoplenty:palm_sapling, biomesoplenty:willow_sapling, biomesoplenty:magic_sapling, biomesoplenty:umbran_sapling, biomesoplenty:hellbark_sapling, biomesoplenty:empyreal_sapling, abundant_atmosphere:ashroot_sapling, galosphere:opal_sapling, enderscape:alluring_magnia_sprout, enderscape:repulsive_magnia_sprout, enderscape:veiled_sapling, newworld:fir_sapling, nethers_exoticism:jaboticaba_sapling, nethers_exoticism:kiwano_sapling, nethers_exoticism:ramboutan_sapling, nethers_exoticism:pitaya_sapling:
 weight: 1
+brightness: 0.95
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers, biomesoplenty:flower_bud, biomesoplenty:origin_dandelion, biomesoplenty:origin_rose, biomesoplenty:marigold, biomesoplenty:violet, biomesoplenty:lavender, biomesoplenty:white_lavender, biomesoplenty:orange_cosmos, biomesoplenty:pink_daffodil, biomesoplenty:pink_hibiscus, biomesoplenty:glowflower, biomesoplenty:wilted_lily, biomesoplenty:burning_blossom, biomesoplenty:endbloom, biomesoplenty:waterlily, abundant_atmosphere:catsbane, abundant_atmosphere:saffron_bushbuds, abundant_atmosphere:cherry_bushbuds, abundant_atmosphere:umbra_bushbuds, abundant_atmosphere:midnight_lily, supplementaries:wild_flax:
+block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals wildflowers, biomesoplenty:flower_bud, biomesoplenty:origin_dandelion, biomesoplenty:origin_rose, biomesoplenty:marigold, biomesoplenty:violet, biomesoplenty:lavender, biomesoplenty:white_lavender, biomesoplenty:orange_cosmos, biomesoplenty:pink_daffodil, biomesoplenty:pink_hibiscus, biomesoplenty:glowflower, biomesoplenty:wilted_lily, biomesoplenty:burning_blossom, biomesoplenty:endbloom, biomesoplenty:waterlily, abundant_atmosphere:catsbane, abundant_atmosphere:saffron_bushbuds, abundant_atmosphere:cherry_bushbuds, abundant_atmosphere:umbra_bushbuds, abundant_atmosphere:midnight_lily, supplementaries:wild_flax, galosphere:bowl_lichen, galosphere:lichen_roots, enderscape:murublight_chanterelle, enderscape:celestial_chanterelle, enderscape:corrupt_growth, enderscape:bulb_flower, enderscape:celestial_growth, enderscape:wisp_flower, enderscape:wisp_growth, enderscape:wisp_sprouts, enderscape:chorus_sprouts, enderscape:dry_end_growth:
 weight: 3
-brightness: 0.8
 shadow casting: foliage
 do bottom waving: false
 brightness: 0.95
@@ -796,7 +797,7 @@ do bottom waving: false
 waviness: 3
 specularness: 0.5
 
-block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom, farmersdelight:red_mushroom_colony, farmersdelight:brown_mushroom_colony, abundant_atmosphere:poreshroom, abundant_atmosphere:puffball_mushroom, supplementaries:bamboo_spikes:
+block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fungus, warped_fungus, biomesoplenty:toadstool, biomesoplenty:glowshroom, farmersdelight:red_mushroom_colony, farmersdelight:brown_mushroom_colony, abundant_atmosphere:poreshroom, abundant_atmosphere:puffball_mushroom, supplementaries:bamboo_spikes, gardens_of_the_dead:soulblight_fungus, nethers_exoticism:bouddha_s_hand_sapling:
 weight: 2
 shadow casting: foliage
 
@@ -828,7 +829,7 @@ weight: 3
 reflectiveness: 0.25
 specularness: 0.6
 
-block pointed_dripstone:
+block pointed_dripstone, galosphere:pink_salt_straw, galosphere:pink_salt_cluster:
 weight: 3
 shadow casting: foliage
 brightness: 0.9
