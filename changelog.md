@@ -1,5 +1,6 @@
-- v1.4.3d
+- v1.4.4
   - Added support (included block ids) for many modded blocks from many mods
+  - Added setting 'Water Caustics Type', with 'Texture-Based' being the new default
   - Tweaked lighting and colors
 
 <br>

@@ -273,14 +273,20 @@ option.WATER_CAUSTICS_ENABLED.comment=Adds waves to underwater light (requires C
 value.WATER_CAUSTICS_ENABLED.0=Off
 value.WATER_CAUSTICS_ENABLED.1=On
 
-option.WATER_CAUSTICS_SIZE=Water Caustics Size
-value.WATER_CAUSTICS_SIZE.-1=Use Style
+option.WATER_CAUSTICS_TYPE=Water Caustics Type
+option.WATER_CAUSTICS_TYPE.comment=Controls the shape of water caustics, being either procedurally generated or dependant on the water texture
+value.WATER_CAUSTICS_TYPE.-1=Use Style
+value.WATER_CAUSTICS_TYPE.1=Texture-Based
+value.WATER_CAUSTICS_TYPE.2=Procedural
 
 option.WATER_CAUSTICS_HORIZONTAL_STRETCH=Water Caustics Horizontal Stretch
 value.WATER_CAUSTICS_HORIZONTAL_STRETCH.-1=Use Style
 
 option.WATER_CAUSTICS_SPEED=Water Caustics Speed
 value.WATER_CAUSTICS_SPEED.-1=Use Style
+
+option.WATER_CAUSTICS_SIZE=Water Caustics Size
+value.WATER_CAUSTICS_SIZE.-1=Use Style
 
 option.WATER_CAUSTICS_THICKNESS=Water Caustics Thickness
 value.WATER_CAUSTICS_THICKNESS.-1=Use Style

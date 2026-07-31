@@ -23,22 +23,32 @@ void main() {
 	#endif
 	
 	#if COLORED_SHADOWS_ENABLED == 1 && WATER_CAUSTICS_ENABLED == 1
-		ivec3 colorInt = ivec3(color * 255.0 + 0.5);
-		if (colorInt.r == 1 && (colorInt.g == 2 || colorInt.g == 3) && colorInt.b == 255) color.rgb -= 0.01;
-		if (materialId == BLOCK_ID_WATER) {
-			vec3 worldPos = playerPos + cameraPosition;
-			worldPos *= 2.0 / WATER_CAUSTICS_SIZE;
-			worldPos.x /= WATER_CAUSTICS_HORIZONTAL_STRETCH * 1.5;
-			worldPos.y += (worldPos.x + worldPos.z);
-			worldPos.y += frameTimeCounter * WATER_CAUSTICS_SPEED;
-			float noise_1 = valueNoise(worldPos);
-			worldPos.y -= frameTimeCounter * 2.0 * WATER_CAUSTICS_SPEED;
-			float noise_2 = valueNoise(worldPos);
-			const float minValue = 0.497 - 0.03 * WATER_CAUSTICS_THICKNESS;
-			const float maxValue = 0.503 + 0.03 * WATER_CAUSTICS_THICKNESS;
-			bool isBright = (noise_1 > minValue && noise_1 < maxValue) || (noise_2 > minValue && noise_2 < maxValue);
-			color.rgb = mix(ivec3(1, 2, 255) / 255.0, ivec3(1, 3, 255) / 255.0, float(isBright));
-		}
+		#if WATER_CAUSTICS_TYPE == 1
+			ivec3 colorInt = ivec3(color * 255.0 + 0.5);
+			if (colorInt.r == 1 && (colorInt.g == 2 || colorInt.g == 3) && colorInt.b == 255) color.rgb -= 0.01;
+			if (materialId == BLOCK_ID_WATER) {
+				vec3 averageColor = texture2DLod(texture, texcoord, 4).rgb * glcolor * 1.05;
+				bool isBright = getLum(color.rgb) > getLum(averageColor);
+				color.rgb = mix(ivec3(1, 2, 255) / 255.0, ivec3(1, 3, 255) / 255.0, float(isBright));
+			}
+		#elif WATER_CAUSTICS_TYPE == 2
+			ivec3 colorInt = ivec3(color * 255.0 + 0.5);
+			if (colorInt.r == 1 && (colorInt.g == 2 || colorInt.g == 3) && colorInt.b == 255) color.rgb -= 0.01;
+			if (materialId == BLOCK_ID_WATER) {
+				vec3 worldPos = playerPos + cameraPosition;
+				worldPos *= 2.0 / WATER_CAUSTICS_SIZE;
+				worldPos.x /= WATER_CAUSTICS_HORIZONTAL_STRETCH * 1.5;
+				worldPos.y += (worldPos.x + worldPos.z);
+				worldPos.y += frameTimeCounter * WATER_CAUSTICS_SPEED;
+				float noise_1 = valueNoise(worldPos);
+				worldPos.y -= frameTimeCounter * 2.0 * WATER_CAUSTICS_SPEED;
+				float noise_2 = valueNoise(worldPos);
+				const float minValue = 0.497 - 0.03 * WATER_CAUSTICS_THICKNESS;
+				const float maxValue = 0.503 + 0.03 * WATER_CAUSTICS_THICKNESS;
+				bool isBright = (noise_1 > minValue && noise_1 < maxValue) || (noise_2 > minValue && noise_2 < maxValue);
+				color.rgb = mix(ivec3(1, 2, 255) / 255.0, ivec3(1, 3, 255) / 255.0, float(isBright));
+			}
+		#endif
 	#endif
 	
 	gl_FragData[0] = color;

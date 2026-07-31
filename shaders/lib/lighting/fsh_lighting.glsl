@@ -33,7 +33,11 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, vec3 playerPos, float depth
 		#if WATER_CAUSTICS_ENABLED == 1
 			ivec3 shadowColorInt = ivec3(shadowColor.rgb * 255.0 + 0.5);
 			if (shadowColorInt == ivec3(1, 2, 255)) shadowColor.rgb = (WATER_CAUSTICS_DARK_COLOR + 0.25) / 0.75;
-			if (shadowColorInt == ivec3(1, 3, 255)) shadowColor.rgb = (WATER_CAUSTICS_BRIGHT_COLOR + 0.25) / 0.75;
+			#if WATER_CAUSTICS_TYPE == 1
+				if (shadowColorInt == ivec3(1, 3, 255)) shadowColor.rgb = (WATER_CAUSTICS_BRIGHT_COLOR + 0.25) / 0.55;
+			#else
+				if (shadowColorInt == ivec3(1, 3, 255)) shadowColor.rgb = (WATER_CAUSTICS_BRIGHT_COLOR + 0.25) / 0.75;
+			#endif
 		#endif
 		
 		shadowColor.rgb = 0.25 + 0.75 * shadowColor.rgb;
