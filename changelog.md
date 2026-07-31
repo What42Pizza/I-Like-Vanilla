@@ -2,6 +2,7 @@
   - Added support (included block ids) for many modded blocks from many mods
   - Added setting 'Water Caustics Type', with 'Texture-Based' being the new default
   - Tweaked lighting and colors
+  - Fixed performance bug with ssao when very close to objects
 
 <br>
 

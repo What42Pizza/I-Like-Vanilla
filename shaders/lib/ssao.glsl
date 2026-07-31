@@ -22,7 +22,7 @@ float getAoAmount(float depth) {
 	float blockDepth = toBlockDepth(depth);
 	vec3 noise3 = texelFetch(noisetex, (texelcoord + frameCounter * 17) & 127, 0).rgb;
 	float fovScale = gbufferProjection[1][1];
-	float scale = AO_SIZE * 0.25 / pow(blockDepth, 1.3) * fovScale;
+	float scale = AO_SIZE * 0.25 / pow(max(blockDepth, 6.0), 1.3) * fovScale;
 	vec2 offsetOffset = noise3.xy * scale * 0.125;
 	vec2 offsetMult = vec2(scale * invAspectRatio, scale);
 	
@@ -41,6 +41,7 @@ float getAoAmount(float depth) {
 	}
 	total /= SAMPLE_COUNT;
 	total *= 1.0 - clamp(blockDepth * invFar, 0.0, 1.0);
+	total *= clamp(blockDepth / 6.0, 0.25, 1.0);
 	
 	return total;
 }
