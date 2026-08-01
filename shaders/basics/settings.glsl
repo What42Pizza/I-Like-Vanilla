@@ -169,7 +169,7 @@ const float shadowIntervalSize    = 2.0;
 	#undef BLOOM_NETHER_AMOUNT
 	#undef BLOOM_END_AMOUNT
 	#undef VIBRANCE
-	#undef SATURATION 0.1
+	#undef SATURATION
 	#define BLOOM_STYLE 2
 	#define BLOOM_SIZE 2.0
 	#define BLOOM_AMOUNT 2.2
