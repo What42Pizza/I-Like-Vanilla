@@ -109,6 +109,7 @@ All of these tests were done with a GTX 1070 + 16 Chunks + 1080p + Distant Horiz
 
 ## Credits:
 
+- **[Spagles](https://github.com/Spagles):** Minor code fixes
 - **[Complementary Reimagined](https://modrinth.com/shader/complementary-reimagined):** Noise textures
 - **[Ian McEwan, Ashima Arts](https://github.com/ashima/webgl-noise):** Simplex noise implementation
 - **[Vildravn](https://godotshaders.com/shader/colorblindness-correction-shader/):** Colorblindness correction filters
