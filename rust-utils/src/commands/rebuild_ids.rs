@@ -402,11 +402,11 @@ pub fn function(args: &[String]) -> Result<()> {
 		}
 		if let Some(leaf) = &mut node.leaf {
 			leaf.voxel_id = *curr_voxel_id;
-			*curr_voxel_id += 1;
 			unsafe {
 				// Safety: idk as long as the output is good I'm happy
 				*leaf.block_data.voxel_id.get() = *curr_voxel_id;
 			}
+			*curr_voxel_id += 1;
 		}
 	}
 	let mut curr_voxel_id = 2;
