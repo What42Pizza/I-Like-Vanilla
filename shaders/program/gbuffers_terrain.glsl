@@ -170,7 +170,6 @@ void main() {
 	#endif
 	
 	#if EMISSIVE_TEXTURES_ENABLED == 1
-		float specularness = specularness;
 		vec3 hsv = rgbToHsv(rawColor.rgb);
 		if (all(greaterThan(hsv, glowingColorMin)) && all(lessThan(hsv, glowingColorMax))) {
 			glowing = 1.0;
