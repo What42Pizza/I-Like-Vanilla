@@ -183,7 +183,7 @@ const float ambientSunsetStart = 0.4;
 const float ambientSunsetEnd = 0.56;
 
 float ambientSunPercent = sunAngle >= 0.0 && sunAngle < ambientSunriseEnd ? (sunAngle - 0.0) / (ambientSunriseEnd - 0.0) : sunAngle >= ambientSunriseEnd && sunAngle < ambientSunsetStart ? 1.0 : sunAngle >= ambientSunsetStart && sunAngle < 0.5 ? 1.0 - (sunAngle - ambientSunsetStart) / (0.5 - ambientSunsetStart) : 0.0;
-float rawAmbientMoonPercent = sunAngle >= 0.5 && sunAngle < ambientSunsetEnd ? pow((sunAngle - 0.5) / (ambientSunsetEnd - 0.5), 2) : sunAngle >= ambientSunsetEnd && sunAngle < ambientSunriseStart ? 1.0 : sunAngle >= ambientSunriseStart && sunAngle < 1.0 ? pow(1.0 - (sunAngle - ambientSunriseStart) / (1.0 - ambientSunriseStart), 2) : 0.0;
+float rawAmbientMoonPercent = sunAngle >= 0.5 && sunAngle < ambientSunsetEnd ? pow((sunAngle - 0.5) / (ambientSunsetEnd - 0.5), 2.0) : sunAngle >= ambientSunsetEnd && sunAngle < ambientSunriseStart ? 1.0 : sunAngle >= ambientSunriseStart && sunAngle < 1.0 ? pow(1.0 - (sunAngle - ambientSunriseStart) / (1.0 - ambientSunriseStart), 2.0) : 0.0;
 float ambientMoonPercent = 1.0 - (1.0 - rawAmbientMoonPercent) * (1.0 - rawAmbientMoonPercent) * (1.0 - rawAmbientMoonPercent);
 float ambientSunrisePercent = sunAngle >= ambientSunriseStart && sunAngle < 1.0 ? 1.0 - ambientMoonPercent : sunAngle >= 0.0 && sunAngle < ambientSunriseEnd ? 1.0 - ambientSunPercent : 0.0;
 float ambientSunsetPercent = sunAngle >= ambientSunsetStart && sunAngle < 0.5 ? 1.0 - ambientSunPercent : sunAngle >= 0.5 && sunAngle < ambientSunsetEnd ? 1.0 - ambientMoonPercent : 0.0;
