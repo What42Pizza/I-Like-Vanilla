@@ -215,6 +215,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		#else
 			float lightDotLift = 0.5;
 		#endif
+		lightDotLift *= max(1.0 - dot(normal, gbufferModelView[1].xyz), 0.0);
 		// TODO: reintroduce 'SUNLIGHT_CEL_AMOUNT' here?
 		lightDot = lightDotLift * 0.5 + (1.0 - lightDotLift * 0.5) * lightDot;
 	#else
