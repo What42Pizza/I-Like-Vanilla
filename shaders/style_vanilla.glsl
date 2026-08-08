@@ -192,6 +192,10 @@
 #undef BRIGHTNESS_TWEAKS_STRENGTH
 										#define BRIGHTNESS_TWEAKS_STRENGTH 1.0
 #endif
+#if PARTICLES_BRIGHTNESS == -1
+#undef PARTICLES_BRIGHTNESS
+										#define PARTICLES_BRIGHTNESS 1.5
+#endif
 
 
 
@@ -678,7 +682,7 @@
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 0.55
+										#define BLOOM_NETHER_AMOUNT 0.5
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT

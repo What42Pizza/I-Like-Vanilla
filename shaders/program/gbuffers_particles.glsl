@@ -83,7 +83,11 @@ void main() {
 	adjustLmcoord(lmcoord);
 	lmcoord = min(lmcoord + 0.05, 1.0);
 	glcolor = gl_Color;
-	glcolor.rgb *= 1.5;
+	#ifdef NETHER
+		glcolor.rgb *= PARTICLES_BRIGHTNESS * 0.75;
+	#else
+		glcolor.rgb *= PARTICLES_BRIGHTNESS;
+	#endif
 	glcolor.a = sqrt(glcolor.a);
 	
 	#if PBR_TYPE != 0

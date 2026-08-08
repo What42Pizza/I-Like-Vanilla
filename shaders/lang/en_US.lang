@@ -367,6 +367,9 @@ option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
 option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
 value.BRIGHTNESS_TWEAKS_STRENGTH.-1=Use Style
 
+option.PARTICLES_BRIGHTNESS=Particles Brightness
+value.PARTICLES_BRIGHTNESS.-1=Use Style
+
 
 
 

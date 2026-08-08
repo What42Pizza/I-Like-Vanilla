@@ -1,18 +1,23 @@
-- v1.4.4
-  - Added support (included block ids) for many modded blocks from many mods
+- v1.4.5
+  - Added setting 'Particles Brightness'
+
+<br>
+
+- v1.4.4 (26/07/31)
+  - Added support (added block ids) for many modded blocks from many mods
   - Added setting 'Water Caustics Type', with 'Texture-Based' being the new default
   - Tweaked lighting and colors
   - Fixed performance bug with ssao when very close to objects
 
 <br>
 
-- v1.4.3c
+- v1.4.3c (26/07/22)
   - Fixed waving blocks not working
   - Fixed enchantment glints not appearing on entities
 
 <br>
 
-- v1.4.3b
+- v1.4.3b (26/07/18)
   - Improved mod compatibility
   - Fixed several bugs
   - Passed 2 million downloads!
