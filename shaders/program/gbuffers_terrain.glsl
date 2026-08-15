@@ -315,8 +315,10 @@ void main() {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
 	#endif
-	#if FLAT_SHADED_LEAVES > 0
-		worldNormal = normalize(mix(worldNormal, vec3(0.0, 1.0, 0.0), FLAT_SHADED_LEAVES / 100.0));
+	#if LEAVES_SIDE_SHADING < 100
+		if (materialId == BLOCK_ID_LEAVES) {
+			worldNormal = normalize(mix(vec3(0.0, 1.0, 0.0), worldNormal, LEAVES_SIDE_SHADING / 100.0));
+		}
 	#endif
 	
 	normal = gl_NormalMatrix * worldNormal;
@@ -340,6 +342,11 @@ void main() {
 	
 	// finish processing glcolor (ao)
 	ao = 1.0 - glcolor4.a;
+	#if LEAVES_AO_AMOUNT < 100
+		if (materialId == BLOCK_ID_LEAVES) {
+			ao *= 0.5 + 0.5 * LEAVES_AO_AMOUNT / 100.0;
+		}
+	#endif
 	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
 	//upDot = dot(normal, gbufferModelView[1].xyz);
 	//ao *= 15.0/16.0 + abs(upDot) / 16.0;

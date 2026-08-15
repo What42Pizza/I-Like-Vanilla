@@ -65,10 +65,15 @@ value.FANCY_END_PORTAL_ENABLED.3=Fancy
 option.ENCHANTMENT_GLINT_STRENGTH=Enchantment Glint Strength
 value.ENCHANTMENT_GLINT_STRENGTH.-1=Use Style
 
-option.FLAT_SHADED_LEAVES=Flat Shaded Leaves
-option.FLAT_SHADED_LEAVES.comment=Alters leaves shading to be more similar to how foliage like grass is rendered
-suffix.FLAT_SHADED_LEAVES=%
-value.FLAT_SHADED_LEAVES.-1=Use Style
+option.LEAVES_SIDE_SHADING=Leaves Side Shading
+option.LEAVES_SIDE_SHADING.comment=Alters leaves shading to be more similar to how foliage like grass is rendered
+suffix.LEAVES_SIDE_SHADING=%
+value.LEAVES_SIDE_SHADING.-1=Use Style
+
+option.LEAVES_AO_AMOUNT=Leaves AO Amount
+option.LEAVES_AO_AMOUNT.comment=Alters how much the inner corners between leave blocks are shaded
+suffix.LEAVES_AO_AMOUNT=%
+value.LEAVES_AO_AMOUNT.-1=Use Style
 
 
 
