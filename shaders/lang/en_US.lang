@@ -65,6 +65,11 @@ value.FANCY_END_PORTAL_ENABLED.3=Fancy
 option.ENCHANTMENT_GLINT_STRENGTH=Enchantment Glint Strength
 value.ENCHANTMENT_GLINT_STRENGTH.-1=Use Style
 
+option.FLAT_SHADED_LEAVES=Flat Shaded Leaves
+option.FLAT_SHADED_LEAVES.comment=Alters leaves shading to be more similar to how foliage like grass is rendered
+suffix.FLAT_SHADED_LEAVES=%
+value.FLAT_SHADED_LEAVES.-1=Use Style
+
 
 
 
@@ -860,7 +865,8 @@ prefix.TEMPORAL_FILTER_DEPTH=x
 option.TEMPORAL_EXTRA_DEPTH_CHECK=Extra Depth Check
 option.TEMPORAL_EXTRA_DEPTH_CHECK.comment=Helps prevent ghosting (for objects that were hidden but become visible) by adding extra additional checks, may slightly impact performance
 value.TEMPORAL_EXTRA_DEPTH_CHECK.0=Off
-value.TEMPORAL_EXTRA_DEPTH_CHECK.1=On
+value.TEMPORAL_EXTRA_DEPTH_CHECK.1=Partial
+value.TEMPORAL_EXTRA_DEPTH_CHECK.2=Full
 
 
 

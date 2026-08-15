@@ -1,5 +1,7 @@
 - v1.4.5
   - Added setting 'Particles Brightness'
+  - Added setting 'Leaves Flat Shading'
+  - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
 
 <br>
 

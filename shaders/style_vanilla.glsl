@@ -34,6 +34,10 @@
 #undef ENCHANTMENT_GLINT_STRENGTH
 										#define ENCHANTMENT_GLINT_STRENGTH 1.0
 #endif
+#if FLAT_SHADED_LEAVES == -1
+#undef FLAT_SHADED_LEAVES
+										#define FLAT_SHADED_LEAVES 0
+#endif
 
 
 

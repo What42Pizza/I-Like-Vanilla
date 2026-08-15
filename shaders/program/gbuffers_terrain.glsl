@@ -315,6 +315,9 @@ void main() {
 			worldNormal = vec3(0.0, 1.0, 0.0);
 		}
 	#endif
+	#if FLAT_SHADED_LEAVES > 0
+		worldNormal = normalize(mix(worldNormal, vec3(0.0, 1.0, 0.0), FLAT_SHADED_LEAVES / 100.0));
+	#endif
 	
 	normal = gl_NormalMatrix * worldNormal;
 	
@@ -336,9 +339,9 @@ void main() {
 	
 	
 	// finish processing glcolor (ao)
-	upDot = dot(normal, gbufferModelView[1].xyz);
 	ao = 1.0 - glcolor4.a;
 	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
+	//upDot = dot(normal, gbufferModelView[1].xyz);
 	//ao *= 15.0/16.0 + abs(upDot) / 16.0;
 	float lightDot = max(dot(normalize(shadowLightPosition), normal), 0.0);
 	ao *= 1.05 - (1.0 - lightDot) * 0.125 * lmcoord.y;

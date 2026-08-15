@@ -81,10 +81,19 @@ void main() {
 	// ======== TEMPORAL FILTER ======== //
 	#if TEMPORAL_FILTER_ENABLED >= 1
 		bool doTF = true;
-		#if TEMPORAL_EXTRA_DEPTH_CHECK == 1
-			float prevDepth = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(0.0, pixelSize.y)).r; // the offset is needed because of the taa jitter, technically there should be 4 or more samples to deal with all directions, but only testing up seems to work fine
-			float depthDiff = (depth - prevDepth) / depth;
-			doTF = doTF && (depthDiff < 0.001 || depth == 1.0);
+		#if TEMPORAL_EXTRA_DEPTH_CHECK >= 1
+			bool depthCheck = depth == 1.0;
+			float prevDepth1 = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(0.0, pixelSize.y)).r;
+			depthCheck = depthCheck || (depth - prevDepth1) / depth < 0.001;
+			#if TEMPORAL_EXTRA_DEPTH_CHECK == 2
+				float prevDepth2 = texture2D(PREV_DEPTH_TEXTURE, prevCoord - vec2(0.0, pixelSize.y)).r;
+				depthCheck = depthCheck || (depth - prevDepth2) / depth < 0.001;
+				float prevDepth3 = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(pixelSize.x, 0.0)).r;
+				depthCheck = depthCheck || (depth - prevDepth3) / depth < 0.001;
+				float prevDepth4 = texture2D(PREV_DEPTH_TEXTURE, prevCoord - vec2(pixelSize.x, 0.0)).r;
+				depthCheck = depthCheck || (depth - prevDepth4) / depth < 0.001;
+			#endif
+			doTF = doTF && depthCheck;
 		#endif
 		#if TEMPORAL_FILTER_ENABLED == 2
 			if (doTF) {
