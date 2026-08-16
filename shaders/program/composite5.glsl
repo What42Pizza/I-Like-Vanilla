@@ -60,9 +60,6 @@ void main() {
 	vec3 pos = vec3(texcoord, depth);
 	vec3 cameraOffset = cameraPosition - previousCameraPosition;
 	vec2 prevCoord = reproject(pos, cameraOffset);
-	#if SSS_LIDAR == 1
-		prevIsValid = true;
-	#endif
 	
 	
 	
