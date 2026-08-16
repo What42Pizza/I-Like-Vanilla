@@ -107,8 +107,10 @@ void main() {
 		float cloudMidDist = (CLOUD_BOTTOM_Y + CLOUD_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
 		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
 		float cloudDist = length(cloudPos);
-		float atmoFogAmount = exp(-fogDensity * cloudDist * 0.1); // note: is inverted (x=1-x)
-		color = mix(color, cloudColor, thickness * atmoFogAmount);
+		float atmoFogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
+		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (CLOUD_TOP_Y + CLOUD_BOTTOM_Y) * 0.3);
+		atmoFogAmount *= atmoFogDecrease * atmoFogDecrease;
+		color = mix(color, cloudColor, thickness * (1.0 - atmoFogAmount));
 	#endif
 	
 	#if NETHER_CLOUDS_ENABLED == 1

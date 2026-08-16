@@ -1,12 +1,12 @@
 #include "/utils/projections.glsl"
 
-float sampleCloud(vec3 pos, const bool isNormal) {
-	//pos.xz = floor(pos.xz / 16.0) * 16.0;
+float sampleCloud(vec3 pos, const bool isSimplified) {
+	//pos.xz = floor(pos.xz / 24.0) * 24.0;
 	float cloudSample = valueNoise((pos - vec3(frameTimeCounter, 0.0, frameTimeCounter) * CLOUD_LAYER_1_SPEED * 0.8) * CLOUD_LAYER_1_SCALE) * CLOUD_LAYER_1_WEIGHT;
 	pos.xz -= pos.zx * 0.2;
 	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_2_SPEED * 0.8) * CLOUD_LAYER_2_SCALE) * CLOUD_LAYER_2_WEIGHT;
 	cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_3_SPEED * 0.8) * CLOUD_LAYER_3_SCALE) * CLOUD_LAYER_3_WEIGHT;
-	if (!isNormal) cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
+	if (!isSimplified) cloudSample += valueNoise((pos - frameTimeCounter * CLOUD_LAYER_4_SPEED * 0.8) * CLOUD_LAYER_4_SCALE) * CLOUD_LAYER_4_WEIGHT;
 	float sampleWeight = (pos.y - CLOUD_BOTTOM_Y) / (CLOUD_TOP_Y - CLOUD_BOTTOM_Y) * 2.0 - 1.0;
 	sampleWeight = sqrt(sqrt(1.0 - sampleWeight * sampleWeight));
 	cloudSample = cloudSample / (CLOUD_LAYER_1_WEIGHT + CLOUD_LAYER_2_WEIGHT + CLOUD_LAYER_3_WEIGHT + CLOUD_LAYER_4_WEIGHT) - (1.0 - sampleWeight) * 0.5;
@@ -18,6 +18,12 @@ float sampleCloud(vec3 pos, const bool isNormal) {
 
 // returns the cloud thickness and brightness (both inverted) for this pixel
 vec2 computeClouds(vec3 playerPos) {
+	
+	float playerLen = length(playerPos.xz);
+	playerPos /= playerLen;
+	float distLimitAmount = sampleCloud(cameraPosition + normalize(playerPos) * 20.0, true);
+	distLimitAmount = 1.0 - (1.0 - distLimitAmount) * (1.0 - distLimitAmount) * (1.0 - distLimitAmount);
+	playerPos *= min(playerLen, mix(128 * 16.0, 20 * 16.0, distLimitAmount));
 	
 	vec3 stepVec = playerPos;
 	stepVec.xz /= abs(stepVec.y);
@@ -35,7 +41,7 @@ vec2 computeClouds(vec3 playerPos) {
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
 	stepVec /= CLOUDS_QUALITY;
-	float desnityMult = length(stepVec) * -0.25;
+	float densityMult = length(stepVec) * -0.25;
 	pos = endPos;
 	
 	float dither = bayer64(gl_FragCoord.xy);
@@ -46,7 +52,7 @@ vec2 computeClouds(vec3 playerPos) {
 	float invBrightness = 0.0;
 	for (int i = 0; i < CLOUDS_QUALITY; i++) {
 		float density = sampleCloud(pos, false);
-		float invDensity = exp(density * desnityMult);
+		float invDensity = exp(density * densityMult);
 		float sampleUp = sampleCloud(pos + cloudsShadowcasterDir, true);
 		invThickness *= invDensity;
 		invBrightness = mix(invBrightness, sampleUp, 1.0 - sqrt(invDensity));

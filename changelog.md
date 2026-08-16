@@ -1,6 +1,7 @@
 - v1.4.5
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
+  - Improved realistic cloud rendering when inside clouds
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
 
 <br>
