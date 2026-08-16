@@ -57,8 +57,8 @@ void main() {
 		0.0, 0.0, VIEW_SHRINK, 0.0,
 		0.0, 0.0, 0.0, 1.0
 	);
-	vec4 linePosStart = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * vec4(vaPosition, 1.0);
-	vec4 linePosEnd = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * vec4(vaPosition + vaNormal, 1.0);
+	vec4 linePosStart = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * gl_Vertex;
+	vec4 linePosEnd = gl_ProjectionMatrix * VIEW_SCALE * gl_ModelViewMatrix * vec4(gl_Vertex.xyz + gl_Normal, 1.0);
 	vec3 ndc1 = linePosStart.xyz / linePosStart.w;
 	vec3 ndc2 = linePosEnd.xyz / linePosEnd.w;
 	vec2 lineScreenDirection = normalize((ndc2.xy - ndc1.xy) * viewSize);
