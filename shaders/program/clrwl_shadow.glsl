@@ -30,6 +30,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	
 	#if COLORED_LIGHTING_ENABLED == 1
+		vec3 playerPos = (shadowModelViewInverse * shadowProjectionInverse * ftransform()).xyz;
 		uint encodedData = uint(mc_Entity.x + 0.5);
 		encodedData *= uint((encodedData & (1u << 14u)) > 0u && encodedData != 65535u);
 		uint materialId = encodedData;
