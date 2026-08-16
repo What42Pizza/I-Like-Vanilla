@@ -50,9 +50,9 @@ const bool colortex4MipmapEnabled = true;
 void doBloomTile(inout vec3 bloomColor, vec2 stepAmount, vec2 texcoord, int lod) {
 	for (int x = -HALF_SAMPLE_COUNT; x <= HALF_SAMPLE_COUNT; x++) {
 		for (int y = -HALF_SAMPLE_COUNT; y <= HALF_SAMPLE_COUNT; y++) {
-			vec2 offset = stepAmount * (vec2(x, y) / HALF_SAMPLE_COUNT);
+			vec2 offset = stepAmount * (vec2(x, y) / float(HALF_SAMPLE_COUNT));
 			float weight = sampleWeights[x + HALF_SAMPLE_COUNT] * sampleWeights[y + HALF_SAMPLE_COUNT];
-			bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord + offset, lod).rgb * weight;
+			bloomColor += texture2DLod(BLOOM_TEXTURE, texcoord + offset, float(lod)).rgb * weight;
 		}
 	}
 }
