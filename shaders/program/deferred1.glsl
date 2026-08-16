@@ -119,10 +119,10 @@ void main() {
 		vec4 refSpecGlowingEntity = unpack_7_7_1_1(data.y);
 		vec3 normal = decodeNormal(data.zw);
 		#ifndef MODERN_BACKEND
-			vec3 viewPosUp    = screenToView(vec3(texcoord + ivec2( 0, -1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0, -1), 0).r));
-			vec3 viewPosDown  = screenToView(vec3(texcoord + ivec2( 0,  1) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0,  1), 0).r));
-			vec3 viewPosLeft  = screenToView(vec3(texcoord + ivec2(-1,  0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2(-1,  0), 0).r));
-			vec3 viewPosRight = screenToView(vec3(texcoord + ivec2( 1,  0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 1,  0), 0).r));
+			vec3 viewPosUp    = screenToView(vec3(texcoord + vec2( 0.0, -1.0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0, -1), 0).r));
+			vec3 viewPosDown  = screenToView(vec3(texcoord + vec2( 0.0,  1.0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 0,  1), 0).r));
+			vec3 viewPosLeft  = screenToView(vec3(texcoord + vec2(-1.0,  0.0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2(-1,  0), 0).r));
+			vec3 viewPosRight = screenToView(vec3(texcoord + vec2( 1.0,  0.0) * pixelSize, texelFetch(DEPTH_BUFFER_ALL, texelcoord + ivec2( 1,  0), 0).r));
 			vec3 xDir = normalize(viewPosLeft - viewPosRight);
 			vec3 yDir = normalize(viewPosUp - viewPosDown);
 			normal = cross(xDir, yDir);
