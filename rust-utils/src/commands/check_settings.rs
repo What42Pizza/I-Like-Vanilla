@@ -67,7 +67,7 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 		let first_part = sliders_iter.next();
 		if first_part != Some("sliders") { println!("WARNING: found unexpected first value (\"{first_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
 		let second_part = sliders_iter.next();
-		if second_part != Some("=") { println!("WARNING: found unexpected second value (\"{first_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
+		if second_part != Some("=") { println!("WARNING: found unexpected second value (\"{second_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
 		for part in sliders_iter {
 			if settings_set.contains(part) {continue;}
 			println!("WARNING: found settings in sliders (in shaders.properties) that is not listed in the settings menu: {part}");
