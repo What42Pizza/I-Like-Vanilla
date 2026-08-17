@@ -3,6 +3,7 @@
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
   - Improved realistic cloud rendering when inside clouds
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
+  - Slightly tweaked settings and lighting
 
 <br>
 
