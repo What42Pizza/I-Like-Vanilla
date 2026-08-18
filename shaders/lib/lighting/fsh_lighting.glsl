@@ -28,11 +28,7 @@ vec3 sampleShadowAtPoint(samplePosType shadowmapPos, vec3 playerPos, float depth
 		
 		if (rawSample(shadowtex0, shadowmapPos).r >= depth) return vec3(1.0);
 		if (rawSample(shadowtex1, shadowmapPos).r < depth) return vec3(0.0);
-		#if SHADOW_FILTERING == 0 && PIXELATED_SHADOWS == 0
-			vec4 shadowColor = texelFetch(shadowcolor0, shadowmapPos, 0);
-		#else
-			vec4 shadowColor = texelFetch(shadowcolor0, ivec2(shadowmapPos * float(shadowMapResolution - 1) + 0.5), 0);
-		#endif
+		vec4 shadowColor = rawSample(shadowcolor0, shadowmapPos);
 		
 		#if WATER_CAUSTICS_ENABLED == 1
 			ivec3 shadowColorInt = ivec3(shadowColor.rgb * 255.0 + 0.5);
