@@ -53,7 +53,7 @@ vec2 computeClouds(vec3 playerPos) {
 		#define CLOUDS_BOTTOM_Y (VOL_VANILLA_CLOUDS_MIDDLE - VOL_VANILLA_CLOUDS_THICKNESS * 0.5)
 	#elif CLOUDS_TYPE == 4
 		#define CLOUDS_TOP_Y REALISTIC_CLOUDS_TOP_Y
-		#define CLOUDS_BOTTOM_Y REALISTIC_CLOUDS_TOP_Y
+		#define CLOUDS_BOTTOM_Y REALISTIC_CLOUDS_BOTTOM_Y
 	#endif
 	
 	vec3 pos = cameraPosition;
