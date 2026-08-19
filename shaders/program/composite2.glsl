@@ -108,6 +108,12 @@ void main() {
 		#endif
 		float sunInfluence = dot(normalize(viewPos), sunPosition / 100);
 		vec3 cloudColor = getCloudColor(0.5 + 0.5 * brightness, sunInfluence);
+
+		// mediocre sunlight scattering, with no moon support
+		sunInfluence = 12 * (1 - sunInfluence);
+		sunInfluence = clamp(1 - sunInfluence, 0, 1);
+		cloudColor = mix(cloudColor, vec3(2, 2, 1.25), pow4(sunInfluence) * thickness);
+
 		float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
 		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
 		float cloudDist = length(cloudPos);
