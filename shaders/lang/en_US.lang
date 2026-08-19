@@ -1074,6 +1074,10 @@ option.REFLECTIONS_BRIGHTNESS=Reflections Brightness
 option.REFLECTIONS_BRIGHTNESS.comment=How much to brighten/darken reflections (only effects reflected terrain)
 value.REFLECTIONS_BRIGHTNESS.-1=Use Style
 
+option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS=Sky Objects Brightness
+option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.comment=How much to brighten sky objects (the sun, moon, and stars)
+value.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.-1=Use Style
+
 #option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
 #option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
 #value.RAIN_REFLECTION_AMOUNT.-1=Use Style
