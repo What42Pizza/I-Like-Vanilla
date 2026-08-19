@@ -106,7 +106,8 @@ void main() {
 		#if CLOUDS_TYPE == 3
 			brightness *= 1.3;
 		#endif
-		vec3 cloudColor = getCloudColor(0.5 + 0.5 * brightness);
+		float sunInfluence = dot(normalize(viewPos), sunPosition / 100);
+		vec3 cloudColor = getCloudColor(0.5 + 0.5 * brightness, sunInfluence);
 		float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
 		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
 		float cloudDist = length(cloudPos);
