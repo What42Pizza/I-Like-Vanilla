@@ -4,12 +4,12 @@
 
 #if CLOUDS_TYPE == 3
 	float sampleCloud(vec3 pos, const bool _isSimplified) {
+        // TODO: match vanilla position/scale at default settings
+        // TODO: configurable movement speed in both directions
 		vec2 texPos = pos.xz;
 		texPos.x += frameTimeCounter;
-		texPos = floor(texPos / 16.0);
-		texPos *= 0.027;
-		texPos.x *= 0.35;
-		return step(0.68, texture2D(noisetex, mod(texPos, 1.0)).g);
+		texPos *= 0.00035;
+		return texture2D(colortex11, mod(texPos, 1.0)).a;
 	}
 #endif
 
