@@ -114,6 +114,10 @@ const float shadowIntervalSize    = 2.0;
 	#define VOL_CLOUDS_ENABLED
 #endif
 
+#if BORDER_FOG_ENABLED == 1 && CLOUD_BORDER_FOG_SCALE > 0
+    #define CLOUD_BORDER_FOG_ENABLED
+#endif
+
 
 
 #if SHADOWS_TYPE < 2

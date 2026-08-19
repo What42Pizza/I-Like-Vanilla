@@ -24,6 +24,9 @@ in_out vec2 texcoord;
 #ifdef VOL_CLOUDS_ENABLED
 	#include "/utils/getCloudColor.glsl"
 #endif
+#ifdef CLOUD_BORDER_FOG_ENABLED
+	#include "/utils/borderFogAmount.glsl"
+#endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
@@ -119,8 +122,13 @@ void main() {
 		float cloudDist = length(cloudPos);
 		float atmoFogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
 		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (REALISTIC_CLOUDS_TOP_Y + REALISTIC_CLOUDS_BOTTOM_Y) * 0.3);
-		atmoFogAmount *= atmoFogDecrease * atmoFogDecrease;
-		color = mix(color, cloudColor, thickness * (1.0 - atmoFogAmount));
+		float fogAmount = atmoFogAmount * atmoFogDecrease * atmoFogDecrease;
+		#ifdef CLOUD_BORDER_FOG_ENABLED
+			// TODO: skip atmospheric fog math if border fog == 1.0?
+			float borderFogAmount = getBorderFogAmount(cloudPos / CLOUD_BORDER_FOG_SCALE);
+			fogAmount = max(fogAmount, borderFogAmount);
+        #endif
+        color = mix(color, cloudColor, thickness * (1.0 - fogAmount));
 	#endif
 	
 	#if NETHER_CLOUDS_ENABLED == 1

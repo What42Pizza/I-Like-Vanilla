@@ -67,6 +67,13 @@ vec2 computeClouds(vec3 playerPos, bool isSky) {
 	}
 	if (posStartY == posEndY) return vec2(1.0, 0.0);
 	pos += stepVec * abs(posStartY - pos.y);
+
+	#ifdef CLOUD_BORDER_FOG_ENABLED
+		vec3 cloudPos = pos - cameraPosition;
+		float cloudDistance = getBorderFogDistance(cloudPos / CLOUD_BORDER_FOG_SCALE);
+		if (cloudDistance > BORDER_FOG_END) return vec2(1.0, 0.0);
+	#endif
+
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
 	stepVec /= CLOUDS_QUALITY;

@@ -1894,6 +1894,9 @@ option.CLOUDS_QUALITY=Clouds Quality
 option.CLOUDS_QUALITY.comment=Quality of all clouds rendering
 
 
+option.CLOUD_BORDER_FOG_SCALE=Clouds Border Fog Scale
+option.CLOUD_BORDER_FOG_SCALE.comment=How far away volumetric clouds should draw before fading into border fog, compared to terrain.
+value.CLOUD_BORDER_FOG_SCALE.-1=∞
 
 
 
