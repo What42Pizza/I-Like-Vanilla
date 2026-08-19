@@ -93,11 +93,6 @@ const float shadowIntervalSize    = 2.0;
 	#define WAVING_WATER_SURFACE_ENABLED 0
 #endif
 
-#ifndef OVERWORLD
-	#undef REALISTIC_CLOUDS_ENABLED
-	#define REALISTIC_CLOUDS_ENABLED 0
-#endif
-
 #ifndef NETHER
 	#undef NETHER_CLOUDS_ENABLED
 	#define NETHER_CLOUDS_ENABLED 0
@@ -113,6 +108,10 @@ const float shadowIntervalSize    = 2.0;
 #endif
 #if defined END
 	#define SHADOWS_TYPE END_SHADOWS_TYPE
+#endif
+
+#if defined OVERWORLD && CLOUDS_TYPE >= 3
+	#define VOL_CLOUDS_ENABLED
 #endif
 
 

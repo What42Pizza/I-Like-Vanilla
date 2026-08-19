@@ -2,6 +2,10 @@
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
   - Improved realistic cloud rendering when inside clouds
+  - Reworked cloud settings:
+    - Added setting 'Clouds Type'
+	- Added new clouds type "Volumetric Vanilla"
+	- Removed settings 'Story Mode Clouds Enabled' and 'Realistic Clouds Enabled' (merged into 'Clouds Type' setting)
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
   - Slightly tweaked settings and lighting
 

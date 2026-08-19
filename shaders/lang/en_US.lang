@@ -1825,9 +1825,28 @@ value.SKY_WEATHER_DESATURATION.-1=Use Style
 
 screen.CLOUDS_MENU=Clouds
 
+option.CLOUDS_TYPE=Clouds Type
+option.CLOUDS_TYPE.comment=Switches between vanilla cloud rendering, story-mode-like clouds, volumetric vanilla-like clouds, and realistic volumetric clouds
+value.CLOUDS_TYPE.-1=Use Style
+value.CLOUDS_TYPE.1=Vanilla
+value.CLOUDS_TYPE.2=Story Mode
+value.CLOUDS_TYPE.3=Volumetric Vanilla
+value.CLOUDS_TYPE.4=Realistic
+
+
+
+
+
+
+screen.VANILLA_STORY_CLOUDS_MENU=Vanilla / Story Mode
+
 option.VANILLA_CLOUD_TRANSPARENCY=Cloud Transparency (Vanilla)
 option.VANILLA_CLOUD_TRANSPARENCY.comment=Transparency for vanilla-style clouds
 value.VANILLA_CLOUD_TRANSPARENCY.-1=Use Style
+
+option.STORY_MODE_CLOUDS_CURVE=Story Mode Clouds Curve
+option.STORY_MODE_CLOUDS_CURVE.comment=Controls the transparency fade of story-mode-type clouds
+value.STORY_MODE_CLOUDS_CURVE.-1=Use Style
 
 option.NEARBY_CLOUD_TRANSPARENCY=Nearby Cloud Transparency
 option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only works for non-realistic clouds
@@ -1859,27 +1878,30 @@ value.VANILLA_CLOUDS_SCALE_XZ.-1=Use Style
 option.VANILLA_CLOUDS_SCALE_Y=Vanilla Clouds Scale (Vertical)
 option.VANILLA_CLOUDS_SCALE_Y.comment=Scales the vanilla clouds by a certain amount (in the y direction). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
 
-option.STORY_MODE_CLOUDS_ENABLED=Story Mode Clouds Enabled
-option.STORY_MODE_CLOUDS_ENABLED.comment=Enables clouds similar to that of Minecraft Story Mode (requires Realistic Clouds to be disabled)
-value.STORY_MODE_CLOUDS_ENABLED.-1=Use Style
-value.STORY_MODE_CLOUDS_ENABLED.0=Off
-value.STORY_MODE_CLOUDS_ENABLED.1=On
 
-option.STORY_MODE_CLOUDS_CURVE=Story Mode Clouds Curve
-option.STORY_MODE_CLOUDS_CURVE.comment=Controls the transparency fade of story-mode-type clouds
-value.STORY_MODE_CLOUDS_CURVE.-1=Use Style
 
-option.REALISTIC_CLOUDS_ENABLED=Realistic Clouds Enabled
-value.REALISTIC_CLOUDS_ENABLED.-1=Use Style
-value.REALISTIC_CLOUDS_ENABLED.0=Off
-value.REALISTIC_CLOUDS_ENABLED.1=On
 
-option.REALISTIC_CLOUD_DENSITY=Cloud Density (Realistic)
-option.REALISTIC_CLOUD_DENSITY.comment=Density of realistic clouds
-value.REALISTIC_CLOUD_DENSITY.-1=Use Style
+
+screen.VOL_VANILLA_CLOUDS_MENU=Volumetric Vanilla Clouds
+
+option.VOL_VANILLA_CLOUDS_MIDDLE=Clouds Height
+
+option.VOL_VANILLA_CLOUDS_THICKNESS=Clouds Vertical Thickness
+
+option.VOL_VANILLA_CLOUDS_DENSITY=Clouds Density
 
 option.CLOUDS_QUALITY=Clouds Quality
-option.CLOUDS_QUALITY.comment=Quality of realistic clouds
+option.CLOUDS_QUALITY.comment=Quality of all clouds rendering
+
+
+
+
+
+screen.REALISTIC_CLOUDS_MENU=Realistic Clouds
+
+option.REALISTIC_CLOUDS_DENSITY=Clouds Density
+option.REALISTIC_CLOUDS_DENSITY.comment=Density of volumetric clouds
+value.REALISTIC_CLOUDS_DENSITY.-1=Use Style
 
 option.CLOUD_COVERAGE=Cloud Coverage
 value.CLOUD_COVERAGE.-1=Use Style
@@ -1888,17 +1910,13 @@ option.CLOUD_WEATHER_COVERAGE=Cloud Weather Coverage
 option.CLOUD_WEATHER_COVERAGE.comment=Coverage for clouds when raining / snowing
 value.CLOUD_WEATHER_COVERAGE.-1=Use Style
 
-option.CLOUD_BOTTOM_Y=Cloud Bottom Level
-option.CLOUD_BOTTOM_Y.comment=The y-level where realistic clouds start
-value.CLOUD_BOTTOM_Y.-1=Use Style
+option.REALISTIC_CLOUDS_BOTTOM_Y=Cloud Bottom Level
+option.REALISTIC_CLOUDS_BOTTOM_Y.comment=The y-level where realistic clouds start
+value.REALISTIC_CLOUDS_BOTTOM_Y.-1=Use Style
 
-option.CLOUD_TOP_Y=Cloud Top Level
-option.CLOUD_TOP_Y.comment=the y-level where realistic clouds stop
-value.CLOUD_TOP_Y.-1=Use Style
-
-option.CLOUD_OPACITY_DISTANCE=Cloud Opacity Distance
-option.CLOUD_OPACITY_DISTANCE.comment=Controls the density of realistic clouds, lower values make the clouds thicken faster
-value.CLOUD_OPACITY_DISTANCE.-1=Use Style
+option.REALISTIC_CLOUDS_TOP_Y=Cloud Top Level
+option.REALISTIC_CLOUDS_TOP_Y.comment=the y-level where realistic clouds stop
+value.REALISTIC_CLOUDS_TOP_Y.-1=Use Style
 
 
 
@@ -1982,8 +2000,8 @@ value.CLOUD_WEATHER_TINT_BLUE.-1=Use Style
 
 
 
-screen.CLOUD_NOISES_MENU=Cloud Noise Values
-screen.CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
+screen.REALISTIC_CLOUD_NOISES_MENU=Realistic Cloud Noise Values
+screen.REALISTIC_CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
 
 option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
 option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is

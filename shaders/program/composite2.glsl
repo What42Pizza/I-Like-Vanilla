@@ -7,7 +7,7 @@ in_out vec2 texcoord;
 	flat in_out float volSunraysAmountMult;
 	flat in_out float volSunraysAmountMax;
 #endif
-#if REALISTIC_CLOUDS_ENABLED == 1
+#ifdef VOL_CLOUDS_ENABLED
 	flat in_out float fogDensity;
 #endif
 #if NETHER_CLOUDS_ENABLED == 1
@@ -18,17 +18,17 @@ in_out vec2 texcoord;
 
 #ifdef FSH
 
-#if VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
+#if VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED
 	#include "/utils/projections.glsl"
 #endif
-#if REALISTIC_CLOUDS_ENABLED == 1
+#ifdef VOL_CLOUDS_ENABLED
 	#include "/utils/getCloudColor.glsl"
 #endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	
-	#if VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1
+	#if VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED
 		vec3 screenPos = vec3(texcoord, texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);
 		vec3 viewPos = screenToView(screenPos);
 		#ifdef DISTANT_HORIZONS
@@ -43,7 +43,7 @@ void main() {
 	
 	// ======== NOISY RENDERS ADDITION ======== //
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 		vec2 noisyRendersData      = texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).rg;
 		vec2 noisyRendersDataUp    = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0,  1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
 		vec2 noisyRendersDataDown  = texelFetch(NOISY_RENDERS_TEXTURE, clamp(texelcoord + ivec2( 0, -1), ivec2(0), ivec2(viewWidth, viewHeight) - 1), 0).rg;
@@ -91,7 +91,7 @@ void main() {
 	#endif
 	
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+	#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 		vec2 cloudsData = unpack_2x8(noisyRendersData.y);
 		cloudsData += unpack_2x8(noisyRendersDataUp.y   );
 		cloudsData += unpack_2x8(noisyRendersDataDown.y );
@@ -100,15 +100,18 @@ void main() {
 		cloudsData *= 0.2;
 	#endif
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
+	#ifdef VOL_CLOUDS_ENABLED
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		vec3 cloudColor = getCloudColor(0.6 + 0.4 * brightness);
-		float cloudMidDist = (CLOUD_BOTTOM_Y + CLOUD_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
+		#if CLOUDS_TYPE == 3
+			brightness *= 1.3;
+		#endif
+		vec3 cloudColor = getCloudColor(0.5 + 0.5 * brightness);
+		float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
 		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
 		float cloudDist = length(cloudPos);
 		float atmoFogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
-		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (CLOUD_TOP_Y + CLOUD_BOTTOM_Y) * 0.3);
+		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (REALISTIC_CLOUDS_TOP_Y + REALISTIC_CLOUDS_BOTTOM_Y) * 0.3);
 		atmoFogAmount *= atmoFogDecrease * atmoFogDecrease;
 		color = mix(color, cloudColor, thickness * (1.0 - atmoFogAmount));
 	#endif
@@ -201,7 +204,7 @@ void main() {
 	
 	// ======== REALISTIC CLOUDS ======== //
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
+	#ifdef VOL_CLOUDS_ENABLED
 		if (isEyeInWater == 0) {
 			float skylightExposure = eyeBrightnessSmooth.y / 240.0;
 			#ifdef OVERWORLD

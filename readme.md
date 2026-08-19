@@ -49,7 +49,7 @@ Note: OptiFine support is now discontinued. It might still somewhat work on Opti
 
 ## Credits:
 
-- **[Spagles](https://github.com/Spagles):** Minor code fixes
+- **[Spagles](https://github.com/Spagles):** Misc code fixes
 - **[Complementary Reimagined](https://modrinth.com/shader/complementary-reimagined):** Noise textures
 - **[Ian McEwan, Ashima Arts](https://github.com/ashima/webgl-noise):** Simplex noise implementation
 - **[Vildravn](https://godotshaders.com/shader/colorblindness-correction-shader/):** Colorblindness correction filters

@@ -2,7 +2,7 @@
 	in_out vec2 texcoord;
 #endif
 in_out vec3 playerPos;
-#if STORY_MODE_CLOUDS_ENABLED == 1
+#if CLOUDS_TYPE == 2
 	in_out float alphaMult;
 #endif
 
@@ -39,7 +39,7 @@ void main() {
 	
 	
 	// story mode clouds
-	#if STORY_MODE_CLOUDS_ENABLED == 1
+	#if CLOUDS_TYPE == 2
 		float alphaMult = 1.0 - alphaMult;
 		#if STORY_MODE_CLOUDS_CURVE == 2
 			alphaMult = pow2(alphaMult);
@@ -115,7 +115,7 @@ void main() {
 	
 	vec3 viewPos = transform(gl_ModelViewMatrix, gl_Vertex.xyz);
 	playerPos = transform(gbufferModelViewInverse, viewPos);
-	#if STORY_MODE_CLOUDS_ENABLED == 1
+	#if CLOUDS_TYPE == 2
 		alphaMult = percentThrough(cameraPosition.y, cloudHeight + 8.0, cloudHeight - 4.0); // start off inverted
 		alphaMult *= float(playerPos.y + cameraPosition.y > cloudHeight + 1.5);
 		alphaMult = 1.0 - alphaMult;

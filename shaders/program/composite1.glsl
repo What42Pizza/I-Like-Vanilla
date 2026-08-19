@@ -8,7 +8,7 @@ flat in_out float distMultMult;
 #if DEPTH_SUNRAYS_ENABLED == 1
 	flat in_out vec2 lightCoord;
 #endif
-#if REALISTIC_CLOUDS_ENABLED == 1
+#ifdef VOL_CLOUDS_ENABLED
 	flat in_out vec3 cloudsShadowcasterDir;
 	flat in_out float cloudsCoverage;
 #endif
@@ -28,8 +28,8 @@ flat in_out float distMultMult;
 #if VOL_SUNRAYS_ENABLED == 1
 	#include "/lib/sunrays_vol.glsl"
 #endif
-#if REALISTIC_CLOUDS_ENABLED == 1
-	#include "/lib/clouds.glsl"
+#ifdef VOL_CLOUDS_ENABLED
+	#include "/lib/vol_clouds.glsl"
 #endif
 #if NETHER_CLOUDS_ENABLED == 1
 	#include "/lib/nether_clouds.glsl"
@@ -38,13 +38,13 @@ flat in_out float distMultMult;
 	#include "/lib/end_clouds.glsl"
 #endif
 
-#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 	#define NOISY_RENDERS_ACTIVE
 #endif
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	#if defined OVERWORLD && REALISTIC_CLOUDS_ENABLED == 0
+	#if defined OVERWORLD && defined VOL_CLOUDS_ENABLED
 		bool isCloud = unpack_7_7_1_1(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).z > 0.5;
 	#else
 		const bool isCloud = false;
@@ -202,7 +202,7 @@ void main() {
 	
 	// ======== CLOUDS RENDERING ======== //
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
+	#ifdef VOL_CLOUDS_ENABLED
 		vec2 cloudData = computeClouds(playerPos);
 	#elif NETHER_CLOUDS_ENABLED == 1
 		vec2 cloudData = computeNetherClouds(playerPos);
@@ -229,7 +229,7 @@ void main() {
 				if (abs(prevSunraysDatas.y - volSunraysAmount) > 0.02)
 					volSunraysAmount = mix(volSunraysAmount, prevSunraysDatas.y, 0.5);
 			#endif
-			#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+			#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 				vec2 prevCloudsData = unpack_2x8(prevNoisyRender.y);
 				cloudData = mix(cloudData, prevCloudsData, 0.5);
 			#endif
@@ -340,7 +340,7 @@ void main() {
 	
 	// ======== CLOUDS ======== //
 	
-	#if REALISTIC_CLOUDS_ENABLED == 1
+	#ifdef VOL_CLOUDS_ENABLED
 		cloudsShadowcasterDir = normalize(mat3(gbufferModelViewInverse) * shadowLightPosition) * 10.0;
 		cloudsCoverage = mix(1.0 - CLOUD_COVERAGE, 0.8 - 0.6 * CLOUD_WEATHER_COVERAGE, rainStrength);
 	#endif

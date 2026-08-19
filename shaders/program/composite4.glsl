@@ -91,7 +91,7 @@ void main() {
 			vec4 refSpecGlowingEntity = unpack_7_7_1_1(data.y);
 			float reflectiveness = refSpecGlowingEntity.x * (1.0 - refSpecGlowingEntity.z); // z holds whether or not it's glowing, x holds the reflectiveness if not glowing
 		#endif
-		#if REALISTIC_CLOUDS_ENABLED == 1 || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+		#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
 			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
 			reflectiveness *= sqrt(invCloudsThickness);
 		#endif
