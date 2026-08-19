@@ -34,7 +34,7 @@
 
 
 // returns the cloud thickness and brightness (both inverted) for this pixel
-vec2 computeClouds(vec3 playerPos) {
+vec2 computeClouds(vec3 playerPos, bool isSky) {
 	
 	#if CLOUDS_TYPE == 4
 		float playerLen = length(playerPos.xz);
@@ -60,9 +60,11 @@ vec2 computeClouds(vec3 playerPos) {
 	float posStartY = clamp(pos.y, CLOUDS_BOTTOM_Y, CLOUDS_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUDS_BOTTOM_Y, CLOUDS_TOP_Y);
 	//if (posStartY == posEndY) return vec2(1.0, 0.0); // TODO: test if this improve performance
-	float maxY = abs(playerPos.y);
-	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
-	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+	if (!isSky) {
+		float maxY = abs(playerPos.y);
+		posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+		posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+	}
 	if (posStartY == posEndY) return vec2(1.0, 0.0);
 	pos += stepVec * abs(posStartY - pos.y);
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);

@@ -202,7 +202,11 @@ void main() {
 	// ======== CLOUDS RENDERING ======== //
 	
 	#ifdef VOL_CLOUDS_ENABLED
-		vec2 cloudData = computeClouds(playerPos);
+	    bool isSky = depth == 1;
+		#ifdef DISTANT_HORIZONS
+			isSky = isSky && depthDh == 1;
+		#endif
+		vec2 cloudData = computeClouds(playerPos, isSky);
 	#elif NETHER_CLOUDS_ENABLED == 1
 		vec2 cloudData = computeNetherClouds(playerPos);
 	#elif END_CLOUDS_ENABLED == 1
