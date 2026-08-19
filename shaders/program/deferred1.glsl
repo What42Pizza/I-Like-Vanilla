@@ -62,8 +62,8 @@ void main() {
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#if BORDER_FOG_ENABLED == 1
-		float fogDistance;
-		float skyAmount = getBorderFogAmount(playerPos, fogDistance);
+		float fogDistance = getBorderFogDistance(playerPos);
+		float skyAmount = getBorderFogAmount(fogDistance);
 		#ifdef DISTANT_HORIZONS
 			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
 		#endif

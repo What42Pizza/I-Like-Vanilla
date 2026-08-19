@@ -34,8 +34,7 @@ void main() {
 	#elif BORDER_FOG_ENABLED == 1
 		vec3 viewPos = screenToView(vec3(texcoord, depth));
 		vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-		float _fogDistance;
-		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		float fogAmount = getBorderFogAmount(playerPos);
 	#else
 		float fogAmount = float(depth == 1.0);
 	#endif

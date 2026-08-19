@@ -2,10 +2,8 @@
 #define INCLUDE_BORDER_FOG_AMOUNT
 
 
-
-float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
-	
-	fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+float getBorderFogDistance(vec3 playerPos) {
+	float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 	#ifdef DISTANT_HORIZONS
 		fogDistance /= dhRenderDistance;
 	#elif defined VOXY
@@ -13,6 +11,10 @@ float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
 	#else
 		fogDistance *= invFar;
 	#endif
+	return fogDistance;
+}
+
+float getBorderFogAmount(float fogDistance) {
 	#ifdef OVERWORLD
 		float borderFogStart = BORDER_FOG_START_OVERWORLD;
 	#elif defined NETHER
@@ -23,8 +25,7 @@ float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
 	#ifdef DISTANT_HORIZONS
 		borderFogStart *= 0.25;
 	#endif
-	float fogAmount = (fogDistance - borderFogStart) / (BORDER_FOG_END - borderFogStart);
-	fogAmount = clamp(fogAmount, 0.0, 1.0);
+	float fogAmount = percentThrough(fogDistance, borderFogStart, BORDER_FOG_END);
 	
 	if (isEyeInWater == 0) {
 		#ifdef OVERWORLD
@@ -48,6 +49,9 @@ float getBorderFogAmount(vec3 playerPos, out float fogDistance) {
 	return fogAmount;
 }
 
-
+float getBorderFogAmount(vec3 playerPos) {
+	float fogDistance = getBorderFogDistance(playerPos);
+	return getBorderFogAmount(fogDistance);
+}
 
 #endif

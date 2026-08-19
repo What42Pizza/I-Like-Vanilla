@@ -92,8 +92,7 @@ void main() {
 	
 	
 	#if BORDER_FOG_ENABLED == 1 || CYLINDRICAL_CLIPPING == 1
-		float _fogDistance;
-		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		float fogAmount = getBorderFogAmount(playerPos);
 		#ifdef DISTANT_HORIZONS
 			fogAmount = mix(fogAmount, 1.0, float(depth == 1.0 && depthDh == 1.0));
 		#endif
