@@ -103,10 +103,11 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	vec3 reflectionColor;
 	if (error == 0) {
 		reflectionColor = texture2DLod(texture, reflectionPos, 0).rgb * 2.0;
-		float reflectionDepth = texelFetch(DEPTH_BUFFER_WO_TRANS, ivec2(reflectionPos * viewSize), 0).r;
-		reflectionColor *= REFLECTIONS_BRIGHTNESS - (REFLECTIONS_BRIGHTNESS - 1.0) * step(1.0, reflectionDepth);
+		float isSky = step(1.0, texelFetch(DEPTH_BUFFER_ALL, ivec2(reflectionPos * viewSize), 0).r);
+		reflectionColor *= mix(REFLECTIONS_BRIGHTNESS, (REFLECTIONS_BRIGHTNESS - 1.0) * 0.5 + 1.0, isSky);
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
 		reflectionColor = mix(skyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
+		reflectionColor += texture2DLod(SKY_OBJECTS_TEXTURE, reflectionPos, 0).rgb * SKY_OBJECT_REFLECTIONS_BRIGHTNESS;
 	} else {
 		reflectionColor = skyColor;
 	}
