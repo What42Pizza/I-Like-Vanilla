@@ -6,6 +6,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 	
 	// calculate the optimal stepVector that will stop at the screen edge
 	vec3 stepVector = screenPos - nextScreenPos;
+	//stepVector = normalize(stepVector);
 	stepVector /= length(stepVector.xy);
 	if (abs(stepVector.x) > 0.0001) {
 		float clampedStepX = clamp(stepVector.x, -screenPos.x, 1.0 - screenPos.x);
@@ -17,20 +18,20 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 		stepVector.xz *= clampedStepY / stepVector.y;
 		stepVector.y = clampedStepY;
 	}
-	stepVector /= (REFLECTION_ITERATIONS - 8); // ensure that the ray will reach the edge of the screen 8 steps early, allows for fine-tuning to not be cut short
+	stepVector /= (REFLECTION_ITERATIONS - 6); // ensure that the ray will reach the edge of the screen 6 steps early, allows for fine-tuning to not be cut short
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	#if TEMPORAL_FILTER_ENABLED > 0
 		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	#endif
-	screenPos += stepVector * (dither + length(viewPos) / 1024) * REFLECTION_DITHER_AMOUNT;
+	screenPos += stepVector * ((dither + length(viewPos) / 1024.0) * REFLECTION_DITHER_AMOUNT + 0.3);
 	
 	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	vec3 worldNormal = mat3(gbufferModelViewInverse) * normal;
 	vec3 absPlayerPos = abs(playerPos * worldNormal);
 	float playerPosMax = max(absPlayerPos.x, max(absPlayerPos.y, absPlayerPos.z));
-	float ratioUpperBound = 1.0 / (1.0 + playerPosMax * 12.0);
-	ratioUpperBound = 1.0002 + ratioUpperBound * 0.009;
+	float ratioUpperBound = 1.0 / (1.0 + playerPosMax * 8.0);
+	ratioUpperBound = 1.0002 + ratioUpperBound * 0.01;
 	
 	int hitCount = 0;
 	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
@@ -77,7 +78,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 
 
 
-void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sampler2D texture, float reflectionStrength) {
+vec4 getReflections(vec3 viewPos, vec3 normal, vec2 lmcoord, sampler2D texture, float reflectionStrength) {
 	
 	vec3 reflectionDirection = reflect(normalize(viewPos), normalize(normal));
 	vec2 reflectionPos;
@@ -111,6 +112,6 @@ void addReflection(inout vec3 color, vec3 viewPos, vec3 normal, vec2 lmcoord, sa
 	} else {
 		reflectionColor = skyColor;
 	}
-	color = mix(color, reflectionColor, reflectionStrength);
 	
+	return vec4(reflectionColor * 0.25, reflectionStrength);
 }

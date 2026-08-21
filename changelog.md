@@ -1,4 +1,5 @@
 - v1.4.5
+  - Added setting 'Reflections Render Scale' (default is x0.5), giving up to 10% better performance
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
   - Improved realistic cloud rendering when inside clouds

@@ -1050,9 +1050,9 @@ option.REFLECTION_ITERATIONS.comment=The number of steps that the pseudo-raytrac
 option.REFLECTION_DITHER_AMOUNT=Reflection Dither Amount
 option.REFLECTION_DITHER_AMOUNT.comment=How much dithering to add to reflections
 
-option.REFLECTION_FRESNEL=Reflection Fresnel Amount
-option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
-value.REFLECTION_FRESNEL.-1=Use Style
+option.REFLECTIONS_RENDER_SCALE=Reflections Render Scale
+option.REFLECTIONS_RENDER_SCALE.comment=The resolution at which reflections will be processed
+prefix.REFLECTIONS_RENDER_SCALE=x
 
 option.BLOCK_REFLECTION_AMOUNT_SURFACE=(Surface) Block Reflection Strength
 option.BLOCK_REFLECTION_AMOUNT_SURFACE.comment=Max reflection strength for blocks in sunlight
@@ -1077,6 +1077,10 @@ value.REFLECTIONS_BRIGHTNESS.-1=Use Style
 option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS=Sky Objects Brightness
 option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.comment=How much to brighten sky objects (the sun, moon, and stars)
 value.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.-1=Use Style
+
+option.REFLECTION_FRESNEL=Reflection Fresnel Amount
+option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
+value.REFLECTION_FRESNEL.-1=Use Style
 
 #option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
 #option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
