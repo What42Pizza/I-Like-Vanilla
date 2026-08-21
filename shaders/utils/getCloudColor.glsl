@@ -1,10 +1,14 @@
-vec3 getCloudColor(float brightness) {
+vec3 getCloudColor(float brightness, float sunInfluence) {
 	brightness += 0.2 * dayPercent;
+
+	vec3 sunriseColor = mix(CLOUD_DAY_COLOR, CLOUD_SUNRISE_COLOR, sunInfluence),
+	    sunsetColor = mix(CLOUD_DAY_COLOR, CLOUD_SUNSET_COLOR, sunInfluence);
+
 	vec3 cloudColor =
 		CLOUD_DAY_COLOR * ambientSunPercent
 		+ CLOUD_NIGHT_COLOR * 0.5 * ambientMoonPercent
-		+ CLOUD_SUNRISE_COLOR * ambientSunrisePercent
-		+ CLOUD_SUNSET_COLOR * ambientSunsetPercent;
+		+ sunriseColor * ambientSunrisePercent
+		+ sunsetColor * ambientSunsetPercent;
 	#if AUTO_EXPOSURE_ENABLED == 1
 		cloudColor *= 0.9;
 	#endif

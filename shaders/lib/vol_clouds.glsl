@@ -1,15 +1,22 @@
 #include "/utils/projections.glsl"
 
 
-
 #if CLOUDS_TYPE == 3
-	float sampleCloud(vec3 pos, const bool _isSimplified) {
-		vec2 texPos = pos.xz;
-		texPos.x += frameTimeCounter;
-		texPos = floor(texPos / 16.0);
-		texPos *= 0.027;
-		texPos.x *= 0.35;
-		return step(0.68, texture2D(noisetex, mod(texPos, 1.0)).g);
+	vec2 roundCloud(vec2 pos, float radius) {
+		vec2 corner = round(pos);
+		vec2 offset = pos - corner;
+		vec2 newOffset = smoothstep(-radius, radius, offset) - 0.5;
+		return corner + newOffset;
+	}
+
+	float sampleCloud(vec3 pos3D, const bool _isSimplified) {
+		vec2 pos = pos3D.xz;
+		pos.x += cloudTime;          // TODO: configurable speed
+		pos /= 12.0;                 // TODO: configurable scale
+		pos = roundCloud(pos, 0.25); // TODO: configurable rounding
+		vec2 uv = pos / textureSize(CLOUDS_TEXTURE, 0);
+		float sample = texture2D(CLOUDS_TEXTURE, uv).a;
+		return round(sample);
 	}
 #endif
 
@@ -34,7 +41,7 @@
 
 
 // returns the cloud thickness and brightness (both inverted) for this pixel
-vec2 computeClouds(vec3 playerPos) {
+vec2 computeClouds(vec3 playerPos, bool isSky) {
 	
 	#if CLOUDS_TYPE == 4
 		float playerLen = length(playerPos.xz);
@@ -60,11 +67,20 @@ vec2 computeClouds(vec3 playerPos) {
 	float posStartY = clamp(pos.y, CLOUDS_BOTTOM_Y, CLOUDS_TOP_Y);
 	float posEndY = clamp(posStartY + stepVec.y * 1000.0, CLOUDS_BOTTOM_Y, CLOUDS_TOP_Y);
 	//if (posStartY == posEndY) return vec2(1.0, 0.0); // TODO: test if this improve performance
-	float maxY = abs(playerPos.y);
-	posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
-	posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+	if (!isSky) {
+		float maxY = abs(playerPos.y);
+		posStartY = clamp(posStartY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+		posEndY = clamp(posEndY - cameraPosition.y, -maxY, maxY) + cameraPosition.y;
+	}
 	if (posStartY == posEndY) return vec2(1.0, 0.0);
 	pos += stepVec * abs(posStartY - pos.y);
+
+	#ifdef CLOUD_BORDER_FOG_ENABLED
+		vec3 cloudPos = pos - cameraPosition;
+		float cloudDistance = getBorderFogDistance(cloudPos / CLOUD_BORDER_FOG_SCALE);
+		if (cloudDistance > BORDER_FOG_END) return vec2(1.0, 0.0);
+	#endif
+
 	vec3 endPos = pos + stepVec * abs(posEndY - posStartY);
 	stepVec = pos - endPos;
 	stepVec /= CLOUDS_QUALITY;

@@ -55,6 +55,7 @@ uniform float wetness;
 uniform vec4 lightningBoltPosition;
 uniform int isEyeInWater;
 uniform int heldBlockLightValue;
+uniform float cloudTime;
 #if VANILLA_CLOUDS_HEIGHT == 0
 	uniform float cloudHeight = 192.0;
 #else

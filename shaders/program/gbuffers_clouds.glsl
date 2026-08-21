@@ -11,6 +11,7 @@ in_out vec3 playerPos;
 #ifdef FSH
 
 #include "/utils/getCloudColor.glsl"
+#include "/utils/projections.glsl"
 
 #ifdef DISTANT_HORIZONS
 	#include "/utils/depth.glsl"
@@ -61,7 +62,10 @@ void main() {
 	normal.xz = abs(normal.xz);
 	float cloudBrightness = dot(normal, normalize(vec3(0.5, 1.0, 0.0)));
 	float maxBrightnessDecrease = mix(0.25, 0.1, betterRainStrength);
-	color.rgb *= getCloudColor(cloudBrightness * maxBrightnessDecrease + (1.0 - maxBrightnessDecrease));
+	vec3 screenPos = vec3(texcoord, texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);
+	vec3 viewPos = screenToView(screenPos);
+	float sunInfluence = dot(normalize(viewPos), normalize(sunPosition));
+	color.rgb *= getCloudColor(cloudBrightness * maxBrightnessDecrease + (1.0 - maxBrightnessDecrease), sunInfluence);
 	
 	
 	// fog transparency
