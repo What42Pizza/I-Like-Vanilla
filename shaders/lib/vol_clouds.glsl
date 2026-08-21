@@ -1,15 +1,14 @@
 #include "/utils/projections.glsl"
 
 
-
 #if CLOUDS_TYPE == 3
-	float sampleCloud(vec3 pos, const bool _isSimplified) {
-        // TODO: match vanilla position/scale at default settings
-        // TODO: configurable movement speed in both directions
-		vec2 texPos = pos.xz;
-		texPos.x += frameTimeCounter;
-		texPos *= 0.00035;
-		return texture2D(colortex11, mod(texPos, 1.0)).a;
+	float sampleCloud(vec3 pos3D, const bool _isSimplified) {
+		vec2 pos = pos3D.xz;
+		pos.x += cloudTime;          // TODO: configurable speed
+		pos /= 12.0;                 // TODO: configurable scale
+		vec2 uv = pos / textureSize(CLOUDS_TEXTURE, 0);
+		float sample = texture2D(CLOUDS_TEXTURE, uv).a;
+		return sample;
 	}
 #endif
 
