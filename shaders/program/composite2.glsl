@@ -116,19 +116,24 @@ void main() {
 		sunInfluence = 12 * (1 - sunInfluence);
 		sunInfluence = clamp(1 - sunInfluence, 0, 1);
 		cloudColor = mix(cloudColor, vec3(2, 2, 1.25), pow4(sunInfluence) * thickness);
+		
+		#if CLOUDS_TYPE == 4
+			float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
+			float fogDecrease = percentThrough(abs(cloudMidDist), 0.0, (REALISTIC_CLOUDS_TOP_Y + REALISTIC_CLOUDS_BOTTOM_Y) * 0.3);
+		#elif CLOUDS_TYPE == 3
+			float cloudMidDist = VOL_VANILLA_CLOUDS_MIDDLE - cameraPosition.y; // y dist from camera pos to cloud middle y level
+			float fogDecrease = clamp(abs(cloudMidDist) - VOL_VANILLA_CLOUDS_THICKNESS * 0.5, 0.0, 1.0);
+		#endif
 
-		float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
 		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
 		float cloudDist = length(cloudPos);
-		float atmoFogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
-		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (REALISTIC_CLOUDS_TOP_Y + REALISTIC_CLOUDS_BOTTOM_Y) * 0.3);
-		float fogAmount = atmoFogAmount * atmoFogDecrease * atmoFogDecrease;
+		float fogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
 		#ifdef CLOUD_BORDER_FOG_ENABLED
 			// TODO: skip atmospheric fog math if border fog == 1.0?
-			float borderFogAmount = getBorderFogAmount(cloudPos / CLOUD_BORDER_FOG_SCALE);
-			fogAmount = max(fogAmount, borderFogAmount);
-        #endif
-        color = mix(color, cloudColor, thickness * (1.0 - fogAmount));
+			fogAmount = max(fogAmount, getBorderFogAmount(cloudPos / CLOUD_BORDER_FOG_SCALE));
+		#endif
+		fogAmount *= pow2(fogDecrease);
+		color = mix(color, cloudColor, thickness * (1.0 - fogAmount));
 	#endif
 	
 	#if NETHER_CLOUDS_ENABLED == 1
