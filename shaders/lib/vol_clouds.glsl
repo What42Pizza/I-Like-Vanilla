@@ -2,13 +2,21 @@
 
 
 #if CLOUDS_TYPE == 3
+	vec2 roundCloud(vec2 pos, float radius) {
+		vec2 corner = round(pos);
+		vec2 offset = pos - corner;
+		vec2 newOffset = smoothstep(-radius, radius, offset) - 0.5;
+		return corner + newOffset;
+	}
+
 	float sampleCloud(vec3 pos3D, const bool _isSimplified) {
 		vec2 pos = pos3D.xz;
 		pos.x += cloudTime;          // TODO: configurable speed
 		pos /= 12.0;                 // TODO: configurable scale
+		pos = roundCloud(pos, 0.25); // TODO: configurable rounding
 		vec2 uv = pos / textureSize(CLOUDS_TEXTURE, 0);
 		float sample = texture2D(CLOUDS_TEXTURE, uv).a;
-		return sample;
+		return round(sample);
 	}
 #endif
 
