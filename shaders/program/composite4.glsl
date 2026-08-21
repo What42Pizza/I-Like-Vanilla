@@ -43,7 +43,7 @@ void main() {
 	
 	// ======== REFLECTIONS ======== //
 	#if REFLECTIONS_ENABLED == 1
-		vec4 reflectionData = texelFetch(colortex9, ivec2(texcoord * 0.5 * viewSize), 0);
+		vec4 reflectionData = texelFetch(colortex9, ivec2(texcoord * REFLECTIONS_RENDER_SCALE * viewSize), 0);
 		color = mix(color, reflectionData.rgb * 4.0, reflectionData.w);
 	#endif
 	

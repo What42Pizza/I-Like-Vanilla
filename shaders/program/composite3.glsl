@@ -1,7 +1,5 @@
 in_out vec2 texcoord;
 
-const float resMult = 0.5;
-
 
 
 #ifdef FSH
@@ -104,8 +102,8 @@ void main() {
 
 void main() {
 	vec4 pos = ftransform();
-	pos.xy *= resMult;
-	pos.xy -= 1.0 - resMult;
+	pos.xy *= REFLECTIONS_RENDER_SCALE;
+	pos.xy -= 1.0 - REFLECTIONS_RENDER_SCALE;
 	gl_Position = pos;
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 }

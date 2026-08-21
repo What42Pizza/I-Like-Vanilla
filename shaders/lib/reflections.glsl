@@ -66,8 +66,8 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 				if (depthIsHand(depthWithHandheld) && dot(viewPos, viewPos) > 2.5 + dither) error = 1;
 				return;
 			}
-			screenPos -= stepVector;
 			stepVector *= 0.5;
+			screenPos -= stepVector;
 		} else {
 			screenPos += stepVector;
 		}
@@ -108,7 +108,7 @@ vec4 getReflections(vec3 viewPos, vec3 normal, vec2 lmcoord, sampler2D texture, 
 		reflectionColor *= mix(REFLECTIONS_BRIGHTNESS, (REFLECTIONS_BRIGHTNESS - 1.0) * 0.5 + 1.0, isSky);
 		float fadeOutSlope = 1.0 / (max(normal.z, 0.0) + 0.0001);
 		reflectionColor = mix(skyColor, reflectionColor, clamp(fadeOutSlope - fadeOutSlope * max(abs(reflectionPos.x * 2.0 - 1.0), abs(reflectionPos.y * 2.0 - 1.0)), 0.0, 1.0));
-		reflectionColor += texture2DLod(SKY_OBJECTS_TEXTURE, reflectionPos, 0).rgb * SKY_OBJECT_REFLECTIONS_BRIGHTNESS;
+		reflectionColor += texture2DLod(SKY_OBJECTS_TEXTURE, reflectionPos, 0).rgb * SKY_OBJECT_REFLECTIONS_BRIGHTNESS * isSky;
 	} else {
 		reflectionColor = skyColor;
 	}
