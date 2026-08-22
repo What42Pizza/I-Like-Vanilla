@@ -11,6 +11,7 @@
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
   - Added setting 'Sky Object Reflections Brightness'
   - The setting 'Reflections Brightness' now affects transparent objects (such as clouds)
+  - Fixed bug causing pbr materials to be too reflective
   - Slightly tweaked settings and lighting
 
 <br>

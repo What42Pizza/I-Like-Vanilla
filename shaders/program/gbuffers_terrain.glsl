@@ -116,6 +116,8 @@ void main() {
 	#elif PBR_TYPE == 1
 		vec2 pbrData = texture2D(specular, texcoord).rg;
 		float reflectiveness = pbrData.g;
+		if (int(reflectiveness * 255.0 + 0.5) > 229) reflectiveness -= 175.0 / 255.0;
+		reflectiveness *= 0.5;
 		float specularness = sqrt(pbrData.r);
 		#if POM_ENABLED == 0
 			vec3 normal = vec3(texture2D(normals, texcoord).rg, 0.0);
