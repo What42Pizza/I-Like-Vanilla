@@ -1,6 +1,8 @@
 - v1.4.5
-  - Added setting 'Reflections Render Scale' (default is x0.5), giving up to 10% better performance
+  - Added setting 'Reflections Render Scale' (default is x0.6)
   - Increased 'Reflection Iterations' from 45 to 60
+  - Changed default 'Shadow Map Distance Cutoff' value from x2.0 to x1.0
+  - Performance compared to last version is up to 7-9% better (with 16 chunks render distance + voxy + 1080p)
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
   - Improved realistic cloud rendering when inside clouds

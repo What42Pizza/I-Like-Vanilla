@@ -31,7 +31,7 @@ void raytrace(out vec2 reflectionPos, out int error, vec3 viewPos, vec3 reflecti
 	vec3 absPlayerPos = abs(playerPos * worldNormal);
 	float playerPosMax = max(absPlayerPos.x, max(absPlayerPos.y, absPlayerPos.z));
 	float ratioUpperBound = 1.0 / (1.0 + playerPosMax * 8.0);
-	ratioUpperBound = 1.0002 + ratioUpperBound * 0.01;
+	ratioUpperBound = 1.00015 + ratioUpperBound * 0.007;
 	
 	int hitCount = 0;
 	for (int i = 0; i < REFLECTION_ITERATIONS; i++) {
