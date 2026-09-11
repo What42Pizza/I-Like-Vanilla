@@ -60,7 +60,7 @@ void main() {
 	}
 	
 	
-	float isEntity = step(0.95, color.a); // allow temporal filter is this entity is transparent
+	float isEntity = step(0.001, color.a);
 	
 	reflectiveness = mix(reflectiveness, ENTITY_FLASH_GLOW_STRENGTH, glowing);
 	
