@@ -45,10 +45,13 @@ void main() {
 			vec3 viewPosVx = screenToViewVx(vec3(texcoord, vxDepth0));
 			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
 		#endif
+		vec4 opaqueDataCheck = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
+		bool isEntityHere = unpack_7_7_1_1(opaqueDataCheck.y).w > 0.5;
+		useTransparentData = useTransparentData && !isEntityHere;
 		if (useTransparentData) {
 			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
 		} else {
-			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
+			data = opaqueDataCheck;
 		}
 		vec3 normal = decodeNormal(data.zw);
 		#ifndef MODERN_BACKEND
