@@ -46,7 +46,8 @@ void main() {
 			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
 		#endif
 		vec4 opaqueDataCheck = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-		bool isEntityHere = unpack_7_7_1_1(opaqueDataCheck.y).w > 0.5;
+		vec3 viewPosOpaque = screenToView(vec3(texcoord, depth1));
+		bool isEntityHere = unpack_7_7_1_1(opaqueDataCheck.y).w > 0.5 && distance(viewPos, viewPosOpaque) < 0.5;
 		useTransparentData = useTransparentData && !isEntityHere;
 		if (useTransparentData) {
 			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
