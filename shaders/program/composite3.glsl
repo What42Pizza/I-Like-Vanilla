@@ -39,18 +39,24 @@ void main() {
 		#endif
 		vec3 screenPos = vec3(texcoord, depth0);
 		vec3 viewPos = screenToView(screenPos);
+		vec4 opaqueDataCheck = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
+		bool isEntityHere = unpack_7_7_1_1(opaqueDataCheck.y).w > 0.5;
 		#ifdef VOXY
 			float vxDepth0 = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
 			float vxDepth1 = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
 			vec3 viewPosVx = screenToViewVx(vec3(texcoord, vxDepth0));
-			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
+			bool voxyTransparentPresent = vxDepth0 < vxDepth1;
+			useTransparentData = useTransparentData || (voxyTransparentPresent && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
 		#endif
-		vec4 opaqueDataCheck = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-		vec3 viewPosOpaque = screenToView(vec3(texcoord, depth1));
-		bool isEntityHere = unpack_7_7_1_1(opaqueDataCheck.y).w > 0.5 && distance(viewPos, viewPosOpaque) < 0.5;
-		useTransparentData = useTransparentData && !isEntityHere;
+		vec4 transparentDataCheck = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
+		bool hasRealTransparentData = transparentDataCheck.x > 0.0 || transparentDataCheck.y > 0.0 || transparentDataCheck.z > 0.0 || transparentDataCheck.w > 0.0;
+		#ifdef VOXY
+			bool transparentDataIsFromVoxy = unpack_7_7_1_1(transparentDataCheck.y).w > 0.5;
+			hasRealTransparentData = hasRealTransparentData && !(transparentDataIsFromVoxy && isEntityHere);
+		#endif
+		useTransparentData = useTransparentData && hasRealTransparentData;
 		if (useTransparentData) {
-			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
+			data = transparentDataCheck;
 		} else {
 			data = opaqueDataCheck;
 		}
