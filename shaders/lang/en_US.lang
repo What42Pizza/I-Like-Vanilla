@@ -2305,6 +2305,10 @@ option.END_SKY_BLUE=End Sky Blue
 option.END_SKY_BLUE.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Blue)
 value.END_SKY_BLUE.-1=Use Style
 
+option.END_SKY_BRIGHTNESS=End Sky Brightness
+option.END_SKY_BRIGHTNESS.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Brightness)
+value.END_SKY_BRIGHTNESS.-1=Use Style
+
 option.END_STATIC_RED=End Static Red
 option.END_STATIC_RED.comment=Color for the end sky static (the brighter half of the static)
 value.END_STATIC_RED.-1=Use Style
@@ -2316,6 +2320,10 @@ value.END_STATIC_GREEN.-1=Use Style
 option.END_STATIC_BLUE=End Static Blue
 option.END_STATIC_BLUE.comment=Color for the end sky static (the brighter half of the static)
 value.END_STATIC_BLUE.-1=Use Style
+
+option.END_STATIC_BRIGHTNESS=End Static Brightness
+option.END_STATIC_BRIGHTNESS.comment=Color for the end sky static (the brighter half of the static)
+value.END_STATIC_BRIGHTNESS.-1=Use Style
 
 
 

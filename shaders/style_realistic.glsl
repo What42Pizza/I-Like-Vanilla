@@ -1892,6 +1892,10 @@
 #undef END_SKY_BLUE
 										#define END_SKY_BLUE 0.7
 #endif
+#if END_SKY_BRIGHTNESS == -1
+#undef END_SKY_BRIGHTNESS
+										#define END_SKY_BRIGHTNESS 1.0
+#endif
 #if END_STATIC_RED == -1
 #undef END_STATIC_RED
 										#define END_STATIC_RED 1.25
@@ -1903,6 +1907,10 @@
 #if END_STATIC_BLUE == -1
 #undef END_STATIC_BLUE
 										#define END_STATIC_BLUE 0.9
+#endif
+#if END_STATIC_BRIGHTNESS == -1
+#undef END_STATIC_BRIGHTNESS
+										#define END_STATIC_BRIGHTNESS 1.0
 #endif
 
 

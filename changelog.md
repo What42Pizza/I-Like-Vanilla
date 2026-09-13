@@ -2,17 +2,19 @@
   - Added setting 'Reflections Render Scale' (default is x0.6)
   - Increased 'Reflection Iterations' from 45 to 60
   - Changed default 'Shadow Map Distance Cutoff' value from x2.0 to x1.0
-  - Performance compared to last version is up to 7-9% better (with 16 chunks render distance + voxy + 1080p)
+  - Performance compared to last version can be up to 7-9% better (with 16 chunks render distance + voxy + 1080p)
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
+  - Added settings 'End Sky Brightness' and 'End Static Brightness'
   - Improved realistic cloud rendering when inside clouds
   - Reworked cloud settings:
     - Added setting 'Clouds Type'
 	- Added new clouds type "Volumetric Vanilla"
 	- Removed settings 'Story Mode Clouds Enabled' and 'Realistic Clouds Enabled' (merged into 'Clouds Type' setting)
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
+  - Improved end clouds
   - Added setting 'Sky Object Reflections Brightness'
-  - The setting 'Reflections Brightness' now affects transparent objects (such as clouds)
+  - The setting 'Reflections Brightness' now also affects transparent objects (such as clouds)
   - Fixed bug causing pbr materials to be too reflective
   - Slightly tweaked settings and lighting
 

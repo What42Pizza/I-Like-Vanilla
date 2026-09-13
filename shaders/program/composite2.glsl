@@ -129,9 +129,11 @@ void main() {
 		float brightness = cloudsData.y;
 		thickness *= 1.0 - END_CLOUDS_TRANSPARENCY;
 		color *= 1.0 - thickness;
-		brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
+		#if END_CLOUDS_TYPE == 2
+			brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
+		#endif
 		#if END_CLOUDS_TYPE == 1
-			brightness *= 2.0;
+			brightness = min(brightness * 2.0, 1.0);
 		#endif
 		color += mix(END_CLOUDS_DARK_COLOR, END_CLOUDS_BRIGHT_COLOR, brightness) * thickness;
 	#endif

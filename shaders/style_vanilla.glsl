@@ -1697,15 +1697,15 @@
 #endif
 #if END_CLOUDS_SCALE == -1
 #undef END_CLOUDS_SCALE
-										#define END_CLOUDS_SCALE 1.8
+										#define END_CLOUDS_SCALE 2.0
 #endif
 #if END_CLOUDS_COVERAGE == -1
 #undef END_CLOUDS_COVERAGE
-										#define END_CLOUDS_COVERAGE 0.7
+										#define END_CLOUDS_COVERAGE 0.6
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
-										#define END_CLOUDS_TRANSPARENCY 0.75
+										#define END_CLOUDS_TRANSPARENCY 0.8
 #endif
 #if END_CLOUDS_RED_DARK == -1
 #undef END_CLOUDS_RED_DARK
@@ -1713,19 +1713,19 @@
 #endif
 #if END_CLOUDS_GREEN_DARK == -1
 #undef END_CLOUDS_GREEN_DARK
-										#define END_CLOUDS_GREEN_DARK 0.05
+										#define END_CLOUDS_GREEN_DARK 0.0
 #endif
 #if END_CLOUDS_BLUE_DARK == -1
 #undef END_CLOUDS_BLUE_DARK
-										#define END_CLOUDS_BLUE_DARK 0.3
+										#define END_CLOUDS_BLUE_DARK 0.5
 #endif
 #if END_CLOUDS_RED_BRIGHT == -1
 #undef END_CLOUDS_RED_BRIGHT
-										#define END_CLOUDS_RED_BRIGHT 1.3
+										#define END_CLOUDS_RED_BRIGHT 1.6
 #endif
 #if END_CLOUDS_GREEN_BRIGHT == -1
 #undef END_CLOUDS_GREEN_BRIGHT
-										#define END_CLOUDS_GREEN_BRIGHT 0.85
+										#define END_CLOUDS_GREEN_BRIGHT 1.0
 #endif
 #if END_CLOUDS_BLUE_BRIGHT == -1
 #undef END_CLOUDS_BLUE_BRIGHT
@@ -1884,27 +1884,35 @@
 
 #if END_SKY_RED == -1
 #undef END_SKY_RED
-										#define END_SKY_RED 0.0
+										#define END_SKY_RED 0.05
 #endif
 #if END_SKY_GREEN == -1
 #undef END_SKY_GREEN
-										#define END_SKY_GREEN 0.0
+										#define END_SKY_GREEN 0.05
 #endif
 #if END_SKY_BLUE == -1
 #undef END_SKY_BLUE
-										#define END_SKY_BLUE 0.2
+										#define END_SKY_BLUE 0.25
+#endif
+#if END_SKY_BRIGHTNESS == -1
+#undef END_SKY_BRIGHTNESS
+										#define END_SKY_BRIGHTNESS 1.0
 #endif
 #if END_STATIC_RED == -1
 #undef END_STATIC_RED
-										#define END_STATIC_RED 0.75
+										#define END_STATIC_RED 0.65
 #endif
 #if END_STATIC_GREEN == -1
 #undef END_STATIC_GREEN
-										#define END_STATIC_GREEN 0.5
+										#define END_STATIC_GREEN 0.4
 #endif
 #if END_STATIC_BLUE == -1
 #undef END_STATIC_BLUE
-										#define END_STATIC_BLUE 0.65
+										#define END_STATIC_BLUE 0.55
+#endif
+#if END_STATIC_BRIGHTNESS == -1
+#undef END_STATIC_BRIGHTNESS
+										#define END_STATIC_BRIGHTNESS 0.75
 #endif
 
 
