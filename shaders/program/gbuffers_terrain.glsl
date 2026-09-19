@@ -350,7 +350,7 @@ void main() {
 		}
 	#endif
 	ao *= mix(VANILLA_AO_DARK, VANILLA_AO_BRIGHT, max(lmcoord.x, lmcoord.y));
-	//upDot = dot(normal, gbufferModelView[1].xyz);
+	upDot = dot(normal, gbufferModelView[1].xyz);
 	//ao *= 15.0/16.0 + abs(upDot) / 16.0;
 	float lightDot = max(dot(normalize(shadowLightPosition), normal), 0.0);
 	ao *= 1.05 - (1.0 - lightDot) * 0.125 * lmcoord.y;
