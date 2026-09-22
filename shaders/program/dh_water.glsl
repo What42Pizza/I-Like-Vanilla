@@ -222,6 +222,11 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
+	#if SHADOWS_TYPE == 1
+		lmcoord.y *= 0.875 + 0.125 * step(0.96, lmcoord.y); // add fake shadows
+	#else
+		lmcoord.y *= 0.75 + 0.25 * step(0.96, lmcoord.y); // add fake shadows
+	#endif
 	
 }
 

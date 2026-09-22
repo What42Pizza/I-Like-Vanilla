@@ -22,6 +22,8 @@ float getLodAoAmount(vec3 normal) {
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	xDir *= 0.875 + 0.25 * dither;
+	yDir *= 0.875 + 0.25 * dither;
 	viewPos += (xDir + yDir) * (dither - 0.5);
 	
 	//float upDot = dot(normal, gbufferModelView[1].xyz);

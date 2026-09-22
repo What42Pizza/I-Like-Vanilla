@@ -409,7 +409,7 @@
 #endif
 #if BLOCK_GREEN_DARK == -1
 #undef BLOCK_GREEN_DARK
-										#define BLOCK_GREEN_DARK 0.7
+										#define BLOCK_GREEN_DARK 0.65
 #endif
 #if BLOCK_BLUE_DARK == -1
 #undef BLOCK_BLUE_DARK
@@ -466,7 +466,7 @@
 #endif
 #if CAVE_AMBIENT_BRIGHTNESS == -1
 #undef CAVE_AMBIENT_BRIGHTNESS
-										#define CAVE_AMBIENT_BRIGHTNESS 0.22
+										#define CAVE_AMBIENT_BRIGHTNESS 0.23
 #endif
 
 
@@ -1187,7 +1187,7 @@
 #endif
 #if WAVING_WORLD_SCALE == -1
 #undef WAVING_WORLD_SCALE
-										#define WAVING_WORLD_SCALE 0.3
+										#define WAVING_WORLD_SCALE 0.2
 #endif
 #if WAVING_AMOUNT_1 == -1
 #undef WAVING_AMOUNT_1
@@ -1199,7 +1199,7 @@
 #endif
 #if WAVING_AMOUNT_3 == -1
 #undef WAVING_AMOUNT_3
-										#define WAVING_AMOUNT_3 0.75
+										#define WAVING_AMOUNT_3 0.7
 #endif
 #if WAVING_WEATHER_MULT == -1
 #undef WAVING_WEATHER_MULT
@@ -1372,7 +1372,7 @@
 #endif
 #if MOON_OPACITY == -1
 #undef MOON_OPACITY
-										#define MOON_OPACITY 1.0
+										#define MOON_OPACITY 0.9
 #endif
 #if SUN_MOON_WEATHER_OPACITY_DECREASE == -1
 #undef SUN_MOON_WEATHER_OPACITY_DECREASE

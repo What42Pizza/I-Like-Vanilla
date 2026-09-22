@@ -68,6 +68,11 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// vsh lighting
 	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
+	#if SHADOWS_TYPE == 1
+		lmcoord.y *= 0.875 + 0.125 * step(0.96, lmcoord.y); // add fake shadows
+	#else
+		lmcoord.y *= 0.75 + 0.25 * step(0.96, lmcoord.y); // add fake shadows
+	#endif
 	
 	
 	// main color

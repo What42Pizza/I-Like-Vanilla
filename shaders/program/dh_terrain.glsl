@@ -79,7 +79,8 @@ void main() {
 			}
 		#endif
 	}
-	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.15;// + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	//if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.15;// + 0.3 * (gl_Normal.y * 0.5 - 0.5);
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 0.9;
 	
 	glcolor = glcolor - (4.0 / 27.0) * glcolor * glcolor * glcolor;
 	float m = getLum(glcolor);
@@ -98,6 +99,11 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
+	#if SHADOWS_TYPE == 1
+		lmcoord.y *= 0.875 + 0.125 * step(0.96, lmcoord.y); // add fake shadows
+	#else
+		lmcoord.y *= 0.75 + 0.25 * step(0.96, lmcoord.y); // add fake shadows
+	#endif
 	
 }
 
