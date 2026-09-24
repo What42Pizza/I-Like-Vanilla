@@ -68,25 +68,25 @@ void main() {
 	dhBlock = dhMaterialId;
 	
 	
-	if (dhMaterialId == DH_BLOCK_LEAVES || dhMaterialId == DH_BLOCK_GRASS) {
-		glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION);
-		glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
-		#if SNOWY_TWEAKS_ENABLED == 1
-			if (inSnowyBiome > 0.0) {
-				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
-				glcolor = mix(glcolor, vec3(1.0, 1.05, 1.2), snowiness);
-				glcolor *= 1.0 + 0.4 * snowiness;
-			}
-		#endif
-	}
+	//if (dhMaterialId == DH_BLOCK_LEAVES || dhMaterialId == DH_BLOCK_GRASS) {
+	//	glcolor = mix(vec3(getLum(glcolor)), glcolor, FOLIAGE_SATURATION);
+	//	glcolor *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+	//	#if SNOWY_TWEAKS_ENABLED == 1
+	//		if (inSnowyBiome > 0.0) {
+	//			float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
+	//			glcolor = mix(glcolor, vec3(1.0, 1.05, 1.2), snowiness);
+	//			glcolor *= 1.0 + 0.4 * snowiness;
+	//		}
+	//	#endif
+	//}
 	//if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 1.15;// + 0.3 * (gl_Normal.y * 0.5 - 0.5);
-	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 0.9;
+	if (dhMaterialId == DH_BLOCK_LEAVES) glcolor *= 0.95;
 	
-	glcolor = glcolor - (4.0 / 27.0) * glcolor * glcolor * glcolor;
-	float m = getLum(glcolor);
-	m = m * m * (3.0 - 2.0 * m);
-	glcolor *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
-	glcolor.rgb = glcolor.rgb * (1.0 + TEXTURE_CONTRAST_2 * 0.025) - TEXTURE_CONTRAST_2 * 0.025;
+	//glcolor = glcolor - (4.0 / 27.0) * glcolor * glcolor * glcolor;
+	//float m = getLum(glcolor);
+	//m = m * m * (3.0 - 2.0 * m);
+	//glcolor *= 1.0 - TEXTURE_CONTRAST * 0.125 + m * TEXTURE_CONTRAST * 0.25;
+	//glcolor.rgb = glcolor.rgb * (1.0 + TEXTURE_CONTRAST_2 * 0.025) - TEXTURE_CONTRAST_2 * 0.025;
 	
 	
 	gl_Position = viewToNdc(viewPos);
@@ -99,11 +99,14 @@ void main() {
 	
 	
 	doVshLighting(lmcoord, glcolor, viewPos, normal, gl_Normal);
+	
+	// add fake shadows
 	#if SHADOWS_TYPE == 1
-		lmcoord.y *= 0.875 + 0.125 * step(0.96, lmcoord.y); // add fake shadows
+		const float fakeShadowsStrength = 0.125;
 	#else
-		lmcoord.y *= 0.75 + 0.25 * step(0.96, lmcoord.y); // add fake shadows
+		const float fakeShadowsStrength = 0.25;
 	#endif
+	lmcoord.y = min(lmcoord.y, 1.0 - fakeShadowsStrength + fakeShadowsStrength * step(0.96, lmcoord.y));
 	
 }
 

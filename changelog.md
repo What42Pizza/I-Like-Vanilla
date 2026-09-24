@@ -13,6 +13,7 @@
 	- Added new clouds type "Volumetric Vanilla"
 	- Removed settings 'Story Mode Clouds Enabled' and 'Realistic Clouds Enabled' (merged into 'Clouds Type' setting)
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
+  - Improved support for latest versions of Distant Horizons
   - Improved end clouds
   - Added setting 'Sky Object Reflections Brightness'
   - The setting 'Reflections Brightness' now also affects transparent objects (such as clouds)
