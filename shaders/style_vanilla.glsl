@@ -686,15 +686,15 @@
 #endif
 #if BLOOM_AMOUNT == -1
 #undef BLOOM_AMOUNT
-										#define BLOOM_AMOUNT 0.45
+										#define BLOOM_AMOUNT 0.55
 #endif
 #if BLOOM_NETHER_AMOUNT == -1
 #undef BLOOM_NETHER_AMOUNT
-										#define BLOOM_NETHER_AMOUNT 0.5
+										#define BLOOM_NETHER_AMOUNT 0.6
 #endif
 #if BLOOM_END_AMOUNT == -1
 #undef BLOOM_END_AMOUNT
-										#define BLOOM_END_AMOUNT 0.55
+										#define BLOOM_END_AMOUNT 0.6
 #endif
 #if EMISSIVES_BLOOM_ENABLED == -1
 #undef EMISSIVES_BLOOM_ENABLED

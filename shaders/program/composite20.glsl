@@ -56,23 +56,27 @@ void main() {
 	
 	#if BLOOM_ENABLED == 1
 		vec3 bloomAddition = vec3(0.0);
-		bloomAddition += texture2D(BLOOM_TEXTURE, texcoord).rgb;
+		bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0, vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
 		#if HORROR_MODE == 0
-			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( invAspectRatio,  0.0)).rgb;
-			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           ,  1.0)).rgb;
-			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2(-invAspectRatio,  0.0)).rgb;
-			bloomAddition += texture2D(BLOOM_TEXTURE, texcoord + 0.01 * BLOOM_SIZE * vec2( 0.0           , -1.0)).rgb;
-			bloomAddition *= 0.2;
+			bloomAddition *= 8.0;
+			float dither = bayer64(gl_FragCoord.xy);
+			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+			float bloomSizeMult = 0.04 * BLOOM_SIZE / sqrt(toBlockDepth(depth) + 10.0) * mix(0.5, 1.5, dither);
+			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2( invAspectRatio,  0.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2( 0.0           ,  1.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2(-invAspectRatio,  0.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
+			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2( 0.0           , -1.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
+			bloomAddition *= 1.0/12.0;
 		#endif
 		bloomAddition = sqrt(bloomAddition);
 		#ifdef OVERWORLD
-			const float bloomAmount = BLOOM_AMOUNT * 0.6;
+			const float bloomAmount = BLOOM_AMOUNT * 0.8;
 		#endif
 		#ifdef NETHER
-			const float bloomAmount = BLOOM_NETHER_AMOUNT * 0.6;
+			const float bloomAmount = BLOOM_NETHER_AMOUNT * 0.8;
 		#endif
 		#ifdef END
-			const float bloomAmount = BLOOM_END_AMOUNT * 0.6;
+			const float bloomAmount = BLOOM_END_AMOUNT * 0.8;
 		#endif
 		#if HORROR_MODE == 1
 			color = bloomAddition * 0.8;
@@ -83,7 +87,7 @@ void main() {
 				bloomAddition *= 0.5;
 			#endif
 			color += bloomAddition * bloomAmount;
-			//color = bloomAddition;
+			//color = bloomAddition * 1.5;
 		#endif
 	#endif
 	

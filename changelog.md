@@ -3,6 +3,7 @@
   - Increased 'Reflection Iterations' from 45 to 60
   - Changed default 'Shadow Map Distance Cutoff' value from x2.0 to x1.0
   - Performance compared to last version can be up to 7-9% better (with 16 chunks render distance + voxy + 1080p)
+  - Improved bloom (now more cartoonish, has faster falloff)
   - Added fake shadows to LOD terrain
   - Added setting 'Particles Brightness'
   - Added settings 'Leaves Side Shading' and 'Leaves Ao Amount'
@@ -17,6 +18,7 @@
   - Improved end clouds
   - Added setting 'Sky Object Reflections Brightness'
   - The setting 'Reflections Brightness' now also affects transparent objects (such as clouds)
+  - Removed setting 'Bloom Render Scale'
   - Fixed bug causing pbr materials to be too reflective
   - Slightly tweaked settings and lighting
 
