@@ -1,4 +1,4 @@
-- **v1.5.0**
+- **v1.5.0** (26/09/26)
   - Added setting 'Reflections Render Scale' (default is x0.6)
   - Increased 'Reflection Iterations' from 45 to 60
   - Changed default 'Shadow Map Distance Cutoff' value from x2.0 to x1.0
@@ -11,8 +11,8 @@
   - Improved realistic cloud rendering when inside clouds
   - Reworked cloud settings:
     - Added setting 'Clouds Type'
-	- Added new clouds type "Volumetric Vanilla"
-	- Removed settings 'Story Mode Clouds Enabled' and 'Realistic Clouds Enabled' (merged into 'Clouds Type' setting)
+    - Added new clouds type "Volumetric Vanilla"
+    - Removed settings 'Story Mode Clouds Enabled' and 'Realistic Clouds Enabled' (merged into 'Clouds Type' setting)
   - Updated setting 'Temporal Extra Depth Check' to have a 'Full' option
   - Improved support for latest versions of Distant Horizons
   - Improved end clouds
@@ -21,6 +21,7 @@
   - Removed setting 'Bloom Render Scale'
   - Fixed bug causing pbr materials to be too reflective
   - Slightly tweaked settings and lighting
+  - Passed 3 million downloads!
 
 <br>
 <br>
