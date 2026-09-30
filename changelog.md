@@ -1,3 +1,8 @@
+- v1.5.0b
+  - Fixed crash when Style is not set to Vanilla
+
+<br>
+
 - **v1.5.0** (26/09/26)
   - Added setting 'Reflections Render Scale' (default is x0.6)
   - Increased 'Reflection Iterations' from 45 to 60
