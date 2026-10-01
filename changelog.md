@@ -1,5 +1,6 @@
 - v1.5.0b
   - Fixed crash when Style is not set to Vanilla
+  - Improved vanilla ao on distant LOD terrain
 
 <br>
 
