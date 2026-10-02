@@ -5,26 +5,25 @@
 // - LOD_PROJECTION_MAT
 
 float getLodAoAmount(vec3 normal) {
-	float aoAmount = 1.0;
 	
 	float centerDepth = texelFetch(LOD_DEPTH_TEX, texelcoord, 0).r;
 	if (centerDepth == 1.0) return 1.0;
 	vec3 viewPos = LOD_SCREEN_TO_VIEW_FN(vec3(texcoord, centerDepth));
-	vec3 blockPos = fract(mat3(gbufferModelViewInverse) * viewPos + cameraPosition);
 	float viewPosLen = length(viewPos);
 	
 	vec3 xDir = cross(normal, gbufferModelView[1].xyz);
 	if (dot(xDir, xDir) < 0.001) xDir = cross(normal, gbufferModelView[2].xyz);
 	xDir = normalize(xDir);
 	vec3 yDir = normalize(cross(normal, xDir));
-	xDir *= 0.7;
-	yDir *= 0.7;
+	xDir *= 0.75;
+	yDir *= 0.75;
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-	xDir *= 0.875 + 0.25 * dither;
-	yDir *= 0.875 + 0.25 * dither;
-	viewPos += (xDir + yDir) * (dither - 0.5);
+	viewPos += (xDir - yDir) * (dither - 0.5) * 1.5;
+	
+	vec3 blockPos = fract(mat3(gbufferModelViewInverse) * viewPos + cameraPosition);
+	float aoAmount = 1.0;
 	
 	//float upDot = dot(normal, gbufferModelView[1].xyz);
 	
@@ -32,24 +31,24 @@ float getLodAoAmount(vec3 normal) {
 	vec3 plusXPos = plusXPos4.xyz / plusXPos4.w * 0.5 + 0.5;
 	float testPlusX = texture2D(LOD_DEPTH_TEX, plusXPos.xy).r;
 	vec3 viewPosPlusX = LOD_SCREEN_TO_VIEW_FN(vec3(plusXPos.xy, testPlusX));
-	float plusXAmount = float(length(viewPosPlusX) < length(viewPos + xDir) * 0.9999 - 0.25);
-	plusXAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * xDir, blockPos - 0.5);
+	float plusXAmount = float(length(viewPosPlusX) < length(viewPos + xDir) - 0.25);
+	plusXAmount *= 0.5 + 0.5 * dot(mat3(gbufferModelViewInverse) * xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 minusXPos4 = LOD_PROJECTION_MAT * vec4(viewPos - xDir, 1.0);
 	vec3 minusXPos = minusXPos4.xyz / minusXPos4.w * 0.5 + 0.5;
 	float testMinusX = texture2D(LOD_DEPTH_TEX, minusXPos.xy).r;
 	vec3 viewPosMinusX = LOD_SCREEN_TO_VIEW_FN(vec3(minusXPos.xy, testMinusX));
-	float minusXAmount = float(length(viewPosMinusX) < length(viewPos - xDir) * 0.9999 - 0.25);
-	minusXAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * -xDir, blockPos - 0.5);
+	float minusXAmount = float(length(viewPosMinusX) < length(viewPos - xDir) - 0.25);
+	minusXAmount *= 0.5 + 0.5 * dot(mat3(gbufferModelViewInverse) * -xDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusXAmount;// * (1.0 - upDot * abs(xDir.x));
 	
 	vec4 plusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos + yDir, 1.0);
 	vec3 plusYPos = plusYPos4.xyz / plusYPos4.w * 0.5 + 0.5;
 	float testPlusY = texture2D(LOD_DEPTH_TEX, plusYPos.xy).r;
 	vec3 viewPosPlusY = LOD_SCREEN_TO_VIEW_FN(vec3(plusYPos.xy, testPlusY));
-	float plusYAmount = float(length(viewPosPlusY) < length(viewPos + yDir) * 0.9999 - 0.25);
-	plusYAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * yDir, blockPos - 0.5);
+	float plusYAmount = float(length(viewPosPlusY) < length(viewPos + yDir) - 0.25);
+	plusYAmount *= 0.5 + 0.5 * dot(mat3(gbufferModelViewInverse) * yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - plusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	vec4 minusYPos4 = LOD_PROJECTION_MAT * vec4(viewPos - yDir, 1.0);
@@ -57,7 +56,7 @@ float getLodAoAmount(vec3 normal) {
 	float testMinusY = texture2D(LOD_DEPTH_TEX, minusYPos.xy).r;
 	vec3 viewPosMinusY = LOD_SCREEN_TO_VIEW_FN(vec3(minusYPos.xy, testMinusY));
 	float minusYAmount = float(length(viewPosMinusY) < length(viewPos - yDir) * 0.999 - 0.2);
-	minusYAmount *= 0.5 + dot(mat3(gbufferModelViewInverse) * -yDir, blockPos - 0.5);
+	minusYAmount *= 0.5 + 0.5 * dot(mat3(gbufferModelViewInverse) * -yDir, blockPos - 0.5);
 	aoAmount *= 1.0 - minusYAmount;// * (1.0 - upDot * abs(yDir.x));
 	
 	aoAmount = 1.0 - aoAmount;
