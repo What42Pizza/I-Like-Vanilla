@@ -1,6 +1,6 @@
 - v1.5.0b
   - Doubled all emissive texture glowing amounts and increased max glowing ores strength
-  - Fixed crash when Style is not set to Vanilla
+  - Fixed shader failing to load if the Style is not set to Vanilla or if Sharpening is disabled
   - Improved vanilla ao on distant LOD terrain
 
 <br>

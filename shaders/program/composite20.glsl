@@ -13,7 +13,7 @@ in_out vec2 texcoord;
 	const bool colortex0MipmapEnabled = true;
 #endif
 
-#if SHARPENING_ENABLED == 1 || KUWAHARA_ENABLED == 1
+#if SHARPENING_ENABLED == 1 || KUWAHARA_ENABLED == 1 || BLOOM_ENABLED == 1
 	#include "/utils/depth.glsl"
 #endif
 #if KUWAHARA_ENABLED == 1
