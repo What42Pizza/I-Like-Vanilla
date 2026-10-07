@@ -60,11 +60,15 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#if FOG_BUG_RECREATION == 1
 			horizonAmount = 1.0;
 		#endif
+		#if USE_VANILLA_FOG_COLOR == 1
+			horizonAmount = 1.0 - 0.5 * upDot;
+			horizonAmount = pow(horizonAmount, 2.5);
+		#endif
 		#if USE_VANILLA_SKY_COLOR == 1
-			fogColorOut = pow(skyColor, vec3(1.5)) * 0.75;
+			fogColorOut = skyColor * skyColor * sqrt(skyColor) * 0.7;
 		#endif
 		#if USE_VANILLA_FOG_COLOR == 1
-			horizonColor = pow(fogColor, vec3(1.2));
+			horizonColor = pow(fogColor, vec3(1.2)) * (1.25 - 0.35 * dayPercent);
 		#endif
 		fogColorOut = mix(fogColorOut, horizonColor, horizonAmount);
 		
