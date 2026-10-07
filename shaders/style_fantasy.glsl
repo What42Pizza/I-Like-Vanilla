@@ -2036,6 +2036,10 @@
 #undef USE_VANILLA_FOG_DENSITY
 										#define USE_VANILLA_FOG_DENSITY 0
 #endif
+#if USE_VANILLA_SKY_COLOR == -1
+#undef USE_VANILLA_SKY_COLOR
+										#define USE_VANILLA_SKY_COLOR 0
+#endif
 
 
 

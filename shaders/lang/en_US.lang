@@ -2507,6 +2507,12 @@ value.USE_VANILLA_FOG_DENSITY.-1=Use Style
 value.USE_VANILLA_FOG_DENSITY.0=Off
 value.USE_VANILLA_FOG_DENSITY.1=On
 
+option.USE_VANILLA_SKY_COLOR=Use Vanilla Sky Density
+option.USE_VANILLA_SKY_COLOR.comment=Replaced the shader's main sky color with the vanilla main sky color
+value.USE_VANILLA_SKY_COLOR.-1=Use Style
+value.USE_VANILLA_SKY_COLOR.0=Off
+value.USE_VANILLA_SKY_COLOR.1=On
+
 
 
 
