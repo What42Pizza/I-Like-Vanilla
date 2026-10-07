@@ -48,6 +48,7 @@ uniform float sunAngle;
 uniform int moonPhase;
 uniform vec3 fogColor;
 uniform vec3 skyColor;
+uniform float fogEnd;
 uniform ivec2 eyeBrightness;
 uniform ivec2 eyeBrightnessSmooth;
 uniform float rainStrength;

@@ -164,7 +164,6 @@ void main() {
 	#ifndef NETHER
 		atmoFogAmount *= 1.0 - 0.25 * float(isEyeInWater == 0) * (1.0 - blindness) * (1.0 - darknessFactor);
 	#endif
-	color = mix(vec3(getLum(color)), color, 1.0 + atmoFogAmount * 0.5);
 	color *= 1.0 - min(atmoFogAmount * fogDarken, 1.0);
 	color += atmoFogColor * atmoFogAmount;
 	
@@ -298,6 +297,9 @@ void main() {
 		#endif
 		extraFogDist = 2.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 8.0;
+		#if USE_VANILLA_FOG_DENSITY == 1
+			fogDensity /= pow(fogEnd * 0.0012, 1.5);
+		#endif
 	} else if (isEyeInWater == 1) {
 		fogDensity = WATER_FOG_DENSITY * 0.2;
 		fogDarken = 1.0;

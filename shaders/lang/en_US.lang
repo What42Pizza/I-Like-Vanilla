@@ -2495,6 +2495,18 @@ option.END_FOG_DENSITY=End Fog Density
 option.END_FOG_DENSITY.comment=Atmospheric fog density for the end
 value.END_FOG_DENSITY.-1=Use Style
 
+option.USE_VANILLA_FOG_COLOR=Use Vanilla Fog Color
+option.USE_VANILLA_FOG_COLOR.comment=Replaced the shader's sky/fog horizon color with the vanilla sky/fog horizon color
+value.USE_VANILLA_FOG_COLOR.-1=Use Style
+value.USE_VANILLA_FOG_COLOR.0=Off
+value.USE_VANILLA_FOG_COLOR.1=On
+
+option.USE_VANILLA_FOG_DENSITY=Use Vanilla Fog Density
+option.USE_VANILLA_FOG_DENSITY.comment=Adds a way for the vanilla fog density to affect the shader's fog density
+value.USE_VANILLA_FOG_DENSITY.-1=Use Style
+value.USE_VANILLA_FOG_DENSITY.0=Off
+value.USE_VANILLA_FOG_DENSITY.1=On
+
 
 
 

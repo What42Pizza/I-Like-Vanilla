@@ -35,6 +35,9 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		float horizonAmount = 1.0 - upDot;
+		#if USE_VANILLA_FOG_COLOR == 1
+			horizonAmount = 1.0 - 0.5 * upDot;
+		#endif
 		#if HORIZON_FADE_STRENGTH > 0
 			horizonAmount *= horizonAmount;
 		#endif
@@ -52,6 +55,9 @@ vec3 getSkyColor(vec3 viewDir, const bool includeLightning) {
 		#endif
 		#if HORIZON_FADE_STRENGTH > 5
 			horizonAmount *= horizonAmount;
+		#endif
+		#if USE_VANILLA_FOG_COLOR == 1
+			horizonColor = pow(fogColor, vec3(1.2));
 		#endif
 		skyColor = mix(skyColor, horizonColor, horizonAmount);
 		

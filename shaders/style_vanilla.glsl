@@ -2029,6 +2029,14 @@
 #undef END_FOG_DENSITY
 										#define END_FOG_DENSITY 0.2
 #endif
+#if USE_VANILLA_FOG_COLOR == -1
+#undef USE_VANILLA_FOG_COLOR
+										#define USE_VANILLA_FOG_COLOR 0
+#endif
+#if USE_VANILLA_FOG_DENSITY == -1
+#undef USE_VANILLA_FOG_DENSITY
+										#define USE_VANILLA_FOG_DENSITY 0
+#endif
 
 
 

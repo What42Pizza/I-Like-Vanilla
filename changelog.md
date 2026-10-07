@@ -1,4 +1,10 @@
-- v1.5.0b
+- v1.5.0c
+  - Added settings 'Use Vanilla Fog Color' and 'Use Vanilla Fog Density'
+  - Increased default reflections render scale from x0.6 to x0.7
+
+<br>
+
+- v1.5.0b (26/10/06)
   - Doubled all emissive texture glowing amounts and increased max glowing ores strength
   - Fixed shader failing to load if the Style is not set to Vanilla or if Sharpening is disabled
   - Improved vanilla ao on distant LOD terrain

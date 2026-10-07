@@ -36,6 +36,9 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#endif
 		horizonColor = mix(horizonColor, vec3(0.1 + 0.25 * dayPercent), inPaleGarden);
 		float horizonAmount = 1.0 - upDot;
+		#if USE_VANILLA_FOG_COLOR == 1
+			horizonAmount = 1.0 - 0.5 * upDot;
+		#endif
 		#if HORIZON_FADE_STRENGTH > 0
 			horizonAmount *= horizonAmount;
 		#endif
@@ -56,6 +59,9 @@ vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
 		#endif
 		#if FOG_BUG_RECREATION == 1
 			horizonAmount = 1.0;
+		#endif
+		#if USE_VANILLA_FOG_COLOR == 1
+			horizonColor = pow(fogColor, vec3(1.2));
 		#endif
 		fogColorOut = mix(fogColorOut, horizonColor, horizonAmount);
 		
