@@ -146,7 +146,7 @@ void main() {
 			
 			if (depth == 1.0 && dhDepth != 1.0) {
 				float vxAo = getLodAoAmount(normal);
-				color *= 0.98 - vxAo * 0.48 * VANILLA_AO_BRIGHT;
+				color *= 1.01 - vxAo * 0.6 * VANILLA_AO_BRIGHT;
 			}
 			
 		#endif
@@ -157,7 +157,7 @@ void main() {
 			vec3 voxyOpaqueViewPos = screenToViewVx(vec3(texcoord, voxyOpaqueDepth));
 			if (voxyOpaqueViewPos.z > viewPos.z - far / (16.0 * 5.0/8.0)) {
 				float vxAo = getLodAoAmount(normal);
-				color *= 0.98 - vxAo * 0.48 * VANILLA_AO_BRIGHT;
+				color *= 1.01 - vxAo * 0.6 * VANILLA_AO_BRIGHT;
 			}
 			
 			float voxyTransparentDepth = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;

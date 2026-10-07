@@ -33,8 +33,8 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
 				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(viewPos)) * lmcoord.y * lmcoord.y;
-				tintColor = mix(tintColor, vec3(1.0, 1.02, 1.03), snowiness);
-				tintColor *= 1.0 + 0.4 * wetness;
+				tintColor = mix(tintColor, vec3(1.0, 1.05, 1.2), snowiness);
+				tintColor *= 1.0 + 0.4 * snowiness;
 			}
 		#endif
 	}
@@ -68,6 +68,14 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// vsh lighting
 	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
+	
+	// add fake shadows
+	#if SHADOWS_TYPE == 1
+		const float fakeShadowsStrength = 0.125;
+	#else
+		const float fakeShadowsStrength = 0.25;
+	#endif
+	lmcoord.y = min(lmcoord.y, 1.0 - fakeShadowsStrength + fakeShadowsStrength * step(0.96, lmcoord.y));
 	
 	
 	// main color

@@ -1,5 +1,5 @@
 #undef SHADOWS_TYPE
-#define SHADOWS_TYPE 0
+#define SHADOWS_TYPE 1
 
 layout(location = 0) out vec4 albedoOut;
 layout(location = 1) out vec4 auxDataOut;
@@ -58,6 +58,14 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	
 	// vsh lighting
 	doVshLighting(lmcoord, glcolor, viewPos, normal, worldNormal);
+	
+	// add fake shadows
+	#if SHADOWS_TYPE == 1
+		const float fakeShadowsStrength = 0.125;
+	#else
+		const float fakeShadowsStrength = 0.25;
+	#endif
+	lmcoord.y = min(lmcoord.y, 1.0 - fakeShadowsStrength + fakeShadowsStrength * step(0.96, lmcoord.y));
 	
 	
 	// main color

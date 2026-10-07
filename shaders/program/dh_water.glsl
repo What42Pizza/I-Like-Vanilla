@@ -223,6 +223,14 @@ void main() {
 	
 	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
 	
+	// add fake shadows
+	#if SHADOWS_TYPE == 1
+		const float fakeShadowsStrength = 0.125;
+	#else
+		const float fakeShadowsStrength = 0.25;
+	#endif
+	lmcoord.y = min(lmcoord.y, 1.0 - fakeShadowsStrength + fakeShadowsStrength * step(0.96, lmcoord.y));
+	
 }
 
 #endif

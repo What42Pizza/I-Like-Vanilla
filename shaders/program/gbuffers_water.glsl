@@ -190,7 +190,7 @@ void main() {
 		// water needs to be more opaque in dark areas
 		float alphaLift = max(lmcoord.x, lmcoord.y * dayPercent);
 		alphaLift = sqrt(alphaLift);
-		alphaLift = (1.0 - alphaLift) * (1.2 - screenBrightness);
+		alphaLift = (1.0 - alphaLift) * (1.2 - min(screenBrightness, 1.0));
 		#if WATER_FOAM_ENABLED == 1
 			alphaLift += foamAmount * WATER_FOAM_AMOUNT;
 		#endif

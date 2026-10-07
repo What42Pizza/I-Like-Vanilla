@@ -83,7 +83,7 @@ void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
 	adjustLmcoord(lmcoord);
-	lmcoord = min(lmcoord + 0.05, 1.0);
+	lmcoord = min(lmcoord * 1.05, 1.0);
 	glcolor = gl_Color;
 	#ifdef NETHER
 		glcolor.rgb *= PARTICLES_BRIGHTNESS * 0.75;
