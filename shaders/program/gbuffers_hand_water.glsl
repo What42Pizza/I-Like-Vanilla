@@ -47,6 +47,14 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, 0.0, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
+	#ifdef IRIS_INLINE_GLINT
+		if (mc_hasGlint()) {
+			vec3 glint = mc_sampleGlint();
+			color.rgb += glint * glint;
+		}
+	#endif
+	
+	
 	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(1.0, 0.5, 0.5, 1.0);

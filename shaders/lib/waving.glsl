@@ -18,11 +18,7 @@ vec3 getWavingAddition(vec3 playerPos) {
 	//float z = simplexNoise(vec2(timePos, 20));
 	//vec3 wavingAmount = vec3(x, y, z) * 0.05;
 	#if HEIGHT_BASED_WAVING_ENABLED == 1
-		const float lowY = 16.0;
-		const float lowMult = 0.0;
-		const float highY = 224.0;
-		const float highMult = 2.0;
-		wavingAmount *= clamp((worldPos.y - lowY) * (highMult - lowMult) / (highY - lowY) + lowMult, 0.0, 1.75);
+		wavingAmount *= 1.0 + 0.75 * percentThrough(worldPos.y, 64.0, 224.0);
 	#endif
 	return wavingAmount;
 }

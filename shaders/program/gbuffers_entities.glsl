@@ -60,6 +60,15 @@ void main() {
 	}
 	
 	
+	#ifdef IRIS_INLINE_GLINT
+		if (mc_hasGlint()) {
+			vec3 glint = mc_sampleGlint();
+			glint *= 1.2;
+			color.rgb += glint * glint;
+		}
+	#endif
+	
+	
 	float isEntity = step(0.95, color.a); // allow temporal filter is this entity is transparent
 	
 	reflectiveness = mix(reflectiveness, ENTITY_FLASH_GLOW_STRENGTH, glowing);

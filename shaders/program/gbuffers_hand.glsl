@@ -44,6 +44,14 @@ void main() {
 	#endif
 	
 	
+	#ifdef IRIS_INLINE_GLINT
+		if (mc_hasGlint()) {
+			vec3 glint = mc_sampleGlint();
+			color.rgb += glint * glint;
+		}
+	#endif
+	
+	
 	float reflectiveness = 0.0;
 	float specularness = 0.3;
 	
