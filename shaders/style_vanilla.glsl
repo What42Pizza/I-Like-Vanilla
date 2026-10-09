@@ -1701,7 +1701,7 @@
 #endif
 #if END_CLOUDS_COVERAGE == -1
 #undef END_CLOUDS_COVERAGE
-										#define END_CLOUDS_COVERAGE 0.5
+										#define END_CLOUDS_COVERAGE 0.45
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
@@ -2027,7 +2027,7 @@
 #endif
 #if END_FOG_DENSITY == -1
 #undef END_FOG_DENSITY
-										#define END_FOG_DENSITY 0.2
+										#define END_FOG_DENSITY 0.4
 #endif
 #if USE_VANILLA_FOG_COLOR == -1
 #undef USE_VANILLA_FOG_COLOR

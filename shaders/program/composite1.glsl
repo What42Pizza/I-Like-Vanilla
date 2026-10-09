@@ -297,7 +297,7 @@ void main() {
 		#endif
 		extraFogDist = 2.0 * inPaleGarden;
 		extraFogDist += betterRainStrength * 8.0;
-		#if USE_VANILLA_FOG_DENSITY == 1
+		#if USE_VANILLA_FOG_DENSITY == 1 && !defined END
 			fogDensity /= pow(fogEnd * 0.0012, 1.5);
 		#endif
 	} else if (isEyeInWater == 1) {
