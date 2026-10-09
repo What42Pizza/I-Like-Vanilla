@@ -1697,11 +1697,11 @@
 #endif
 #if END_CLOUDS_SCALE == -1
 #undef END_CLOUDS_SCALE
-										#define END_CLOUDS_SCALE 2.0
+										#define END_CLOUDS_SCALE 2.5
 #endif
 #if END_CLOUDS_COVERAGE == -1
 #undef END_CLOUDS_COVERAGE
-										#define END_CLOUDS_COVERAGE 0.6
+										#define END_CLOUDS_COVERAGE 0.5
 #endif
 #if END_CLOUDS_TRANSPARENCY == -1
 #undef END_CLOUDS_TRANSPARENCY
