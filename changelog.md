@@ -1,6 +1,7 @@
 - v1.5.0c
   - Added settings 'Use Vanilla Fog Color', 'Use Vanilla Fog Density', and 'Use Vanilla Sky Color'
   - Increased default reflections render scale from x0.6 to x0.7
+  - Added emissive glowing to redstone lamps and copper bulbs
 
 <br>
 

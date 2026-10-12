@@ -441,6 +441,9 @@ emission: vec3(1.0, 1.0, 1.0)
 
 block redstone_lamp:lit=true, copper_bulb:lit=true, exposed_copper_bulb:lit=true, weathered_copper_bulb:lit=true, oxidized_copper_bulb:lit=true, waxed_copper_bulb:lit=true, waxed_exposed_copper_bulb:lit=true, waxed_weathered_copper_bulb:lit=true, waxed_oxidized_copper_bulb:lit=true:
 weight: 1
+glow detect min: vec3(22.9, 17.6, 74.9)
+glow detect max: vec3(49.3, 84.8, 100.0)
+glow amount: 0.75
 voxelize: true
 emission: vec3(1.0, 1.0, 0.9)
 

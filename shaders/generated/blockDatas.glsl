@@ -459,6 +459,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							} else {
 								if (materialId < 91u) {
 									if (materialId < 90u) {
+										SET_GLOWING_COLOR(vec3(22.9, 17.6, 74.9), vec3(49.3, 84.8, 100.0), 0.75);
 										SET_VOXEL_ID(23u);
 									} else {
 										SET_REFLECTIVENESS(0.4);
