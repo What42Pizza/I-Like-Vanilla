@@ -143,7 +143,7 @@ void main() {
 	normal *= -sign(dot(normal, viewPos));
 	
 	
-	gl_Position = viewToNdc(viewPos);
+	gl_Position = gl_ProjectionMatrix * vec4(viewPos, 1.0);
 	
 	
 	#if TAA_ENABLED == 1
