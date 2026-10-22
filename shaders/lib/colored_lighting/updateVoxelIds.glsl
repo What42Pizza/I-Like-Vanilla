@@ -5,20 +5,20 @@ layout(r8ui) uniform writeonly uimage3D voxelIds;
 
 
 
-void updateVoxelIds(vec3 playerPos, uint materialId) {
-	
-	if (!any(equal(ivec4(renderStage), ivec4(
-		MC_RENDER_STAGE_TERRAIN_SOLID,
-		MC_RENDER_STAGE_TERRAIN_TRANSLUCENT,
-		MC_RENDER_STAGE_TERRAIN_CUTOUT,
-		MC_RENDER_STAGE_TERRAIN_CUTOUT_MIPPED
-	)))) return;
+void updateVoxelIds(vec3 playerPos, uint encodedBlockData, uint materialId) {
 	
 	bool outsideRange;
 	ivec3 voxelPos = getVoxelPos(playerPos, at_midBlock / 64.0, outsideRange);
 	if (outsideRange) return;
 	
-	uint voxelId;
+	// assume voxel id
+	bool excludeFromShadows = (encodedBlockData & (3u << 12u)) >= (1u << 12u); // test if 'shadow casting' value is 1 or 3
+	uint voxelId = uint(
+		abs(gl_Normal.x + gl_Normal.y + gl_Normal.z) == 1.0 // assume solid if normal is non-diagonal
+		&& !excludeFromShadows // is not solid if it does 
+	);
+	
+	// get specific block id
 	#define GET_VOXEL_ID
 	#include "/generated/blockDatas.glsl"
 	

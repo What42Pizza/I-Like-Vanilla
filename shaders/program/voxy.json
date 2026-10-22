@@ -62,7 +62,8 @@
 		"betterRainStrength",
 		"inSnowyBiome",
 		"inPaleGarden",
-		"invAspectRatio"
+		"invAspectRatio",
+		"cameraPositionFract"
 	],
 	"samplers": {
 		"tex": "sampler2D",

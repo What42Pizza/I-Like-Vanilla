@@ -39,7 +39,7 @@ void main() {
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		if (gl_VertexID % 4 == 0) {
-			updateVoxelIds(playerPos, materialId);
+			updateVoxelIds(playerPos, encodedData, materialId);
 		}
 	#endif
 	

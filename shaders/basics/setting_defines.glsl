@@ -107,7 +107,7 @@ const float shadowDistanceRenderMul = 1.0; // [0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1
 
 
 #define COLORED_LIGHTING_ENABLED 0 // [0 1]
-#define COLORED_LIGHTING_DIST 64 // [32 48 64 96 128 192 256 384 512]
+#define COLORED_LIGHTING_DIST 128 // [32 48 64 96 128 192 256 384 512]
 
 
 

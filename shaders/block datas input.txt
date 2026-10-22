@@ -73,6 +73,7 @@ block glass, glass_pane:
 weight: 100
 reflectiveness: 0.4
 specularness: 1.0
+voxelize: empty
 
 block tinted_glass:
 weight: 1
@@ -720,6 +721,7 @@ weight: 2
 waviness: 2
 brightness: 1.2
 specularness: 0.75
+voxelize: empty
 
 block pale_hanging_moss, biomesoplenty:spanish_moss:
 weight: 1
@@ -816,6 +818,10 @@ shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
+block snow:
+weight: 10
+voxelize: empty
+
 block sand, suspicious_sand, sandstone, sandstone_stairs, sandstone_slab, sandstone_wall, chiseled_sandstone, smooth_sandstone, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone, cut_sandstone_slab:
 weight: 100
 specularness: 0.2
@@ -867,11 +873,13 @@ block iron_block, iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
 weight: 1
 reflectiveness: 0.4
 specularness: 0.3
+voxelize: empty
 
 block light_weighted_pressure_plate, redstone_block, emerald_block, lapis_block, diamond_block, netherite_block:
 weight: 1
 reflectiveness: 0.4
 specularness: 0.3
+voxelize: empty
 
 block gold_block:
 weight: 1
@@ -957,3 +965,7 @@ block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terraco
 weight: 10
 reflectiveness: 0.5
 specularness: 0.5
+
+block %c:fences, %doors, %trapdoors, dirt_path:
+weight: 3
+voxelize: empty

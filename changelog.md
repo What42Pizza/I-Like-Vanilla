@@ -3,6 +3,7 @@
   - Increased default reflections render scale from x0.6 to x0.7
   - Added emissive glowing to redstone lamps and copper bulbs
   - Removed hidden 'Colored Lighting' options
+  - Slightly improved mod compatibility
 
 <br>
 

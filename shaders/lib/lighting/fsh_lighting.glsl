@@ -195,6 +195,15 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 
+#if COLORED_LIGHTING_ENABLED == 1
+	#include "/lib/colored_lighting/coloredLightingUtils.glsl"
+	//uniform usampler3D voxelIdsSampler;
+#endif
+
+
+
+
+
 void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrightness, float ambientBrightness, float specularness, float glowingAmount, vec3 viewPos, vec3 normal, float depth) {
 	
 	#if AMBIENT_CEL_AMOUNT != 0
@@ -329,5 +338,13 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		lighting = vec3(1.0);
 	#endif
 	color *= lighting;
+	
+	//vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	//bool outsideRange;
+	//ivec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * length(viewPos) * 0.001), outsideRange);
+	//if (!outsideRange) {
+	//    uint voxelId = texelFetch(voxelIdsSampler, voxelPos, 0).x;
+	//	color = vec3(voxelId != 0u);
+	//}
 	
 }

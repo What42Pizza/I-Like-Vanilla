@@ -94,9 +94,9 @@ void main() {
 	materialId = encodedData;
 	materialId &= (1u << 10u) - 1u;
 	
-	#if COLORED_LIGHTING_ENABLED == 1
+	#if COLORED_LIGHTING_ENABLED == 1 && !defined SHADER_SHADOW_ENTITIES && !defined SHADER_SHADOW_BLOCK
 		if (gl_VertexID % 4 == 0) {
-			updateVoxelIds(playerPos, materialId);
+			updateVoxelIds(playerPos, encodedData, materialId);
 		}
 	#endif
 	

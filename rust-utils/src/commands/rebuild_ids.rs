@@ -32,7 +32,6 @@ const BLOCK_DATAS_START: &str = r#"
 	#define SET_GLOWING_COLOR(v1, v2, v3)
 #endif
 #ifdef GET_VOXEL_ID
-	voxelId = float(abs(gl_Normal.x + gl_Normal.y + gl_Normal.z) == 1.0); // assume solid if normal is non-diagonal
 	#define SET_VOXEL_ID(v) voxelId = v;
 #else
 	#define SET_VOXEL_ID(v)
@@ -179,7 +178,12 @@ pub fn function(args: &[String]) -> Result<()> {
 			}
 			
 			"voxelize" => {
-				curr_block_data.voxelize = value.parse()?;
+				curr_block_data.voxelize = match &*value.to_lowercase() {
+					"true" => VoxelizeValue::True,
+					"false" => VoxelizeValue::False,
+					"empty" => VoxelizeValue::Empty,
+					_ => bail!("Invalid value for 'voxelize': '{value}', must be 'true', 'false', or 'empty'"),
+				};
 			}
 			
 			"translucency" => {
@@ -306,12 +310,13 @@ pub fn function(args: &[String]) -> Result<()> {
 			if let Some(alias) = leaf.alias {
 				aliases.push((alias, leaf.int_id));
 			}
-			if leaf.voxelize {
+			if matches!(leaf.voxelize, VoxelizeValue::True | VoxelizeValue::Empty) {
 				voxel_datas.push(VoxelData {
 					weight: leaf.weight.unwrap(),
 					voxel_id: 0,
 					emission: leaf.emission,
 					translucency: leaf.translucency,
+					must_be_empty: leaf.voxelize == VoxelizeValue::Empty,
 					block_data: unsafe { &*(node.leaf.as_ref().unwrap() as *const _ as *const BlockData<'a>) }, // not using unsafe here causes bad lifetime issues
 				});
 			}
@@ -400,7 +405,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			node.branch_split = *curr_voxel_id;
 			postprocess_voxel_tree_data(&mut branches.1, curr_voxel_id);
 		}
-		if let Some(leaf) = &mut node.leaf {
+		if let Some(leaf) = &mut node.leaf && !leaf.must_be_empty {
 			leaf.voxel_id = *curr_voxel_id;
 			unsafe {
 				// Safety: idk as long as the output is good I'm happy
@@ -447,7 +452,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			if let Some(custom_code) = &leaf.custom_code {
 				*block_datas_file += custom_code;
 			}
-			if leaf.voxelize {
+			if matches!(leaf.voxelize, VoxelizeValue::True | VoxelizeValue::Empty) {
 				*block_datas_file += &format!("{indent}SET_VOXEL_ID({}u);\n", unsafe {*leaf.voxel_id.get()});
 			}
 		}
@@ -538,7 +543,7 @@ struct BlockData<'a> {
 	glow_detect_max: Option<&'a str>,
 	glow_amount: Option<&'a str>,
 	brightness: Option<&'a str>,
-	voxelize: bool,
+	voxelize: VoxelizeValue,
 	voxel_id: UnsafeCell<u8>,
 	emission: Option<&'a str>,
 	translucency: Option<&'a str>,
@@ -561,12 +566,19 @@ impl<'a> BlockData<'a> {
 			glow_detect_max: None,
 			glow_amount: None,
 			brightness: None,
-			voxelize: false,
+			voxelize: VoxelizeValue::False,
 			voxel_id: UnsafeCell::new(0),
 			emission: None,
 			translucency: None,
 		}
 	}
+}
+
+#[derive(Debug, PartialEq)]
+enum VoxelizeValue {
+	True,
+	False,
+	Empty,
 }
 
 #[derive(Debug)]
@@ -584,6 +596,7 @@ struct VoxelData<'a> {
 	voxel_id: u8,
 	emission: Option<&'a str>,
 	translucency: Option<&'a str>,
+	must_be_empty: bool,
 }
 
 #[derive(Debug)]
