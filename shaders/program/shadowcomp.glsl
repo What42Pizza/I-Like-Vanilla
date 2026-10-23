@@ -70,8 +70,8 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	SAMPLE_MAX_LIGHT(0, 1, 0);
 	SAMPLE_MAX_LIGHT(0, 0, 1);
 	
-	vec3 newLight = neighborsMax * vec3(0.85, 0.78, 0.71);
-	newLight = max(newLight, emission);
+	vec3 newLight = neighborsMax - 1.0 / vec3(19.0, 14.5, 12.0);
+	newLight = max(newLight, emission * 0.7);
 	newLight *= translucency;
 	
 	imageStore(outputFloodFill, voxelPos, vec4(newLight, 0.0));

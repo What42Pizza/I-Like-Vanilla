@@ -323,7 +323,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
 		if (!outsideRange) {
 			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
-			blockBrightness = sqrt(getLum(coloredBlockLight)) * 1.25;
+			blockBrightness = sqrt(getLum(coloredBlockLight)) * 1.2;
 			blockLight = coloredBlockLight;
 		}
 	#endif
@@ -331,7 +331,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	blockBrightness *= 1.0 - getLum(lighting) * 0.75;
+	blockBrightness *= 1.1 - getLum(lighting) * 0.75;
 	lighting = mix(lighting, blockLight, blockBrightness);
 	//color = blockLight * blockBrightness;
 	//return;

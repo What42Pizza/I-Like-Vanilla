@@ -22,7 +22,7 @@ if (voxelId < 28u) {
 					if (voxelId < 3u) {
 						if (voxelId < 2u) {
 						} else {
-							SET_EMISSION(vec3(0.0, 0.25, 1.0));
+							SET_EMISSION(vec3(0.45, 0.85, 1.25));
 						}
 					} else {
 						SET_EMISSION(vec3(1.0, 0.97, 0.92));
@@ -115,7 +115,7 @@ if (voxelId < 28u) {
 						if (voxelId < 27u) {
 							SET_EMISSION(vec3(0.0, 0.7, 0.9));
 						} else {
-							SET_EMISSION(vec3(0.3, 0.5, 0.4));
+							SET_EMISSION(vec3(0.5, 0.65, 0.9));
 						}
 					}
 				}
@@ -135,7 +135,7 @@ if (voxelId < 28u) {
 				if (voxelId < 37u) {
 					if (voxelId < 31u) {
 						if (voxelId < 30u) {
-							SET_EMISSION(vec3(0.0, 0.5, 0.0));
+							SET_EMISSION(vec3(0.85, 0.45, 0.2));
 						} else {
 							SET_EMISSION(vec3(1.0, 1.0, 0.9));
 						}
