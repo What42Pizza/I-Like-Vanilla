@@ -33,8 +33,6 @@ uniform sampler3D lightFloodfill2Sampler;
 writeonly uniform image3D lightFloodfill1;
 writeonly uniform image3D lightFloodfill2;
 
-const vec3 EMISSION_SETTINGS_MULT = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, 0.88);
-
 
 
 #include "/lib/colored_lighting/updateFloodFill.glsl"

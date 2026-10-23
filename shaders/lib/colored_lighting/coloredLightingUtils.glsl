@@ -1,6 +1,8 @@
 #ifndef COLORED_LIGHTING_UTILS
 #define COLORED_LIGHTING_UTILS
 
+
+
 #if COLORED_LIGHTING_DIST == 32
 	const ivec3 coloredLightingSize = ivec3(32, 24, 32);
 #elif COLORED_LIGHTING_DIST == 48
@@ -20,17 +22,28 @@
 #elif COLORED_LIGHTING_DIST == 512
 	const ivec3 coloredLightingSize = ivec3(512, 348, 512);
 #endif
+
 const ivec3 halfColoredLightingSize = coloredLightingSize / 2;
+
+const vec3 lightTransmittanceDecrease = 1.0 / vec3(30.0, 27.5, 24.5);
+
+const vec3 EMISSION_SETTINGS_MULT = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, 0.88);
+
+
 
 vec3 cameraDir = vec3(gbufferModelView[0].z, gbufferModelView[1].z, gbufferModelView[2].z);
 ivec3 voxelRegionCorner = ivec3(cameraDir * -(halfColoredLightingSize - ivec3(16, 8, 16))) - halfColoredLightingSize;
 vec3 prevCameraDir = vec3(gbufferPreviousModelView[0].z, gbufferPreviousModelView[1].z, gbufferPreviousModelView[2].z);
 ivec3 prevVoxelRegionCorner = ivec3(prevCameraDir * -(halfColoredLightingSize - ivec3(16, 8, 16))) - halfColoredLightingSize;
 
+
+
 vec3 getVoxelPos(vec3 playerPos, vec3 offset, out bool outsideRange) {
 	vec3 voxelPos = playerPos + cameraPositionFract + offset - voxelRegionCorner;
 	outsideRange = any(lessThan(voxelPos, vec3(0.0))) || any(greaterThanEqual(voxelPos, vec3(coloredLightingSize)));
 	return voxelPos;
 }
+
+
 
 #endif

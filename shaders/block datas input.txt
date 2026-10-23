@@ -57,7 +57,7 @@ custom code: ##
 // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately used instead of stored
 specularness: 2.0
 voxelize: true
-translucency: vec3(0.5, 0.5, 1.0)
+translucency: vec3(0.3, 0.4, 1.0)
 
 
 block lava, flowing_lava:
@@ -65,7 +65,7 @@ weight: 100
 alias: BLOCK_ID_LAVA
 brightness: 1.15
 voxelize: true
-emission: vec3(1.0, 0.5, 0.0)
+emission: vec3(1.5, 0.95, 0.6)
 translucency: vec3(0.0, 0.0, 0.0)
 
 
@@ -87,112 +87,112 @@ weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.95, 0.95, 0.95)
 
 block light_gray_stained_glass, light_gray_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.85, 0.85, 0.85)
 
 block gray_stained_glass, gray_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.75, 0.75, 0.75)
 
 block black_stained_glass, black_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.65, 0.65, 0.65)
 
 block brown_stained_glass, brown_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.85, 0.6, 0.55)
 
 block red_stained_glass, red_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(1.0, 0.7, 0.7)
 
 block orange_stained_glass, orange_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(1.0, 0.75, 0.55)
 
 block yellow_stained_glass, yellow_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(1.0, 1.0, 0.75)
 
 block lime_stained_glass, lime_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.8, 1.0, 0.75)
 
 block green_stained_glass, green_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.8, 0.9, 0.7)
 
 block cyan_stained_glass, cyan_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.6, 0.7, 0.8)
 
 block light_blue_stained_glass, light_blue_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.8, 0.9, 1.0)
 
 block blue_stained_glass, blue_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.6, 0.65, 1.0)
 
 block purple_stained_glass, purple_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(0.9, 0.7, 1.0)
 
 block magenta_stained_glass, magenta_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(1.0, 0.7, 0.9)
 
 block pink_stained_glass, pink_stained_glass_pane:
 weight: 10
 reflectiveness: 0.4
 specularness: 1.0
 voxelize: true
-translucency: vec3(0.9, 0.9, 0.9)
+translucency: vec3(1.0, 0.8, 1.0)
 
 
 
@@ -428,6 +428,13 @@ shadow casting: foliage
 voxelize: true
 emission: vec3(0.75, 0.3, 0.0)
 
+block copper_torch, copper_wall_torch, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern:
+weight: 1
+brightness: 0.95
+shadow casting: foliage
+voxelize: true
+emission: vec3(0.65, 0.9, 0.55)
+
 block sea_lantern:
 weight: 1
 brightness: 1.25
@@ -440,13 +447,37 @@ reflectiveness: 0.4
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
 
-block redstone_lamp:lit=true, copper_bulb:lit=true, exposed_copper_bulb:lit=true, weathered_copper_bulb:lit=true, oxidized_copper_bulb:lit=true, waxed_copper_bulb:lit=true, waxed_exposed_copper_bulb:lit=true, waxed_weathered_copper_bulb:lit=true, waxed_oxidized_copper_bulb:lit=true:
+block redstone_lamp:lit=true, copper_bulb:lit=true, waxed_copper_bulb:lit=true:
 weight: 1
 glow detect min: vec3(22.9, 17.6, 74.9)
 glow detect max: vec3(49.3, 84.8, 100.0)
 glow amount: 0.75
 voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
+emission: vec3(1.25, 1.05, 0.9)
+
+block exposed_copper_bulb:lit=true, waxed_oxidized_copper_bulb:lit=true:
+weight: 1
+glow detect min: vec3(22.9, 17.6, 74.9)
+glow detect max: vec3(49.3, 84.8, 100.0)
+glow amount: 0.65
+voxelize: true
+emission: vec3(1.05, 0.85, 0.7)
+
+block weathered_copper_bulb:lit=true, waxed_exposed_copper_bulb:lit=true:
+weight: 1
+glow detect min: vec3(22.9, 17.6, 74.9)
+glow detect max: vec3(49.3, 84.8, 100.0)
+glow amount: 0.55
+voxelize: true
+emission: vec3(0.85, 0.65, 0.4)
+
+block oxidized_copper_bulb:lit=true, waxed_weathered_copper_bulb:lit=true:
+weight: 1
+glow detect min: vec3(22.9, 17.6, 74.9)
+glow detect max: vec3(49.3, 84.8, 100.0)
+glow amount: 0.45
+voxelize: true
+emission: vec3(0.65, 0.45, 0.3)
 
 block lava_cauldron:
 weight: 1
@@ -477,7 +508,7 @@ glow detect min: vec3(60.0, 19.0, 67.6)
 glow detect max: vec3(63.0, 21.0, 69.6)
 glow amount: 0.5
 voxelize: true
-emission: vec3(0.5, 0.6, 0.75)
+emission: vec3(0.55, 0.6, 0.65)
 
 block cave_vines_plant:berries=true, cave_vines:berries=true:
 weight: 5
@@ -485,7 +516,7 @@ glow detect min: vec3(28.0, 56.7, 64.3)
 glow detect max: vec3(51.0, 79.3, 96.9)
 glow amount: 1.1
 voxelize: true
-emission: vec3(0.7, 0.5, 0.3)
+emission: vec3(1.25, 1.0, 0.9)
 
 block small_amethyst_bud, biomesoplenty:small_rose_quartz_bud:
 weight: 1
@@ -559,6 +590,8 @@ emission: vec3(0.4, 0.5, 0.5)
 block sculk, sculk_vein, sculk_shrieker, sculk_sensor:sculk_sensor_phase=inactive, calibrated_sculk_sensor:sculk_sensor_phase=inactive, sculk_sensor:sculk_sensor_phase=cooldown, calibrated_sculk_sensor:sculk_sensor_phase=cooldown:
 weight: 2
 alias: BLOCK_ID_SCULK_GROUP_1
+voxelize: true
+emission: vec3(0.1, 0.2, 0.35)
 
 block sculk_sensor:sculk_sensor_phase=active, calibrated_sculk_sensor:sculk_sensor_phase=active, sculk_catalyst:
 weight: 1
@@ -710,7 +743,7 @@ block pumpkin:
 weight: 1
 alias: BLOCK_ID_PUMPKIN
 
-block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves, abundant_atmosphere:ashroot_leaves, abundant_atmosphere:gourdrot_leaves, galosphere:opal_leaves, enderscape:veiled_leaves, newworld:fir_leaves, nethers_exoticism:jaboticaba_leaves, nethers_exoticism:kiwano_leaves, nethers_exoticism:ramboutan_leaves:
+block oak_leaves, spruce_leaves, birch_leaves, jungle_leaves, acacia_leaves, dark_oak_leaves, mangrove_leaves, azalea_leaves, flowering_azalea_leaves, cherry_leaves, pale_oak_leaves, azalea, biomesoplenty:flowering_oak_leaves, biomesoplenty:cypress_leaves, biomesoplenty:snowblossom_leaves, biomesoplenty:origin_oak_leaves, biomesoplenty:pine_leaves, biomesoplenty:red_maple_leaves, biomesoplenty:orange_maple_leaves, biomesoplenty:yellow_maple_leaves, biomesoplenty:redwood_leaves, biomesoplenty:mahogany_leaves, biomesoplenty:jacaranda_leaves, biomesoplenty:palm_leaves, biomesoplenty:willow_leaves, biomesoplenty:dead_leaves, biomesoplenty:magic_leaves, biomesoplenty:umbran_leaves, biomesoplenty:hellbark_leaves, biomesoplenty:empyreal_leaves, abundant_atmosphere:ashroot_leaves, abundant_atmosphere:gourdrot_leaves, galosphere:opal_leaves, enderscape:veiled_leaves, newworld:fir_leaves, nethers_exoticism:jaboticaba_leaves, nethers_exoticism:kiwano_leaves, nethers_exoticism:ramboutan_leaves:
 weight: 2000
 alias: BLOCK_ID_LEAVES
 waviness: 3
@@ -943,6 +976,8 @@ block nether_portal:
 weight: 1
 alias: BLOCK_ID_NETHER_PORTAL
 shadow casting: never
+voxelize: true
+emission: vec3(2.0, 0.8, 2.0)
 
 block end_portal, end_gateway:
 weight: 1
@@ -968,6 +1003,6 @@ weight: 10
 reflectiveness: 0.5
 specularness: 0.5
 
-block %c:fences, %doors, %trapdoors, dirt_path, bell:
+block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, moss_carpet:
 weight: 3
 voxelize: empty

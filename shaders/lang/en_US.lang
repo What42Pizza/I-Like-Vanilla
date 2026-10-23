@@ -734,7 +734,7 @@ value.END_AMBIENT_BRIGHTNESS.-1=Use Style
 screen.COLORED_LIGHTING_MENU=Colored Blocklight
 
 option.COLORED_LIGHTING_ENABLED=Colored Lighting
-option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
+option.COLORED_LIGHTING_ENABLED.comment=Enables colored block lights, requires shadows type to be 'Real-Time'
 value.COLORED_LIGHTING_ENABLED.0=Off
 value.COLORED_LIGHTING_ENABLED.1=On
 

@@ -22,6 +22,8 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	#include "/generated/voxelDatas.glsl"
 	if (voxelId == 0) { emission = vec3(0.0); translucency = vec3(1.0); }
 	if (voxelId == 1) { emission = vec3(0.0); translucency = vec3(0.0); }
+	emission = mix(vec3(getLum(emission)), emission, COLORED_LIGHTING_SATURATION);
+	emission *= EMISSION_SETTINGS_MULT * 0.5;
 	
 	// get max of neighbors
 	vec3 neighborsMax = vec3(0.0);
@@ -35,10 +37,9 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	SAMPLE_MAX_LIGHT(0, 0, 1);
 	
 	// get new light value
-	vec3 newLight = neighborsMax - 1.0 / vec3(23.0, 21.0, 20.0);
-	emission = mix(vec3(getLum(emission)), emission, COLORED_LIGHTING_SATURATION);
-	newLight = max(newLight, emission * EMISSION_SETTINGS_MULT * 0.7);
+	vec3 newLight = neighborsMax - lightTransmittanceDecrease;
 	newLight *= translucency;
+	newLight = max(newLight, emission);
 	
 	imageStore(outputFloodFill, voxelPos, vec4(newLight, float(voxelId != 1)));
 }

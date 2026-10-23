@@ -503,6 +503,25 @@ pub fn function(args: &[String]) -> Result<()> {
 	gen_block_properties_code(&mut block_properties_file, &tree_nodes[0]);
 	fs::write(shaders_path.join("block.properties"), block_properties_file)?;
 	
+	// step 9: generate 'item.properties' file
+	let mut item_properties_file = BLOCK_PROPERTIES_START[1..].to_string();
+	fn gen_item_properties_code(item_properties_file: &mut String, node: &TreeNode) {
+		if let Some(branches) = &node.branches {
+			gen_item_properties_code(item_properties_file, &branches.0);
+			gen_item_properties_code(item_properties_file, &branches.1);
+		}
+		if let Some(leaf) = &node.leaf {
+			*item_properties_file += &format!("item.{} =", leaf.int_id);
+			for id in &leaf.block_ids {
+				item_properties_file.push(' ');
+				*item_properties_file += id;
+			}
+			item_properties_file.push('\n');
+		}
+	}
+	gen_item_properties_code(&mut item_properties_file, &tree_nodes[0]);
+	fs::write(shaders_path.join("item.properties"), &item_properties_file)?;
+	
 	// step 10: generate 'generated/common.glsl'
 	let mut generated_common_file = GENERATED_COMMON_START[1..].to_string();
 	for (alias, int_id) in aliases {
