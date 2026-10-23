@@ -429,7 +429,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			*block_datas_file += &format!("{indent}}}\n");
 		}
 		if let Some(leaf) = &node.leaf {
-			//*block_datas_file += &format!("{indent}// id: {}\n", leaf.int_id);
+			//*block_datas_file += &format!("{indent}// block id: {}, material id: {}\n", leaf.int_id, leaf.int_id & 0x3FF);
 			//*block_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_ids);
 			if let Some(reflectiveness) = &leaf.reflectiveness {
 				*block_datas_file += &format!("{indent}SET_REFLECTIVENESS({reflectiveness});\n");

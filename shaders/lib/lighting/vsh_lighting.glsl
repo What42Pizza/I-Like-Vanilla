@@ -2,7 +2,7 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 	
 	lmcoord.y = (lmcoord.y * lmcoord.y + lmcoord.y * 2.0) * 0.333; // kinda like squaring but not as intense
 	
-	#if HANDHELD_LIGHT_ENABLED == 1 && SHOW_DANGEROUS_LIGHT == 0
+	#if HANDHELD_LIGHT_ENABLED == 1 && SHOW_DANGEROUS_LIGHT == 0 && COLORED_LIGHTING_ENABLED == 0
 		float viewPosLen = length(viewPos);
 		if (viewPosLen <= HANDHELD_LIGHT_DISTANCE) {
 			float handLightBrightness = max(1.0 - viewPosLen / HANDHELD_LIGHT_DISTANCE, 0.0);
@@ -28,9 +28,5 @@ void doVshLighting(inout vec2 lmcoord, inout vec3 glcolor, vec3 viewPos, vec3 no
 	sideShading *= mix(SIDE_SHADING_DARK, SIDE_SHADING_BRIGHT, brightForSS * brightForSS) * 0.8;
 	sideShading *= 1.0 - step(1.0, lmcoord.x) * 0.6;
 	glcolor *= 1.0 + sideShading + step(1.0, lmcoord.x) * 0.125;
-	
-	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
-		lmcoord.x *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
-	#endif
 	
 }

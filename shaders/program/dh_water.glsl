@@ -2,6 +2,8 @@
 #define SHADOWS_TYPE 0
 #undef HANDHELD_LIGHT_ENABLED
 #define HANDHELD_LIGHT_ENABLED 0
+#undef COLORED_LIGHTING_ENABLED
+#define COLORED_LIGHTING_ENABLED 0
 
 in_out vec4 glcolor;
 in_out vec2 lmcoord;

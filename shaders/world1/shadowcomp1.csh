@@ -1,7 +1,7 @@
 #version 430 compatibility
 
 #define SHADER_SHADOWCOMP
-#define OVERWORLD
+#define END
 #define CSH
 
 #include "/basics/settings.glsl"
@@ -9,4 +9,4 @@
 #include "/generated/common.glsl"
 #include "/basics/common.glsl"
 
-#include "/program/shadowcomp.glsl"
+#include "/program/shadowcomp1.glsl"

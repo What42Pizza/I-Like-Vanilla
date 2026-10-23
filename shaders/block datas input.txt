@@ -390,7 +390,7 @@ glow detect min: vec3( 0.0,   0.0, 100.0)
 glow detect max: vec3(60.0, 100.0, 100.0)
 glow amount: 0.3
 voxelize: true
-emission: vec3(1.0, 0.97, 0.92)
+emission: vec3(1.0, 1.0, 1.0)
 
 block lantern, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern, enderscape:bulb_lantern, abundant_atmosphere:mud_lamp:
 weight: 2
@@ -399,7 +399,7 @@ glow detect min: vec3(33.6,  40.8, 100.0)
 glow detect max: vec3(60.0, 100.0, 100.0)
 glow amount: 0.2
 voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
+emission: vec3(1.0, 1.0, 1.0)
 
 block campfire, furnace:lit=true:
 weight: 1
@@ -407,26 +407,26 @@ glow detect min: vec3(21.4,  31.3, 69.4)
 glow detect max: vec3(49.2, 100.0, 97.6)
 glow amount: 1.0
 voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
+emission: vec3(1.0, 1.0, 1.0)
 
 block jack_o_lantern:
 weight: 1
 voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
+emission: vec3(1.0, 0.95, 0.85)
 
 block soul_torch, soul_wall_torch, soul_lantern, soul_campfire, galosphere:soul_light_stand, galosphere:soul_chandelier, supplementaries:sconce_soul:
 weight: 3
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.45, 0.85, 1.25)
+emission: vec3(0.45, 0.75, 1.2)
 
 block redstone_torch, redstone_wall_torch:
 weight: 5
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.85, 0.45, 0.2)
+emission: vec3(0.75, 0.3, 0.0)
 
 block sea_lantern:
 weight: 1
@@ -459,13 +459,13 @@ weight: 5
 shadow casting: never
 //brightness: 0.9
 voxelize: true
-emission: vec3(1.0, 1.0, 0.9)
+emission: vec3(1.1, 1.0, 0.85)
 
 block soul_fire:
 weight: 5
 shadow casting: never
 voxelize: true
-emission: vec3(0.0, 0.7, 0.9)
+emission: vec3(0.5, 0.85, 1.5)
 
 
 
@@ -477,7 +477,7 @@ glow detect min: vec3(60.0, 19.0, 67.6)
 glow detect max: vec3(63.0, 21.0, 69.6)
 glow amount: 0.5
 voxelize: true
-emission: vec3(0.5, 0.65, 0.9)
+emission: vec3(0.5, 0.6, 0.75)
 
 block cave_vines_plant:berries=true, cave_vines:berries=true:
 weight: 5
@@ -635,7 +635,7 @@ glow detect min: vec3(  0.0,  46.3,  21.0)
 glow detect max: vec3(360.0, 100.0, 100.0)
 glow amount: GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH
 voxelize: true
-emission: vec3(0.1, 0.0, 0.0)
+emission: vec3(0.75, 0.35, 0.1)
 
 block emerald_ore, deepslate_emerald_ore:
 weight: 1
@@ -715,6 +715,8 @@ weight: 2000
 alias: BLOCK_ID_LEAVES
 waviness: 3
 specularness: 0.8
+voxelize: true
+translucency: vec3(0.5, 0.6, 0.5)
 
 block vine, biomesoplenty:willow_vine:
 weight: 2
@@ -966,6 +968,6 @@ weight: 10
 reflectiveness: 0.5
 specularness: 0.5
 
-block %c:fences, %stairs, %doors, %trapdoors, dirt_path, bell:
+block %c:fences, %doors, %trapdoors, dirt_path, bell:
 weight: 3
 voxelize: empty

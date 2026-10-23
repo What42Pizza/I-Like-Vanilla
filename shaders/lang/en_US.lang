@@ -1,7 +1,8 @@
 profile.POTATO=§4Potato
 profile.VERY_LOW=§2Very Low
 profile.LOW=§3Low
-profile.MEDIUM=§bMedium
+profile.MEDIUM=§aMedium
+profile.MEDIUM_PLUS=§bMedium +
 profile.HIGH=§eHigh
 profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
@@ -445,18 +446,6 @@ value.BLOCKLIGHT_CEL_AMOUNT.100=1.0
 
 
 
-screen.COLORED_LIGHTING_MENU=Colored Blocklight
-
-option.COLORED_LIGHTING_ENABLED=Colored Lighting
-option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
-
-option.COLORED_LIGHTING_DIST=Colored Lighting Distance
-option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
-
-
-
-
-
 screen.LIGHT_COLORS_MENU=Light Colors
 
 option.LIGHTNING_BRIGHTNESS=Lightning Brightness
@@ -737,6 +726,29 @@ value.END_AMBIENT_BLUE.-1=Use Style
 
 option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
 value.END_AMBIENT_BRIGHTNESS.-1=Use Style
+
+
+
+
+
+screen.COLORED_LIGHTING_MENU=Colored Blocklight
+
+option.COLORED_LIGHTING_ENABLED=Colored Lighting
+option.COLORED_LIGHTING_ENABLED.comment=Enables floodfill colored block lights
+value.COLORED_LIGHTING_ENABLED.0=Off
+value.COLORED_LIGHTING_ENABLED.1=On
+
+option.COLORED_LIGHTING_DIST=Colored Lighting Distance
+option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
+
+option.COLORED_LIGHTING_SATURATION=Colored Lighting Saturation
+option.COLORED_LIGHTING_SATURATION.comment=How saturated the colored light emissive values should be
+value.COLORED_LIGHTING_SATURATION.-1=Use Style
+
+option.TRIPLED_COLORED_LIGHTING_UPDATES=Tripled Colored Lighting Updates
+option.TRIPLED_COLORED_LIGHTING_UPDATES.comment=Updates the colored lighting 3 times per frame instead of once, significantly increases responsiveness with a relatively low performance cost
+value.TRIPLED_COLORED_LIGHTING_UPDATES.0=Off
+value.TRIPLED_COLORED_LIGHTING_UPDATES.1=On
 
 
 

@@ -196,6 +196,7 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 #if COLORED_LIGHTING_ENABLED == 1
+	uniform usampler3D voxelIdsSampler;
 	uniform sampler3D lightFloodfill1Sampler;
 	uniform sampler3D lightFloodfill2Sampler;
 	#include "/lib/colored_lighting/sampleColoredLighting.glsl"
@@ -313,9 +314,6 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	
 	blockBrightness = percentThrough(blockBrightness, 0.0, 0.85);
 	vec3 blockLight = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
-	#ifdef NETHER
-		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
-	#endif
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
@@ -323,17 +321,25 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
 		if (!outsideRange) {
 			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
-			blockBrightness = sqrt(getLum(coloredBlockLight)) * 1.2;
+			blockBrightness = getLum(coloredBlockLight);
+			coloredBlockLight /= blockBrightness * 0.6 + 0.2;
 			blockLight = coloredBlockLight;
+			blockBrightness *= 1.5;
 		}
 	#endif
 	
+	#if BLOCKLIGHT_FLICKERING_ENABLED == 1
+		blockBrightness *= 1.0 + (blockFlickerAmount - 1.0) * BLOCKLIGHT_FLICKERING_AMOUNT * 0.1;
+	#endif
+	#ifdef NETHER
+		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
+	#endif
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
-	blockBrightness *= 1.1 - getLum(lighting) * 0.75;
+	blockBrightness *= 1.1 - getLum(lighting) * 0.9;
 	lighting = mix(lighting, blockLight, blockBrightness);
-	//color = blockLight * blockBrightness;
+	//color = vec3(lighting);
 	//return;
 	
 	float betterNightVision = nightVision;
