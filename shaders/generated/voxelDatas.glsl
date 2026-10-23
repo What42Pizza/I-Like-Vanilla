@@ -2,13 +2,13 @@
 // To edit the voxel datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
 
 #ifdef GET_EMISSION
-	emission = 0.0;
+	emission = vec3(0.0);
 	#define SET_EMISSION(v) emission = v;
 #else
 	#define SET_EMISSION(v)
 #endif
 #ifdef GET_TRANSLUCENCY
-	translucency = 0.0;
+	translucency = vec3(1.0);
 	#define SET_TRANSLUCENCY(v) translucency = v;
 #else
 	#define SET_TRANSLUCENCY(v)
@@ -22,10 +22,10 @@ if (voxelId < 28u) {
 					if (voxelId < 3u) {
 						if (voxelId < 2u) {
 						} else {
-							SET_EMISSION(vec3(0.0, 0.15, 0.75));
+							SET_EMISSION(vec3(0.0, 0.25, 1.0));
 						}
 					} else {
-						SET_EMISSION(vec3(1.0, 1.0, 0.9));
+						SET_EMISSION(vec3(1.0, 0.97, 0.92));
 					}
 				} else {
 					SET_EMISSION(vec3(1.0, 0.9, 0.3));

@@ -46,13 +46,13 @@ const VOXEL_DATAS_START: &str = r#"
 // To edit the voxel datas, edit the 'block datas input.txt' file then (in the 'rust-utils' folder) run `cargo run -- rebuild_ids`
 
 #ifdef GET_EMISSION
-	emission = 0.0;
+	emission = vec3(0.0);
 	#define SET_EMISSION(v) emission = v;
 #else
 	#define SET_EMISSION(v)
 #endif
 #ifdef GET_TRANSLUCENCY
-	translucency = 0.0;
+	translucency = vec3(1.0);
 	#define SET_TRANSLUCENCY(v) translucency = v;
 #else
 	#define SET_TRANSLUCENCY(v)

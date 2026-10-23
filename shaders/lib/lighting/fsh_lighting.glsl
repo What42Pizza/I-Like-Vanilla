@@ -196,8 +196,9 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 #if COLORED_LIGHTING_ENABLED == 1
-	#include "/lib/colored_lighting/coloredLightingUtils.glsl"
-	//uniform usampler3D voxelIdsSampler;
+	uniform sampler3D lightFloodfill1Sampler;
+	uniform sampler3D lightFloodfill2Sampler;
+	#include "/lib/colored_lighting/sampleColoredLighting.glsl"
 #endif
 
 
@@ -205,6 +206,9 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrightness, float ambientBrightness, float specularness, float glowingAmount, vec3 viewPos, vec3 normal, float depth) {
+	
+	float dither = bayer64(gl_FragCoord.xy);
+	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	
 	#if AMBIENT_CEL_AMOUNT != 0
 		ambientBrightness = sqrt(ambientBrightness);
@@ -276,8 +280,6 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	inSunlightAmount *= min((sunLightBrightness + moonLightBrightness) * 5.0, 1.0);
 	inSunlightAmount *= clamp(lightDot, 0.0, 1.0);
 	#if SHADOWS_TYPE == 1
-		float dither = bayer64(gl_FragCoord.xy);
-		dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		inSunlightAmount *= step(1.0, ambientBrightness + dither * 0.006);
 	#else
 		inSunlightAmount *= ambientBrightness * ambientBrightness;
@@ -314,11 +316,25 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#ifdef NETHER
 		blockLight *= mix(vec3(1.0), NETHER_BLOCKLIGHT_MULT, blockBrightness);
 	#endif
+	
+	#if COLORED_LIGHTING_ENABLED == 1
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		bool outsideRange;
+		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
+		if (!outsideRange) {
+			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
+			blockBrightness = sqrt(getLum(coloredBlockLight)) * 1.25;
+			blockLight = coloredBlockLight;
+		}
+	#endif
+	
 	#ifdef OVERWORLD
 		blockBrightness *= 1.0 + ambientBrightness * moonLightBrightness * (BLOCK_BRIGHTNESS_NIGHT_MULT - 1.0);
 	#endif
 	blockBrightness *= 1.0 - getLum(lighting) * 0.75;
 	lighting = mix(lighting, blockLight, blockBrightness);
+	//color = blockLight * blockBrightness;
+	//return;
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {
@@ -338,13 +354,5 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		lighting = vec3(1.0);
 	#endif
 	color *= lighting;
-	
-	//vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
-	//bool outsideRange;
-	//ivec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * length(viewPos) * 0.001), outsideRange);
-	//if (!outsideRange) {
-	//    uint voxelId = texelFetch(voxelIdsSampler, voxelPos, 0).x;
-	//	color = vec3(voxelId != 0u);
-	//}
 	
 }

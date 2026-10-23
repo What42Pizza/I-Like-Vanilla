@@ -30,17 +30,59 @@ layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
 
 
 
-#extension GL_ARB_shader_image_load_store : enable
-layout(rgb10_a2) uniform restrict image3D lightFloodfill1;
 uniform usampler3D voxelIdsSampler;
+uniform sampler3D lightFloodfill1Sampler;
+uniform sampler3D lightFloodfill2Sampler;
+#extension GL_ARB_shader_image_load_store : enable
+writeonly uniform image3D lightFloodfill1;
+writeonly uniform image3D lightFloodfill2;
 
 
 
-void main() {
+void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill) {
+	
+	// get camera movement
+	ivec3 cameraPos = ivec3(floor(cameraPosition));
+	ivec3 prevCameraPos = ivec3(floor(previousCameraPosition));
+	ivec3 inputOffset = (voxelRegionCorner + cameraPos) - (prevVoxelRegionCorner + prevCameraPos);
 	
 	// get voxel id and datas
 	ivec3 voxelPos = ivec3(gl_GlobalInvocationID);
 	uint voxelId = texelFetch(voxelIdsSampler, voxelPos, 0).r;
-	#include "/generated/voxelDatas.glsl"
 	
+	// get voxel emission and translucency
+	vec3 emission;
+	vec3 translucency;
+	#define GET_EMISSION
+	#define GET_TRANSLUCENCY
+	#include "/generated/voxelDatas.glsl"
+	if (voxelId == 1) translucency = vec3(0.0);
+	
+	
+	// get max of neighbors
+	vec3 neighborsMax = vec3(0.0);
+	#define SAMPLE_MAX_LIGHT(x, y, z) neighborsMax = max(neighborsMax, texelFetch(inputFloodFill, voxelPos + inputOffset + ivec3(x, y, z), 0).rgb);
+	SAMPLE_MAX_LIGHT(0, 0, 0);
+	SAMPLE_MAX_LIGHT(-1, 0, 0);
+	SAMPLE_MAX_LIGHT(0, -1, 0);
+	SAMPLE_MAX_LIGHT(0, 0, -1);
+	SAMPLE_MAX_LIGHT(1, 0, 0);
+	SAMPLE_MAX_LIGHT(0, 1, 0);
+	SAMPLE_MAX_LIGHT(0, 0, 1);
+	
+	vec3 newLight = neighborsMax * vec3(0.85, 0.78, 0.71);
+	newLight = max(newLight, emission);
+	newLight *= translucency;
+	
+	imageStore(outputFloodFill, voxelPos, vec4(newLight, 0.0));
+}
+
+
+
+void main() {
+	if (frameCounter % 2 == 0) {
+		updateFloodFill(lightFloodfill1Sampler, lightFloodfill2);
+	} else {
+		updateFloodFill(lightFloodfill2Sampler, lightFloodfill1);
+	}
 }
