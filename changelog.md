@@ -1,6 +1,8 @@
-- v1.6.0
+- **v2.0.0**
   - Added colored lighting (configurable, enabled by default)
   - Added new profile "Medium +", which is the new default profile
+  - Removed 'Style' setting
+    - Instead, there will be three separate versions of the shader distributed (similar to before with the OptiFine versions)
   - Added settings 'Use Vanilla Fog Color', 'Use Vanilla Fog Density', and 'Use Vanilla Sky Color'
   - Increased default reflections render scale from x0.6 to x0.7
   - Added emissive glowing to redstone lamps and copper bulbs

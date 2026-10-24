@@ -8,11 +8,10 @@ profile.ULTRA=§6Ultra
 profile.UNPLAYABLE=§cUnplayable
 
 option.STYLE=Style
-option.STYLE.comment=Changes the default values for settings that are set to 'Use STyle' (this does nothing on OptiFine versions)\n\nIf you want to see the default setting values for each style, you can download the corresponding OptiFine (style-specific) version.
-value.STYLE.0=Vanilla
-value.STYLE.1=Fantasy
-value.STYLE.2=Realistic
-value.STYLE.3=Cartoon
+option.STYLE.comment=This is the style of the shaderpack, if you want to try out another style then you can download it on CurseForge or Modrinth. There are three versions for each release: a Vanilla Style version, a Fantasy Style version, and a Realistic Style version.
+option.STYLE.value.Vanilla=§bVanilla
+option.STYLE.value.Fantasy=§6Fantasy
+option.STYLE.value.Realistic=§2Realistic
 
 
 
@@ -27,54 +26,43 @@ value.PBR_TYPE.1=LabPBR 1.3
 
 option.FOLIAGE_NOISE_ENABLED=Foliage Noise Enabled
 option.FOLIAGE_NOISE_ENABLED.comment=Randomly makes foliage blocks brighter/darker depending on its world position (affects all blocks that don't cast shadows when 'Exclude Foliage' is enabled)
-value.FOLIAGE_NOISE_ENABLED.-1=Use Style
 value.FOLIAGE_NOISE_ENABLED.0=Off
 value.FOLIAGE_NOISE_ENABLED.1=On
 
 option.FOLIAGE_NOISE_AMOUNT=Foliage Noise Amount
-value.FOLIAGE_NOISE_AMOUNT.-1=Use Style
 
 option.LAVA_NOISE_ENABLED=Lava Noise Enabled
 option.LAVA_NOISE_ENABLED.comment=Adds dark patches to lava
-value.LAVA_NOISE_ENABLED.-1=Use Style
 value.LAVA_NOISE_ENABLED.0=Off
 value.LAVA_NOISE_ENABLED.1=On
 
 option.LAVA_NOISE_AMOUNT_OVERWORLD=Lava Noise Amount (Overworld)
-value.LAVA_NOISE_AMOUNT_OVERWORLD.-1=Use Style
 
 option.LAVA_NOISE_AMOUNT_NETHER=Lava Noise Amount (Nether)
-value.LAVA_NOISE_AMOUNT_NETHER.-1=Use Style
 
 option.LAVA_NOISE_AMOUNT_END=Lava Noise Amount (End)
-value.LAVA_NOISE_AMOUNT_END.-1=Use Style
 
 option.FANCY_NETHER_PORTAL_ENABLED=Fancy Nether Portals
 option.FANCY_NETHER_PORTAL_ENABLED.comment=Enables a 3D effect for nether portals
-value.FANCY_NETHER_PORTAL_ENABLED.-1=Use Style
 value.FANCY_NETHER_PORTAL_ENABLED.0=Off
 value.FANCY_NETHER_PORTAL_ENABLED.1=On
 
 option.FANCY_END_PORTAL_ENABLED=End Portal Style
 option.FANCY_END_PORTAL_ENABLED.comment=Enables a 3D effect for end portals
-value.FANCY_END_PORTAL_ENABLED.-1=Use Style
 value.FANCY_END_PORTAL_ENABLED.0=None
 value.FANCY_END_PORTAL_ENABLED.1=Vanilla (Moves With Camera)
 value.FANCY_END_PORTAL_ENABLED.2=Vanilla (Moves With World)
 value.FANCY_END_PORTAL_ENABLED.3=Fancy
 
 option.ENCHANTMENT_GLINT_STRENGTH=Enchantment Glint Strength
-value.ENCHANTMENT_GLINT_STRENGTH.-1=Use Style
 
 option.LEAVES_SIDE_SHADING=Leaves Side Shading
 option.LEAVES_SIDE_SHADING.comment=Alters leaves shading to be more similar to how foliage like grass is rendered
 suffix.LEAVES_SIDE_SHADING=%
-value.LEAVES_SIDE_SHADING.-1=Use Style
 
 option.LEAVES_AO_AMOUNT=Leaves AO Amount
 option.LEAVES_AO_AMOUNT.comment=Alters how much the inner corners between leave blocks are shaded
 suffix.LEAVES_AO_AMOUNT=%
-value.LEAVES_AO_AMOUNT.-1=Use Style
 
 
 
@@ -85,7 +73,6 @@ screen.INTERNAL_MATERIALS_MENU.comment=Materials settings for when 'PBR Type' is
 
 option.PBR_NORMALS_AMOUNT=PBR Normals Amount
 option.PBR_NORMALS_AMOUNT.comment=How much effect the pbr normals have (this impacts both PBR normals and POM normals)
-value.PBR_NORMALS_AMOUNT.-1=Use Style
 
 
 
@@ -101,19 +88,15 @@ value.EMISSIVE_TEXTURES_ENABLED.1=On
 
 option.GLOWING_ORES_STRENGTH_OVERWORLD=Glowing Ores Strength (Overworld)
 option.GLOWING_ORES_STRENGTH_OVERWORLD.comment=The emissive strength for glowing ores when in the overworld
-value.GLOWING_ORES_STRENGTH_OVERWORLD.-1=Use Style
 
 option.GLOWING_ORES_STRENGTH_NETHER=Glowing Ores Strength (Nether)
 option.GLOWING_ORES_STRENGTH_NETHER.comment=The emissive strength for glowing ores when in the nether
-value.GLOWING_ORES_STRENGTH_NETHER.-1=Use Style
 
 option.GLOWING_ORES_STRENGTH_END=Glowing Ores Strength (End)
 option.GLOWING_ORES_STRENGTH_END.comment=The emissive strength for glowing ores when in the end
-value.GLOWING_ORES_STRENGTH_END.-1=Use Style
 
 option.GLOWING_STEMS_STRENGTH=Glowing Stems Strength
 option.GLOWING_STEMS_STRENGTH.comment=The emissive strength of Crimson Stems and Warped Stems
-value.GLOWING_STEMS_STRENGTH.-1=Use Style
 
 
 
@@ -160,7 +143,6 @@ value.POM_ENABLED.1=On
 
 option.POM_DEPTH=POM Depth
 option.POM_DEPTH.comment=How much to scale the faked POM depth
-value.POM_DEPTH.-1=Use Style
 
 option.POM_QUALITY=POM Quality
 option.POM_QUALITY.comment=Controls the quality of the POM (lower values may not be obviously bad at first, but it does have a big impact when looking at blocks from the side)
@@ -251,11 +233,9 @@ value.SHADOW_FILTERING.4=On (High)
 
 option.SHADOWS_NOISE=Shadows Noise Amount
 option.SHADOWS_NOISE.comment=Amount of noise to apply to shadow filtering
-value.SHADOWS_NOISE.-1=Use Style
 
 option.PIXELATED_SHADOWS=Pixelated Shadows
 option.PIXELATED_SHADOWS.comment=Makes the shadows pixelated along the same grid as blocks
-value.PIXELATED_SHADOWS.-1=Use Style
 value.PIXELATED_SHADOWS.0=Off
 value.PIXELATED_SHADOWS.8=8x
 value.PIXELATED_SHADOWS.16=16x
@@ -265,11 +245,9 @@ value.PIXELATED_SHADOWS.128=128x
 
 option.PIXELATED_SHADOWS_SOFTNESS=Pixelated Shadows Softness
 option.PIXELATED_SHADOWS_SOFTNESS.comment=How soft the transition from in-shadow to in-brightness should be when Pixelated Shadows is turned on
-value.PIXELATED_SHADOWS_SOFTNESS.-1=Use Style
 
 option.EXCLUDE_FOLIAGE=Exclude Foliage
 option.EXCLUDE_FOLIAGE.comment=If true, foliage will not cast shadows
-value.EXCLUDE_FOLIAGE.-1=Use Style
 value.EXCLUDE_FOLIAGE.0=Off
 value.EXCLUDE_FOLIAGE.1=On
 
@@ -286,53 +264,40 @@ value.WATER_CAUSTICS_ENABLED.1=On
 
 option.WATER_CAUSTICS_TYPE=Water Caustics Type
 option.WATER_CAUSTICS_TYPE.comment=Controls the shape of water caustics, being either procedurally generated or dependant on the water texture
-value.WATER_CAUSTICS_TYPE.-1=Use Style
 value.WATER_CAUSTICS_TYPE.1=Texture-Based
 value.WATER_CAUSTICS_TYPE.2=Procedural
 
 option.WATER_CAUSTICS_HORIZONTAL_STRETCH=Water Caustics Horizontal Stretch
-value.WATER_CAUSTICS_HORIZONTAL_STRETCH.-1=Use Style
 
 option.WATER_CAUSTICS_SPEED=Water Caustics Speed
-value.WATER_CAUSTICS_SPEED.-1=Use Style
 
 option.WATER_CAUSTICS_SIZE=Water Caustics Size
-value.WATER_CAUSTICS_SIZE.-1=Use Style
 
 option.WATER_CAUSTICS_THICKNESS=Water Caustics Thickness
-value.WATER_CAUSTICS_THICKNESS.-1=Use Style
 
 option.WATER_CAUSTICS_DARK_RED=Caustics Dark Red
 option.WATER_CAUSTICS_DARK_RED.comment=Controls the darker light color of water caustics
-value.WATER_CAUSTICS_DARK_RED.-1=Use Style
 
 option.WATER_CAUSTICS_DARK_GREEN=Caustics Dark Green
 option.WATER_CAUSTICS_DARK_GREEN.comment=Controls the darker light color of water caustics
-value.WATER_CAUSTICS_DARK_GREEN.-1=Use Style
 
 option.WATER_CAUSTICS_DARK_BLUE=Caustics Dark Blue
 option.WATER_CAUSTICS_DARK_BLUE.comment=Controls the darker light color of water caustics
-value.WATER_CAUSTICS_DARK_BLUE.-1=Use Style
 
 option.WATER_CAUSTICS_DARK_BRIGHTNESS=Caustics Dark Brightness
 option.WATER_CAUSTICS_DARK_BRIGHTNESS.comment=Controls the darker light color of water caustics
-value.WATER_CAUSTICS_DARK_BRIGHTNESS.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_RED=Caustics Bright Red
 option.WATER_CAUSTICS_BRIGHT_RED.comment=Controls the brighter (highlight) light color of water caustics
-value.WATER_CAUSTICS_BRIGHT_RED.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_GREEN=Caustics Bright Green
 option.WATER_CAUSTICS_BRIGHT_GREEN.comment=Controls the brighter (highlight) light color of water caustics
-value.WATER_CAUSTICS_BRIGHT_GREEN.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_BLUE=Caustics Bright Blue
 option.WATER_CAUSTICS_BRIGHT_BLUE.comment=Controls the brighter (highlight) light color of water caustics
-value.WATER_CAUSTICS_BRIGHT_BLUE.-1=Use Style
 
 option.WATER_CAUSTICS_BRIGHT_BRIGHTNESS=Caustics Bright Brightness
 option.WATER_CAUSTICS_BRIGHT_BRIGHTNESS.comment=Controls the brighter (highlight) light color of water caustics
-value.WATER_CAUSTICS_BRIGHT_BRIGHTNESS.-1=Use Style
 
 
 
@@ -342,44 +307,34 @@ screen.SHADING_MENU=Shading
 
 option.VANILLA_AO_BRIGHT=Vanilla AO (Bright)
 option.VANILLA_AO_BRIGHT.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in brightly lit areas (lower is more accurate, higher is more vanilla-like)
-value.VANILLA_AO_BRIGHT.-1=Use Style
 
 option.VANILLA_AO_DARK=Vanilla AO (Dark)
 option.VANILLA_AO_DARK.comment=Not entirely the same as Vanilla AO, but effectively controls how effective Vanilla AO is in dimly lit areas (lower is more accurate, higher is more vanilla-like)
-value.VANILLA_AO_DARK.-1=Use Style
 
 option.SIDE_SHADING_BRIGHT=Side Shading (Bright)
 option.SIDE_SHADING_BRIGHT.comment=How much to increase / decrease the sides of blocks at brightly lit areas (lower is more accurate, higher is more vanilla-like)
-value.SIDE_SHADING_BRIGHT.-1=Use Style
 
 option.SIDE_SHADING_DARK=Side Shading (Dark)
 option.SIDE_SHADING_DARK.comment=How much to increase / decrease the sides of blocks at dimly lit areas (lower is more accurate, higher is more vanilla-like)
-value.SIDE_SHADING_DARK.-1=Use Style
 
 option.OVERRIDE_FOLIAGE_NORMALS=Override Foliage Normals
 option.OVERRIDE_FOLIAGE_NORMALS.comment=Sets the normals (surface direction) of foliage blocks (grass, flowers, etc) to always face upwards (just like vanilla and most other shaders)
-value.OVERRIDE_FOLIAGE_NORMALS.-1=Use Style
 value.OVERRIDE_FOLIAGE_NORMALS.0=Off
 value.OVERRIDE_FOLIAGE_NORMALS.1=On
 
 option.NIGHT_SATURATION_DECREASE=Night Saturation Decrease
 option.NIGHT_SATURATION_DECREASE.comment=Decreases texture saturation at night to make nighttime look more like night
-value.NIGHT_SATURATION_DECREASE.-1=Use Style
 
 option.WEATHER_BRIGHTNESS_MULT_DAY=Weather Brightness Multiplier (Day)
 option.WEATHER_BRIGHTNESS_MULT_DAY.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing during the day
-value.WEATHER_BRIGHTNESS_MULT_DAY.-1=Use Style
 
 option.WEATHER_BRIGHTNESS_MULT_NIGHT=Weather Brightness Multiplier (Night)
 option.WEATHER_BRIGHTNESS_MULT_NIGHT.comment=How much to increase / decrease the brightness of outdoor lighting when raining / snowing during night
-value.WEATHER_BRIGHTNESS_MULT_NIGHT.-1=Use Style
 
 option.BRIGHTNESS_TWEAKS_STRENGTH=Brightness Tweaks Strength
 option.BRIGHTNESS_TWEAKS_STRENGTH.comment=Some blocks have specific brightness multipliers applied, this controls the strength of those multipliers
-value.BRIGHTNESS_TWEAKS_STRENGTH.-1=Use Style
 
 option.PARTICLES_BRIGHTNESS=Particles Brightness
-value.PARTICLES_BRIGHTNESS.-1=Use Style
 
 
 
@@ -389,12 +344,10 @@ screen.CEL_SHADING_MENU=Cel Shading
 
 option.SUNLIGHT_CEL_AMOUNT=Sunlight Amount
 option.SUNLIGHT_CEL_AMOUNT.comment=How much to apply the cel shading affect to sunlight / moonlight\n\nThis is much less noticeable than the ambient and blocklight cel shading, all it does is make the lighting ignore the angle of the surface (and give all in-light surfaces the exact same brightness)
-value.SUNLIGHT_CEL_AMOUNT.-1=Use Style
 value.SUNLIGHT_CEL_AMOUNT.0=Disabled
 
 option.AMBIENT_CEL_AMOUNT=Ambient Amount
 option.AMBIENT_CEL_AMOUNT.comment=How much to apply the cel shading affect to ambient lighting
-value.AMBIENT_CEL_AMOUNT.-1=Use Style
 value.AMBIENT_CEL_AMOUNT.0=Disabled
 value.AMBIENT_CEL_AMOUNT.5=0.05
 value.AMBIENT_CEL_AMOUNT.10=0.1
@@ -419,7 +372,6 @@ value.AMBIENT_CEL_AMOUNT.100=1.0
 
 option.BLOCKLIGHT_CEL_AMOUNT=Blocklight Amount
 option.BLOCKLIGHT_CEL_AMOUNT.comment=How much to apply the cel shading affect to block lighting
-value.BLOCKLIGHT_CEL_AMOUNT.-1=Use Style
 value.BLOCKLIGHT_CEL_AMOUNT.0=Disabled
 value.BLOCKLIGHT_CEL_AMOUNT.5=0.05
 value.BLOCKLIGHT_CEL_AMOUNT.10=0.1
@@ -450,7 +402,6 @@ screen.LIGHT_COLORS_MENU=Light Colors
 
 option.LIGHTNING_BRIGHTNESS=Lightning Brightness
 option.LIGHTNING_BRIGHTNESS.comment=How much the sky brightens when lightning strikes
-value.LIGHTNING_BRIGHTNESS.-1=Use Style
 
 
 
@@ -460,28 +411,20 @@ value.LIGHTNING_BRIGHTNESS.-1=Use Style
 screen.DAY_LIGHTING_MENU=Day Lighting
 
 option.SKYLIGHT_DAY_RED=Skylight Day Red
-value.SKYLIGHT_DAY_RED.-1=Use Style
 
 option.SKYLIGHT_DAY_GREEN=Skylight Day Green
-value.SKYLIGHT_DAY_GREEN.-1=Use Style
 
 option.SKYLIGHT_DAY_BLUE=Skylight Day Blue
-value.SKYLIGHT_DAY_BLUE.-1=Use Style
 
 option.SKYLIGHT_DAY_BRIGHTNESS=Skylight Day Brightness
-value.SKYLIGHT_DAY_BRIGHTNESS.-1=Use Style
 
 option.AMBIENT_DAY_RED=Ambient Day Red
-value.AMBIENT_DAY_RED.-1=Use Style
 
 option.AMBIENT_DAY_GREEN=Ambient Day Green
-value.AMBIENT_DAY_GREEN.-1=Use Style
 
 option.AMBIENT_DAY_BLUE=Ambient Day Blue
-value.AMBIENT_DAY_BLUE.-1=Use Style
 
 option.AMBIENT_DAY_BRIGHTNESS=Ambient Day Brightness
-value.AMBIENT_DAY_BRIGHTNESS.-1=Use Style
 
 
 
@@ -490,48 +433,35 @@ value.AMBIENT_DAY_BRIGHTNESS.-1=Use Style
 screen.NIGHT_LIGHTING_MENU=Night Lighting
 
 option.SKYLIGHT_NIGHT_RED=Skylight Night Red
-value.SKYLIGHT_NIGHT_RED.-1=Use Style
 
 option.SKYLIGHT_NIGHT_GREEN=Skylight Night Green
-value.SKYLIGHT_NIGHT_GREEN.-1=Use Style
 
 option.SKYLIGHT_NIGHT_BLUE=Skylight Night Blue
-value.SKYLIGHT_NIGHT_BLUE.-1=Use Style
 
 option.SKYLIGHT_NIGHT_BRIGHTNESS=Skylight Night Brightness
-value.SKYLIGHT_NIGHT_BRIGHTNESS.-1=Use Style
 
 option.AMBIENT_NIGHT_RED=Ambient Night Red
-value.AMBIENT_NIGHT_RED.-1=Use Style
 
 option.AMBIENT_NIGHT_GREEN=Ambient Night Green
-value.AMBIENT_NIGHT_GREEN.-1=Use Style
 
 option.AMBIENT_NIGHT_BLUE=Ambient Night Blue
-value.AMBIENT_NIGHT_BLUE.-1=Use Style
 
 option.AMBIENT_NIGHT_BRIGHTNESS=Ambient Night Brightness
-value.AMBIENT_NIGHT_BRIGHTNESS.-1=Use Style
 
 option.MOON_PHASE_BRIGHTNESS_MULT_1=Moon Phase Brightness Mult 1
 option.MOON_PHASE_BRIGHTNESS_MULT_1.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'full moon' (brightest)
-value.MOON_PHASE_BRIGHTNESS_MULT_1.-1=Use Style
 
 option.MOON_PHASE_BRIGHTNESS_MULT_2=Moon Phase Brightness Mult 2
 option.MOON_PHASE_BRIGHTNESS_MULT_2.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'waning gibbous' / 'waxing gibbous' (2nd brightest)
-value.MOON_PHASE_BRIGHTNESS_MULT_2.-1=Use Style
 
 option.MOON_PHASE_BRIGHTNESS_MULT_3=Moon Phase Brightness Mult 3
 option.MOON_PHASE_BRIGHTNESS_MULT_3.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'last quarter' / 'first quarter' (middle brightness)
-value.MOON_PHASE_BRIGHTNESS_MULT_3.-1=Use Style
 
 option.MOON_PHASE_BRIGHTNESS_MULT_4=Moon Phase Brightness Mult 4
 option.MOON_PHASE_BRIGHTNESS_MULT_4.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'waning crescent' / 'waxing crescent' (2nd darkest)
-value.MOON_PHASE_BRIGHTNESS_MULT_4.-1=Use Style
 
 option.MOON_PHASE_BRIGHTNESS_MULT_5=Moon Phase Brightness Mult 5
 option.MOON_PHASE_BRIGHTNESS_MULT_5.comment=A multiplier for the setting 'Skylight Night Brightness' (aka moonlight) when the moon's phase is 'new moon' (darkest)
-value.MOON_PHASE_BRIGHTNESS_MULT_5.-1=Use Style
 
 
 
@@ -540,28 +470,20 @@ value.MOON_PHASE_BRIGHTNESS_MULT_5.-1=Use Style
 screen.SUNRISE_LIGHTING_MENU=Sunrise Lighting
 
 option.SKYLIGHT_SUNRISE_RED=Skylight Sunrise Red
-value.SKYLIGHT_SUNRISE_RED.-1=Use Style
 
 option.SKYLIGHT_SUNRISE_GREEN=Skylight Sunrise Green
-value.SKYLIGHT_SUNRISE_GREEN.-1=Use Style
 
 option.SKYLIGHT_SUNRISE_BLUE=Skylight Sunrise Blue
-value.SKYLIGHT_SUNRISE_BLUE.-1=Use Style
 
 option.SKYLIGHT_SUNRISE_BRIGHTNESS=Skylight Sunrise Brightness
-value.SKYLIGHT_SUNRISE_BRIGHTNESS.-1=Use Style
 
 option.AMBIENT_SUNRISE_RED=Ambient Sunrise Red
-value.AMBIENT_SUNRISE_RED.-1=Use Style
 
 option.AMBIENT_SUNRISE_GREEN=Ambient Sunrise Green
-value.AMBIENT_SUNRISE_GREEN.-1=Use Style
 
 option.AMBIENT_SUNRISE_BLUE=Ambient Sunrise Blue
-value.AMBIENT_SUNRISE_BLUE.-1=Use Style
 
 option.AMBIENT_SUNRISE_BRIGHTNESS=Ambient Sunrise Brightness
-value.AMBIENT_SUNRISE_BRIGHTNESS.-1=Use Style
 
 
 
@@ -570,28 +492,20 @@ value.AMBIENT_SUNRISE_BRIGHTNESS.-1=Use Style
 screen.SUNSET_LIGHTING_MENU=Sunset Lighting
 
 option.SKYLIGHT_SUNSET_RED=Skylight Sunset Red
-value.SKYLIGHT_SUNSET_RED.-1=Use Style
 
 option.SKYLIGHT_SUNSET_GREEN=Skylight Sunset Green
-value.SKYLIGHT_SUNSET_GREEN.-1=Use Style
 
 option.SKYLIGHT_SUNSET_BLUE=Skylight Sunset Blue
-value.SKYLIGHT_SUNSET_BLUE.-1=Use Style
 
 option.SKYLIGHT_SUNSET_BRIGHTNESS=Skylight Sunset Brightness
-value.SKYLIGHT_SUNSET_BRIGHTNESS.-1=Use Style
 
 option.AMBIENT_SUNSET_RED=Ambient Sunset Red
-value.AMBIENT_SUNSET_RED.-1=Use Style
 
 option.AMBIENT_SUNSET_GREEN=Ambient Sunset Green
-value.AMBIENT_SUNSET_GREEN.-1=Use Style
 
 option.AMBIENT_SUNSET_BLUE=Ambient Sunset Blue
-value.AMBIENT_SUNSET_BLUE.-1=Use Style
 
 option.AMBIENT_SUNSET_BRIGHTNESS=Ambient Sunset Brightness
-value.AMBIENT_SUNSET_BRIGHTNESS.-1=Use Style
 
 
 
@@ -601,49 +515,38 @@ screen.BLOCKLIGHT_LIGHTING_MENU=Blocklight Lighting
 
 option.BLOCK_RED_DARK=Block Red (Dark)
 option.BLOCK_RED_DARK.comment=The darker blocklight color (further from the source)
-value.BLOCK_RED_DARK.-1=Use Style
 
 option.BLOCK_GREEN_DARK=Block Green (Dark)
 option.BLOCK_GREEN_DARK.comment=The darker blocklight color (further from the source)
-value.BLOCK_GREEN_DARK.-1=Use Style
 
 option.BLOCK_BLUE_DARK=Block Blue (Dark)
 option.BLOCK_BLUE_DARK.comment=The darker blocklight color (further from the source)
-value.BLOCK_BLUE_DARK.-1=Use Style
 
 option.BLOCK_RED_BRIGHT=Block Red (Bright)
 option.BLOCK_RED_BRIGHT.comment=The brighter blocklight color (near the source)
-value.BLOCK_RED_BRIGHT.-1=Use Style
 
 option.BLOCK_GREEN_BRIGHT=Block Green (Bright)
 option.BLOCK_GREEN_BRIGHT.comment=The brighter blocklight color (near the source)
-value.BLOCK_GREEN_BRIGHT.-1=Use Style
 
 option.BLOCK_BLUE_BRIGHT=Block Blue (Bright)
 option.BLOCK_BLUE_BRIGHT.comment=The brighter blocklight color (near the source)
-value.BLOCK_BLUE_BRIGHT.-1=Use Style
 
 option.BLOCK_BRIGHTNESS=Block Brightness
 option.BLOCK_BRIGHTNESS.comment=Overall blocklight brightness
-value.BLOCK_BRIGHTNESS.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_CURVE=Block Brightness Curve
 option.BLOCK_BRIGHTNESS_CURVE.comment=Take the calculated block brightness to the power of [this setting]
-value.BLOCK_BRIGHTNESS_CURVE.-1=Use Style
 
 option.BLOCK_BRIGHTNESS_NIGHT_MULT=Block Brightness Night Multiplier
 option.BLOCK_BRIGHTNESS_NIGHT_MULT.comment=How much to increase the block brightness while outside at night
-value.BLOCK_BRIGHTNESS_NIGHT_MULT.-1=Use Style
 
 option.BLOCKLIGHT_FLICKERING_ENABLED=Blocklight Flickering Enabled
 option.BLOCKLIGHT_FLICKERING_ENABLED.comment=Makes block light flicker slightly
-value.BLOCKLIGHT_FLICKERING_ENABLED.-1=Use Style
 value.BLOCKLIGHT_FLICKERING_ENABLED.0=Off
 value.BLOCKLIGHT_FLICKERING_ENABLED.1=On
 
 option.BLOCKLIGHT_FLICKERING_AMOUNT=Blocklight Flickering Amount
 option.BLOCKLIGHT_FLICKERING_ENABLED.comment=Makes block light flicker slightly
-value.BLOCKLIGHT_FLICKERING_AMOUNT.-1=Use Style
 
 
 
@@ -652,16 +555,12 @@ value.BLOCKLIGHT_FLICKERING_AMOUNT.-1=Use Style
 screen.CAVE_LIGHTING_MENU=Cave Lighting
 
 option.CAVE_AMBIENT_RED=Cave Red
-value.CAVE_AMBIENT_RED.-1=Use Style
 
 option.CAVE_AMBIENT_GREEN=Cave Green
-value.CAVE_AMBIENT_GREEN.-1=Use Style
 
 option.CAVE_AMBIENT_BLUE=Cave Blue
-value.CAVE_AMBIENT_BLUE.-1=Use Style
 
 option.CAVE_AMBIENT_BRIGHTNESS=Cave Brightness
-value.CAVE_AMBIENT_BRIGHTNESS.-1=Use Style
 
 
 
@@ -670,32 +569,24 @@ value.CAVE_AMBIENT_BRIGHTNESS.-1=Use Style
 screen.NETHER_LIGHTING_MENU=Nether Lighting
 
 option.NETHER_AMBIENT_RED=Nether Ambient Red
-value.NETHER_AMBIENT_RED.-1=Use Style
 
 option.NETHER_AMBIENT_GREEN=Nether Ambient Green
-value.NETHER_AMBIENT_GREEN.-1=Use Style
 
 option.NETHER_AMBIENT_BLUE=Nether Ambient Blue
-value.NETHER_AMBIENT_BLUE.-1=Use Style
 
 option.NETHER_AMBIENT_BRIGHTNESS=Nether Ambient Brightness
-value.NETHER_AMBIENT_BRIGHTNESS.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_RED_MULT=Nether Blocklight Red Mult
 option.NETHER_BLOCKLIGHT_RED_MULT.comment=How much to increase / decrease the red channel of blocklight when in the nether
-value.NETHER_BLOCKLIGHT_RED_MULT.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_GREEN_MULT=Nether Blocklight Green Mult
 option.NETHER_BLOCKLIGHT_GREEN_MULT.comment=How much to increase / decrease the green channel of blocklight when in the nether
-value.NETHER_BLOCKLIGHT_GREEN_MULT.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_BLUE_MULT=Nether Blocklight Blue Mult
 option.NETHER_BLOCKLIGHT_BLUE_MULT.comment=How much to increase / decrease the blue channel of blocklight when in the nether
-value.NETHER_BLOCKLIGHT_BLUE_MULT.-1=Use Style
 
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT=Nether Blocklight Brightness Mult
 option.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.comment=How much to increase / decrease the brightness of blocklight when in the nether
-value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 
 
 
@@ -704,28 +595,20 @@ value.NETHER_BLOCKLIGHT_BRIGHTNESS_MULT.-1=Use Style
 screen.END_LIGHTING_MENU=End Lighting
 
 option.END_SKYLIGHT_RED=End Skylight Red
-value.END_SKYLIGHT_RED.-1=Use Style
 
 option.END_SKYLIGHT_GREEN=End Skylight Green
-value.END_SKYLIGHT_GREEN.-1=Use Style
 
 option.END_SKYLIGHT_BLUE=End Skylight Blue
-value.END_SKYLIGHT_BLUE.-1=Use Style
 
 option.END_SKYLIGHT_BRIGHTNESS=End Skylight Brightness
-value.END_SKYLIGHT_BRIGHTNESS.-1=Use Style
 
 option.END_AMBIENT_RED=End Ambient Red
-value.END_AMBIENT_RED.-1=Use Style
 
 option.END_AMBIENT_GREEN=End Ambient Green
-value.END_AMBIENT_GREEN.-1=Use Style
 
 option.END_AMBIENT_BLUE=End Ambient Blue
-value.END_AMBIENT_BLUE.-1=Use Style
 
 option.END_AMBIENT_BRIGHTNESS=End Ambient Brightness
-value.END_AMBIENT_BRIGHTNESS.-1=Use Style
 
 
 
@@ -743,7 +626,6 @@ option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
 
 option.COLORED_LIGHTING_SATURATION=Colored Lighting Saturation
 option.COLORED_LIGHTING_SATURATION.comment=How saturated the colored light emissive values should be
-value.COLORED_LIGHTING_SATURATION.-1=Use Style
 
 option.TRIPLED_COLORED_LIGHTING_UPDATES=Tripled Colored Lighting Updates
 option.TRIPLED_COLORED_LIGHTING_UPDATES.comment=Updates the colored lighting 3 times per frame instead of once, significantly increases responsiveness with a relatively low performance cost
@@ -757,19 +639,15 @@ value.TRIPLED_COLORED_LIGHTING_UPDATES.1=On
 screen.HANDHELD_LIGHT_MENU=Handheld Light
 
 option.HANDHELD_LIGHT_ENABLED=Handheld Light Enabled
-value.HANDHELD_LIGHT_ENABLED.-1=Use Style
 value.HANDHELD_LIGHT_ENABLED.0=Off
 value.HANDHELD_LIGHT_ENABLED.1=On
 
 option.HANDHELD_LIGHT_DISTANCE=Handheld Light Distance
-value.HANDHELD_LIGHT_DISTANCE.-1=Use Style
 
 option.HANDHELD_LIGHT_BRIGHTNESS=Handheld Light Brightness
-value.HANDHELD_LIGHT_BRIGHTNESS.-1=Use Style
 
 option.HANDHELD_LIGHT_REALISM=Handheld Light Realism
 option.HANDHELD_LIGHT_REALISM.comment=Decreases the brightness of handheld lighting depending on the angle of the lit surface
-value.HANDHELD_LIGHT_REALISM.-1=Use Style
 
 
 
@@ -778,39 +656,30 @@ value.HANDHELD_LIGHT_REALISM.-1=Use Style
 screen.OTHER_COLORS_MENU=Other Colors
 
 option.NIGHT_VISION_BRIGHTNESS=Night Vision Brightness
-value.NIGHT_VISION_BRIGHTNESS.-1=Use Style
 
 option.NIGHT_VISION_GREEN_AMOUNT=Night Vision Green Amount
 option.NIGHT_VISION_GREEN_AMOUNT.comment=How much of a green tint to apply when night vision is active. 0.0 means no green tint, and 1.0 means only green light
-value.NIGHT_VISION_GREEN_AMOUNT.-1=Use Style
 
 option.TEXTURE_CONTRAST=Texture Contrast
 option.TEXTURE_CONTRAST.comment=Directly alters the contrast of textures (and is offset with saturation)
-value.TEXTURE_CONTRAST.-1=Use Style
 
 option.TEXTURE_CONTRAST_2=Texture Contrast 2
 option.TEXTURE_CONTRAST_2.comment=Alternative to Texture Contrast
-value.TEXTURE_CONTRAST_2.-1=Use Style
 
 option.FOLIAGE_SATURATION=Foliage Saturation
 option.FOLIAGE_SATURATION.comment=Affects the saturation of all dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_SATURATION.-1=Use Style
 
 option.FOLIAGE_TINT_RED=Foliage Tint Red
 option.FOLIAGE_TINT_RED.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_RED.-1=Use Style
 
 option.FOLIAGE_TINT_GREEN=Foliage Tint Green
 option.FOLIAGE_TINT_GREEN.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_GREEN.-1=Use Style
 
 option.FOLIAGE_TINT_BLUE=Foliage Tint Blue
 option.FOLIAGE_TINT_BLUE.comment=The color tint that is applied to dynamically colored blocks (which is mostly foliage)
-value.FOLIAGE_TINT_BLUE.-1=Use Style
 
 option.SNOWY_TWEAKS_ENABLED=Snowy Tweaks
 option.SNOWY_TWEAKS_ENABLED.comment=Changes the foliage in snowy biomes to be snowy
-value.SNOWY_TWEAKS_ENABLED.-1=Use Style
 value.SNOWY_TWEAKS_ENABLED.0=Off
 value.SNOWY_TWEAKS_ENABLED.1=On
 
@@ -822,17 +691,14 @@ screen.HEIGHT_BASED_DESATURATION_MENU=Height-Based Desaturation
 
 option.HBD_ENABLED=HBD Enabled
 option.HBD_ENABLED.comment=Enabled or disables height-based desaturation (only applies in the overworld)
-value.HBD_ENABLED.-1=Use Style
 value.HBD_ENABLED.0=Off
 value.HBD_ENABLED.1=On
 
 option.HBD_STRENGTH=HBD Strength
 option.HBD_STRENGTH.comment=Sets the maximum strength of the height-based desaturation
-value.HBD_STRENGTH.-1=Use Style
 
 option.HBD_SCALE=HBD Scale
 option.HBD_SCALE.comment=Determines how quickly everything becomes desaturated as you go upwards (starting from sea level (y=64), the inverted strength is halved every X blocks. So if this is set to 100, it will be 0% strength at y=64, then 50% strength at y=164, then 75% strength at y=264, etc)
-value.HBD_SCALE.-1=Use Style
 
 
 
@@ -853,7 +719,6 @@ value.TAA_ENABLED.1=On
 
 option.TAA_JITTER_AMOUNT=TAA Jitter Amount
 option.TAA_JITTER_AMOUNT.comment=Controls the strength of the taa jitter (note: this has no effect on the smoothing, go to the Temporal Filter menu for that)
-value.TAA_JITTER_AMOUNT.-1=Use Style
 
 option.FXAA_ENABLED=FXAA
 option.FXAA_ENABLED.comment=A simple form of anti-aliasing (makes jagged edges smooth)
@@ -893,25 +758,19 @@ screen.OUTLINES_MENU=Outlines
 
 option.OUTLINES_ENABLED=Line Outlines
 option.OUTLINES_ENABLED.comment=Adds simple outlines to everything
-value.OUTLINES_ENABLED.-1=Use Style
 value.OUTLINES_ENABLED.0=Off
 value.OUTLINES_ENABLED.1=On
 
 option.OUTLINES_SIZE=Line Outlines Size
-value.OUTLINES_SIZE.-1=Use Style
 
 option.OUTLINES_RED=Line Outlines Red
-value.OUTLINES_RED.-1=Use Style
 
 option.OUTLINES_GREEN=Line Outlines Green
-value.OUTLINES_GREEN.-1=Use Style
 
 option.OUTLINES_BLUE=Line Outlines Blue
-value.OUTLINES_BLUE.-1=Use Style
 
 option.EDGE_HIGHLIGHT_ENABLED=Edge Highlights
 option.EDGE_HIGHLIGHT_ENABLED.comment=Enabled MC-Dungeons-like block highlights
-value.EDGE_HIGHLIGHT_ENABLED.-1=Use Style
 value.EDGE_HIGHLIGHT_ENABLED.0=Off
 value.EDGE_HIGHLIGHT_ENABLED.1=On
 
@@ -921,15 +780,12 @@ prefix.EDGE_HIGHLIGHT_SIZE=1 /
 
 option.EDGE_HIGHLIGHT_BRIGHTNESS_MULT=Edge Highlight Brightness Mult
 option.EDGE_HIGHLIGHT_BRIGHTNESS_MULT.comment=How much the edge highlight effect should brighten the pixel by multiplying (0.0 means no extra brightness, 0.5 means 1.5x brightness, etc)
-value.EDGE_HIGHLIGHT_BRIGHTNESS_MULT.-1=Use Style
 
 option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT=Edge Highlight Brightness Lift
 option.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.comment=How much the edge highlight effect should brighten the pixel by adding
-value.EDGE_HIGHLIGHT_BRIGHTNESS_LIFT.-1=Use Style
 
 option.EDGE_HIGHLIGHT_ON_ENTITIES=Edge Highlight On Entities
 option.EDGE_HIGHLIGHT_ON_ENTITIES.comment=Controls whether the edge highlight is added to entities (and other moving objects)
-value.EDGE_HIGHLIGHT_ON_ENTITIES.-1=Use Style
 value.EDGE_HIGHLIGHT_ON_ENTITIES.0=Off
 value.EDGE_HIGHLIGHT_ON_ENTITIES.1=On
 
@@ -946,7 +802,6 @@ value.BLOOM_ENABLED.1=On
 
 option.BLOOM_STYLE=Bloom Style
 option.BLOOM_STYLE.comment=Changes the bloom calculations to be either realistic or stylized
-value.BLOOM_STYLE.-1=Use Style
 value.BLOOM_STYLE.1=Stylized
 value.BLOOM_STYLE.2=Realistic
 
@@ -957,61 +812,47 @@ option.BLOOM_LEVELS=Bloom Levels
 option.BLOOM_LEVELS.comment=How many layers of bloom to calculate. If you increase this then you might want to decrease Bloom Size and increase Bloom Amount (and vice versa)
 
 option.BLOOM_SIZE=Bloom Size
-value.BLOOM_SIZE.-1=Use Style
 
 option.BLOOM_AMOUNT=Bloom Amount
 option.BLOOM_AMOUNT.comment=The amount of bloom when in the overworld
-value.BLOOM_AMOUNT.-1=Use Style
 
 option.BLOOM_NETHER_AMOUNT=Bloom Nether Amount
 option.BLOOM_NETHER_AMOUNT.comment=The amount of bloom when in the nether
-value.BLOOM_NETHER_AMOUNT.-1=Use Style
 
 option.BLOOM_END_AMOUNT=Bloom End Amount
 option.BLOOM_END_AMOUNT.comment=The amount of bloom when in the end
-value.BLOOM_END_AMOUNT.-1=Use Style
 
 option.EMISSIVES_BLOOM_ENABLED=Emissives Bloom Enabled
 option.EMISSIVES_BLOOM_ENABLED.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
-value.EMISSIVES_BLOOM_ENABLED.-1=Use Style
 value.EMISSIVES_BLOOM_ENABLED.0=Off
 value.EMISSIVES_BLOOM_ENABLED.1=On
 
 option.EMISSIVES_BLOOM_AMOUNT=Emissives Bloom Amount
 option.EMISSIVES_BLOOM_AMOUNT.comment=Adds extra bloom to emissive textures, likely with a small performance cost. Note: you probably won't notice any difference turning this on if the other bloom settings are left at default values due to how subtle the default bloom is
-value.EMISSIVES_BLOOM_AMOUNT.-1=Use Style
 
 option.BLOOM_LOW_CUTOFF=Bloom Low Cutoff
 option.BLOOM_LOW_CUTOFF.comment=The value at which all colors are treated as equally dark
-value.BLOOM_LOW_CUTOFF.-1=Use Style
 
 option.BLOOM_HIGH_CUTOFF=Bloom High Cutoff
 option.BLOOM_HIGH_CUTOFF.comment=The value at which all colors are treated as equally light
-value.BLOOM_HIGH_CUTOFF.-1=Use Style
 
 option.BLOOM_DETECT_TINT_RED=Bloom Detect Tint Red
 option.BLOOM_DETECT_TINT_RED.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
-value.BLOOM_DETECT_TINT_RED.-1=Use Style
 
 option.BLOOM_DETECT_TINT_GREEN=Bloom Detect Tint Green
 option.BLOOM_DETECT_TINT_GREEN.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
-value.BLOOM_DETECT_TINT_GREEN.-1=Use Style
 
 option.BLOOM_DETECT_TINT_BLUE=Bloom Detect Tint Blue
 option.BLOOM_DETECT_TINT_BLUE.comment=Before bloom contribution is calculated, the screen color is multiplied by this color value. If you, for example, want to decrease the amount of yellow bloom then you should use a red/green/blue value like (0.8, 0.8, 1.0)
-value.BLOOM_DETECT_TINT_BLUE.-1=Use Style
 
 option.BLOOM_FINAL_TINT_RED=Bloom Final Tint Red
 option.BLOOM_FINAL_TINT_RED.comment=How much to tint the bloom color that is applied to the image
-value.BLOOM_FINAL_TINT_RED.-1=Use Style
 
 option.BLOOM_FINAL_TINT_GREEN=Bloom Final Tint Green
 option.BLOOM_FINAL_TINT_GREEN.comment=How much to tint the bloom color that is applied to the image
-value.BLOOM_FINAL_TINT_GREEN.-1=Use Style
 
 option.BLOOM_FINAL_TINT_BLUE=Bloom Final Tint Blue
 option.BLOOM_FINAL_TINT_BLUE.comment=How much to tint the bloom color that is applied to the image
-value.BLOOM_FINAL_TINT_BLUE.-1=Use Style
 
 
 
@@ -1026,15 +867,12 @@ value.SSAO_ENABLED.1=On
 
 option.AO_AMOUNT_LIT=SSAO Amount (Lit)
 option.AO_AMOUNT_LIT.comment=How much to darken corners / crevasses for areas that are lit (in sunlight/moonlight/blocklight)
-value.AO_AMOUNT_LIT.-1=Use Style
 
 option.AO_AMOUNT_UNLIT=SSAO Amount (Shaded)
 option.AO_AMOUNT_UNLIT.comment=How much to darken corners / crevasses for areas that are unlit (not in sunlight/moonlight/blocklight)
-value.AO_AMOUNT_UNLIT.-1=Use Style
 
 option.AO_SIZE=SSAO Size
 option.AO_SIZE.comment=How much the SSAO should spread
-value.AO_SIZE.-1=Use Style
 
 option.AO_QUALITY=SSAO Quality
 option.AO_QUALITY.comment=Controls the number of samples for SSAO
@@ -1062,47 +900,36 @@ prefix.REFLECTIONS_RENDER_SCALE=x
 
 option.BLOCK_REFLECTION_AMOUNT_SURFACE=(Surface) Block Reflection Strength
 option.BLOCK_REFLECTION_AMOUNT_SURFACE.comment=Max reflection strength for blocks in sunlight
-value.BLOCK_REFLECTION_AMOUNT_SURFACE.-1=Use Style
 
 option.BLOCK_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Block Reflection Strength
 option.BLOCK_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for blocks not in sunlight
-value.BLOCK_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.WATER_REFLECTION_AMOUNT_SURFACE=(Surface) Water Reflection Strength
 option.WATER_REFLECTION_AMOUNT_SURFACE.comment=Max reflection strength for water in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
-value.WATER_REFLECTION_AMOUNT_SURFACE.-1=Use Style
 
 option.WATER_REFLECTION_AMOUNT_UNDERGROUND=(Underground) Water Reflection Strength
 option.WATER_REFLECTION_AMOUNT_UNDERGROUND.comment=Max reflection strength for water not in sunlight (also affects reflections of transparent blocks like stained glass, ice, etc)
-value.WATER_REFLECTION_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.REFLECTIONS_BRIGHTNESS=Reflections Brightness
 option.REFLECTIONS_BRIGHTNESS.comment=How much to brighten/darken reflections (only effects reflected terrain)
-value.REFLECTIONS_BRIGHTNESS.-1=Use Style
 
 option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS=Sky Objects Brightness
 option.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.comment=How much to brighten sky objects (the sun, moon, and stars)
-value.SKY_OBJECT_REFLECTIONS_BRIGHTNESS.-1=Use Style
 
 option.REFLECTION_FRESNEL=Reflection Fresnel Amount
 option.REFLECTION_FRESNEL.comment=How much the angle of the reflection affects the reflectiveness. A fresnel of 1.0 makes the reflection completely disappear when looking head-on and a value of 0 makes it always the same strength
-value.REFLECTION_FRESNEL.-1=Use Style
 
 #option.RAIN_REFLECTION_AMOUNT=Rain Reflection Strength
 #option.RAIN_REFLECTION_AMOUNT.comment=Max rain reflections strength
-#value.RAIN_REFLECTION_AMOUNT.-1=Use Style
 
 #option.RAIN_REFLECTION_COVERAGE=Rain Reflection Coverage
 #option.RAIN_REFLECTION_COVERAGE.comment=How much terrain is at full reflection strength
-#value.RAIN_REFLECTION_COVERAGE.-1=Use Style
 
 #option.RAIN_REFLECTION_MIN=Rain Reflection Min
 #option.RAIN_REFLECTION_MIN.comment=Minimum amount for reflection strength
-#value.RAIN_REFLECTION_MIN.-1=Use Style
 
 #option.RAIN_REFLECTION_SLOPE=Rain Reflection Slope
 #option.RAIN_REFLECTION_SLOPE.comment=How quickly the reflection strength drops off
-#value.RAIN_REFLECTION_SLOPE.-1=Use Style
 
 
 
@@ -1112,13 +939,11 @@ screen.SUNRAYS_MENU=Sunrays
 
 option.DEPTH_SUNRAYS_ENABLED=Sunrays Enabled (Depth-Based)
 option.DEPTH_SUNRAYS_ENABLED.comment=Enabled screen-based sunrays, which are low-ish quality but very cheap
-value.DEPTH_SUNRAYS_ENABLED.-1=Use Style
 value.DEPTH_SUNRAYS_ENABLED.0=Off
 value.DEPTH_SUNRAYS_ENABLED.1=On
 
 option.VOL_SUNRAYS_ENABLED=Sunrays Enabled (Volumetric)
 option.VOL_SUNRAYS_ENABLED.comment=Enables world-space sunrays, which are expensive but generally better-looking
-value.VOL_SUNRAYS_ENABLED.-1=Use Style
 value.VOL_SUNRAYS_ENABLED.0=Off
 value.VOL_SUNRAYS_ENABLED.1=On
 
@@ -1127,39 +952,28 @@ option.SUNRAYS_QUALITY.comment=Controls the number of samples for each pixel
 
 option.SUNRAYS_WEATHER_MULT=Sunrays Amount Weather Mult
 option.SUNRAYS_WEATHER_MULT.comment=How much to increase / decrease the sunrays during rain / snow
-value.SUNRAYS_WEATHER_MULT.-1=Use Style
 
 option.SUNRAYS_AMOUNT_DAY=Sunrays Amount Day
-value.SUNRAYS_AMOUNT_DAY.-1=Use Style
 
 option.SUNRAYS_AMOUNT_NIGHT=Sunrays Amount Night
-value.SUNRAYS_AMOUNT_NIGHT.-1=Use Style
 
 option.SUNRAYS_INCREASE_SUNRISE=Sunrays Increase Sunrise
 option.SUNRAYS_INCREASE_SUNRISE.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunrise
-value.SUNRAYS_INCREASE_SUNRISE.-1=Use Style
 
 option.SUNRAYS_INCREASE_SUNSET=Sunrays Increase Sunset
 option.SUNRAYS_INCREASE_SUNSET.comment=How much to increase / decrease 'Sunrays Amount Day' / 'Sunrays Amount Night' during sunset
-value.SUNRAYS_INCREASE_SUNSET.-1=Use Style
 
 option.SUNRAYS_SUN_RED=Sunrays Sun Red
-value.SUNRAYS_SUN_RED.-1=Use Style
 
 option.SUNRAYS_SUN_GREEN=Sunrays Sun Green
-value.SUNRAYS_SUN_GREEN.-1=Use Style
 
 option.SUNRAYS_SUN_BLUE=Sunrays Sun Blue
-value.SUNRAYS_SUN_BLUE.-1=Use Style
 
 option.SUNRAYS_MOON_RED=Sunrays Moon Red
-value.SUNRAYS_MOON_RED.-1=Use Style
 
 option.SUNRAYS_MOON_GREEN=Sunrays Moon Green
-value.SUNRAYS_MOON_GREEN.-1=Use Style
 
 option.SUNRAYS_MOON_BLUE=Sunrays Moon Blue
-value.SUNRAYS_MOON_BLUE.-1=Use Style
 
 
 
@@ -1170,13 +984,11 @@ screen.DEPTH_SUNRAYS_MENU.comment=Settings specific to depth-based sunrays
 
 option.DEPTH_SUNRAYS_STYLE=Sunrays Style
 option.DEPTH_SUNRAYS_STYLE.comment=Alters how the depth sunrays are calculated
-value.DEPTH_SUNRAYS_STYLE.-1=Use Style
 value.DEPTH_SUNRAYS_STYLE.1=Natural
 value.DEPTH_SUNRAYS_STYLE.2=Impressive
 
 option.SUNRAYS_FLICKERING_FIX=Sunrays Flickering Fix
 option.SUNRAYS_FLICKERING_FIX.comment=Fixes a subtle bug where sunrays flicker when the sun is off-screen
-value.SUNRAYS_FLICKERING_FIX.-1=Use Style
 value.SUNRAYS_FLICKERING_FIX.0=Off
 value.SUNRAYS_FLICKERING_FIX.1=On
 
@@ -1189,19 +1001,15 @@ screen.VOL_SUNRAYS_MENU.comment=Settings specific to volumetric sunrays
 
 option.SUNRAYS_UNDERGROUND_MULT=Sunrays Underground Mult
 option.SUNRAYS_UNDERGROUND_MULT.comment=Increases/decreases volumetric sunrays while underground
-value.SUNRAYS_UNDERGROUND_MULT.-1=Use Style
 
 option.SUNRAYS_AMOUNT_MAX_DAY=Sunrays Amount Max Day
 option.SUNRAYS_AMOUNT_MAX_DAY.comment=Clamp for how much the sunrays color can be mixed into the main color (during the day)
-value.SUNRAYS_AMOUNT_MAX_DAY.-1=Use Style
 
 option.SUNRAYS_AMOUNT_MAX_NIGHT=Sunrays Amount Max Night
 option.SUNRAYS_AMOUNT_MAX_NIGHT.comment=Clamp for how much the sunrays color can be mixed into the main color (during the night)
-value.SUNRAYS_AMOUNT_MAX_NIGHT.-1=Use Style
 
 option.SUNRAYS_BRIGHTNESS_INCREASE=Sunrays Brightness Increase
 option.SUNRAYS_BRIGHTNESS_INCREASE.comment=How much sunrays should increase / decrease the brightness of pixels before application
-value.SUNRAYS_BRIGHTNESS_INCREASE.-1=Use Style
 
 
 
@@ -1210,52 +1018,39 @@ value.SUNRAYS_BRIGHTNESS_INCREASE.-1=Use Style
 screen.DOF_MENU=Depth Of Field
 
 option.DOF_ENABLED=Depth Of Field Enabled
-value.DOF_ENABLED.-1=Use Style
 value.DOF_ENABLED.0=Off
 value.DOF_ENABLED.1=On
 
 option.DOF_SLOPE_TYPE=DOF Slope Type
 option.DOF_SLOPE_TYPE.comment=How the 'Start' and 'Slope' settings are used\n\nDefault: 'Start' and 'Slope' settings are decreased as focal plane is decreased\nLocked: 'Start' and 'Slope' settings are static
-value.DOF_SLOPE_TYPE.-1=Use Style
 value.DOF_SLOPE_TYPE.1=Default
 value.DOF_SLOPE_TYPE.2=Locked
 
 option.DOF_NEAR_BLUR_START=DOF Near Blur Start
-value.DOF_NEAR_BLUR_START.-1=Use Style
 
 option.DOF_FAR_BLUR_START=DOF Far Blur Start
-value.DOF_FAR_BLUR_START.-1=Use Style
 
 option.DOF_NEAR_BLUR_SLOPE=DOF Near Blur Slope
-value.DOF_NEAR_BLUR_SLOPE.-1=Use Style
 
 option.DOF_FAR_BLUR_SLOPE=DOF Far Blur Slope
-value.DOF_FAR_BLUR_SLOPE.-1=Use Style
 
 option.DOF_NEAR_BLUR_STRENGTH=DOF Near Blur Strength
-value.DOF_NEAR_BLUR_STRENGTH.-1=Use Style
 
 option.DOF_FAR_BLUR_STRENGTH=DOF Far Blur Strength
-value.DOF_FAR_BLUR_STRENGTH.-1=Use Style
 
 option.DOF_MIN_BLUR_STRENGTH=DOF Min Blur Strength
-value.DOF_MIN_BLUR_STRENGTH.-1=Use Style
 
 option.DOF_NEAR_BLUR_SIZE=DOF Near Blur Size
-value.DOF_NEAR_BLUR_SIZE.-1=Use Style
 
 option.DOF_FAR_BLUR_SIZE=DOF Far Blur Size
-value.DOF_FAR_BLUR_SIZE.-1=Use Style
 
 option.DOF_LOCKED_FOCAL_PLANE=DOF Locked Focal Plane
 option.DOF_LOCKED_FOCAL_PLANE.comment=Uses a fixed focus distance instead of focusing on what you're looking at
-value.DOF_LOCKED_FOCAL_PLANE.-1=Use Style
 value.DOF_LOCKED_FOCAL_PLANE.0=Off
 value.DOF_LOCKED_FOCAL_PLANE.1=On
 
 option.DOF_FOCAL_PLANE_DISTANCE=DOF Focal Plane Distance
 option.DOF_FOCAL_PLANE_DISTANCE.comment=Sets the distance for Locked Focal Plane (which needs to be on for this to take effect)
-value.DOF_FOCAL_PLANE_DISTANCE.-1=Use Style
 
 
 
@@ -1264,12 +1059,10 @@ value.DOF_FOCAL_PLANE_DISTANCE.-1=Use Style
 screen.MOTION_BLUR_MENU=Motion Blur
 
 option.MOTION_BLUR_ENABLED=Motion Blur Enabled
-value.MOTION_BLUR_ENABLED.-1=Use Style
 value.MOTION_BLUR_ENABLED.0=Off
 value.MOTION_BLUR_ENABLED.1=On
 
 option.MOTION_BLUR_AMOUNT=Motion Blur Amount
-value.MOTION_BLUR_AMOUNT.-1=Use Style
 
 option.MOTION_BLUR_QUALITY=Motion Blur Quality
 
@@ -1281,13 +1074,11 @@ screen.PAINTED_EFFECT_MENU=Painted Effect
 
 option.KUWAHARA_ENABLED=Painted Effect Enabled
 option.KUWAHARA_ENABLED.comment=Enabled the Kuwahara effect, giving a painterly aesthetic
-value.KUWAHARA_ENABLED.-1=Use Style
 value.KUWAHARA_ENABLED.0=Off
 value.KUWAHARA_ENABLED.1=On
 
 option.KUWAHARA_SIZE=Painted Effect Size
 option.KUWAHARA_SIZE.comment=The size of the painted (kuwahara) effect
-value.KUWAHARA_SIZE.-1=Use Style
 
 
 
@@ -1301,19 +1092,15 @@ value.SHARPENING_ENABLED.0=Off
 value.SHARPENING_ENABLED.1=On
 
 option.SHARPEN_AMOUNT=Sharpening Amount
-value.SHARPEN_AMOUNT.-1=Use Style
 
 option.SHARPEN_VEL_ADDITION=Velocity Addition
 option.SHARPEN_VEL_ADDITION.comment=How much more to sharpen when moving
-value.SHARPEN_VEL_ADDITION.-1=Use Style
 
 option.SHARPEN_DEPTH_ADDITION=Depth Addition
 option.SHARPEN_DEPTH_ADDITION.comment=How much more to sharpen based on depth
-value.SHARPEN_DEPTH_ADDITION.-1=Use Style
 
 option.SHARPENING_DETECT_SIZE=Sharpening Detect Size
 option.SHARPENING_DETECT_SIZE.comment=The number of samples used for determining how to sharpen
-value.SHARPENING_DETECT_SIZE.-1=Use Style
 value.SHARPENING_DETECT_SIZE.3=3x3
 value.SHARPENING_DETECT_SIZE.5=5x5
 value.SHARPENING_DETECT_SIZE.7=7x7
@@ -1326,67 +1113,52 @@ screen.COLOR_PROCESSING_MENU=Color Correction
 
 option.USE_GAMMA_CORRECTION=Use Gamma Correction
 option.USE_GAMMA_CORRECTION.comment=Corrects for gamma before and after color correction
-value.USE_GAMMA_CORRECTION.-1=Use Style
 value.USE_GAMMA_CORRECTION.0=Off
 value.USE_GAMMA_CORRECTION.1=On
 
 option.GAMMA=Gamma
 option.GAMMA.comment=Gamma applied to the final image, roughly equivalent to the inverse of saturation
-value.GAMMA.-1=Use Style
 
 option.OVERWORLD_BRIGHTNESS=Brightness (Overworld)
 option.OVERWORLD_BRIGHTNESS.comment=Brightness applied to the final image (when in the overworld)
-value.OVERWORLD_BRIGHTNESS.-1=Use Style
 
 option.NETHER_BRIGHTNESS=Brightness (Nether)
 option.NETHER_BRIGHTNESS.comment=Brightness applied to the final image (when in the nether)
-value.NETHER_BRIGHTNESS.-1=Use Style
 
 option.END_BRIGHTNESS=Brightness (End)
 option.END_BRIGHTNESS.comment=Brightness applied to the final image (when in the end)
-value.END_BRIGHTNESS.-1=Use Style
 
 option.AUTO_EXPOSURE_ENABLED=Auto Exposure Enabled
 option.AUTO_EXPOSURE_ENABLED.comment=Changes brightness based on blocklight and skylight
-value.AUTO_EXPOSURE_ENABLED.-1=Use Style
 value.AUTO_EXPOSURE_ENABLED.0=Off
 value.AUTO_EXPOSURE_ENABLED.1=On
 
 option.AUTO_EXPOSURE_BRIGHT_MULT=Auto Exposure Bright Mult
 option.AUTO_EXPOSURE_BRIGHT_MULT.comment=Brightness multiplier when in bright areas
-value.AUTO_EXPOSURE_BRIGHT_MULT.-1=Use Style
 
 option.AUTO_EXPOSURE_DARK_MULT=Auto Exposure Dark Mult
 option.AUTO_EXPOSURE_DARK_MULT.comment=Brightness multiplier when in dark areas
-value.AUTO_EXPOSURE_DARK_MULT.-1=Use Style
 
 option.VIBRANCE=Vibrance
 option.VIBRANCE.comment=Vibrance applied to the final image. This saturates the less saturated colors more than the already saturated colors
-value.VIBRANCE.-1=Use Style
 
 option.SATURATION=Saturation
 option.SATURATION.comment=Saturation applied to the final image
-value.SATURATION.-1=Use Style
 
 option.SATURATION_DARK=Saturation Dark
 option.SATURATION_DARK.comment=How much to saturation dark areas
-value.SATURATION_DARK.-1=Use Style
 
 option.SATURATION_LIGHT=Saturation Light
 option.SATURATION_LIGHT.comment=How much to saturation light areas
-value.SATURATION_LIGHT.-1=Use Style
 
 option.SURFACE_CONTRAST=Surface Contrast
 option.SURFACE_CONTRAST.comment=Amount of contrast applied to the final image when not underground
-value.SURFACE_CONTRAST.-1=Use Style
 
 option.UNDERGROUND_CONTRAST=Underground Contrast
 option.UNDERGROUND_CONTRAST.comment=Amount of contrast applied to the final image when underground
-value.UNDERGROUND_CONTRAST.-1=Use Style
 
 option.TONEMAPPER=Tonemapper
 option.TONEMAPPER.comment=This defines how light data is interpreted (note: the shader internally uses values from 0-2, so the brightness is still capped).\n\nNone: clamps the value into 0-1\nSimple: basic tonemapper that accounts for slightly brighter colors than none\nReinhard: Simple tonemapper that can handle any brightness\nACES: Industry standard for good, realistic graphics
-value.TONEMAPPER.-1=Use Style
 value.TONEMAPPER.0=None
 value.TONEMAPPER.1=Simple
 value.TONEMAPPER.2=Reinhard
@@ -1401,14 +1173,12 @@ screen.COLORBLIND_MODE.comment=Helps correct for colorblindness (supposedly, ple
 
 option.COLORBLIND_MODE=Colorblind Mode
 option.COLORBLIND_MODE.comment=Helps correct for colorblindness (supposedly, please let me know whether it does!)
-value.COLORBLIND_MODE.-1=Use Style
 value.COLORBLIND_MODE.0=Off
 value.COLORBLIND_MODE.1=Protanopia
 value.COLORBLIND_MODE.2=Deuteranopia
 value.COLORBLIND_MODE.3=Tritanopia
 
 option.COLORBLIND_INTENSITY=Correction Intensity
-value.COLORBLIND_INTENSITY.-1=Use Style
 
 
 
@@ -1418,20 +1188,16 @@ screen.VIGNETTE_MENU=Vignette
 
 option.VIGNETTE_ENABLED=Vignette Enabled
 option.VIGNETTE_ENABLED.comment=Darkens the edges of the screen
-value.VIGNETTE_ENABLED.-1=Use Style
 value.VIGNETTE_ENABLED.0=Off
 value.VIGNETTE_ENABLED.1=On
 
 option.VIGNETTE_SCALE=Vignette Scale
-value.VIGNETTE_SCALE.-1=Use Style
 
 option.VIGNETTE_AMOUNT_SURFACE=Vignette Amount Surface
 option.VIGNETTE_AMOUNT_SURFACE.comment=The amount of vignette when exposed to sunlight
-value.VIGNETTE_AMOUNT_SURFACE.-1=Use Style
 
 option.VIGNETTE_AMOUNT_UNDERGROUND=Vignette Amount Underground
 option.VIGNETTE_AMOUNT_UNDERGROUND.comment=The amount of vignette when not exposed to sunlight
-value.VIGNETTE_AMOUNT_UNDERGROUND.-1=Use Style
 
 
 
@@ -1441,28 +1207,23 @@ screen.HSV_POSTERIZE_MENU=HSV Posterize
 
 option.HSV_POSTERIZE_ENABLED=HSV Posterize Enabled
 option.HSV_POSTERIZE_ENABLED.comment=Similar to Posterize in super-secret-settings, but works with HSV instead of RGB
-value.HSV_POSTERIZE_ENABLED.-1=Use Style
 value.HSV_POSTERIZE_ENABLED.0=Off
 value.HSV_POSTERIZE_ENABLED.1=On
 
 option.HSV_POSTERIZE_HUE_QUALITY=Posterize Hue Quality
 option.HSV_POSTERIZE_HUE_QUALITY.comment=How much to compress the Hue data
-value.HSV_POSTERIZE_HUE_QUALITY.-1=Use Style
 value.HSV_POSTERIZE_HUE_QUALITY.0=None
 
 option.HSV_POSTERIZE_SATURATION_QUALITY=Posterize Saturation Quality
 option.HSV_POSTERIZE_SATURATION_QUALITY.comment=How much to compress the Saturation data
-value.HSV_POSTERIZE_SATURATION_QUALITY.-1=Use Style
 value.HSV_POSTERIZE_SATURATION_QUALITY.0=None
 
 option.HSV_POSTERIZE_BRIGHTNESS_QUALITY=Posterize Brightness Quality
 option.HSV_POSTERIZE_BRIGHTNESS_QUALITY.comment=How much to compress the Brightness data
-value.HSV_POSTERIZE_BRIGHTNESS_QUALITY.-1=Use Style
 value.HSV_POSTERIZE_BRIGHTNESS_QUALITY.0=None
 
 option.HSV_POSTERIZE_STEP_SLOPE=Step Slope
 option.HSV_POSTERIZE_STEP_SLOPE.comment=How quickly it changes from one step to another
-value.HSV_POSTERIZE_STEP_SLOPE.-1=Use Style
 
 
 
@@ -1472,29 +1233,22 @@ screen.GAMEPLAY_EFFECTS_MENU=Gameplay Effects
 
 option.HEALTH_EFFECT_ENABLED=Low-Health Effect Enabled
 option.HEALTH_EFFECT_ENABLED.comment=Adds a red vignette when low on health\n\nNOTE: only works on Iris
-value.HEALTH_EFFECT_ENABLED.-1=Use Style
 
 option.HEALTH_EFFECT_STRENGTH=Low-Health Effect Strength
-value.HEALTH_EFFECT_STRENGTH.-1=Use Style
 
 option.DAMAGE_EFFECT_ENABLED=Damage Effect Enabled
 option.DAMAGE_EFFECT_ENABLED.comment=Adds a red vignette when taking damage\n\nNOTE: only works on Iris
-value.DAMAGE_EFFECT_ENABLED.-1=Use Style
 
 option.DAMAGE_EFFECT_STRENGTH=Damage Effect Strength
-value.DAMAGE_EFFECT_STRENGTH.-1=Use Style
 
 option.NEARBY_PARTICLE_TRANSPARENCY=Nearby Particle Transparency
 option.NEARBY_PARTICLE_TRANSPARENCY.comment=Make particles transparent when too close
-value.NEARBY_PARTICLE_TRANSPARENCY.-1=Use Style
 
 option.COLORED_PARTICLE_TRANSPARENCY=Colored Particle Transparency
 option.COLORED_PARTICLE_TRANSPARENCY.comment=Modifies the transparency of particles that have dynamic color, such as potion effect particles
-value.COLORED_PARTICLE_TRANSPARENCY.-1=Use Style
 
 option.LOW_LIGHT_DESATURATION=Low Light Desaturation
 option.LOW_LIGHT_DESATURATION.comment=Simulates the visual desaturation you see in low light conditions (setting this to 0.0 fully disables it)
-value.LOW_LIGHT_DESATURATION.-1=Use Style
 value.LOW_LIGHT_DESATURATION.0=0.0
 value.LOW_LIGHT_DESATURATION.5=0.05
 value.LOW_LIGHT_DESATURATION.10=0.1
@@ -1519,7 +1273,6 @@ value.LOW_LIGHT_DESATURATION.100=1.0
 
 option.LOW_LIGHT_CONTRAST=Low Light Contrast
 option.LOW_LIGHT_CONTRAST.comment=Simulates the visual contrast decrease you see in low light conditions (setting this to 0.0 fully disables it)
-value.LOW_LIGHT_CONTRAST.-1=Use Style
 value.LOW_LIGHT_CONTRAST.0=0.0
 value.LOW_LIGHT_CONTRAST.-5=-0.05
 value.LOW_LIGHT_CONTRAST.-10=-0.1
@@ -1544,7 +1297,6 @@ value.LOW_LIGHT_CONTRAST.-100=-1.0
 
 option.LOW_LIGHT_STATIC_STRENGTH=Low Light Static Strength
 option.LOW_LIGHT_STATIC_STRENGTH.comment=Simulates the visual noise you see in low light conditions (setting this to 0.0 fully disables it)
-value.LOW_LIGHT_STATIC_STRENGTH.-1=Use Style
 value.LOW_LIGHT_STATIC_STRENGTH.0=0.0
 value.LOW_LIGHT_STATIC_STRENGTH.5=0.05
 value.LOW_LIGHT_STATIC_STRENGTH.10=0.1
@@ -1579,11 +1331,9 @@ value.LOW_LIGHT_STATIC_STRENGTH.200=2.0
 
 option.ENTITY_FLASH_STRENGTH=Entity Flash Strength
 option.ENTITY_FLASH_STRENGTH.comment=Controls the strength of entity flashes (such as hitting entities, creepers flashing before exploding, etc)
-value.ENTITY_FLASH_STRENGTH.-1=Use style
 
 option.ENTITY_FLASH_GLOW_STRENGTH=Entity Flash Glowing Strength
 option.ENTITY_FLASH_GLOW_STRENGTH.comment=Makes entities glow when flashing (such as hitting entities, creepers flashing before exploding, etc)
-value.ENTITY_FLASH_GLOW_STRENGTH.-1=Use Style
 
 
 
@@ -1599,39 +1349,30 @@ screen.WAVING_MENU=Waving
 screen.WAVING_BLOCKS_MENU=Waving Blocks
 
 option.WAVING_ENABLED=Waving Enabled
-value.WAVING_ENABLED.-1=Use Style
 value.WAVING_ENABLED.0=Off
 value.WAVING_ENABLED.1=On
 
 option.WAVING_SPEED=Waving Speed
-value.WAVING_SPEED.-1=Use Style
 
 option.WAVING_WORLD_SCALE=Waving World Scale
-value.WAVING_WORLD_SCALE.-1=Use Style
 
 option.WAVING_AMOUNT_1=Waving Amount 1
 option.WAVING_AMOUNT_1.comment=How much waving there is for things like cobwebs, dead bushes, sugar cane, etc
-value.WAVING_AMOUNT_1.-1=Use Style
 
 option.WAVING_AMOUNT_2=Waving Amount 2
 option.WAVING_AMOUNT_2.comment=How much waving there is for things like saplings, flowers, crops, etc
-value.WAVING_AMOUNT_2.-1=Use Style
 
 option.WAVING_AMOUNT_3=Waving Amount 3
 option.WAVING_AMOUNT_3.comment=How much waving there is for things like grass, wheat, etc
-value.WAVING_AMOUNT_3.-1=Use Style
 
 option.WAVING_WEATHER_MULT=Waving Weather Multiplier
 option.WAVING_WEATHER_MULT.comment=How much to increase / decrease the waving amount when it is raining / snowing
-value.WAVING_WEATHER_MULT.-1=Use Style
 
 option.WAVING_NIGHT_MULT=Waving Night Multiplier
 option.WAVING_NIGHT_MULT.comment=How much to increase / decrease the waving amount when it is night
-value.WAVING_NIGHT_MULT.-1=Use Style
 
 option.HEIGHT_BASED_WAVING_ENABLED=Height Based Waviness Enabled
 option.HEIGHT_BASED_WAVING_ENABLED.comment=Increases waviness when higher up
-value.HEIGHT_BASED_WAVING_ENABLED.-1=Use Style
 value.HEIGHT_BASED_WAVING_ENABLED.0=Off
 value.HEIGHT_BASED_WAVING_ENABLED.1=On
 
@@ -1643,47 +1384,37 @@ screen.WAVING_WATER_MENU=Waving Water
 
 option.PHYSICALLY_WAVING_WATER_ENABLED=Physical Waving Enabled
 option.PHYSICALLY_WAVING_WATER_ENABLED.comment=Makes the water actually wave
-value.PHYSICALLY_WAVING_WATER_ENABLED.-1=Use Style
 value.PHYSICALLY_WAVING_WATER_ENABLED.0=Off
 value.PHYSICALLY_WAVING_WATER_ENABLED.1=On
 
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE=Physical Waving Amount Surface
 option.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
-value.PHYSICALLY_WAVING_WATER_AMOUNT_SURFACE.-1=Use Style
 
 option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND=Physical Waving Amount Underground
 option.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
-value.PHYSICALLY_WAVING_WATER_AMOUNT_UNDERGROUND.-1=Use Style
 
 option.WAVING_WATER_SURFACE_ENABLED=Waving Surface Enabled
 option.WAVING_WATER_SURFACE_ENABLED.comment=Makes the water reflections wavy (only takes effect when water reflections are enabled)
-value.WAVING_WATER_SURFACE_ENABLED.-1=Use Style
 value.WAVING_WATER_SURFACE_ENABLED.0=Off
 value.WAVING_WATER_SURFACE_ENABLED.1=On
 
 option.WAVING_WATER_SCALE=Waving Water Scale
 option.WAVING_WATER_SCALE.comment=How much to scale the noise for the waving water surface
-value.WAVING_WATER_SCALE.-1=Use Style
 
 option.WAVING_WATER_SPEED=Waving Water Speed
 option.WAVING_WATER_SPEED.comment=How fast the surface of water should wave
-value.WAVING_WATER_SPEED.-1=Use Style
 
 option.WAVING_WATER_FRESNEL_SURFACE=Waving Fresnel Surface
 option.WAVING_WATER_FRESNEL_SURFACE.comment=How much to darken the water based on the viewing direction when under skylight
-value.WAVING_WATER_FRESNEL_SURFACE.-1=Use Style
 
 option.WAVING_WATER_FRESNEL_UNDERGROUND=Waving Fresnel Underground
 option.WAVING_WATER_FRESNEL_UNDERGROUND.comment=How much to darken the water based on the viewing direction when not under skylight
-value.WAVING_WATER_FRESNEL_UNDERGROUND.-1=Use Style
 
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE=Normals Waving Amount Surface
 option.WAVING_WATER_SURFACE_AMOUNT_SURFACE.comment=How much waving to apply when under skylight
-value.WAVING_WATER_SURFACE_AMOUNT_SURFACE.-1=Use Style
 
 option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND=Normals Waving Amount Underground
 option.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.comment=How much waving to apply when not under skylight
-value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style
 
 
 
@@ -1692,18 +1423,14 @@ value.WAVING_WATER_SURFACE_AMOUNT_UNDERGROUND.-1=Use Style
 screen.UNDERWATER_WAVINESS_MENU=Underwater Waviness
 
 option.UNDERWATER_WAVINESS_ENABLED=Underwater Waviness Enabled
-value.UNDERWATER_WAVINESS_ENABLED.-1=Use Style
 value.UNDERWATER_WAVINESS_ENABLED.0=Off
 value.UNDERWATER_WAVINESS_ENABLED.1=On
 
 option.UNDERWATER_WAVINESS_AMOUNT=Underwater Waviness Amount
-value.UNDERWATER_WAVINESS_AMOUNT.-1=Use Style
 
 option.UNDERWATER_WAVINESS_SCALE=Underwater Waviness Scale
-value.UNDERWATER_WAVINESS_SCALE.-1=Use Style
 
 option.UNDERWATER_WAVINESS_SPEED=Underwater Waviness Speed
-value.UNDERWATER_WAVINESS_SPEED.-1=Use Style
 
 
 
@@ -1712,23 +1439,18 @@ value.UNDERWATER_WAVINESS_SPEED.-1=Use Style
 screen.WATER_MENU=Water
 
 option.WATER_TRANSPARENCY_SHALLOW=Water Transparency (Shallow)
-value.WATER_TRANSPARENCY_SHALLOW.-1=Use Style
 
 option.WATER_TRANSPARENCY_DEEP=Water Transparency (Deep)
-value.WATER_TRANSPARENCY_DEEP.-1=Use Style
 
 option.WATER_FOAM_ENABLED=Water Foam Enabled
 option.WATER_FOAM_ENABLED.comment=Makes the edges of water more white
-value.WATER_FOAM_ENABLED.-1=Use Style
 value.WATER_FOAM_ENABLED.0=Off
 value.WATER_FOAM_ENABLED.1=On
 
 option.WATER_FOAM_AMOUNT=Water Foam Amount
 option.WATER_FOAM_AMOUNT.comment=Makes the edges of water more white
-value.WATER_FOAM_AMOUNT.-1=Use Style
 
 option.WATER_FOAM_SIZE=Water Foam Size
-value.WATER_FOAM_SIZE.-1=Use Style
 
 
 
@@ -1738,43 +1460,33 @@ screen.WATER_COLOR_MENU=Water Color
 
 option.WATER_TEXTURE_INFLUENCE=Water Texture Influence
 option.WATER_TEXTURE_INFLUENCE.comment=When this is set to 0.0, the base water color is fully controlled by the biome's water color (this is applied before the 'Water Tint Red/Green/Blue' settings and the 'Water Biome Influence' setting)
-value.WATER_TEXTURE_INFLUENCE.-1=Use Style
 
 option.WATER_BIOME_INFLUENCE=Water Biome Influence
 option.WATER_BIOME_INFLUENCE.comment=How much to saturate / desaturate the vanilla water (this is applied before the 'Water Tint Red/Green/Blue' settings)
-value.WATER_BIOME_INFLUENCE.-1=Use Style
 
 option.WATER_TINT_SHALLOW_RED=Water Tint (Shallow) Red
 option.WATER_TINT_SHALLOW_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_SHALLOW_RED.-1=Use Style
 
 option.WATER_TINT_SHALLOW_GREEN=Water Tint (Shallow) Green
 option.WATER_TINT_SHALLOW_GREEN.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_SHALLOW_GREEN.-1=Use Style
 
 option.WATER_TINT_SHALLOW_BLUE=Water Tint (Shallow) Blue
 option.WATER_TINT_SHALLOW_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_SHALLOW_BLUE.-1=Use Style
 
 option.WATER_TINT_SHALLOW_BRIGHTNESS=Water Tint (Shallow) Brightness
 option.WATER_TINT_SHALLOW_BRIGHTNESS.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_SHALLOW_BRIGHTNESS.-1=Use Style
 
 option.WATER_TINT_DEEP_RED=Water Tint (Deep) Red
 option.WATER_TINT_DEEP_RED.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_DEEP_RED.-1=Use Style
 
 option.WATER_TINT_DEEP_GREEN=Water Tint (Deep) Green
 option.WATER_TINT_DEEP_GREEN.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_DEEP_GREEN.-1=Use Style
 
 option.WATER_TINT_DEEP_BLUE=Water Tint (Deep) Blue
 option.WATER_TINT_DEEP_BLUE.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_DEEP_BLUE.-1=Use Style
 
 option.WATER_TINT_DEEP_BRIGHTNESS=Water Tint (Deep) Brightness
 option.WATER_TINT_DEEP_BRIGHTNESS.comment=How much to tint the water color (this is applied after the 'Water Saturation' setting)
-value.WATER_TINT_DEEP_BRIGHTNESS.-1=Use Style
 
 
 
@@ -1784,54 +1496,41 @@ screen.SKY_MENU=Sky
 
 option.HORIZON_FADE_STRENGTH=Horizon Fade Strength
 option.HORIZON_FADE_STRENGTH.comment=How quickly the sky should fade from its top color to its bottom color
-value.HORIZON_FADE_STRENGTH.-1=Use Style
 
 option.SUN_BRIGHTNESS=Sun Brightness
-value.SUN_BRIGHTNESS.-1=Use Style
 
 option.SUN_OPACITY=Sun Opacity
-value.SUN_OPACITY.-1=Use Style
 
 option.MOON_BRIGHTNESS=Moon Brightness
-value.MOON_BRIGHTNESS.-1=Use Style
 
 option.MOON_OPACITY=Moon Opacity
-value.MOON_OPACITY.-1=Use Style
 
 option.SUN_MOON_WEATHER_OPACITY_DECREASE=Sun/Moon Weather Opacity Decrease
 option.SUN_MOON_WEATHER_OPACITY_DECREASE.comment=How much to decrease the sun's/moon's opacity when raining/snowing
-value.SUN_MOON_WEATHER_OPACITY_DECREASE.-1=Use Style
 
 option.STARS_BRIGHTNESS=Stars Brightness
-value.STARS_BRIGHTNESS.-1=Use Style
 
 option.sunPathRotation=Sun Path Rotation
 option.sunPathRotation.comment=How tilted the sun's rotation is. 0 is vanilla
 
 option.DARKEN_STARS_NEAR_BLOCKLIGHT=Darken Stars Near Blocklight
 option.DARKEN_STARS_NEAR_BLOCKLIGHT.comment=Simulates light pollution by darkening stars when you're near blocklight
-value.DARKEN_STARS_NEAR_BLOCKLIGHT.-1=Use Style
 value.DARKEN_STARS_NEAR_BLOCKLIGHT.0=Off
 value.DARKEN_STARS_NEAR_BLOCKLIGHT.1=On
 
 option.DARKENED_STARS_BRIGHTNESS=Darkened Stars Brightness
 option.DARKENED_STARS_BRIGHTNESS.comment=Brightness of stars when darkened by blocklight. Only takes effect when 'Darken Stars Near Blocklight' is enabled
-value.DARKENED_STARS_BRIGHTNESS.-1=Use Style
 
 option.WEATHER_TRANSPARENCY=Weather Transparency
-value.WEATHER_TRANSPARENCY.-1=Use Style
 
 option.WEATHER_HORIZONTAL_AMOUNT=Weather Horizontal Amount
 option.WEATHER_HORIZONTAL_AMOUNT.comment=Makes rain, snow, etc diagonal
-value.WEATHER_HORIZONTAL_AMOUNT.-1=Use Style
 
 option.SKY_WEATHER_BRIGHTNESS=Sky Weather Brightness
 option.SKY_WEATHER_BRIGHTNESS.comment=Brightness of the sky when raining/snowing (this is also dependant on the Sky Weather Desaturation setting)
-value.SKY_WEATHER_BRIGHTNESS.-1=Use Style
 
 option.SKY_WEATHER_DESATURATION=Sky Weather Desaturation
 option.SKY_WEATHER_DESATURATION.comment=How much to desaturate the sky when raining/snowing
-value.SKY_WEATHER_DESATURATION.-1=Use Style
 
 
 
@@ -1841,7 +1540,6 @@ screen.CLOUDS_MENU=Clouds
 
 option.CLOUDS_TYPE=Clouds Type
 option.CLOUDS_TYPE.comment=Switches between vanilla cloud rendering, story-mode-like clouds, volumetric vanilla-like clouds, and realistic volumetric clouds
-value.CLOUDS_TYPE.-1=Use Style
 value.CLOUDS_TYPE.1=Vanilla
 value.CLOUDS_TYPE.2=Story Mode
 value.CLOUDS_TYPE.3=Volumetric Vanilla
@@ -1856,27 +1554,21 @@ screen.VANILLA_STORY_CLOUDS_MENU=Vanilla / Story Mode
 
 option.VANILLA_CLOUD_TRANSPARENCY=Cloud Transparency (Vanilla)
 option.VANILLA_CLOUD_TRANSPARENCY.comment=Transparency for vanilla-style clouds
-value.VANILLA_CLOUD_TRANSPARENCY.-1=Use Style
 
 option.STORY_MODE_CLOUDS_CURVE=Story Mode Clouds Curve
 option.STORY_MODE_CLOUDS_CURVE.comment=Controls the transparency fade of story-mode-type clouds
-value.STORY_MODE_CLOUDS_CURVE.-1=Use Style
 
 option.NEARBY_CLOUD_TRANSPARENCY=Nearby Cloud Transparency
 option.NEARBY_CLOUD_TRANSPARENCY.comment=Transparency for nearby clouds, only works for non-realistic clouds
-value.NEARBY_CLOUD_TRANSPARENCY.-1=Use Style
 
 option.NEARBY_CLOUD_DIST=Nearby Cloud Distance
 option.NEARBY_CLOUD_DIST.comment=The distance at which clouds are still considered nearby, only works for non-realistic clouds
-value.NEARBY_CLOUD_DIST.-1=Use Style
 
 option.CLOUD_FOG_START=Cloud Fog Start
 option.CLOUD_FOG_START.comment=Set the distance at which the clouds start fading into the distance
-value.CLOUD_FOG_START.-1=Use Style
 
 option.CLOUD_FOG_CURVE=Cloud Fog Curve
 option.CLOUD_FOG_CURVE.comment=Set how quickly the clouds fade out
-value.CLOUD_FOG_CURVE.-1=Use Style
 
 option.VANILLA_CLOUDS_HEIGHT=Detected Clouds Height
 option.VANILLA_CLOUDS_HEIGHT.comment=Sometimes the shader doesn't know what the actual cloud height is, this can be used to override the default system and manually specify it
@@ -1887,7 +1579,6 @@ option.VANILLA_CLOUDS_HEIGHT_OFFSET.comment=Moves the vanilla clouds up/down (th
 
 option.VANILLA_CLOUDS_SCALE_XZ=Vanilla Clouds Scale (Horizontal)
 option.VANILLA_CLOUDS_SCALE_XZ.comment=Scales the vanilla clouds by a certain amount (in the x and z directions). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
-value.VANILLA_CLOUDS_SCALE_XZ.-1=Use Style
 
 option.VANILLA_CLOUDS_SCALE_Y=Vanilla Clouds Scale (Vertical)
 option.VANILLA_CLOUDS_SCALE_Y.comment=Scales the vanilla clouds by a certain amount (in the y direction). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
@@ -1915,22 +1606,17 @@ screen.REALISTIC_CLOUDS_MENU=Realistic Clouds
 
 option.REALISTIC_CLOUDS_DENSITY=Clouds Density
 option.REALISTIC_CLOUDS_DENSITY.comment=Density of volumetric clouds
-value.REALISTIC_CLOUDS_DENSITY.-1=Use Style
 
 option.CLOUD_COVERAGE=Cloud Coverage
-value.CLOUD_COVERAGE.-1=Use Style
 
 option.CLOUD_WEATHER_COVERAGE=Cloud Weather Coverage
 option.CLOUD_WEATHER_COVERAGE.comment=Coverage for clouds when raining / snowing
-value.CLOUD_WEATHER_COVERAGE.-1=Use Style
 
 option.REALISTIC_CLOUDS_BOTTOM_Y=Cloud Bottom Level
 option.REALISTIC_CLOUDS_BOTTOM_Y.comment=The y-level where realistic clouds start
-value.REALISTIC_CLOUDS_BOTTOM_Y.-1=Use Style
 
 option.REALISTIC_CLOUDS_TOP_Y=Cloud Top Level
 option.REALISTIC_CLOUDS_TOP_Y.comment=the y-level where realistic clouds stop
-value.REALISTIC_CLOUDS_TOP_Y.-1=Use Style
 
 
 
@@ -1940,75 +1626,57 @@ screen.CLOUD_COLORS_MENU=Cloud Colors
 
 option.CLOUD_DAY_RED=Cloud Day Red
 option.CLOUD_DAY_RED.comment=Clouds red color during the day
-value.CLOUD_DAY_RED.-1=Use Style
 
 option.CLOUD_DAY_GREEN=Cloud Day Green
 option.CLOUD_DAY_GREEN.comment=Clouds green color during the day
-value.CLOUD_DAY_GREEN.-1=Use Style
 
 option.CLOUD_DAY_BLUE=Cloud Day Blue
 option.CLOUD_DAY_BLUE.comment=Clouds blue color during the day
-value.CLOUD_DAY_BLUE.-1=Use Style
 
 option.CLOUD_NIGHT_RED=Cloud Night Red
 option.CLOUD_NIGHT_RED.comment=Clouds red color during the night
-value.CLOUD_NIGHT_RED.-1=Use Style
 
 option.CLOUD_NIGHT_GREEN=Cloud Night Green
 option.CLOUD_NIGHT_GREEN.comment=Clouds green color during the night
-value.CLOUD_NIGHT_GREEN.-1=Use Style
 
 option.CLOUD_NIGHT_BLUE=Cloud Night Blue
 option.CLOUD_NIGHT_BLUE.comment=Clouds blue color during the night
-value.CLOUD_NIGHT_BLUE.-1=Use Style
 
 option.CLOUD_SUNRISE_RED=Cloud Sunrise Red
 option.CLOUD_SUNRISE_RED.comment=Clouds red color during sunrise
-value.CLOUD_SUNRISE_RED.-1=Use Style
 
 option.CLOUD_SUNRISE_GREEN=Cloud Sunrise Green
 option.CLOUD_SUNRISE_GREEN.comment=Clouds green color during sunrise
-value.CLOUD_SUNRISE_GREEN.-1=Use Style
 
 option.CLOUD_SUNRISE_BLUE=Cloud Sunrise Blue
 option.CLOUD_SUNRISE_BLUE.comment=Clouds blue color during sunrise
-value.CLOUD_SUNRISE_BLUE.-1=Use Style
 
 option.CLOUD_SUNSET_RED=Cloud Sunset Red
 option.CLOUD_SUNSET_RED.comment=Clouds red color during sunset
-value.CLOUD_SUNSET_RED.-1=Use Style
 
 option.CLOUD_SUNSET_GREEN=Cloud Sunset Green
 option.CLOUD_SUNSET_GREEN.comment=Clouds green color during sunset
-value.CLOUD_SUNSET_GREEN.-1=Use Style
 
 option.CLOUD_SUNSET_BLUE=Cloud Sunset Blue
 option.CLOUD_SUNSET_BLUE.comment=Clouds blue color during sunset
-value.CLOUD_SUNSET_BLUE.-1=Use Style
 
 option.CLOUD_BOTTOM_TINT_RED=Cloud Bottom Tint Red
 option.CLOUD_BOTTOM_TINT_RED.comment=Controls the color of the bottom / sides of clouds
-value.CLOUD_BOTTOM_TINT_RED.-1=Use Style
 
 option.CLOUD_BOTTOM_TINT_GREEN=Cloud Bottom Tint Green
 option.CLOUD_BOTTOM_TINT_GREEN.comment=Controls the color of the bottom / sides of clouds
-value.CLOUD_BOTTOM_TINT_GREEN.-1=Use Style
 
 option.CLOUD_BOTTOM_TINT_BLUE=Cloud Bottom Tint Blue
 option.CLOUD_BOTTOM_TINT_BLUE.comment=Controls the color of the bottom / sides of clouds
-value.CLOUD_BOTTOM_TINT_BLUE.-1=Use Style
 
 option.CLOUD_WEATHER_TINT_RED=Cloud Weather Tint Red
 option.CLOUD_WEATHER_TINT_RED.comment=Controls the color of clouds during rain
-value.CLOUD_WEATHER_TINT_RED.-1=Use Style
 
 option.CLOUD_WEATHER_TINT_GREEN=Cloud Weather Tint Green
 option.CLOUD_WEATHER_TINT_GREEN.comment=Controls the color of clouds during rain
-value.CLOUD_WEATHER_TINT_GREEN.-1=Use Style
 
 option.CLOUD_WEATHER_TINT_BLUE=Cloud Weather Tint Blue
 option.CLOUD_WEATHER_TINT_BLUE.comment=Controls the color of clouds during rain
-value.CLOUD_WEATHER_TINT_BLUE.-1=Use Style
 
 
 
@@ -2019,51 +1687,39 @@ screen.REALISTIC_CLOUD_NOISES_MENU.comment=Settings for realistic clouds noise
 
 option.CLOUD_LAYER_1_SCALE=Layer 1 Scale
 option.CLOUD_LAYER_1_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_1_SCALE.-1=Use Style
 
 option.CLOUD_LAYER_1_WEIGHT=Layer 1 Weight
 option.CLOUD_LAYER_1_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_1_WEIGHT.-1=Use Style
 
 option.CLOUD_LAYER_1_SPEED=Layer 1 Speed
 option.CLOUD_LAYER_1_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_1_SPEED.-1=Use Style
 
 option.CLOUD_LAYER_2_SCALE=Layer 2 Scale
 option.CLOUD_LAYER_2_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_2_SCALE.-1=Use Style
 
 option.CLOUD_LAYER_2_WEIGHT=Layer 2 Weight
 option.CLOUD_LAYER_2_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_2_WEIGHT.-1=Use Style
 
 option.CLOUD_LAYER_2_SPEED=Layer 2 Speed
 option.CLOUD_LAYER_2_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_2_SPEED.-1=Use Style
 
 option.CLOUD_LAYER_3_SCALE=Layer 3 Scale
 option.CLOUD_LAYER_3_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_3_SCALE.-1=Use Style
 
 option.CLOUD_LAYER_3_WEIGHT=Layer 3 Weight
 option.CLOUD_LAYER_3_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_3_WEIGHT.-1=Use Style
 
 option.CLOUD_LAYER_3_SPEED=Layer 3 Speed
 option.CLOUD_LAYER_3_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_3_SPEED.-1=Use Style
 
 option.CLOUD_LAYER_4_SCALE=Layer 4 Scale
 option.CLOUD_LAYER_4_SCALE.comment=How large this layer of noise is
-value.CLOUD_LAYER_4_SCALE.-1=Use Style
 
 option.CLOUD_LAYER_4_WEIGHT=Layer 4 Weight
 option.CLOUD_LAYER_4_WEIGHT.comment=How much this layer affects the noise
-value.CLOUD_LAYER_4_WEIGHT.-1=Use Style
 
 option.CLOUD_LAYER_4_SPEED=Layer 4 Speed
 option.CLOUD_LAYER_4_SPEED.comment=How quickly this layer moves through the world (it is suggested that smaller layers move slower than larger layers)
-value.CLOUD_LAYER_4_SPEED.-1=Use Style
 
 
 
@@ -2073,51 +1729,39 @@ screen.NETHER_CLOUDS_MENU=Nether Clouds
 
 option.NETHER_CLOUDS_ENABLED=Nether Clouds Enabled
 option.NETHER_CLOUDS_ENABLED.comment=Enables smoke-like volumetric clouds in the nether
-value.NETHER_CLOUDS_ENABLED.-1=Use Style
 value.NETHER_CLOUDS_ENABLED.0=Off
 value.NETHER_CLOUDS_ENABLED.1=On
 
 option.NETHER_CLOUDS_SCALE=Nether Clouds Scale
-value.NETHER_CLOUDS_SCALE.-1=Use Style
 
 option.NETHER_CLOUDS_COVERAGE=Nether Clouds Coverage
-value.NETHER_CLOUDS_COVERAGE.-1=Use Style
 
 option.NETHER_CLOUDS_DENSITY=Nether Clouds Density
 option.NETHER_CLOUDS_DENSITY.comment=How quickly the clouds transition to max opacity
-value.NETHER_CLOUDS_DENSITY.-1=Use Style
 
 option.NETHER_CLOUDS_TRANSPARENCY=Nether Clouds Transparency
 option.NETHER_CLOUDS_TRANSPARENCY.comment=The final mixing multiplier for nether clouds
-value.NETHER_CLOUDS_TRANSPARENCY.-1=Use Style
 
 option.NETHER_CLOUDS_BASE_RED=Nether Clouds Base Color Red
 option.NETHER_CLOUDS_BASE_RED.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
-value.NETHER_CLOUDS_BASE_RED.-1=Use Style
 
 option.NETHER_CLOUDS_BASE_GREEN=Nether Clouds Base Color Green
 option.NETHER_CLOUDS_BASE_GREEN.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
-value.NETHER_CLOUDS_BASE_GREEN.-1=Use Style
 
 option.NETHER_CLOUDS_BASE_BLUE=Nether Clouds Base Color Blue
 option.NETHER_CLOUDS_BASE_BLUE.comment=The base value for the nether clouds (this value is simply added to the value from the Nether Clouds Fog Influence)
-value.NETHER_CLOUDS_BASE_BLUE.-1=Use Style
 
 option.NETHER_CLOUDS_FOG_INFLUENCE=Nether Clouds Fog Influence
 option.NETHER_CLOUDS_FOG_INFLUENCE.comment=How much the nether fog color influences the color of the nether clouds (this value is simply added to the value from the Nether Clouds Base Color)
-value.NETHER_CLOUDS_FOG_INFLUENCE.-1=Use Style
 
 option.NETHER_CLOUDS_TINT_RED=Nether Clouds Tint Red
 option.NETHER_CLOUDS_TINT_RED.comment=The final red multiplier for the nether clouds color
-value.NETHER_CLOUDS_TINT_RED.-1=Use Style
 
 option.NETHER_CLOUDS_TINT_GREEN=Nether Clouds Tint Green
 option.NETHER_CLOUDS_TINT_GREEN.comment=The final green multiplier for the nether clouds color
-value.NETHER_CLOUDS_TINT_GREEN.-1=Use Style
 
 option.NETHER_CLOUDS_TINT_BLUE=Nether Clouds Tint Blue
 option.NETHER_CLOUDS_TINT_BLUE.comment=The final blue multiplier for the nether clouds color
-value.NETHER_CLOUDS_TINT_BLUE.-1=Use Style
 
 
 
@@ -2127,47 +1771,36 @@ screen.END_CLOUDS_MENU=End Clouds
 
 option.END_CLOUDS_ENABLED=End Clouds Enabled
 option.END_CLOUDS_ENABLED.comment=Enables volumetric clouds in the end
-value.END_CLOUDS_ENABLED.-1=Use Style
 value.END_CLOUDS_ENABLED.0=Off
 value.END_CLOUDS_ENABLED.1=On
 
 option.END_CLOUDS_TYPE=End Clouds Type
-value.END_CLOUDS_TYPE.-1=Use Style
 value.END_CLOUDS_TYPE.1=Vertical
 value.END_CLOUDS_TYPE.2=Swirly
 
 option.END_CLOUDS_SCALE=End Clouds Scale
-value.END_CLOUDS_SCALE.-1=Use Style
 
 option.END_CLOUDS_COVERAGE=End Clouds Coverage
-value.END_CLOUDS_COVERAGE.-1=Use Style
 
 option.END_CLOUDS_TRANSPARENCY=End Clouds Transparency
-value.END_CLOUDS_TRANSPARENCY.-1=Use Style
 
 option.END_CLOUDS_RED_DARK=End Clouds Red Dark
 option.END_CLOUDS_RED_DARK.comment=Changes the darker color of the end clouds
-value.END_CLOUDS_RED_DARK.-1=Use Style
 
 option.END_CLOUDS_GREEN_DARK=End Clouds Green Dark
 option.END_CLOUDS_GREEN_DARK.comment=Changes the darker color of the end clouds
-value.END_CLOUDS_GREEN_DARK.-1=Use Style
 
 option.END_CLOUDS_BLUE_DARK=End Clouds Blue Dark
 option.END_CLOUDS_BLUE_DARK.comment=Changes the darker color of the end clouds
-value.END_CLOUDS_BLUE_DARK.-1=Use Style
 
 option.END_CLOUDS_RED_BRIGHT=End Clouds Red Bright
 option.END_CLOUDS_RED_BRIGHT.comment=Changes the brighter color of the end clouds
-value.END_CLOUDS_RED_BRIGHT.-1=Use Style
 
 option.END_CLOUDS_GREEN_BRIGHT=End Clouds Green Bright
 option.END_CLOUDS_GREEN_BRIGHT.comment=Changes the brighter color of the end clouds
-value.END_CLOUDS_GREEN_BRIGHT.-1=Use Style
 
 option.END_CLOUDS_BLUE_BRIGHT=End Clouds Blue Bright
 option.END_CLOUDS_BLUE_BRIGHT.comment=Changes the brighter color of the end clouds
-value.END_CLOUDS_BLUE_BRIGHT.-1=Use Style
 
 
 
@@ -2176,84 +1809,58 @@ value.END_CLOUDS_BLUE_BRIGHT.-1=Use Style
 screen.SKY_COLORS_MENU=Sky Colors
 
 option.SKY_DAY_RED=Sky Day Red
-value.SKY_DAY_RED.-1=use Style
 
 option.SKY_DAY_GREEN=Sky Day Green
-value.SKY_DAY_GREEN.-1=use Style
 
 option.SKY_DAY_BLUE=Sky Day Blue
-value.SKY_DAY_BLUE.-1=use Style
 
 option.SKY_DAY_BRIGHTNESS=Sky Day Brightness
-value.SKY_DAY_BRIGHTNESS.-1=Use Style
 
 option.SKY_NIGHT_RED=Sky Night Red
-value.SKY_NIGHT_RED.-1=use Style
 
 option.SKY_NIGHT_GREEN=Sky Night Green
-value.SKY_NIGHT_GREEN.-1=use Style
 
 option.SKY_NIGHT_BLUE=Sky Night Blue
-value.SKY_NIGHT_BLUE.-1=use Style
 
 option.SKY_NIGHT_BRIGHTNESS=Sky Night Brightness
-value.SKY_NIGHT_BRIGHTNESS.-1=Use Style
 
 option.SKY_HORIZON_DAY_RED=Horizon Day Red
-value.SKY_HORIZON_DAY_RED.-1=use Style
 
 option.SKY_HORIZON_DAY_GREEN=Horizon Day Green
-value.SKY_HORIZON_DAY_GREEN.-1=use Style
 
 option.SKY_HORIZON_DAY_BLUE=Horizon Day Blue
-value.SKY_HORIZON_DAY_BLUE.-1=use Style
 
 option.SKY_HORIZON_DAY_BRIGHTNESS=Horizon Day Brightness
-value.SKY_HORIZON_DAY_BRIGHTNESS.-1=Use Style
 
 option.SKY_HORIZON_NIGHT_RED=Horizon Night Red
-value.SKY_HORIZON_NIGHT_RED.-1=use Style
 
 option.SKY_HORIZON_NIGHT_GREEN=Horizon Night Green
-value.SKY_HORIZON_NIGHT_GREEN.-1=use Style
 
 option.SKY_HORIZON_NIGHT_BLUE=Horizon Night Blue
-value.SKY_HORIZON_NIGHT_BLUE.-1=use Style
 
 option.SKY_HORIZON_NIGHT_BRIGHTNESS=Horizon Night Brightness
-value.SKY_HORIZON_NIGHT_BRIGHTNESS.-1=Use Style
 
 option.SKY_HORIZON_SUNRISE_RED=Horizon Sunrise Red
-value.SKY_HORIZON_SUNRISE_RED.-1=use Style
 
 option.SKY_HORIZON_SUNRISE_GREEN=Horizon Sunrise Green
-value.SKY_HORIZON_SUNRISE_GREEN.-1=use Style
 
 option.SKY_HORIZON_SUNRISE_BLUE=Horizon Sunrise Blue
-value.SKY_HORIZON_SUNRISE_BLUE.-1=use Style
 
 option.SKY_HORIZON_SUNRISE_BRIGHTNESS=Horizon Sunrise Brightness
-value.SKY_HORIZON_SUNRISE_BRIGHTNESS.-1=Use Style
 
 option.SKY_HORIZON_SUNSET_RED=Horizon Sunset Red
-value.SKY_HORIZON_SUNSET_RED.-1=use Style
 
 option.SKY_HORIZON_SUNSET_GREEN=Horizon Sunset Green
-value.SKY_HORIZON_SUNSET_GREEN.-1=use Style
 
 option.SKY_HORIZON_SUNSET_BLUE=Horizon Sunset Blue
-value.SKY_HORIZON_SUNSET_BLUE.-1=use Style
 
 option.SKY_HORIZON_SUNSET_BRIGHTNESS=Horizon Sunset Brightness
-value.SKY_HORIZON_SUNSET_BRIGHTNESS.-1=Use Style
 
 option.SUNRISE_SUNSET_TOP_HEIGHT=Sunrise/Sunset Top Height
 option.SUNRISE_SUNSET_TOP_HEIGHT.comment=Controls the top height of the sunrise/sunset sky glow
-value.SUNRISE_SUNSET_TOP_HEIGHT.-1=Use Style
 
 option.SUNRISE_SUNSET_BOTTOM_HEIGHT=Sunrise/Sunset Bottom Height
 option.SUNRISE_SUNSET_BOTTOM_HEIGHT.comment=Controls the bottom height of the sunrise/sunset sky glow
-value.SUNRISE_SUNSET_BOTTOM_HEIGHT.-1=Use Style
 
 
 
@@ -2263,35 +1870,27 @@ screen.NETHER_SKY_COLORS_MENU=Nether Sky Colors
 
 option.NETHER_SKY_BASE_RED=Base Red
 option.NETHER_SKY_BASE_RED.comment=The base red value for the nether sky color (this is simply added to the fog influence to get the final sky color)
-value.NETHER_SKY_BASE_RED.-1=Use Style
 
 option.NETHER_SKY_BASE_GREEN=Base Green
 option.NETHER_SKY_BASE_GREEN.comment=The base green value for the nether sky color (this is simply added to the fog influence to get the final sky color)
-value.NETHER_SKY_BASE_GREEN.-1=Use Style
 
 option.NETHER_SKY_BASE_BLUE=Base Blue
 option.NETHER_SKY_BASE_BLUE.comment=The base blue value for the nether sky color (this is simply added to the fog influence to get the final sky color)
-value.NETHER_SKY_BASE_BLUE.-1=Use Style
 
 option.NETHER_SKY_FOG_INFLUENCE=Fog Influence
 option.NETHER_SKY_FOG_INFLUENCE.comment=How much of the vanilla fog to add to the sky color (this is simply added to the base value to get the final sky color)
-value.NETHER_SKY_FOG_INFLUENCE.-1=Use Style
 
 option.NETHER_SKY_FOG_SATURATION=Fog Saturation
 option.NETHER_SKY_FOG_SATURATION.comment=How much to increase/decrease the vanilla fog's saturation before adding to the sky color
-value.NETHER_SKY_FOG_SATURATION.-1=Use Style
 
 option.NETHER_SKY_TINT_RED=Tint Red
 option.NETHER_SKY_TINT_RED.comment=The final red multiplier for the nether sky color
-value.NETHER_SKY_TINT_RED.-1=Use Style
 
 option.NETHER_SKY_TINT_GREEN=Tint Green
 option.NETHER_SKY_TINT_GREEN.comment=The final green multiplier for the nether sky color
-value.NETHER_SKY_TINT_GREEN.-1=Use Style
 
 option.NETHER_SKY_TINT_BLUE=Tint Blue
 option.NETHER_SKY_TINT_BLUE.comment=The final blue multiplier for the nether sky color
-value.NETHER_SKY_TINT_BLUE.-1=Use Style
 
 
 
@@ -2301,35 +1900,27 @@ screen.END_SKY_COLORS_MENU=End Sky Colors
 
 option.END_SKY_RED=End Sky Red
 option.END_SKY_RED.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Red)
-value.END_SKY_RED.-1=Use Style
 
 option.END_SKY_GREEN=End Sky Green
 option.END_SKY_GREEN.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Green)
-value.END_SKY_GREEN.-1=Use Style
 
 option.END_SKY_BLUE=End Sky Blue
 option.END_SKY_BLUE.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Blue)
-value.END_SKY_BLUE.-1=Use Style
 
 option.END_SKY_BRIGHTNESS=End Sky Brightness
 option.END_SKY_BRIGHTNESS.comment=Color for the end sky (the darker half of the static, this is half as sensitive as End Static Brightness)
-value.END_SKY_BRIGHTNESS.-1=Use Style
 
 option.END_STATIC_RED=End Static Red
 option.END_STATIC_RED.comment=Color for the end sky static (the brighter half of the static)
-value.END_STATIC_RED.-1=Use Style
 
 option.END_STATIC_GREEN=End Static Green
 option.END_STATIC_GREEN.comment=Color for the end sky static (the brighter half of the static)
-value.END_STATIC_GREEN.-1=Use Style
 
 option.END_STATIC_BLUE=End Static Blue
 option.END_STATIC_BLUE.comment=Color for the end sky static (the brighter half of the static)
-value.END_STATIC_BLUE.-1=Use Style
 
 option.END_STATIC_BRIGHTNESS=End Static Brightness
 option.END_STATIC_BRIGHTNESS.comment=Color for the end sky static (the brighter half of the static)
-value.END_STATIC_BRIGHTNESS.-1=Use Style
 
 
 
@@ -2375,28 +1966,22 @@ screen.FOG_MENU=Fog
 
 option.UNDERGROUND_FOG_CONDITION=Underground Fog Condition
 option.UNDERGROUND_FOG_CONDITION.comment=When to apply the underground fog darkening\n\nSkylight: apply the fog darkness according to skylight\nPosition: apply the fog darkness when below sea level
-value.UNDERGROUND_FOG_CONDITION.-1=Use style
 value.UNDERGROUND_FOG_CONDITION.1=Brightness
 value.UNDERGROUND_FOG_CONDITION.2=Position
 
 option.UNDERGROUND_FOG_COLOR_TYPE=Underground Fog Color Type
 option.UNDERGROUND_FOG_COLOR_TYPE.comment=Changes the underground fog color to be either a static grayscale value or simply just the vanilla fog color
-value.UNDERGROUND_FOG_COLOR_TYPE.-1=Use style
 value.UNDERGROUND_FOG_COLOR_TYPE.1=Vanilla
 value.UNDERGROUND_FOG_COLOR_TYPE.2=Static
 
 option.UNDERGROUND_FOG_BRIGHTNESS=Underground Fog Brightness
 option.UNDERGROUND_FOG_BRIGHTNESS.comment=The underground sky is made darker so that the underground fog is made darker, and this controls the brightness of that underground darkness
-value.UNDERGROUND_FOG_BRIGHTNESS.-1=Use Style
 
 option.END_FOG_RED=End Fog Red
-value.END_FOG_RED.-1=Use Style
 
 option.END_FOG_GREEN=End Fog Green
-value.END_FOG_GREEN.-1=Use Style
 
 option.END_FOG_BLUE=End Fog Blue
-value.END_FOG_BLUE.-1=Use Style
 
 
 
@@ -2412,31 +1997,24 @@ value.BORDER_FOG_ENABLED.1=On
 
 option.BORDER_FOG_START_OVERWORLD=Border Fog Start (Overworld)
 option.BORDER_FOG_START_OVERWORLD.comment=Where fog starts during normal conditions in the overworld
-value.BORDER_FOG_START_OVERWORLD.-1=Use Style
 
 option.BORDER_FOG_START_NETHER=Border Fog Start (Nether)
 option.BORDER_FOG_START_NETHER.comment=Where fog starts during normal conditions in the nether
-value.BORDER_FOG_START_NETHER.-1=Use Style
 
 option.BORDER_FOG_START_END=Border Fog Start (End)
 option.BORDER_FOG_START_END.comment=Where fog starts during normal conditions in the end
-value.BORDER_FOG_START_END.-1=Use Style
 
 option.BORDER_FOG_END=Border Fog End
 option.BORDER_FOG_END.comment=Where fog ends during normal conditions
-value.BORDER_FOG_END.-1=Use Style
 
 option.BORDER_FOG_CURVE_OVERWORLD=Border Fog Curve (Overworld)
 option.BORDER_FOG_CURVE_OVERWORLD.comment= How quickly fog drops off from end to start in the overworld (high values mean faster drop off)
-value.BORDER_FOG_CURVE_OVERWORLD.-1=Use Style
 
 option.BORDER_FOG_CURVE_NETHER=Border Fog Curve (Nether)
 option.BORDER_FOG_CURVE_NETHER.comment= How quickly fog drops off from end to start in the nether (high values mean faster drop off)
-value.BORDER_FOG_CURVE_NETHER.-1=Use Style
 
 option.BORDER_FOG_CURVE_END=Border Fog Curve (End)
 option.BORDER_FOG_CURVE_END.comment= How quickly fog drops off from end to start in the end (high values mean faster drop off)
-value.BORDER_FOG_CURVE_END.-1=Use Style
 
 option.CYLINDRICAL_CLIPPING=Cylindrical Clipping
 option.CYLINDRICAL_CLIPPING.comment=Prevents terrain past the border fog from being rendered (should always be on when border fog is enabled)
@@ -2461,67 +2039,52 @@ screen.ATMOSPHERIC_FOG_MENU.comment=Fog that gives the world more depth, atmosph
 
 option.DAY_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Day)
 option.DAY_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at day)
-value.DAY_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 option.NIGHT_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Night)
 option.NIGHT_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at night)
-value.NIGHT_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 option.SUNRISE_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Sunrise)
 option.SUNRISE_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at sunrise)
-value.SUNRISE_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 option.SUNSET_ATMOSPHERIC_FOG_DENSITY=Atmospheric Fog Density (Sunset)
 option.SUNSET_ATMOSPHERIC_FOG_DENSITY.comment=General-purpose fog (at sunset)
-value.SUNSET_ATMOSPHERIC_FOG_DENSITY.-1=Use Style
 
 option.UNDERGROUND_FOG_DENSITY=Underground Fog Density
 option.UNDERGROUND_FOG_DENSITY.comment=Atmospheric fog density when underground
-value.UNDERGROUND_FOG_DENSITY.-1=Use Style
 
 option.WEATHER_FOG_DENSITY=Rain Fog Density
 option.WEATHER_FOG_DENSITY.comment=Atmospheric fog density when raining / snowing
-value.WEATHER_FOG_DENSITY.-1=Use Style
 
 option.PALE_GARDEN_FOG_DENSITY=Pale Garden Fog Density
 option.PALE_GARDEN_FOG_DENSITY.comment=Atmospheric fog density when in the pale garden
-value.PALE_GARDEN_FOG_DENSITY.-1=Use Style
 
 option.PALE_GARDEN_FOG_NIGHT_DENSITY=Pale Garden Fog Night Density
 option.PALE_GARDEN_FOG_NIGHT_DENSITY.comment=Atmospheric fog density when in the pale garden at night
-value.PALE_GARDEN_FOG_NIGHT_DENSITY.-1=Use Style
 
 option.BLINDNESS_EFFECT_FOG_DENSITY=Blindness Effect Fog Density
 option.BLINDNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Blindness effect
-value.BLINDNESS_EFFECT_FOG_DENSITY.-1=Use Style
 
 option.DARKNESS_EFFECT_FOG_DENSITY=Darkness Effect Fog Density
 option.DARKNESS_EFFECT_FOG_DENSITY.comment=Atmospheric fog density for the Darkness effect
-value.DARKNESS_EFFECT_FOG_DENSITY.-1=Use Style
 
 option.NETHER_FOG_DENSITY=Nether Fog Density
 option.NETHER_FOG_DENSITY.comment=Atmospheric fog density for the nether
-value.NETHER_FOG_DENSITY.-1=Use Style
 
 option.END_FOG_DENSITY=End Fog Density
 option.END_FOG_DENSITY.comment=Atmospheric fog density for the end
-value.END_FOG_DENSITY.-1=Use Style
 
 option.USE_VANILLA_FOG_COLOR=Use Vanilla Fog Color
 option.USE_VANILLA_FOG_COLOR.comment=Replaced the shader's sky/fog horizon color with the vanilla sky/fog horizon color
-value.USE_VANILLA_FOG_COLOR.-1=Use Style
 value.USE_VANILLA_FOG_COLOR.0=Off
 value.USE_VANILLA_FOG_COLOR.1=On
 
 option.USE_VANILLA_FOG_DENSITY=Use Vanilla Fog Density
 option.USE_VANILLA_FOG_DENSITY.comment=Adds a way for the vanilla fog density to affect the shader's fog density
-value.USE_VANILLA_FOG_DENSITY.-1=Use Style
 value.USE_VANILLA_FOG_DENSITY.0=Off
 value.USE_VANILLA_FOG_DENSITY.1=On
 
 option.USE_VANILLA_SKY_COLOR=Use Vanilla Sky Density
 option.USE_VANILLA_SKY_COLOR.comment=Replaced the shader's main sky color with the vanilla main sky color
-value.USE_VANILLA_SKY_COLOR.-1=Use Style
 value.USE_VANILLA_SKY_COLOR.0=Off
 value.USE_VANILLA_SKY_COLOR.1=On
 
@@ -2533,71 +2096,54 @@ screen.IN_LIQUID_FOG_MENU=In-Liquid Fog
 
 option.WATER_FOG_BASE_RED=Water Fog Base Red
 option.WATER_FOG_BASE_RED.comment=The base red value for the underwater fog color (this is simply added to the vanilla fog influence to get the final fog color)
-value.WATER_FOG_BASE_RED.-1=Use Style
 
 option.WATER_FOG_BASE_GREEN=Water Fog Base Green
 option.WATER_FOG_BASE_GREEN.comment=The base green value for the underwater fog color (this is simply added to the vanilla fog influence to get the final fog color)
-value.WATER_FOG_BASE_GREEN.-1=Use Style
 
 option.WATER_FOG_BASE_BLUE=Water Fog Base Blue
 option.WATER_FOG_BASE_BLUE.comment=The base blue value for the underwater fog color (this is simply added to the vanilla fog influence to get the final fog color)
-value.WATER_FOG_BASE_BLUE.-1=Use Style
 
 option.WATER_VANILLA_FOG_INFLUENCE=Water Vanilla Fog Influence
 option.WATER_VANILLA_FOG_INFLUENCE.comment=How much of the vanilla fog to add to the fog color (this is simply added to the base value to get the final fog color, also note that the vanilla water color seems to start dark and slowly become brighter after entering water)
-value.WATER_VANILLA_FOG_INFLUENCE.-1=Use Style
 
 option.WATER_VANILLA_FOG_SATURATION=Water Vanilla Fog Saturation
 option.WATER_VANILLA_FOG_SATURATION.comment=How much to increase/decrease the vanilla fog's saturation before adding to the sky color
-value.WATER_VANILLA_FOG_SATURATION.-1=Use Style
 
 option.WATER_FOG_TINT_RED=Water Fog Red Tint
 option.WATER_FOG_TINT_RED.comment=The final red multiplier for the underwater fog color
-value.WATER_FOG_TINT_RED.-1=Use Style
 
 option.WATER_FOG_TINT_GREEN=Water Fog Green Tint
 option.WATER_FOG_TINT_GREEN.comment=The final green multiplier for the underwater fog color
-value.WATER_FOG_TINT_GREEN.-1=Use Style
 
 option.WATER_FOG_TINT_BLUE=Water Fog Blue Tint
 option.WATER_FOG_TINT_BLUE.comment=The final blue multiplier for the underwater fog color
-value.WATER_FOG_TINT_BLUE.-1=Use Style
 
 option.WATER_FOG_DENSITY=Water Fog Density
 option.WATER_FOG_DENSITY.comment=Density of fog when underwater
-value.WATER_FOG_DENSITY.-1=Use Style
 
 option.LAVA_FOG_RED=Lava Fog Red
 option.LAVA_FOG_RED.comment=Fog color when in lava
-value.LAVA_FOG_RED.-1=Use Style
 
 option.LAVA_FOG_GREEN=Lava Fog Green
 option.LAVA_FOG_GREEN.comment=Fog color when in lava
-value.LAVA_FOG_GREEN.-1=Use Style
 
 option.LAVA_FOG_BLUE=Lava Fog Blue
 option.LAVA_FOG_BLUE.comment=Fog color when in lava
-value.LAVA_FOG_BLUE.-1=Use Style
 
 option.LAVA_FOG_DENSITY=Lava Fog Density
 option.LAVA_FOG_DENSITY.comment=Density of fog when in lava
-value.LAVA_FOG_DENSITY.-1=Use Style
 
 option.POWDERED_SNOW_FOG_RED=Snow Fog Red
 option.POWDERED_SNOW_FOG_RED.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_RED.-1=Use Style
 
 option.POWDERED_SNOW_FOG_GREEN=Snow Fog Green
 option.POWDERED_SNOW_FOG_GREEN.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_GREEN.-1=Use Style
 
 option.POWDERED_SNOW_FOG_BLUE=Snow Fog Blue
 option.POWDERED_SNOW_FOG_BLUE.comment=Fog color when in powdered snow
-value.POWDERED_SNOW_FOG_BLUE.-1=Use Style
 
 option.POWDERED_SNOW_FOG_DENSITY=Snow Fog Density
 option.POWDERED_SNOW_FOG_DENSITY.comment=Density of fog when in powdered snow
-value.POWDERED_SNOW_FOG_DENSITY.-1=Use Style
 
 
 
@@ -2633,7 +2179,6 @@ value.SHOW_DANGEROUS_LIGHT.1=On
 
 option.REFLECTIVE_EVERYTHING=Reflective Everything
 option.REFLECTIVE_EVERYTHING.comment=Make EVERYTHING reflective
-value.REFLECTIVE_EVERYTHING.-1=Use Style
 value.REFLECTIVE_EVERYTHING.0=Off
 value.REFLECTIVE_EVERYTHING.1=On
 
