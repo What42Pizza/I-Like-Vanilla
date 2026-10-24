@@ -187,8 +187,10 @@ This describes which /main_files-s handle different effects
 - **colortex4:  Bloom Texture**
 - **colortex5:  Sky Objects Texture**
 - **colortex6:  Noisy Renders Texture**
-  - x: depthSunraysAmount (8-bit) & volSunraysAmount (8-bit, value = 1/stored-1)
-  - y: clouds transparency (8-bit, value = 1-stored) & clouds brightness (8-bit, value = 1-stored)
+  - x: depthSunraysAmount
+  - y: volSunraysAmount (value = 1/stored-1)
+  - z: clouds transparency (value = 1-stored)
+  - w: clouds brightness (value = 1-stored)
 - **colortex7:  Prev Depth Texture**
   - r: depth (16-bit)
 - **colortex8:  Weather Texture**

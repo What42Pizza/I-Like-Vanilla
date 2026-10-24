@@ -73,6 +73,7 @@ vec2 computeClouds(vec3 playerPos) {
 	
 	float dither = bayer64(gl_FragCoord.xy);
 	dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+	float noise = texelFetch(noisetex, (texelcoord + ivec2(frameCounter * 31, frameCounter * 34)) & 127, 0).b;
 	pos += stepVec * (dither - 0.5);
 	
 	#if CLOUDS_TYPE == 3

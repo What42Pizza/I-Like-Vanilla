@@ -1,96 +1,158 @@
 in_out vec2 texcoord;
 
+#if DEPTH_SUNRAYS_ENABLED == 1
+	flat in_out float depthSunraysAmountMult;
+#endif
+#if VOL_SUNRAYS_ENABLED == 1
+	flat in_out float volSunraysAmountMult;
+	flat in_out float volSunraysAmountMax;
+#endif
+#ifdef VOL_CLOUDS_ENABLED
+	flat in_out float fogDensity;
+#endif
+#if NETHER_CLOUDS_ENABLED == 1
+	flat in_out vec3 cloudsColor;
+#endif
+
 
 
 #ifdef FSH
 
-#if REFLECTIONS_ENABLED == 1
-	#include "/utils/depth.glsl"
+#if VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED
 	#include "/utils/projections.glsl"
-	#include "/utils/getSkyColor.glsl"
-	#include "/lib/reflections.glsl"
 #endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/utils/borderFogAmount.glsl"
+#ifdef VOL_CLOUDS_ENABLED
+	#include "/utils/getCloudColor.glsl"
 #endif
-
-
 
 void main() {
-	/* DRAWBUFFERS:9 */
-	gl_FragData[0] = vec4(0.0);
+	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
 	
-	
-	
-	ivec2 texelcoord = ivec2(texcoord * viewSize);
-	
-	// ======== REFLECTIONS ======== //
-	
-	#if REFLECTIONS_ENABLED == 1
-		
-		vec4 data;
-		float depth0 = texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r;
-		float depth1 = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-		bool useTransparentData = depth0 < depth1; // if transparents depth is less than non-transparents depth then use transparents data tex
-		#ifdef DISTANT_HORIZONS
-			float dhDepth0 = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
-			float dhDepth1 = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
-			useTransparentData = useTransparentData || dhDepth0 < dhDepth1;
-		#endif
-		vec3 screenPos = vec3(texcoord, depth0);
+	#if VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED
+		vec3 screenPos = vec3(texcoord, texelFetch(DEPTH_BUFFER_ALL, texelcoord, 0).r);
 		vec3 viewPos = screenToView(screenPos);
-		#ifdef VOXY
-			float vxDepth0 = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
-			float vxDepth1 = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
-			vec3 viewPosVx = screenToViewVx(vec3(texcoord, vxDepth0));
-			useTransparentData = useTransparentData || (vxDepth0 < vxDepth1 && viewPosVx.z > viewPos.z - far / (16.0 / 2.0));
-		#endif
-		if (useTransparentData) {
-			data = texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0);
-		} else {
-			data = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0);
-		}
-		vec3 normal = decodeNormal(data.zw);
-		#ifndef MODERN_BACKEND
-			vec3 xDir = normalize(dFdx(viewPos));
-			vec3 yDir = normalize(dFdy(viewPos));
-			normal = cross(xDir, yDir);
-		#endif
-		vec2 lmcoord = unpack_2x8(data.x);
-		
-		#if REFLECTIVE_EVERYTHING == 1
-			float reflectionStrength = 1.0;
-		#else
-			vec4 refSpecGlowingEntity = unpack_7_7_1_1(data.y);
-			float reflectionStrength = refSpecGlowingEntity.x * (1.0 - refSpecGlowingEntity.z); // z holds whether or not it's glowing, x holds the reflectionStrength if not glowing
-		#endif
-		#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
-			float invCloudsThickness = unpack_2x8(texelFetch(NOISY_RENDERS_TEXTURE, texelcoord, 0).g).x;
-			reflectionStrength *= sqrt(invCloudsThickness);
-		#endif
-		#if BORDER_FOG_ENABLED == 1
-			vec3 playerPos = mat3(gbufferModelViewInverse) * viewPos;
-			float _fogDistance;
-			float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
-			reflectionStrength *= 1.0 - fogAmount;
-		#endif
-		
-		if (depthIsHand(depth0)) return;
 		#ifdef DISTANT_HORIZONS
-			if (depth0 == 1.0 && dhDepth0 == 1.0) return;
-		#else
-			if (depth0 == 1.0) return;
+			vec3 screenPosDh = vec3(texcoord, texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r);
+			vec3 viewPosDh = screenToViewDh(screenPosDh);
+			if (viewPosDh.b > viewPos.b) viewPos = viewPosDh;
 		#endif
-		
-		#ifdef DISTANT_HORIZONS
-			if (depth0 == 1.0) viewPos = screenToViewDh(vec3(texcoord, dhDepth0));
-		#endif
-		
-		if (reflectionStrength > 0.01) {
-			gl_FragData[0] = getReflections(viewPos, normal, lmcoord, MAIN_TEXTURE, reflectionStrength);
-		}
-		
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
 	#endif
+	
+	
+	
+	// ======== NOISY RENDERS ADDITION ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+		vec4 noisyRendersData  = texture2D(NOISY_RENDERS_TEXTURE, texcoord, 0);
+		vec4 noisyRendersData1 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75, -0.75) * pixelSize);
+		vec4 noisyRendersData2 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75, -0.75) * pixelSize);
+		vec4 noisyRendersData3 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75,  0.75) * pixelSize);
+		vec4 noisyRendersData4 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75,  0.75) * pixelSize);
+	#endif
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
+		vec2 sunraysDatas = vec2(0.0);
+		sunraysDatas += noisyRendersData1.xy;
+		sunraysDatas += noisyRendersData2.xy;
+		sunraysDatas += noisyRendersData3.xy;
+		sunraysDatas += noisyRendersData4.xy;
+		sunraysDatas *= 0.25;
+	#endif
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		vec3 depthSunraysColor = isSun ? SUNRAYS_SUN_COLOR : SUNRAYS_MOON_COLOR;
+		#if BSL_MODE == 1
+			depthSunraysColor = vec3(getLum(depthSunraysColor)) * 2.0;
+		#endif
+		sunraysDatas.x = 1.0 - (1.0 - sunraysDatas.x) * (1.0 - sunraysDatas.x);
+		color += sunraysDatas.x * depthSunraysColor * depthSunraysAmountMult;
+	#endif
+	
+	#if VOL_SUNRAYS_ENABLED == 1
+		vec3 volSunraysColor = sunAngle < 0.5 ? SUNRAYS_SUN_COLOR * 1.25 : SUNRAYS_MOON_COLOR * 1.25;
+		float volSunraysAmount = sunraysDatas.y;
+		volSunraysAmount = 1.0 / volSunraysAmount - 1.0;
+		volSunraysAmount *= volSunraysAmountMult;
+		
+		volSunraysAmount *= 0.25 + 0.75 * abs(dot(normalize(viewPos), sunPosition * 0.01)); // this decreases the amount when you're looking perpendicular to the sun angle
+		
+		float undergroundAmount = pow(volSunraysAmount, 0.6) * 4.0;
+		volSunraysAmount = mix(volSunraysAmount, undergroundAmount, (1.0 - eyeBrightnessSmooth.y / 240.0) * (SUNRAYS_UNDERGROUND_MULT - 1.0) * 0.5 + 0.1);
+		
+		float altitude = playerPos.y + cameraPosition.y;
+		altitude += (0.25 - abs(mod(sunAngle, 0.5) - 0.25)) * 64.0; // make sure altitude light leaking prevention has less effect near noon
+		volSunraysAmount *= 8.0 / (8.0 - min(altitude, 64.0) + 64.0);
+		
+		volSunraysAmount = exp(-volSunraysAmount); // after this, volSunraysAmount is inverted (x=1-x)
+		volSunraysAmount = max(volSunraysAmount, volSunraysAmountMax);
+		color *= 1.0 + (1.0 - volSunraysAmount) * SUNRAYS_BRIGHTNESS_INCREASE * 2.0;
+		color = mix(volSunraysColor, color, volSunraysAmount);
+	#endif
+	
+	
+	#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
+		//vec2 cloudsData = vec2(0.0);
+		//cloudsData += noisyRendersData1.zw;
+		//cloudsData += noisyRendersData2.zw;
+		//cloudsData += noisyRendersData3.zw;
+		//cloudsData += noisyRendersData4.zw;
+		//cloudsData *= 0.25;
+		vec2 cloudsData = noisyRendersData.zw;
+	#endif
+	
+	#ifdef VOL_CLOUDS_ENABLED
+		float thickness = 1.0 - cloudsData.x;
+		float brightness = 1.0 - cloudsData.y;
+		#if CLOUDS_TYPE == 3
+			brightness *= 1.3;
+		#endif
+		vec3 cloudColor = getCloudColor(0.5 + 0.5 * brightness);
+		float cloudMidDist = (REALISTIC_CLOUDS_BOTTOM_Y + REALISTIC_CLOUDS_TOP_Y) / 2.0 - cameraPosition.y; // y dist from camera pos to cloud middle y level
+		vec3 cloudPos = playerPos / playerPos.y * cloudMidDist; // vector from camera pos to cloud middle y level
+		float cloudDist = length(cloudPos);
+		float atmoFogAmount = 1.0 - exp(-fogDensity * cloudDist * 0.1);
+		float atmoFogDecrease = percentThrough(abs(cloudMidDist), 0.0, (REALISTIC_CLOUDS_TOP_Y + REALISTIC_CLOUDS_BOTTOM_Y) * 0.3);
+		atmoFogAmount *= atmoFogDecrease * atmoFogDecrease;
+		color = mix(color, cloudColor, thickness * (1.0 - atmoFogAmount));
+	#endif
+	
+	#if NETHER_CLOUDS_ENABLED == 1
+		float thickness = 1.0 - cloudsData.x;
+		float brightness = 1.0 - cloudsData.y;
+		thickness *= 1.0 - (0.25 + 0.75 * NETHER_CLOUDS_TRANSPARENCY);
+		color *= 1.0 - thickness;
+		color += cloudsColor * brightness * thickness;
+	#endif
+	
+	#if END_CLOUDS_ENABLED == 1
+		float thickness = 1.0 - cloudsData.x;
+		float brightness = cloudsData.y;
+		thickness *= 1.0 - END_CLOUDS_TRANSPARENCY;
+		color *= 1.0 - thickness;
+		#if END_CLOUDS_TYPE == 2
+			brightness = 1.0 - (1.0 - brightness) * (1.0 - brightness);
+		#endif
+		#if END_CLOUDS_TYPE == 1
+			brightness = min(brightness * 2.0, 1.0);
+		#endif
+		color += mix(END_CLOUDS_DARK_COLOR, END_CLOUDS_BRIGHT_COLOR, brightness) * thickness;
+	#endif
+	
+	
+	
+	// ======== MIX WEATHER RENDER ======== //
+	
+	if (rainStrength > 0.0) {
+		vec4 weather = texelFetch(WEATHER_TEXTURE, texelcoord, 0);
+		color = mix(color, weather.rgb * 1.5, weather.a);
+	}
+	
+	
+	
+	/* DRAWBUFFERS:0 */
+	color *= 0.5;
+	gl_FragData[0] = vec4(color, 1.0);
 	
 }
 
@@ -101,11 +163,85 @@ void main() {
 #ifdef VSH
 
 void main() {
-	vec4 pos = ftransform();
-	pos.xy *= REFLECTIONS_RENDER_SCALE;
-	pos.xy -= 1.0 - REFLECTIONS_RENDER_SCALE;
-	gl_Position = pos;
-	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	gl_Position = ftransform();
+	texcoord = gl_MultiTexCoord0.xy;
+	
+	
+	
+	// ======== SUNRAYS ======== //
+	
+	#if DEPTH_SUNRAYS_ENABLED == 1
+		if (isSun) {
+			depthSunraysAmountMult = (ambientSunPercent + ambientSunrisePercent + ambientSunsetPercent) * SUNRAYS_AMOUNT_DAY * 0.8;
+			depthSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET;
+		} else {
+			depthSunraysAmountMult = (ambientMoonPercent + (ambientSunrisePercent + ambientSunsetPercent) * 0.5) * SUNRAYS_AMOUNT_NIGHT * 0.8;
+		}
+		depthSunraysAmountMult *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		depthSunraysAmountMult *= 0.5 + 0.5 * float(isEyeInWater == 0);
+		depthSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
+	#endif
+	
+	#if VOL_SUNRAYS_ENABLED == 1
+		volSunraysAmountMult = sunAngle < 0.5 ? SUNRAYS_AMOUNT_DAY * 0.2 : SUNRAYS_AMOUNT_NIGHT * 0.1;
+		float shadowCasterBrightness = sunLightBrightness + moonLightBrightness;
+		shadowCasterBrightness = 1.0 - shadowCasterBrightness;
+		shadowCasterBrightness *= shadowCasterBrightness;
+		shadowCasterBrightness *= shadowCasterBrightness;
+		shadowCasterBrightness = 1.0 - shadowCasterBrightness;
+		volSunraysAmountMult *= shadowCasterBrightness;
+		float eyeSkylightSmooth = eyeBrightnessSmooth.y / 240.0;
+		//volSunraysAmountMult *= mix(1.0, SUNRAYS_UNDERGROUND_MULT, (1.0 - eyeSkylightSmooth * eyeSkylightSmooth) * float(sunAngle < 0.5));
+		volSunraysAmountMult *= 1.0 + ambientSunrisePercent * SUNRAYS_INCREASE_SUNRISE * 2.0 + ambientSunsetPercent * SUNRAYS_INCREASE_SUNSET * 2.0;
+		volSunraysAmountMult *= 1.0 - 0.5 * inPaleGarden;
+		volSunraysAmountMax = 0.4 * (sunAngle < 0.5 ? SUNRAYS_AMOUNT_MAX_DAY : SUNRAYS_AMOUNT_MAX_NIGHT); 
+		volSunraysAmountMax *= 1.0 - rainStrength * (1.0 - SUNRAYS_WEATHER_MULT);
+		volSunraysAmountMax = 1.0 - volSunraysAmountMax;
+	#endif
+	#if NETHER_CLOUDS_ENABLED == 1
+		cloudsColor = normalize(fogColor + 0.001) * NETHER_CLOUDS_FOG_INFLUENCE + NETHER_CLOUDS_BASE_COLOR;
+		cloudsColor *= NETHER_CLOUDS_TINT_COLOR;
+	#endif
+	
+	
+	
+	// ======== REALISTIC CLOUDS ======== //
+	
+	#ifdef VOL_CLOUDS_ENABLED
+		if (isEyeInWater == 0) {
+			float skylightExposure = eyeBrightnessSmooth.y / 240.0;
+			#ifdef OVERWORLD
+				fogDensity =
+					DAY_ATMOSPHERIC_FOG_DENSITY * ambientSunPercent
+					+ NIGHT_ATMOSPHERIC_FOG_DENSITY * ambientMoonPercent
+					+ SUNRISE_ATMOSPHERIC_FOG_DENSITY * ambientSunrisePercent
+					+ SUNSET_ATMOSPHERIC_FOG_DENSITY * ambientSunsetPercent;
+				fogDensity = mix(UNDERGROUND_FOG_DENSITY, fogDensity, min(skylightExposure * 1.5, 1.0));
+				fogDensity = mix(fogDensity, WEATHER_FOG_DENSITY, betterRainStrength * skylightExposure);
+				fogDensity = mix(fogDensity, mix(PALE_GARDEN_FOG_NIGHT_DENSITY, PALE_GARDEN_FOG_DENSITY, dayPercent), inPaleGarden);
+			#elif defined NETHER
+				fogDensity = NETHER_FOG_DENSITY;
+			#elif defined END
+				fogDensity = END_FOG_DENSITY;
+			#endif
+			fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY, blindness);
+			fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 2.0, darknessFactor);
+			fogDensity /= 256.0;
+		} else if (isEyeInWater == 1) {
+			fogDensity = WATER_FOG_DENSITY * 0.2;
+		} else if (isEyeInWater == 2) {
+			fogDensity = LAVA_FOG_DENSITY * 0.2;
+		} else if (isEyeInWater == 3) {
+			fogDensity = POWDERED_SNOW_FOG_DENSITY * 0.2;
+		} else {
+			fogDensity = 1.0;
+		}
+		fogDensity = mix(fogDensity, BLINDNESS_EFFECT_FOG_DENSITY / 300.0, blindness);
+		fogDensity = mix(fogDensity, DARKNESS_EFFECT_FOG_DENSITY / 600.0, darknessFactor);
+	#endif
+	
+	
+	
 }
 
 #endif

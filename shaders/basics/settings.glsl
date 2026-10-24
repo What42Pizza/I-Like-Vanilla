@@ -20,13 +20,13 @@ const int   colortex4Format       = R11F_G11F_B10F;
 const bool  colortex4Clear        = false;
 const int   colortex5Format       = RGB10_A2;
 const bool  colortex5Clear        = true;
-const int   colortex6Format       = RG16;
+const int   colortex6Format       = RGBA8;
 const bool  colortex6Clear        = false;
 const int   colortex7Format       = R16;
 const bool  colortex7Clear        = false;
 const int   colortex8Format       = RGBA4;
-const int   colortex9Format   = RGBA8;
-const bool  colortex9Clear    = true;
+const int   colortex9Format       = RGBA8;
+const bool  colortex9Clear        = true;
 // should maybe change this to RG16F:
 const int   colortex10Format      = RG8;
 const bool  colortex10Clear       = false;

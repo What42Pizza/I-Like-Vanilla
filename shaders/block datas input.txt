@@ -57,7 +57,7 @@ custom code: ##
 // values greater than 1.0 only work here bc this isn't deferred lighting and the specular value is immediately used instead of stored
 specularness: 2.0
 voxelize: true
-translucency: vec3(0.3, 0.4, 1.0)
+translucency: vec3(0.35, 0.5, 1.0)
 
 
 block lava, flowing_lava:
@@ -65,7 +65,7 @@ weight: 100
 alias: BLOCK_ID_LAVA
 brightness: 1.15
 voxelize: true
-emission: vec3(1.2, 0.85, 0.6)
+emission: vec3(1.25, 0.85, 0.6)
 translucency: vec3(0.0, 0.0, 0.0)
 
 
@@ -450,7 +450,7 @@ weight: 5
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.75, 0.3, 0.0)
+emission: vec3(0.9, 0.3, 0.0)
 
 block copper_torch, copper_wall_torch, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern:
 weight: 1
@@ -532,7 +532,7 @@ glow detect min: vec3(60.0, 19.0, 67.6)
 glow detect max: vec3(63.0, 21.0, 69.6)
 glow amount: 0.5
 voxelize: true
-emission: vec3(0.55, 0.6, 0.65)
+emission: vec3(0.6, 0.6, 0.65)
 
 block cave_vines_plant:berries=true, cave_vines:berries=true:
 weight: 5
@@ -632,13 +632,13 @@ weight: 25
 reflectiveness: 1.0
 brightness: 1.1
 voxelize: true
-emission: vec3(1.0, 0.9, 0.3)
+emission: vec3(1.0, 0.9, 0.5)
 
 block shroomlight:
 weight: 10
 brightness: 0.9
 voxelize: true
-emission: vec3(1.0, 0.9, 0.5)
+emission: vec3(1.0, 0.7, 0.4)
 
 block magma_block:
 weight: 20
@@ -646,11 +646,13 @@ brightness: 0.7
 glow detect min: vec3(  0.0, 64.5, 79.2)
 glow detect max: vec3(360.0, 97.0, 98.4)
 glow amount: 1.0
+voxelize: true
+emission: vec3(0.5, 0.3, 0.0)
 
 block end_rod, end_crystal:
 weight: 1
 voxelize: true
-emission: vec3(0.9, 0.95, 1.0)
+emission: vec3(0.85, 0.75, 0.95)
 
 
 
@@ -1001,7 +1003,7 @@ weight: 1
 alias: BLOCK_ID_NETHER_PORTAL
 shadow casting: never
 voxelize: true
-emission: vec3(1.3, 0.65, 1.25)
+emission: vec3(1.2, 0.65, 1.15)
 
 block end_portal, end_gateway:
 weight: 1

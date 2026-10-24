@@ -1,0 +1,173 @@
+in_out vec2 texcoord;
+
+#if SSS_LIDAR == 1
+	const int lidarSampleCount = 24;
+	in_out vec2 lidarSampleCoords[lidarSampleCount];
+#endif
+
+
+
+#ifdef FSH
+
+#include "/utils/projections.glsl"
+
+#if SSS_PHOSPHOR == 1
+	#include "/lib/super_secret_settings/phosphor.glsl"
+#endif
+#if FXAA_ENABLED > 0
+	#include "/lib/fxaa.glsl"
+#endif
+#if TEMPORAL_FILTER_ENABLED > 0
+	#include "/utils/depth.glsl"
+	#include "/lib/temporal_filter.glsl"
+#endif
+#if MOTION_BLUR_ENABLED == 1
+	#include "/lib/motion_blur.glsl"
+#endif
+
+void main() {
+	
+	// super secret settings
+	ivec2 sampleCoord = texelcoord;
+	#if SSS_PIXELS != 0
+		int texelSize = int(viewSize.y) / SSS_PIXELS;
+		sampleCoord /= texelSize;
+		sampleCoord *= texelSize;
+	#endif
+	
+	vec3 color = texelFetch(MAIN_TEXTURE, sampleCoord, 0).rgb * 2.0;
+	
+	
+	
+	// super secret settings
+	
+	#if SSS_PHOSPHOR == 1
+		sss_phosphor(color);
+	#endif
+	
+	
+	
+	float depth = texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+	#ifdef DISTANT_HORIZONS
+		vec3 viewPos = screenToView(vec3(texcoord, depth));
+		float depthDh = texelFetch(DH_DEPTH_BUFFER_WO_TRANS, texelcoord, 0).r;
+		vec3 viewPosDh = screenToViewDh(vec3(texcoord, depthDh));
+		if (dot(viewPosDh, viewPosDh) < dot(viewPos, viewPos)) viewPos = viewPosDh;
+		vec4 sampleScreenPos = gbufferProjection * vec4(viewPos, 1.0);
+		depth = sampleScreenPos.z / sampleScreenPos.w * 0.5 + 0.5;
+	#endif
+	
+	vec3 pos = vec3(texcoord, depth);
+	vec3 cameraOffset = cameraPosition - previousCameraPosition;
+	vec2 prevCoord = reproject(pos, cameraOffset);
+	
+	
+	
+	#if FXAA_ENABLED == 2 || TEMPORAL_FILTER_ENABLED == 2
+		float refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, texelcoord, 0).y;
+		bool isEntity = unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
+	#endif
+	
+	// ======== FXAA ======== //
+	#if FXAA_ENABLED == 1
+		doFxaa(color, MAIN_TEXTURE);
+	#elif FXAA_ENABLED == 2
+		if (isEntity) doFxaa(color, MAIN_TEXTURE);
+	#endif
+	
+	// ======== TEMPORAL FILTER ======== //
+	#if TEMPORAL_FILTER_ENABLED >= 1
+		bool doTF = true;
+		#if TEMPORAL_EXTRA_DEPTH_CHECK >= 1
+			bool depthCheck = depth == 1.0;
+			float prevDepth1 = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(0.0, pixelSize.y)).r;
+			depthCheck = depthCheck || (depth - prevDepth1) / depth < 0.001;
+			#if TEMPORAL_EXTRA_DEPTH_CHECK == 2
+				float prevDepth2 = texture2D(PREV_DEPTH_TEXTURE, prevCoord - vec2(0.0, pixelSize.y)).r;
+				depthCheck = depthCheck || (depth - prevDepth2) / depth < 0.001;
+				float prevDepth3 = texture2D(PREV_DEPTH_TEXTURE, prevCoord + vec2(pixelSize.x, 0.0)).r;
+				depthCheck = depthCheck || (depth - prevDepth3) / depth < 0.001;
+				float prevDepth4 = texture2D(PREV_DEPTH_TEXTURE, prevCoord - vec2(pixelSize.x, 0.0)).r;
+				depthCheck = depthCheck || (depth - prevDepth4) / depth < 0.001;
+			#endif
+			doTF = doTF && depthCheck;
+		#endif
+		#if TEMPORAL_FILTER_ENABLED == 2
+			if (doTF) {
+				refSpecGlowingEntity = texelFetch(OPAQUE_DATA_TEXTURE, ivec2(prevCoord * viewSize), 0).y;
+				isEntity = isEntity || unpack_7_7_1_1(refSpecGlowingEntity).w > 0.5;
+				doTF = doTF && !isEntity;
+			}
+		#endif
+		if (doTF) doTemporalFilter(color, depth, prevCoord);
+	#endif
+	
+	
+	
+	// ======== SSS LIDAR ======== //
+	
+	#if SSS_LIDAR == 1
+		color = vec3(0.0);
+		for (int i = 0; i < lidarSampleCount; i++) {
+			float sampleDist = length((texcoord - lidarSampleCoords[i]) * vec2(aspectRatio, 1.0));
+			if (sampleDist < 0.005) {
+				color = texture2D(MAIN_TEXTURE, lidarSampleCoords[i]).rgb * 2.0;
+			}
+		}
+		float linearDepth = toLinearDepth(depth); 
+		float prevLinearDepth = toLinearDepth(texture2D(PREV_DEPTH_TEXTURE, prevCoord).r);
+		float depthDiff = (linearDepth - prevLinearDepth) * far;
+		if (depthDiff < 1.0 && clamp(prevCoord, 0.0, 1.0) == prevCoord) {
+			color = max(color, texelFetch(PREV_TEXTURE, ivec2(prevCoord * viewSize), 0).rgb * 2.0) - 1.0 / 255.0 * float(((texelcoord.x + texelcoord.y + frameCounter) & 7) == 0);
+		}
+	#endif
+	
+	
+	
+	// ======== MOTION BLUR ======== //
+	
+	#if MOTION_BLUR_ENABLED == 1
+		vec3 prevColor = color;
+		if (length(texcoord - prevCoord) > 0.00001 && !depthIsHand(depth)) {
+			doMotionBlur(color, prevCoord);
+		}
+	#endif
+	
+	
+	
+	/* DRAWBUFFERS:0 */
+	color *= 0.5;
+	gl_FragData[0] = vec4(color, 1.0);
+	#if TEMPORAL_FILTER_ENABLED > 0 || MOTION_BLUR_ENABLED == 1 || SSS_PHOSPHOR == 1 || SSS_LIDAR == 1
+		/* DRAWBUFFERS:01 */
+		#if MOTION_BLUR_ENABLED == 1
+			prevColor *= 0.5;
+			gl_FragData[1] = vec4(prevColor, 1.0);
+		#else
+			gl_FragData[1] = vec4(color, 1.0);
+		#endif
+	#endif
+	
+}
+
+#endif
+
+
+
+#ifdef VSH
+
+void main() {
+	gl_Position = ftransform();
+	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
+	
+	#if SSS_LIDAR == 1
+		uint rng = uint(frameCounter * lidarSampleCount);
+		for (int i = 0; i < lidarSampleCount; i++) {
+			lidarSampleCoords[i].x = randomFloat(rng) * 0.5 + 0.5;
+			lidarSampleCoords[i].y = randomFloat(rng) * 0.5 + 0.5;
+		}
+	#endif
+	
+}
+
+#endif

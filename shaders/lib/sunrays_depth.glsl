@@ -8,7 +8,10 @@ float getDepthSunraysAmount() {
 	//#define GRADIENT_NOISE_SPEED 21.001
 	//#include "/utils/var_gradient_noise.glsl"
 	
-	float noise = texelFetch(noisetex, (texelcoord + ivec2(frameCounter * 17, frameCounter * 27)) & 127, 0).b;
+	float noise = texelFetch(noisetex, (texelcoord + ivec2(frameCounter * 31, frameCounter * 34)) & 127, 0).b;
+	
+	//float noise = bayer64(gl_FragCoord.xy);
+	//noise = fract(noise + 1.61803398875 * mod(float(frameCounter), 3600.0));
 	
 	vec2 pos = texcoord;
 	vec2 coordStep = (lightCoord - pos) / SUNRAYS_QUALITY;

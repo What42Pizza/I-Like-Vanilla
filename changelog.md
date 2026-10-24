@@ -3,10 +3,12 @@
   - Added new profile "Medium +", which is the new default profile
   - Removed 'Style' setting
     - Instead, there will be three separate versions of the shader distributed (similar to before with the OptiFine versions)
+  - Changed sunrays and volumetric clouds to render at half resolution
+  - Increased sunrays and volumetric clouds quality (sunrays: 6 -> 8, clouds: 8 -> 12)
   - Added settings 'Use Vanilla Fog Color', 'Use Vanilla Fog Density', and 'Use Vanilla Sky Color'
-  - Increased default reflections render scale from x0.6 to x0.7
-  - Added emissive glowing to redstone lamps and copper bulbs
-  - Slightly improved mod compatibility
+  - Other minor tweaks
+  - Passed 4 million downloads!
+  - This shader is now considered mostly complete
 
 <br>
 <br>
