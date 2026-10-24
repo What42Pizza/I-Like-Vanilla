@@ -213,6 +213,13 @@ void main() {
 	
 	
 	
+	#if COLORED_LIGHTING_ENABLED == 1
+		// sampling form shadowtex0 seems to be necessary (for colored lighting) so that Iris/Optifine doesn't disable shadow rendering
+		gl_Position.z += texture2D(shadowtex0, vec2(0.0)).r * 0.00001;
+	#endif
+	
+	
+	
 }
 
 #endif

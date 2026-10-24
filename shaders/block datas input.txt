@@ -65,7 +65,7 @@ weight: 100
 alias: BLOCK_ID_LAVA
 brightness: 1.15
 voxelize: true
-emission: vec3(1.5, 0.95, 0.6)
+emission: vec3(1.2, 0.85, 0.6)
 translucency: vec3(0.0, 0.0, 0.0)
 
 
@@ -197,6 +197,30 @@ translucency: vec3(1.0, 0.8, 1.0)
 
 
 // candles
+
+block candle:candles=1:lit=true:
+weight: 1
+voxelize: true
+emission: vec3(0.4, 0.35, 0.3)
+
+block candle:candles=2:lit=true:
+weight: 1
+voxelize: true
+emission: vec3(0.55, 0.5, 0.45)
+
+block candle:candles=3:lit=true:
+weight: 1
+voxelize: true
+emission: vec3(0.7, 0.65, 0.6)
+
+block candle:candles=4:lit=true:
+weight: 1
+voxelize: true
+emission: vec3(0.85, 0.8, 0.75)
+
+block candle:lit=false:
+weight: 1
+voxelize: empty
 
 block white_candle:lit=true:
 weight: 1
@@ -407,7 +431,7 @@ glow detect min: vec3(21.4,  31.3, 69.4)
 glow detect max: vec3(49.2, 100.0, 97.6)
 glow amount: 1.0
 voxelize: true
-emission: vec3(1.0, 1.0, 1.0)
+emission: vec3(1.2, 1.0, 0.8)
 
 block jack_o_lantern:
 weight: 1
@@ -445,7 +469,7 @@ block beacon:
 weight: 1
 reflectiveness: 0.4
 voxelize: true
-emission: vec3(1.0, 1.0, 1.0)
+emission: vec3(1.0, 1.05, 1.1)
 
 block redstone_lamp:lit=true, copper_bulb:lit=true, waxed_copper_bulb:lit=true:
 weight: 1
@@ -977,7 +1001,7 @@ weight: 1
 alias: BLOCK_ID_NETHER_PORTAL
 shadow casting: never
 voxelize: true
-emission: vec3(2.0, 0.8, 2.0)
+emission: vec3(1.3, 0.65, 1.25)
 
 block end_portal, end_gateway:
 weight: 1
