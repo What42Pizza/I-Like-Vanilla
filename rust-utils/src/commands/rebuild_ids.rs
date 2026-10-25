@@ -154,15 +154,21 @@ pub fn function(args: &[String]) -> Result<()> {
 			
 			"shadow casting" => {
 				curr_block_data.shadow_casting = match value {
-					"always" => 0,
-					"foliage" => 2,
-					"never" => 1,
+					"always" => ShadowCastingValue::Always,
+					"foliage" => ShadowCastingValue::Foliage,
+					"never" => ShadowCastingValue::Never,
 					_ => return Err(Error::msg(format!("Invalid value for 'shadow casting': '{value}'"))),
 				};
 			}
 			
 			"waviness" => {
-				curr_block_data.waviness = value.parse()?;
+				curr_block_data.waviness = match value.parse::<u8>()? {
+					0 => WavinessValue::None,
+					1 => WavinessValue::Low,
+					2 => WavinessValue::Medium,
+					3 => WavinessValue::High,
+					_ => return Err(Error::msg(format!("Invalid value for 'waviness': '{value}'"))),
+				};
 			}
 			
 			"do bottom waving" => {
@@ -187,11 +193,11 @@ pub fn function(args: &[String]) -> Result<()> {
 			}
 			
 			"translucency" => {
-				curr_block_data.translucency = Some(value);
+				curr_block_data.voxel_translucency = Some(value);
 			}
 			
 			"emission" => {
-				curr_block_data.emission = Some(value);
+				curr_block_data.voxel_emission = Some(value);
 			}
 			
 			"glow detect min" => {
@@ -295,11 +301,11 @@ pub fn function(args: &[String]) -> Result<()> {
 		}
 		if let Some(leaf) = &mut node.leaf {
 			let casting_plus_bottom_value = match (leaf.shadow_casting, leaf.do_bottom_waving) {
-				(0, true) => 0,
-				(1, true) => 1,
-				(2, true) => 2,
-				(2, false) => 3,
-				_ => return Err(Error::msg(format!("Group id {:?} in input file 'block datas input.txt' is invalid: combination of 'shadow casting' value {} + 'do bottom waving' value {} is not allowed", leaf.block_ids, leaf.shadow_casting, leaf.do_bottom_waving))),
+				(ShadowCastingValue::Always, true) => 0,
+				(ShadowCastingValue::Never, true) => 1,
+				(ShadowCastingValue::Foliage, true) => 2,
+				(ShadowCastingValue::Foliage, false) => 3,
+				_ => return Err(Error::msg(format!("Group id {:?} in input file 'block datas input.txt' is invalid: combination of 'shadow casting' value {:?} + 'do bottom waving' value {} is not allowed", leaf.block_ids, leaf.shadow_casting, leaf.do_bottom_waving))),
 			};
 			leaf.int_id =
 				*curr_id
@@ -311,13 +317,14 @@ pub fn function(args: &[String]) -> Result<()> {
 				aliases.push((alias, leaf.int_id));
 			}
 			if matches!(leaf.voxelize, VoxelizeValue::True | VoxelizeValue::Empty) {
+				#[allow(invalid_reference_casting)]
 				voxel_datas.push(VoxelData {
 					weight: leaf.weight.unwrap(),
 					voxel_id: 0,
-					emission: leaf.emission,
-					translucency: leaf.translucency,
+					emission: leaf.voxel_emission,
+					translucency: leaf.voxel_translucency,
 					must_be_empty: leaf.voxelize == VoxelizeValue::Empty,
-					block_data: unsafe { &*(node.leaf.as_ref().unwrap() as *const _ as *const BlockData<'a>) }, // not using unsafe here causes bad lifetime issues
+					block_data: unsafe { &mut *(node.leaf.as_ref().unwrap() as *const _ as *mut BlockData<'a>) }, // not using unsafe here causes bad lifetime issues
 				});
 			}
 		}
@@ -407,10 +414,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		}
 		if let Some(leaf) = &mut node.leaf && !leaf.must_be_empty {
 			leaf.voxel_id = *curr_voxel_id;
-			unsafe {
-				// Safety: idk as long as the output is good I'm happy
-				*leaf.block_data.voxel_id.get() = *curr_voxel_id;
-			}
+			leaf.block_data.voxel_id = *curr_voxel_id;
 			*curr_voxel_id += 1;
 		}
 	}
@@ -453,7 +457,7 @@ pub fn function(args: &[String]) -> Result<()> {
 				*block_datas_file += custom_code;
 			}
 			if matches!(leaf.voxelize, VoxelizeValue::True | VoxelizeValue::Empty) {
-				*block_datas_file += &format!("{indent}SET_VOXEL_ID({}u);\n", unsafe {*leaf.voxel_id.get()});
+				*block_datas_file += &format!("{indent}SET_VOXEL_ID({}u);\n", leaf.voxel_id);
 			}
 		}
 	}
@@ -553,8 +557,9 @@ struct BlockData<'a> {
 	weight: Option<f32>,
 	alias: Option<&'a str>,
 	custom_code: Option<String>,
-	shadow_casting: u8,
-	waviness: u8,
+	custom_voxel_code: Option<String>,
+	shadow_casting: ShadowCastingValue,
+	waviness: WavinessValue,
 	do_bottom_waving: bool,
 	reflectiveness: Option<&'a str>,
 	specularness: Option<&'a str>,
@@ -563,9 +568,9 @@ struct BlockData<'a> {
 	glow_amount: Option<&'a str>,
 	brightness: Option<&'a str>,
 	voxelize: VoxelizeValue,
-	voxel_id: UnsafeCell<u8>,
-	emission: Option<&'a str>,
-	translucency: Option<&'a str>,
+	voxel_id: u8,
+	voxel_emission: Option<&'a str>,
+	voxel_translucency: Option<&'a str>,
 }
 
 impl<'a> BlockData<'a> {
@@ -576,8 +581,9 @@ impl<'a> BlockData<'a> {
 			weight: None,
 			alias: None,
 			custom_code: None,
-			shadow_casting: 0,
-			waviness: 0,
+			custom_voxel_code: None,
+			shadow_casting: ShadowCastingValue::Always,
+			waviness: WavinessValue::None,
 			do_bottom_waving: true,
 			reflectiveness: None,
 			specularness: None,
@@ -586,14 +592,29 @@ impl<'a> BlockData<'a> {
 			glow_amount: None,
 			brightness: None,
 			voxelize: VoxelizeValue::False,
-			voxel_id: UnsafeCell::new(0),
-			emission: None,
-			translucency: None,
+			voxel_id: 0u8,
+			voxel_emission: None,
+			voxel_translucency: None,
 		}
 	}
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
+enum ShadowCastingValue {
+	Always = 0,
+	Foliage = 2,
+	Never = 1,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq)]
+enum WavinessValue {
+	None = 0,
+	Low = 1,
+	Medium = 2,
+	High = 3,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq)]
 enum VoxelizeValue {
 	True,
 	False,
@@ -611,7 +632,7 @@ struct TreeNode<'a> {
 #[derive(Debug)]
 struct VoxelData<'a> {
 	weight: f32,
-	block_data: &'a BlockData<'a>,
+	block_data: &'a mut BlockData<'a>,
 	voxel_id: u8,
 	emission: Option<&'a str>,
 	translucency: Option<&'a str>,
