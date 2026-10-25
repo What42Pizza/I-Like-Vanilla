@@ -7,5 +7,6 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.104"
+bitflags = "2.13.2"
 walkdir = "2.5.0"
-zip = "8.6.0"
+zip = "9.1.0"

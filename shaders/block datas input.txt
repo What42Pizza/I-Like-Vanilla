@@ -591,19 +591,19 @@ emission: vec3(0.4, 0.6, 0.5)
 block ochre_froglight:
 weight: 1
 voxelize: true
-emission: vec3(1.1, 1.0, 0.95)
+emission: vec3(1.2, 1.0, 0.9)
 brightness: 0.9
 
 block verdant_froglight:
 weight: 1
 voxelize: true
-emission: vec3(0.85, 1.0, 0.9)
+emission: vec3(0.8, 1.1, 0.95)
 brightness: 0.9
 
 block pearlescent_froglight:
 weight: 1
 voxelize: true
-emission: vec3(1.15, 1.0, 1.05)
+emission: vec3(1.2, 0.95, 1.1)
 brightness: 0.9
 
 block conduit:
@@ -752,7 +752,7 @@ brightness: 0.9
 
 
 
-// natural blocks
+// plants
 
 block sugar_cane, gardens_of_the_dead:whistlecane:
 weight: 1
@@ -879,31 +879,95 @@ shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
+block warped_stem:
+weight: 3
+glow detect min: vec3(  0.0, 77.3, 38.0)
+glow detect max: vec3(360.0, 86.6, 58.4)
+glow amount: GLOWING_STEMS_STRENGTH
+
+block crimson_stem:
+weight: 3
+glow detect min: vec3(  0.0,  78.0, 48.2)
+glow detect max: vec3(360.0, 100.0, 69.4)
+glow amount: GLOWING_STEMS_STRENGTH
+
+
+
+
+
+// terrain
+
 block snow:
 weight: 10
 voxelize: empty
 
-block sand, suspicious_sand, sandstone, chiseled_sandstone, smooth_sandstone, cut_sandstone:
+
+
+block sandstone, chiseled_sandstone, smooth_sandstone, cut_sandstone, sandstone_wall:
 weight: 100
 specularness: 0.2
 
-block sandstone_stairs, sandstone_slab, sandstone_wall, smooth_sandstone_stairs, smooth_sandstone_slab, cut_sandstone_slab:
+block sandstone_stairs:facing=north:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
 weight: 3
 specularness: 0.2
-voxelize: empty
+voxelize: true
+blocked faces: north, down
 
-block red_sand:
+block sandstone_stairs:facing=north:half=top, smooth_sandstone_stairs:facing=north:half=top:
 weight: 3
 specularness: 0.2
+voxelize: true
+blocked faces: north, up
 
-block diorite:
-weight: 1
-specularness: 0.25
+block sandstone_stairs:facing=south:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: south, down
 
-block diorite_stairs, diorite_slab, diorite_wall:
-weight: 1
-specularness: 0.25
-voxelize: empty
+block sandstone_stairs:facing=south:half=top, smooth_sandstone_stairs:facing=north:half=top:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: south, up
+
+block sandstone_stairs:facing=east:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: east, down
+
+block sandstone_stairs:facing=east:half=top, smooth_sandstone_stairs:facing=north:half=top:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: east, up
+
+block sandstone_stairs:facing=west:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: west, down
+
+block sandstone_stairs:facing=west:half=top, smooth_sandstone_stairs:facing=north:half=top:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: west, up
+
+block sandstone_slab:type=bottom, smooth_sandstone_slab:type=bottom, cut_sandstone_slab:type=bottom:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: down
+
+block sandstone_slab:type=top, smooth_sandstone_slab:type=top, cut_sandstone_slab:type=top:
+weight: 3
+specularness: 0.2
+voxelize: true
+blocked faces: up
+
+
 
 block polished_granite, polished_diorite, polished_andesite, polished_deepslate:
 weight: 3
@@ -935,18 +999,6 @@ voxelize: empty
 block netherrack:
 weight: 1000
 reflectiveness: 0.15
-
-block warped_stem:
-weight: 3
-glow detect min: vec3(  0.0, 77.3, 38.0)
-glow detect max: vec3(360.0, 86.6, 58.4)
-glow amount: GLOWING_STEMS_STRENGTH
-
-block crimson_stem:
-weight: 3
-glow detect min: vec3(  0.0,  78.0, 48.2)
-glow detect max: vec3(360.0, 100.0, 69.4)
-glow amount: GLOWING_STEMS_STRENGTH
 
 
 
@@ -1020,7 +1072,8 @@ brightness: 0.95
 block white_carpet:
 weight: 2
 brightness: 0.95
-voxelize: empty
+voxelize: true
+blocked faces: down
 
 block yellow_wool, orange_wool:
 weight: 1
@@ -1029,7 +1082,8 @@ brightness: 0.85
 block yellow_carpet, orange_carpet:
 weight: 1
 brightness: 0.85
-voxelize: empty
+voxelize: true
+blocked faces: down
 
 block nether_portal:
 weight: 1
@@ -1074,6 +1128,11 @@ weight: 10
 reflectiveness: 0.5
 specularness: 0.5
 
-block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, moss_carpet, pale_moss_carpet, %wool_carpets, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs:
+block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs:
 weight: 5
 voxelize: empty
+
+block moss_carpet, pale_moss_carpet, %wool_carpets:
+weight: 2
+voxelize: true
+blocked faces: down
