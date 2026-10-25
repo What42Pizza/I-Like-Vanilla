@@ -43,9 +43,9 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 	let mut sliders_line = None;
 	for (i, mut line) in properties.lines().enumerate() {
 		line = line.trim();
-		if line.starts_with("sliders") {sliders_line = Some(line);}
-		let Some(line) = line.strip_prefix("screen") else {continue;};
-		if line.contains(".columns") {continue;}
+		if line.starts_with("sliders") { sliders_line = Some(line); }
+		let Some(line) = line.strip_prefix("screen") else { continue; };
+		if line.contains(".columns") { continue; }
 		let Some(equal_position) = line.find('=') else {
 			println!("WARNING: invalid settings screen found in shaders.properties line {}, could not find equals sign", i + 1);
 			*found_problems = true;
@@ -53,11 +53,11 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 		};
 		let line = line[equal_position + 1 ..].trim_start();
 		for part in line.split_ascii_whitespace() {
-			if part.is_empty() {continue;}
-			if part.starts_with('[') {continue;}
-			if part == "<empty>" {continue;}
-			if part == "<profile>" {continue;}
-			if settings_set.contains(part) {continue;}
+			if part.is_empty() { continue; }
+			if part.starts_with('[') { continue; }
+			if part == "<empty>" { continue; }
+			if part == "<profile>" { continue; }
+			if settings_set.contains(part) { continue; }
 			settings_set.insert(part.to_string());
 			settings_list.push(part.to_string());
 		}
@@ -69,7 +69,7 @@ pub fn get_properties_settings(shaders_path: &Path, found_problems: &mut bool) -
 		let second_part = sliders_iter.next();
 		if second_part != Some("=") { println!("WARNING: found unexpected second value (\"{second_part:?}\") for sliders definition in shaders.properties"); *found_problems = true; }
 		for part in sliders_iter {
-			if settings_set.contains(part) {continue;}
+			if settings_set.contains(part) { continue; }
 			println!("WARNING: found settings in sliders (in shaders.properties) that is not listed in the settings menu: {part}");
 			*found_problems = true;
 		}
@@ -88,7 +88,7 @@ pub fn check_defines_file(shaders_path: &Path, prop_settings_set: &HashSet<Strin
 	let mut style_settings_set = HashSet::new();
 	for (i, mut line) in define_strings.lines().enumerate() {
 		line = line.trim();
-		if line.starts_with("//#define ") {line = &line[2..];}
+		if line.starts_with("//#define ") { line = &line[2..]; }
 		let setting_name = if let Some(define) = line.strip_prefix("#define ") {
 			let mut define_iter = define.split_ascii_whitespace();
 			let Some(setting_name) = define_iter.next() else {
@@ -132,7 +132,7 @@ pub fn check_lang_file(shaders_path: &Path, prop_settings_set: &HashSet<String>,
 		let Some(entry) = line.strip_prefix("option.") else {
 			continue;
 		};
-		if entry.contains(".comment=") {continue;}
+		if entry.contains(".comment=") { continue; }
 		let Some(equal_position) = entry.find('=') else {
 			println!("WARNING: invalid settings screen found in lang/en_US.lang line {}, could not find equals sign", i + 1);
 			*found_problems = true;
@@ -164,7 +164,7 @@ pub fn check_style_file(
 	for (i, mut setting) in setting_strings.lines().enumerate() {
 		setting = setting.trim();
 		let mut setting_parts = setting.split_ascii_whitespace();
-		if setting_parts.next() != Some("#define") {continue;}
+		if setting_parts.next() != Some("#define") { continue; }
 		let Some(setting_name) = setting_parts.next() else {
 			println!("WARNING: found invalid setting with no name in style_{style_name}.glsl line {}", i + 1);
 			*found_problems = true;
@@ -185,7 +185,7 @@ pub fn check_style_file(
 pub fn check_settings_order(settings_list: &[&str], prop_settings_list: &[String], style_settings_set: Option<&HashSet<String>>, file_name: &'static str, found_problems: &mut bool) {
 	let mut prev_i = 0;
 	for setting in prop_settings_list.iter() {
-		if let Some(style_settings_set) = style_settings_set && !style_settings_set.contains(setting) {continue;}
+		if let Some(style_settings_set) = style_settings_set && !style_settings_set.contains(setting) { continue; }
 		let Some((mut defines_i, _)) = settings_list.iter().enumerate().find(|(_, define)| *define == setting) else {
 			println!("WARNING: found setting in shaders.properties that is not present in {file_name}: {setting}");
 			*found_problems = true;

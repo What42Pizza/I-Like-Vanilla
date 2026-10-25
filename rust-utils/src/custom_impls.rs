@@ -11,7 +11,7 @@ pub trait PathTraits {
 impl PathTraits for Path {
 	fn contains_file(&self, dir_name: &str) -> bool {
 		for path in self.read_dir().expect("Could not read dir entries") {
-			if path.expect("Could not process dir entry").file_name() == dir_name {return true;}
+			if path.expect("Could not process dir entry").file_name() == dir_name { return true; }
 		}
 		false
 	}

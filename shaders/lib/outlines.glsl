@@ -31,7 +31,7 @@
 float getOutlineAmount() {
 	
 	float m = toLinearDepth(texelFetch(DEPTH_BUFFER_WO_TRANS, texelcoord + ivec2( 0,  0), 0).r);
-	if (m == 1.0) {return 0.0;}
+	if (m == 1.0) { return 0.0; }
 	m *= far;
 	float tl = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2(-1, -1) * pixelSize * OUTLINES_SIZE).r) * far;
 	float t  = toLinearDepth(texture2D(DEPTH_BUFFER_WO_TRANS, texcoord + vec2( 0, -1) * pixelSize * OUTLINES_SIZE).r) * far;

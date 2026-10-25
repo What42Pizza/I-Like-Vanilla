@@ -17,7 +17,7 @@ void doHsvPosterize(inout vec3 color, float depth) {
 		float dhDepth = texelFetch(DH_DEPTH_BUFFER_ALL, texelcoord, 0).r;
 		isSky = isSky && dhDepth == 1.0;
 	#endif
-	if (isSky) {return;}
+	if (isSky) { return; }
 	color = rgbToHsv(color);
 	#if HSV_POSTERIZE_HUE_QUALITY > 0
 		color.x = compress(color.x, HSV_POSTERIZE_HUE_QUALITY);

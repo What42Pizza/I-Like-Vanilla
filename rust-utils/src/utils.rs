@@ -20,7 +20,7 @@ pub fn get_project_path() -> Result<PathBuf> {
 			return Ok(curr_path);
 		}
 		let did_pop = curr_path.pop();
-		if !did_pop {return Err(Error::msg("Could not find 'shaders' folder"));}
+		if !did_pop { return Err(Error::msg("Could not find 'shaders' folder")); }
 	}
 }
 
@@ -33,7 +33,7 @@ pub fn get_shaders_path() -> Result<PathBuf> {
 pub fn get_temp_path() -> Result<PathBuf> {
 	let mut dir = get_project_path()?;
 	dir.push("temp");
-	if !dir.exists() {fs::create_dir(&dir)?;}
+	if !dir.exists() { fs::create_dir(&dir)?; }
 	Ok(dir)
 }
 

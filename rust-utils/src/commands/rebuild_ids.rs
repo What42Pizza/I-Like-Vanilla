@@ -1,5 +1,4 @@
 use crate::*;
-use std::cell::UnsafeCell;
 
 
 
@@ -102,16 +101,16 @@ pub fn function(args: &[String]) -> Result<()> {
 		.enumerate()
 		.filter_map(|(i, mut line)| {
 			line = line.trim_start();
-			if line.starts_with("//") {return None;}
+			if line.starts_with("//") { return None; }
 			line = line.trim_end();
-			if line.is_empty() {return None;}
+			if line.is_empty() { return None; }
 			Some((i, line))
 		})
 		.collect::<Vec<_>>();
 	
-	// step 2: collect raw data into a `Vec<BlockData>`
-	let mut block_datas = vec!();
-	if !lines[0].1.starts_with("block ") {return Err(Error::msg("Input file 'block datas input.txt' is invalid: first non-removed line must start with \"block \""));}
+	// step 2: collect all raw block datas into a `Vec<BlockData>`
+	let mut block_datas = vec![];
+	if !lines[0].1.starts_with("block ") { return Err(Error::msg("Input file 'block datas input.txt' is invalid: first non-removed line must start with \"block \"")); }
 	let block_ids = get_block_ids_from_header(lines[0].1);
 	let mut curr_block_data = BlockData::new(block_ids);
 	
@@ -120,7 +119,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		let line_num = lines[i].0 + 1;
 		let line = lines[i].1;
 		if line.starts_with("block "){
-			if curr_block_data.weight.is_none() {return Err(Error::msg(format!("Input file 'block datas input.txt' is invalid: block datas for {:?} does not contain a weight field", curr_block_data.block_ids)));}
+			if curr_block_data.weight == 0.0 { return Err(Error::msg(format!("Input file 'block datas input.txt' is invalid: block datas for {:?} does not contain a weight field, or the weight was set to 0.0", curr_block_data.block_ids))); }
 			block_datas.push(curr_block_data);
 			let block_ids = get_block_ids_from_header(line);
 			curr_block_data = BlockData::new(block_ids);
@@ -137,7 +136,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			}
 			
 			"weight" => {
-				curr_block_data.weight = Some(value.parse()?);
+				curr_block_data.weight = value.parse()?;
 			}
 			
 			"custom code" => {
@@ -145,7 +144,7 @@ pub fn function(args: &[String]) -> Result<()> {
 				let mut code = String::new();
 				'inner: loop {
 					i += 1;
-					if lines[i].1 == pattern {break 'inner;}
+					if lines[i].1 == pattern { break 'inner; }
 					code += lines[i].1;
 					code.push('\n');
 				}
@@ -220,41 +219,27 @@ pub fn function(args: &[String]) -> Result<()> {
 			
 		}
 		i += 1;
-		if i == lines.len() {break;}
+		if i == lines.len() { break; }
 	}
-	if curr_block_data.weight.is_none() {return Err(Error::msg(format!("Input file 'block datas input.txt' is invalid: block datas for {:?} does not contain a weight field", curr_block_data.block_ids)));}
+	if curr_block_data.weight == 0.0 { return Err(Error::msg(format!("Input file 'block datas input.txt' is invalid: block datas for {:?} does not contain a weight field, or the weight was set to 0.0", curr_block_data.block_ids))); }
 	block_datas.push(curr_block_data);
 	
-	//// step 3: extract voxel datas for later
-	//let mut voxel_datas =
-	//	block_datas
-	//	.iter()
-	//	.filter_map(|data| {
-	//		if !data.voxelize {return None;}
-	//		Some(VoxelData {
-	//			weight: data.weight.unwrap(),
-	//			emission: data.emission,
-	//			translucency: data.translucency,
-	//		})
-	//	})
-	//	.collect::<Vec<_>>();
-	
-	// step 3: turn big list of block datas into tree
+	// step 3: turn big list of block datas into a tree
 	block_datas.sort_by(|a, b| {
-		b.weight.unwrap().total_cmp(&a.weight.unwrap()) // note: sorts largest the smallest
+		b.weight.total_cmp(&a.weight) // note: sorts largest the smallest
 	});
 	let mut tree_nodes =
 		block_datas
-		.into_iter()
+		.iter_mut()
 		.map(|data| TreeNode {
-			weight: data.weight.unwrap().powf(0.7), // somewhat flattens the tree so that extremely low weights don't cause extremely high tree depths
+			weight: data.weight.powf(0.7), // somewhat flattens the tree so that extremely low weights don't cause extremely high tree depths
 			branches: None,
 			branch_split: 0,
 			leaf: Some(data),
 		})
 		.collect::<Vec<_>>();
 	loop {
-		if tree_nodes.len() == 1 {break;}
+		if tree_nodes.len() == 1 { break; }
 		let node_a = tree_nodes.pop().unwrap();
 		let node_b = tree_nodes.pop().unwrap();
 		let new_weight = node_a.weight + node_b.weight;
@@ -269,35 +254,38 @@ pub fn function(args: &[String]) -> Result<()> {
 		tree_nodes.insert(new_index, new_node);
 	}
 	
-	// step 4: give block datas int ids and extract voxel and alias datas
-	// (but first, add another leaf for default blocks)
+	// step 4: add another leaf that represents the default for when no block id is given
+	// this leaf is positioned so that it will always receive the int id 0
 	let mut curr_leaf = &tree_nodes[0];
 	loop {
 		if let Some(branches) = &curr_leaf.branches {
 			curr_leaf = &branches.0;
 			continue;
+		} else {
+			break;
 		}
-		#[allow(invalid_reference_casting)]
-		let curr_leaf = unsafe {&mut *(curr_leaf as *const _ as *mut TreeNode)};
-		let leaf = curr_leaf.leaf.take();
-		curr_leaf.branches = Some(Box::new((TreeNode {
-			weight: 0.0,
-			branches: None,
-			branch_split: 0,
-			leaf: Some(BlockData::new(vec!("none"))),
-		}, TreeNode {
-			weight: curr_leaf.weight,
-			branches: None,
-			branch_split: 0,
-			leaf,
-		})));
-		break;
 	}
-	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u16, voxel_datas: &mut Vec<VoxelData<'a>>, aliases: &mut Vec<(&'a str, u16)>) -> Result<()> {
+	#[allow(invalid_reference_casting)]
+	let curr_leaf = unsafe { &mut *(curr_leaf as *const _ as *mut TreeNode) };
+	let mut empty_block_id = BlockData::new(vec!("none"));
+	curr_leaf.branches = Some(Box::new((TreeNode {
+		weight: 0.0,
+		branches: None,
+		branch_split: 0,
+		leaf: Some(&mut empty_block_id),
+	}, TreeNode {
+		weight: curr_leaf.weight,
+		branches: None,
+		branch_split: 0,
+		leaf: curr_leaf.leaf.take(),
+	})));
+	
+	// step 5: give block datas int ids and extract voxel and alias datas
+	fn postprocess_tree_data<'a>(node: &mut TreeNode<'a>, curr_id: &mut u16, aliases: &mut Vec<(&'a str, u16)>) -> Result<()> {
 		if let Some(branches) = &mut node.branches {
-			postprocess_tree_data(&mut branches.0, curr_id, voxel_datas, aliases)?;
+			postprocess_tree_data(&mut branches.0, curr_id, aliases)?;
 			node.branch_split = *curr_id;
-			postprocess_tree_data(&mut branches.1, curr_id, voxel_datas, aliases)?;
+			postprocess_tree_data(&mut branches.1, curr_id, aliases)?;
 		}
 		if let Some(leaf) = &mut node.leaf {
 			let casting_plus_bottom_value = match (leaf.shadow_casting, leaf.do_bottom_waving) {
@@ -316,47 +304,30 @@ pub fn function(args: &[String]) -> Result<()> {
 			if let Some(alias) = leaf.alias {
 				aliases.push((alias, leaf.int_id));
 			}
-			if matches!(leaf.voxelize, VoxelizeValue::True | VoxelizeValue::Empty) {
-				#[allow(invalid_reference_casting)]
-				voxel_datas.push(VoxelData {
-					weight: leaf.weight.unwrap(),
-					voxel_id: 0,
-					emission: leaf.voxel_emission,
-					translucency: leaf.voxel_translucency,
-					must_be_empty: leaf.voxelize == VoxelizeValue::Empty,
-					block_data: unsafe { &mut *(node.leaf.as_ref().unwrap() as *const _ as *mut BlockData<'a>) }, // not using unsafe here causes bad lifetime issues
-				});
-			}
 		}
 		Ok(())
 	}
 	let mut curr_id = 0;
-	let mut voxel_datas = vec!();
-	let mut aliases = vec!();
-	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut voxel_datas, &mut aliases)?;
+	let mut aliases = vec![];
+	postprocess_tree_data(&mut tree_nodes[0], &mut curr_id, &mut aliases)?;
 	
-	//static mut HIGHEST_DEPTH: usize = 0;
-	//fn print_tree<'a>(node: &TreeNode<'a>, depth: usize) {
-	//	unsafe {
-	//		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
-	//	}
-	//	let indent = "  ".repeat(depth);
-	//	println!("{indent}weight: {}", node.weight);
-	//	if let Some(branches) = &node.branches {
-	//		print_tree(&branches.0, depth + 1);
-	//		print_tree(&branches.1, depth + 1);
-	//	}
-	//	if let Some(leaf) = &node.leaf {
-	//		println!("{indent}block ids: {:?}", leaf.block_ids);
-	//	}
-	//}
-	//print_tree(&tree_nodes[0], 0);
-	//unsafe {
-	//	println!("{}", HIGHEST_DEPTH + 0);
-	//}
+	// step 6: gather all block datas that will be voxelized
+	fn gather_voxel_datas<'a>(node: &'a mut TreeNode<'a>, voxel_datas: &mut Vec<&'a mut &'a mut BlockData<'a>>) {
+		if let Some(branches) = &mut node.branches {
+			gather_voxel_datas(&mut branches.0, voxel_datas);
+			gather_voxel_datas(&mut branches.1, voxel_datas);
+		}
+		if let Some(leaf) = &mut node.leaf && leaf.voxelize != VoxelizeValue::False {
+			voxel_datas.push(leaf);
+		}
+	}
+	let mut voxel_datas = vec![];
+	#[allow(invalid_reference_casting)]
+	let tree_nodes_2 = unsafe { &mut *(&tree_nodes as *const _ as *mut Vec<TreeNode>) };
+	gather_voxel_datas(&mut tree_nodes_2[0], &mut voxel_datas);
 	
-	// step 5: turn big list of voxel datas into tree
-	voxel_datas.sort_by(|a, b| {
+	// step 7: turn big list of voxel datas into tree
+	voxel_datas.sort_by(|a: &&mut &mut BlockData, b: &&mut &mut BlockData| {
 		b.weight.total_cmp(&a.weight) // note: sorts largest the smallest
 	});
 	let mut voxel_tree_nodes =
@@ -370,7 +341,7 @@ pub fn function(args: &[String]) -> Result<()> {
 		})
 		.collect::<Vec<_>>();
 	loop {
-		if voxel_tree_nodes.len() == 1 {break;}
+		if voxel_tree_nodes.len() == 1 { break; }
 		let node_a = voxel_tree_nodes.pop().unwrap();
 		let node_b = voxel_tree_nodes.pop().unwrap();
 		let new_weight = node_a.weight + node_b.weight;
@@ -385,43 +356,22 @@ pub fn function(args: &[String]) -> Result<()> {
 		voxel_tree_nodes.insert(new_index, new_node);
 	}
 	
-	//static mut HIGHEST_DEPTH: usize = 0;
-	//fn print_voxel_tree<'a>(node: &VoxelTreeNode<'a>, depth: usize) {
-	//	unsafe {
-	//		if depth > HIGHEST_DEPTH {HIGHEST_DEPTH = depth;}
-	//	}
-	//	let indent = "  ".repeat(depth);
-	//	println!("{indent}weight: {}", node.weight);
-	//	if let Some(branches) = &node.branches {
-	//		print_voxel_tree(&branches.0, depth + 1);
-	//		print_voxel_tree(&branches.1, depth + 1);
-	//	}
-	//	if let Some(leaf) = &node.leaf {
-	//		println!("{indent}block ids: {:?}", leaf.voxel_id);
-	//	}
-	//}
-	//print_voxel_tree(&tree_nodes[0], 0);
-	//unsafe {
-	//	println!("{}", HIGHEST_DEPTH + 0);
-	//}
-	
-	// step 6: give voxel datas (and block datas) voxel ids
+	// step 8: give block datas voxel ids
 	fn postprocess_voxel_tree_data(node: &mut VoxelTreeNode, curr_voxel_id: &mut u8) {
 		if let Some(branches) = &mut node.branches {
 			postprocess_voxel_tree_data(&mut branches.0, curr_voxel_id);
 			node.branch_split = *curr_voxel_id;
 			postprocess_voxel_tree_data(&mut branches.1, curr_voxel_id);
 		}
-		if let Some(leaf) = &mut node.leaf && !leaf.must_be_empty {
+		if let Some(leaf) = &mut node.leaf && leaf.voxelize != VoxelizeValue::Empty {
 			leaf.voxel_id = *curr_voxel_id;
-			leaf.block_data.voxel_id = *curr_voxel_id;
 			*curr_voxel_id += 1;
 		}
 	}
 	let mut curr_voxel_id = 2;
 	postprocess_voxel_tree_data(&mut voxel_tree_nodes[0], &mut curr_voxel_id);
 	
-	// step 7: generate 'blockDatas.glsl' file
+	// step 9: generate 'blockDatas.glsl' file
 	let mut block_datas_file = BLOCK_DATAS_START[1..].to_string();
 	fn gen_block_datas_code(block_datas_file: &mut String, node: &TreeNode, depth: usize) {
 		let indent = "\t".repeat(depth);
@@ -464,7 +414,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	gen_block_datas_code(&mut block_datas_file, &tree_nodes[0], 0);
 	fs::write(shaders_path.join("generated/blockDatas.glsl"), block_datas_file)?;
 	
-	// step 8: generate 'voxelDatas.glsl' file
+	// step 10: generate 'voxelDatas.glsl' file
 	let mut voxel_datas_file = VOXEL_DATAS_START[1..].to_string();
 	fn gen_voxel_datas_code(voxel_datas_file: &mut String, node: &VoxelTreeNode, depth: usize) {
 		let indent = "\t".repeat(depth);
@@ -477,10 +427,10 @@ pub fn function(args: &[String]) -> Result<()> {
 		}
 		if let Some(leaf) = &node.leaf {
 			//*voxel_datas_file += &format!("{indent}// blocks: {:?}\n", leaf.block_data.block_ids);
-			if let Some(emission) = &leaf.emission {
+			if let Some(emission) = &leaf.voxel_emission {
 				*voxel_datas_file += &format!("{indent}SET_EMISSION({emission});\n");
 			}
-			if let Some(translucency) = &leaf.translucency {
+			if let Some(translucency) = &leaf.voxel_translucency {
 				*voxel_datas_file += &format!("{indent}SET_TRANSLUCENCY({translucency});\n");
 			}
 		}
@@ -488,7 +438,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	gen_voxel_datas_code(&mut voxel_datas_file, &voxel_tree_nodes[0], 0);
 	fs::write(shaders_path.join("generated/voxelDatas.glsl"), voxel_datas_file)?;
 	
-	// step 9: generate 'block.properties' file
+	// step 11: generate 'block.properties' file
 	let mut block_properties_file = BLOCK_PROPERTIES_START[1..].to_string();
 	fn gen_block_properties_code(block_properties_file: &mut String, node: &TreeNode) {
 		if let Some(branches) = &node.branches {
@@ -507,7 +457,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	gen_block_properties_code(&mut block_properties_file, &tree_nodes[0]);
 	fs::write(shaders_path.join("block.properties"), block_properties_file)?;
 	
-	// step 9: generate 'item.properties' file
+	// step 12: generate 'item.properties' file
 	let mut item_properties_file = BLOCK_PROPERTIES_START[1..].to_string();
 	fn gen_item_properties_code(item_properties_file: &mut String, node: &TreeNode) {
 		if let Some(branches) = &node.branches {
@@ -526,7 +476,7 @@ pub fn function(args: &[String]) -> Result<()> {
 	gen_item_properties_code(&mut item_properties_file, &tree_nodes[0]);
 	fs::write(shaders_path.join("item.properties"), &item_properties_file)?;
 	
-	// step 10: generate 'generated/common.glsl'
+	// step 13: generate 'generated/common.glsl'
 	let mut generated_common_file = GENERATED_COMMON_START[1..].to_string();
 	for (alias, int_id) in aliases {
 		generated_common_file += &format!("const uint {alias} = {}u;\n", int_id & ((1 << 10) - 1));
@@ -554,7 +504,7 @@ fn get_block_ids_from_header(header_line: &str) -> Vec<&str> {
 struct BlockData<'a> {
 	block_ids: Vec<&'a str>,
 	int_id: u16,
-	weight: Option<f32>,
+	weight: f32,
 	alias: Option<&'a str>,
 	custom_code: Option<String>,
 	custom_voxel_code: Option<String>,
@@ -578,7 +528,7 @@ impl<'a> BlockData<'a> {
 		Self {
 			block_ids,
 			int_id: 0,
-			weight: None,
+			weight: 0.0,
 			alias: None,
 			custom_code: None,
 			custom_voxel_code: None,
@@ -626,17 +576,7 @@ struct TreeNode<'a> {
 	weight: f32,
 	branches: Option<Box<(TreeNode<'a>, TreeNode<'a>)>>,
 	branch_split: u16,
-	leaf: Option<BlockData<'a>>,
-}
-
-#[derive(Debug)]
-struct VoxelData<'a> {
-	weight: f32,
-	block_data: &'a mut BlockData<'a>,
-	voxel_id: u8,
-	emission: Option<&'a str>,
-	translucency: Option<&'a str>,
-	must_be_empty: bool,
+	leaf: Option<&'a mut BlockData<'a>>,
 }
 
 #[derive(Debug)]
@@ -644,5 +584,5 @@ struct VoxelTreeNode<'a> {
 	weight: f32,
 	branches: Option<Box<(VoxelTreeNode<'a>, VoxelTreeNode<'a>)>>,
 	branch_split: u8,
-	leaf: Option<VoxelData<'a>>,
+	leaf: Option<&'a mut BlockData<'a>>,
 }

@@ -61,7 +61,7 @@ void main() {
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
 		fogDistance += dither * 4.0;
 		fogDistance *= invFar;
-		if (fogDistance >= BORDER_FOG_END - 0.01) {discard; return;}
+		if (fogDistance >= BORDER_FOG_END - 0.01) { discard; return; }
 	#endif
 	
 	
