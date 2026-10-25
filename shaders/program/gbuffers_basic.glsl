@@ -18,7 +18,7 @@ void main() {
 	gl_FragData[0] = vec4(color);
 	gl_FragData[1] = vec4(
 		pack_2x8(lmcoord),
-		pack_7_7_1_1(0.0, 0.3, 0.0, 0.0),
+		pack_7_7_1_1(0.0, 0.3, 0.0, float(depthIsHand(gl_FragCoord.z))),
 		encodedNormal
 	);
 }
@@ -41,7 +41,9 @@ void main() {
 	glcolor = gl_Color;
 	encodedNormal = encodeNormal(gbufferModelView[1].xyz);
 	
-	gl_Position = viewToNdc(transform(gl_ModelViewMatrix, gl_Vertex.xyz));
+	gl_Position = ftransform();
+	
+	glcolor *= 1.0 + 0.333 * float(depthIsHand(gl_Position.z));
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
