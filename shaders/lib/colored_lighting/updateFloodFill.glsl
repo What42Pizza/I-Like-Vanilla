@@ -28,7 +28,6 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	// get max of neighbors
 	vec3 neighborsMax = vec3(0.0);
 	#define SAMPLE_MAX_LIGHT(x, y, z) neighborsMax = max(neighborsMax, texelFetch(inputFloodFill, voxelPos + inputOffset + ivec3(x, y, z), 0).rgb);
-	SAMPLE_MAX_LIGHT(0, 0, 0);
 	SAMPLE_MAX_LIGHT(-1, 0, 0);
 	SAMPLE_MAX_LIGHT(0, -1, 0);
 	SAMPLE_MAX_LIGHT(0, 0, -1);
