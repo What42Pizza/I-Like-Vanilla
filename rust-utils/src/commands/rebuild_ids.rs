@@ -151,6 +151,18 @@ pub fn function(args: &[String]) -> Result<()> {
 				curr_block_data.custom_code = Some(code);
 			}
 			
+			"custom voxel code" => {
+				let pattern = value;
+				let mut code = String::new();
+				'inner: loop {
+					i += 1;
+					if lines[i].1 == pattern { break 'inner; }
+					code += lines[i].1;
+					code.push('\n');
+				}
+				curr_block_data.custom_voxel_code = Some(code);
+			}
+			
 			"shadow casting" => {
 				curr_block_data.shadow_casting = match value {
 					"always" => ShadowCastingValue::Always,
@@ -317,7 +329,7 @@ pub fn function(args: &[String]) -> Result<()> {
 			gather_voxel_datas(&mut branches.0, voxel_datas);
 			gather_voxel_datas(&mut branches.1, voxel_datas);
 		}
-		if let Some(leaf) = &mut node.leaf && leaf.voxelize != VoxelizeValue::False {
+		if let Some(leaf) = &mut node.leaf && leaf.voxelize == VoxelizeValue::True {
 			voxel_datas.push(leaf);
 		}
 	}
@@ -432,6 +444,9 @@ pub fn function(args: &[String]) -> Result<()> {
 			}
 			if let Some(translucency) = &leaf.voxel_translucency {
 				*voxel_datas_file += &format!("{indent}SET_TRANSLUCENCY({translucency});\n");
+			}
+			if let Some(custom_voxel_code) = &leaf.custom_voxel_code {
+				*voxel_datas_file += custom_voxel_code;
 			}
 		}
 	}

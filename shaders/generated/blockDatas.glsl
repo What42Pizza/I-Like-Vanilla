@@ -41,12 +41,12 @@ if (materialId < 22u) {
 							if (materialId < 1u) {
 							} else {
 								TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-								SET_VOXEL_ID(72u);
+								SET_VOXEL_ID(83u);
 							}
 						} else {
 							SET_GLOWING_COLOR(vec3( 0.0,   0.0, 100.0), vec3(60.0, 100.0, 100.0), 0.3);
 							TWEAK_GLCOLOR_BRIGHTNESS(0.95);
-							SET_VOXEL_ID(71u);
+							SET_VOXEL_ID(82u);
 						}
 					} else {
 						if (materialId < 4u) {
@@ -60,28 +60,28 @@ if (materialId < 22u) {
 						if (materialId < 6u) {
 							SET_REFLECTIVENESS(0.4);
 							SET_SPECULARNESS(1.0);
-							SET_VOXEL_ID(84u);
+							SET_VOXEL_ID(85u);
 						} else {
 							SET_REFLECTIVENESS(0.4);
 							SET_SPECULARNESS(1.0);
-							SET_VOXEL_ID(83u);
+							SET_VOXEL_ID(84u);
 						}
 					} else {
 						if (materialId < 8u) {
 							SET_REFLECTIVENESS(0.4);
 							SET_SPECULARNESS(1.0);
-							SET_VOXEL_ID(86u);
+							SET_VOXEL_ID(3u);
 						} else {
 							SET_REFLECTIVENESS(0.4);
 							SET_SPECULARNESS(1.0);
-							SET_VOXEL_ID(85u);
+							SET_VOXEL_ID(2u);
 						}
 					}
 				}
 			} else {
 				SET_REFLECTIVENESS(0.7);
 				SET_SPECULARNESS(0.8);
-				SET_VOXEL_ID(82u);
+				SET_VOXEL_ID(94u);
 			}
 		} else {
 			if (materialId < 19u) {
@@ -97,19 +97,19 @@ if (materialId < 22u) {
 							}
 						} else {
 							if (materialId < 13u) {
-								SET_VOXEL_ID(92u);
+								SET_VOXEL_ID(11u);
 							} else {
 								TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-								SET_VOXEL_ID(91u);
+								SET_VOXEL_ID(10u);
 							}
 						}
 					} else {
 						if (materialId < 16u) {
 							if (materialId < 15u) {
 								SET_GLOWING_COLOR(vec3(60.0, 19.0, 67.6), vec3(63.0, 21.0, 69.6), 0.5);
-								SET_VOXEL_ID(90u);
+								SET_VOXEL_ID(9u);
 							} else {
-								SET_VOXEL_ID(89u);
+								SET_VOXEL_ID(8u);
 							}
 						} else {
 							if (materialId < 17u) {
@@ -117,7 +117,7 @@ if (materialId < 22u) {
 								SET_SPECULARNESS(0.5);
 							} else {
 								SET_GLOWING_COLOR(vec3(28.0, 56.7, 64.3), vec3(51.0, 79.3, 96.9), 1.1);
-								SET_VOXEL_ID(88u);
+								SET_VOXEL_ID(7u);
 							}
 						}
 					}
@@ -131,7 +131,7 @@ if (materialId < 22u) {
 					SET_VOXEL_ID(0u);
 				} else {
 					TWEAK_GLCOLOR_BRIGHTNESS(1.15);
-					SET_VOXEL_ID(94u);
+					SET_VOXEL_ID(6u);
 				}
 			}
 		}
@@ -160,11 +160,11 @@ if (materialId < 22u) {
 								}
 							} else {
 								if (materialId < 27u) {
-									SET_VOXEL_ID(3u);
+									SET_VOXEL_ID(13u);
 								} else {
 									SET_GLOWING_COLOR(vec3(33.6,  40.8, 100.0), vec3(60.0, 100.0, 100.0), 0.2);
 									TWEAK_GLCOLOR_BRIGHTNESS(1.2);
-									SET_VOXEL_ID(93u);
+									SET_VOXEL_ID(12u);
 								}
 							}
 						}
@@ -194,7 +194,7 @@ if (materialId < 22u) {
 									}
 								} else {
 									if (materialId < 35u) {
-										SET_VOXEL_ID(5u);
+										SET_VOXEL_ID(17u);
 									} else {
 										SET_REFLECTIVENESS(0.4);
 										SET_SPECULARNESS(0.5);
@@ -206,10 +206,10 @@ if (materialId < 22u) {
 									if (materialId < 37u) {
 										SET_REFLECTIVENESS(0.75);
 										SET_SPECULARNESS(0.3);
-										SET_VOXEL_ID(15u);
+										SET_VOXEL_ID(73u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(18u);
+										SET_VOXEL_ID(72u);
 									}
 								} else {
 									if (materialId < 39u) {
@@ -230,32 +230,32 @@ if (materialId < 22u) {
 								if (materialId < 43u) {
 									if (materialId < 42u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(17u);
+										SET_VOXEL_ID(75u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(12u);
+										SET_VOXEL_ID(74u);
 									}
 								} else {
 									if (materialId < 44u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(11u);
+										SET_VOXEL_ID(27u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(14u);
+										SET_VOXEL_ID(26u);
 									}
 								}
 							} else {
 								if (materialId < 47u) {
 									if (materialId < 46u) {
-										SET_VOXEL_ID(13u);
+										SET_VOXEL_ID(29u);
 									} else {
-										SET_VOXEL_ID(23u);
+										SET_VOXEL_ID(28u);
 									}
 								} else {
 									if (materialId < 48u) {
 										SET_VOXEL_ID(0u);
 									} else {
-										SET_VOXEL_ID(25u);
+										SET_VOXEL_ID(23u);
 									}
 								}
 							}
@@ -264,36 +264,36 @@ if (materialId < 22u) {
 								if (materialId < 51u) {
 									if (materialId < 50u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(24u);
+										SET_VOXEL_ID(22u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(20u);
+										SET_VOXEL_ID(25u);
 									}
 								} else {
 									if (materialId < 52u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(19u);
+										SET_VOXEL_ID(24u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(22u);
+										SET_VOXEL_ID(35u);
 									}
 								}
 							} else {
 								if (materialId < 55u) {
 									if (materialId < 54u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(21u);
+										SET_VOXEL_ID(34u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(47u);
+										SET_VOXEL_ID(37u);
 									}
 								} else {
 									if (materialId < 56u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(46u);
+										SET_VOXEL_ID(36u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(49u);
+										SET_VOXEL_ID(31u);
 									}
 								}
 							}
@@ -370,16 +370,16 @@ if (materialId < 22u) {
 								if (materialId < 75u) {
 									if (materialId < 74u) {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-										SET_VOXEL_ID(48u);
+										SET_VOXEL_ID(30u);
 									} else {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-										SET_VOXEL_ID(43u);
+										SET_VOXEL_ID(33u);
 									}
 								} else {
 									if (materialId < 76u) {
-										SET_VOXEL_ID(42u);
+										SET_VOXEL_ID(32u);
 									} else {
-										SET_VOXEL_ID(45u);
+										SET_VOXEL_ID(60u);
 									}
 								}
 							} else {
@@ -387,18 +387,18 @@ if (materialId < 22u) {
 									if (materialId < 78u) {
 										SET_REFLECTIVENESS(1.0);
 										SET_SPECULARNESS(0.5);
-										SET_VOXEL_ID(44u);
+										SET_VOXEL_ID(59u);
 									} else {
 										SET_REFLECTIVENESS(1.0);
 										SET_SPECULARNESS(0.5);
-										SET_VOXEL_ID(55u);
+										SET_VOXEL_ID(62u);
 									}
 								} else {
 									if (materialId < 80u) {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-										SET_VOXEL_ID(54u);
+										SET_VOXEL_ID(61u);
 									} else {
-										SET_VOXEL_ID(57u);
+										SET_VOXEL_ID(56u);
 									}
 								}
 							}
@@ -415,7 +415,7 @@ if (materialId < 22u) {
 										SET_GLOWING_COLOR(vec3(126.0,  14.9,  48.2), vec3(162.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_EMERALD_ORE_STRENGTH);
 									} else {
 										SET_GLOWING_COLOR(vec3(  0.0,  46.3,  21.0), vec3(360.0, 100.0, 100.0), GLOWING_ORES_STRENGTH * GLOWING_REDSTONE_ORE_STRENGTH);
-										SET_VOXEL_ID(56u);
+										SET_VOXEL_ID(55u);
 									}
 								}
 							} else {
@@ -423,7 +423,7 @@ if (materialId < 22u) {
 									if (materialId < 86u) {
 										SET_GLOWING_COLOR(vec3( 0.0,  0.0, 14.5), vec3(90.0, 16.0, 29.4), GLOWING_ORES_STRENGTH * GLOWING_COAL_ORE_STRENGTH);
 									} else {
-										SET_VOXEL_ID(51u);
+										SET_VOXEL_ID(58u);
 									}
 								} else {
 									if (materialId < 88u) {
@@ -441,32 +441,32 @@ if (materialId < 22u) {
 							if (materialId < 93u) {
 								if (materialId < 91u) {
 									if (materialId < 90u) {
-										SET_VOXEL_ID(50u);
+										SET_VOXEL_ID(57u);
 									} else {
 										SET_GLOWING_COLOR(vec3(21.4,  31.3, 69.4), vec3(49.2, 100.0, 97.6), 1.0);
-										SET_VOXEL_ID(53u);
+										SET_VOXEL_ID(68u);
 									}
 								} else {
 									if (materialId < 92u) {
 										TWEAK_GLCOLOR_BRIGHTNESS(1.25);
-										SET_VOXEL_ID(52u);
+										SET_VOXEL_ID(67u);
 									} else {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.95);
-										SET_VOXEL_ID(31u);
+										SET_VOXEL_ID(70u);
 									}
 								}
 							} else {
 								if (materialId < 95u) {
 									if (materialId < 94u) {
-										SET_VOXEL_ID(30u);
+										SET_VOXEL_ID(69u);
 									} else {
-										SET_VOXEL_ID(33u);
+										SET_VOXEL_ID(64u);
 									}
 								} else {
 									if (materialId < 96u) {
-										SET_VOXEL_ID(32u);
+										SET_VOXEL_ID(63u);
 									} else {
-										SET_VOXEL_ID(27u);
+										SET_VOXEL_ID(66u);
 									}
 								}
 							}
@@ -475,38 +475,38 @@ if (materialId < 22u) {
 								if (materialId < 99u) {
 									if (materialId < 98u) {
 										TWEAK_GLCOLOR_BRIGHTNESS(1.1);
-										SET_VOXEL_ID(26u);
+										SET_VOXEL_ID(65u);
 									} else {
 										SET_GLOWING_COLOR(vec3(22.9, 17.6, 74.9), vec3(49.3, 84.8, 100.0), 0.45);
-										SET_VOXEL_ID(29u);
+										SET_VOXEL_ID(43u);
 									}
 								} else {
 									if (materialId < 100u) {
 										SET_REFLECTIVENESS(1.0);
 										SET_SPECULARNESS(0.5);
-										SET_VOXEL_ID(28u);
+										SET_VOXEL_ID(42u);
 									} else {
 										SET_REFLECTIVENESS(1.0);
 										SET_SPECULARNESS(0.5);
-										SET_VOXEL_ID(39u);
+										SET_VOXEL_ID(45u);
 									}
 								}
 							} else {
 								if (materialId < 103u) {
 									if (materialId < 102u) {
 										SET_GLOWING_COLOR(vec3(22.9, 17.6, 74.9), vec3(49.3, 84.8, 100.0), 0.75);
-										SET_VOXEL_ID(38u);
+										SET_VOXEL_ID(44u);
 									} else {
 										SET_REFLECTIVENESS(0.4);
-										SET_VOXEL_ID(41u);
+										SET_VOXEL_ID(39u);
 									}
 								} else {
 									if (materialId < 104u) {
 										SET_GLOWING_COLOR(vec3(22.9, 17.6, 74.9), vec3(49.3, 84.8, 100.0), 0.55);
-										SET_VOXEL_ID(40u);
+										SET_VOXEL_ID(38u);
 									} else {
 										SET_GLOWING_COLOR(vec3(22.9, 17.6, 74.9), vec3(49.3, 84.8, 100.0), 0.65);
-										SET_VOXEL_ID(35u);
+										SET_VOXEL_ID(41u);
 									}
 								}
 							}
@@ -516,33 +516,33 @@ if (materialId < 22u) {
 							if (materialId < 109u) {
 								if (materialId < 107u) {
 									if (materialId < 106u) {
-										SET_VOXEL_ID(34u);
+										SET_VOXEL_ID(40u);
 									} else {
-										SET_VOXEL_ID(37u);
+										SET_VOXEL_ID(51u);
 									}
 								} else {
 									if (materialId < 108u) {
-										SET_VOXEL_ID(36u);
+										SET_VOXEL_ID(50u);
 									} else {
-										SET_VOXEL_ID(63u);
+										SET_VOXEL_ID(53u);
 									}
 								}
 							} else {
 								if (materialId < 111u) {
 									if (materialId < 110u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(62u);
+										SET_VOXEL_ID(52u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(65u);
+										SET_VOXEL_ID(47u);
 									}
 								} else {
 									if (materialId < 112u) {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(64u);
+										SET_VOXEL_ID(46u);
 									} else {
 										SET_SPECULARNESS(1.0);
-										SET_VOXEL_ID(59u);
+										SET_VOXEL_ID(49u);
 									}
 								}
 							}
@@ -550,29 +550,29 @@ if (materialId < 22u) {
 							if (materialId < 117u) {
 								if (materialId < 115u) {
 									if (materialId < 114u) {
-										SET_VOXEL_ID(58u);
+										SET_VOXEL_ID(48u);
 									} else {
-										SET_VOXEL_ID(61u);
+										SET_VOXEL_ID(19u);
 									}
 								} else {
 									if (materialId < 116u) {
-										SET_VOXEL_ID(60u);
+										SET_VOXEL_ID(18u);
 									} else {
-										SET_VOXEL_ID(8u);
+										SET_VOXEL_ID(21u);
 									}
 								}
 							} else {
 								if (materialId < 119u) {
 									if (materialId < 118u) {
-										SET_VOXEL_ID(7u);
+										SET_VOXEL_ID(20u);
 									} else {
-										SET_VOXEL_ID(10u);
+										SET_VOXEL_ID(77u);
 									}
 								} else {
 									if (materialId < 120u) {
-										SET_VOXEL_ID(9u);
+										SET_VOXEL_ID(76u);
 									} else {
-										SET_VOXEL_ID(6u);
+										SET_VOXEL_ID(15u);
 									}
 								}
 							}
@@ -589,7 +589,7 @@ if (materialId < 22u) {
 #if defined SHADER_GBUFFERS_WATER || defined SHADER_VOXY_TRANSLUCENT
 SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMOUNT_SURFACE, lmcoord.y));
 #endif
-			SET_VOXEL_ID(2u);
+			SET_VOXEL_ID(54u);
 		} else {
 			if (materialId < 148u) {
 				if (materialId < 138u) {
@@ -638,12 +638,12 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 						if (materialId < 133u) {
 							SET_GLOWING_COLOR(vec3(  0.0, 64.5, 79.2), vec3(360.0, 97.0, 98.4), 1.0);
 							TWEAK_GLCOLOR_BRIGHTNESS(0.7);
-							SET_VOXEL_ID(66u);
+							SET_VOXEL_ID(71u);
 						} else {
 							if (materialId < 136u) {
 								if (materialId < 135u) {
 									if (materialId < 134u) {
-										SET_VOXEL_ID(4u);
+										SET_VOXEL_ID(14u);
 									} else {
 										TWEAK_GLCOLOR_BRIGHTNESS(0.85);
 										SET_VOXEL_ID(0u);
@@ -668,7 +668,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 									TWEAK_GLCOLOR_BRIGHTNESS(0.95);
 								} else {
 									TWEAK_GLCOLOR_BRIGHTNESS(0.9);
-									SET_VOXEL_ID(87u);
+									SET_VOXEL_ID(78u);
 								}
 							} else {
 								if (materialId < 141u) {
@@ -697,7 +697,7 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 						if (materialId < 146u) {
 							SET_REFLECTIVENESS(1.0);
 							TWEAK_GLCOLOR_BRIGHTNESS(1.1);
-							SET_VOXEL_ID(68u);
+							SET_VOXEL_ID(79u);
 						} else {
 							if (materialId < 147u) {
 								SET_REFLECTIVENESS(0.4);
@@ -717,21 +717,21 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 149u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(79u);
+								SET_VOXEL_ID(5u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(81u);
+								SET_VOXEL_ID(4u);
 							}
 						} else {
 							if (materialId < 151u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(80u);
+								SET_VOXEL_ID(91u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(77u);
+								SET_VOXEL_ID(90u);
 							}
 						}
 					} else {
@@ -759,21 +759,21 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 157u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(78u);
+								SET_VOXEL_ID(93u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(74u);
+								SET_VOXEL_ID(92u);
 							}
 						} else {
 							if (materialId < 159u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(73u);
+								SET_VOXEL_ID(87u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(76u);
+								SET_VOXEL_ID(86u);
 							}
 						}
 					} else {
@@ -781,21 +781,21 @@ SET_REFLECTIVENESS(mix(WATER_REFLECTION_AMOUNT_UNDERGROUND, WATER_REFLECTION_AMO
 							if (materialId < 161u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(75u);
+								SET_VOXEL_ID(89u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(70u);
+								SET_VOXEL_ID(88u);
 							}
 						} else {
 							if (materialId < 163u) {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(69u);
+								SET_VOXEL_ID(81u);
 							} else {
 								SET_REFLECTIVENESS(0.4);
 								SET_SPECULARNESS(1.0);
-								SET_VOXEL_ID(67u);
+								SET_VOXEL_ID(80u);
 							}
 						}
 					}
