@@ -1,5 +1,3 @@
-use bitflags::bitflags;
-
 use crate::*;
 
 
@@ -57,12 +55,6 @@ const VOXEL_DATAS_START: &str = r#"
 	#define SET_TRANSLUCENCY(v) translucency = v;
 #else
 	#define SET_TRANSLUCENCY(v)
-#endif
-#ifdef GET_BLOCKED_FACES
-	blockedFaces = 0u;
-	#define SET_BLOCKED_FACES(v) blockedFaces = v;
-#else
-	#define SET_BLOCKED_FACES(v)
 #endif
 
 "#;
@@ -217,10 +209,6 @@ pub fn function(args: &[String]) -> Result<()> {
 			
 			"translucency" => {
 				curr_block_data.voxel_translucency = Some(value);
-			}
-			
-			"blocked faces" => {
-				curr_block_data.voxel_blocked_faces = Some(parse_blocked_faces(value)?);
 			}
 			
 			"glow detect min" => {
@@ -457,9 +445,6 @@ pub fn function(args: &[String]) -> Result<()> {
 			if let Some(translucency) = &leaf.voxel_translucency {
 				*voxel_datas_file += &format!("{indent}SET_TRANSLUCENCY({translucency});\n");
 			}
-			if let Some(blocked_faces) = &leaf.voxel_blocked_faces {
-				*voxel_datas_file += &format!("{indent}SET_BLOCKED_FACES({});\n", blocked_faces.bits());
-			}
 			if let Some(custom_voxel_code) = &leaf.custom_voxel_code {
 				*voxel_datas_file += custom_voxel_code;
 			}
@@ -528,28 +513,6 @@ fn get_block_ids_from_header(header_line: &str) -> Vec<&str> {
 		.collect::<Vec<_>>()
 }
 
-fn parse_blocked_faces(value: &str) -> Result<VoxelBlockedFaces> {
-	let mut output = VoxelBlockedFaces::empty();
-	let mut parts = value.split(' ').collect::<Vec<_>>();
-	let len_minus_one = parts.len() - 1;
-	for part in &mut parts[0..len_minus_one] {
-		// remove commas
-		*part = &part[..part.len()-1];
-	}
-	for part in parts {
-		match part {
-			"west"  => output |= VoxelBlockedFaces::WEST,
-			"down"  => output |= VoxelBlockedFaces::DOWN,
-			"north" => output |= VoxelBlockedFaces::NORTH,
-			"east"  => output |= VoxelBlockedFaces::EAST,
-			"up"    => output |= VoxelBlockedFaces::UP,
-			"south" => output |= VoxelBlockedFaces::SOUTH,
-			_ => bail!("Unknown value in 'blocked faces': \"{part}\"\n(full value: \"{value}\")\nMust be one of: north, south, east, west, up, down, all values except last must have commas"),
-		}
-	}
-	Ok(output)
-}
-
 
 
 #[derive(Debug)]
@@ -573,7 +536,6 @@ struct BlockData<'a> {
 	voxel_id: u8,
 	voxel_emission: Option<&'a str>,
 	voxel_translucency: Option<&'a str>,
-	voxel_blocked_faces: Option<VoxelBlockedFaces>,
 }
 
 impl<'a> BlockData<'a> {
@@ -598,7 +560,6 @@ impl<'a> BlockData<'a> {
 			voxel_id: 0u8,
 			voxel_emission: None,
 			voxel_translucency: None,
-			voxel_blocked_faces: None,
 		}
 	}
 }
@@ -623,18 +584,6 @@ enum VoxelizeValue {
 	True,
 	False,
 	Empty,
-}
-
-bitflags! {
-	#[derive(Debug, Copy, Clone)]
-	struct VoxelBlockedFaces: u8 {
-		const WEST  = 1 << 0;
-		const DOWN  = 1 << 1;
-		const NORTH = 1 << 2;
-		const EAST  = 1 << 3;
-		const UP    = 1 << 4;
-		const SOUTH = 1 << 5;
-	}
 }
 
 #[derive(Debug)]

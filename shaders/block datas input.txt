@@ -903,71 +903,14 @@ voxelize: empty
 
 
 
-block sandstone, chiseled_sandstone, smooth_sandstone, cut_sandstone, sandstone_wall:
-weight: 100
+block sandstone, chiseled_sandstone, smooth_sandstone, cut_sandstone:
+weight: 10
 specularness: 0.2
 
-block sandstone_stairs:facing=north:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
+block sandstone_stairs, smooth_sandstone_stairs, sandstone_slab, smooth_sandstone_slab, cut_sandstone_slab, sandstone_wall:
 weight: 3
 specularness: 0.2
-voxelize: true
-blocked faces: north, down
-
-block sandstone_stairs:facing=north:half=top, smooth_sandstone_stairs:facing=north:half=top:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: north, up
-
-block sandstone_stairs:facing=south:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: south, down
-
-block sandstone_stairs:facing=south:half=top, smooth_sandstone_stairs:facing=north:half=top:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: south, up
-
-block sandstone_stairs:facing=east:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: east, down
-
-block sandstone_stairs:facing=east:half=top, smooth_sandstone_stairs:facing=north:half=top:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: east, up
-
-block sandstone_stairs:facing=west:half=bottom, smooth_sandstone_stairs:facing=north:half=bottom:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: west, down
-
-block sandstone_stairs:facing=west:half=top, smooth_sandstone_stairs:facing=north:half=top:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: west, up
-
-block sandstone_slab:type=bottom, smooth_sandstone_slab:type=bottom, cut_sandstone_slab:type=bottom:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: down
-
-block sandstone_slab:type=top, smooth_sandstone_slab:type=top, cut_sandstone_slab:type=top:
-weight: 3
-specularness: 0.2
-voxelize: true
-blocked faces: up
-
-
+voxelize: empty
 
 block polished_granite, polished_diorite, polished_andesite, polished_deepslate:
 weight: 3
@@ -1004,7 +947,12 @@ reflectiveness: 0.15
 
 // valuables:
 
-block iron_block, iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
+block iron_block:
+weight: 1
+reflectiveness: 0.4
+specularness: 0.3
+
+block iron_door, iron_trapdoor, heavy_weighted_pressure_plate:
 weight: 1
 reflectiveness: 0.4
 specularness: 0.3
@@ -1072,8 +1020,7 @@ brightness: 0.95
 block white_carpet:
 weight: 2
 brightness: 0.95
-voxelize: true
-blocked faces: down
+voxelize: empty
 
 block yellow_wool, orange_wool:
 weight: 1
@@ -1082,8 +1029,7 @@ brightness: 0.85
 block yellow_carpet, orange_carpet:
 weight: 1
 brightness: 0.85
-voxelize: true
-blocked faces: down
+voxelize: empty
 
 block nether_portal:
 weight: 1
@@ -1101,38 +1047,21 @@ shadow casting: never
 
 // building blocks
 
-block quartz_block, chiseled_quartz_block, quartz_bricks, quartz_pillar:
+block quartz_block, chiseled_quartz_block, quartz_bricks, quartz_pillar, quartz_stairs, quartz_slab:
 weight: 10
 reflectiveness: 0.3
 specularness: 0.5
 
-block quartz_stairs, quartz_slab:
-weight: 1
-reflectiveness: 0.3
-specularness: 0.5
-voxelize: empty
-
-block smooth_quartz, smooth_quartz_stairs:
+block smooth_quartz, smooth_quartz_stairs, smooth_quartz_slab:
 weight: 10
 reflectiveness: 0.4
-specularness: 0.5
-
-block smooth_quartz_slab:
-weight: 10
-reflectiveness: 0.4
-specularness: 0.5
-voxelize: empty
+specularness: 0.6
 
 block white_glazed_terracotta, light_gray_glazed_terracotta, gray_glazed_terracotta, black_glazed_terracotta, brown_glazed_terracotta, red_glazed_terracotta, orange_glazed_terracotta, yellow_glazed_terracotta, lime_glazed_terracotta, green_glazed_terracotta, cyan_glazed_terracotta, light_blue_glazed_terracotta, blue_glazed_terracotta, purple_glazed_terracotta, magenta_glazed_terracotta, pink_glazed_terracotta:
 weight: 10
 reflectiveness: 0.5
 specularness: 0.5
 
-block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs:
+block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs, moss_carpet, pale_moss_carpet, %wool_carpets:
 weight: 5
 voxelize: empty
-
-block moss_carpet, pale_moss_carpet, %wool_carpets:
-weight: 2
-voxelize: true
-blocked faces: down
