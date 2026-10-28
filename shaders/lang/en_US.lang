@@ -2026,6 +2026,10 @@ option.FOG_BUG_RECREATION.comment=Partially recreates the vanilla bug of fully i
 value.FOG_BUG_RECREATION.0=Off
 value.FOG_BUG_RECREATION.1=On
 
+option.TRANSPARENTS_BORDER_FOG_DIST_MULT=Transparents Distance Mult
+option.TRANSPARENTS_BORDER_FOG_DIST_MULT.comment=How much to decrease the fog distance for transparent terrain (including water)
+prefix.TRANSPARENTS_BORDER_FOG_DIST_MULT=x
+
 option.VOXY_BORDER_FOG_DIST_MULT=Voxy Distance Mult
 option.VOXY_BORDER_FOG_DIST_MULT.comment=How much to decrease the fog distance when Voxy is enabled
 prefix.VOXY_BORDER_FOG_DIST_MULT=x

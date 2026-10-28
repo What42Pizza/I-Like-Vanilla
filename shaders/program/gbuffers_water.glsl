@@ -239,6 +239,7 @@ void main() {
 	// fog
 	#if BORDER_FOG_ENABLED == 1
 		color.a *= 1.0 - fogAmount;
+		reflectiveness *= 1.0 - fogAmount * fogAmount;
 	#endif
 	
 	
@@ -336,7 +337,7 @@ void main() {
 	
 	#if BORDER_FOG_ENABLED == 1
 		float _fogDistance;
-		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		fogAmount = getBorderFogAmount(playerPos / TRANSPARENTS_BORDER_FOG_DIST_MULT, _fogDistance);
 	#endif
 	
 	

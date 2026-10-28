@@ -6,6 +6,7 @@
   - Changed sunrays and volumetric clouds to render at half resolution
   - Increased sunrays and volumetric clouds quality (sunrays: 6 -> 8, clouds: 8 -> 12)
   - Added settings 'Use Vanilla Fog Color', 'Use Vanilla Fog Density', and 'Use Vanilla Sky Color'
+  - Added setting 'Transparents Fog Distance Mult'
   - Other minor tweaks
   - Passed 4 million downloads!
   - This shader is now considered mostly complete
