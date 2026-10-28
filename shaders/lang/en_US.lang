@@ -1588,6 +1588,10 @@ option.CLOUD_SKY_HORIZON_FADE.comment=Makes the clouds quickly fade into the sky
 value.CLOUD_SKY_HORIZON_FADE.0=Off
 value.CLOUD_SKY_HORIZON_FADE.1=On
 
+option.CLOUD_SKY_HORIZON_FADE_DIST_MULT=Horizon Fade Distance Mult
+option.CLOUD_SKY_HORIZON_FADE_DIST_MULT.comment=How far out the clouds sky horizon fade should start
+prefix.CLOUD_SKY_HORIZON_FADE_DIST_MULT=x
+
 
 
 

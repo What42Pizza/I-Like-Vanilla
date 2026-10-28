@@ -82,7 +82,8 @@ void main() {
 	color.a *= fogAmount;
 	
 	#if CLOUD_SKY_HORIZON_FADE == 1
-		color.rgb = mix(color.rgb, horizonColor, min(dist / (clamp(far, 16 * 6, 16 * 12) * (BORDER_FOG_END * 4.0)), 1.0));
+		float cloudHorizonFadeEnd = clamp(far, 16 * 6, 16 * 12) * (4.0 * CLOUD_SKY_HORIZON_FADE_DIST_MULT);
+		color.rgb = mix(color.rgb, horizonColor, min(dist / cloudHorizonFadeEnd, 1.0));
 	#endif
 	
 	color.a *= 1.0 - blindness;
@@ -138,7 +139,8 @@ void main() {
 	gl_Position.z += 0.00004;
 	
 	#if CLOUD_SKY_HORIZON_FADE == 1
-		horizonColor = getFogColor(gbufferModelView[0].xyz);
+		float viewSign = 1.0 - 2.0 * step(0.5, fract(sunAngle + 0.25));
+		horizonColor = getFogColor(gbufferModelView[0].xyz * viewSign);
 	#endif
 	
 	#if TAA_ENABLED == 1
