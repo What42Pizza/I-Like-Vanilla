@@ -99,7 +99,7 @@ void main() {
 	fogDist *= 1.0 + distMult * distMultMult;
 	
 	float fogDarken = fogDarken;
-	vec3 atmoFogColor = getFogColor(viewPos, playerPos);
+	vec3 atmoFogColor = getFogColor(viewPos);
 	atmoFogColor *= 1.0 - blindness;
 	atmoFogColor *= 1.0 - darknessFactor;
 	#ifndef NETHER

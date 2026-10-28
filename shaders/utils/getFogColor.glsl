@@ -3,7 +3,7 @@
 
 
 
-vec3 getFogColor(vec3 viewPos, vec3 playerPos) {
+vec3 getFogColor(vec3 viewPos) {
 	vec3 fogColorOut;
 	
 	#ifdef OVERWORLD

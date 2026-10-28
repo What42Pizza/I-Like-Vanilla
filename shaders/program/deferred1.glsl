@@ -186,7 +186,7 @@ void main() {
 		
 		#if BORDER_FOG_ENABLED == 1
 			#if FOG_BUG_RECREATION == 1
-				skyColor = getFogColor(viewPos, playerPos);
+				skyColor = getFogColor(viewPos);
 			#endif
 			color = mix(color, skyColor, skyAmount);
 		#endif

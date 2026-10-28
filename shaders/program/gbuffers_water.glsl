@@ -239,7 +239,6 @@ void main() {
 	// fog
 	#if BORDER_FOG_ENABLED == 1
 		color.a *= 1.0 - fogAmount;
-		reflectiveness *= 1.0 - fogAmount * fogAmount;
 	#endif
 	
 	

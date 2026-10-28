@@ -1583,6 +1583,11 @@ option.VANILLA_CLOUDS_SCALE_XZ.comment=Scales the vanilla clouds by a certain am
 option.VANILLA_CLOUDS_SCALE_Y=Vanilla Clouds Scale (Vertical)
 option.VANILLA_CLOUDS_SCALE_Y.comment=Scales the vanilla clouds by a certain amount (in the y direction). There are known and unfixable limitations here, also setting the horizontal and vertical scales to the same value looks the same at all scales (e.g. a horizontal scale of 2.0 and a vertical scale of 2.0 will look the same as if both are 1.0)
 
+option.CLOUD_SKY_HORIZON_FADE=Cloud Sky Horizon Fade
+option.CLOUD_SKY_HORIZON_FADE.comment=Makes the clouds quickly fade into the sky horizon color
+value.CLOUD_SKY_HORIZON_FADE.0=Off
+value.CLOUD_SKY_HORIZON_FADE.1=On
+
 
 
 

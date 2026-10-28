@@ -5,6 +5,9 @@ in_out vec3 playerPos;
 #if CLOUDS_TYPE == 2
 	in_out float alphaMult;
 #endif
+#if CLOUD_SKY_HORIZON_FADE == 1
+	flat in_out vec3 horizonColor;
+#endif
 
 
 
@@ -66,8 +69,7 @@ void main() {
 	
 	// fog transparency
 	float dist = length(playerPos.xz) / VANILLA_CLOUDS_SCALE_XZ;
-	dist /= 128.0 * 16.0 * 1.25;
-	float fogAmount = percentThrough(dist, 1.0, CLOUD_FOG_START);
+	float fogAmount = percentThrough(dist / (128.0 * 16.0 * 1.25), 1.0, CLOUD_FOG_START);
 	#if CLOUD_FOG_CURVE == 2
 		fogAmount = pow2(fogAmount);
 	#elif CLOUD_FOG_CURVE == 3
@@ -78,6 +80,10 @@ void main() {
 		fogAmount = pow5(fogAmount);
 	#endif
 	color.a *= fogAmount;
+	
+	#if CLOUD_SKY_HORIZON_FADE == 1
+		color.rgb = mix(color.rgb, horizonColor, min(dist / (clamp(far, 16 * 6, 16 * 12) * (BORDER_FOG_END * 4.0)), 1.0));
+	#endif
 	
 	color.a *= 1.0 - blindness;
 	color.a *= 1.0 - darknessFactor;
@@ -107,6 +113,9 @@ void main() {
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
+#if CLOUD_SKY_HORIZON_FADE == 1
+	#include "/utils/getFogColor.glsl"
+#endif
 
 void main() {
 	#if CLOUD_COMPATIBILITY == 1
@@ -127,6 +136,10 @@ void main() {
 	
 	gl_Position = viewToNdc(viewPos);
 	gl_Position.z += 0.00004;
+	
+	#if CLOUD_SKY_HORIZON_FADE == 1
+		horizonColor = getFogColor(gbufferModelView[0].xyz);
+	#endif
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
