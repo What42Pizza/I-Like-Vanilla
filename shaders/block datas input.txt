@@ -438,12 +438,20 @@ weight: 1
 voxelize: true
 emission: vec3(1.0, 0.95, 0.85)
 
-block soul_torch, soul_wall_torch, soul_lantern, soul_campfire:lit=true, galosphere:soul_light_stand, galosphere:soul_chandelier, supplementaries:sconce_soul:
+block soul_torch, soul_wall_torch, soul_lantern, galosphere:soul_light_stand, galosphere:soul_chandelier, supplementaries:sconce_soul:
 weight: 3
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
 emission: vec3(0.45, 0.75, 1.2)
+
+block soul_campfire:lit=true:
+weight: 1
+glow detect min: vec3(0.0, 0.0, 70.2)
+glow detect max: vec3(181.5, 89.4, 100.0)
+glow amount: 1.0
+voxelize: true
+emission: vec3(0.5, 0.85, 1.35)
 
 block redstone_torch, redstone_wall_torch:
 weight: 5
@@ -463,7 +471,7 @@ block sea_lantern:
 weight: 1
 brightness: 1.25
 voxelize: true
-emission: vec3(0.8, 1.0, 0.9)
+emission: vec3(0.75, 1.0, 1.05)
 
 block beacon:
 weight: 1

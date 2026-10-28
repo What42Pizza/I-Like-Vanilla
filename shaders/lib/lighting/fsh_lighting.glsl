@@ -341,6 +341,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 			fadeOut *= fadeOut;
 			fadeOut *= fadeOut;
 			blockLight = mix(blockLight, origLight, fadeOut);
+			blockBrightness = min(blockBrightness, origBrightness);
 			blockBrightness = mix(blockBrightness, origBrightness, fadeOut);
 			
 		} else {
