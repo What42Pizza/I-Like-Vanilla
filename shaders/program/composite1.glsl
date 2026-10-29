@@ -12,11 +12,12 @@ flat in_out float distMultMult;
 #include "/utils/projections.glsl"
 #include "/utils/borderFogAmount.glsl"
 
+#include "/utils/getSkyColor.glsl"
 #include "/utils/getFogColor.glsl"
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	#if defined OVERWORLD && defined VOL_CLOUDS_ENABLED
+	#if defined OVERWORLD
 		bool isCloud = unpack_7_7_1_1(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).z > 0.5;
 	#else
 		const bool isCloud = false;
@@ -64,16 +65,23 @@ void main() {
 	
 	
 	#if BORDER_FOG_ENABLED == 1 || CYLINDRICAL_CLIPPING == 1
-		float _fogDistance;
-		float fogAmount = getBorderFogAmount(playerPos, _fogDistance);
+		float fogDistance;
+		float fogAmount = getBorderFogAmount(playerPos, fogDistance);
 		#ifdef DISTANT_HORIZONS
 			fogAmount = mix(fogAmount, 1.0, float(depth == 1.0 && depthDh == 1.0));
+			fogDistance = mix(fogDistance, 1.0, float(depth == 1.0 && depthDh == 1.0));
 		#endif
 		#ifdef VOXY
 			fogAmount = mix(fogAmount, 1.0, float(depth == 1.0));
+			fogDistance = mix(fogDistance, 1.0, float(depth == 1.0));
 		#endif
+		#if FOG_BUG_RECREATION == 1
+			fogAmount *= 1.0 - 0.0001 * float(depth < 1.0);
+		#endif
+		fogAmount *= float(!isCloud);
 	#else
 		const float fogAmount = 0.0;
+		const float fogDistance = 1.0;
 	#endif
 	
 	#ifdef OVERWORLD
@@ -89,6 +97,34 @@ void main() {
 	#elif defined END
 		const float distMult = 1.0;
 	#endif
+	
+	
+	vec3 skyColor = vec3(0.0);
+	if (fogAmount > 0.0) {
+		vec3 viewPos = screenToView(vec3(texcoord, 1.0));
+		skyColor = getSkyColor(normalize(viewPos), true);
+		#if defined OVERWORLD || defined CUSTOM_SKYBOX
+			
+			#if CYLINDRICAL_CLIPPING == 1
+				const float objectsMixingSlope = 7.0;
+			#else
+				const float objectsMixingSlope = 32.0;
+			#endif
+			vec3 skyObjects = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * 2.0;
+			skyObjects *= (1.0 - 0.6 * skyColor) * clamp(1.0 - objectsMixingSlope * (1.0 - fogDistance), 0.0, 1.0);
+			#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1
+				skyObjects *= OVERWORLD_SKYBOX_BRIGHTNESS;
+			#endif
+			#if defined NETHER && CUSTOM_NETHER_SKYBOX == 1
+				skyObjects *= NETHER_SKYBOX_BRIGHTNESS;
+			#endif
+			#if defined END && CUSTOM_END_SKYBOX == 1
+				skyObjects *= END_SKYBOX_BRIGHTNESS;
+			#endif
+			skyColor += skyObjects;
+		#endif
+	}
+	color = mix(color, skyColor, fogAmount);
 	
 	
 	

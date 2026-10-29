@@ -4,8 +4,8 @@ float sampleNetherCloud(vec3 pos) {
 	pos *= 0.002 / NETHER_CLOUDS_SCALE;
 	pos.y *= 0.33;
 	float cloudSample = 0.0;
-	cloudSample += texNoise3D((pos + frameTimeCounter*0 / 1024.0) * 1.0) * 1.0;
-	cloudSample += texNoise3D((pos + frameTimeCounter*0 / 2048.0) * 0.5) * 0.5;
+	cloudSample += texNoise3D((pos + frameTimeCounter / 1024.0) * 1.0) * 1.0;
+	cloudSample += texNoise3D((pos + frameTimeCounter / 2048.0) * 0.5) * 0.5;
 	cloudSample /= 1.0 + 0.5;
 	
 	return percentThrough(cloudSample, 1.0 - NETHER_CLOUDS_COVERAGE * 0.75, 1.0);

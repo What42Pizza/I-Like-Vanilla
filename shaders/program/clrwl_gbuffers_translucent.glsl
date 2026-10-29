@@ -11,9 +11,6 @@ flat in_out float specularness;
 	in_out vec3 playerPos;
 	flat in_out float isDangerousLight;
 #endif
-#if BORDER_FOG_ENABLED == 1
-	in_out float fogAmount;
-#endif
 
 
 
@@ -66,12 +63,6 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
-	// fog
-	#if BORDER_FOG_ENABLED == 1
-		color.a *= 1.0 - fogAmount;
-	#endif
-	
-	
 	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.0, 0.25, 1.0, 1.0);
@@ -97,9 +88,6 @@ void main() {
 
 #if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
-#endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/utils/borderFogAmount.glsl"
 #endif
 
 void main() {
@@ -132,12 +120,6 @@ void main() {
 	
 	#if TAA_ENABLED == 1 && TEMPORAL_FILTER_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
-	#endif
-	
-	
-	#if BORDER_FOG_ENABLED == 1
-		float _fogDistance;
-		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	

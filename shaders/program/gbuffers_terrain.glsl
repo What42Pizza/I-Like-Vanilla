@@ -53,8 +53,6 @@ void main() {
 		
 	#elif CYLINDRICAL_CLIPPING == 1
 		float dither = bayer64(gl_FragCoord.xy);
-		//#include "/utils/var_rng.glsl"
-		//float dither = randomFloat(rng) * 0.5 + 0.5;
 		#if TEMPORAL_FILTER_ENABLED > 0
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
 		#endif

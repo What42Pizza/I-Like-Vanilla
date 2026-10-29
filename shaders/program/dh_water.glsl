@@ -12,10 +12,6 @@ in_out vec3 playerPos;
 flat in_out vec3 normal;
 flat in_out int dhBlock;
 
-#if BORDER_FOG_ENABLED == 1
-	in_out float fogAmount;
-#endif
-
 
 
 #ifdef FSH
@@ -102,11 +98,6 @@ void main() {
 		vec3 opaqueViewPos = screenToViewDh(vec3(texelcoord * pixelSize, opaqueDepth));
 		float blockDepth = length(viewPos);
 		float opaqueBlockDepth = length(opaqueViewPos);
-		#if BORDER_FOG_ENABLED == 1
-			// this tries to fix underwater border fog but it breaks more stuff than it fixes
-			//vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;
-			//opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
-		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
 		float waterDepthPercent = exp(waterDepth / -16.0); // note: 0.0 is deep and 1.0 is shallow
 		if (isEyeInWater == 1) {
@@ -157,12 +148,6 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
-	// fog
-	#if BORDER_FOG_ENABLED == 1
-		color.a *= 1.0 - fogAmount;
-	#endif
-	
-	
 	/* DRAWBUFFERS:03 */
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
@@ -189,9 +174,6 @@ void main() {
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
 #endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/utils/borderFogAmount.glsl"
-#endif
 
 void main() {
 	glcolor = gl_Color;
@@ -214,12 +196,6 @@ void main() {
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
-	#endif
-	
-	
-	#if BORDER_FOG_ENABLED == 1
-		float _fogDistance;
-		fogAmount = getBorderFogAmount(playerPos, _fogDistance);
 	#endif
 	
 	

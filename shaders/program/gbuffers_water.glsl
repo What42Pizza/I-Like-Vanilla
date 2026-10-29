@@ -23,9 +23,6 @@ flat in_out vec2 midCoordOffset;
 #if WAVING_WATER_SURFACE_ENABLED == 1 || FANCY_NETHER_PORTAL_ENABLED == 1 || PBR_TYPE == 1
 	in_out mat3 tbn;
 #endif
-#if BORDER_FOG_ENABLED == 1
-	in_out float fogAmount;
-#endif
 
 
 
@@ -53,9 +50,14 @@ void main() {
 	#elif defined VOXY
 		
 	#elif CYLINDRICAL_CLIPPING == 1
+		float dither = bayer64(gl_FragCoord.xy);
+		#if TEMPORAL_FILTER_ENABLED > 0
+			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
+		#endif
 		float fogDistance = max(length(playerPos.xz), abs(playerPos.y));
+		fogDistance += dither * 4.0;
 		fogDistance *= invFar;
-		if (fogDistance >= BORDER_FOG_END) { discard; return; }
+		if (fogDistance >= BORDER_FOG_END - 0.01) { discard; return; }
 	#endif
 	
 	
@@ -156,11 +158,6 @@ void main() {
 			//	opaqueBlockDepth = min(opaqueBlockDepth, opaqueBlockDepthDh);
 			//}
 		#endif
-		#if BORDER_FOG_ENABLED == 1
-			// this tries to fix underwater border fog but it breaks more stuff than it fixes
-			//vec3 opaquePlayerPos = mat3(gbufferModelViewInverse) * opaqueViewPos;
-			//opaqueBlockDepth = mix(opaqueBlockDepth, far, getBorderFogAmount(opaquePlayerPos));
-		#endif
 		float waterDepth = opaqueBlockDepth - blockDepth;
 		float waterDepthPercent = exp(waterDepth / -8.0); // note: 0.0 is deep and 1.0 is shallow
 		if (isEyeInWater == 1) {
@@ -236,12 +233,6 @@ void main() {
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
 	
 	
-	// fog
-	#if BORDER_FOG_ENABLED == 1
-		color.a *= 1.0 - fogAmount;
-	#endif
-	
-	
 	/* DRAWBUFFERS:03 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.0, 0.0, 1.0, 1.0);
@@ -267,9 +258,6 @@ void main() {
 
 #if TAA_ENABLED == 1
 	#include "/lib/taa_jitter.glsl"
-#endif
-#if BORDER_FOG_ENABLED == 1
-	#include "/utils/borderFogAmount.glsl"
 #endif
 
 void main() {
@@ -331,12 +319,6 @@ void main() {
 	
 	#if TAA_ENABLED == 1
 		doTaaJitter(gl_Position.xy);
-	#endif
-	
-	
-	#if BORDER_FOG_ENABLED == 1
-		float _fogDistance;
-		fogAmount = getBorderFogAmount(playerPos / TRANSPARENTS_BORDER_FOG_DIST_MULT, _fogDistance);
 	#endif
 	
 	

@@ -60,25 +60,15 @@ void main() {
 	//	if (depthVxTrans != 1.0) viewPos = screenToViewVx(vec3(texcoord, depthVxTrans));
 	//#endif
 	
-	vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	#if BORDER_FOG_ENABLED == 1 || EDGE_HIGHLIGHT_ENABLED == 1
+		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+	#endif
+	
+	float skyAmount = float(depth == 1.0);
 	#if BORDER_FOG_ENABLED == 1
 		float fogDistance;
-		float skyAmount = getBorderFogAmount(playerPos, fogDistance);
-		#ifdef DISTANT_HORIZONS
-			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && dhDepth == 1.0));
-		#endif
-		#ifdef VOXY
-			//float vxDepthOpaque = texelFetch(VX_DEPTH_BUFFER_OPAQUE, texelcoord, 0).r;
-			//float vxDepthTrans = texelFetch(VX_DEPTH_BUFFER_TRANS, texelcoord, 0).r;
-			//skyAmount = mix(skyAmount, 1.0, float(depth == 1.0 && vxDepthOpaque == 1.0 && vxDepthTrans == 1.0));
-			skyAmount = mix(skyAmount, 1.0, float(depth == 1.0));
-			fogDistance = mix(fogDistance, 1.0, float(depth == 1.0));
-		#endif
-		#if FOG_BUG_RECREATION == 1
-			skyAmount *= 1.0 - 0.0001 * float(depth < 1.0);
-		#endif
+		getBorderFogAmount(playerPos, fogDistance);
 	#else
-		float skyAmount = float(depth == 1.0);
 		float fogDistance = skyAmount;
 	#endif
 	
@@ -95,7 +85,7 @@ void main() {
 				const float objectsMixingSlope = 32.0;
 			#endif
 			vec3 skyObjects = texelFetch(SKY_OBJECTS_TEXTURE, texelcoord, 0).rgb * 2.0;
-			skyObjects *= (1.0 - 0.6 * skyColor) * clamp(1.0 - objectsMixingSlope * (1.0 - fogDistance), 0.0, 1.0);
+			//skyObjects *= (1.0 - 0.6 * skyColor) * clamp(1.0 - objectsMixingSlope * (1.0 - fogDistance), 0.0, 1.0);
 			#if defined OVERWORLD && CUSTOM_OVERWORLD_SKYBOX == 1
 				skyObjects *= OVERWORLD_SKYBOX_BRIGHTNESS;
 			#endif
@@ -184,12 +174,12 @@ void main() {
 			}
 		#endif
 		
-		#if BORDER_FOG_ENABLED == 1
-			#if FOG_BUG_RECREATION == 1
-				skyColor = getFogColor(viewPos);
-			#endif
-			color = mix(color, skyColor, skyAmount);
-		#endif
+		//#if BORDER_FOG_ENABLED == 1
+		//	#if FOG_BUG_RECREATION == 1
+		//		skyColor = getFogColor(viewPos);
+		//	#endif
+		//	color = mix(color, skyColor, skyAmount);
+		//#endif
 		
 	}
 	
