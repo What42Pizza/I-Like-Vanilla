@@ -82,24 +82,19 @@ void main() {
 	color.a *= fogAmount;
 	
 	#if CLOUD_SKY_HORIZON_FADE == 1
-		float cloudHorizonFadeEnd = clamp(far, 16 * 6, 16 * 12) * (4.0 * CLOUD_SKY_HORIZON_FADE_DIST_MULT);
+		float cloudHorizonFadeEnd = clamp(far, 16.0 * 6.0, 16.0 * 12.0) * (4.0 * CLOUD_SKY_HORIZON_FADE_DIST_MULT);
 		color.rgb = mix(color.rgb, horizonColor, min(dist / cloudHorizonFadeEnd, 1.0));
 	#endif
 	
 	color.a *= 1.0 - blindness;
 	color.a *= 1.0 - darknessFactor;
 	
-	/* DRAWBUFFERS:03 */
+	/* RENDERTARGETS: 11 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
 		color = vec4(0.0, 1.0, 1.0, 1.0);
 	#endif
 	color.rgb *= 0.5;
 	gl_FragData[0] = color;
-	gl_FragData[1] = vec4(
-		pack_2x8(0.0, 0.25),
-		pack_7_7_1_1(0.0, 0.0, 1.0, 0.0),
-		0.0, 1.0
-	);
 	
 }
 

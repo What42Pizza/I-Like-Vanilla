@@ -30,6 +30,8 @@ const bool  colortex9Clear        = true;
 // should maybe change this to RG16F:
 const int   colortex10Format      = RG8;
 const bool  colortex10Clear       = false;
+const int   colortex11Format      = RGBA8;
+const bool  colortex11Clear       = true;
 const bool  shadowtex0Clear       = false;
 const bool  shadowtex1Clear       = false;
 const float wetnessHalflife       = 30.0f;

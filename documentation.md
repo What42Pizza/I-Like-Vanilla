@@ -200,6 +200,7 @@ This describes which /main_files-s handle different effects
   - pixel (1, 0): shadow caster light RG                  (stored with 0.5 multiplier)
   - pixel (0, 1): shadow caster light B & ambient light R (stored with 0.5 multiplier)
   - pixel (1, 1): ambient light GB                        (stored with 0.5 multiplier)
+- **colortex11: Clouds Texture**
 - **colortex15: Debug Output** (normally not used)
 
 <br>

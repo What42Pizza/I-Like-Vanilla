@@ -40,11 +40,7 @@ flat in_out float distMultMult;
 #endif
 
 void main() {
-	#if defined OVERWORLD && defined VOL_CLOUDS_ENABLED
-		bool isCloud = unpack_7_7_1_1(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord * 2, 0).y).z > 0.5;
-	#else
-		const bool isCloud = false;
-	#endif
+	bool isCloud = texelFetch(CLOUDS_TEXTURE, texelcoord * 2, 0).a > 0.0;
 	
 	#if FOG_IGNORES_TRANSPARENTS == 0
 		float depth;

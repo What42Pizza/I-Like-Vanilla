@@ -17,11 +17,8 @@ flat in_out float distMultMult;
 
 void main() {
 	vec3 color = texelFetch(MAIN_TEXTURE, texelcoord, 0).rgb * 2.0;
-	#if defined OVERWORLD
-		bool isCloud = unpack_7_7_1_1(texelFetch(TRANSPARENT_DATA_TEXTURE, texelcoord, 0).y).z > 0.5;
-	#else
-		const bool isCloud = false;
-	#endif
+	vec4 cloudData = texelFetch(CLOUDS_TEXTURE, texelcoord, 0);
+	bool isCloud = cloudData.a > 0.0;
 	
 	#if FOG_IGNORES_TRANSPARENTS == 0
 		float depth;
@@ -78,7 +75,6 @@ void main() {
 		#if FOG_BUG_RECREATION == 1
 			fogAmount *= 1.0 - 0.0001 * float(depth < 1.0);
 		#endif
-		fogAmount *= float(!isCloud);
 	#else
 		const float fogAmount = 0.0;
 		const float fogDistance = 1.0;
@@ -124,7 +120,12 @@ void main() {
 			skyColor += skyObjects;
 		#endif
 	}
+	
 	color = mix(color, skyColor, fogAmount);
+	
+	#if CLOUDS_TYPE <= 2
+		color = mix(color, cloudData.rgb * 2.0, cloudData.a);
+	#endif
 	
 	
 	
