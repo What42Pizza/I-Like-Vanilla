@@ -8,6 +8,7 @@
   - Added settings 'Use Vanilla Fog Color', 'Use Vanilla Fog Density', and 'Use Vanilla Sky Color'
   - Added settings 'Cloud Sky Horizon Fade' and 'Horizon Fade Distance Mult'
   - Added setting 'Transparents Fog Distance Mult'
+  - Improved nether clouds
   - Other minor tweaks
   - Passed 4 million downloads!
   - This shader is now considered mostly complete

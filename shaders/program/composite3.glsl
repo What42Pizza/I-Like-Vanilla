@@ -43,20 +43,12 @@ void main() {
 	
 	// ======== NOISY RENDERS ADDITION ======== //
 	
-	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1 || defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
-		vec4 noisyRendersData  = texture2D(NOISY_RENDERS_TEXTURE, texcoord, 0);
-		vec4 noisyRendersData1 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75, -0.75) * pixelSize);
-		vec4 noisyRendersData2 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75, -0.75) * pixelSize);
-		vec4 noisyRendersData3 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75,  0.75) * pixelSize);
-		vec4 noisyRendersData4 = texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75,  0.75) * pixelSize);
-	#endif
-	
 	#if DEPTH_SUNRAYS_ENABLED == 1 || VOL_SUNRAYS_ENABLED == 1
 		vec2 sunraysDatas = vec2(0.0);
-		sunraysDatas += noisyRendersData1.xy;
-		sunraysDatas += noisyRendersData2.xy;
-		sunraysDatas += noisyRendersData3.xy;
-		sunraysDatas += noisyRendersData4.xy;
+		sunraysDatas += texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75, -0.75) * pixelSize).xy;
+		sunraysDatas += texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75, -0.75) * pixelSize).xy;
+		sunraysDatas += texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2(-0.75,  0.75) * pixelSize).xy;
+		sunraysDatas += texture2D(NOISY_RENDERS_TEXTURE, texcoord + vec2( 0.75,  0.75) * pixelSize).xy;
 		sunraysDatas *= 0.25;
 	#endif
 	
@@ -92,13 +84,7 @@ void main() {
 	
 	
 	#if defined VOL_CLOUDS_ENABLED || NETHER_CLOUDS_ENABLED == 1 || END_CLOUDS_ENABLED == 1
-		//vec2 cloudsData = vec2(0.0);
-		//cloudsData += noisyRendersData1.zw;
-		//cloudsData += noisyRendersData2.zw;
-		//cloudsData += noisyRendersData3.zw;
-		//cloudsData += noisyRendersData4.zw;
-		//cloudsData *= 0.25;
-		vec2 cloudsData = noisyRendersData.zw;
+		vec2 cloudsData = texture2D(NOISY_RENDERS_TEXTURE, texcoord, 0).zw;
 	#endif
 	
 	#ifdef VOL_CLOUDS_ENABLED
@@ -120,7 +106,7 @@ void main() {
 	#if NETHER_CLOUDS_ENABLED == 1
 		float thickness = 1.0 - cloudsData.x;
 		float brightness = 1.0 - cloudsData.y;
-		thickness *= 1.0 - (0.25 + 0.75 * NETHER_CLOUDS_TRANSPARENCY);
+		thickness *= 1.0 - NETHER_CLOUDS_TRANSPARENCY;
 		color *= 1.0 - thickness;
 		color += cloudsColor * brightness * thickness;
 	#endif

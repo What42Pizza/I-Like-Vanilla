@@ -333,6 +333,18 @@ float valueHash(ivec4 v) {
     return fract(h.x * h.y * h.z * h.w * (h.x + h.y + h.z + h.w));
 }
 
+// copied from: https://stackoverflow.com/a/30644459
+float texNoise3D(vec3 p) {
+	p.z = fract(p.z) * 128.0;
+	float iz = floor(p.z);
+	float fz = fract(p.z);
+	vec2 a_off = vec2(23.0, 29.0) * (iz) / 128.0;
+	vec2 b_off = vec2(23.0, 29.0) * (iz + 1.0) / 128.0;
+	float a = texture2D(noisetex, p.xy + a_off).r;
+	float b = texture2D(noisetex, p.xy + b_off).r;
+	return mix(a, b, fz);
+}
+
 float valueNoise(vec3 v) {
 	ivec3 i = ivec3(floor(v));
 	vec3 f = v - i;
