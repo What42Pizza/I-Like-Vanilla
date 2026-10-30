@@ -318,6 +318,7 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	
 	#if COLORED_LIGHTING_ENABLED == 1
 		vec3 playerPos = transform(gbufferModelViewInverse, viewPos);
+		playerPos *= float(!depthIsHand(depth)); // if shading hand, use player pos (playerPos=0) instead of actual hand pos
 		bool outsideRange;
 		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
 		if (!outsideRange) {
@@ -326,8 +327,8 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 			
 			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
 			#if HANDHELD_LIGHT_ENABLED == 1 && SHOW_DANGEROUS_LIGHT == 0
-				vec3 handheldEmission = getHandheldColoredLighting(viewPos, normal);
-				coloredBlockLight = max(coloredBlockLight, handheldEmission);
+				vec4 handheldEmission = getHandheldColoredLighting(viewPos, normal);
+				coloredBlockLight = max(coloredBlockLight, handheldEmission.rgb);
 			#endif
 			blockBrightness = getLum(coloredBlockLight);
 			coloredBlockLight /= blockBrightness * 0.6 + 0.2;
@@ -341,11 +342,9 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 			fadeOut *= fadeOut;
 			fadeOut *= fadeOut;
 			blockLight = mix(blockLight, origLight, fadeOut);
-			blockBrightness = min(blockBrightness, origBrightness);
+			blockBrightness = min(blockBrightness, max(origBrightness, handheldEmission.w));
 			blockBrightness = mix(blockBrightness, origBrightness, fadeOut);
 			
-		} else {
-			//color *= 0.75;
 		}
 	#endif
 	
