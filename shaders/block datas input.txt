@@ -65,7 +65,7 @@ weight: 100
 alias: BLOCK_ID_LAVA
 brightness: 1.15
 voxelize: true
-emission: vec3(1.25, 0.85, 0.6)
+emission: vec3(1.0, 0.6, 0.25) * 2.0
 translucency: vec3(0.0, 0.0, 0.0)
 
 
@@ -425,13 +425,16 @@ glow amount: 0.2
 voxelize: true
 emission: vec3(1.0, 1.0, 1.0)
 
-block campfire:lit=true, furnace:lit=true:
+block campfire, furnace:lit=true:
 weight: 1
 glow detect min: vec3(21.4,  31.3, 69.4)
 glow detect max: vec3(49.2, 100.0, 97.6)
 glow amount: 1.0
 voxelize: true
-emission: vec3(1.2, 1.0, 0.8)
+emission: vec3(1.0, 0.8, 0.55) * 1.3
+
+block campfire:lit=false:
+weight: 1
 
 block jack_o_lantern:
 weight: 1
@@ -443,29 +446,32 @@ weight: 3
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.45, 0.75, 1.2)
+emission: vec3(0.25, 0.45, 1.0) * 0.9
 
-block soul_campfire:lit=true:
+block soul_campfire:
 weight: 1
 glow detect min: vec3(0.0, 0.0, 70.2)
 glow detect max: vec3(181.5, 89.4, 100.0)
 glow amount: 1.0
 voxelize: true
-emission: vec3(0.5, 0.85, 1.35)
+emission: vec3(0.25, 0.45, 1.0) * 1.2
+
+block soul_campfire:lit=false:
+weight: 1
 
 block redstone_torch, redstone_wall_torch:
 weight: 5
 brightness: 0.9
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.9, 0.3, 0.0)
+emission: vec3(1.0, 0.3, 0.2) * 0.5
 
 block copper_torch, copper_wall_torch, copper_lantern, exposed_copper_lantern, weathered_copper_lantern, oxidized_copper_lantern, waxed_copper_lantern, waxed_exposed_copper_lantern, waxed_weathered_copper_lantern, waxed_oxidized_copper_lantern:
 weight: 1
 brightness: 0.95
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.65, 0.9, 0.55)
+emission: vec3(0.55, 1.0, 0.45)
 
 block sea_lantern:
 weight: 1
@@ -515,7 +521,7 @@ block lava_cauldron:
 weight: 1
 brightness: 1.1
 voxelize: true
-emission: vec3(1.0, 0.9, 0.8)
+emission: vec3(1.0, 0.6, 0.25) * 1.0
 
 block fire:
 weight: 5
@@ -540,7 +546,7 @@ glow detect min: vec3(60.0, 19.0, 67.6)
 glow detect max: vec3(63.0, 21.0, 69.6)
 glow amount: 0.5
 voxelize: true
-emission: vec3(0.6, 0.6, 0.65)
+emission: vec3(0.5, 0.6, 1.0) * 0.3
 
 block cave_vines_plant:berries=true, cave_vines:berries=true:
 weight: 5
@@ -548,39 +554,15 @@ glow detect min: vec3(28.0, 56.7, 64.3)
 glow detect max: vec3(51.0, 79.3, 96.9)
 glow amount: 1.1
 voxelize: true
-emission: vec3(1.25, 1.0, 0.9)
+emission: vec3(1.0, 0.9, 0.6) * 0.7
 
-block small_amethyst_bud, biomesoplenty:small_rose_quartz_bud:
+block small_amethyst_bud, biomesoplenty:small_rose_quartz_bud, medium_amethyst_bud, biomesoplenty:medium_rose_quartz_bud, large_amethyst_bud, biomesoplenty:large_rose_quartz_bud, amethyst_cluster, biomesoplenty:rose_quartz_cluster, galosphere:glinted_amethyst_cluster, galosphere:allurite_cluster, galosphere:glinted_allurite_cluster, galosphere:lumiere_cluster, galosphere:glinted_lumiere_cluster:
 weight: 1
 shadow casting: foliage
 reflectiveness: 1.0
 specularness: 0.5
 voxelize: true
-emission: vec3(0.1, 0.1, 0.1)
-
-block medium_amethyst_bud, biomesoplenty:medium_rose_quartz_bud:
-weight: 1
-shadow casting: foliage
-reflectiveness: 1.0
-specularness: 0.5
-voxelize: true
-emission: vec3(0.2, 0.2, 0.2)
-
-block large_amethyst_bud, biomesoplenty:large_rose_quartz_bud:
-weight: 1
-shadow casting: foliage
-reflectiveness: 1.0
-specularness: 0.5
-voxelize: true
-emission: vec3(0.3, 0.3, 0.3)
-
-block amethyst_cluster, biomesoplenty:rose_quartz_cluster, galosphere:glinted_amethyst_cluster, galosphere:allurite_cluster, galosphere:glinted_allurite_cluster, galosphere:lumiere_cluster, galosphere:glinted_lumiere_cluster:
-weight: 1
-shadow casting: foliage
-reflectiveness: 1.0
-specularness: 0.5
-voxelize: true
-emission: vec3(0.4, 0.4, 0.4)
+emission: vec3(0.8, 0.45, 1.0) * 0.5
 
 block amethyst_block, budding_amethyst:
 weight: 5

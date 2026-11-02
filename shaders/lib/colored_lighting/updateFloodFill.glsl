@@ -23,7 +23,7 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	if (voxelId == 0) { emission = vec3(0.0); translucency = vec3(1.0); }
 	if (voxelId == 1) { emission = vec3(0.0); translucency = vec3(0.0); }
 	emission = mix(vec3(getLum(emission)), emission, COLORED_LIGHTING_SATURATION);
-	emission *= EMISSION_SETTINGS_MULT * 0.5;
+	emission *= 0.5; // reminder: if one block's emissive light is larger than other's, it won't necessarily look brighter (brightness is controlled only by the vanilla lmcoord), but its color will more easily overpower the other light's color
 	
 	// get max of neighbors
 	vec3 neighborsMax = vec3(0.0);
@@ -36,7 +36,7 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	SAMPLE_MAX_LIGHT(0, 0, 1);
 	
 	// get new light value
-	vec3 newLight = neighborsMax - lightTransmittanceDecrease;
+	vec3 newLight = neighborsMax * 0.8; // constant 20% brightness drop from one block to the next
 	newLight *= translucency;
 	newLight = max(newLight, emission);
 	

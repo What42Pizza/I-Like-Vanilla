@@ -322,28 +322,20 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		bool outsideRange;
 		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
 		if (!outsideRange) {
-			vec3 origLight = blockLight;
-			float origBrightness = blockBrightness;
 			
 			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
-			#if HANDHELD_LIGHT_ENABLED == 1 && SHOW_DANGEROUS_LIGHT == 0
-				vec4 handheldEmission = getHandheldColoredLighting(viewPos, normal);
-				coloredBlockLight = max(coloredBlockLight, handheldEmission.rgb);
+			#if HANDHELD_LIGHT_ENABLED == 1
+				coloredBlockLight = max(coloredBlockLight, getHandheldColoredLighting(viewPos));
 			#endif
-			blockBrightness = getLum(coloredBlockLight);
-			coloredBlockLight /= blockBrightness * 0.6 + 0.2;
-			blockLight = coloredBlockLight;
-			blockBrightness *= 2.0;
-			blockLight *= 1.2;
+			coloredBlockLight *= mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
+			coloredBlockLight *= (getLum(blockLight) + 0.0001) / (getLum(coloredBlockLight) + 0.0001);
 			
 			vec3 fadeOutPos = voxelPos / (coloredLightingSize * 1.01);
 			fadeOutPos = abs(fadeOutPos * 2.0 - 1.0);
 			float fadeOut = max(max(fadeOutPos.x, fadeOutPos.y), fadeOutPos.z);
 			fadeOut *= fadeOut;
 			fadeOut *= fadeOut;
-			blockLight = mix(blockLight, origLight, fadeOut);
-			blockBrightness = min(blockBrightness, max(origBrightness, handheldEmission.w));
-			blockBrightness = mix(blockBrightness, origBrightness, fadeOut);
+			blockLight = mix(coloredBlockLight, blockLight, fadeOut);
 			
 		}
 	#endif
@@ -359,8 +351,6 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 	#endif
 	blockBrightness *= 1.1 - getLum(lighting) * 0.9;
 	lighting = mix(lighting, blockLight, blockBrightness);
-	//color = vec3(lighting);
-	//return;
 	
 	float betterNightVision = nightVision;
 	if (betterNightVision > 0.0) {

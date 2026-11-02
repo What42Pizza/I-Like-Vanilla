@@ -25,10 +25,6 @@
 
 const ivec3 halfColoredLightingSize = coloredLightingSize / 2;
 
-const vec3 lightTransmittanceDecrease = 1.0 / vec3(30.0, 27.5, 24.5);
-
-const vec3 EMISSION_SETTINGS_MULT = mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, 0.88);
-
 
 
 vec3 cameraDir = vec3(gbufferModelView[0].z, gbufferModelView[1].z, gbufferModelView[2].z);

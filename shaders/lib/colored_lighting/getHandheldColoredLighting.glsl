@@ -15,25 +15,20 @@ vec3 getEmissionForItemId(int itemId) {
 	if (voxelId == 0u) emission = vec3(0.0);
 	if (voxelId == 1u) emission = vec3(0.0);
 	emission = mix(vec3(getLum(emission)), emission, COLORED_LIGHTING_SATURATION);
-	emission *= EMISSION_SETTINGS_MULT * 0.53;
 	
 	return emission;
 }
 
 
 
-vec4 getHandheldColoredLighting(vec3 viewPos, vec3 normal) {
-	
+vec3 getHandheldColoredLighting(vec3 viewPos) {
 	vec3 rightEmission = getEmissionForItemId(heldItemId);
 	vec3 leftEmission = getEmissionForItemId(heldItemId2);
 	vec3 emission = max(rightEmission, leftEmission);
 	
-	float dist = length(viewPos) * 15.0 / HANDHELD_LIGHT_DISTANCE;
-	emission -= lightTransmittanceDecrease * dist;
-	emission *= HANDHELD_LIGHT_BRIGHTNESS;
-	float lightDot = -dot(normalize(viewPos), normal);
-	emission *= (lightDot - 1.0) * HANDHELD_LIGHT_REALISM + 1.0;
+	float handLightBrightness = max(1.0 - length(viewPos) / HANDHELD_LIGHT_DISTANCE, 0.0);
+	handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
+	emission *= handLightBrightness;
 	
-	float brightness = (1.0 - dist) * HANDHELD_LIGHT_BRIGHTNESS;
-	return vec4(clamp(emission, 0.0, 1.0), dist);
+	return emission;
 }
