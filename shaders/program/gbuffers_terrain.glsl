@@ -211,6 +211,12 @@ void main() {
 		}
 	#endif
 	
+	//if (gl_FragCoord.x < 1920 / 5) {
+	//	color.rgb = vec3(1.0);
+	//} else {
+	//	color.rgb = glcolor;
+	//}
+	
 	
 	/* DRAWBUFFERS:02 */
 	#if DO_COLOR_CODED_GBUFFERS == 1
@@ -280,8 +286,18 @@ void main() {
 	
 	// start processing glcolor (foliage tint)
 	if (glcolor4.rgb != vec3(1.0)) {
+		#if MC_VERSION >= 260300
+			vec3 original = glcolor4.rgb;
+		#endif
 		glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
 		glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
+		#if MC_VERSION >= 260300
+			float isGreenAmount = min(original.g / (original.r + original.b + 0.01) * 2.0, 1.0);
+			isGreenAmount *= isGreenAmount;
+			isGreenAmount *= isGreenAmount;
+			isGreenAmount *= isGreenAmount;
+			glcolor4.rgb = mix(original, glcolor4.rgb, isGreenAmount);
+		#endif
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
 				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
