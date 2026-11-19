@@ -808,21 +808,21 @@ block leaf_litter, abundant_atmosphere:moss_clump, abundant_atmosphere:rust_moss
 weight: 20
 shadow casting: foliage
 
-block oak_sapling, spruce_sapling, birch_sapling, jungle_sapling, acacia_sapling, dark_oak_sapling, mangrove_propagule, cherry_sapling, pale_oak_sapling, biomesoplenty:flowering_oak_sapling, biomesoplenty:cypress_sapling, biomesoplenty:snowblossom_sapling, biomesoplenty:origin_oak_sapling, biomesoplenty:pine_sapling, biomesoplenty:red_maple_sapling, biomesoplenty:orange_maple_sapling, biomesoplenty:yellow_maple_sapling, biomesoplenty:redwood_sapling, biomesoplenty:mahogany_sapling, biomesoplenty:jacaranda_sapling, biomesoplenty:palm_sapling, biomesoplenty:willow_sapling, biomesoplenty:magic_sapling, biomesoplenty:umbran_sapling, biomesoplenty:hellbark_sapling, biomesoplenty:empyreal_sapling, abundant_atmosphere:ashroot_sapling, galosphere:opal_sapling, enderscape:alluring_magnia_sprout, enderscape:repulsive_magnia_sprout, enderscape:veiled_sapling, newworld:fir_sapling, nethers_exoticism:jaboticaba_sapling, nethers_exoticism:kiwano_sapling, nethers_exoticism:ramboutan_sapling, nethers_exoticism:pitaya_sapling:
+block %saplings:
 weight: 1
 brightness: 0.95
 shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block dandelion, poppy, blue_orchid, allium, azure_bluet, red_tulip, orange_tulip, white_tulip, pink_tulip, oxeye_daisy, cornflower, lily_of_the_valley, torchflower, cactus_flower, closed_eyeblossom, open_eyeblossom, pink_petals, wildflowers, biomesoplenty:flower_bud, biomesoplenty:origin_dandelion, biomesoplenty:origin_rose, biomesoplenty:marigold, biomesoplenty:violet, biomesoplenty:lavender, biomesoplenty:white_lavender, biomesoplenty:orange_cosmos, biomesoplenty:pink_daffodil, biomesoplenty:pink_hibiscus, biomesoplenty:glowflower, biomesoplenty:wilted_lily, biomesoplenty:burning_blossom, biomesoplenty:endbloom, biomesoplenty:waterlily, abundant_atmosphere:catsbane, abundant_atmosphere:saffron_bushbuds, abundant_atmosphere:cherry_bushbuds, abundant_atmosphere:umbra_bushbuds, abundant_atmosphere:midnight_lily, supplementaries:wild_flax, galosphere:bowl_lichen, galosphere:lichen_roots, enderscape:murublight_chanterelle, enderscape:celestial_chanterelle, enderscape:corrupt_growth, enderscape:bulb_flower, enderscape:celestial_growth, enderscape:wisp_flower, enderscape:wisp_growth, enderscape:wisp_sprouts, enderscape:chorus_sprouts, enderscape:dry_end_growth:
+block %c:flowers/small, cactus_flower, pink_petals, wildflowers, golden_dandelion:
 weight: 3
 shadow casting: foliage
 do bottom waving: false
 brightness: 0.95
 waviness: 2
 
-block potatoes, carrots, beetroots, wheat, farmersdelight:wild_cabbages, farmersdelight:wild_onions, farmersdelight:wild_tomatoes, farmersdelight:wild_carrots, farmersdelight:wild_potatoes, farmersdelight:wild_beetroots, farmersdelight:tomatoes, farmersdelight:cabbages, farmersdelight:onions:
+block %crops:
 weight: 5
 shadow casting: foliage
 do bottom waving: false
@@ -839,14 +839,14 @@ shadow casting: foliage
 do bottom waving: false
 waviness: 2
 
-block rose_bush:half=upper, peony:half=upper, lilac:half=upper, sunflower:half=upper, pitcher_plant:half=upper, pitcher_crop:half=upper, biomesoplenty:tall_lavender:half=upper, biomesoplenty:tall_white_lavender:half=upper, biomesoplenty:blue_hydrangea:half=upper, biomesoplenty:goldenrod:half=upper, biomesoplenty:icy_iris:half=upper, biomesoplenty:barley:half=upper, biomesoplenty:sea_oats:half=upper, biomesoplenty:cattail:half=upper, biomesoplenty:reed:half=upper, biomesoplenty:watergrass:half=upper, overweight_farming:allium_bush:half=upper:
+block %c:flowers/tall:half=upper:
 weight: 1
 brightness: 0.85
 shadow casting: foliage
 waviness: 3
 specularness: 0.5
 
-block rose_bush:half=lower, peony:half=lower, lilac:half=lower, sunflower:half=lower, pitcher_plant:half=lower, pitcher_crop:half=lower, biomesoplenty:tall_lavender:half=lower, biomesoplenty:tall_white_lavender:half=lower, biomesoplenty:blue_hydrangea:half=lower, biomesoplenty:goldenrod:half=lower, biomesoplenty:icy_iris:half=lower, biomesoplenty:barley:half=lower, biomesoplenty:sea_oats:half=lower, biomesoplenty:cattail:half=lower, biomesoplenty:reed:half=lower, biomesoplenty:watergrass:half=lower, overweight_farming:allium_bush:half=lower:
+block %c:flowers/tall:half=lower:
 weight: 1
 brightness: 0.85
 shadow casting: foliage
@@ -858,7 +858,7 @@ block red_mushrooms, brown_mushrooms, red_mushroom, brown_mushroom, crimson_fung
 weight: 2
 shadow casting: foliage
 
-block cobweb:
+block cobweb, %c:chains:
 weight: 2
 shadow casting: foliage
 
@@ -1004,24 +1004,6 @@ block command_block, chain_command_block, repeating_command_block:
 weight: 1
 specularness: 0.75
 
-block white_wool:
-weight: 2
-brightness: 0.95
-
-block white_carpet:
-weight: 2
-brightness: 0.95
-voxelize: empty
-
-block yellow_wool, orange_wool:
-weight: 1
-brightness: 0.85
-
-block yellow_carpet, orange_carpet:
-weight: 1
-brightness: 0.85
-voxelize: empty
-
 block nether_portal:
 weight: 1
 alias: BLOCK_ID_NETHER_PORTAL
@@ -1053,6 +1035,6 @@ weight: 10
 reflectiveness: 0.5
 specularness: 0.5
 
-block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs, moss_carpet, pale_moss_carpet, %wool_carpets:
+block %c:fences, %doors, %trapdoors, dirt_path, bell, ladder, iron_bars, %c:bars, redstone_wire, %wooden_buttons, %stone_buttons, lever, %stairs, %slabs, moss_carpet, pale_moss_carpet, %wool_carpets:
 weight: 5
 voxelize: empty

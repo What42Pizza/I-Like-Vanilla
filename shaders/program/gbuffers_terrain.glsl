@@ -142,6 +142,7 @@ void main() {
 	vec4 color = rawColor;
 	color.rgb = color.rgb - (4.0 / 27.0) * color.rgb * color.rgb * color.rgb;
 	color.rgb *= glcolor;
+	color *= 1.05 - (color.r + color.g - color.b) / 12.0;
 	
 	float m = getLum(color.rgb);
 	m = m * m * (3.0 - 2.0 * m);
@@ -286,18 +287,17 @@ void main() {
 	
 	// start processing glcolor (foliage tint)
 	if (glcolor4.rgb != vec3(1.0)) {
-		#if MC_VERSION >= 260300
-			vec3 original = glcolor4.rgb;
-		#endif
+		
+		vec3 original = glcolor4.rgb;
 		glcolor4.rgb = mix(vec3(getLum(glcolor4.rgb)), glcolor4.rgb, FOLIAGE_SATURATION);
 		glcolor4.rgb *= vec3(FOLIAGE_TINT_RED, FOLIAGE_TINT_GREEN, FOLIAGE_TINT_BLUE);
-		#if MC_VERSION >= 260300
-			float isGreenAmount = min(original.g / (original.r + original.b + 0.01) * 2.0, 1.0);
-			isGreenAmount *= isGreenAmount;
-			isGreenAmount *= isGreenAmount;
-			isGreenAmount *= isGreenAmount;
-			glcolor4.rgb = mix(original, glcolor4.rgb, isGreenAmount);
-		#endif
+		
+		float isGreenAmount = min(original.g / (original.r + original.b + 0.01) * 2.0, 1.0);
+		isGreenAmount *= isGreenAmount;
+		isGreenAmount *= isGreenAmount;
+		isGreenAmount *= isGreenAmount;
+		glcolor4.rgb = mix(original, glcolor4.rgb, isGreenAmount);
+		
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
 				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
@@ -306,6 +306,7 @@ void main() {
 				glcolor4.a = mix(glcolor4.a, 1.0, snowiness * 0.5);
 			}
 		#endif
+		
 	}
 	
 	
