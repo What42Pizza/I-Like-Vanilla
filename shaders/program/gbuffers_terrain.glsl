@@ -301,7 +301,7 @@ void main() {
 		#if SNOWY_TWEAKS_ENABLED == 1
 			if (inSnowyBiome > 0.0) {
 				float snowiness = (0.9 + 0.1 * wetness) * inSnowyBiome / (1.0 + 0.00390625 * length(playerPos)) * lmcoord.y * lmcoord.y;
-				glcolor4.rgb = mix(glcolor4.rgb, vec3(1.0, 1.05, 1.2), snowiness);
+				glcolor4.rgb = mix(glcolor4.rgb, vec3(1.0, 1.04, 1.16), snowiness);
 				glcolor4.rgb *= 1.0 + 0.4 * snowiness;
 				glcolor4.a = mix(glcolor4.a, 1.0, snowiness * 0.5);
 			}

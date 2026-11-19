@@ -126,7 +126,7 @@ if (materialId < 27u) {
 		} else {
 			if (materialId < 18u) {
 				SET_REFLECTIVENESS(0.7);
-				SET_SPECULARNESS(0.8);
+				SET_SPECULARNESS(0.5);
 				SET_VOXEL_ID(92u);
 			} else {
 				if (materialId < 25u) {
@@ -169,7 +169,7 @@ if (materialId < 27u) {
 			}
 		}
 	} else {
-		SET_SPECULARNESS(0.8);
+		SET_SPECULARNESS(0.75);
 		SET_VOXEL_ID(93u);
 	}
 } else {

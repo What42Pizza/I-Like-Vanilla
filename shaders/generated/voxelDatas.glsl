@@ -80,7 +80,7 @@ if (voxelId < 52u) {
 			}
 		} else {
 			if (voxelId < 19u) {
-				SET_EMISSION(vec3(1.0, 0.6, 0.25) * 2.0);
+				SET_EMISSION(vec3(1.0, 0.6, 0.2) * 2.0);
 				SET_TRANSLUCENCY(vec3(0.0, 0.0, 0.0));
 			} else {
 				if (voxelId < 35u) {

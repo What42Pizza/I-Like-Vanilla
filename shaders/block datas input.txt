@@ -60,12 +60,12 @@ voxelize: true
 translucency: vec3(0.35, 0.5, 1.0)
 
 
-block lava, flowing_lava:
+block lava, flowing_lava, lava_bucket:
 weight: 100
 alias: BLOCK_ID_LAVA
 brightness: 1.15
 voxelize: true
-emission: vec3(1.0, 0.6, 0.25) * 2.0
+emission: vec3(1.0, 0.6, 0.2) * 2.0
 translucency: vec3(0.0, 0.0, 0.0)
 
 
@@ -759,11 +759,11 @@ block pumpkin:
 weight: 1
 alias: BLOCK_ID_PUMPKIN
 
-block %leaves, azalea:
+block %leaves:
 weight: 2000
 alias: BLOCK_ID_LEAVES
 waviness: 3
-specularness: 0.8
+specularness: 0.75
 voxelize: true
 translucency: vec3(0.5, 0.6, 0.5)
 
@@ -791,7 +791,7 @@ shadow casting: foliage
 waviness: 2
 specularness: 0.5
 
-block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, sweet_berry_bush, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves, abundant_atmosphere:cave_sprouts, abundant_atmosphere:rust_moss_sprouts, abundant_atmosphere:short_cave_sprouts, abundant_atmosphere:pink_water_lotus:half=lower, abundant_atmosphere:violet_water_lotus:half=lower, enderscape:veiled_vines, newworld:moss_sprouts, gardens_of_the_dead:soulblight_sprouts, gardens_of_the_dead:blistercrown, gardens_of_the_dead:tall_blistercrown:half=lower, gardens_of_the_dead:soul_spore, gardens_of_the_dead:glowing_soul_spore:
+block grass, short_grass, fern, bush, crimson_roots, warped_roots, tall_grass:half=lower, short_dry_grass, large_fern:half=lower, firefly_bush, sweet_berry_bush, red_shrub, biomesoplenty:sprout, biomesoplenty:high_grass, biomesoplenty:bramble_leaves, abundant_atmosphere:cave_sprouts, abundant_atmosphere:rust_moss_sprouts, abundant_atmosphere:short_cave_sprouts, abundant_atmosphere:pink_water_lotus:half=lower, abundant_atmosphere:violet_water_lotus:half=lower, enderscape:veiled_vines, newworld:moss_sprouts, gardens_of_the_dead:soulblight_sprouts, gardens_of_the_dead:blistercrown, gardens_of_the_dead:tall_blistercrown:half=lower, gardens_of_the_dead:soul_spore, gardens_of_the_dead:glowing_soul_spore:
 weight: 50
 shadow casting: foliage
 do bottom waving: false
@@ -975,8 +975,9 @@ voxelize: empty
 
 block ice:
 weight: 200
+alias: BLOCK_ID_ICE
 reflectiveness: 0.7
-specularness: 0.8
+specularness: 0.5
 voxelize: true
 translucency: vec3(0.5, 0.75, 1.0)
 

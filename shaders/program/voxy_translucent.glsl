@@ -83,6 +83,13 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	color.rgb = color.rgb * (1.0 + TEXTURE_CONTRAST_2 * 0.025) - TEXTURE_CONTRAST_2 * 0.025;
 	
 	
+	float reflectivenessMult = mix(BLOCK_REFLECTION_AMOUNT_SURFACE, BLOCK_REFLECTION_AMOUNT_UNDERGROUND, lmcoord.y);
+	reflectiveness *= 1.0 - float(materialId != BLOCK_ID_WATER) * (1.0 - reflectivenessMult);
+	#if PBR_TYPE == 0
+		reflectiveness *= 1.0 - 0.5 * getSaturation(rawColor.rgb);
+	#endif
+	
+	
 	if (materialId == BLOCK_ID_WATER) {
 		
 		color.rgb = mix(parameters.tinting.rgb, color.rgb, WATER_TEXTURE_INFLUENCE);
@@ -143,6 +150,11 @@ void voxy_emitFragment(VoxyFragmentParameters parameters) {
 	// main lighting
 	float _inSunlightAmount;
 	doFshLighting(color.rgb, _inSunlightAmount, lmcoord.x, lmcoord.y, specularness, 0.0, viewPos, normal, gl_FragCoord.z);
+	
+	if (materialId == BLOCK_ID_ICE) {
+		color.rgb *= 1.15;
+		color.a = 1.0 - (1.0 - color.a) * 0.35;
+	};
 	
 	
 	color.rgb *= 0.5;

@@ -67,6 +67,7 @@
 		"hlll",
 		"ifdef",
 		"ifndef",
+		"inout",
 		"Interp",
 		"inversesqrt",
 		"ivec",
