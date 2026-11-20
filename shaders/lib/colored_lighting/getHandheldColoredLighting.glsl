@@ -24,11 +24,7 @@ vec3 getEmissionForItemId(int itemId) {
 vec3 getHandheldColoredLighting(vec3 viewPos) {
 	vec3 rightEmission = getEmissionForItemId(heldItemId);
 	vec3 leftEmission = getEmissionForItemId(heldItemId2);
-	vec3 emission = max(rightEmission, leftEmission);
-	
-	float handLightBrightness = max(1.0 - length(viewPos) / HANDHELD_LIGHT_DISTANCE, 0.0);
-	handLightBrightness *= heldBlockLightValue / 15.0 * HANDHELD_LIGHT_BRIGHTNESS;
-	emission *= handLightBrightness;
-	
+	vec3 emission = max(rightEmission, leftEmission) * 0.33;
+	emission *= max(1.0 - length(viewPos) / HANDHELD_LIGHT_DISTANCE, 0.0);
 	return emission;
 }

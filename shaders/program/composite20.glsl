@@ -61,7 +61,7 @@ void main() {
 			bloomAddition *= 8.0;
 			float dither = bayer64(gl_FragCoord.xy);
 			dither = fract(dither + 1.61803398875 * mod(float(frameCounter), 3600.0));
-			float bloomSizeMult = 0.04 * BLOOM_SIZE / sqrt(toBlockDepth(depth) + 10.0) * mix(0.5, 1.5, dither);
+			float bloomSizeMult = 0.02 * BLOOM_SIZE / sqrt(toBlockDepth(depth) + 10.0) * mix(0.5, 1.5, dither);
 			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2( invAspectRatio,  0.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
 			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2( 0.0           ,  1.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;
 			bloomAddition += texture2D(BLOOM_TEXTURE, min(texcoord * 8.0 / 27.0 + bloomSizeMult * vec2(-invAspectRatio,  0.0), vec2(8.0/27.0) - pixelSize * 2.0)).rgb;

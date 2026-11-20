@@ -36,9 +36,13 @@ void applyWaving(inout vec3 position, uint encodedData) {
 		else wavingScale = WAVING_AMOUNT_3;
 	}
 	if (((encodedData & (3u << 12u)) == (3u << 12u)) && at_midBlock.y >= 31.0) return; // don't apply waving to base
-	#if !defined SHADER_SHADOW && !defined NETHER
-		wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
-		if (wavingScale == 0.0) return;
+	#if !defined SHADER_SHADOW
+		#ifdef NETHER
+			wavingScale *= 0.5;
+		#else
+			wavingScale *= max(1.0 - 3.0 * (1.0 - lmcoord.y), 0.0);
+			if (wavingScale == 0.0) return;
+		#endif
 	#endif
 	wavingScale *= 1.0 + betterRainStrength * (WAVING_WEATHER_MULT - 1.0);
 	wavingScale *= 1.0 - ambientMoonPercent * (1.0 - WAVING_NIGHT_MULT);

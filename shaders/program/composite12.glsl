@@ -19,7 +19,7 @@ void main() {
 	color += texture2D(BLOOM_TEXTURE, texcoord + BLOOM_SIZE * 1.75 * vec2(pixelSize.x * -2.0, pixelSize.y *  4.0)).rgb;
 	color += texture2D(BLOOM_TEXTURE, texcoord + BLOOM_SIZE * 1.75 * vec2(pixelSize.x * -2.0, pixelSize.y * -4.0)).rgb;
 	
-	color *= 1.0 / 16.0;
+	color *= 1.0 / 14.0;
 	
 	/* DRAWBUFFERS:4 */
 	gl_FragData[0] = vec4(color, 1.0);
