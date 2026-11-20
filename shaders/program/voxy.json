@@ -10,19 +10,19 @@
 	#if TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 5
 		"taaOffset": "{ return taaOffsetUniform * 0.05; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 10
-		"taaOffset": "{ return taaOffsetUniform * 0.099999994; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.1; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 15
-		"taaOffset": "{ return taaOffsetUniform * 0.14999999; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.15; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 20
-		"taaOffset": "{ return taaOffsetUniform * 0.19999999; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.2; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 25
 		"taaOffset": "{ return taaOffsetUniform * 0.25; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 30
-		"taaOffset": "{ return taaOffsetUniform * 0.29999998; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.3; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 35
 		"taaOffset": "{ return taaOffsetUniform * 0.35; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 40
-		"taaOffset": "{ return taaOffsetUniform * 0.39999998; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.4; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 45
 		"taaOffset": "{ return taaOffsetUniform * 0.45; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 50
@@ -30,7 +30,7 @@
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 55
 		"taaOffset": "{ return taaOffsetUniform * 0.55; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 60
-		"taaOffset": "{ return taaOffsetUniform * 0.59999996; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.6; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 65
 		"taaOffset": "{ return taaOffsetUniform * 0.65; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 70
@@ -38,9 +38,9 @@
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 75
 		"taaOffset": "{ return taaOffsetUniform * 0.75; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 80
-		"taaOffset": "{ return taaOffsetUniform * 0.79999995; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.8; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 85
-		"taaOffset": "{ return taaOffsetUniform * 0.84999996; }",
+		"taaOffset": "{ return taaOffsetUniform * 0.85; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 90
 		"taaOffset": "{ return taaOffsetUniform * 0.9; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 95
@@ -54,7 +54,7 @@
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 115
 		"taaOffset": "{ return taaOffsetUniform * 1.15; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 120
-		"taaOffset": "{ return taaOffsetUniform * 1.1999999; }",
+		"taaOffset": "{ return taaOffsetUniform * 1.2; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 125
 		"taaOffset": "{ return taaOffsetUniform * 1.25; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 130
@@ -64,7 +64,7 @@
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 140
 		"taaOffset": "{ return taaOffsetUniform * 1.4; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 145
-		"taaOffset": "{ return taaOffsetUniform * 1.4499999; }",
+		"taaOffset": "{ return taaOffsetUniform * 1.45; }",
 	#elif TAA_ENABLED == 1 && TAA_LOD_JITTER_AMOUNT == 150
 		"taaOffset": "{ return taaOffsetUniform * 1.5; }",
 	#endif

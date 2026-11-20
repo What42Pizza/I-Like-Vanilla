@@ -70,13 +70,13 @@ void main() {
 		#endif
 		bloomAddition = sqrt(bloomAddition);
 		#ifdef OVERWORLD
-			const float bloomAmount = BLOOM_AMOUNT * 0.8;
+			const float bloomAmount = BLOOM_AMOUNT * 0.75;
 		#endif
 		#ifdef NETHER
-			const float bloomAmount = BLOOM_NETHER_AMOUNT * 0.8;
+			const float bloomAmount = BLOOM_NETHER_AMOUNT * 0.75;
 		#endif
 		#ifdef END
-			const float bloomAmount = BLOOM_END_AMOUNT * 0.8;
+			const float bloomAmount = BLOOM_END_AMOUNT * 0.75;
 		#endif
 		#if HORROR_MODE == 1
 			color = bloomAddition * 0.8;
