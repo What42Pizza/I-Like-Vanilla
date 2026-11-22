@@ -28,21 +28,18 @@ layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
 
 uniform usampler3D voxelIdsSampler;
 uniform sampler3D lightFloodfill1Sampler;
-uniform sampler3D lightFloodfill2Sampler;
 #extension GL_ARB_shader_image_load_store : enable
-writeonly uniform image3D lightFloodfill1;
 writeonly uniform image3D lightFloodfill2;
 
 
 
+#define IS_FIRST_UPDATE
+#define INPUT_SAMPLER lightFloodfill1Sampler
+#define OUTPUT_IMAGE lightFloodfill2
 #include "/lib/colored_lighting/updateFloodFill.glsl"
 
 
 
 void main() {
-	if (frameCounter % 2 == 0) {
-		updateFloodFill(lightFloodfill1Sampler, lightFloodfill2, true);
-	} else {
-		updateFloodFill(lightFloodfill2Sampler, lightFloodfill1, true);
-	}
+	updateFloodFill();
 }

@@ -625,12 +625,7 @@ option.COLORED_LIGHTING_DIST=Colored Lighting Distance
 option.COLORED_LIGHTING_DIST.comment=How far the colored lighting extends
 
 option.COLORED_LIGHTING_SATURATION=Colored Lighting Saturation
-option.COLORED_LIGHTING_SATURATION.comment=How saturated the colored light emissive values should be
-
-option.TRIPLED_COLORED_LIGHTING_UPDATES=Tripled Colored Lighting Updates
-option.TRIPLED_COLORED_LIGHTING_UPDATES.comment=Updates the colored lighting 3 times per frame instead of once, significantly increases responsiveness with a relatively low performance cost
-value.TRIPLED_COLORED_LIGHTING_UPDATES.0=Off
-value.TRIPLED_COLORED_LIGHTING_UPDATES.1=On
+option.COLORED_LIGHTING_SATURATION.comment=Affects the overall saturation of colored blocklights compared to neutral light like torches. It should be noted that the Block Red/Green/Blue Bright/Dark color settings (in the 'Blocklight Lighting' menu) are still applied as multipliers on top of the floodfill blocklight color
 
 
 

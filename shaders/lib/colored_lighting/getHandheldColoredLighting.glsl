@@ -14,7 +14,6 @@ vec3 getEmissionForItemId(int itemId) {
 	#include "/generated/voxelDatas.glsl"
 	if (voxelId == 0u) emission = vec3(0.0);
 	if (voxelId == 1u) emission = vec3(0.0);
-	emission = mix(vec3(getLum(emission)), emission, COLORED_LIGHTING_SATURATION);
 	
 	return emission;
 }

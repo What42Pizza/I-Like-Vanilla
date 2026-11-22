@@ -196,10 +196,8 @@ vec3 sampleShadow(vec3 viewPos, float lightDot, vec3 normal) {
 
 
 #if COLORED_LIGHTING_ENABLED == 1
-	//uniform usampler3D voxelIdsSampler;
 	uniform sampler3D lightFloodfill1Sampler;
-	uniform sampler3D lightFloodfill2Sampler;
-	#include "/lib/colored_lighting/sampleColoredLighting.glsl"
+	#include "/lib/colored_lighting/coloredLightingUtils.glsl"
 	#include "/lib/colored_lighting/getHandheldColoredLighting.glsl"
 #endif
 
@@ -323,10 +321,11 @@ void doFshLighting(inout vec3 color, out float inSunlightAmount, float blockBrig
 		vec3 voxelPos = getVoxelPos(playerPos, mat3(gbufferModelViewInverse) * (normal * (0.45 + dither * 0.1)), outsideRange);
 		if (!outsideRange) {
 			
-			vec3 coloredBlockLight = sampleColoredLighting(voxelPos);
+			vec3 coloredBlockLight = texture(lightFloodfill1Sampler, vec3(voxelPos) / coloredLightingSize, 0).rgb;
 			#if HANDHELD_LIGHT_ENABLED == 1
 				coloredBlockLight = max(coloredBlockLight, getHandheldColoredLighting(viewPos));
 			#endif
+			coloredBlockLight = mix(vec3(getLum(coloredBlockLight)), coloredBlockLight, COLORED_LIGHTING_SATURATION);
 			coloredBlockLight *= mix(BLOCK_COLOR_DARK, BLOCK_COLOR_BRIGHT, blockBrightness * blockBrightness);
 			coloredBlockLight *= (getLum(blockLight) + 0.0001) / (getLum(coloredBlockLight) + 0.0001);
 			
