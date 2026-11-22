@@ -318,89 +318,10 @@ specularness: 1.0
 voxelize: true
 emission: vec3(0.25, 0.25, 0.25)
 
-
-
-// light blocks
-
-block light:level=0:
+block light:
 weight: 1
 voxelize: true
-emission: vec3(0.0 / 15.0)
-
-block light:level=1:
-weight: 1
-voxelize: true
-emission: vec3(1.0 / 15.0)
-
-block light:level=2:
-weight: 1
-voxelize: true
-emission: vec3(2.0 / 15.0)
-
-block light:level=3:
-weight: 1
-voxelize: true
-emission: vec3(3.0 / 15.0)
-
-block light:level=4:
-weight: 1
-voxelize: true
-emission: vec3(4.0 / 15.0)
-
-block light:level=5:
-weight: 1
-voxelize: true
-emission: vec3(5.0 / 15.0)
-
-block light:level=6:
-weight: 1
-voxelize: true
-emission: vec3(6.0 / 15.0)
-
-block light:level=7:
-weight: 1
-voxelize: true
-emission: vec3(7.0 / 15.0)
-
-block light:level=8:
-weight: 1
-voxelize: true
-emission: vec3(8.0 / 15.0)
-
-block light:level=9:
-weight: 1
-voxelize: true
-emission: vec3(9.0 / 15.0)
-
-block light:level=10:
-weight: 1
-voxelize: true
-emission: vec3(10.0 / 15.0)
-
-block light:level=11:
-weight: 1
-voxelize: true
-emission: vec3(11.0 / 15.0)
-
-block light:level=12:
-weight: 1
-voxelize: true
-emission: vec3(12.0 / 15.0)
-
-block light:level=13:
-weight: 1
-voxelize: true
-emission: vec3(13.0 / 15.0)
-
-block light:level=14:
-weight: 1
-voxelize: true
-emission: vec3(14.0 / 15.0)
-
-block light:level=15:
-weight: 1
-voxelize: true
-emission: vec3(15.0 / 15.0)
+emission: vec3(0.1)
 
 
 
@@ -477,7 +398,7 @@ block sea_lantern:
 weight: 1
 brightness: 1.25
 voxelize: true
-emission: vec3(0.75, 1.0, 1.05)
+emission: vec3(0.75, 0.9, 1.0)
 
 block beacon:
 weight: 1

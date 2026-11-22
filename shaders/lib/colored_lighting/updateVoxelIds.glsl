@@ -15,6 +15,7 @@ void updateVoxelIds(vec3 playerPos, uint encodedBlockData, uint materialId) {
 	bool excludeFromShadows = (encodedBlockData & (3u << 12u)) >= (1u << 12u); // test if 'shadow casting' value is 1 or 3
 	uint voxelId = uint(
 		abs(gl_Normal.x + gl_Normal.y + gl_Normal.z) == 1.0 // assume solid if normal is non-diagonal
+		&& abs(at_midBlock) == vec3(32.0) // assume not solid if not connected to block corners
 		&& !excludeFromShadows // assume not solid if it doesn't cast shadows
 	);
 	

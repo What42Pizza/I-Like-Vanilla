@@ -40,5 +40,5 @@ void updateFloodFill(sampler3D inputFloodFill, writeonly image3D outputFloodFill
 	newLight *= translucency;
 	newLight = max(newLight, emission);
 	
-	imageStore(outputFloodFill, voxelPos, vec4(newLight, float(voxelId != 1)));
+	imageStore(outputFloodFill, voxelPos, vec4(newLight, 1));
 }
