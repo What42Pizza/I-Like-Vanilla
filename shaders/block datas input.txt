@@ -392,7 +392,7 @@ weight: 1
 brightness: 0.95
 shadow casting: foliage
 voxelize: true
-emission: vec3(0.55, 1.0, 0.45)
+emission: vec3(0.55, 1.0, 0.5)
 
 block sea_lantern:
 weight: 1
