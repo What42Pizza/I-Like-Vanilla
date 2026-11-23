@@ -50,9 +50,9 @@ const float shadowIntervalSize    = 2.0;
 
 // settings basics
 
-//#include "/setting_fantasy_style.glsl"
+#include "/setting_fantasy_style.glsl"
 //#include "/setting_realistic_style.glsl"
-#include "/setting_vanilla_style.glsl"
+//#include "/setting_vanilla_style.glsl"
 
 
 

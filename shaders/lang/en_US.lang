@@ -1167,12 +1167,6 @@ option.AUTO_EXPOSURE_ENABLED.comment=Changes brightness based on blocklight and 
 value.AUTO_EXPOSURE_ENABLED.0=Off
 value.AUTO_EXPOSURE_ENABLED.1=On
 
-option.AUTO_EXPOSURE_BRIGHT_MULT=Auto Exposure Bright Mult
-option.AUTO_EXPOSURE_BRIGHT_MULT.comment=Brightness multiplier when in bright areas
-
-option.AUTO_EXPOSURE_DARK_MULT=Auto Exposure Dark Mult
-option.AUTO_EXPOSURE_DARK_MULT.comment=Brightness multiplier when in dark areas
-
 option.VIBRANCE=Vibrance
 option.VIBRANCE.comment=Vibrance applied to the final image. This saturates the less saturated colors more than the already saturated colors
 

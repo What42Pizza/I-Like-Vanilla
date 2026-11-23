@@ -205,10 +205,10 @@ void main() {
 	
 	#if AUTO_EXPOSURE_ENABLED == 1
 		vec3 screenAverage = texture2DLod(MAIN_TEXTURE, vec2(0.0), 10000.0).rgb * 2.0;
-		float screenBrightness = sqrt(getLum(screenAverage) * 2.0);
+		float screenBrightness = getLum(screenAverage);
 		float prevBrightness = texelFetch(PREV_DEPTH_TEXTURE, ivec2(0), 0).r;
 		autoExposureBrightness = mix(prevBrightness, screenBrightness, 1.0 - pow(1.0 - 0.6, frameTime));
-		autoExposureMult = mix(AUTO_EXPOSURE_DARK_MULT, AUTO_EXPOSURE_BRIGHT_MULT, autoExposureBrightness);
+		autoExposureMult = 1.0 / mix(1.0, autoExposureBrightness, 0.5);
 	#endif
 	
 	
