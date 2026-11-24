@@ -51,7 +51,6 @@ void main() {
 		vec2 encodedNormal = encodeNormal(normal);
 	#endif
 	
-	
 	// main lighting
 	float isAfterDeferred = texelFetch(colortex10, ivec2(0), 0).r;
 	if (isAfterDeferred > 0.5) {
@@ -150,11 +149,11 @@ void main() {
 		#if TEMPORAL_FILTER_ENABLED == 1
 			doTaaJitter(gl_Position.xy);
 		#elif TEMPORAL_FILTER_ENABLED == 2
-			// fixes jittery entity shadows
-			if (gl_Color.a < 0.99) doTaaJitter(gl_Position.xy);
+			// fixes both jittery entity shadows and cushions
+			if (gl_Color.a < 0.99 || entityId == 20000) doTaaJitter(gl_Position.xy);
 		#endif
 	#endif
-	gl_Position.z -= 0.0001;
+	gl_Position.z += 0.0001;
 	
 	
 	doVshLighting(lmcoord, glcolor.rgb, viewPos, normal, gl_Normal);
